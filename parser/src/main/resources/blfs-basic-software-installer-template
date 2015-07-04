@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+set +h
+
+for SCRIPT in postlfs/*.sh
+do
+
+./$SCRIPT
+
+done
+
+passwd root
+

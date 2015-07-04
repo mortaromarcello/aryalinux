@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -e
+set +h
+
+export XORG_PREFIX="/usr"
+export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
+    --localstatedir=/var --disable-static"
+
+. /etc/alps/alps.conf
+
+#DEPS
+
+cd $SOURCE_DIR
+
+#DOWNLOADS
+
+TARBALL=#TARBALL
+DIRECTORY=#DIRECTORY
+
+#UNARCHIVE
+cd $DIRECTORY
+
+#COMMANDS
+ 
+cd $SOURCE_DIR
+sudo rm -rf $DIRECTORY
+ 
+echo "#NAME=>`date`" | sudo tee -a $INSTALLED_LIST

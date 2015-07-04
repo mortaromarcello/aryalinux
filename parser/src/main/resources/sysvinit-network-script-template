@@ -1,0 +1,62 @@
+#!/bin/bash
+
+set -e
+set +h
+
+
+export SOURCE_DIR="/sources"
+export LOG_PATH="/sources/install-log"
+
+export STEP_NAME="7.5. General Network Configuration"
+
+touch $LOG_PATH
+cd $SOURCE_DIR
+
+if ! grep "$STEP_NAME" $LOG_PATH
+then
+
+echo `grep SUBSYSTEM /etc/udev/rules.d/70-persistent-net.rules | rev | cut -d "\"" -f2 | rev` > network-interfaces
+
+COUNT=2
+
+for INTERFACE in `cat network-interfaces`
+do
+
+cd /etc/sysconfig/
+
+
+cat > ifconfig.$INTERFACE << EOF
+ONBOOT=yes
+IFACE=$INTERFACE
+SERVICE=ipv4-static
+IP=192.168.1.$COUNT
+GATEWAY=192.168.1.1
+PREFIX=24
+BROADCAST=192.168.1.255
+EOF
+
+COUNT=$(($COUNT+1))
+
+done
+cat > /etc/resolv.conf << EOF
+# Begin /etc/resolv.conf
+
+domain $DOMAIN_NAME
+nameserver $PRIMARY_DNS
+nameserver $SECONDARY_DNS
+
+# End /etc/resolv.conf
+EOF
+echo "$HOST_NAME" > /etc/hostname
+cat > /etc/hosts << EOF
+# Begin /etc/hosts (network card version)
+
+127.0.0.1 localhost
+
+# End /etc/hosts (network card version)
+EOF
+
+cd $SOURCE_DIR
+echo "$STEP_NAME" >> $LOG_PATH
+
+fi

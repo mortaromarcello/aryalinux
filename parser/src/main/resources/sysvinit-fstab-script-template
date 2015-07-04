@@ -1,0 +1,62 @@
+#!/bin/bash
+
+set -e
+set +h
+
+export SOURCE_DIR="/sources"
+export LOG_PATH="/sources/install-log"
+
+export STEP_NAME="8.2. Creating the /etc/fstab File"
+
+touch $LOG_PATH
+cd $SOURCE_DIR
+
+if ! grep "$STEP_NAME" $LOG_PATH
+then
+
+cat > /etc/fstab << "EOF"
+# Begin /etc/fstab
+
+# file system mount-point type options dump fsck
+# order
+
+EOF
+
+if [ "x$ROOT_PART" != "x" ]
+then
+cat >> /etc/fstab << EOF
+$ROOT_PART / ext4 defaults 1 1
+EOF
+fi
+
+if [ "x$SWAP_PART" != "x" ]
+then
+cat >> /etc/fstab << EOF
+$SWAP_PART swap swap pri=1 0 0
+EOF
+fi
+
+if [ "x$HOME_PART" != "x" ]
+then
+cat >> /etc/fstab << EOF
+$HOME_PART /home ext4 defaults 1 1
+EOF
+fi
+
+cat >> /etc/fstab << "EOF"
+proc /proc proc nosuid,noexec,nodev 0 0
+sysfs /sys sysfs nosuid,noexec,nodev 0 0
+devpts /dev/pts devpts gid=5,mode=620 0 0
+tmpfs /run tmpfs defaults 0 0
+devtmpfs /dev devtmpfs mode=0755,nosuid 0 0
+
+# End /etc/fstab
+EOF
+
+cd $SOURCE_DIR
+echo "$STEP_NAME" >> $LOG_PATH
+
+fi
+
+echo "Execute 13.sh"
+

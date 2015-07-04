@@ -1,0 +1,61 @@
+#!/bin/bash
+
+set -e
+set +h
+
+export SOURCE_DIR="/sources"
+export LOG_PATH="/sources/install-log"
+
+export STEP_NAME="7.2. General Network Configuration"
+
+touch $LOG_PATH
+cd $SOURCE_DIR
+
+if ! grep "$STEP_NAME" $LOG_PATH
+then
+
+echo `ip link | grep -v "link/" | cut "-d " -f2 | sed -u "s@:@@g" | sed -u "s/lo//g"` > network-interfaces
+
+COUNT=2
+
+for INTERFACE in `cat network-interfaces`
+do
+
+cat > /etc/systemd/network/10-static-$INTERFACE.network << EOF
+[Match]
+Name=$INTERFACE
+
+[Network]
+Address=192.168.0.$COUNT/24
+Gateway=192.168.0.1
+DNS=192.168.0.1
+EOF
+
+COUNT=$(($COUNT+1))
+
+done
+
+cat > /etc/resolv.conf << EOF
+# Begin /etc/resolv.conf
+
+domain $DOMAIN_NAME
+nameserver $PRIMARY_DNS
+nameserver $SECONDARY_DNS
+
+# End /etc/resolv.conf
+EOF
+ln -sfv /run/systemd/resolve/resolv.conf /etc/resolv.conf
+echo "$HOST_NAME" > /etc/hostname
+cat > /etc/hosts << "EOF"
+# Begin /etc/hosts (network card version)
+
+127.0.0.1 localhost
+::1 localhost
+
+# End /etc/hosts (network card version)
+EOF
+
+cd $SOURCE_DIR
+echo "$STEP_NAME" >> $LOG_PATH
+
+fi
