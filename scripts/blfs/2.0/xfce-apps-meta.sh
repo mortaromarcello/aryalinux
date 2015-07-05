@@ -18,17 +18,5 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 #DEP:libunique
 #DEP:xfce4-mixer
 #DEP:xfce4-notifyd
-
-
-cd $SOURCE_DIR
-
-
-
-
-
-
-
- 
-cd $SOURCE_DIR
  
 echo "xfce-apps-meta=>`date`" | sudo tee -a $INSTALLED_LIST

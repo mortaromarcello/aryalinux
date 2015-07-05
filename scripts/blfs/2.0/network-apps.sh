@@ -18,17 +18,5 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 #DEP:curl
 #DEP:network-manager-applet
 #DEP:ModemManager
-
-
-cd $SOURCE_DIR
-
-
-
-
-
-
-
- 
-cd $SOURCE_DIR
  
 echo "network-apps=>`date`" | sudo tee -a $INSTALLED_LIST

@@ -31,20 +31,5 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 #DEP:xterm
 #DEP:xclock
 #DEP:xinit
-
-
-cd $SOURCE_DIR
-
-
-
-
-tar -xf $TARBALL
-
-
-echo ""
-
-
- 
-cd $SOURCE_DIR
  
 echo "xserver-meta=>`date`" | sudo tee -a $INSTALLED_LIST

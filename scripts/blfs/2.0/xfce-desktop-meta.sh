@@ -32,18 +32,5 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 #DEP:adwaita-icon-theme
 #DEP:lightdm
 #DEP:lightdm-gtk-greeter
-
-
-cd $SOURCE_DIR
-
-
-
-
-tar -xf $TARBALL
-
-
-
- 
-cd $SOURCE_DIR
  
 echo "xfce-desktop-meta=>`date`" | sudo tee -a $INSTALLED_LIST

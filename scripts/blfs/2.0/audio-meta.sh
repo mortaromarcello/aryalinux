@@ -24,18 +24,5 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 #DEP:gst10-plugins-ugly
 #DEP:libsndfile
 #DEP:pulseaudio
-
-
-cd $SOURCE_DIR
-
-
-
-
-tar -xf $TARBALL
-
-
-
- 
-cd $SOURCE_DIR
  
 echo "audio-meta=>`date`" | sudo tee -a $INSTALLED_LIST
