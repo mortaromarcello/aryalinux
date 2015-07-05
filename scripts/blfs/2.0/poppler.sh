@@ -33,6 +33,7 @@ cd $DIRECTORY
             --sysconfdir=/etc     \
             --disable-static      \
             --enable-xpdf-headers \
+            --disable-poppler-qt4 \
             --with-testdatadir=$PWD/testfiles &&
 make
 

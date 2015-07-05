@@ -37,6 +37,16 @@ chmod a+x 1434987998836.sh
 sudo ./1434987998836.sh
 sudo rm -rf 1434987998836.sh
 
+cd $SOURCE_DIR
+
+TARBALL=libva-vdpau-driver-0.7.4.tar.bz2
+DIRECTORY=`tar -tf $TARBALL | sed -e 's@/.*@@' | uniq `
+
+tar -xf $TARBALL
+
+cd $DIRECTORY
+
+
 patch -Np1 -i ../libva-vdpau-driver-0.7.4-build_fixes-1.patch &&
 ./configure --prefix=/usr &&
 make

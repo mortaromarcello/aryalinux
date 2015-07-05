@@ -31,5 +31,7 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 #DEP:xterm
 #DEP:xclock
 #DEP:xinit
+#DEP:xorg-drivers-meta
+#DEP:libva-drivers
  
 echo "xserver-meta=>`date`" | sudo tee -a $INSTALLED_LIST
