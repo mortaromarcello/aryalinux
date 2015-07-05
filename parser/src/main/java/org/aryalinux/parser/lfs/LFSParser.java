@@ -162,8 +162,8 @@ public class LFSParser {
 				for (Step step : steps) {
 					if (step.getSource().equals(expendable)) {
 						String index = step.getIndex();
-						//new File(outputDirectory + File.separator + "chapter06"
-							//	+ File.separator + index + ".sh").delete();
+						new File(outputDirectory + File.separator + "chapter06"
+								+ File.separator + index + ".sh").delete();
 					}
 				}
 			}
