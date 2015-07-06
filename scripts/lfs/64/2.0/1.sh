@@ -3,12 +3,14 @@
 set -e
 set +h
 
-read -p "Root partition " ROOT_PART
-read -p "Home partition " HOME_PART
-read -p "Swap Partition " SWAP_PART
+read -p "Enter root partition : " ROOT_PART
+read -p "Enter home partition : " HOME_PART
+read -p "Enter swap Partition : " SWAP_PART
 
 cat > inputs <<EOF
 ROOT_PART=$ROOT_PART
+SWAP_PART=$SWAP_PART
+HOME_PART=$HOME_PART
 EOF
 
 export CLFS=/mnt/clfs
