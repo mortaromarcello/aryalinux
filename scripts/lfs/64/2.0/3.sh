@@ -1,22 +1,12 @@
-#!/bin/bash
-
-set -e
-set +h
-
-export CLFS=/mnt/clfs
-
-export CLFS_HOST=$(echo ${MACHTYPE} | sed -e 's/-[^-]*/-cross/')
-export CLFS_TARGET="x86_64-unknown-linux-gnu"
-export BUILD64="-m64"
-
-cat >> ~/.bashrc << EOF
-export CLFS_HOST="${CLFS_HOST}"
-export CLFS_TARGET="${CLFS_TARGET}"
-export BUILD64="${BUILD64}"
-EOF
-
-
-for script in cross-tools/*
+for script in testsuite-tools/*
 do
 	$script
 done
+
+for script in final-system/*
+do
+	$script
+done
+
+echo "Now execute 4.sh by entering the following below:"
+echo "./4.sh"
