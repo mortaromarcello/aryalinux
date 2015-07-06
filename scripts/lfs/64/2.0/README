@@ -30,8 +30,7 @@ HOW TO INSTALL
 1) You need to download these scripts into a directory in your root dir
 2) In the same directory create a sources directory and copy all source
 tarballs into it
-3) Change to the scripts directory and execute 1.sh, 2.sh and 3.sh
-4) Get back to the root by typing exit twice
-5) Execute 4.sh, 5.sh, 6.sh, 7.sh and 8.sh
+3) Change to the scripts directory and execute 1.sh, 2.sh, 3.sh and 4.sh
+one after the other
 
 In case of issues, please send an email to aryalinux11@gmail.com
