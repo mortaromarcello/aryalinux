@@ -1,0 +1,37 @@
+AryaLinux build scripts. Use these scripts to build your own Linux System by compiling source code.
+Copyright (C) 2015 Chandrakant Singh
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+README
+======
+
+The scripts that are found in this directory can be used to build your
+own 64 bit Linux Desktop by building the source code of the various
+components a Linux System comprises of. Source code that would be built
+is not included in this directory and that needs to be downloaded
+separately. The instructions in these scripts have been gleaned from
+the CLFS-3.0.0 book.
+
+HOW TO INSTALL
+==============
+
+1) You need to download these scripts into a directory in your root dir
+2) In the same directory create a sources directory and copy all source
+tarballs into it
+3) Change to the scripts directory and execute 1.sh, 2.sh and 3.sh
+4) Get back to the root by typing exit twice
+5) Execute 4.sh, 5.sh, 6.sh, 7.sh and 8.sh
+
+In case of issues, please send an email to aryalinux11@gmail.com
