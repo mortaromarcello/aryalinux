@@ -9,10 +9,28 @@ read -p "Enter root partition (like /dev/sda1) : " ROOT_PART
 read -p "Enter home partition (like /dev/sda2) : " HOME_PART
 read -p "Enter swap Partition (like /dev/sda3) : " SWAP_PART
 read -p "Enter the locale (like en_IN.utf-8) : " LOCALE
-read -p "Enter the paper size to be used by groff (A4/LETTER) : " PAPER_SIZE
+read -p "Enter the paper size to be used by groff (A4/letter) : " PAPER_SIZE
 read -p "Enter this computer's name (how would it be identified in the network) : " HOSTNAME
+read -p "Enter the domain name for this network (eg. aryalinux.org) : " DOMAIN
+read -p "Enter the primary DNS (e.g. 8.8.8.8) : " PRIMARY_DNS
+read -p "Enter the secondary DNS (e.g. 8.8.4.4) : " SEC_DNS
 read -p "Enter your full name : " FULLNAME
 read -p "Choose a username for $FULLNAME : " USERNAME
+
+if [ $HOSTNAME == "" ]
+then
+	HOSTNAME="aryalinux.org"
+fi
+
+if [ $PRIMARY_DNS == "" ]
+then
+        PRIMARY_DNS="8.8.8.8"
+fi
+
+if [ $SEC_DNS == "" ]
+then
+        SEC_DNS="8.8.4.4"
+fi
 
 clear
 
@@ -31,6 +49,9 @@ HOME_PART="$HOME_PART"
 LOCALE="$LOCALE"
 PAPER_SIZE="$PAPER_SIZE"
 HOSTNAME="$HOSTNAME"
+DOMAIN="$DOMAIN"
+PRIMARY_DNS="$PRIMARY_DNS"
+SEC_DNS="$SEC_DNS"
 FULLNAME="$FULLNAME"
 USERNAME="$USERNAME"
 EOF

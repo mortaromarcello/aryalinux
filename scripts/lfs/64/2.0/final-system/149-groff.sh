@@ -20,7 +20,7 @@ tar -xf $TAR
 cd $DIR
 
 
-PAGE=A4 ./configure --prefix=/usr
+PAGE=$PAPER_SIZE ./configure --prefix=/usr
 
 make "-j`nproc`"
 

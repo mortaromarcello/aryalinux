@@ -1,0 +1,8 @@
+ROOT_PART="/dev/sda6"
+SWAP_PART="/dev/sda10"
+HOME_PART=""
+LOCALE="en_IN.utf-8"
+PAPER_SIZE="A4"
+HOSTNAME="aryalinux"
+FULLNAME="Chandrakant Singh"
+USERNAME="chandrakant"

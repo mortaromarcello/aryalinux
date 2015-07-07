@@ -1,3 +1,4 @@
+. inputs
 for script in testsuite-tools/*
 do
 	$script

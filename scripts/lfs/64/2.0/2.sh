@@ -1,3 +1,5 @@
+. inputs
+
 mkdir -pv /{bin,boot,dev,{etc/,}opt,home,lib,mnt}
 mkdir -pv /{proc,media/{floppy,cdrom},run/shm,sbin,srv,sys}
 mkdir -pv /var/{lock,log,mail,spool}

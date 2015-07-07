@@ -1,8 +1,26 @@
+#!/bin/bash
+
+set -e
+set +h
+
+export SOURCES=/sources
+export BUILD_LOG=/sources/build-log
+
+. inputs
+
+if [ ! -f /etc/adjtime ]
+then
+
 cat > /etc/adjtime << "EOF"
 0.0 0 0.0
 0
 LOCAL
 EOF
+
+fi
+
+if [ ! -f /etc/profile ]
+then
 
 cat > /etc/profile << "EOF"
 # Begin /etc/profile
@@ -20,13 +38,23 @@ export INPUTRC=/etc/inputrc
 # End /etc/profile
 EOF
 
+fi
+
+if [ ! -f /etc/locale.conf ]
+then
+
 cat > /etc/locale.conf << "EOF"
 # Begin /etc/locale.conf
 
-LANG=en_IN.utf-8
+LANG=$LOCALE
 
 # End /etc/locale.conf
 EOF
+
+fi
+
+if [ ! -f /etc/inputrc ]
+then
 
 cat > /etc/inputrc << "EOF"
 # Begin /etc/inputrc
@@ -74,38 +102,77 @@ set bell-style none
 # End /etc/inputrc
 EOF
 
-cat > /etc/fstab << "EOF"
+fi
+if [ ! -f /etc/fstab ]
+then
+
+cat > /etc/fstab <<EOF
 # Begin /etc/fstab
 
 # file system  mount-point  type   options          dump  fsck
 #                                                         order
 
-/dev/[xxx]     /            [fff]  defaults         1     1
-/dev/[yyy]     swap         swap   pri=1            0     0
+$ROOT_PART     /            ext4  defaults         1     1
+EOF
 
+if [ $SWAP_PART != "" ]
+then
+cat >> /etc/fstab<<EOF
+$SWAP_PART     swap         swap   pri=1            0     0
+EOF
+fi
+
+if [ $HOME_PART != "" ]
+then
+cat >> /etc/fstab<<EOF
+$HOME_PART     /home         ext4   defaults       1     1
+EOF
+fi
+
+cat >> /etc/fstab<<"EOF"
 # End /etc/fstab
 EOF
 
-echo "[clfs]" > /etc/hostname
+fi
+
+if [ ! -f /etc/hostname ]
+then
+
+echo "$HOSTNAME" > /etc/hostname
+
+fi
+
+if [ ! -f /etc/hosts ]
+then
 
 cat > /etc/hosts << "EOF"
 # Begin /etc/hosts (network card version)
 
 127.0.0.1 localhost
-[192.168.1.1] [<HOSTNAME>.example.org] [HOSTNAME] [alias ...]
+# Host entries go here...
 
 # End /etc/hosts (network card version)
 EOF
 
-cat > /etc/resolv.conf << "EOF"
+fi
+
+if [ ! -f /etc/resolv.conf ]
+then
+
+cat > /etc/resolv.conf <<EOF
 # Begin /etc/resolv.conf
 
-domain [Your Domain Name]
-nameserver [IP address of your primary nameserver]
-nameserver [IP address of your secondary nameserver]
+domain $DOMAIN
+nameserver $PRIMARY_DNS
+nameserver $SEC_DNS
 
 # End /etc/resolv.conf
 EOF
+
+fi
+
+if [ ! -f /etc/systemd/network/dhcp.network ]
+then
 
 cd /etc/systemd/network &&
 cat > dhcp.network << "EOF"
@@ -116,19 +183,35 @@ Name=enp2s0
 DHCP=yes
 EOF
 
+fi
+
+if ! grep "systemd-timesync" /etc/passwd
+then
+
 groupadd -g 41 systemd-timesync
 useradd -g systemd-timesync -u 41 -d /dev/null -s /bin/false systemd-timesync
 
 systemctl enable systemd-timesyncd
 
+fi
+
+if ! grep "network-scripts" $BUILD_LOG
+then
+
 cd /sources
-tar -xf boot-scripts-cross-lfs-3.0-20140710.tar.xz
-cd boot-scripts-cross-lfs-3.0-20140710
+tar -xf clfs-network-scripts-20140224.tar.xz
+cd clfs-network-scripts-20140224
 
 make install
 
 cd /sources
-rm -rf boot-scripts-cross-lfs-3.0-20140710
+rm -rf clfs-network-scripts-20140224
+
+echo "network-scripts" >> $BUILD_LOG
+fi
+
+if ! grep "kernel" $BUILD_LOG
+then
 
 tar -xf linux-3.14.21.tar.xz
 cd linux-3.14.21
@@ -151,4 +234,20 @@ cp -v .config /boot/config-3.14.21
 cd /sources
 rm -rf linux-3.14.21
 
+echo "kernel" >> $BUILD_LOG
+fi
+
+if ! grep "firmware" $BUILD_LOG
+then
+
+tar -xf linux-firmware.tar.gz -C /lib/modules
+
+echo "firmware" >> $BUILD_LOG
+fi
+
+if [ ! -f "/etc/clfs-release" ]
+then
+
 echo 3.0.0-SYSTEMD > /etc/clfs-release
+
+fi
