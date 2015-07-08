@@ -47,8 +47,6 @@ pwconv
 
 grpconv
 
-passwd root
-
 cd $SOURCE_DIR
 rm -rf $DIR
 echo 126-shadow >> $LOG

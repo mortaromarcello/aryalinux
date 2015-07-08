@@ -115,14 +115,14 @@ cat > /etc/fstab <<EOF
 $ROOT_PART     /            ext4  defaults         1     1
 EOF
 
-if [ $SWAP_PART != "" ]
+if [ "x$SWAP_PART" != "x" ]
 then
 cat >> /etc/fstab<<EOF
 $SWAP_PART     swap         swap   pri=1            0     0
 EOF
 fi
 
-if [ $HOME_PART != "" ]
+if [ "x$HOME_PART" != "x" ]
 then
 cat >> /etc/fstab<<EOF
 $HOME_PART     /home         ext4   defaults       1     1
@@ -240,7 +240,7 @@ fi
 if ! grep "firmware" $BUILD_LOG
 then
 
-tar -xf linux-firmware.tar.gz -C /lib/modules
+tar -xf linux-firmware-master.tar.gz -C /lib/modules
 
 echo "firmware" >> $BUILD_LOG
 fi
@@ -251,3 +251,8 @@ then
 echo 3.0.0-SYSTEMD > /etc/clfs-release
 
 fi
+
+clear
+echo "Done with building the base system. Now lets put some essential packages before rebooting"
+echo "Execute 5.sh by entering the following below:"
+echo "./5.sh"
