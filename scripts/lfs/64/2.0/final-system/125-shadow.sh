@@ -27,6 +27,8 @@ sed -i src/Makefile.in \
 find man -name Makefile.in -exec sed -i \
   -e 's/man1\/groups\.1 //' -e 's/man8\/nologin\.8 //' '{}' \;
 
+sed -i 's/1000/999/' etc/useradd
+
 ./configure --sysconfdir=/etc
 
 make "-j`nproc`"
