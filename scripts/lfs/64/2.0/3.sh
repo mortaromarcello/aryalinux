@@ -1,4 +1,8 @@
+set -e
+set +h
+
 . inputs
+
 for script in testsuite-tools/*
 do
 	$script

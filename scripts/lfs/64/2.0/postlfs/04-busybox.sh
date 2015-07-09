@@ -38,5 +38,3 @@ rm -rf $DIRECTORY
 echo "$STEP_NAME" >> $LOG_PATH
 
 fi
-
-echo "Execute 6.sh"

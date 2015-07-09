@@ -16,6 +16,8 @@ clear
 echo "Please enter the root password :"
 passwd root
 
+clear
+
 echo "Now creating a user for you..."
 useradd -m -c "$FULLNAME" -s /bin/bash $USERNAME
 echo "Please enter the password for $USERNAME :"

@@ -1,3 +1,6 @@
+set -e
+set +h
+
 . inputs
 
 mkdir -pv /{bin,boot,dev,{etc/,}opt,home,lib,mnt}

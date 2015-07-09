@@ -21,5 +21,3 @@ cd $SOURCE_DIR
 echo "$STEP_NAME" >> $LOG_PATH
 
 fi
-
-echo "Execute 6.sh"
