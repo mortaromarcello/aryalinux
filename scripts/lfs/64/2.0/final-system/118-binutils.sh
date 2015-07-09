@@ -44,6 +44,8 @@ make tooldir=/usr install
 
 cd $SOURCE_DIR
 rm -rf $DIR
+rm -rf binutils-build
+
 echo 119-binutils >> $LOG
 
 fi
