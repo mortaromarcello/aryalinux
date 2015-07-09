@@ -254,8 +254,6 @@ fi
 
 clear
 
-passwd root
-
 echo "Done with building the base system. Now lets put some essential packages before rebooting"
 echo "Execute 5.sh by entering the following below:"
 echo "./5.sh"
