@@ -3,6 +3,8 @@ include_once 'dbconfig.php';
 include_once 'ui/form_functions.php';
 include_once 'ui/table_functions.php';
 include_once 'users/users_functions.php';
+include_once 'issues/issues_functions.php';
+
 function connect() {
 	global $username;
 	global $password;
@@ -16,7 +18,6 @@ function connect() {
 	return $con;
 }
 function query($sql) {
-	echo $sql;
 	$con = connect ();
 	$result = mysqli_query ( $con, $sql );
 	$data = array ();
@@ -31,6 +32,20 @@ function update($sql) {
 	$con = connect ();
 	$result = mysqli_query ( $con, $sql );
 	return $result;
+}
+function save_object($table, $data) {
+	$con = connect();
+	$cols = "";
+	$vals = "";
+	$sql = "insert into $table ";
+	foreach ($data as $key=>$value) {
+		$cols = "$cols, $key";
+		$vals = "$vals, '" . addslashes($value) . "'";
+	}
+	$sql = "$sql ($cols) values ($vals)";
+	$sql = str_replace("(, ", "(", $sql);
+	echo $sql;
+	return update($sql);
 }
 function multi_filter_select($table_name, $column_list = null, $filter_map = null) {
 	$sql = "select ";

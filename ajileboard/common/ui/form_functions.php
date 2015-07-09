@@ -16,6 +16,23 @@ function textfield($name, $properties = null, $class = null) {
 	}
 	echo "/>";
 }
+function textarea($name, $properties=null, $class=null) {
+	echo "<textarea name=\"$name\" ";
+	$props = "";
+	if (isset ( $properties )) {
+		foreach ( $properties as $key => $value ) {
+			$props = $props . "$key=\"$value\" ";
+		}
+	}
+	if (isset ( $_REQUEST [$name] )) {
+		$props = $props . "value=\"" . stripslashes ( $_REQUEST [$name] ) . "\" ";
+	}
+	echo $props;
+	if (isset ( $class )) {
+		echo "class=\"$class\" ";
+	}
+	echo "></textarea>";
+}
 function password($name, $properties = null, $class = null) {
 	echo "<input type=\"password\" name=\"$name\" ";
 	$props = "";

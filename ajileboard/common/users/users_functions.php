@@ -9,7 +9,7 @@ function getAuthRequest($request) {
 	);
 }
 function authenticate($authRequest) {
-	$result = multi_filter_select ( "users", null, $authRequest );
+	$result = multi_filter_select ( "tbl_users", null, $authRequest );
 	return $result;
 }
 function takeAuthAction($authResponse) {
