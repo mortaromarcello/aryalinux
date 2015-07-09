@@ -4,7 +4,7 @@ set -e
 set +h
 
 export SOURCE_DIR="/sources"
-export LOG_PATH="/sources/install-log"
+export LOG_PATH="/sources/build-log"
 
 export STEP_NAME="01-which"
 export TARBALL="which-2.20.tar.gz"

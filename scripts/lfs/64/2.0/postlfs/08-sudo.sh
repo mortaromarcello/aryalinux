@@ -4,7 +4,7 @@ set -e
 set +h
 
 export SOURCE_DIR="/sources"
-export LOG_PATH="/sources/install-log"
+export LOG_PATH="/sources/build-log"
 
 export STEP_NAME="08-sudo"
 export TARBALL="sudo-1.8.12.tar.gz"

@@ -6,7 +6,7 @@ set +h
 . inputs
 
 export SOURCE_DIR=/sources
-export INSTALL_LOG=$SOURCE_DIR/install-log
+export INSTALL_LOG=$SOURCE_DIR/build-log
 
 cd $SOURCE_DIR
 touch $INSTALL_LOG

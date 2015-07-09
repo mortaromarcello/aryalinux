@@ -4,7 +4,7 @@ set -e
 set +h
 
 export SOURCE_DIR="/sources"
-export LOG_PATH="/sources/install-log"
+export LOG_PATH="/sources/build-log"
 
 export STEP_NAME="03-os-prober"
 export TARBALL="os-prober_1.63.tar.gz"
