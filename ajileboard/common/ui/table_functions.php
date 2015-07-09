@@ -21,13 +21,20 @@ function table($headings, $data, $properties = null, $style = null, $class = nul
 		echo " class=\"$class\"";
 	}
 	echo ">\n";
-	echo "<tr>\n";
+	echo "<tr class=\"heading\">\n";
 	foreach ( $headings as $key => $value ) {
 		echo "<td>$value</td>\n";
 	}
 	echo "</tr>\n";
+	$num = -1;
 	foreach ( $data as $record ) {
-		echo "<tr>\n";
+		if ($num * -1 == 1) {
+			echo "<tr class=\"r1\">\n";
+		}
+		else {
+			echo "<tr class=\"r0\">\n";
+		}
+		$num = $num * -1;
 		foreach ( $headings as $key => $value ) {
 			echo "<td>$record[$key]</td>\n";
 		}
