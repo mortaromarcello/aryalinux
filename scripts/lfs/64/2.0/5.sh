@@ -11,6 +11,8 @@ export INSTALL_LOG=$SOURCE_DIR/install-log
 cd $SOURCE_DIR
 touch $INSTALL_LOG
 
+clear
+
 echo "Please enter the root password :"
 passwd root
 
@@ -32,6 +34,8 @@ done
 
 sed -i "s/# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/g" /etc/sudoers
 usermod -a -G wheel $USERNAME
+
+clear
 
 echo "Done with installation of the system. Please reboot to log into your newly created operating system"
 echo "Press Ctrl + Alt + Delete to reboot now"
