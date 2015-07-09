@@ -48,8 +48,6 @@ endif
 " End /etc/vimrc
 EOF
 
-vim -c ':options'
-
 cd $SOURCE_DIR
 rm -rf $DIR
 echo 169-vim >> $LOG
