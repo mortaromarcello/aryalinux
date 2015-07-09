@@ -27,15 +27,6 @@ echo "Installing bootloader..."
 
 grub-install $DEVICE
 
-for script in postlfs/*.sh
-do
-	$script
-done
-
-sed -i "s/# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/g" /etc/sudoers
-usermod -a -G wheel $USERNAME
-
-echo "We are almost done..."
 read -p "Let's give a name to your operating system. What name would you like? " NAME
 read -p "What version of $NAME is this? " VERSION
 read -p "Give a nickname to $NAME version $VERSION " CODENAME
@@ -46,6 +37,14 @@ DISTRIB_RELEASE="$VERSION"
 DISTRIB_CODENAME="$CODENAME"
 DISTRIB_DESCRIPTION="$NAME $VERSION $CODENAME"
 EOF
+
+for script in postlfs/*.sh
+do
+	$script
+done
+
+sed -i "s/# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/g" /etc/sudoers
+usermod -a -G wheel $USERNAME
 
 echo "Done with installation of the system. Please reboot to log into your newly created operating system"
 echo "Press Ctrl + Alt + Delete to reboot now"
