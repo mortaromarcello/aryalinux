@@ -6,7 +6,7 @@
 		</h3>
 		<ul>
 			<li><a href="newPage.jsp">New Page</a></li>
-			<li><a href="#">Manage Pages</a></li>
+			<li><a href="managePages.jsp">Manage Pages</a></li>
 		</ul>
 	</li>
 	<li>
