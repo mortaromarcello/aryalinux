@@ -17,4 +17,15 @@
 		<input type="submit" value="Save Page" class="btn"/>
 	</form>
 </div>
+<div class="rightSidebar">
+	<br/><br/>
+	<div class="label">Template</div>
+	<select></select>
+	<div class="label">Parent Page</div>
+	<select></select>
+	<div class="label">Order</div>
+	<select></select>
+	<div class="label">Visibility</div>
+	<div class="control"><input type="radio" name="showDate"> Shown <input type="radio" name="showDate" checked="checked"> Hidden</div>
+</div>
 <%@include file="commons/commonFooter.jsp"%>

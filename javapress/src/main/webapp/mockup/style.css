@@ -99,6 +99,7 @@ body {
 	float: left;
 	margin-left: 20px;
 	padding-top: 10px;
+	width: 850px;
 }
 .bigTextBox
 {
@@ -119,4 +120,7 @@ body {
 {
 	padding: 5px 20px;
 	font-family: 'Titillium Web', sans-serif;
+}
+.rightSidebar
+{
 }
