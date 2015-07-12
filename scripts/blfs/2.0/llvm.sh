@@ -50,8 +50,8 @@ sudo ./1434987998776.sh
 sudo rm -rf 1434987998776.sh
 
 
- 
+
 cd $SOURCE_DIR
-#sudo rm -rf $DIRECTORY
- 
+sudo rm -rf $DIRECTORY
+
 echo "llvm=>`date`" | sudo tee -a $INSTALLED_LIST
