@@ -124,3 +124,24 @@ body {
 .rightSidebar
 {
 }
+.tableHeading
+{
+	background-color: #2d2d2d;
+	color: #fff;
+}
+table
+{
+	border-spacing: 0px;
+}
+td
+{
+	padding: 5px;
+}
+.r1
+{
+	background-color: #eee;
+}
+.r0
+{
+	background-color: #ccc;
+}

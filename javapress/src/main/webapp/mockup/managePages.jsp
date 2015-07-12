@@ -9,7 +9,7 @@
 
 <div class="mainContent">
 	<h3>Pages</h3>
-	<table cellspacing="0" cellpadding="0" style="width: 800px">
+	<table style="width: 800px">
 		<tr class="tableHeading">
 			<td>Title</td>
 			<td></td>
