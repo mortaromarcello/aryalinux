@@ -62,7 +62,7 @@ sudo ./1434987998773.sh
 sudo rm -rf 1434987998773.sh
 
 cat > 1434987998773.sh << "ENDOFFILE"
-mv -v /usr/lib/libnss_{myhostname,mymachines,resolve}.so.2 /lib
+mv -v /usr/lib/libnss_myhostname.so.2 /lib
 ENDOFFILE
 chmod a+x 1434987998773.sh
 sudo ./1434987998773.sh
