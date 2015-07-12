@@ -33,5 +33,7 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 #DEP:xinit
 
 cd $SOURCE_DIR
+
+sudo rm /etc/X11/xorg.conf.d/*
  
 echo "xserver-meta=>`date`" | sudo tee -a $INSTALLED_LIST

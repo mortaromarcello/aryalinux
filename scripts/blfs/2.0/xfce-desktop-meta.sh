@@ -33,5 +33,6 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 #DEP:lightdm
 #DEP:lightdm-gtk-greeter
 
- 
+sudo systemctl enable lightdm
+
 echo "xfce-desktop-meta=>`date`" | sudo tee -a $INSTALLED_LIST
