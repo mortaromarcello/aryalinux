@@ -28,4 +28,9 @@
 	</bean>
 	<context:annotation-config></context:annotation-config>
 	<context:component-scan base-package="org.aryalinux.library"></context:component-scan>
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<bean name="viewResolver"
+		class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+	<bean name="jsonTemplate"
+		class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
 </beans>

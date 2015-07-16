@@ -2,6 +2,7 @@ import wx
 import sys
 sys.path.append('.')
 import okcancelpanel
+import okcanceldialog
 
 class Form(wx.Panel):
 	def __init__(self, parent):
@@ -46,17 +47,5 @@ class Form(wx.Panel):
                                         for option in control['options']:
                                                 ctrl.Append(option)
                                         ctrl.Select(0)
+		print "Done"
 
-app = wx.App()
-frame = wx.Frame(None, -1, title='Hello World')
-f = Form(frame)
-frame.SetSizer(wx.FlexGridSizer(2, 1))
-frame.GetSizer().AddGrowableCol(0)
-frame.GetSizer().AddGrowableRow(0)
-frame.GetSizer().Add(f, 1, wx.EXPAND)
-f.InitializeControls([{'label':'Email Address', 'type':'textfield'}, {'label':'Password', 'type':'password'}, {'type':'listbox', 'label':'Role', 'options':['Admin', 'User']}, {'type':'button', 'label':'', 'value':'Login'}])
-frame.GetSizer().Add(okcancelpanel.OkCancelPanel(frame), 1, wx.ALIGN_RIGHT|wx.ALL|wx.EXPAND, 2)
-frame.SetSize(frame.GetVirtualSize())
-
-frame.Show()
-app.MainLoop()
