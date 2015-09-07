@@ -25,10 +25,19 @@ int isInstalled(char* package)
 	FILE* file = fopen(INSTALLED_LIST, "r");
 	char line[128];
 	fgets(line, 128, file);
+	char* str = (char*)malloc(strlen(package) * sizeof(char) + 2);
+	strcpy(str, "");
+	strcat(str, package);
+	strcat(str, "=>");
+	//printf("%s\n", str);
 	while (line != NULL && !feof(file))
 	{
-		char* temp = strstr(line, package);
-		if (temp != NULL)
+		char* temp = strstr(line, str);
+		// This means that the word is found
+		// Need to check if the word is found in the beginning
+		// If the word is found in the beginning, the length of the line
+		// And the length of temp would be same..
+		if (temp != NULL && strlen(temp) == strlen(line))
 		{
 			fclose(file);
 			return 1;
@@ -281,7 +290,7 @@ int doInstall(int argc, char** packages)
 		exit(0);
 	}
 	i = 0;
-	printf("The following packages would be installed.\n\n");
+	printf("\nThe following packages would be installed.\n\n");
 	while(dependencies[i] != NULL)
 	{
 		if (!force && isInstalled(dependencies[i]))
@@ -377,17 +386,21 @@ int main(int argc, char** argv)
 		doInstall(argc - 2, argv + 2);
 		exit(0);
 	}
-	if (strcmp(argv[1], "forceinstall") == 0)
+	else if (strcmp(argv[1], "forceinstall") == 0)
 	{
 		doForceInstall(argc - 2, argv + 2);
 		exit(0);
 	}
-	if (strcmp(argv[1], "cleanup") == 0)
+	else if (strcmp(argv[1], "cleanup") == 0)
 	{
 		doCleanup();
 	}
-	if (strcmp(argv[1], "update") == 0)
+	else if (strcmp(argv[1], "update") == 0)
 	{
 		doUpdate();
+	}
+	else
+	{
+		printf("Unknown command: \"%s\". Doing Nothing.\n", argv[1]);
 	}
 }
