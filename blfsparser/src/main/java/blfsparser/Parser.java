@@ -181,6 +181,7 @@ public class Parser {
 			builder.append("#OPT:" + str.replace(".html", "") + '\n');
 		}
 		builder.append("\n");
+		builder.append("\ncd $SOURCE_DIR\n\n");
 		if (downloadUrls.size() > 0) {
 			builder.append("URL=" + downloadUrls.get(0) + "\n\n");
 
