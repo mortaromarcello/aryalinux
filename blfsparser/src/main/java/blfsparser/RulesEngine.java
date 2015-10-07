@@ -49,15 +49,25 @@ public class RulesEngine {
 					newCommands.add(command);
 				}
 				else {
-					System.out.println(parser.getSubSection() + "_" + parser.getName() + " : " + command);
+					//System.out.println(parser.getSubSection() + "_" + parser.getName() + " : " + command);
 				}
 			}
 			parser.setCommands(newCommands);
 		}
 	}
+	
+	private static void xorgEnvRule(Parser parser) {
+		if (parser.getRequiredDependencies().contains("x_xorg7.html#xorg-env")) {
+			parser.getRequiredDependencies().remove("x_xorg7.html#xorg-env");
+			parser.getCommands().add(0, "USER_INPUT:export XORG_PREFIX=/usr\nexport XORG_CONFIG=\"--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static\"");
+			// System.out.println("Added xorgenv to " + parser.getSubSection() + "_" + parser.getName());
+		}
+		//if (parser.getRequiredDependencies().contains("#xorg-env"))
+	}
 
 	public static void applyRules(Parser parser) {
 		x7Rules(parser);
 		removeDoxygenCommands(parser);
+		xorgEnvRule(parser);
 	}
 }
