@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Built-By: chandrakant
+Build-Jdk: 1.8.0_51-BLFS
+Created-By: Maven Integration for Eclipse
+
