@@ -1,5 +1,6 @@
 package blfsparser;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,5 +23,39 @@ public class Util {
 			}
 		}
 		return false;
+	}
+
+	public static String readFileEncode(String filePath) throws Exception {
+		FileInputStream inputStream = new FileInputStream(filePath);
+		byte[] data = new byte[inputStream.available()];
+		inputStream.read(data);
+		String str = new String(data);
+		str = str.replace("\n", "br3ak");
+		str = str.replace("=br3ak", "=\n");
+		inputStream.close();
+		return str;
+	}
+
+	public static String wrapRootCommands(String rawCommands) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("\n");
+		builder.append("sudo tee rootscript.sh << \"ENDOFROOTSCRIPT\"\n");
+		builder.append(rawCommands + "\n");
+		builder.append("ENDOFROOTSCRIPT\n");
+		builder.append("sudo chmod 755 rootscript.sh\n");
+		builder.append("sudo ./rootscript.sh\n");
+		builder.append("sudo rm rootscript.sh\n");
+		builder.append("\n");
+		return builder.toString();
+	}
+
+	public static String removeEntities(String rawString) {
+		rawString = rawString.replace("&amp;", "&");
+		rawString = rawString.replace("&lt;", "<");
+		rawString = rawString.replace("&gt;", ">");
+		rawString = rawString.replace("&quot;", "\"");
+		rawString = rawString.replace("&nbsp;", " ");
+		rawString = rawString.replace("<code class=\"literal\">", "").replace("</code>", "");
+		return rawString;
 	}
 }
