@@ -16,16 +16,19 @@ public class BLFSParser {
 	public static String systemdUnits = null;
 	public static String systemdUnitsTarball = null;
 	public static List<String> systemdDownloads = new ArrayList<String>();
-	
+	public static String dbusLink = null;
+
 	static {
 		systemdDownloads.add("http://anduin.linuxfromscratch.org/sources/other/systemd/systemd-224.tar.xz");
-		//systemdDownloads.add("http://www.linuxfromscratch.org/patches/downloads/systemd/systemd-224-compat-3.patch");
+		// systemdDownloads.add("http://www.linuxfromscratch.org/patches/downloads/systemd/systemd-224-compat-3.patch");
 		systemdDownloads.add("http://www.linuxfromscratch.org/patches/downloads/systemd/systemd-224-compat-1.patch");
+		dbusLink = "http://dbus.freedesktop.org/releases/dbus/dbus-1.8.18.tar.gz";
 	}
+
 	public static void main(String[] args) throws Exception {
 		String indexPath = "/home/chandrakant/blfs-svn/index.html";
 		String outDir = "/home/chandrakant/blfs-generated";
-		
+
 		Document document = Jsoup.parse(new File(indexPath), "utf8");
 		parent = indexPath.substring(0, indexPath.lastIndexOf('/'));
 		outputDir = outDir;
@@ -39,8 +42,19 @@ public class BLFSParser {
 			Parser parser = null;
 			if (href.contains("x7driver")) {
 				parser = new XorgDriverParser(name, sourceFile, subDir);
-			}
-			else {
+			} else if (href.contains("python-modules")) {
+				parser = new PythonModulesParser(name, sourceFile, subDir);
+				parser.parse();
+				List<Parser> parsers = ((PythonModulesParser) parser).getAllParsers();
+				for (Parser pythonModuleParser : parsers) {
+					String generated = pythonModuleParser.generate();
+					FileOutputStream fileOutputStream = new FileOutputStream(
+							outputDir + File.separator + "general_" + pythonModuleParser.getName() + ".sh");
+					fileOutputStream.write(generated.getBytes());
+					fileOutputStream.close();
+				}
+				continue;
+			} else {
 				parser = new Parser(name, sourceFile, subDir);
 			}
 			parser.parse();
@@ -52,13 +66,17 @@ public class BLFSParser {
 				continue;
 			}
 			if (generated != null) {
-				FileOutputStream output = new FileOutputStream(outputDir + File.separator + href.replace("/", "_").replace(".html", ".sh"));
+				FileOutputStream output = new FileOutputStream(
+						outputDir + File.separator + href.replace("/", "_").replace(".html", ".sh"));
 				output.write(generated.getBytes());
 				output.close();
-			}
-			else {
-				//System.out.println(parser.getName() + " gave null");
+			} else {
+				// System.out.println(parser.getName() + " gave null");
 			}
 		}
+		Parser parser = new Parser();
+		parser.setName("npth");
+		parser.setSubSection("general");
+		
 	}
 }

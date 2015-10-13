@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Util {
 	private static List<String> extensions = new ArrayList<String>();
+
 	static {
 		extensions.add(".tar.gz");
 		extensions.add(".tar.bz2");
@@ -16,8 +17,9 @@ public class Util {
 		extensions.add(".zip");
 		extensions.add(".patch");
 	}
+
 	public static boolean isValidTarballDownloadUrl(String url) {
-		for(String str : extensions) {
+		for (String str : extensions) {
 			if (url.endsWith(str)) {
 				return true;
 			}
@@ -45,7 +47,6 @@ public class Util {
 		builder.append("sudo chmod 755 rootscript.sh\n");
 		builder.append("sudo ./rootscript.sh\n");
 		builder.append("sudo rm rootscript.sh\n");
-		builder.append("\n");
 		return builder.toString();
 	}
 
@@ -58,4 +59,32 @@ public class Util {
 		rawString = rawString.replace("<code class=\"literal\">", "").replace("</code>", "");
 		return rawString;
 	}
+
+	public static void removeCommandContaining(Parser parser, String name, String needle) {
+		if (parser.getName().equals(name)) {
+			List<String> newCommands = new ArrayList<String>();
+			for (String command : parser.getCommands()) {
+				if (!command.contains(needle)) {
+					newCommands.add(command);
+				}
+			}
+			parser.setCommands(newCommands);
+		}
+	}
+
+	public static void replaceCommandContaining(Parser parser, String name, String needle, String replacement) {
+		if (parser.getName().equals(name)) {
+			List<String> newCommands = new ArrayList<String>();
+			for (String command : parser.getCommands()) {
+				if (command.contains(needle)) {
+					newCommands.add(command.replace(needle, replacement));
+				}
+				else {
+					newCommands.add(command);
+				}
+			}
+			parser.setCommands(newCommands);
+		}
+	}
+
 }

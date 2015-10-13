@@ -69,6 +69,10 @@ public class Parser {
 		return this.document;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	private void parseDownloadUrls() {
 		Elements ulinks = document.select("a.ulink");
 		for (Element ulink : ulinks) {
@@ -116,6 +120,10 @@ public class Parser {
 			// optional.add(element.attr("href").substring(element.attr("href").indexOf('/')
 			// + 1));
 		}
+	}
+
+	public void setSubSection(String subSection) {
+		this.subSection = subSection;
 	}
 
 	private void parseCommands() {
