@@ -179,6 +179,7 @@ public class RulesEngine {
 			for (String str : BLFSParser.systemdDownloads) {
 				downloadUrls.add(str);
 			}
+			Util.replaceCommandContaining(parser, "systemd", "-compat-1.patch", "-compat-3.patch");
 		}
 	}
 
@@ -360,6 +361,64 @@ public class RulesEngine {
 		}
 	}
 
+	private static void aspell(Parser parser) {
+		if (parser.getName().equals("aspell")) {
+			parser.getCommands().remove(parser.getCommands().size() - 1);
+			parser.getCommands().remove(parser.getCommands().size() - 1);
+		}
+	}
+
+	private static void popt(Parser parser) {
+		if (parser.getName().equals("popt")) {
+			Util.removeCommandContaining(parser, "popt", "/usr/share/doc/popt");
+		}
+	}
+
+	private static void dhcpcd(Parser parser) {
+		Util.removeCommandContaining(parser, "dhcpcd", "systemctl enable");
+		Util.removeCommandContaining(parser, "dhcpcd", "systemctl start");
+	}
+
+	private static void networkManager(Parser parser) {
+		if (parser.getName().equals("networkmanager")) {
+			parser.getRecommendedDependencies().remove("basicnet_dhcp.html");
+		}
+	}
+
+	private static void x7lib(Parser parser) {
+		Util.removeCommandContaining(parser, "x7lib", "ln -sv $XORG_PREFIX/lib/X11");
+	}
+
+	private static void freetypeHarfbuzzCircularDeps(Parser parser) {
+		if (parser.getName().equals("freetype2")) {
+			parser.getRecommendedDependencies().remove("general_freetype2.html");
+		}
+		if (parser.getName().equals("harfbuzz")) {
+			parser.getRecommendedDependencies().remove("general_freetype2.html");
+			parser.getRecommendedDependencies().remove("general_harfbuzz.html");
+			parser.getRecommendedDependencies().add("general_freetype2-without-harfbuzz.html");
+		}
+		if (parser.getName().equals("freetype2-without-harfbuzz")) {
+			parser.getRecommendedDependencies().remove("general_freetype2.html");
+			parser.getRecommendedDependencies().remove("general_harfbuzz.html");
+		}
+	}
+
+	private static void xfce4session(Parser parser) {
+		Util.replaceCommandContaining(parser, "xfce4-session", "update-mime-database",
+				"update-mime-database /usr/share/mime");
+	}
+
+	private static void libnotify(Parser parser) {
+		if (parser.getName().equals("libnotify")) {
+			parser.getRequiredDependencies().remove("xfce_xfce4-notifyd.html");
+		}
+	}
+
+	private static void docbookXsl(Parser parser) {
+		Util.removeCommandContaining(parser, "docbook-xsl", "em class=");
+	}
+
 	public static void applyRules(Parser parser) {
 		x7Rules(parser);
 		removeDoxygenCommands(parser);
@@ -389,5 +448,14 @@ public class RulesEngine {
 		// x7driver(parser);
 		gnomeSettingsDaemon(parser);
 		gnupg(parser);
+		aspell(parser);
+		dhcpcd(parser);
+		networkManager(parser);
+		popt(parser);
+		x7lib(parser);
+		freetypeHarfbuzzCircularDeps(parser);
+		xfce4session(parser);
+		libnotify(parser);
+		docbookXsl(parser);
 	}
 }

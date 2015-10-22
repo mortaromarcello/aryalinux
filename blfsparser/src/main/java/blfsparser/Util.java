@@ -2,7 +2,13 @@ package blfsparser;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class Util {
 	private static List<String> extensions = new ArrayList<String>();
@@ -66,6 +72,8 @@ public class Util {
 			for (String command : parser.getCommands()) {
 				if (!command.contains(needle)) {
 					newCommands.add(command);
+				} else {
+					// System.out.println(name + ":" + command);
 				}
 			}
 			parser.setCommands(newCommands);
@@ -78,8 +86,7 @@ public class Util {
 			for (String command : parser.getCommands()) {
 				if (command.contains(needle)) {
 					newCommands.add(command.replace(needle, replacement));
-				}
-				else {
+				} else {
 					newCommands.add(command);
 				}
 			}
@@ -87,4 +94,67 @@ public class Util {
 		}
 	}
 
+	public static Set<String> createSet(String... elements) {
+		Set<String> deps = new LinkedHashSet<String>();
+		for (String element : elements) {
+			deps.add(element);
+		}
+		return deps;
+	}
+
+	public static List<String> createList(String... elements) {
+		List<String> deps = new LinkedList<String>();
+		for (String element : elements) {
+			deps.add(element);
+		}
+		return deps;
+	}
+
+	public static Elements selectClass(Element parent, String className) {
+		Elements children = parent.children();
+		Elements selected = new Elements();
+		for (Element child : children) {
+			if (child.attr("class").equals(className)) {
+				selected.add(child);
+			}
+		}
+		return selected;
+	}
+
+	public static Element getNextSiblingByClass(Element here, String clazz) {
+		while (!here.nextElementSibling().attr("class").equals(clazz)) {
+			here = here.nextElementSibling();
+		}
+		if (here.nextElementSibling().attr("class").equals(clazz)) {
+			return here.nextElementSibling();
+		} else {
+			return null;
+		}
+	}
+
+	public static Element getNextChildByClass(Element parent, String clazz) {
+		Elements children = parent.children();
+		for (Element child : children) {
+			if (child.attr("href").equals(clazz)) {
+				return child;
+			}
+		}
+		return null;
+	}
+
+	public static Element getNextRecursiveChildByClass(Element parent, String clazz) {
+		Elements children = parent.children();
+		for (Element child : children) {
+			if (child.attr("class").equals(clazz)) {
+				return child;
+			}
+			else {
+				Element found = getNextRecursiveChildByClass(child, clazz);
+				if (found != null) {
+					return found;
+				}
+			}
+		}
+		return null;
+	}
 }

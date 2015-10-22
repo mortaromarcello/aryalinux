@@ -1,7 +1,9 @@
 package blfsparser;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
@@ -11,15 +13,15 @@ public class Parser {
 	private Element document;
 	private List<String> downloadUrls;
 	private String name;
-	private List<String> required, recommended, optional;
+	private Set<String> required, recommended, optional;
 	private List<String> commands;
 	private String subSection;
 
 	protected Parser() {
 		downloadUrls = new ArrayList<String>();
-		required = new ArrayList<String>();
-		recommended = new ArrayList<String>();
-		optional = new ArrayList<String>();
+		required = new LinkedHashSet<String>();
+		recommended = new LinkedHashSet<String>();
+		optional = new LinkedHashSet<String>();
 		commands = new ArrayList<String>();
 	}
 
@@ -49,15 +51,15 @@ public class Parser {
 		this.commands = commands;
 	}
 
-	public List<String> getRequiredDependencies() {
+	public Set<String> getRequiredDependencies() {
 		return required;
 	}
 
-	public List<String> getRecommendedDependencies() {
+	public Set<String> getRecommendedDependencies() {
 		return recommended;
 	}
 
-	public List<String> getOptionalDependencies() {
+	public Set<String> getOptionalDependencies() {
 		return optional;
 	}
 
@@ -71,6 +73,10 @@ public class Parser {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public void setDocument(Element document) {
+		this.document = document;
 	}
 
 	private void parseDownloadUrls() {
