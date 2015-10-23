@@ -408,6 +408,11 @@ public class RulesEngine {
 		Util.replaceCommandContaining(parser, "xfce4-session", "update-mime-database",
 				"update-mime-database /usr/share/mime");
 	}
+	
+	private static void libisoburn(Parser parser) {
+		Util.removeCommandContaining(parser, "libisoburn", "doxygen");
+		Util.removeCommandContaining(parser, "libisoburn", "/usr/share/doc/libisoburn");
+	}
 
 	private static void libnotify(Parser parser) {
 		if (parser.getName().equals("libnotify")) {
@@ -457,5 +462,6 @@ public class RulesEngine {
 		xfce4session(parser);
 		libnotify(parser);
 		docbookXsl(parser);
+		libisoburn(parser);
 	}
 }
