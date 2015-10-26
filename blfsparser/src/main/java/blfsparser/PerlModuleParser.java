@@ -70,7 +70,7 @@ public class PerlModuleParser {
 				// Add another package as dep
 			} else if (module.getDownloadUrl().startsWith("http://")) {
 				// Let's parse online page....
-				System.out.println("Parsing online page...");
+				System.out.print(".");
 				Document onlineDoc = Jsoup.parse(new URL(module.getDownloadUrl()), 10000);
 				Elements anchors = onlineDoc.select("a");
 
@@ -114,11 +114,11 @@ public class PerlModuleParser {
 				for (PerlModule dep : module.getDependencies()) {
 					if (!dep.getName().contains("perl-build-install")) {
 						if (dep.getName().contains("perl-modules")) {
-							output = output + "REQ#general_" + dep.getName().replace(".html", "") + "\n";
+							output = output + "REQ#" + dep.getName().replace(".html", "") + "\n";
 						} else if (dep.getName().endsWith(".html")) {
 							output = output + "REQ#" + dep.getName().replace("/", "_").replace(".html", "");
 						} else {
-							output = output + "REQ#general_perl-modules#" + dep.getName().replace(".html", "") + "\n";
+							output = output + "REQ#perl-modules#" + dep.getName().replace(".html", "") + "\n";
 						}
 					}
 				}
@@ -131,14 +131,14 @@ public class PerlModuleParser {
 						+ "cd $SOURCE_DIR\n\n" + "sudo rm -rf $DIRECTORY\n\n";
 				FileOutputStream fout = null;
 				if (module.getName().contains("perl-modules")) {
-					output = output + "echo \"general_" + module.getName()
+					output = output + "echo \"" + module.getName()
 							+ "=>`date`\" | sudo tee -a $INSTALLED_LIST\n\n";
 					fout = new FileOutputStream(outputDir + File.separator + "general_" + module.getName().replace(".html", "") + ".sh");
 				} else {
-					output = output + "echo \"general_perl-modules#" + module.getName()
+					output = output + "echo \"perl-modules#" + module.getName()
 							+ "=>`date`\" | sudo tee -a $INSTALLED_LIST\n\n";
 					fout = new FileOutputStream(
-							outputDir + File.separator + "general_perl-modules#" + module.getName().replace(".html", "") + ".sh");
+							outputDir + File.separator + "perl-modules#" + module.getName().replace(".html", "") + ".sh");
 				}
 				fout.write(output.getBytes());
 				fout.close();

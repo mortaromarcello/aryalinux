@@ -4,6 +4,7 @@ aryalinux-themes.sh
 aryalinux-wallpapers.sh
 dosfstools.sh
 firefox-bin.sh
+thunderbird-bin.sh
 galculator.sh
 lightdm-gtk-greeter.sh
 lightdm.sh
@@ -21,3 +22,5 @@ xfce4-dev-tools.sh
 murrine-gtk-engine.sh
 libxfcegui4.sh
 aryalinux-xfce-customizations.sh
+xfce4-whiskermenu-plugin.sh
+msttcorefonts.sh

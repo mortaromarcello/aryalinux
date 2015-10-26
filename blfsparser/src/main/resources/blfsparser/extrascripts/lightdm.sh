@@ -401,8 +401,8 @@ cat > /lib/systemd/system/lightdm.service << "EOF"
 [Unit]
 Description=Light Display Manager
 Documentation=man:lightdm(1)
-Conflicts=getty at tty1.service
-After=systemd-user-sessions.service getty at tty1.service plymouth-quit.service
+Conflicts=getty@tty1.service
+After=systemd-user-sessions.service getty@tty1.service plymouth-quit.service
 
 [Service]
 ExecStart=/usr/sbin/lightdm

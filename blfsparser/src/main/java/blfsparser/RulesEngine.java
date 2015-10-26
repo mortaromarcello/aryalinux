@@ -33,7 +33,7 @@ public class RulesEngine {
 	}
 
 	private static void removeDoxygenCommands(Parser parser) {
-		if (parser.getOptionalDependencies().contains("general_doxygen.html")) {
+		if (parser.getOptionalDependencies().contains("doxygen.html")) {
 			List<String> newCommands = new ArrayList<String>();
 			for (String command : parser.getCommands()) {
 				boolean shouldAdd = true;
@@ -59,7 +59,7 @@ public class RulesEngine {
 	}
 
 	private static void removeTexliveCommands(Parser parser) {
-		if (parser.getOptionalDependencies().contains("pst_texlive.html")) {
+		if (parser.getOptionalDependencies().contains("texlive.html")) {
 			List<String> newCommands = new ArrayList<String>();
 			boolean texiCommands = false;
 			for (String command : parser.getCommands()) {
@@ -85,22 +85,22 @@ public class RulesEngine {
 	}
 
 	private static void xorgEnvRule(Parser parser) {
-		if (parser.getRequiredDependencies().contains("x_xorg7.html#xorg-env")) {
-			parser.getRequiredDependencies().remove("x_xorg7.html#xorg-env");
+		if (parser.getRequiredDependencies().contains("xorg7#xorg-env")) {
+			parser.getRequiredDependencies().remove("xorg7#xorg-env");
 			parser.getCommands().add(0,
 					"USER_INPUT:export XORG_PREFIX=/usr\nexport XORG_CONFIG=\"--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static\"");
 			// System.out.println("Added xorgenv to " + parser.getSubSection() +
 			// "_" + parser.getName());
 		}
-		if (parser.getRecommendedDependencies().contains("x_xorg7.html#xorg-env")) {
-			parser.getRecommendedDependencies().remove("x_xorg7.html#xorg-env");
+		if (parser.getRecommendedDependencies().contains("xorg7#xorg-env")) {
+			parser.getRecommendedDependencies().remove("xorg7#xorg-env");
 			parser.getCommands().add(0,
 					"USER_INPUT:export XORG_PREFIX=/usr\nexport XORG_CONFIG=\"--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static\"");
 			// System.out.println("Added xorgenv to " + parser.getSubSection() +
 			// "_" + parser.getName());
 		}
-		if (parser.getOptionalDependencies().contains("x_xorg7.html#xorg-env")) {
-			parser.getOptionalDependencies().remove("x_xorg7.html#xorg-env");
+		if (parser.getOptionalDependencies().contains("xorg7#xorg-env")) {
+			parser.getOptionalDependencies().remove("xorg7#xorg-env");
 			parser.getCommands().add(0,
 					"USER_INPUT:export XORG_PREFIX=/usr\nexport XORG_CONFIG=\"--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static\"");
 			// System.out.println("Added xorgenv to " + parser.getSubSection() +
@@ -270,14 +270,14 @@ public class RulesEngine {
 
 	private static void akonadi(Parser parser) {
 		if (parser.getName().equals("akonadi")) {
-			parser.getRequiredDependencies().remove("server_mariadb.html");
-			parser.getRequiredDependencies().remove("server_postgresql.html");
+			parser.getRequiredDependencies().remove("mariadb.html");
+			parser.getRequiredDependencies().remove("postgresql.html");
 		}
 	}
 
 	private static void kdelibs(Parser parser) {
 		if (parser.getName().equals("kdelibs")) {
-			parser.getRecommendedDependencies().remove("general_udisks.html");
+			parser.getRecommendedDependencies().remove("udisks.html");
 		}
 	}
 
@@ -349,13 +349,13 @@ public class RulesEngine {
 
 	private static void gnomeSettingsDaemon(Parser parser) {
 		if (parser.getName().equals("gnome-settings-daemon")) {
-			parser.getRequiredDependencies().remove("x_x7driver.html#xorg-wacom-driver");
+			parser.getRequiredDependencies().remove("x7driver.html#xorg-wacom-driver");
 		}
 	}
 
 	private static void gnupg(Parser parser) {
 		if (parser.getName().equals("gnupg")) {
-			parser.getRequiredDependencies().add("general_npth.html");
+			parser.getRequiredDependencies().add("npth.html");
 			Util.removeCommandContaining(parser, "gnupg", "make -C doc pdf ps html");
 			Util.removeCommandContaining(parser, "gnupg", "install -v -m644 doc/gnupg.html/*");
 		}
@@ -381,7 +381,7 @@ public class RulesEngine {
 
 	private static void networkManager(Parser parser) {
 		if (parser.getName().equals("networkmanager")) {
-			parser.getRecommendedDependencies().remove("basicnet_dhcp.html");
+			parser.getRecommendedDependencies().remove("dhcp.html");
 		}
 	}
 
@@ -391,16 +391,16 @@ public class RulesEngine {
 
 	private static void freetypeHarfbuzzCircularDeps(Parser parser) {
 		if (parser.getName().equals("freetype2")) {
-			parser.getRecommendedDependencies().remove("general_freetype2.html");
+			parser.getRecommendedDependencies().remove("freetype2.html");
 		}
 		if (parser.getName().equals("harfbuzz")) {
-			parser.getRecommendedDependencies().remove("general_freetype2.html");
-			parser.getRecommendedDependencies().remove("general_harfbuzz.html");
-			parser.getRecommendedDependencies().add("general_freetype2-without-harfbuzz.html");
+			parser.getRecommendedDependencies().remove("freetype2.html");
+			parser.getRecommendedDependencies().remove("harfbuzz.html");
+			parser.getRecommendedDependencies().add("freetype2-without-harfbuzz.html");
 		}
 		if (parser.getName().equals("freetype2-without-harfbuzz")) {
-			parser.getRecommendedDependencies().remove("general_freetype2.html");
-			parser.getRecommendedDependencies().remove("general_harfbuzz.html");
+			parser.getRecommendedDependencies().remove("freetype2.html");
+			parser.getRecommendedDependencies().remove("harfbuzz.html");
 		}
 	}
 
@@ -408,7 +408,7 @@ public class RulesEngine {
 		Util.replaceCommandContaining(parser, "xfce4-session", "update-mime-database",
 				"update-mime-database /usr/share/mime");
 	}
-	
+
 	private static void libisoburn(Parser parser) {
 		Util.removeCommandContaining(parser, "libisoburn", "doxygen");
 		Util.removeCommandContaining(parser, "libisoburn", "/usr/share/doc/libisoburn");
@@ -416,7 +416,7 @@ public class RulesEngine {
 
 	private static void libnotify(Parser parser) {
 		if (parser.getName().equals("libnotify")) {
-			parser.getRequiredDependencies().remove("xfce_xfce4-notifyd.html");
+			parser.getRequiredDependencies().remove("xfce4-notifyd.html");
 		}
 	}
 
@@ -424,6 +424,101 @@ public class RulesEngine {
 		Util.removeCommandContaining(parser, "docbook-xsl", "em class=");
 	}
 
+	private static void wpaSupplicant(Parser parser) {
+		Util.removeCommandContaining(parser, "wpa_supplicant", "pushd wpa_gui-qt4");
+		Util.removeCommandContaining(parser, "wpa_supplicant", "install -v -m755 wpa_gui-qt4");
+		Util.removeCommandContaining(parser, "wpa_supplicant", "wpa_passphrase");
+		Util.removeCommandContaining(parser, "wpa_supplicant", "em class=");
+	}
+
+	private static void gimp(Parser parser) {
+		Util.replaceCommandContaining(parser, "gimp", "ALL_LINGUAS=",
+				"HELPTARBALL=`ls ../gimp-help*`\nHELPDIR=`tar tf $HELPTARBALL | cut -d/ -f1 | uniq`\ntar xf $HELPTARBALL\ncd $HELPDIR\nALL_LINGUAS=");
+		Util.replaceCommandContaining(parser, "gimp", "<em class=\"replaceable\"><code>&lt;browser&gt;</code></em>",
+				"firefox");
+	}
+
+	private static void transmission(Parser parser) {
+		if (parser.getName().equals("transmission")) {
+			parser.getRecommendedDependencies().remove("qt4");
+			parser.getRecommendedDependencies().remove("qt5");
+			Util.removeCommandContaining(parser, "transmission", "pushd qt");
+			Util.removeCommandContaining(parser, "transmission", "transmission-qt.desktop");
+		}
+	}
+
+	private static void libevent(Parser parser) {
+		Util.removeCommandContaining(parser, "libevent", "doxygen");
+	}
+
+	private static void cups(Parser parser) {
+		if (parser.getName().equals("cups")) {
+			Util.removeCommandContaining(parser, "cups", "usermod -a -G lpadmin");
+		}
+	}
+
+	private static void poppler(Parser parser) {
+		Util.removeCommandContaining(parser, "poppler", "git");
+	}
+
+	private static void gs(Parser parser) {
+		Util.removeCommandContaining(parser, "gs", "tar -xvf");
+		Util.removeCommandContaining(parser, "gs", "gs -q -dBATCH");
+	}
+
+	private static void installing(Parser parser) {
+		if (parser.getRequiredDependencies().contains("installing")) {
+			parser.getRequiredDependencies().remove("installing");
+			parser.getRequiredDependencies().add("xorg-server");
+		}
+		if (parser.getRecommendedDependencies().contains("installing")) {
+			parser.getRecommendedDependencies().remove("installing");
+			parser.getRecommendedDependencies().add("xorg-server");
+		}
+		if (parser.getOptionalDependencies().contains("installing")) {
+			parser.getOptionalDependencies().remove("installing");
+			parser.getOptionalDependencies().add("xorg-server");
+		}
+	}
+	
+	private static void codecs(Parser parser) {
+		parser.getRequiredDependencies().remove("alsa");
+		parser.getRecommendedDependencies().remove("alsa");
+		parser.getOptionalDependencies().remove("alsa");
+		Util.removeCommandContaining(parser, "alsa-lib", "make doc");
+		Util.removeCommandContaining(parser, "alsa-lib", "doxygen");
+		Util.removeCommandContaining(parser, "alsa-tools", "bash -e");
+		Util.removeCommandContaining(parser, "alsa-tools", "exit");
+		Util.removeCommandContaining(parser, "faac", "./frontend/faac");
+		Util.removeCommandContaining(parser, "faac", "faad Front_Left.mp4");
+		Util.removeCommandContaining(parser, "faad2", "./frontend/faad -o sample.wav");
+		Util.removeCommandContaining(parser, "faad2", "aplay sample.wav");
+		Util.removeCommandContaining(parser, "libmusicbrainz5", "doxygen");
+		Util.removeCommandContaining(parser, "libmusicbrainz5", "/usr/share/doc/libmusicbrainz-5.1.0");
+		Util.removeCommandContaining(parser, "ffmpeg", "pushd doc");
+		Util.removeCommandContaining(parser, "ffmpeg", "doc/*.pdf");
+		Util.removeCommandContaining(parser, "ffmpeg", "doc/doxy/html/*");
+		Util.removeCommandContaining(parser, "xine-lib", "doxygen");
+		Util.removeCommandContaining(parser, "xine-lib", "/usr/share/doc/");
+	}
+	
+	private static void parole(Parser parser) {
+		if (parser.getName().equals("parole")) {
+			parser.getRequiredDependencies().add("xdg-utils");
+		}
+		if (parser.getName().equals("xdg-utils")) {
+			parser.getRequiredDependencies().remove("fop");
+			parser.getRequiredDependencies().remove("w3m");
+			parser.getRequiredDependencies().remove("links");
+		}
+	}
+	
+	private static void vlc(Parser parser) {
+		if (parser.getName().equals("vlc")) {
+			parser.getRequiredDependencies().add("qt4");
+		}
+	}
+	
 	public static void applyRules(Parser parser) {
 		x7Rules(parser);
 		removeDoxygenCommands(parser);
@@ -463,5 +558,16 @@ public class RulesEngine {
 		libnotify(parser);
 		docbookXsl(parser);
 		libisoburn(parser);
+		wpaSupplicant(parser);
+		gimp(parser);
+		transmission(parser);
+		libevent(parser);
+		cups(parser);
+		poppler(parser);
+		gs(parser);
+		installing(parser);
+		codecs(parser);
+		parole(parser);
+		vlc(parser);
 	}
 }

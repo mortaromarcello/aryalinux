@@ -98,6 +98,10 @@ public class Parser {
 			processed = subSection + "_" + processed;
 		}
 		processed = processed.replace("/", "_");
+		processed = processed.replace(".html", "");
+		if (!BLFSParser.namesToNormalize.contains(processed)) {
+			processed = processed.substring(processed.indexOf('_') + 1);
+		}
 		return processed;
 	}
 
@@ -200,7 +204,7 @@ public class Parser {
 				builder.append(cmd.replace("br3ak", "\n").replace("USER_INPUT:", "") + "\n");
 			} else {
 				String str = cmd.replace("br3ak", "\n").replace("ROOT_COMMANDS:", "");
-				if (str.trim().startsWith("make install-")) {
+				if (str.trim().startsWith("make install-") && !str.trim().startsWith("make install-full")) {
 					str = "wget -nc " + BLFSParser.systemdUnits + " -O $SOURCE_DIR/" + BLFSParser.systemdUnitsTarball
 							+ "\ntar xf $SOURCE_DIR/" + BLFSParser.systemdUnitsTarball + " -C .\ncd "
 							+ BLFSParser.systemdUnitsTarball.replace(".tar.bz2", "") + "\n" + str + "\ncd ..";
@@ -213,7 +217,12 @@ public class Parser {
 		if (downloadUrls.size() > 0) {
 			builder.append("sudo rm -rf $DIRECTORY\n");
 		}
-		builder.append("echo \"" + subSection + '_' + name + "=>`date`\" | sudo tee -a $INSTALLED_LIST\n\n");
+		if (!BLFSParser.namesToNormalize.contains(subSection + "_" + name)) {
+			builder.append("echo \"" + name + "=>`date`\" | sudo tee -a $INSTALLED_LIST\n\n");
+		}
+		else {
+			builder.append("echo \"" + subSection + '_' + name + "=>`date`\" | sudo tee -a $INSTALLED_LIST\n\n");
+		}
 		return Util.removeEntities(builder.toString());
 	}
 

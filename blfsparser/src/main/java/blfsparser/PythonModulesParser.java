@@ -93,9 +93,14 @@ public class PythonModulesParser extends Parser {
 			}
 			builder.append("\n# End of driver installation #\n\n");
 		}
-
-		builder.append("echo \"" + super.getSubSection() + '_' + super.getName()
+		if (!BLFSParser.namesToNormalize.contains(super.getSubSection() + "_" + super.getName())) {
+			builder.append("echo \"" + super.getName()
 				+ "=>`date`\" | sudo tee -a $INSTALLED_LIST\n\n");
+		}
+		else {
+			builder.append("echo \"" + super.getSubSection() + '_' + super.getName()
+					+ "=>`date`\" | sudo tee -a $INSTALLED_LIST\n\n");
+		}
 		return Util.removeEntities(builder.toString());
 	}
 }

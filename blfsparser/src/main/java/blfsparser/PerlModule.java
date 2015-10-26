@@ -44,11 +44,4 @@ public class PerlModule {
 	public void setDependencies(List<PerlModule> dependencies) {
 		this.dependencies = dependencies;
 	}
-	
-	public void print(String indent) {
-		System.out.println(indent + name + "(" + downloadUrl + ")");
-		for(PerlModule module : dependencies) {
-			module.print(indent + "    ");
-		}
-	}
 }

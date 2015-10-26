@@ -6,7 +6,12 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -20,6 +25,8 @@ public class BLFSParser {
 	public static String systemdUnitsTarball = null;
 	public static List<String> systemdDownloads = new ArrayList<String>();
 	public static String dbusLink = null;
+	public static Map<String, List<String>> names = new LinkedHashMap<String, List<String>>();
+	public static List<String> namesToNormalize = new ArrayList<String>();
 
 	static {
 		systemdDownloads.add("http://anduin.linuxfromscratch.org/sources/other/systemd/systemd-224.tar.xz");
@@ -28,6 +35,21 @@ public class BLFSParser {
 		dbusLink = "http://dbus.freedesktop.org/releases/dbus/dbus-1.8.18.tar.gz";
 	}
 
+	private static void normalizeNames() {
+		Set<String> nameSet = new HashSet<String>();
+		for (String name: names.keySet()) {
+			nameSet.add(name);
+		}
+		for (String name: nameSet) {
+			if (names.get(name).size() == 1) {
+				names.remove(name);
+			}
+		}
+		for (Entry<String, List<String>> entry : names.entrySet()) {
+			namesToNormalize.addAll(entry.getValue());
+		}
+	}
+	
 	public static void generateExtraScripts() throws Exception {
 		InputStream inputStream = BLFSParser.class.getClassLoader()
 				.getResourceAsStream("blfsparser/extrascripts/scripts");
@@ -56,6 +78,16 @@ public class BLFSParser {
 		parent = indexPath.substring(0, indexPath.lastIndexOf('/'));
 		outputDir = outDir;
 		Elements pageLinks = document.select("li.sect1 a");
+		for (Element pageLink: pageLinks) {
+			String href = pageLink.attr("href");
+			String name = href.substring(href.lastIndexOf('/') + 1).replace(".html", "");
+			String subDir = href.substring(0, href.lastIndexOf('/'));
+			if (names.get(name) == null) {
+				names.put(name, new ArrayList<String>());
+			}
+			names.get(name).add(subDir + "_" + name);
+		}
+		normalizeNames();
 		for (Element pageLink : pageLinks) {
 			String href = pageLink.attr("href");
 			String name = href.substring(href.lastIndexOf('/') + 1).replace(".html", "");
@@ -68,8 +100,8 @@ public class BLFSParser {
 			} else if (href.endsWith("freetype2.html")) {
 				parser = new Parser(name, sourceFile, subDir);
 				Parser parser1 = new Parser(name, sourceFile, subDir);
-				parser1.getRecommendedDependencies().remove("general_freetype2.html");
-				parser1.getRecommendedDependencies().remove("general_harfbuzz.html");
+				parser1.getRecommendedDependencies().remove("freetype2.html");
+				parser1.getRecommendedDependencies().remove("harfbuzz.html");
 				parser.parse();
 				parser1.parse();
 				parser1.setName("freetype2-without-harfbuzz");
@@ -79,7 +111,7 @@ public class BLFSParser {
 				String generated = parser1.generate();
 				// System.out.println(generated);
 				FileOutputStream output = new FileOutputStream(
-						outputDir + File.separator + "general_freetype2-without-harfbuzz.sh");
+						outputDir + File.separator + "freetype2-without-harfbuzz.sh");
 				output.write(generated.getBytes());
 				output.close();
 			} else if (href.contains("python-modules")) {
@@ -89,7 +121,7 @@ public class BLFSParser {
 				for (Parser pythonModuleParser : parsers) {
 					String generated = pythonModuleParser.generate();
 					FileOutputStream fileOutputStream = new FileOutputStream(
-							outputDir + File.separator + "general_" + pythonModuleParser.getName() + ".sh");
+							outputDir + File.separator + pythonModuleParser.getName() + ".sh");
 					fileOutputStream.write(generated.getBytes());
 					fileOutputStream.close();
 				}
@@ -113,10 +145,10 @@ public class BLFSParser {
 					p.parse();
 					String output = p.generate();
 					FileOutputStream fout = new FileOutputStream(
-							outputDir + File.separator + p.getSubSection() + "_" + p.getName() + ".sh");
-					fout.write(outDir.getBytes());
+							outputDir + File.separator + p.getName() + ".sh");
+					fout.write(output.getBytes());
 					fout.close();
-					File file = new File(outputDir + File.separator + p.getSubSection() + "_" + p.getName() + ".sh");
+					File file = new File(outputDir + File.separator + p.getName() + ".sh");
 					file.setExecutable(true);
 				}
 			} else {
@@ -131,11 +163,22 @@ public class BLFSParser {
 				continue;
 			}
 			if (generated != null) {
-				FileOutputStream output = new FileOutputStream(
-						outputDir + File.separator + href.replace("/", "_").replace(".html", ".sh"));
+				String filename = null;
+				FileOutputStream output = null;
+				if (!namesToNormalize.contains(parser.getSubSection() + "_" + parser.getName())) {
+					filename = href.replace("/", "_").replace(".html", ".sh");
+					filename = outputDir + File.separator + filename.substring(filename.indexOf('_') + 1);
+					//System.out.println("Generating " + filename);
+					output = new FileOutputStream(filename);
+				}
+				else {
+					filename = outputDir + File.separator + href.replace("/", "_").replace(".html", ".sh");
+					//System.out.println("Generating " + filename);
+					output = new FileOutputStream(filename);
+				}
 				output.write(generated.getBytes());
 				output.close();
-				File file = new File(outputDir + File.separator + href.replace("/", "_").replace(".html", ".sh"));
+				File file = new File(filename);
 				file.setExecutable(true);
 			} else {
 				// System.out.println(parser.getName() + " gave null");

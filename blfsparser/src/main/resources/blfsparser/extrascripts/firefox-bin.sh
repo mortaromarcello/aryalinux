@@ -9,6 +9,34 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 
 . /etc/alps/alps.conf
 
+#REQ:alsa-lib
+#REQ:gtk2
+#REQ:unzip
+#REQ:yasm
+#REQ:zip
+#REC:icu
+#REC:libevent
+#REC:libvpx
+#REC:nspr
+#REC:nss
+#REC:sqlite
+#OPT:curl
+#OPT:dbus-glib
+#OPT:doxygen
+#OPT:gst-plugins-base
+#OPT:gst-plugins-good
+#OPT:gst-ffmpeg
+#OPT:gst10-plugins-base
+#OPT:gst10-plugins-good
+#OPT:gst10-libav
+#OPT:libnotify
+#OPT:openjdk
+#OPT:pulseaudio
+#OPT:startup-notification
+#OPT:wget
+#OPT:wireless_tools
+
+
 cd $SOURCE_DIR
 
 if [ $(uname -m) != "x86_64" ]
