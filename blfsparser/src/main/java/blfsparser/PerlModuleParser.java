@@ -130,18 +130,22 @@ public class PerlModuleParser {
 						+ "then\n" + "perl Makefile.PL &&\n" + "make &&\n" + "sudo make install\n" + "fi\n"
 						+ "cd $SOURCE_DIR\n\n" + "sudo rm -rf $DIRECTORY\n\n";
 				FileOutputStream fout = null;
+				File file = null;
 				if (module.getName().contains("perl-modules")) {
 					output = output + "echo \"" + module.getName()
 							+ "=>`date`\" | sudo tee -a $INSTALLED_LIST\n\n";
 					fout = new FileOutputStream(outputDir + File.separator + "general_" + module.getName().replace(".html", "") + ".sh");
+					file = new File(outputDir + File.separator + "general_" + module.getName().replace(".html", "") + ".sh");
 				} else {
 					output = output + "echo \"perl-modules#" + module.getName()
 							+ "=>`date`\" | sudo tee -a $INSTALLED_LIST\n\n";
 					fout = new FileOutputStream(
 							outputDir + File.separator + "perl-modules#" + module.getName().replace(".html", "") + ".sh");
+					file = new File(outputDir + File.separator + "perl-modules#" + module.getName().replace(".html", "") + ".sh");
 				}
 				fout.write(output.getBytes());
 				fout.close();
+				file.setExecutable(true);
 			}
 		}
 	}

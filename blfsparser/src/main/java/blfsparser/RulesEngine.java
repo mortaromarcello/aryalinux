@@ -33,7 +33,7 @@ public class RulesEngine {
 	}
 
 	private static void removeDoxygenCommands(Parser parser) {
-		if (parser.getOptionalDependencies().contains("doxygen.html")) {
+		if (parser.getOptionalDependencies().contains("doxygen")) {
 			List<String> newCommands = new ArrayList<String>();
 			for (String command : parser.getCommands()) {
 				boolean shouldAdd = true;
@@ -59,7 +59,7 @@ public class RulesEngine {
 	}
 
 	private static void removeTexliveCommands(Parser parser) {
-		if (parser.getOptionalDependencies().contains("texlive.html")) {
+		if (parser.getOptionalDependencies().contains("texlive")) {
 			List<String> newCommands = new ArrayList<String>();
 			boolean texiCommands = false;
 			for (String command : parser.getCommands()) {
@@ -270,14 +270,14 @@ public class RulesEngine {
 
 	private static void akonadi(Parser parser) {
 		if (parser.getName().equals("akonadi")) {
-			parser.getRequiredDependencies().remove("mariadb.html");
-			parser.getRequiredDependencies().remove("postgresql.html");
+			parser.getRequiredDependencies().remove("mariadb");
+			parser.getRequiredDependencies().remove("postgresql");
 		}
 	}
 
 	private static void kdelibs(Parser parser) {
 		if (parser.getName().equals("kdelibs")) {
-			parser.getRecommendedDependencies().remove("udisks.html");
+			parser.getRecommendedDependencies().remove("udisks");
 		}
 	}
 
@@ -349,13 +349,13 @@ public class RulesEngine {
 
 	private static void gnomeSettingsDaemon(Parser parser) {
 		if (parser.getName().equals("gnome-settings-daemon")) {
-			parser.getRequiredDependencies().remove("x7driver.html#xorg-wacom-driver");
+			parser.getRequiredDependencies().remove("x7driver#xorg-wacom-driver");
 		}
 	}
 
 	private static void gnupg(Parser parser) {
 		if (parser.getName().equals("gnupg")) {
-			parser.getRequiredDependencies().add("npth.html");
+			parser.getRequiredDependencies().add("npth");
 			Util.removeCommandContaining(parser, "gnupg", "make -C doc pdf ps html");
 			Util.removeCommandContaining(parser, "gnupg", "install -v -m644 doc/gnupg.html/*");
 		}
@@ -381,7 +381,7 @@ public class RulesEngine {
 
 	private static void networkManager(Parser parser) {
 		if (parser.getName().equals("networkmanager")) {
-			parser.getRecommendedDependencies().remove("dhcp.html");
+			parser.getRecommendedDependencies().remove("dhcp");
 		}
 	}
 
@@ -391,16 +391,16 @@ public class RulesEngine {
 
 	private static void freetypeHarfbuzzCircularDeps(Parser parser) {
 		if (parser.getName().equals("freetype2")) {
-			parser.getRecommendedDependencies().remove("freetype2.html");
+			parser.getRecommendedDependencies().remove("freetype2");
 		}
 		if (parser.getName().equals("harfbuzz")) {
-			parser.getRecommendedDependencies().remove("freetype2.html");
-			parser.getRecommendedDependencies().remove("harfbuzz.html");
-			parser.getRecommendedDependencies().add("freetype2-without-harfbuzz.html");
+			parser.getRecommendedDependencies().remove("freetype2");
+			parser.getRecommendedDependencies().remove("harfbuzz");
+			parser.getRecommendedDependencies().add("freetype2-without-harfbuzz");
 		}
 		if (parser.getName().equals("freetype2-without-harfbuzz")) {
-			parser.getRecommendedDependencies().remove("freetype2.html");
-			parser.getRecommendedDependencies().remove("harfbuzz.html");
+			parser.getRecommendedDependencies().remove("freetype2");
+			parser.getRecommendedDependencies().remove("harfbuzz");
 		}
 	}
 
@@ -416,7 +416,7 @@ public class RulesEngine {
 
 	private static void libnotify(Parser parser) {
 		if (parser.getName().equals("libnotify")) {
-			parser.getRequiredDependencies().remove("xfce4-notifyd.html");
+			parser.getRequiredDependencies().remove("xfce4-notifyd");
 		}
 	}
 
@@ -480,7 +480,7 @@ public class RulesEngine {
 			parser.getOptionalDependencies().add("xorg-server");
 		}
 	}
-	
+
 	private static void codecs(Parser parser) {
 		parser.getRequiredDependencies().remove("alsa");
 		parser.getRecommendedDependencies().remove("alsa");
@@ -501,7 +501,7 @@ public class RulesEngine {
 		Util.removeCommandContaining(parser, "xine-lib", "doxygen");
 		Util.removeCommandContaining(parser, "xine-lib", "/usr/share/doc/");
 	}
-	
+
 	private static void parole(Parser parser) {
 		if (parser.getName().equals("parole")) {
 			parser.getRequiredDependencies().add("xdg-utils");
@@ -512,11 +512,32 @@ public class RulesEngine {
 			parser.getRequiredDependencies().remove("links");
 		}
 	}
-	
+
 	private static void vlc(Parser parser) {
 		if (parser.getName().equals("vlc")) {
 			parser.getRequiredDependencies().add("qt4");
 		}
+	}
+
+	private static void pidgin(Parser parser) {
+		Util.removeCommandContaining(parser, "pidgin", "cp -v doc/html/*");
+	}
+
+	private static void graphite2(Parser parser) {
+		Util.replaceCommandContaining(parser, "graphite2", "\\ \n", "\\\n");
+	}
+
+	private static void libreoffice(Parser parser) {
+		Util.replaceCommandContaining(parser, "libreoffice", "--with-system-boost", "--without-system-boost");
+	}
+
+	private static void libusb(Parser parser) {
+		Util.removeCommandContaining(parser, "libusb", "doc/html/*");
+		Util.removeCommandContaining(parser, "fuse", "doc/html/*");
+		Util.removeCommandContaining(parser, "parted", "texi2pdf");
+		Util.removeCommandContaining(parser, "parted", "pdf,ps,dvi");
+		Util.removeCommandContaining(parser, "libgcrypt", "doc/gcrypt.html/*");
+		Util.removeCommandContaining(parser, "libgcrypt", "make -j1 -C doc pdf ps html");
 	}
 	
 	public static void applyRules(Parser parser) {
@@ -569,5 +590,9 @@ public class RulesEngine {
 		codecs(parser);
 		parole(parser);
 		vlc(parser);
+		pidgin(parser);
+		graphite2(parser);
+		libreoffice(parser);
+		libusb(parser);
 	}
 }

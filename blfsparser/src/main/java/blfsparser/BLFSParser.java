@@ -114,6 +114,8 @@ public class BLFSParser {
 						outputDir + File.separator + "freetype2-without-harfbuzz.sh");
 				output.write(generated.getBytes());
 				output.close();
+				File file = new File(outputDir + File.separator + "freetype2-without-harfbuzz.sh");
+				file.setExecutable(true);
 			} else if (href.contains("python-modules")) {
 				parser = new PythonModulesParser(name, sourceFile, subDir);
 				parser.parse();
@@ -124,6 +126,9 @@ public class BLFSParser {
 							outputDir + File.separator + pythonModuleParser.getName() + ".sh");
 					fileOutputStream.write(generated.getBytes());
 					fileOutputStream.close();
+					File file = new File(
+							outputDir + File.separator + pythonModuleParser.getName() + ".sh");
+					file.setExecutable(true);
 				}
 				continue;
 			} else if (href.contains("perl-modules")) {
