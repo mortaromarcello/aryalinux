@@ -24,3 +24,6 @@ libxfcegui4.sh
 aryalinux-xfce-customizations.sh
 xfce4-whiskermenu-plugin.sh
 msttcorefonts.sh
+t1lib.sh
+gd.sh
+net-snmp.sh

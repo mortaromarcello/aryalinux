@@ -540,6 +540,63 @@ public class RulesEngine {
 		Util.removeCommandContaining(parser, "libgcrypt", "make -j1 -C doc pdf ps html");
 	}
 	
+	private static void removeMail(Parser parser) {
+		parser.getRequiredDependencies().remove("mail");
+		parser.getRecommendedDependencies().remove("mail");
+		parser.getOptionalDependencies().remove("mail");
+	}
+	
+	private static void php(Parser parser) {
+		if (parser.getName().equals("php")) {
+			parser.getRecommendedDependencies().addAll(parser.getOptionalDependencies());
+			parser.getRecommendedDependencies().remove("mitkrb");
+			parser.getRequiredDependencies().remove("mitkrb");
+			parser.getRecommendedDependencies().add("t1lib");
+			parser.getRecommendedDependencies().add("gd");
+			parser.getRecommendedDependencies().add("net-snmp");
+			Util.removeCommandContaining(parser, "php", "php_manual");
+			for (int i=0; i<parser.getCommands().size(); i++) {
+				String command = parser.getCommands().get(i);
+				if (command.contains("./configure")) {
+					String newCommand = command.substring(0, command.indexOf("./configure"));
+					newCommand = newCommand + PHPConfig.PHP_CONFIG;
+					parser.getCommands().set(i, newCommand);
+					break;
+				}
+			}
+		}
+	}
+	
+	private static void mariadb(Parser parser) {
+		if (parser.getName().equals("mariadb")) {
+			for (int i=0; i<parser.getCommands().size(); i++) {
+				if (parser.getCommands().get(i).contains("mysqladmin -u root password")) {
+					parser.getCommands().add(i, "USER_INPUT:sleep 5\nclear\n");
+					i++;
+				}
+			}
+		}
+	}
+	
+	private static void postgresql(Parser parser) {
+		if (parser.getName().equals("postgresql")) {
+			for (int i=0; i<parser.getCommands().size(); i++) {
+				String command = parser.getCommands().get(i);
+				if (command.contains("/usr/bin/createdb")) {
+					parser.getCommands().add(i, "USER_INPUT:sleep 5\nclear\n");
+					i++;
+				}
+			}
+		}
+	}
+	
+	private static void mitkerberos(Parser parser) {
+		if (parser.getName().equals("mitkrb")) {
+			Util.removeCommandContaining(parser, "mitkrb", "gpg2");
+			
+		}
+	}
+	
 	public static void applyRules(Parser parser) {
 		x7Rules(parser);
 		removeDoxygenCommands(parser);
@@ -594,5 +651,10 @@ public class RulesEngine {
 		graphite2(parser);
 		libreoffice(parser);
 		libusb(parser);
+		php(parser);
+		removeMail(parser);
+		mariadb(parser);
+		postgresql(parser);
+		mitkerberos(parser);
 	}
 }

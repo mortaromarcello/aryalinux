@@ -192,6 +192,9 @@ public class Parser {
 			} else {
 				builder.append("DIRECTORY=''\nunzip_dirname $TARBALL DIRECTORY\n\n");
 			}
+			if(name.equals("mitkrb")) {
+				builder.append("DIRECTORY=`tar tf $DIRECTORY | cut -d/ -f1 | uniq`\n\n");
+			}
 			if (!downloadUrls.get(0).endsWith(".zip")) {
 				builder.append("tar xf $TARBALL\n");
 			} else {
