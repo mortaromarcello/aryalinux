@@ -499,7 +499,7 @@ public class RulesEngine {
 		Util.removeCommandContaining(parser, "ffmpeg", "doc/*.pdf");
 		Util.removeCommandContaining(parser, "ffmpeg", "doc/doxy/html/*");
 		Util.removeCommandContaining(parser, "xine-lib", "doxygen");
-		Util.removeCommandContaining(parser, "xine-lib", "/usr/share/doc/");
+		Util.removeCommandContaining(parser, "xine-lib", "doc/api/*");
 	}
 
 	private static void parole(Parser parser) {
@@ -597,6 +597,10 @@ public class RulesEngine {
 		}
 	}
 	
+	private static void updateDesktopDatabase(Parser parser) {
+		Util.removeCommandContaining(parser, "desktop-file-utils", "update-desktop-database");
+	}
+	
 	public static void applyRules(Parser parser) {
 		x7Rules(parser);
 		removeDoxygenCommands(parser);
@@ -656,5 +660,6 @@ public class RulesEngine {
 		mariadb(parser);
 		postgresql(parser);
 		mitkerberos(parser);
+		updateDesktopDatabase(parser);
 	}
 }

@@ -10,7 +10,7 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 . /etc/alps/alps.conf
 
 #REQ:xfce4-dev-tools
-#REQ:xfce_thunar
+#REQ:thunar
 
 
 cd $SOURCE_DIR

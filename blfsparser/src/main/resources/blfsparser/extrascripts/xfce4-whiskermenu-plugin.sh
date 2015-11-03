@@ -9,7 +9,7 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 
 . /etc/alps/alps.conf
 
-#DEP:cmake
+#REQ:cmake
 
 
 cd $SOURCE_DIR

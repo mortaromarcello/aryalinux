@@ -9,8 +9,8 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 
 . /etc/alps/alps.conf
 
-#REQ:pst_itstool
-#REQ:general_libgcrypt
+#REQ:itstool
+#REQ:libgcrypt
 
 
 cd $SOURCE_DIR

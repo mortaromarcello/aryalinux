@@ -5,8 +5,8 @@ set +h
 
 . /etc/alps/alps.conf
 
-#REQ:x_libglade
-#REQ:xfce_libxfce4util
+#REQ:libglade
+#REQ:libxfce4util
 cd $SOURCE_DIR
 
 URL=http://archive.xfce.org/src/xfce/libxfcegui4/4.10/libxfcegui4-4.10.0.tar.bz2
