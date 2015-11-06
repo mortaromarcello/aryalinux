@@ -549,6 +549,8 @@ public class RulesEngine {
 	private static void php(Parser parser) {
 		if (parser.getName().equals("php")) {
 			parser.getRecommendedDependencies().addAll(parser.getOptionalDependencies());
+			parser.getRequiredDependencies().remove("mariadb");
+			parser.getRecommendedDependencies().remove("mariadb");
 			parser.getRecommendedDependencies().remove("mitkrb");
 			parser.getRequiredDependencies().remove("mitkrb");
 			parser.getRecommendedDependencies().add("t1lib");
@@ -601,6 +603,14 @@ public class RulesEngine {
 		Util.removeCommandContaining(parser, "desktop-file-utils", "update-desktop-database");
 	}
 	
+	private static void removeDocumentation(Parser parser) {
+		Util.removeCommandContaining(parser, "git", "make html");
+		Util.removeCommandContaining(parser, "git", "make man");
+		Util.removeCommandContaining(parser, "git", "make install-man");
+		Util.removeCommandContaining(parser, "git", "htmldir=/usr/share/doc/");
+		Util.removeCommandContaining(parser, "git", "man-pages/{html,text}");
+		
+	}
 	public static void applyRules(Parser parser) {
 		x7Rules(parser);
 		removeDoxygenCommands(parser);
@@ -661,5 +671,6 @@ public class RulesEngine {
 		postgresql(parser);
 		mitkerberos(parser);
 		updateDesktopDatabase(parser);
+		removeDocumentation(parser);
 	}
 }

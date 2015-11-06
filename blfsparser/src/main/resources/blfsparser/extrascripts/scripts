@@ -27,3 +27,9 @@ msttcorefonts.sh
 t1lib.sh
 gd.sh
 net-snmp.sh
+mysql.sh
+node.sh
+redis.sh
+mongodb.sh
+ansible.sh
+scons.sh

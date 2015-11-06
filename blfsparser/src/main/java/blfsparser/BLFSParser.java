@@ -42,7 +42,6 @@ public class BLFSParser {
 		}
 		for (String name: nameSet) {
 			if (name.equals("libglade")) {
-				System.out.println(names.get(name));
 			}
 			if (names.get(name).size() == 1) {
 				names.remove(name);
@@ -51,7 +50,6 @@ public class BLFSParser {
 		for (Entry<String, List<String>> entry : names.entrySet()) {
 			namesToNormalize.addAll(entry.getValue());
 		}
-		System.out.println(namesToNormalize);
 	}
 	
 	public static void generateExtraScripts() throws Exception {
@@ -165,7 +163,7 @@ public class BLFSParser {
 			}
 			parser.parse();
 			//if (parser.getName().contains("libxfcegui4")) {
-				System.out.println(parser.getName());
+				// System.out.println(parser.getName());
 			//}
 			RulesEngine.applyRules(parser);
 			String generated = parser.generate();

@@ -71,7 +71,13 @@ public class PerlModuleParser {
 			} else if (module.getDownloadUrl().startsWith("http://")) {
 				// Let's parse online page....
 				System.out.print(".");
-				Document onlineDoc = Jsoup.parse(new URL(module.getDownloadUrl()), 10000);
+				Document onlineDoc = null;
+				try {
+					onlineDoc = Jsoup.parse(new URL(module.getDownloadUrl()), 10000);
+				}
+				catch(Exception ex) {
+					System.out.println("Could not download : " + module.getDownloadUrl());
+				}
 				Elements anchors = onlineDoc.select("a");
 
 				for (Element anchor : anchors) {
