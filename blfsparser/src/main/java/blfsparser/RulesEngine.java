@@ -609,8 +609,9 @@ public class RulesEngine {
 		Util.removeCommandContaining(parser, "git", "make install-man");
 		Util.removeCommandContaining(parser, "git", "htmldir=/usr/share/doc/");
 		Util.removeCommandContaining(parser, "git", "man-pages/{html,text}");
-		
+		Util.removeCommandContaining(parser, "rsync", "/usr/share/doc/rsync");
 	}
+	
 	public static void applyRules(Parser parser) {
 		x7Rules(parser);
 		removeDoxygenCommands(parser);
