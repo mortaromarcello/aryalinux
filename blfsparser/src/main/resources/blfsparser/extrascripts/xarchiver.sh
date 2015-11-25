@@ -15,7 +15,7 @@ tar -xf $TARBALL
 
 cd $DIRECTORY
 
-./configure --prefix=/usr &&
+./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static &&
 make
 sudo make install
 

@@ -15,7 +15,7 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
 tar xf $TARBALL
 cd $DIRECTORY
 
-./configure --prefix=/usr &&
+./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static &&
 make "-j`nproc`" without_doc
 
 sudo make install

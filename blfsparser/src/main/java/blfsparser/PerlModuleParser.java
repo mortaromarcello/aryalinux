@@ -71,18 +71,24 @@ public class PerlModuleParser {
 			} else if (module.getDownloadUrl().startsWith("http://")) {
 				// Let's parse online page....
 				System.out.print(".");
+				// System.out.println(module.getDownloadUrl());
 				Document onlineDoc = null;
 				try {
 					onlineDoc = Jsoup.parse(new URL(module.getDownloadUrl()), 10000);
-				}
-				catch(Exception ex) {
+				} catch (Exception ex) {
 					System.out.println("Could not download : " + module.getDownloadUrl());
 				}
 				Elements anchors = onlineDoc.select("a");
 
 				for (Element anchor : anchors) {
 					if (anchor.attr("href").endsWith(".tar.gz")) {
-						module.setDownloadUrl(module.getDownloadUrl() + "/" + anchor.attr("href"));
+						if (anchor.attr("href").startsWith("/")) {
+							module.setDownloadUrl(
+									module.getDownloadUrl().substring(0, module.getDownloadUrl().indexOf(".org") + 4)
+											+ anchor.attr("href"));
+						} else {
+							module.setDownloadUrl(module.getDownloadUrl() + "/" + anchor.attr("href"));
+						}
 					}
 				}
 			}
@@ -97,22 +103,31 @@ public class PerlModuleParser {
 		}
 	}
 
+	private void addRecursive(PerlModule root, Set<PerlModule> collection) {
+		for (PerlModule child : root.getDependencies()) {
+			if (child.getDownloadUrl().endsWith(".tar.gz")) {
+				addRecursive(child, collection);
+				collection.add(child);
+			}
+		}
+	}
+
 	public void generate(String outputDir) throws Exception {
 		Set<PerlModule> allModules = new LinkedHashSet<PerlModule>();
 		for (PerlModule module : perlModules) {
-			for (PerlModule child : module.getDependencies()) {
-				boolean present = false;
-				for (PerlModule m : allModules) {
-					if (m.getName().equals(child.getName())) {
-						present = true;
-					}
-				}
-				if (!present && child.getDownloadUrl().endsWith(".tar.gz")) {
-					allModules.add(child);
-				}
-			}
-			allModules.add(module);
+			addRecursive(module, allModules);
 		}
+
+		/*
+		 * for (PerlModule module : perlModules) { for (PerlModule child :
+		 * module.getDependencies()) { boolean present = false; for (PerlModule
+		 * m : allModules) { if (m.getName().equals(child.getName())) { present
+		 * = true; } } if (!present &&
+		 * child.getDownloadUrl().endsWith(".tar.gz")) { allModules.add(child);
+		 * } } allModules.add(module); }
+		 */
+
+		// System.out.println(perlModules);
 		for (PerlModule module : allModules) {
 			if (!module.getName().endsWith(".html") && !module.getName().contains("perl-build-install")) {
 				String output = "#!/bin/bash\n" + "\n" + "set -e\n" + "set +h\n" + "\n" + ". /etc/alps/alps.conf\n"
@@ -120,11 +135,11 @@ public class PerlModuleParser {
 				for (PerlModule dep : module.getDependencies()) {
 					if (!dep.getName().contains("perl-build-install")) {
 						if (dep.getName().contains("perl-modules")) {
-							output = output + "REQ#" + dep.getName().replace(".html", "") + "\n";
+							output = output + "#REQ:" + dep.getName().replace(".html", "") + "\n";
 						} else if (dep.getName().endsWith(".html")) {
-							output = output + "REQ#" + dep.getName().replace("/", "_").replace(".html", "");
+							output = output + "#REQ:" + dep.getName().replace("/", "_").replace(".html", "");
 						} else {
-							output = output + "REQ#perl-modules#" + dep.getName().replace(".html", "") + "\n";
+							output = output + "#REQ:perl-modules#" + dep.getName().replace(".html", "") + "\n";
 						}
 					}
 				}
@@ -138,16 +153,18 @@ public class PerlModuleParser {
 				FileOutputStream fout = null;
 				File file = null;
 				if (module.getName().contains("perl-modules")) {
-					output = output + "echo \"" + module.getName()
-							+ "=>`date`\" | sudo tee -a $INSTALLED_LIST\n\n";
-					fout = new FileOutputStream(outputDir + File.separator + "general_" + module.getName().replace(".html", "") + ".sh");
-					file = new File(outputDir + File.separator + "general_" + module.getName().replace(".html", "") + ".sh");
+					output = output + "echo \"" + module.getName() + "=>`date`\" | sudo tee -a $INSTALLED_LIST\n\n";
+					fout = new FileOutputStream(
+							outputDir + File.separator + "general_" + module.getName().replace(".html", "") + ".sh");
+					file = new File(
+							outputDir + File.separator + "general_" + module.getName().replace(".html", "") + ".sh");
 				} else {
 					output = output + "echo \"perl-modules#" + module.getName()
 							+ "=>`date`\" | sudo tee -a $INSTALLED_LIST\n\n";
-					fout = new FileOutputStream(
-							outputDir + File.separator + "perl-modules#" + module.getName().replace(".html", "") + ".sh");
-					file = new File(outputDir + File.separator + "perl-modules#" + module.getName().replace(".html", "") + ".sh");
+					fout = new FileOutputStream(outputDir + File.separator + "perl-modules#"
+							+ module.getName().replace(".html", "") + ".sh");
+					file = new File(outputDir + File.separator + "perl-modules#" + module.getName().replace(".html", "")
+							+ ".sh");
 				}
 				fout.write(output.getBytes());
 				fout.close();

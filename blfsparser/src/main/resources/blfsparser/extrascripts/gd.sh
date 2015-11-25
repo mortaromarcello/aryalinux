@@ -50,7 +50,7 @@ tar xf $TARBALL
 cd $DIRECTORY
 
 patch -Np1 -i ../gd-1-fix-libvpx.patch
-./configure --prefix=/usr &&
+./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static &&
 make "-j`nproc`"
 
 sudo make install

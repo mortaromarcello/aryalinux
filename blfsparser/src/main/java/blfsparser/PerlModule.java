@@ -44,4 +44,8 @@ public class PerlModule {
 	public void setDependencies(List<PerlModule> dependencies) {
 		this.dependencies = dependencies;
 	}
+	
+	public String toString() {
+		return getName();
+	}
 }
