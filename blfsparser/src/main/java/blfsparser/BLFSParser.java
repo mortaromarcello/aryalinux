@@ -58,6 +58,7 @@ public class BLFSParser {
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 		String line = null;
 		while ((line = bufferedReader.readLine()) != null) {
+			System.out.println("blfsparser/extrascripts/" + line);
 			InputStream inputStream2 = BLFSParser.class.getClassLoader()
 					.getResourceAsStream("blfsparser/extrascripts/" + line);
 			FileOutputStream fout = new FileOutputStream(outputDir + File.separator + line);
