@@ -17,7 +17,10 @@ set +h
 
 cd $SOURCE_DIR
 
-sudo userdel -r mysql
+if [ `getent group mysql` ]
+then
+	sudo userdel -r mysql
+fi
 sudo groupadd -g 40 mysql &&
 sudo useradd -c "MySQL Server" -d /srv/mysql -g mysql -s /bin/false -u 40 mysql
 
