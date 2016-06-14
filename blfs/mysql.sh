@@ -43,9 +43,13 @@ cmake -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_CONFIG=mysql_release .. &&
 make "-j`nproc`"
 sudo make install
 
-pushd /usr
-sudo bin/mysql_install_db --user=mysql
+chmod a+x scripts/mysql_install_db
+sudo mkdir -pv /usr/scripts/
+sudo cp scripts/mysql_install_db /usr/scripts
 
+pushd /usr
+
+sudo scripts/mysql_install_db --user=mysql
 sudo chown -R mysql data
 
 sudo mkdir -pv /var/mysqld
