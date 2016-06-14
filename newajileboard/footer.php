@@ -1,1 +1,0 @@
-<div class="footer">(C) 2015 Ajileboard. All Rights Reserved.</div>
