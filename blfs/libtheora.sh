@@ -29,6 +29,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i 's/png_\(sizeof\)/\1/g' examples/png2theora.c &&
 ./configure --prefix=/usr --disable-static &&
 make "-j`nproc`"

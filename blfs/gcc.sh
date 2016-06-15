@@ -22,6 +22,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 mkdir ../gcc-build                                   &&
 cd    ../gcc-build                                   &&
 ../gcc-5.3.0/configure                               \

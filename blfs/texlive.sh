@@ -36,6 +36,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 cat >> /etc/ld.so.conf << EOF

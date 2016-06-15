@@ -26,6 +26,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 cat > wpa_supplicant/.config << "EOF"
 CONFIG_BACKEND=file
 CONFIG_CTRL_IFACE=y

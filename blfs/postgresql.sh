@@ -33,6 +33,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i '/DEFAULT_PGSOCKET_DIR/s@/tmp@/run/postgresql@' src/include/pg_config_manual.h &&
 ./configure --prefix=/usr          \
             --enable-thread-safety \

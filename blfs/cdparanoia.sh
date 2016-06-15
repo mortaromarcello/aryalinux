@@ -22,6 +22,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../cdparanoia-III-10.2-gcc_fixes-1.patch &&
 ./configure --prefix=/usr --mandir=/usr/share/man &&
 make -j1

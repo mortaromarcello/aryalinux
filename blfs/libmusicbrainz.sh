@@ -23,6 +23,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../libmusicbrainz-2.1.5-missing-includes-1.patch &&
 ./configure --prefix=/usr --disable-static &&
 make "-j`nproc`"

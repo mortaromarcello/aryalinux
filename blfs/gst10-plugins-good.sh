@@ -40,6 +40,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -e '/smgradio/ {
     a \  \/* Radionomy Hot40Music shoutcast stream *\/
     a \  g_object_set (src, "location",

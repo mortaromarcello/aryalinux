@@ -24,6 +24,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i '/skipping/d' util/packer.c &&
 ./configure --prefix=/usr    \
             --disable-static \

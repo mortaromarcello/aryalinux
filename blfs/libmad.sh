@@ -22,6 +22,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../libmad-0.15.1b-fixes-1.patch                &&
 sed "s@AM_CONFIG_HEADER@AC_CONFIG_HEADERS@g" -i configure.ac &&
 touch NEWS AUTHORS ChangeLog                                 &&

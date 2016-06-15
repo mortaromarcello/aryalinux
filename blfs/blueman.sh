@@ -32,7 +32,8 @@ make "-j`nproc`"
 
 sudo make install
 
-sudo usermod -a -G lp `read -p "Enter your username : " USERNAME; echo $USERNAME`
+whoami > /tmp/currentuser
+sudo usermod -a -G lp `cat /tmp/currentuser`
 
 if [ "`which thunar`" != "" ]
 then

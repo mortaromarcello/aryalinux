@@ -21,6 +21,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 CFLAGS="$CFLAGS -std=gnu89" \
 ./configure --prefix=/usr --sbindir=/sbin &&
 make "-j`nproc`"

@@ -13,6 +13,8 @@ set -e
 
 cd $SOURCE_DIR
 
+whoami > /tmp/currentuser
+
 cat > ~/.xinitrc << EOF
 # Begin .xinitrc
 exec dbus-launch --exit-with-session startkde

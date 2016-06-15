@@ -28,6 +28,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../geoclue-0.12.0-gpsd_fix-1.patch &&
 sed -i "s@ -Werror@@" configure &&
 sed -i "s@libnm_glib@libnm-glib@g" configure &&

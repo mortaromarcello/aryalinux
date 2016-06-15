@@ -21,6 +21,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 wget -c https://github.com/cjlin1/liblinear/archive/v2.1.tar.gz \
      -O liblinear-2.1.tar.gz
 

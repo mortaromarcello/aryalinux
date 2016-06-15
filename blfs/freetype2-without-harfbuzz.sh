@@ -25,6 +25,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 tar -xf ../freetype-doc-2.6.3.tar.bz2 --strip-components=2 -C docs
 
 

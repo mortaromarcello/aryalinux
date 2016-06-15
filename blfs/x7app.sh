@@ -15,6 +15,8 @@ set -e
 
 cd $SOURCE_DIR
 
+whoami > /tmp/currentuser
+
 export XORG_PREFIX=/usr
 export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
 

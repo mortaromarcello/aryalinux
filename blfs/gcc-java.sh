@@ -26,6 +26,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i 's/\(install.*:\) install-.*recursive/\1/' libffi/Makefile.in         &&
 sed -i 's/\(install-data-am:\).*/\1/'             libffi/include/Makefile.in &&
 cp ../ecj-latest.jar ./ecj.jar &&

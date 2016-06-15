@@ -11,6 +11,8 @@ set -e
 
 cd $SOURCE_DIR
 
+whoami > /tmp/currentuser
+
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 cat > /sbin/mkinitramfs << "EOF"

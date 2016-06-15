@@ -30,6 +30,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../feh-2.14.2-disable_some_tests-1.patch
 
 

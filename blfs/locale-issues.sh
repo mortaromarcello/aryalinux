@@ -10,6 +10,8 @@ set -e
 
 cd $SOURCE_DIR
 
+whoami > /tmp/currentuser
+
 find /usr/share/man -type f | xargs checkman.sh
 
 

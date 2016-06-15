@@ -21,6 +21,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 ./bootstrap &&
 ./configure --prefix=/usr \
             --docdir=/usr/share/doc/soundtouch-1.9.2 &&

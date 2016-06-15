@@ -23,6 +23,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 export TEXARCH=$(uname -m | sed -e 's/i.86/i386/' -e 's/$/-linux/') &&
 sed -i "s/ grep -v '^;'/ awk NF/" make-rules/inputenc/Makefile.in &&
 ./configure --prefix=/opt/texlive/2015              \

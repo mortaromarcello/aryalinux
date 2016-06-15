@@ -31,6 +31,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 tar -xf ../Linux-PAM-1.2.0-docs.tar.bz2 --strip-components=1
 
 

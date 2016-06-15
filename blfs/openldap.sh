@@ -30,6 +30,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../openldap-2.4.44-consolidated-2.patch &&
 autoconf &&
 ./configure --prefix=/usr     \

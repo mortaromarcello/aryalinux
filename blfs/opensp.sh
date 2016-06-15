@@ -23,6 +23,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i 's/32,/253,/' lib/Syntax.cxx &&
 sed -i 's/LITLEN          240 /LITLEN          8092/' \
     unicode/{gensyntax.pl,unicode.syn} &&

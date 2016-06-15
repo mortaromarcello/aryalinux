@@ -24,6 +24,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -e '/^libdocdir =/ s/$(book_name)/gtkmm-3.18.0/' \
     -i docs/Makefile.in
 

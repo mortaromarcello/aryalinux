@@ -21,6 +21,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed "s@<unistd.h>@&\n#include <sys/types.h>@g" -i fscklog/extract.c &&
 ./configure &&
 make "-j`nproc`"

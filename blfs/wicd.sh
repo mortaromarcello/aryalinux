@@ -30,6 +30,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -e "/detection failed/ a\                self.init=\'init\/default\/wicd\'" \
     -i.orig setup.py &&
 rm po/*.po      &&

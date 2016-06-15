@@ -38,6 +38,8 @@ set -e
 
 cd $SOURCE_DIR
 
+whoami > /tmp/currentuser
+
 cat > frameworks-5.18.0.md5 << "EOF"
 cf34c6fa2dcad71300592dd393920ff4 attica-5.18.0.tar.xz
 909827fc26098c7b4ab48c7228801e16 bluez-qt-5.18.0.tar.xz

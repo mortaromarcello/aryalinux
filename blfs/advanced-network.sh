@@ -10,6 +10,8 @@ set -e
 
 cd $SOURCE_DIR
 
+whoami > /tmp/currentuser
+
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 cat > /etc/systemd/network/50-br0.netdev << EOF

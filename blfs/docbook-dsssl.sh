@@ -28,6 +28,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 tar -xf ../docbook-dsssl-doc-1.79.tar.bz2 --strip-components=1
 
 

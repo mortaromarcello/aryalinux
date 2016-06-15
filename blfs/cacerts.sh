@@ -12,6 +12,8 @@ set -e
 
 cd $SOURCE_DIR
 
+whoami > /tmp/currentuser
+
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 cat > /usr/bin/make-cert.pl << "EOF"

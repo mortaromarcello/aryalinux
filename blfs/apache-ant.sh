@@ -26,6 +26,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 tar -xvf ../hamcrest-1.3.tgz &&
 cp -v ../junit-4.11.jar \
       hamcrest-1.3/hamcrest-core-1.3.jar lib/optional

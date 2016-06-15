@@ -48,6 +48,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -e '/openjpeg-2/ s/0/1/' \
     -i configure ext/openjpeg/gstopenjpeg.h &&
 sed -e '/user_data (/ s/mstream/&, NULL/' \

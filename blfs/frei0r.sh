@@ -22,6 +22,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../frei0r-snapshot-27-01-15-gcc5_fix-1.patch &&
 mkdir -vp build &&
 cd        build &&

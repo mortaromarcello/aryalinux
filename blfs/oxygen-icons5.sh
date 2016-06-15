@@ -23,6 +23,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -e '/set(OXYGEN/ s:${KDE.*:/usr/share/icons/oxygen5):' \
     -e '/( oxygen/ s/)/scalable)/' \
     -i CMakeLists.txt &&

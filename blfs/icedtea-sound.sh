@@ -24,6 +24,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 ./configure --with-jdk-home=${JAVA_HOME} --disable-docs &&
 make "-j`nproc`"
 

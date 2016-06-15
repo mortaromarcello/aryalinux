@@ -21,6 +21,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 ./configure --prefix=/usr    \
             --disable-static \
             --with-installbuilddir=/usr/share/apr-1/build &&

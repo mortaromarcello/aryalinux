@@ -25,6 +25,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i '/DG_DISABLE_DEPRECATED/d' glade/Makefile.in &&
 ./configure --prefix=/usr --disable-static &&
 make "-j`nproc`"

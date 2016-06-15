@@ -25,6 +25,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i '/ioctl/a #include <sys/stat.h>' dao/ScsiIf-linux.cc &&
 ./configure --prefix=/usr --mandir=/usr/share/man &&
 make "-j`nproc`"

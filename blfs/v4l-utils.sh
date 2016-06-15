@@ -28,6 +28,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 SAVEPATH=$PKG_CONFIG_PATH &&
 PKG_CONFIG_PATH="\
 `echo $PKG_CONFIG_PATH | sed 's@:/opt/qt5/lib/pkgconfig@@'`"

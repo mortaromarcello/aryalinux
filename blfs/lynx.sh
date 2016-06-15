@@ -26,6 +26,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 ./configure --prefix=/usr          \
             --sysconfdir=/etc/lynx \
             --datadir=/usr/share/doc/lynx-2.8.8rel.2 \

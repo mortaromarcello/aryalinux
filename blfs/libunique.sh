@@ -25,6 +25,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../libunique-1.1.6-upstream_fixes-1.patch &&
 autoreconf -fi &&
 ./configure --prefix=/usr  \

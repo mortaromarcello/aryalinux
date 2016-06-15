@@ -23,6 +23,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 cd ROX-Filer                                                        &&
 sed -i 's:g_strdup(getenv("APP_DIR")):"/usr/share/rox":' src/main.c &&
 mkdir build                        &&

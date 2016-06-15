@@ -48,6 +48,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i 's/-lflite"/-lflite -lasound"/' configure &&
 ./configure --prefix=/usr        \
             --enable-gpl         \

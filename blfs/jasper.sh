@@ -26,6 +26,8 @@ unzip_dirname $TARBALL DIRECTORY
 unzip_file $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../jasper-1.900.1-security_fixes-2.patch &&
 ./configure --prefix=/usr    \
             --enable-shared  \

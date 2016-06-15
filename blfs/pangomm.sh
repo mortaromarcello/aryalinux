@@ -24,6 +24,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -e '/^libdocdir =/ s/$(book_name)/pangomm-2.38.1/' \
     -i docs/Makefile.in
 

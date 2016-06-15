@@ -10,6 +10,8 @@ set -e
 
 cd $SOURCE_DIR
 
+whoami > /tmp/currentuser
+
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 install -v -dm755 /etc/systemd/scripts

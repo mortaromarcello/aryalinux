@@ -35,6 +35,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 tar -xf ../cfe-3.7.1.src.tar.xz -C tools &&
 tar -xf ../compiler-rt-3.7.1.src.tar.xz -C projects &&
 mv tools/cfe-3.7.1.src tools/clang &&

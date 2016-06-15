@@ -23,6 +23,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 ./configure --prefix=/usr    \
             --docdir=/usr/share/doc/libxkbcommon-0.5.0 &&
 make "-j`nproc`"

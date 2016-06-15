@@ -21,6 +21,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sa_lib_dir=/usr/lib/sa    \
 sa_dir=/var/log/sa        \
 conf_dir=/etc/sysconfig   \

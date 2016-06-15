@@ -64,6 +64,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i 's:libsmbclient.h:samba-4.0/&:' configure stream/stream_smb.c &&
 ./configure --prefix=/usr            \
             --confdir=/etc/mplayer   \

@@ -23,6 +23,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i -e '/^docdir/ s:$:/libjpeg-turbo-1.4.2:' Makefile.in &&
 ./configure --prefix=/usr           \
             --mandir=/usr/share/man \

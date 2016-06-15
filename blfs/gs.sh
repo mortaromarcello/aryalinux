@@ -38,6 +38,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i 's/ZLIBDIR=src/ZLIBDIR=$includedir/' configure.ac configure &&
 rm -rf freetype lcms2 jpeg libpng
 

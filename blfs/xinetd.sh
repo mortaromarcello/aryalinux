@@ -21,6 +21,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i -e "s/exec_server/child_process/" xinetd/builtins.c       &&
 sed -i -e "/register unsigned count/s/register//" xinetd/itox.c  &&
 ./configure --prefix=/usr --mandir=/usr/share/man --with-loadavg &&

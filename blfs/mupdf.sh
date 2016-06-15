@@ -28,6 +28,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 rm -rf thirdparty/curl     &&
 rm -rf thirdparty/freetype &&
 rm -rf thirdparty/jpeg     &&

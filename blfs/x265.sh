@@ -24,6 +24,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../x265-1.9-enable_static-1.patch &&
 mkdir bld &&
 cd bld &&

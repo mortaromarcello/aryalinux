@@ -10,6 +10,8 @@ set -e
 
 cd $SOURCE_DIR
 
+whoami > /tmp/currentuser
+
 pvcreate /dev/sda4 /dev/sdb2
 
 

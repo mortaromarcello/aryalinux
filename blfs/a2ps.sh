@@ -30,6 +30,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 autoconf &&
 sed -i -e "s/GPERF --version |/& head -n 1 |/" \
        -e "s|/usr/local/share|/usr/share|" configure &&

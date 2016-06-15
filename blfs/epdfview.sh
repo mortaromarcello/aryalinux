@@ -27,6 +27,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../epdfview-0.1.8-fixes-2.patch &&
 ./configure --prefix=/usr &&
 make "-j`nproc`"

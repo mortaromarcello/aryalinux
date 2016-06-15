@@ -21,6 +21,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 cd nspr                                                     &&
 sed -ri 's#^(RELEASE_BINS =).*#\1#' pr/src/misc/Makefile.in &&
 sed -i 's#$(LIBRARY) ##' config/rules.mk                    &&

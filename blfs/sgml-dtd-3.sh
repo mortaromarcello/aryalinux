@@ -24,6 +24,8 @@ unzip_dirname $TARBALL DIRECTORY
 unzip_file $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i -e '/ISO 8879/d' \
        -e 's|DTDDECL "-//OASIS//DTD DocBook V3.1//EN"|SGMLDECL|g' \
        docbook.cat

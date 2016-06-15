@@ -24,6 +24,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 ./configure --prefix=/usr    \
             --disable-static \
             --docdir=/usr/share/doc/opus-1.1.2 &&

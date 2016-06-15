@@ -22,6 +22,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../sgml-common-0.6.3-manpage-1.patch &&
 autoreconf -f -i
 

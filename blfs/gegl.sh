@@ -41,6 +41,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../gegl-0.2.0-ffmpeg2-1.patch &&
 ./configure --prefix=/usr &&
 LC_ALL=en_US make

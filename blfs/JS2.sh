@@ -26,6 +26,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 cd js/src &&
 sed -i 's/(defined\((@TEMPLATE_FILE)\))/\1/' config/milestone.pl &&
 ./configure --prefix=/usr       \

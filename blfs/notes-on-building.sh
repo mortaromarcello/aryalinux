@@ -10,6 +10,8 @@ set -e
 
 cd $SOURCE_DIR
 
+whoami > /tmp/currentuser
+
 tar -xvf filename.tar.gz
 tar -xvf filename.tgz
 tar -xvf filename.tar.Z

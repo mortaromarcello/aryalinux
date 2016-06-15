@@ -43,6 +43,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i 's/ruby-1.9/ruby-2.2/g' configure                  &&
 sed -i 's/ e_/ gs_error_/'     plugin/gs/gvloadimage_gs.c &&
 ./configure --prefix=/usr         &&

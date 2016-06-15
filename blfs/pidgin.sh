@@ -41,6 +41,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../pidgin-2.10.11-gstreamer1-1.patch &&
 autoreconf -fi
 

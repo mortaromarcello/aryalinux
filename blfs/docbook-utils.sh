@@ -29,6 +29,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../docbook-utils-0.6.14-grep_fix-1.patch &&
 sed -i 's:/html::' doc/HTML/Makefile.in                &&
 ./configure --prefix=/usr --mandir=/usr/share/man      &&

@@ -22,6 +22,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i -e 's@TWDB="${prefix}@TWDB="/var@' install/install.cfg            &&
 sed -i -e 's/!Equal/!this->Equal/' src/cryptlib/algebra.h                &&
 sed -i -e '/stdtwadmin.h/i#include <unistd.h>' src/twadmin/twadmincl.cpp &&

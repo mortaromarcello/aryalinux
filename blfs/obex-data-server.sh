@@ -28,6 +28,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../obex-data-server-0.4.6-build-fixes-1.patch &&
 ./configure --prefix=/usr --sysconfdir=/etc &&
 make "-j`nproc`"

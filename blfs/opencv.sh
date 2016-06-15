@@ -41,6 +41,8 @@ unzip_dirname $TARBALL DIRECTORY
 unzip_file $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 ipp_file=../ippicv_linux_20151201.tgz             &&
 ipp_hash=$(md5sum $ipp_file | cut -d" " -f1)      &&
 ipp_dir=3rdparty/ippicv/downloads/linux-$ipp_hash &&

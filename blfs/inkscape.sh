@@ -36,6 +36,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../inkscape-0.91-testfiles-1.patch &&
 CXXFLAGS="-g -O2 -std=c++11" ./configure --prefix=/usr &&
 make "-j`nproc`"

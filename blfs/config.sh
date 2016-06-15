@@ -11,6 +11,8 @@ set -e
 
 cd $SOURCE_DIR
 
+whoami > /tmp/currentuser
+
 export KDE_PREFIX=/opt/kde
 
 

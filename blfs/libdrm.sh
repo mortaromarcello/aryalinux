@@ -27,6 +27,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i "/pthread-stubs/d" configure.ac  &&
 autoreconf -fiv                         &&
 ./configure --prefix=/usr --enable-udev &&

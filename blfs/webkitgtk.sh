@@ -43,6 +43,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i "s#isnan#std::&#g" Source/JavaScriptCore/runtime/Options.cpp
 
 mkdir build &&

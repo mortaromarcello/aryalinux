@@ -23,6 +23,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i '/^usbids/ s:usb.ids:hwdata/&:' lsusb.py &&
 ./configure --prefix=/usr --datadir=/usr/share/hwdata &&
 make "-j`nproc`"

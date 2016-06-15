@@ -40,6 +40,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 egrep '^flags.*(vmx|svm)' /proc/cpuinfo
 
 
@@ -81,14 +83,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+whoami > /tmp/currentuser
+sudo usermod -a -G kvm `cat /tmp/currentuser`
 
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-usermod -a -G kvm <em class="replaceable"><code><username></em>
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
 
 
 

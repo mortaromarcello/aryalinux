@@ -26,6 +26,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i "/speex_preprocess.h/i#include <stdint.h>" speex/pcm_speex.c &&
 ./configure &&
 make "-j`nproc`"

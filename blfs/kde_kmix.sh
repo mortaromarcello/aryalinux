@@ -25,6 +25,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i "s:\${ECM_MODULE_PATH}:\${CMAKE_SOURCE_DIR}/cmake/modules &:g" CMakeLists.txt
 
 

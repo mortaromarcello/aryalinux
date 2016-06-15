@@ -31,6 +31,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../valgrind-3.11.0-pthread_barrier_fix-1.patch &&
 sed -i 's|/doc/valgrind||' docs/Makefile.in &&
 ./configure --prefix=/usr \

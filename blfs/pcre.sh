@@ -23,6 +23,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../pcre-8.38-upstream_fixes-1.patch &&
 ./configure --prefix=/usr                     \
             --docdir=/usr/share/doc/pcre-8.38 \

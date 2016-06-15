@@ -25,6 +25,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -e 's/client_set/set/'  \
     -e 's/gnutls_retr/&2/'  \
     -e 's/type = t/cert_&/' \

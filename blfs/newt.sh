@@ -26,6 +26,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -e 's/^LIBNEWT =/#&/' \
     -e '/install -m 644 $(LIBNEWT)/ s/^/#/' \
     -e 's/$(LIBNEWT)/$(LIBNEWTSONAME)/g' \

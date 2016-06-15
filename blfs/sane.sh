@@ -34,6 +34,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 rm -f /var/lock
@@ -55,7 +57,8 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
-echo -e "Please add the current user to the scanner group by pressing Ctrl + C and then entering \e[31m\e[1msudo usermod -a -G scanner $USER\e[0m\e[21m at the terminal. After that logout, login and re-run this script. In case you have already done that then press enter to continue."; read RESPONSE
+whoami > /tmp/currentuser
+sudo usermod -a -G scanner `cat /tmp/currentuser`
 
 
 

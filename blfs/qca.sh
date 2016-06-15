@@ -36,6 +36,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 export QT4PREFIX="/opt/qt4"
 export QT4BINDIR="$QT4PREFIX/bin"
 export QT4DIR="$QT4PREFIX"

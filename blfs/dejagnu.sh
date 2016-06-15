@@ -23,6 +23,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 ./configure --prefix=/usr &&
 makeinfo --html --no-split -o doc/dejagnu.html doc/dejagnu.texi &&
 makeinfo --plaintext       -o doc/dejagnu.txt  doc/dejagnu.texi

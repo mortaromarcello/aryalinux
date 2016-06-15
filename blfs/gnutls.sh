@@ -33,6 +33,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 ./configure --prefix=/usr \
             --with-default-trust-store-file=/etc/ssl/ca-bundle.crt &&
 make "-j`nproc`"

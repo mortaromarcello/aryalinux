@@ -23,6 +23,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 mkdir build &&
 cd    build &&
 cmake -DCMAKE_INSTALL_PREFIX=$KF5_PREFIX  \

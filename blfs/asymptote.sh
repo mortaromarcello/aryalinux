@@ -31,6 +31,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 export TEXARCH=$(uname -m | sed -e 's/i.86/i386/' -e 's/$/-linux/') &&
 ./configure --prefix=/opt/texlive/2015 \
  --bindir=/opt/texlive/2015/bin/$TEXARCH \

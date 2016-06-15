@@ -35,6 +35,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i 's%naist.jp/pub/NetBSD/packages%netbsd.org/pub/pkgsrc%' \
   tests/Makefile.in &&
 ./configure --prefix=/usr     \

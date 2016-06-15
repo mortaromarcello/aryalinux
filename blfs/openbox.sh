@@ -30,6 +30,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 2to3 -w data/autostart/openbox-xdg-autostart &&
 sed 's/python/python3/' -i data/autostart/openbox-xdg-autostart
 

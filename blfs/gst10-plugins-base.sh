@@ -34,6 +34,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 ./configure --prefix=/usr \
             --with-package-name="GStreamer Base Plugins 1.6.3 BLFS" \
             --with-package-origin="http://www.linuxfromscratch.org/blfs/view/svn/" &&

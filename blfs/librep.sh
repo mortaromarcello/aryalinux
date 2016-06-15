@@ -22,6 +22,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i 's/__OPTIMIZE__/__OPTIMIZE__ \&\& 0/g' src/repint.h &&
 ./configure --prefix=/usr --disable-static &&
 make "-j`nproc`"

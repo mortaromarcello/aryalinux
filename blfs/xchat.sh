@@ -30,6 +30,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../xchat-2.8.8-glib-2.31-1.patch &&
 LIBS+="-lgmodule-2.0"         \
 ./configure --prefix=/usr     \

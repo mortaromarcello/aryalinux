@@ -29,6 +29,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../opal-3.10.10-ffmpeg2-1.patch &&
 ./configure --prefix=/usr &&
 make "-j`nproc`"

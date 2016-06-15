@@ -29,6 +29,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../w3m-0.5.3-bdwgc72-1.patch &&
 sed -i 's/file_handle/file_foo/' istream.{c,h} &&
 sed -i 's#gdk-pixbuf-xlib-2.0#& x11#' configure &&

@@ -23,6 +23,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../bridge-utils-1.5-linux_3.8_fix-1.patch &&
 autoconf -o configure configure.in                      &&
 ./configure --prefix=/usr                               &&

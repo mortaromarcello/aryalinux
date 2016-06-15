@@ -22,6 +22,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../faac-1.28-glibc_fixes-1.patch &&
 sed -i -e '/obj-type/d' -e '/Long Term/d' frontend/main.c &&
 ./configure --prefix=/usr --disable-static &&

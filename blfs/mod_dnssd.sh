@@ -24,6 +24,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i 's/unixd_setup_child/ap_&/' src/mod_dnssd.c &&
 ./configure --prefix=/usr \
             --disable-lynx &&

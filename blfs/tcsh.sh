@@ -21,6 +21,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -e 's/ i)/ k)/' \
      -e '/ k)/ i \   k = i;' \
      -e '/\*cp/ a \  volatile size_t k;' \

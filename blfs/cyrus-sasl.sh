@@ -31,6 +31,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../cyrus-sasl-2.1.26-fixes-3.patch &&
 autoreconf -fi &&
 ./configure --prefix=/usr        \

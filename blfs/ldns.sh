@@ -27,6 +27,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i 's/defined(@$also)/@$also/' doc/doxyparse.pl &&
 ./configure --prefix=/usr     \
             --sysconfdir=/etc \

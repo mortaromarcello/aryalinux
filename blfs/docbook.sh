@@ -25,6 +25,8 @@ unzip_dirname $TARBALL DIRECTORY
 unzip_file $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 install -v -d -m755 /usr/share/xml/docbook/xml-dtd-4.5 &&

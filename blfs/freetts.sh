@@ -26,6 +26,8 @@ unzip_dirname $TARBALL DIRECTORY
 unzip_file $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 unzip -q freetts-1.2.2-src.zip -x META-INF/* &&
 unzip -q freetts-1.2.2-tst.zip -x META-INF/*
 

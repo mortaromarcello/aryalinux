@@ -21,6 +21,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i 's#pkgdata#doc#' doc/Makefile.am &&
 autoreconf -fi &&
 ./configure --prefix=/usr    \

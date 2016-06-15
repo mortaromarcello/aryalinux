@@ -35,6 +35,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../libquicktime-1.2.4-ffmpeg2-1.patch &&
 ./configure --prefix=/usr     \
             --enable-gpl      \

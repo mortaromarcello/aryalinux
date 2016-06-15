@@ -25,6 +25,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i "/Append/s:RPATH=libdir,::"   SConstruct &&
 sed -i "/Default/s:lib_static,::"    SConstruct &&
 sed -i "/Alias/s:install_static,::"  SConstruct &&

@@ -44,6 +44,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 cat > mozconfig << "EOF"
 # If you have a multicore machine, the build may be faster if using parallel
 # jobs. The build system automatically adds -jN to the "make" flags, where N

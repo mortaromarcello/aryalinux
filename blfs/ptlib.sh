@@ -31,6 +31,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 patch -Np1 -i ../ptlib-2.10.11-bison_fixes-1.patch &&
 ./configure --prefix=/usr &&
 make "-j`nproc`"

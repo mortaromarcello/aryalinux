@@ -22,6 +22,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 mkdir -v at-3.1.18 &&
 cd       at-3.1.18 &&
 tar -xf  ../at_3.1.18.tar.gz

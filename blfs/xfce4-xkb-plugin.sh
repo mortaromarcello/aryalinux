@@ -24,6 +24,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -e 's|xfce4/panel-plugins|xfce4/panel/plugins|' \
     -i panel-plugin/{Makefile.in,xkb-plugin.desktop.in.in} &&
 ./configure --prefix=/usr         \

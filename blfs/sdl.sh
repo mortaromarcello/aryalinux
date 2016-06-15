@@ -27,6 +27,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -e '/_XData32/s:register long:register _Xconst long:' \
     -i src/video/x11/SDL_x11sym.h &&
 ./configure --prefix=/usr --disable-static &&

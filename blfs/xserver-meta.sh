@@ -5,6 +5,9 @@ set +h
 
 . /etc/alps/alps.conf
 
+whoami > /tmp/currentuser
+sudo usermod -a -G video `cat /tmp/currentuser`
+
 #REQ:libxml2
 #REQ:util-macros
 #REQ:x7proto

@@ -31,6 +31,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -e "s@zz-application/zz-winassoc-xls;@@" \
     -i gnumeric.desktop.in &&
 ./configure --prefix=/usr  &&

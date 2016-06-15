@@ -24,6 +24,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 wget -c https://github.com/htacg/tidy-html5/archive/5.1.25.tar.gz \
      -O tidy-html5-5.1.25.tar.gz
 

@@ -77,6 +77,8 @@ wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libreoffice/libreof
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
+whoami > /tmp/currentuser
+
 read -p "Enter language : " LANGUAGE
 
 

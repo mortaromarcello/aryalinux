@@ -23,6 +23,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed -i 's/static const/static/' libmpeg2/idct_mmx.c &&
 ./configure --prefix=/usr    \
             --enable-shared  \

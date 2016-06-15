@@ -10,6 +10,8 @@ set -e
 
 cd $SOURCE_DIR
 
+whoami > /tmp/currentuser
+
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 groupadd -g 56 svn &&
@@ -83,7 +85,7 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 chown -R svn:svntest /srv/svn/repositories/svntest    &&
 chmod -R g+w         /srv/svn/repositories/svntest    &&
 chmod g+s            /srv/svn/repositories/svntest/db &&
-usermod -G svn,svntest -a <em class="replaceable"><code><username></em>
+usermod -G svn,svntest -a cat `/tmp/currentuser`
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
