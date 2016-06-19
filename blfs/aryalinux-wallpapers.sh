@@ -7,7 +7,7 @@ set +h
 cd $SOURCE_DIR
 
 URL=http://aryalinux.org/packages/2015/aryalinux-wallpaper.tar.xz
-wget -nc $URL
+wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=0B12bXgUaD30LbDZnd3ZoM0J1dGM' -O aryalinux-wallpaper.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | sed -e 's@/.*@@' | uniq `
 

@@ -7,7 +7,7 @@ set +h
 cd $SOURCE_DIR
 
 URL=http://aryalinux.org/packages/2015/aryalinux-icons.tar.xz
-wget -nc $URL
+wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=0B12bXgUaD30LSmwxWF9sdDVKY0E' -O aryalinux-icons.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | sed -e 's@/.*@@' | uniq `
 

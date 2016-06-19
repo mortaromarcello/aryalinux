@@ -4,13 +4,14 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:libbamf3:0.5.1
-#REQ:libwnck
-#REQ:libgtop
+#VER:xfce4-taskmanager:1.1.0
 
+#REQ:libwnck
+
+KDE_PREFIX=/usr
 cd $SOURCE_DIR
 
-URL=https://launchpad.net/bamf/0.5/0.5.1/+download/bamf-0.5.1.tar.gz
+URL=http://archive.xfce.org/src/apps/xfce4-taskmanager/1.1/xfce4-taskmanager-1.1.0.tar.bz2
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | sed -e 's@/.*@@' | uniq `
@@ -19,14 +20,12 @@ tar -xf $TARBALL
 
 cd $DIRECTORY
 
-./configure --prefix=/usr &&
+./configure --prefix=/usr --enable-gtk3 &&
 make
 sudo make install
 
 cd $SOURCE_DIR
 rm -rf $DIRECTORY
 
-echo "libbamf3=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
+echo "xfce4-taskmanager=>`date`" | sudo tee -a $INSTALLED_LIST
 
