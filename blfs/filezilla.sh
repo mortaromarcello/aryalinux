@@ -7,7 +7,6 @@ set +h
 #VER:filezilla:3.18.0
 
 #REQ:wxwidgets
-#REQ:libfilezilla
 
 cd $SOURCE_DIR
 

@@ -4,7 +4,9 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:bamf:0.5.1
+#VER:libbamf3:0.5.1
+#REQ:libwnck
+#REQ:libgtop
 
 cd $SOURCE_DIR
 
