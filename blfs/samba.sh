@@ -83,7 +83,7 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
-wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20160602.tar.xz -O $SOURCE_DIR/blfs-systemd-units-20160602.tar.xz
+wget -nc http://aryalinux.org/releases/2016.07/blfs-systemd-units-20160602.tar.xz -O $SOURCE_DIR/blfs-systemd-units-20160602.tar.xz
 tar xf $SOURCE_DIR/blfs-systemd-units-20160602.tar.xz -C $SOURCE_DIR
 cd $SOURCE_DIR/blfs-systemd-units-20160602.tar.xz
 make install-samba
@@ -99,7 +99,7 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
-wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20160602.tar.xz -O $SOURCE_DIR/blfs-systemd-units-20160602.tar.xz
+wget -nc http://aryalinux.org/releases/2016.07/blfs-systemd-units-20160602.tar.xz -O $SOURCE_DIR/blfs-systemd-units-20160602.tar.xz
 tar xf $SOURCE_DIR/blfs-systemd-units-20160602.tar.xz -C $SOURCE_DIR
 cd $SOURCE_DIR/blfs-systemd-units-20160602.tar.xz
 make install-winbindd

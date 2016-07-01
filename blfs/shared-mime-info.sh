@@ -26,7 +26,7 @@ cd $DIRECTORY
 whoami > /tmp/currentuser
 
 ./configure --prefix=/usr &&
-make "-j`nproc`"
+make
 
 
 

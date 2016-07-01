@@ -15,12 +15,11 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 
 cd $SOURCE_DIR
 
-wget -nc https://launchpad.net/lightdm/1.8/1.8.5/+download/lightdm-1.8.5.tar.xz
-wget -nc https://launchpad.net/lightdm-gtk-greeter/1.8/1.8.5/+download/lightdm-gtk-greeter-1.8.5.tar.gz
+wget -nc https://launchpad.net/lightdm/1.10/1.10.5/+download/lightdm-1.10.5.tar.xz
 
 
-TARBALL=lightdm-1.8.5.tar.xz
-DIRECTORY=lightdm-1.8.5
+TARBALL=lightdm-1.10.5.tar.xz
+DIRECTORY=lightdm-1.10.5
 
 tar -xf $TARBALL
 

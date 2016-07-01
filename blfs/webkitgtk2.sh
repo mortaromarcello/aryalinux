@@ -5,7 +5,7 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:webkitgtk:2.4.10
+#VER:webkitgtk:2.4.11
 
 #REQ:gst10-plugins-base
 #REQ:gtk3
@@ -30,9 +30,9 @@ set -e
 
 cd $SOURCE_DIR
 
-URL=http://webkitgtk.org/releases/webkitgtk-2.4.10.tar.xz
+URL=http://webkitgtk.org/releases/webkitgtk-2.4.11.tar.xz
 
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/webkit/webkitgtk-2.4.10.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/webkit/webkitgtk-2.4.10.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/webkit/webkitgtk-2.4.10.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/webkit/webkitgtk-2.4.10.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/webkit/webkitgtk-2.4.10.tar.xz || wget -nc http://webkitgtk.org/releases/webkitgtk-2.4.10.tar.xz
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -52,11 +52,11 @@ make &&
 popd
 
 
-mkdir build2 &&
-pushd build2 &&
-../configure --prefix=/usr --with-gtk=2.0 --disable-webkit2 &&
-make &&
-popd
+#mkdir build2 &&
+#pushd build2 &&
+#../configure --prefix=/usr --with-gtk=2.0 --disable-webkit2 &&
+#make &&
+#popd
 
 
 
@@ -77,20 +77,20 @@ sudo rm rootscript.sh
 
 
 
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make -C build2 install                             &&
-rm -rf /usr/share/gtk-doc/html/webkit{,dom}gtk-1.0 &&
-if [ -e /usr/share/gtk-doc/html/webkitdomgtk ]; then
-  mv -v /usr/share/gtk-doc/html/webkitdomgtk{,-1.0}
-fi
-if [ -e /usr/share/gtk-doc/html/webkitgtk ]; then
-  mv -v /usr/share/gtk-doc/html/webkitgtk{,-1.0}
-fi
+#sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+#make -C build2 install                             &&
+#rm -rf /usr/share/gtk-doc/html/webkit{,dom}gtk-1.0 &&
+#if [ -e /usr/share/gtk-doc/html/webkitdomgtk ]; then
+#  mv -v /usr/share/gtk-doc/html/webkitdomgtk{,-1.0}
+#fi
+#if [ -e /usr/share/gtk-doc/html/webkitgtk ]; then
+#  mv -v /usr/share/gtk-doc/html/webkitgtk{,-1.0}
+#fi
 
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
+#ENDOFROOTSCRIPT
+#sudo chmod 755 rootscript.sh
+#sudo ./rootscript.sh
+#sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR

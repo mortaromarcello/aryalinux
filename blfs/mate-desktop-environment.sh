@@ -26,6 +26,7 @@ set +h
 #REQ:libsoup
 #REQ:icon-naming-utils
 #REQ:libunique
+#REQ:libunique3
 #REQ:libwnck
 #REQ:librsvg
 #REQ:upower
@@ -80,6 +81,7 @@ set +h
 #REQ:mate-power-manager
 #REQ:marco
 #REQ:python-modules#pygobject2
+#REQ:python-modules#pygobject3
 #REQ:mozo
 #REQ:mate-backgrounds
 #REQ:mate-media

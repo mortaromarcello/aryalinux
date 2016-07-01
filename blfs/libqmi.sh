@@ -5,7 +5,7 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:libqmi:1.12.6
+#VER:libqmi:1.14.2
 
 #REQ:glib2
 #OPT:gtk-doc
@@ -13,10 +13,9 @@ set -e
 
 cd $SOURCE_DIR
 
-URL=http://www.freedesktop.org/software/libqmi/libqmi-1.12.6.tar.xz
+URL=https://www.freedesktop.org/software/libqmi/libqmi-1.14.2.tar.xz
 
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libqmi/libqmi-1.12.6.tar.xz || wget -nc http://www.freedesktop.org/software/libqmi/libqmi-1.12.6.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libqmi/libqmi-1.12.6.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libqmi/libqmi-1.12.6.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libqmi/libqmi-1.12.6.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libqmi/libqmi-1.12.6.tar.xz
-
+wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 

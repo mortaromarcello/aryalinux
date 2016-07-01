@@ -5,11 +5,11 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:mate-themes-gtk3.18:1.15.0
+#VER:mate-themes:3.20.8
 
 cd $SOURCE_DIR
 
-URL="http://pub.mate-desktop.org/releases/1.15/mate-themes-gtk3.18-1.15.0.tar.xz"
+URL="http://pub.mate-desktop.org/releases/themes/3.20/mate-themes-3.20.8.tar.xz"
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`

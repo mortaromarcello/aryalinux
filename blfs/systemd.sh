@@ -30,7 +30,7 @@ cd $SOURCE_DIR
 
 URL=http://anduin.linuxfromscratch.org/sources/other/systemd/systemd-230.tar.xz
 
-wget -nc http://ftp.osuosl.org/pub/blfs/svn/s/systemd-230.tar.xz || wget -nc http://anduin.linuxfromscratch.org/sources/other/systemd/systemd-230.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/systemd/systemd-230.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/systemd/systemd-230.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/systemd/systemd-230.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/systemd/systemd-230.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/systemd/systemd-230.tar.xz
+wget -nc http://anduin.linuxfromscratch.org/sources/other/systemd/systemd-230.tar.xz || wget -nc http://aryalinux.org/releases/2016.07/systemd-230.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/systemd/systemd-230.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/systemd/systemd-230.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/systemd/systemd-230.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/systemd/systemd-230.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/systemd/systemd-230.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
