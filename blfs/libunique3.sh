@@ -5,7 +5,7 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:libunique:1.1.6
+#VER:libunique3:3.0.2
 
 #REQ:gtk2
 #OPT:gobject-introspection
@@ -26,7 +26,6 @@ cd $DIRECTORY
 
 whoami > /tmp/currentuser
 
-patch -Np1 -i ../libunique-1.1.6-upstream_fixes-1.patch &&
 autoreconf -fi &&
 ./configure --prefix=/usr  \
             --disable-dbus \
@@ -47,5 +46,5 @@ sudo rm rootscript.sh
 cd $SOURCE_DIR
 
 sudo rm -rf $DIRECTORY
-echo "libunique=>`date`" | sudo tee -a $INSTALLED_LIST
+echo "libunique3=>`date`" | sudo tee -a $INSTALLED_LIST
 

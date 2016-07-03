@@ -157,13 +157,13 @@ then
 
 clear
 echo "Setting the password for root :"
-passwd root
+yes "$ROOT_PASSWORD" | passwd root
 
 clear
 echo "Creating user with name $FULLNAME and username : $USERNAME"
 useradd -m -c "$FULLNAME" -s /bin/bash $USERNAME
 echo "Setting the password for $USERNAME :"
-passwd $USERNAME
+yes "$USER_PASSWORD" | passwd $USERNAME
 sed -i "s/# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/g" /etc/sudoers
 groupadd wheel
 usermod -a -G wheel $USERNAME

@@ -21,6 +21,9 @@ echo ""
 echo "Here are the partitions in $DEV_NAME:"
 echo -e "${BLUE}"
 fdisk -l $DEV_NAME | grep "^$DEV_NAME"
+echo -e "${RED}"
+echo "Please enter different partition names for root and swap and home."
+echo "If you do not want swap or home partitions, simply press enter."
 echo -e "${NC}"
 read -p "Enter the root partition e.g. /dev/sda10 : " ROOT_PART
 read -p "Enter the swap partition e.g. /dev/sda11 : " SWAP_PART
@@ -56,6 +59,28 @@ fi
 read -p "Enter paper size (A4/letter) : " PAPER_SIZE
 read -p "Do you want to build using multiple processors? (y/n) : " MULTICORE
 
+echo "Enter the root password: "
+read -s ROOT_PASSWORD
+echo "Re-type the root password: "
+read -s ROOT_PASSWORD1
+
+if [ "$ROOT_PASSWORD" != "$ROOT_PASSWORD1" ]
+then
+	echo "Passwords do not match. Cannot continue. Exiting..."
+	exit
+fi
+
+echo "Enter the password for $USERNAME: "
+read -s USER_PASSWORD
+echo "Re-type the password for $USERNAME: "
+read -s USER_PASSWORD1
+
+if [ "$USER_PASSWORD" != "$USER_PASSWORD1" ]
+then
+	echo "Passwords do not match. Cannot continue. Exiting..."
+	exit
+fi
+
 clear
 cat asciiart
 
@@ -67,8 +92,8 @@ ROOT_PART="$ROOT_PART"
 SWAP_PART="$SWAP_PART"
 HOME_PART="$HOME_PART"
 OS_NAME="AryaLinux"
-OS_CODENAME="DawnOfJustice"
-OS_VERSION="2016.04"
+OS_CODENAME="Saavan"
+OS_VERSION="2016.07"
 LOCALE="$LOCALE"
 PAPER_SIZE="$PAPER_SIZE"
 HOST_NAME="$HOST_NAME"
@@ -79,13 +104,15 @@ FULLNAME="$FULLNAME"
 USERNAME="$USERNAME"
 CONSOLEKEYMAP="$CONSOLEKEYMAP"
 CONSOLEFONT="$CONSOLEFONT"
+ROOT_PASSWORD="$ROOT_PASSWORD"
+USER_PASSWORD="$USER_PASSWORD"
 SCREEN_RES="`xrandr | fgrep '*' | tr -s " " | cut -d ' ' -f2`"
 EOF
 
 clear
 cat asciiart
 
-cat build-properties | grep -v "OS_" | grep -v "SCREEN_RES"
+cat build-properties | grep -v "OS_" | grep -v "SCREEN_RES" | grep -v "_PASSWORD"
 echo ""
 read -p "Shall I proceed with these inputs? (y/n) " PROCEED
 if [ "x$PROCEED" == "xy" ] || [ "X$PROCEED" == "XY" ]
@@ -184,7 +211,6 @@ su - lfs
 
 chown -R root:root $LFS/tools
 
-
 mkdir -pv $LFS/{dev,proc,sys,run}
 
 mknod -m 600 $LFS/dev/console c 5 1
@@ -231,14 +257,11 @@ echo -e "${NC}"
 chroot "$LFS" /usr/bin/env -i              \
     HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \
     PATH=/bin:/usr/bin:/sbin:/usr/sbin     \
-    /bin/bash --login
+    /bin/bash --login +h
 
 echo "Cleaning up..."
 
-rm -f /usr/lib/lib{bfd,opcodes}.a
-rm -f /usr/lib/libbz2.a
-rm -f /usr/lib/lib{com_err,e2p,ext2fs,ss}.a
-rm -f /usr/lib/libltdl.a
-rm -f /usr/lib/libz.a
-
+rm ./build-properties
+cp $LFS/sources/build-properties $LFS/sources/props
+grep -v "_PASSWORD" $LFS/sources/props > $LFS/sources/build-properties
 

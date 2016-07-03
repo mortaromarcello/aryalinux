@@ -57,7 +57,7 @@ GRUB_HIDDEN_TIMEOUT_QUIET="false"
 GRUB_TIMEOUT="10"
 GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo AryaLinux`
 GRUB_CMDLINE_LINUX_DEFAULT=""
-GRUB_CMDLINE_LINUX=""
+GRUB_CMDLINE_LINUX="quiet splash"
 
 # Uncomment to disable graphical terminal (grub-pc only)
 #GRUB_TERMINAL=console
