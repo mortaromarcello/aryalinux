@@ -33,7 +33,7 @@ set +h
 #REQ:xfburn
 #REQ:ristretto
 #REQ:xfce4-notifyd
-#REQ:xfce4-mixer
+#REQ:pnmixer
 #REQ:xfce4-whiskermenu-plugin
 #REQ:xfce4-screenshooter
 #REQ:xfce4-taskmanager
