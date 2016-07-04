@@ -70,7 +70,7 @@ set +h
 #REQ:caja-dropbox
 #REQ:pluma
 #REQ:galculator
-#REQ:eom
+#REQ:gpicview
 #REQ:engrampa
 #REQ:mate-utils
 #REQ:murrine-gtk-engine
