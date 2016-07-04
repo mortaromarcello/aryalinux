@@ -24,7 +24,7 @@ tar -xf $TARBALL
 
 cd $DIRECTORY
 
-CFLAGS+=-fno-builtin-strftime
+export CFLAGS+=-fno-builtin-strftime
 ./configure --prefix=/usr --sysconfdir=/etc &&
 make "-j`nproc`"
 
