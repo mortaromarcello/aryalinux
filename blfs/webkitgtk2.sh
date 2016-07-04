@@ -33,12 +33,19 @@ cd $SOURCE_DIR
 URL=http://webkitgtk.org/releases/webkitgtk-2.4.11.tar.xz
 
 wget -nc $URL
+wget -nc http://aryalinux.org/releases/2016.07/webkitgtk-2.4.11-patch1.patch
+wget -nc http://aryalinux.org/releases/2016.07/webkitgtk-2.4.11-patch2.patch
+wget -nc http://aryalinux.org/releases/2016.07/webkitgtk-2.4.11-patch3.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar xf $TARBALL
 cd $DIRECTORY
+
+patch -Np1 -i ../webkitgtk-2.4.11-patch1.patch
+patch -Np1 -i ../webkitgtk-2.4.11-patch2.patch
+patch -Np1 -i ../webkitgtk-2.4.11-patch3.patch
 
 whoami > /tmp/currentuser
 
