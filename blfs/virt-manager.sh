@@ -30,6 +30,14 @@ cd $DIRECTORY
 python setup.py build
 sudo python setup.py install
 
+sudo systemctl enable libvirtd
+sudo systemctl enable libvirt-guests
+
+sudo systemctl start libvirtd
+sudo systemctl start libvirt-guests
+
+sudo sed -i "s@Exec=virt-manager@Exec=sudo virt-manager@g" /usr/share/applications/virt-manager.desktop
+
 cd $SOURCE_DIR
 
 rm -rf $DIRECTORY

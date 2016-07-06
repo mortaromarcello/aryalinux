@@ -24,6 +24,6 @@ sudo python setup.py install
 
 cd $SOURCE_DIR
 
-rm -rf $DIRECTORY
+sudo rm -rf $DIRECTORY
 
 echo "python-requests=>`date`" | sudo tee -a $INSTALLED_LIST

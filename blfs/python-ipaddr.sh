@@ -8,6 +8,7 @@ set +h
 #VER:python-ipaddr:2.1.11
 
 #REQ:python2
+#REQ:python-modules#setuptools
 
 cd $SOURCE_DIR
 
