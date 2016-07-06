@@ -15,7 +15,7 @@ cd $SOURCE_DIR
 
 URL=http://download.kde.org/stable/qimageblitz/qimageblitz-0.0.6.tar.bz2
 
-wget -nc ftp://ftp.kde.org/pub/kde/stable/qimageblitz/qimageblitz-0.0.6.tar.bz2 || wget -nc http://download.kde.org/stable/qimageblitz/qimageblitz-0.0.6.tar.bz2
+wget -nc http://download.kde.org/stable/qimageblitz/qimageblitz-0.0.6.tar.bz2 || wget -nc ftp://ftp.kde.org/pub/kde/stable/qimageblitz/qimageblitz-0.0.6.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

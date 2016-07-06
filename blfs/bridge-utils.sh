@@ -14,8 +14,8 @@ cd $SOURCE_DIR
 
 URL=http://sourceforge.net/projects/bridge/files/bridge/bridge-utils-1.5.tar.gz
 
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/bridge-utils/bridge-utils-1.5.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/bridge-utils/bridge-utils-1.5.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/bridge-utils/bridge-utils-1.5.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/bridge-utils/bridge-utils-1.5.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/bridge-utils/bridge-utils-1.5.tar.gz || wget -nc http://sourceforge.net/projects/bridge/files/bridge/bridge-utils-1.5.tar.gz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/systemd/bridge-utils-1.5-linux_3.8_fix-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/bridge-utils/bridge-utils-1.5-linux_3.8_fix-1.patch
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/bridge-utils/bridge-utils-1.5.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/bridge-utils/bridge-utils-1.5.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/bridge-utils/bridge-utils-1.5.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/bridge-utils/bridge-utils-1.5.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/bridge-utils/bridge-utils-1.5.tar.gz || wget -nc http://sourceforge.net/projects/bridge/files/bridge/bridge-utils-1.5.tar.gz
+wget -nc http://www.linuxfromscratch.org/patches/downloads/bridge-utils/bridge-utils-1.5-linux_3.8_fix-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/systemd/bridge-utils-1.5-linux_3.8_fix-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

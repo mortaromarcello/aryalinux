@@ -22,9 +22,9 @@ set -e
 #REQ:phonon
 #REQ:shared-mime-info
 #REQ:wget
-#REQ:kde_libdbusmenu-qt
 #REC:avahi
 #REC:aspell
+#REC:general_libdbusmenu-qt
 #REC:polkit-qt
 #OPT:oxygen-fonts
 #OPT:doxygen
@@ -154,6 +154,9 @@ do
   rm -rf $packagedir
   as_root /sbin/ldconfig
 done
+
+
+exit
 
 
 cd $SOURCE_DIR

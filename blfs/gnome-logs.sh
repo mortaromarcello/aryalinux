@@ -21,7 +21,7 @@ cd $SOURCE_DIR
 
 URL=http://ftp.gnome.org/pub/gnome/sources/gnome-logs/3.14/gnome-logs-3.14.2.tar.xz
 
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-logs/3.14/gnome-logs-3.14.2.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-logs/3.14/gnome-logs-3.14.2.tar.xz
+wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-logs/3.14/gnome-logs-3.14.2.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-logs/3.14/gnome-logs-3.14.2.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

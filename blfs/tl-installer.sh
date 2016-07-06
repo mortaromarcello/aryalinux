@@ -5,8 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:install-tl-unx:null
 #VER:readline:5.2
+#VER:install-tl-unx:null
 
 #REC:gs
 #REC:x7lib
@@ -22,8 +22,8 @@ cd $SOURCE_DIR
 
 URL=http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 
-wget -nc ftp://ftp.gnu.org/gnu/readline/readline-5.2.tar.gz
 wget -nc http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+wget -nc ftp://ftp.gnu.org/gnu/readline/readline-5.2.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

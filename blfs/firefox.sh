@@ -39,7 +39,7 @@ cd $SOURCE_DIR
 
 URL=https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/45.0/source/firefox-45.0.source.tar.xz
 
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/firefox/firefox-45.0.source.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/firefox/firefox-45.0.source.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/firefox/firefox-45.0.source.tar.xz || wget -nc https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/45.0/source/firefox-45.0.source.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/firefox/firefox-45.0.source.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/firefox/firefox-45.0.source.tar.xz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/firefox/firefox-45.0.source.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/firefox/firefox-45.0.source.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/firefox/firefox-45.0.source.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/firefox/firefox-45.0.source.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/firefox/firefox-45.0.source.tar.xz || wget -nc https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/45.0/source/firefox-45.0.source.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

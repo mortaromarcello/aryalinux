@@ -48,7 +48,7 @@ cd $SOURCE_DIR
 
 URL=http://download.qt.io/archive/qt/5.5/5.5.1/single/qt-everywhere-opensource-src-5.5.1.tar.xz
 
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.5.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.5.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.5.1.tar.xz || wget -nc http://download.qt.io/archive/qt/5.5/5.5.1/single/qt-everywhere-opensource-src-5.5.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.5.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.5.1.tar.xz
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.5.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.5.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.5.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.5.1.tar.xz || wget -nc http://download.qt.io/archive/qt/5.5/5.5.1/single/qt-everywhere-opensource-src-5.5.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.5.1.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -61,15 +61,15 @@ whoami > /tmp/currentuser
 export QT5PREFIX=/opt/qt5
 
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-mkdir /opt/qt-5.5.1
-ln -sfnv qt-5.5.1 /opt/qt5
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
+-bindir         /usr/bin/qt5                \
+-plugindir      /usr/lib/qt5/plugins        \
+-importdir      /usr/lib/qt5/imports        \
+-headerdir      /usr/include/qt5            \
+-datadir        /usr/share/qt5              \
+-docdir         /usr/share/doc/qt5          \
+-translationdir /usr/share/qt5/translations \
+-demosdir       /usr/share/doc/qt5/demos    \
+-examplesdir    /usr/share/doc/qt5/examples
 
 
 ./configure -prefix         $QT5PREFIX \
@@ -89,6 +89,9 @@ make "-j`nproc`"
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+export QT5PREFIX=/opt/qt5
+export QT5DIR=/opt/qt5
+export QT5BINDIR=$QT5PREFIX/bin
 make install
 
 ENDOFROOTSCRIPT
@@ -102,6 +105,9 @@ find $QT5PREFIX/lib/pkgconfig -name "*.pc" -exec perl -pi -e "s, -L$PWD/?\S+,,g"
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+export QT5PREFIX=/opt/qt5
+export QT5DIR=/opt/qt5
+export QT5BINDIR=$QT5PREFIX/bin
 find $QT5PREFIX -name qt_lib_bootstrap_private.pri \
    -exec sed -i -e "s:$PWD/qtbase:/$QT5PREFIX/lib/:g" {} \; &&
 find $QT5PREFIX -name \*.prl \
@@ -115,6 +121,9 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+export QT5PREFIX=/opt/qt5
+export QT5DIR=/opt/qt5
+export QT5BINDIR=$QT5PREFIX/bin
 QT5BINDIR=$QT5PREFIX/bin
 install -v -dm755 /usr/share/pixmaps/                  &&
 install -v -Dm644 qttools/src/assistant/assistant/images/assistant-128.png \
@@ -183,6 +192,9 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+export QT5PREFIX=/opt/qt5
+export QT5DIR=/opt/qt5
+export QT5BINDIR=$QT5PREFIX/bin
 for file in moc uic rcc qmake lconvert lrelease lupdate; do
   ln -sfrvn $QT5BINDIR/$file /usr/bin/$file-qt5
 done
@@ -195,21 +207,9 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-cat > /etc/profile.d/qt5.sh << EOF
-# Begin /etc/profile.d/qt5.sh
-QT5DIR=/usr
-export QT5DIR
-# End /etc/profile.d/qt5.sh
-EOF
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+export QT5PREFIX=/opt/qt5
+export QT5DIR=/opt/qt5
+export QT5BINDIR=$QT5PREFIX/bin
 cat >> /etc/ld.so.conf << EOF
 # Begin Qt addition
 /opt/qt5/lib
@@ -225,6 +225,9 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+export QT5PREFIX=/opt/qt5
+export QT5DIR=/opt/qt5
+export QT5BINDIR=$QT5PREFIX/bin
 cat > /etc/profile.d/qt5.sh << EOF
 # Begin /etc/profile.d/qt5.sh
 QT5DIR=/opt/qt5
@@ -242,6 +245,9 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+export QT5PREFIX=/opt/qt5
+export QT5DIR=/opt/qt5
+export QT5BINDIR=$QT5PREFIX/bin
 cat > /usr/bin/setqt4 << 'EOF'
 if [ "x$QT5DIR" != "x/usr" ]; then pathremove $QT5DIR/bin; fi
 if [ "x$QT4DIR" != "x/usr" ]; then pathprepend $QT4DIR/bin; fi
@@ -256,11 +262,28 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+export QT5PREFIX=/opt/qt5
+export QT5DIR=/opt/qt5
+export QT5BINDIR=$QT5PREFIX/bin
 cat > /usr/bin/setqt5 << 'EOF'
 if [ "x$QT4DIR" != "x/usr" ]; then pathremove $QT4DIR/bin; fi
 if [ "x$QT5DIR" != "x/usr" ]; then pathprepend $QT5DIR/bin; fi
 echo $PATH
 EOF
+
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo ./rootscript.sh
+sudo rm rootscript.sh
+
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+export QT5PREFIX=/opt/qt5
+export QT5DIR=/opt/qt5
+export QT5BINDIR=$QT5PREFIX/bin
+mkdir /opt/qt-5.5.1
+ln -sfnv qt-5.5.1 /opt/qt5
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

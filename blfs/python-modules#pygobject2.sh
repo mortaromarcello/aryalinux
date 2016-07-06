@@ -17,7 +17,7 @@ cd $SOURCE_DIR
 
 URL=http://ftp.gnome.org/pub/gnome/sources/pygobject/2.28/pygobject-2.28.6.tar.xz
 
-wget -nc http://www.linuxfromscratch.org/patches/blfs/systemd/pygobject-2.28.6-fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/pygobject/pygobject-2.28.6-fixes-1.patch
+wget -nc http://www.linuxfromscratch.org/patches/downloads/pygobject/pygobject-2.28.6-fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/systemd/pygobject-2.28.6-fixes-1.patch
 wget -nc http://ftp.gnome.org/pub/gnome/sources/pygobject/2.28/pygobject-2.28.6.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/pygobject/2.28/pygobject-2.28.6.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`

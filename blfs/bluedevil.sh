@@ -14,8 +14,8 @@ cd $SOURCE_DIR
 
 URL=http://download.kde.org/stable/plasma/5.3.1/bluedevil-5.3.1.tar.xz
 
+wget -nc http://www.linuxfromscratch.org/patches/downloads/bluedevil/bluedevil-5.3.1-bluezqt_api_changes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/systemd/bluedevil-5.3.1-bluezqt_api_changes-1.patch
 wget -nc ftp://ftp.kde.org/pub/kde/stable/plasma/5.3.1/bluedevil-5.3.1.tar.xz || wget -nc http://download.kde.org/stable/plasma/5.3.1/bluedevil-5.3.1.tar.xz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/systemd/bluedevil-5.3.1-bluezqt_api_changes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/bluedevil/bluedevil-5.3.1-bluezqt_api_changes-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

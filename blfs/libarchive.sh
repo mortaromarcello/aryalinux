@@ -18,7 +18,7 @@ cd $SOURCE_DIR
 URL=http://www.libarchive.org/downloads/libarchive-3.1.2.tar.gz
 
 wget -nc http://www.linuxfromscratch.org/patches/downloads/libarchive/libarchive-3.1.2-upstream_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/systemd/libarchive-3.1.2-upstream_fixes-1.patch
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libarchive/libarchive-3.1.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libarchive/libarchive-3.1.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libarchive/libarchive-3.1.2.tar.gz || wget -nc http://www.libarchive.org/downloads/libarchive-3.1.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libarchive/libarchive-3.1.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libarchive/libarchive-3.1.2.tar.gz
+wget -nc http://www.libarchive.org/downloads/libarchive-3.1.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libarchive/libarchive-3.1.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libarchive/libarchive-3.1.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libarchive/libarchive-3.1.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libarchive/libarchive-3.1.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libarchive/libarchive-3.1.2.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

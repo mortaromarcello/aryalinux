@@ -36,7 +36,6 @@ set +h
 #REQ:pnmixer
 #REQ:xfce4-whiskermenu-plugin
 #REQ:xfce4-screenshooter
-#REQ:xfce4-taskmanager
 #REQ:p7zip-full
 #REQ:xarchiver
 #REQ:imagemagick

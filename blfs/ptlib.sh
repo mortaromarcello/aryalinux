@@ -22,7 +22,7 @@ cd $SOURCE_DIR
 
 URL=http://ftp.gnome.org/pub/gnome/sources/ptlib/2.10/ptlib-2.10.11.tar.xz
 
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ptlib/ptlib-2.10.11.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ptlib/ptlib-2.10.11.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/ptlib/2.10/ptlib-2.10.11.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ptlib/ptlib-2.10.11.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/ptlib/2.10/ptlib-2.10.11.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ptlib/ptlib-2.10.11.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ptlib/ptlib-2.10.11.tar.xz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ptlib/ptlib-2.10.11.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/ptlib/2.10/ptlib-2.10.11.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ptlib/ptlib-2.10.11.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ptlib/ptlib-2.10.11.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ptlib/ptlib-2.10.11.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ptlib/ptlib-2.10.11.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/ptlib/2.10/ptlib-2.10.11.tar.xz
 wget -nc http://www.linuxfromscratch.org/patches/blfs/systemd/ptlib-2.10.11-bison_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/ptlib/ptlib-2.10.11-bison_fixes-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`

@@ -5,8 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:qtwebkit:2.3.4
 #VER:qt-everywhere-opensource-src:4.8.7
+#VER:qtwebkit:2.3.4
 
 #REQ:x7lib
 #REC:alsa-lib
@@ -35,9 +35,9 @@ cd $SOURCE_DIR
 
 URL=http://download.qt-project.org/official_releases/qt/4.8/4.8.7/qt-everywhere-opensource-src-4.8.7.tar.gz
 
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qt4/qt-everywhere-opensource-src-4.8.7.tar.gz || wget -nc http://download.qt-project.org/official_releases/qt/4.8/4.8.7/qt-everywhere-opensource-src-4.8.7.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qt4/qt-everywhere-opensource-src-4.8.7.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qt4/qt-everywhere-opensource-src-4.8.7.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qt4/qt-everywhere-opensource-src-4.8.7.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qt4/qt-everywhere-opensource-src-4.8.7.tar.gz
-wget -nc http://www.linuxfromscratch.org/patches/downloads/qt/qtwebkit-2.3.4-gcc5-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/systemd/qtwebkit-2.3.4-gcc5-1.patch
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qtwebkit/qtwebkit-2.3.4.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qtwebkit/qtwebkit-2.3.4.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qtwebkit/qtwebkit-2.3.4.tar.gz || wget -nc http://download.kde.org/stable/qtwebkit-2.3/2.3.4/src/qtwebkit-2.3.4.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qtwebkit/qtwebkit-2.3.4.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qtwebkit/qtwebkit-2.3.4.tar.gz
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qt4/qt-everywhere-opensource-src-4.8.7.tar.gz || wget -nc http://download.qt-project.org/official_releases/qt/4.8/4.8.7/qt-everywhere-opensource-src-4.8.7.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qt4/qt-everywhere-opensource-src-4.8.7.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qt4/qt-everywhere-opensource-src-4.8.7.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qt4/qt-everywhere-opensource-src-4.8.7.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qt4/qt-everywhere-opensource-src-4.8.7.tar.gz
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qtwebkit/qtwebkit-2.3.4.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qtwebkit/qtwebkit-2.3.4.tar.gz || wget -nc http://download.kde.org/stable/qtwebkit-2.3/2.3.4/src/qtwebkit-2.3.4.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qtwebkit/qtwebkit-2.3.4.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qtwebkit/qtwebkit-2.3.4.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qtwebkit/qtwebkit-2.3.4.tar.gz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/systemd/qtwebkit-2.3.4-gcc5-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/qt/qtwebkit-2.3.4-gcc5-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

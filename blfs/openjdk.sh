@@ -87,9 +87,9 @@ mkdir -pv /usr/share/applications &&
 cat > /usr/share/applications/openjdk-8-policytool.desktop << "EOF" &&
 [Desktop Entry]
 Name=OpenJDK Java Policy Tool
-Name[pt_BR]=OpenJDK Java - Ferramenta de Política
+Name[pt_BR]=OpenJDK Java - Ferramenta de Pol??tica
 Comment=OpenJDK Java Policy Tool
-Comment[pt_BR]=OpenJDK Java - Ferramenta de Política
+Comment[pt_BR]=OpenJDK Java - Ferramenta de Pol??tica
 Exec=/opt/jdk/bin/policytool
 Terminal=false
 Type=Application

@@ -9,7 +9,7 @@ set -e
 
 #REQ:cmake
 #REQ:glib2
-#REQ:qt5
+#REQ:qt4
 #OPT:pulseaudio
 
 
@@ -17,7 +17,7 @@ cd $SOURCE_DIR
 
 URL=http://download.kde.org/stable/phonon/4.8.3/src/phonon-4.8.3.tar.xz
 
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/phonon/phonon-4.8.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/phonon/phonon-4.8.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/phonon/phonon-4.8.3.tar.xz || wget -nc http://download.kde.org/stable/phonon/4.8.3/src/phonon-4.8.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/phonon/phonon-4.8.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/phonon/phonon-4.8.3.tar.xz || wget -nc ftp://ftp.kde.org/pub/kde/stable/phonon/4.8.3/src/phonon-4.8.3.tar.xz
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/phonon/phonon-4.8.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/phonon/phonon-4.8.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/phonon/phonon-4.8.3.tar.xz || wget -nc ftp://ftp.kde.org/pub/kde/stable/phonon/4.8.3/src/phonon-4.8.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/phonon/phonon-4.8.3.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/phonon/phonon-4.8.3.tar.xz || wget -nc http://download.kde.org/stable/phonon/4.8.3/src/phonon-4.8.3.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

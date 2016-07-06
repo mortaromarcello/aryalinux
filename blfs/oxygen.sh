@@ -14,7 +14,7 @@ cd $SOURCE_DIR
 
 URL=http://download.kde.org/stable/plasma/5.3.1/oxygen-5.3.1.tar.xz
 
-wget -nc ftp://ftp.kde.org/pub/kde/stable/plasma/5.3.1/oxygen-5.3.1.tar.xz || wget -nc http://download.kde.org/stable/plasma/5.3.1/oxygen-5.3.1.tar.xz
+wget -nc http://download.kde.org/stable/plasma/5.3.1/oxygen-5.3.1.tar.xz || wget -nc ftp://ftp.kde.org/pub/kde/stable/plasma/5.3.1/oxygen-5.3.1.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

@@ -5,10 +5,10 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:libreoffice-translations:5.1.0.3
-#VER:libreoffice-help:5.1.0.3
-#VER:libreoffice-dictionaries:5.1.0.3
 #VER:libreoffice:5.1.0.3
+#VER:libreoffice-translations:5.1.0.3
+#VER:libreoffice-dictionaries:5.1.0.3
+#VER:libreoffice-help:5.1.0.3
 
 #REQ:perl-modules#perl-archive-zip
 #REQ:unzip
@@ -69,10 +69,10 @@ cd $SOURCE_DIR
 
 URL=http://download.documentfoundation.org/libreoffice/src/5.1.0/libreoffice-5.1.0.3.tar.xz
 
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libreoffice/libreoffice-translations-5.1.0.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libreoffice/libreoffice-translations-5.1.0.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libreoffice/libreoffice-translations-5.1.0.3.tar.xz || wget -nc http://download.documentfoundation.org/libreoffice/src/5.1.0/libreoffice-translations-5.1.0.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libreoffice/libreoffice-translations-5.1.0.3.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libreoffice/libreoffice-translations-5.1.0.3.tar.xz
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libreoffice/libreoffice-dictionaries-5.1.0.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libreoffice/libreoffice-dictionaries-5.1.0.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libreoffice/libreoffice-dictionaries-5.1.0.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libreoffice/libreoffice-dictionaries-5.1.0.3.tar.xz || wget -nc http://download.documentfoundation.org/libreoffice/src/5.1.0/libreoffice-dictionaries-5.1.0.3.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libreoffice/libreoffice-dictionaries-5.1.0.3.tar.xz
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libreoffice/libreoffice-5.1.0.3.tar.xz || wget -nc http://download.documentfoundation.org/libreoffice/src/5.1.0/libreoffice-5.1.0.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libreoffice/libreoffice-5.1.0.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libreoffice/libreoffice-5.1.0.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libreoffice/libreoffice-5.1.0.3.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libreoffice/libreoffice-5.1.0.3.tar.xz
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libreoffice/libreoffice-help-5.1.0.3.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libreoffice/libreoffice-help-5.1.0.3.tar.xz || wget -nc http://download.documentfoundation.org/libreoffice/src/5.1.0/libreoffice-help-5.1.0.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libreoffice/libreoffice-help-5.1.0.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libreoffice/libreoffice-help-5.1.0.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libreoffice/libreoffice-help-5.1.0.3.tar.xz
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libreoffice/libreoffice-help-5.1.0.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libreoffice/libreoffice-help-5.1.0.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libreoffice/libreoffice-help-5.1.0.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libreoffice/libreoffice-help-5.1.0.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libreoffice/libreoffice-help-5.1.0.3.tar.xz || wget -nc http://download.documentfoundation.org/libreoffice/src/5.1.0/libreoffice-help-5.1.0.3.tar.xz
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libreoffice/libreoffice-translations-5.1.0.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libreoffice/libreoffice-translations-5.1.0.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libreoffice/libreoffice-translations-5.1.0.3.tar.xz || wget -nc http://download.documentfoundation.org/libreoffice/src/5.1.0/libreoffice-translations-5.1.0.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libreoffice/libreoffice-translations-5.1.0.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libreoffice/libreoffice-translations-5.1.0.3.tar.xz
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libreoffice/libreoffice-dictionaries-5.1.0.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libreoffice/libreoffice-dictionaries-5.1.0.3.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libreoffice/libreoffice-dictionaries-5.1.0.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libreoffice/libreoffice-dictionaries-5.1.0.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libreoffice/libreoffice-dictionaries-5.1.0.3.tar.xz || wget -nc http://download.documentfoundation.org/libreoffice/src/5.1.0/libreoffice-dictionaries-5.1.0.3.tar.xz
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libreoffice/libreoffice-5.1.0.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libreoffice/libreoffice-5.1.0.3.tar.xz || wget -nc http://download.documentfoundation.org/libreoffice/src/5.1.0/libreoffice-5.1.0.3.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libreoffice/libreoffice-5.1.0.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libreoffice/libreoffice-5.1.0.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libreoffice/libreoffice-5.1.0.3.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

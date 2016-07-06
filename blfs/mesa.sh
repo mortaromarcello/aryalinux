@@ -22,7 +22,7 @@ cd $SOURCE_DIR
 
 URL=ftp://ftp.freedesktop.org/pub/mesa/11.1.1/mesa-11.1.1.tar.xz
 
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mesa/mesa-11.1.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mesa/mesa-11.1.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mesa/mesa-11.1.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mesa/mesa-11.1.1.tar.xz || wget -nc ftp://ftp.freedesktop.org/pub/mesa/11.1.1/mesa-11.1.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mesa/mesa-11.1.1.tar.xz
+wget -nc ftp://ftp.freedesktop.org/pub/mesa/11.1.1/mesa-11.1.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mesa/mesa-11.1.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mesa/mesa-11.1.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mesa/mesa-11.1.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mesa/mesa-11.1.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mesa/mesa-11.1.1.tar.xz
 wget -nc http://www.linuxfromscratch.org/patches/downloads/mesa/mesa-11.1.1-add_xdemos-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/systemd/mesa-11.1.1-add_xdemos-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`

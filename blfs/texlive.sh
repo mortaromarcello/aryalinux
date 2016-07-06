@@ -5,8 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:texlive-source:20150521
 #VER:texlive-texmf:20150523
+#VER:texlive-source:20150521
 
 #REC:gs
 #REC:fontconfig
@@ -27,8 +27,8 @@ cd $SOURCE_DIR
 
 URL=ftp://tug.org/texlive/historic/2015/texlive-20150521-source.tar.xz
 
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20150521-source.tar.xz || wget -nc ftp://tug.org/texlive/historic/2015/texlive-20150521-source.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20150521-source.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20150521-source.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/texlive/texlive-20150521-source.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20150521-source.tar.xz
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20150523-texmf.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20150523-texmf.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20150523-texmf.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/texlive/texlive-20150523-texmf.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20150523-texmf.tar.xz || wget -nc ftp://tug.org/texlive/historic/2015/texlive-20150523-texmf.tar.xz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20150521-source.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20150521-source.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20150521-source.tar.xz || wget -nc ftp://tug.org/texlive/historic/2015/texlive-20150521-source.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/texlive/texlive-20150521-source.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20150521-source.tar.xz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20150523-texmf.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20150523-texmf.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20150523-texmf.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20150523-texmf.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/texlive/texlive-20150523-texmf.tar.xz || wget -nc ftp://tug.org/texlive/historic/2015/texlive-20150523-texmf.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
