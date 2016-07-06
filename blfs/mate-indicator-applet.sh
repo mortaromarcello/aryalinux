@@ -19,7 +19,7 @@ DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
 tar xf $TARBALL
 cd $DIRECTORY
 
-./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static --with-gtk=3.0 &&
+./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static --with-gtk=2.0 &&
 make "-j`nproc`"
 
 sudo make install
