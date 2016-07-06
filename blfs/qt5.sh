@@ -59,17 +59,6 @@ whoami > /tmp/currentuser
 export QT5PREFIX=/opt/qt5
 
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-mkdir /opt/qt-5.6.1
-ln -sfnv qt-5.6.1 /opt/qt5
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
 ./configure -prefix         $QT5PREFIX \
             -sysconfdir     /etc/xdg   \
             -confirm-license           \
@@ -87,6 +76,9 @@ make "-j`nproc`"
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+export QT5PREFIX=/opt/qt5
+export QT5DIR=/opt/qt5
+export QT5BINDIR=$QT5PREFIX/bin
 make install
 
 ENDOFROOTSCRIPT
@@ -97,6 +89,9 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+export QT5PREFIX=/opt/qt5
+export QT5DIR=/opt/qt5
+export QT5BINDIR=$QT5PREFIX/bin
 find $QT5PREFIX/lib/pkgconfig -name "*.pc" -exec perl -pi -e "s, -L$PWD/?\S+,,g" {} \;
 
 ENDOFROOTSCRIPT
@@ -107,6 +102,9 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+export QT5PREFIX=/opt/qt5
+export QT5DIR=/opt/qt5
+export QT5BINDIR=$QT5PREFIX/bin
 find $QT5PREFIX/ -name qt_lib_bootstrap_private.pri \
    -exec sed -i -e "s:$PWD/qtbase:/$QT5PREFIX/lib/:g" {} \; &&
 find $QT5PREFIX/ -name \*.prl \
@@ -120,6 +118,9 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+export QT5PREFIX=/opt/qt5
+export QT5DIR=/opt/qt5
+export QT5BINDIR=$QT5PREFIX/bin
 QT5BINDIR=$QT5PREFIX/bin
 install -v -dm755 /usr/share/pixmaps/                  &&
 install -v -Dm644 qttools/src/assistant/assistant/images/assistant-128.png \
@@ -188,6 +189,9 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+export QT5PREFIX=/opt/qt5
+export QT5DIR=/opt/qt5
+export QT5BINDIR=$QT5PREFIX/bin
 for file in moc uic rcc qmake lconvert lrelease lupdate; do
   ln -sfrvn $QT5BINDIR/$file /usr/bin/$file-qt5
 done
@@ -200,22 +204,9 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-cat > /etc/profile.d/qt5.sh << "EOF"
-# Begin /etc/profile.d/qt5.sh
-QT5DIR=/usr
-export QT5DIR
-pathappend $QT5DIR/bin/qt5
-# End /etc/profile.d/qt5.sh
-EOF
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+export QT5PREFIX=/opt/qt5
+export QT5DIR=/opt/qt5
+export QT5BINDIR=$QT5PREFIX/bin
 cat >> /etc/ld.so.conf << "EOF"
 # Begin Qt addition
 /opt/qt5/lib
@@ -231,6 +222,9 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+export QT5PREFIX=/opt/qt5
+export QT5DIR=/opt/qt5
+export QT5BINDIR=$QT5PREFIX/bin
 cat > /etc/profile.d/qt5.sh << EOF
 # Begin /etc/profile.d/qt5.sh
 QT5DIR=/opt/qt5
@@ -239,6 +233,20 @@ pathappend $QT5DIR/lib/pkgconfig PKG_CONFIG_PATH
 export QT5DIR
 # End /etc/profile.d/qt5.sh
 EOF
+
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo ./rootscript.sh
+sudo rm rootscript.sh
+
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+export QT5PREFIX=/opt/qt5
+export QT5DIR=/opt/qt5
+export QT5BINDIR=$QT5PREFIX/bin
+mkdir /opt/qt-5.6.1
+ln -sfnv qt-5.6.1 /opt/qt5
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

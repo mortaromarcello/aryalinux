@@ -5,11 +5,11 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:check:0.10.0
+#VER:cdrkit:1.1.11
 
 cd $SOURCE_DIR
 
-URL="http://archive.ubuntu.com/ubuntu/pool/universe/c/check/check_0.10.0.orig.tar.gz"
+URL="https://launchpad.net/ubuntu/+archive/primary/+files/cdrkit_1.1.11.orig.tar.gz"
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
@@ -17,12 +17,15 @@ DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
 tar xf $TARBALL
 cd $DIRECTORY
 
-./configure --prefix=/usr
+mkdir build
+cd build
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr .. &&
 make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
 
-rm -rf check
+rm -rf $DIRECTORY
 
-echo "check=>`date`" | sudo tee -a $INSTALLED_LIST
+echo "cdrkit=>`date`" | sudo tee -a $INSTALLED_LIST

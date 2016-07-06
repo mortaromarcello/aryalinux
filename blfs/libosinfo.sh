@@ -5,11 +5,13 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:check:0.10.0
+#VER:libosinfo:0.3.1
+
+#REQ:check
 
 cd $SOURCE_DIR
 
-URL="http://archive.ubuntu.com/ubuntu/pool/universe/c/check/check_0.10.0.orig.tar.gz"
+URL="https://fedorahosted.org/releases/l/i/libosinfo/libosinfo-0.3.1.tar.gz"
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
@@ -23,6 +25,6 @@ sudo make install
 
 cd $SOURCE_DIR
 
-rm -rf check
+rm -rf $DIRECTORY
 
-echo "check=>`date`" | sudo tee -a $INSTALLED_LIST
+echo "libosinfo=>`date`" | sudo tee -a $INSTALLED_LIST

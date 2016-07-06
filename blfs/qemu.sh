@@ -10,6 +10,7 @@ set -e
 #REQ:glib2
 #REQ:python2
 #REQ:xorg-server
+#REQ:libcacard
 #REC:sdl
 #OPT:bluez
 #OPT:check
@@ -41,9 +42,6 @@ tar xf $TARBALL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
-
-egrep '^flags.*(vmx|svm)' /proc/cpuinfo
-
 
 if [ $(uname -m) = i686 ]; then
    QEMU_ARCH=i386-softmmu
@@ -109,38 +107,6 @@ sudo rm rootscript.sh
 
 
 qemu-img create -f qcow2 vdisk.img 10G
-
-
-qemu -enable-kvm -hda vdisk.img            \
-     -cdrom Fedora-16-x86_64-Live-LXDE.iso \
-     -boot d                               \
-     -m 384
-
-
-qemu -enable-kvm vdisk.img -m 384
-
-
-qemu -enable-kvm             \
-    -cdrom /home/fernando/ISO/linuxmint-17.1-mate-32bit.iso \
-    -boot order=d             \
-    -m 1G,slots=3,maxmem=4G \
-    -machine smm=off        \
-    -soundhw es1370         \
-    -cpu host               \
-    -smp cores=4,threads=2  \
-    -vga std                \
-    vdisk.img
-
-
-qemu -enable-kvm          \
-    -machine smm=off             \
-    -boot order=d                \
-    -m 1G,slots=3,maxmem=4G      \
-    -soundhw es1370              \
-    -cpu host                    \
-    -smp cores=4,threads=2       \
-    -vga vmware                  \
-    -hda vdisk.img
 
 
 
@@ -212,6 +178,7 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+sudo mkdir -pv /etc/qemu
 echo 'allow br0' > /etc/qemu/bridge.conf
 
 ENDOFROOTSCRIPT

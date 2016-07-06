@@ -5,11 +5,11 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:check:0.10.0
+#VER:libvirt-glib:0.2.3
 
 cd $SOURCE_DIR
 
-URL="http://archive.ubuntu.com/ubuntu/pool/universe/c/check/check_0.10.0.orig.tar.gz"
+URL="https://libvirt.org/sources/glib/libvirt-glib-0.2.3.tar.gz"
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
@@ -25,4 +25,4 @@ cd $SOURCE_DIR
 
 rm -rf check
 
-echo "check=>`date`" | sudo tee -a $INSTALLED_LIST
+echo "libvirt-glib=>`date`" | sudo tee -a $INSTALLED_LIST

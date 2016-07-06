@@ -174,7 +174,7 @@ session-wrapper=/etc/lightdm/Xsession
 #autologin-user-timeout=0
 #autologin-in-background=false
 #autologin-session=UNIMPLEMENTED
-#pam-service=lightdm-autologin
+pam-service=lightdm-autologin
 #exit-on-failure=false
 
 #

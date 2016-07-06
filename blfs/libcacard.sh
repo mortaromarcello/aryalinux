@@ -5,11 +5,11 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:check:0.10.0
+#VER:libcacard:2.5.2
 
 cd $SOURCE_DIR
 
-URL="http://archive.ubuntu.com/ubuntu/pool/universe/c/check/check_0.10.0.orig.tar.gz"
+URL="http://www.spice-space.org/download/libcacard/libcacard-2.5.2.tar.xz"
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
@@ -23,6 +23,6 @@ sudo make install
 
 cd $SOURCE_DIR
 
-rm -rf check
+rm -rf $DIRECTORY
 
-echo "check=>`date`" | sudo tee -a $INSTALLED_LIST
+echo "libcacard=>`date`" | sudo tee -a $INSTALLED_LIST
