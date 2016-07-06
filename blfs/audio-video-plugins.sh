@@ -36,7 +36,6 @@ set +h
 #REQ:pulseaudio
 #REQ:glu
 #REQ:v4l-utils
-#REQ:libmusicbrainz
 #REQ:neon
 #REQ:libmusicbrainz5
 #REQ:faad2
