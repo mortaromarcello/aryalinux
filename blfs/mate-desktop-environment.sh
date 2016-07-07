@@ -72,6 +72,7 @@ set +h
 #REQ:galculator
 #REQ:gpicview
 #REQ:engrampa
+#REQ:atril
 #REQ:mate-utils
 #REQ:murrine-gtk-engine
 #REQ:mate-themes-gtk3
