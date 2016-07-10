@@ -81,7 +81,6 @@ whoami > /tmp/currentuser
 
 read -p "Enter language : " LANGUAGE
 
-
 tar -xf libreoffice-5.1.0.3.tar.xz --no-overwrite-dir &&
 cd libreoffice-5.1.0.3
 
@@ -183,7 +182,7 @@ fi
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
+#sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
