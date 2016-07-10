@@ -11,6 +11,7 @@ set +h
 #REQ:lua
 #REQ:toluapp
 #REQ:imlib2
+#REQ:librsvg
 
 cd $SOURCE_DIR
 

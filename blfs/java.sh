@@ -1,88 +1,58 @@
 #!/bin/bash
+
 set -e
-set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
+
+#VER:OpenJDK-1.8.0.72-x-bin:86_64
+#VER:OpenJDK-1.8.0.72-i-bin:686
+
+#REQ:alsa-lib
+#REQ:cups
+#REQ:giflib
+#REQ:x7lib
+
 
 cd $SOURCE_DIR
 
-ARCH=$(uname -m)
+URL=http://anduin.linuxfromscratch.org/BLFS/OpenJDK/OpenJDK-1.8.0.72/OpenJDK-1.8.0.72-i686-bin.tar.xz
 
-if [ $ARCH == "x86_64" ]
-then
-	URL=http://anduin.linuxfromscratch.org/files/BLFS/OpenJDK-1.8.0.51/OpenJDK-1.8.0.51-x86_64-bin.tar.xz
-else
-	URL=http://anduin.linuxfromscratch.org/files/BLFS/OpenJDK-1.8.0.51/OpenJDK-1.8.0.51-i686-bin.tar.xz
-fi
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/openjdk/OpenJDK-1.8.0.72-x86_64-bin.tar.xz || wget -nc http://anduin.linuxfromscratch.org/BLFS/OpenJDK/OpenJDK-1.8.0.72/OpenJDK-1.8.0.72-x86_64-bin.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/openjdk/OpenJDK-1.8.0.72-x86_64-bin.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/openjdk/OpenJDK-1.8.0.72-x86_64-bin.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/openjdk/OpenJDK-1.8.0.72-x86_64-bin.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/openjdk/OpenJDK-1.8.0.72-x86_64-bin.tar.xz
+wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/openjdk/OpenJDK-1.8.0.72-i686-bin.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/openjdk/OpenJDK-1.8.0.72-i686-bin.tar.xz || wget -nc http://anduin.linuxfromscratch.org/BLFS/OpenJDK/OpenJDK-1.8.0.72/OpenJDK-1.8.0.72-i686-bin.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/openjdk/OpenJDK-1.8.0.72-i686-bin.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/openjdk/OpenJDK-1.8.0.72-i686-bin.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/openjdk/OpenJDK-1.8.0.72-i686-bin.tar.xz
 
-wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar -tf $TARBALL | sed -e 's@/.*@@' | uniq `
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar -xf $TARBALL
-
+tar xf $TARBALL
 cd $DIRECTORY
 
-sudo install -v -dm755 /opt/OpenJDK-1.8.0.51-bin &&
-sudo mv -v * /opt/OpenJDK-1.8.0.51-bin         &&
-sudo chown -R root:root /opt/OpenJDK-1.8.0.51-bin
+whoami > /tmp/currentuser
 
-sudo ln -sfnv OpenJDK-1.8.0.51-bin /opt/jdk
 
-sudo tee /etc/profile.d/openjdk.sh << "EOF"
-# Begin /etc/profile.d/openjdk.sh
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+install -vdm755 /opt/OpenJDK-1.8.0.72-bin &&
+mv -v * /opt/OpenJDK-1.8.0.72-bin         &&
+chown -R root:root /opt/OpenJDK-1.8.0.72-bin
 
-# Set JAVA_HOME directory
-JAVA_HOME=/opt/jdk
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo ./rootscript.sh
+sudo rm rootscript.sh
 
-# Adjust PATH
-pathappend $JAVA_HOME/bin
 
-# Add to MANPATH
-pathappend $JAVA_HOME/man MANPATH
 
-# Make sure C and C++ compilers can find Java headers
-pathappend $JAVA_HOME/include       C_INCLUDE_PATH
-pathappend $JAVA_HOME/include/linux C_INCLUDE_PATH
-pathappend $JAVA_HOME/include       CPLUS_INCLUDE_PATH
-pathappend $JAVA_HOME/include/linux CPLUS_INCLUDE_PATH
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+ln -sfn OpenJDK-1.8.0.72-bin /opt/jdk
 
-# Auto Java CLASSPATH: Copy jar files to, or create symlinks in, the
-# /usr/share/java directory. Note that having gcj jars with OpenJDK 8
-# may lead to errors.
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo ./rootscript.sh
+sudo rm rootscript.sh
 
-AUTO_CLASSPATH_DIR=/usr/share/java
-
-pathprepend . CLASSPATH
-
-for dir in `find ${AUTO_CLASSPATH_DIR} -type d 2>/dev/null`; do
-    pathappend $dir CLASSPATH
-done
-
-for jar in `find ${AUTO_CLASSPATH_DIR} -name "*.jar" 2>/dev/null`; do
-    pathappend $jar CLASSPATH
-done
-
-export JAVA_HOME
-unset AUTO_CLASSPATH_DIR dir jar
-
-# End /etc/profile.d/openjdk.sh
-EOF
-
-sudo tee -a /etc/man_db.conf << "EOF" &&
-# Begin Java addition
-MANDATORY_MANPATH     /opt/jdk/man
-MANPATH_MAP           /opt/jdk/bin     /opt/jdk/man
-MANDB_MAP             /opt/jdk/man     /var/cache/man/jdk
-# End Java addition
-EOF
-
-sudo mkdir -p /var/cache/man
-sudo mandb -c /opt/jdk/man
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
 
+sudo rm -rf $DIRECTORY
 echo "java=>`date`" | sudo tee -a $INSTALLED_LIST
-
 

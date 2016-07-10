@@ -8,6 +8,7 @@ set +h
 
 #REQ:packagekit
 #REQ:sane
+#REQ:itstool
 
 cd $SOURCE_DIR
 
