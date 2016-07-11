@@ -6,9 +6,9 @@ set +h
 . /etc/alps/alps.conf
 
 
-URL="http://search.cpan.org/CPAN/authors/id/U/UM/UMEMOTO/Socket6-0.27.tar.gz"
+URL="http://search.cpan.org/CPAN/authors/id/U/UM/UMEMOTO/Socket6-0.28.tar.gz"
 
-#VER:Socket6:0.27
+#VER:Socket6:0.28
 
 cd $SOURCE_DIR
 wget -nc $URL

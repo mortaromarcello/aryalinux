@@ -11,16 +11,17 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 
 #REQ:itstool
 #REQ:libgcrypt
+#REQ:libxklavier
 
 
 cd $SOURCE_DIR
 
-wget -nc https://launchpad.net/lightdm/1.8/1.8.5/+download/lightdm-1.8.5.tar.xz
-wget -nc https://launchpad.net/lightdm-gtk-greeter/1.8/1.8.5/+download/lightdm-gtk-greeter-1.8.5.tar.gz
+wget -nc https://launchpad.net/lightdm/1.10/1.10.5/+download/lightdm-1.10.5.tar.xz
+wget -nc https://launchpad.net/lightdm-gtk-greeter/2.0/2.0.1/+download/lightdm-gtk-greeter-2.0.1.tar.gz
 
 
-TARBALL=lightdm-1.8.5.tar.xz
-DIRECTORY=lightdm-1.8.5
+TARBALL=lightdm-1.10.5.tar.xz
+DIRECTORY=lightdm-1.10.5
 
 tar -xf $TARBALL
 
@@ -175,7 +176,7 @@ session-wrapper=/etc/lightdm/Xsession
 #autologin-user-timeout=0
 #autologin-in-background=false
 #autologin-session=UNIMPLEMENTED
-pam-service=lightdm-autologin
+#pam-service=lightdm-autologin
 #exit-on-failure=false
 
 #
