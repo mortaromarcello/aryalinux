@@ -21,7 +21,7 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
 tar xf $TARBALL
 cd $DIRECTORY
 
-./configure --prefix=/usr &&
+./configure --prefix=/usr --enable-win64 &&
 make "-j`nproc`"
 sudo make install
 
