@@ -39,7 +39,7 @@ sudo dracut -f `ls /boot/initrd.img*` `ls /lib/modules`
 
 if [ -f /etc/lightdm/lightdm-gtk-greeter.conf ]
 then
-	sudo sed -i "s@#background=@background=/usr/share/backgrounds/aryalinux/2016_05_Life-of-Pix-free-stock-rain-plant-details-LEEROY.jpg@g" /etc/lightdm/lightdm-gtk-greeter.conf
+	sudo sed -i "s@#background=@background=/usr/share/backgrounds/aryalinux/2016_05_Life-of-Pix-free-peaceful-Lake-mountains-OlivierMiche.jpg@g" /etc/lightdm/lightdm-gtk-greeter.conf
 	sudo sed -i "s@#theme-name=@theme-name=Adwaita@g" /etc/lightdm/lightdm-gtk-greeter.conf
 	sudo sed -i "s@#font-name=@font-name=Open Sans@g" /etc/lightdm/lightdm-gtk-greeter.conf
 	sudo sed -i "s@#icon-theme-name=@icon-theme-name=menta@g" /etc/lightdm/lightdm-gtk-greeter.conf

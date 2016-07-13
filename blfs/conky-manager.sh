@@ -14,6 +14,7 @@ set +h
 cd $SOURCE_DIR
 
 wget aryalinux.org/releases/2016.04/conky-manager.tar.gz
+wget aryalinux.org/releases/2016.04/default-themes-extra-1.cmtp.7z -O ~/default-themes-extra-1.cmtp.7z
 
 sudo tar xf conky-manager.tar.gz -C /
 
