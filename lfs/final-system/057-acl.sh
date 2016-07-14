@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="057-acl.sh"
 TARBALL="acl-2.2.52.src.tar.gz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

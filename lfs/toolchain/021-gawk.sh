@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="021-gawk.sh"
 TARBALL="gawk-4.1.3.tar.xz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

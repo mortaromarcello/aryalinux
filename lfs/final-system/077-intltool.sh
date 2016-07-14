@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="077-intltool.sh"
 TARBALL="intltool-0.51.0.tar.gz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

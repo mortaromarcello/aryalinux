@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="071-gdbm.sh"
 TARBALL="gdbm-1.11.tar.gz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

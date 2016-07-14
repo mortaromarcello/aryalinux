@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="006-glibc.sh"
 TARBALL="glibc-2.23.tar.xz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="076-xml-parser.sh"
 TARBALL="XML-Parser-2.44.tar.gz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

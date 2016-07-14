@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="081-kmod.sh"
 TARBALL="kmod-22.tar.xz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

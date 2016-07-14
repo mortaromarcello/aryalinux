@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="061-psmisc.sh"
 TARBALL="psmisc-22.21.tar.gz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

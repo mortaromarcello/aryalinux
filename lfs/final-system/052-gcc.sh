@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="052-gcc.sh"
 TARBALL="gcc-5.3.0.tar.bz2"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="094-iproute2.sh"
 TARBALL="iproute2-4.5.0.tar.xz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

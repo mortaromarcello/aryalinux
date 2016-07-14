@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="095-kbd.sh"
 TARBALL="kbd-2.0.3.tar.xz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

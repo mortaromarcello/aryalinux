@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="087-diffutils.sh"
 TARBALL="diffutils-3.3.tar.xz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="005-linux-headers.sh"
 TARBALL="linux-4.5.tar.xz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

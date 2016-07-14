@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="074-inetutils.sh"
 TARBALL="inetutils-1.9.4.tar.xz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="048-binutils.sh"
 TARBALL="binutils-2.26.tar.bz2"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="055-ncurses.sh"
 TARBALL="ncurses-6.0.tar.gz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

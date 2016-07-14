@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="085-e2fsprogs.sh"
 TARBALL="e2fsprogs-1.42.13.tar.gz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

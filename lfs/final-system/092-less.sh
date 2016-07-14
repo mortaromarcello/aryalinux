@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="092-less.sh"
 TARBALL="less-481.tar.gz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

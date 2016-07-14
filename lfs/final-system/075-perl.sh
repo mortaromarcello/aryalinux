@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="075-perl.sh"
 TARBALL="perl-5.22.1.tar.bz2"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

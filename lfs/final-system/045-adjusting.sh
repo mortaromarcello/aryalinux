@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="045-adjusting.sh"
 TARBALL=""
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

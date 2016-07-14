@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="100-util-linux.sh"
 TARBALL="util-linux-2.27.1.tar.xz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

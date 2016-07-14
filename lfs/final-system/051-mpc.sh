@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="051-mpc.sh"
 TARBALL="mpc-1.0.3.tar.gz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

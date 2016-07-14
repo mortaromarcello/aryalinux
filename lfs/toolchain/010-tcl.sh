@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="010-tcl.sh"
 TARBALL="tcl-core8.6.5-src.tar.gz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

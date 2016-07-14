@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="104-vim.sh"
 TARBALL="vim-7.4.tar.bz2"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

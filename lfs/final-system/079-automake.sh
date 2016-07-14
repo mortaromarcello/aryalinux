@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="079-automake.sh"
 TARBALL="automake-1.15.tar.xz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

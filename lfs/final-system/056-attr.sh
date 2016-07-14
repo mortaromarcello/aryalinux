@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="056-attr.sh"
 TARBALL="attr-2.4.47.src.tar.gz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

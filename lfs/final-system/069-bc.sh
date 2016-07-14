@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="069-bc.sh"
 TARBALL="bc-1.06.95.tar.bz2"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

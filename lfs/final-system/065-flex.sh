@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="065-flex.sh"
 TARBALL="flex-2.6.0.tar.xz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="012-dejagnu.sh"
 TARBALL="dejagnu-1.5.3.tar.gz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

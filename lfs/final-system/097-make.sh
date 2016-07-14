@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="097-make.sh"
 TARBALL="make-4.1.tar.bz2"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

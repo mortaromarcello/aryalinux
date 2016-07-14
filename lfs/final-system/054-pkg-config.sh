@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="054-pkg-config.sh"
 TARBALL="pkg-config-0.29.1.tar.gz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

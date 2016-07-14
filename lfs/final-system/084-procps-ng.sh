@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="084-procps-ng.sh"
 TARBALL="procps-ng-3.3.11.tar.xz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

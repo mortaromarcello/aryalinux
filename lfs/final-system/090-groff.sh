@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="090-groff.sh"
 TARBALL="groff-1.22.3.tar.gz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

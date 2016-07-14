@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="101-man-db.sh"
 TARBALL="man-db-2.7.5.tar.xz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

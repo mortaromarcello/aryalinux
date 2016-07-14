@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="017-coreutils.sh"
 TARBALL="coreutils-8.25.tar.xz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

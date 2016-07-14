@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="072-gperf.sh"
 TARBALL="gperf-3.0.4.tar.gz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

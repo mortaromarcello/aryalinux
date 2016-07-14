@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="064-bison.sh"
 TARBALL="bison-3.0.4.tar.xz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

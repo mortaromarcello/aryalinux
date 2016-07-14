@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="078-autoconf.sh"
 TARBALL="autoconf-2.69.tar.xz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

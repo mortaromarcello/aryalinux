@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="050-mpfr.sh"
 TARBALL="mpfr-3.1.4.tar.xz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

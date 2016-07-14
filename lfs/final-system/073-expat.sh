@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="073-expat.sh"
 TARBALL="expat-2.1.1.tar.bz2"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

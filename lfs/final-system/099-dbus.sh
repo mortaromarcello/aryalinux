@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="099-dbus.sh"
 TARBALL="dbus-1.10.6.tar.gz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 

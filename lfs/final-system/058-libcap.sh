@@ -15,8 +15,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="058-libcap.sh"
 TARBALL="libcap-2.25.tar.xz"
 
-echo "$LOGLENGTH" > /sources/lines2track
-
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 
