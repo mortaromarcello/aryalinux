@@ -1,56 +1,23 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
-. /var/lib/alps/functions
 
-#VER:ffmpeg:2.8.6
+#VER:ffmpeg:2.3.6
 
-#REC:libass
-#REC:fdk-aac
-#REC:freetype2
-#REC:lame
-#REC:libtheora
-#REC:libvorbis
-#REC:libvpx
-#REC:opus
-#REC:x264
-#REC:x265
-#REC:yasm
-#OPT:faac
-#OPT:fontconfig
-#OPT:frei0r
-#OPT:libcdio
-#OPT:libwebp
-#OPT:opencv
-#OPT:openjpeg
-#OPT:openssl
-#OPT:gnutls
-#OPT:pulseaudio
-#OPT:speex
-#OPT:texlive
-#OPT:tl-installer
-#OPT:v4l-utils
-#OPT:xvid
-#OPT:xorg-server
-
+URL=http://ffmpeg.org/releases/ffmpeg-2.3.6.tar.bz2
 
 cd $SOURCE_DIR
 
-URL=http://ffmpeg.org/releases/ffmpeg-2.8.6.tar.xz
-
-wget -nc http://ffmpeg.org/releases/ffmpeg-2.8.6.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ffmpeg/ffmpeg-2.8.6.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ffmpeg/ffmpeg-2.8.6.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ffmpeg/ffmpeg-2.8.6.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ffmpeg/ffmpeg-2.8.6.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ffmpeg/ffmpeg-2.8.6.tar.xz
-
+wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
 
-tar xf $TARBALL
+tar -xf $TARBALL
 cd $DIRECTORY
 
-whoami > /tmp/currentuser
-
-sed -i 's/-lflite"/-lflite -lasound"/' configure &&
 ./configure --prefix=/usr        \
             --enable-gpl         \
             --enable-version3    \
@@ -69,26 +36,15 @@ sed -i 's/-lflite"/-lflite -lasound"/' configure &&
             --enable-libx264     \
             --enable-libx265     \
             --enable-x11grab     \
-            --docdir=/usr/share/doc/ffmpeg-2.8.6 &&
-make &&
+            --docdir=/usr/share/doc/ffmpeg-2.3.6  &&
+make "-j`nproc`" &&
 gcc tools/qt-faststart.c -o tools/qt-faststart
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install &&
-install -v -m755    tools/qt-faststart /usr/bin &&
-install -v -m644    doc/*.txt \
-                    /usr/share/doc/ffmpeg-2.8.6
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
+sudo make install
+sudo install -v -m755    tools/qt-faststart /usr/bin
+sudo install -v -m644    doc/*.txt \
+                    /usr/share/doc/ffmpeg-2.3.6
 
 cd $SOURCE_DIR
+rm -rf $DIRECTORY
 
-sudo rm -rf $DIRECTORY
 echo "ffmpeg=>`date`" | sudo tee -a $INSTALLED_LIST
-
