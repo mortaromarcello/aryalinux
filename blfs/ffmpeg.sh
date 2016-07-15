@@ -5,9 +5,9 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:ffmpeg:2.3.6
+#VER:ffmpeg_.orig:3.0.2
 
-URL=http://ffmpeg.org/releases/ffmpeg-2.3.6.tar.bz2
+URL=http://archive.ubuntu.com/ubuntu/pool/universe/f/ffmpeg/ffmpeg_3.0.2.orig.tar.xz
 
 cd $SOURCE_DIR
 
@@ -36,13 +36,13 @@ cd $DIRECTORY
             --enable-libx264     \
             --enable-libx265     \
             --enable-x11grab     \
-            --docdir=/usr/share/doc/ffmpeg-2.3.6  &&
+            --docdir=/usr/share/doc/ffmpeg-3.0.2  &&
 make "-j`nproc`" &&
 gcc tools/qt-faststart.c -o tools/qt-faststart
 sudo make install
 sudo install -v -m755    tools/qt-faststart /usr/bin
 sudo install -v -m644    doc/*.txt \
-                    /usr/share/doc/ffmpeg-2.3.6
+                    /usr/share/doc/ffmpeg-3.0.2
 
 cd $SOURCE_DIR
 rm -rf $DIRECTORY

@@ -7,7 +7,7 @@ set -e
 
 #VER:vlc-3.0.0:20160606
 
-#REQ:qt5
+#REQ:qt4
 #REC:alsa-lib
 #REC:ffmpeg
 #REC:liba52
@@ -68,30 +68,30 @@ cd $DIRECTORY
 
 whoami > /tmp/currentuser
 
-export QT5PREFIX="/opt/qt5"
-export QT5BINDIR="$QT5PREFIX/bin"
-export QT5DIR="$QT5PREFIX"
-export QTDIR="$QT5PREFIX"
-export PATH="$PATH:$QT5BINDIR"
-export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt5/lib/pkgconfig"
+export QT4PREFIX="/opt/qt4"
+export QT4BINDIR="$QT4PREFIX/bin"
+export QT4DIR="$QT4PREFIX"
+export QTDIR="$QT4PREFIX"
+export PATH="$PATH:$QT4BINDIR"
+export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt4/lib/pkgconfig"
 export XORG_PREFIX=/usr
 export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
 
-export QT5PREFIX="/opt/qt5"
-export QT5BINDIR="$QT5PREFIX/bin"
-export QT5DIR="$QT5PREFIX"
-export QTDIR="$QT5PREFIX"
-export PATH="$PATH:$QT5BINDIR"
-export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt5/lib/pkgconfig"
+export QT4PREFIX="/opt/qt4"
+export QT4BINDIR="$QT4PREFIX/bin"
+export QT4DIR="$QT4PREFIX"
+export QTDIR="$QT4PREFIX"
+export PATH="$PATH:$QT4BINDIR"
+export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt4/lib/pkgconfig"
 sed -i '/seems to be moved/s/^/#/' autotools/ltmain.sh
 
 
-export QT5PREFIX="/opt/qt5"
-export QT5BINDIR="$QT5PREFIX/bin"
-export QT5DIR="$QT5PREFIX"
-export QTDIR="$QT5PREFIX"
-export PATH="$PATH:$QT5BINDIR"
-export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt5/lib/pkgconfig"
+export QT4PREFIX="/opt/qt4"
+export QT4BINDIR="$QT4PREFIX/bin"
+export QT4DIR="$QT4PREFIX"
+export QTDIR="$QT4PREFIX"
+export PATH="$PATH:$QT4BINDIR"
+export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt4/lib/pkgconfig"
 BUILDCC=gcc                      \
 CFLAGS="-I $XORG_PREFIX/include" \
 ./configure --prefix=/usr &&
@@ -100,12 +100,12 @@ make "-j`nproc`"
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-export QT5PREFIX="/opt/qt5"
-export QT5BINDIR="$QT5PREFIX/bin"
-export QT5DIR="$QT5PREFIX"
-export QTDIR="$QT5PREFIX"
-export PATH="$PATH:$QT5BINDIR"
-export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt5/lib/pkgconfig"
+export QT4PREFIX="/opt/qt4"
+export QT4BINDIR="$QT4PREFIX/bin"
+export QT4DIR="$QT4PREFIX"
+export QTDIR="$QT4PREFIX"
+export PATH="$PATH:$QT4BINDIR"
+export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt4/lib/pkgconfig"
 make docdir=/usr/share/doc/vlc-3.0.0-20160606 install
 
 ENDOFROOTSCRIPT
@@ -116,12 +116,12 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-export QT5PREFIX="/opt/qt5"
-export QT5BINDIR="$QT5PREFIX/bin"
-export QT5DIR="$QT5PREFIX"
-export QTDIR="$QT5PREFIX"
-export PATH="$PATH:$QT5BINDIR"
-export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt5/lib/pkgconfig"
+export QT4PREFIX="/opt/qt4"
+export QT4BINDIR="$QT4PREFIX/bin"
+export QT4DIR="$QT4PREFIX"
+export QTDIR="$QT4PREFIX"
+export PATH="$PATH:$QT4BINDIR"
+export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt4/lib/pkgconfig"
 gtk-update-icon-cache &&
 update-desktop-database
 

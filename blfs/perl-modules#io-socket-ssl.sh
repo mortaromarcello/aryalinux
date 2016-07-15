@@ -8,9 +8,9 @@ set +h
 #REQ:perl-modules#io-socket-ssl
 #REQ:perl-modules#mozilla-ca
 
-URL="http://search.cpan.org/CPAN/authors/id/S/SU/SULLR/IO-Socket-SSL-2.032.tar.gz"
+URL="http://search.cpan.org/CPAN/authors/id/S/SU/SULLR/IO-Socket-SSL-2.033.tar.gz"
 
-#VER:IO-Socket-SSL:2.032
+#VER:IO-Socket-SSL:2.033
 
 cd $SOURCE_DIR
 wget -nc $URL

@@ -22,6 +22,7 @@ set +h
 #REQ:soundtouch
 #REQ:gst10-plugins-bad
 #REQ:x264
+#REQ:x265
 #REQ:gst10-plugins-ugly
 #REQ:libdvdcss
 #REQ:libcdio

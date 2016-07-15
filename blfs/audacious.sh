@@ -12,7 +12,7 @@ set -e
 #REQ:libxml2
 #REQ:xorg-server
 #REQ:mpg123
-#REQ:qt5
+#REQ:qt4
 #OPT:dbus
 #OPT:gnome-icon-theme
 #OPT:pcre
