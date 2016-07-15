@@ -5,15 +5,16 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:audacious-plugins:3.7.1
-#VER:audacious:3.7.1
+#VER:audacious-plugins:3.7.2
+#VER:audacious:3.7.2
 
 #REQ:gtk2
 #REQ:libxml2
 #REQ:xorg-server
 #REQ:mpg123
-#REQ:qt4
+#REQ:qt5
 #OPT:dbus
+#OPT:gnome-icon-theme
 #OPT:pcre
 #OPT:valgrind
 #OPT:curl
@@ -35,10 +36,10 @@ set -e
 
 cd $SOURCE_DIR
 
-URL=http://distfiles.audacious-media-player.org/audacious-3.7.1.tar.bz2
+URL=http://distfiles.audacious-media-player.org/audacious-3.7.2.tar.bz2
 
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/audacious-plugins/audacious-plugins-3.7.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/audacious-plugins/audacious-plugins-3.7.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/audacious-plugins/audacious-plugins-3.7.1.tar.bz2 || wget -nc http://distfiles.audacious-media-player.org/audacious-plugins-3.7.1.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/audacious-plugins/audacious-plugins-3.7.1.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/audacious-plugins/audacious-plugins-3.7.1.tar.bz2
-wget -nc http://distfiles.audacious-media-player.org/audacious-3.7.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/audacious/audacious-3.7.1.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/audacious/audacious-3.7.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/audacious/audacious-3.7.1.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/audacious/audacious-3.7.1.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/audacious/audacious-3.7.1.tar.bz2
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/audacious/audacious-3.7.2.tar.bz2 || wget -nc http://distfiles.audacious-media-player.org/audacious-3.7.2.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/audacious/audacious-3.7.2.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/audacious/audacious-3.7.2.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/audacious/audacious-3.7.2.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/audacious/audacious-3.7.2.tar.bz2
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/audacious-plugins/audacious-plugins-3.7.2.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/audacious-plugins/audacious-plugins-3.7.2.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/audacious-plugins/audacious-plugins-3.7.2.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/audacious-plugins/audacious-plugins-3.7.2.tar.bz2 || wget -nc http://distfiles.audacious-media-player.org/audacious-plugins-3.7.2.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/audacious-plugins/audacious-plugins-3.7.2.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -67,8 +68,8 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
-tar xf ../audacious-plugins-3.7.1.tar.bz2
-cd `tar -tf ../audacious-plugins-3.7.1.tar.bz2 | cut -d ' ' -f1 | uniq`
+tar xf ../audacious-plugins-3.7.2.tar.bz2
+cd `tar -tf ../audacious-plugins-3.7.2.tar.bz2 | cut -d ' ' -f1 | uniq`
 
 
 
