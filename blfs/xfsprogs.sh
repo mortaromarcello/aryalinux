@@ -5,15 +5,15 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:xfsprogs:4.3.0
+#VER:xfsprogs:4.5.0
 
 
 
 cd $SOURCE_DIR
 
-URL=ftp://oss.sgi.com/projects/xfs/cmd_tars/xfsprogs-4.3.0.tar.gz
+URL=ftp://oss.sgi.com/projects/xfs/cmd_tars/xfsprogs-4.5.0.tar.gz
 
-wget -nc ftp://oss.sgi.com/projects/xfs/cmd_tars/xfsprogs-4.3.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xfsprogs/xfsprogs-4.3.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xfsprogs/xfsprogs-4.3.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xfsprogs/xfsprogs-4.3.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xfsprogs/xfsprogs-4.3.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xfsprogs/xfsprogs-4.3.0.tar.gz
+wget -nc ftp://oss.sgi.com/projects/xfs/cmd_tars/xfsprogs-4.5.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xfsprogs/xfsprogs-4.5.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xfsprogs/xfsprogs-4.5.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xfsprogs/xfsprogs-4.5.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xfsprogs/xfsprogs-4.5.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xfsprogs/xfsprogs-4.5.0.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -31,8 +31,8 @@ make DEBUG=-DNDEBUG     \
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make PKG_DOC_DIR=/usr/share/doc/xfsprogs-4.3.0 install     &&
-make PKG_DOC_DIR=/usr/share/doc/xfsprogs-4.3.0 install-dev &&
+make PKG_DOC_DIR=/usr/share/doc/xfsprogs-4.5.0 install     &&
+make PKG_DOC_DIR=/usr/share/doc/xfsprogs-4.5.0 install-dev &&
 rm -rfv /usr/lib/libhandle.a                               &&
 rm -rfv /lib/libhandle.{a,la,so}                           &&
 ln -sfv ../../lib/libhandle.so.1 /usr/lib/libhandle.so     &&
