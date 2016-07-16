@@ -56,6 +56,23 @@ export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt4/lib/pkgconfig"
 export QT4PREFIX=/opt/qt4
 
 
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+export QT4PREFIX="/opt/qt4"
+export QT4BINDIR="$QT4PREFIX/bin"
+export QT4DIR="$QT4PREFIX"
+export QTDIR="$QT4PREFIX"
+export PATH="$PATH:$QT4BINDIR"
+export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt4/lib/pkgconfig"
+mkdir /opt/qt-4.8.7
+ln -sfnv qt-4.8.7 /opt/qt4
+
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo ./rootscript.sh
+sudo rm rootscript.sh
+
+
 export QT4PREFIX="/opt/qt4"
 export QT4BINDIR="$QT4PREFIX/bin"
 export QT4DIR="$QT4PREFIX"
@@ -358,23 +375,6 @@ if [ "x$QT4DIR" != "x/usr" ]; then pathremove $QT4DIR/bin; fi
 if [ "x$QT5DIR" != "x/usr" ]; then pathprepend $QT5DIR/bin; fi
 echo $PATH
 EOF
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-export QT4PREFIX="/opt/qt4"
-export QT4BINDIR="$QT4PREFIX/bin"
-export QT4DIR="$QT4PREFIX"
-export QTDIR="$QT4PREFIX"
-export PATH="$PATH:$QT4BINDIR"
-export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt4/lib/pkgconfig"
-mkdir /opt/qt-4.8.7
-ln -sfnv qt-4.8.7 /opt/qt4
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

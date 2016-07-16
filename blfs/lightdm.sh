@@ -39,7 +39,9 @@ CPPLAGS="-march=native -mtune=native -O3"  \
             --with-greeter-user=lightdm \
             --with-greeter-session=lightdm-gtk-greeter \
             --disable-static \
-            --disable-tests
+            --disable-tests  \
+			--disable-liblightdm-qt5  \
+			--disable-liblightdm-qt
 
 make "-j`nproc`"
 

@@ -32,7 +32,7 @@ cd $DIRECTORY
 
 whoami > /tmp/currentuser
 
-./configure --prefix=/usr &&
+./configure --prefix=/usr --disable-pinentry-qt5 --enable-pinentry-qt=no &&
 make "-j`nproc`"
 
 

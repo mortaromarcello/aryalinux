@@ -44,6 +44,7 @@ set +h
 #REQ:yelp
 #REQ:xdg-utils
 #REQ:xdg-user-dirs
+#REQ:libgtop
 
 #REQ:mate-common-1.14
 #REQ:mate-desktop-1.14

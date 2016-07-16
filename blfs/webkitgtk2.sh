@@ -52,14 +52,6 @@ make &&
 popd
 
 
-mkdir build2 &&
-pushd build2 &&
-../configure --prefix=/usr --with-gtk=2.0 --disable-webkit2 &&
-make &&
-popd
-
-
-
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make -C build3 install                             &&
 rm -rf /usr/share/gtk-doc/html/webkit{,dom}gtk-3.0 &&
@@ -75,22 +67,6 @@ sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
 sudo rm rootscript.sh
 
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make -C build2 install                             &&
-rm -rf /usr/share/gtk-doc/html/webkit{,dom}gtk-1.0 &&
-if [ -e /usr/share/gtk-doc/html/webkitdomgtk ]; then
-  mv -v /usr/share/gtk-doc/html/webkitdomgtk{,-1.0}
-fi
-if [ -e /usr/share/gtk-doc/html/webkitgtk ]; then
-  mv -v /usr/share/gtk-doc/html/webkitgtk{,-1.0}
-fi
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
