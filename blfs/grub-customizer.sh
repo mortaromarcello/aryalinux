@@ -4,6 +4,8 @@ set +h
 
 . /etc/alps/alps.conf
 
+#REQ:gtkmm3
+
 #VER:grub-customizer:5.0.6
 
 cd $SOURCE_DIR
