@@ -5,6 +5,8 @@ set +h
 
 . /etc/alps/alps.conf
 
+
+#REQ:audio-video-plugins
 #REQ:protobuf
 #REQ:libchromaprint
 #REQ:libgpod
