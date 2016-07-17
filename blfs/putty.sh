@@ -34,7 +34,7 @@ Exec=putty %u
 Terminal=false
 Type=Application
 Icon=putty
-Categories=System;GTK;Utility;TerminalEmulator;
+Categories=System;GTK;Utility;
 StartupNotify=true
 EOF
 
