@@ -7,6 +7,8 @@ set +h
 
 #VER:audacity_.orig:2.1.2
 
+
+#REQ:audio-video-plugins
 #REQ:ffmpeg
 #REQ:vamp-plugin-sdk
 
