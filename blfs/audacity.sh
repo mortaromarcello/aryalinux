@@ -24,9 +24,10 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
 tar -xf $TARBALL
 cd $DIRECTORY
 
-sudo rm -vf /usr/lib64/libvamp-hostsdk.la
-./configure --prefix=/usr  --disable-dynamic-loading --with-ffmpeg=system &&
+./configure --prefix=/usr  --disable-dynamic-loading --with-ffmpeg=system
+sudo mv /usr/lib/libvamp-hostsdk.la .
 make "-j`nproc`"
+sudo mv ./libvamp-hostsdk.la /usr/lib/
 sudo make install
 
 cd $SOURCE_DIR
