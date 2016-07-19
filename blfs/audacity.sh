@@ -25,9 +25,21 @@ tar -xf $TARBALL
 cd $DIRECTORY
 
 ./configure --prefix=/usr  --disable-dynamic-loading --with-ffmpeg=system
-sudo mv /usr/lib/libvamp-hostsdk.la .
+if [ -f /usr/lib/libvamp-hostsdk.la ]
+then
+	sudo mv /usr/lib/libvamp-hostsdk.la .
+elif [ -f /usr/lib64/libvamp-hostsdk.la ]
+then
+	sudo mv /usr/lib64/libvamp-hostsdk.la .
+fi
 make "-j`nproc`"
-sudo mv ./libvamp-hostsdk.la /usr/lib/
+if [ -d /usr/lib64 ]
+then
+	sudo mv ./libvamp-hostsdk.la /usr/lib64/
+elif [ -d /usr/lib ]
+then
+	sudo mv ./libvamp-hostsdk.la /usr/lib/
+fi
 sudo make install
 
 cd $SOURCE_DIR
