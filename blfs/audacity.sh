@@ -11,6 +11,7 @@ set +h
 #REQ:audio-video-plugins
 #REQ:ffmpeg
 #REQ:vamp-plugin-sdk
+#REQ:wxwidgets
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/a/audacity/audacity_2.1.2.orig.tar.xz
 
