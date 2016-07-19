@@ -25,7 +25,7 @@ tar -xf $TARBALL
 cd $DIRECTORY
 
 sudo rm -vf /usr/lib64/libvamp-hostsdk.la
-./configure --prefix=/usr  &&
+./configure --prefix=/usr  --disable-dynamic-loading --with-ffmpeg=system &&
 make "-j`nproc`"
 sudo make install
 
