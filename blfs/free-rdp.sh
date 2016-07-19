@@ -28,7 +28,7 @@ make &&
 sudo make install
 echo /opt/remmina_devel/freerdp/lib | sudo tee /etc/ld.so.conf.d/freerdp_devel.conf > /dev/null
 sudo ldconfig
-sudo ln -s /opt/remmina_devel/freerdp/bin/xfreerdp /usr/bin/
+sudo ln -svf /opt/remmina_devel/freerdp/bin/xfreerdp /usr/bin/
 
 cd $SOURCE_DIR
 rm -rf $DIRECTORY
