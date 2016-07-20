@@ -5,12 +5,9 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:fontforge_.b.orig:20120731
+#VER:libspnav_.orig:0.2.3
 
-#REQ:perl-modules#io-string
-#REQ:perl-modules#font-ttf
-
-URL=http://archive.ubuntu.com/ubuntu/pool/universe/f/fontforge/fontforge_20120731.b.orig.tar.bz2
+URL=http://archive.ubuntu.com/ubuntu/pool/universe/libs/libspnav/libspnav_0.2.3.orig.tar.gz
 
 cd $SOURCE_DIR
 
@@ -28,4 +25,4 @@ sudo make install
 cd $SOURCE_DIR
 rm -rf $DIRECTORY
 
-echo "fontforge=>`date`" | sudo tee -a $INSTALLED_LIST
+echo "libspnav=>`date`" | sudo tee -a $INSTALLED_LIST

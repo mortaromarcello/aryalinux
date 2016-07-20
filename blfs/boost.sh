@@ -40,7 +40,7 @@ sed -e '1 i#ifndef Q_MOC_RUN' \
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-./b2 install threading=multi link=shared
+./b2 --prefix=/usr threading=multi link=shared install
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

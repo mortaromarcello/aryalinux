@@ -5,12 +5,9 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:fontforge_.b.orig:20120731
+#VER:jemalloc_.orig:3.6.0
 
-#REQ:perl-modules#io-string
-#REQ:perl-modules#font-ttf
-
-URL=http://archive.ubuntu.com/ubuntu/pool/universe/f/fontforge/fontforge_20120731.b.orig.tar.bz2
+URL=http://archive.ubuntu.com/ubuntu/pool/universe/j/jemalloc/jemalloc_3.6.0.orig.tar.bz2
 
 cd $SOURCE_DIR
 
@@ -28,4 +25,4 @@ sudo make install
 cd $SOURCE_DIR
 rm -rf $DIRECTORY
 
-echo "fontforge=>`date`" | sudo tee -a $INSTALLED_LIST
+echo "jemalloc=>`date`" | sudo tee -a $INSTALLED_LIST

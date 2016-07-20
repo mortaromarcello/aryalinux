@@ -5,12 +5,9 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:fontforge_.b.orig:20120731
+#VER:openal-soft_.orig:1.17.2
 
-#REQ:perl-modules#io-string
-#REQ:perl-modules#font-ttf
-
-URL=http://archive.ubuntu.com/ubuntu/pool/universe/f/fontforge/fontforge_20120731.b.orig.tar.bz2
+URL=http://archive.ubuntu.com/ubuntu/pool/universe/o/openal-soft/openal-soft_1.17.2.orig.tar.bz2
 
 cd $SOURCE_DIR
 
@@ -21,11 +18,11 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
 tar -xf $TARBALL
 cd $DIRECTORY
 
-./configure --prefix=/usr  &&
+cmake -DCMAKE_INSTALL_PREFIX=/usr . &&
 make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
 rm -rf $DIRECTORY
 
-echo "fontforge=>`date`" | sudo tee -a $INSTALLED_LIST
+echo "openal-soft=>`date`" | sudo tee -a $INSTALLED_LIST
