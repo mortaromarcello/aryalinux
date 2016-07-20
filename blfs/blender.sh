@@ -19,7 +19,7 @@ set +h
 #REQ:ilmbase
 #REQ:jack2
 #REQ:jemalloc
-#REQ:libjpeg-turbo
+#REQ:libjpeg
 #REQ:openal-soft
 #REQ:opencolorio
 #REQ:openexr
