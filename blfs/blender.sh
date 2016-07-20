@@ -28,7 +28,7 @@ set +h
 #REQ:libpng
 #REQ:python2
 #REQ:libsndfile
-#REQ:libpsnav
+#REQ:libspnav
 #REQ:tbb
 #REQ:libtiff
 #REQ:xserver-meta
@@ -73,6 +73,6 @@ pathappend /opt/blender-2.77
 EOF
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+rm -rf $DIRECTORY
 
 echo "blender=>`date`" | sudo tee -a $INSTALLED_LIST
