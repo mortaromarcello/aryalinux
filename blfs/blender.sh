@@ -73,6 +73,6 @@ pathappend /opt/blender-2.77
 EOF
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+sudo rm -rf $DIRECTORY
 
 echo "blender=>`date`" | sudo tee -a $INSTALLED_LIST
