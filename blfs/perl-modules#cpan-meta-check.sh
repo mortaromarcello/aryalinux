@@ -7,9 +7,9 @@ set +h
 
 #REQ:perl-modules#test-deep
 
-URL="http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/CPAN-Meta-Check-0.012.tar.gz"
+URL="http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/CPAN-Meta-Check-0.013.tar.gz"
 
-#VER:CPAN-Meta-Check:0.012
+#VER:CPAN-Meta-Check:0.013
 
 cd $SOURCE_DIR
 wget -nc $URL
