@@ -21,8 +21,8 @@ set +h
 #REQ:jemalloc
 #REQ:libjpeg
 #REQ:openal-soft
-#REQ:opencolorio
 #REQ:openexr
+#REQ:opencolorio
 #REQ:openimageio
 #REQ:openjpeg
 #REQ:libpng
