@@ -5,12 +5,13 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:mlt_.orig:0.9.0
+#VER:mlt:6.0.0
 
 #REQ:swig
 #REQ:jackd2
+#REQ:jackrack
 
-URL=https://launchpad.net/ubuntu/+archive/primary/+files/mlt_0.9.0.orig.tar.gz
+URL=http://downloads.sourceforge.net/mlt/mlt-6.0.0.tar.gz
 
 cd $SOURCE_DIR
 
