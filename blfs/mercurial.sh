@@ -46,7 +46,7 @@ make PREFIX=/usr install-doc
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
+#sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
