@@ -13,7 +13,8 @@ set -e
 #REQ:networkmanager
 #REQ:polkit-gnome
 #REC:gobject-introspection
-#OPT:ModemManager
+#REQ:blueman
+#REQ:ModemManager
 
 
 cd $SOURCE_DIR
@@ -33,6 +34,8 @@ whoami > /tmp/currentuser
 ./configure --prefix=/usr       \
             --sysconfdir=/etc   \
             --disable-migration \
+			--with-bluetooth  \
+			--with-modem-manager-1 \
             --disable-static    &&
 make "-j`nproc`"
 

@@ -24,22 +24,23 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
 tar -xf $TARBALL
 cd $DIRECTORY
 
-if [ `uname -m` == "x86_64" ]
+./configure --prefix=/usr  --disable-dynamic-loading --with-ffmpeg=system
+if [ -f /usr/lib/libvamp-hostsdk.la ]
+then
+	sudo mv /usr/lib/libvamp-hostsdk.la .
+elif [ -f /usr/lib64/libvamp-hostsdk.la ]
 then
 	sudo mv /usr/lib64/libvamp-hostsdk.la .
-else
-	sudo mv /usr/lib/libvamp-hostsdk.la .
 fi
-./configure --prefix=/usr  --disable-dynamic-loading --with-ffmpeg=system &&
 make "-j`nproc`"
-sudo make install
-
-if [ `uname -m` == "x86_64" ]
+if [ -d /usr/lib64 ]
 then
-        sudo mv ./libvamp-hostsdk.la /usr/lib64/
-else
-        sudo mv ./libvamp-hostsdk.la /usr/lib/
+	sudo mv ./libvamp-hostsdk.la /usr/lib64/
+elif [ -d /usr/lib ]
+then
+	sudo mv ./libvamp-hostsdk.la /usr/lib/
 fi
+sudo make install
 
 cd $SOURCE_DIR
 rm -rf $DIRECTORY
