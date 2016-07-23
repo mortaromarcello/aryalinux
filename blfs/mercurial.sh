@@ -30,29 +30,6 @@ whoami > /tmp/currentuser
 make build
 
 
-make doc
-
-
-cat > tests/blacklists/failed-tests << "EOF"
-# Test Failures
- test-convert-svn-source.t
- test-convert-hg-svn.t
- test-gpg.t
-EOF
-rm -rf tests/tmp &&
-TESTFLAGS="-j<em class="replaceable"><code><N></em> --tmpdir tmp --blacklist blacklists/failed-tests" \
-make check
-
-
-pushd tests  &&
-  rm -rf tmp &&
-  ./run-tests.py --tmpdir tmp              \
-                 test-convert-svn-source.t \
-                 test-convert-hg-svn.t     \
-                 test-gpg.t                &&
-popd
-
-
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make PREFIX=/usr install-bin
@@ -71,12 +48,6 @@ ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
 sudo rm rootscript.sh
-
-
-cat >> ~/.hgrc << "EOF"
-[ui]
-username = <em class="replaceable"><code><user_name> <user@mail></em>
-EOF
 
 
 

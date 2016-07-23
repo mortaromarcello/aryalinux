@@ -21,9 +21,18 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
 tar xf $TARBALL
 cd $DIRECTORY
 
-./configure --prefix=/usr --enable-win64 &&
+if [ `uname -m` == "x86_64" ]
+then
+	FLAG64="--enable-win64"
+fi
+./configure --prefix=/usr $FLAG64 &&
 make "-j`nproc`"
 sudo make install
+
+if [ `uname -m` == "x86_64" ]
+then
+	sudo ln -svf /usr/bin/wine64 /usr/bin/wine
+fi
 
 cd $SOURCE_DIR
 rm -rf $DIRECTORY
