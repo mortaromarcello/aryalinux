@@ -36,6 +36,6 @@ done
 
 sudo tar xf arya-plymouth-theme.tar.gz -C /usr/share/plymouth/themes/
 
-echo "aryalinux-default-themes-mate=>`date`" | sudo tee -a $INSTALLED_LIST
+echo "aryalinux-mate-themes=>`date`" | sudo tee -a $INSTALLED_LIST
 
 
