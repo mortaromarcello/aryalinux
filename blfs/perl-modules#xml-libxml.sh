@@ -6,9 +6,9 @@ set +h
 . /etc/alps/alps.conf
 
 
-URL="http://search.cpan.org/CPAN/authors/id/S/SH/SHLOMIF/XML-LibXML-2.0127.tar.gz"
+URL="http://search.cpan.org/CPAN/authors/id/S/SH/SHLOMIF/XML-LibXML-2.0128.tar.gz"
 
-#VER:XML-LibXML:2.0127
+#VER:XML-LibXML:2.0128
 
 cd $SOURCE_DIR
 wget -nc $URL
