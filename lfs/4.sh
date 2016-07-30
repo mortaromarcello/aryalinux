@@ -139,10 +139,20 @@ fi
 
 fi
 
-./initramfs.sh
-extras/014-openssl.sh
+if ! grep initramfs /sources/build-log &> /dev/null
+then
+	./initramfs.sh
+fi
 
-./kernel.sh
+if ! grep "014-openssl.sh" /sources/build-log &> /dev/null
+then
+	extras/014-openssl.sh
+fi
+
+if ! grep kernel /sources/build-log &> /dev/null
+then
+	./kernel.sh
+fi
 
 for script in extras/*.sh
 do

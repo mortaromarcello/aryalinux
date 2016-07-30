@@ -33,13 +33,14 @@ wget -nc http://www.linuxfromscratch.org/patches/blfs/7.6-systemd/openssl-1.0.1i
 wget -nc http://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-4.06.tar.xz
 wget -nc http://gondor.apana.org.au/~herbert/dash/files/dash-0.5.8.tar.gz
 wget -nc https://www.kernel.org/pub/linux/utils/boot/dracut/dracut-044.tar.xz
-wget -nc http://aryalinux.org/releases/2016.08/aufs-4.6.tar.gz
+wget -nc http://aryalinux.org/releases/2016.08/aufs-4.7.tar.gz
 wget -nc http://aryalinux.org/releases/2016.08/aufs4-base.patch
 wget -nc http://aryalinux.org/releases/2016.08/aufs4-kbuild.patch
 wget -nc http://aryalinux.org/releases/2016.08/aufs4-loopback.patch
 wget -nc http://aryalinux.org/releases/2016.08/aufs4-mmap.patch
 wget -nc http://aryalinux.org/releases/2016.08/aufs4-standalone.patch
 wget -nc http://aryalinux.org/releases/2016.08/0.21-nvme_ioctl.h.patch
+wget -nc http://aryalinux.org/releases/2016.08/alps-scripts-2016.08.tar.gz
 
 popd
 
