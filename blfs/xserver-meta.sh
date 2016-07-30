@@ -38,11 +38,14 @@ sudo usermod -a -G video `cat /tmp/currentuser`
 #REQ:xf86-video-r128
 #REQ:xf86-video-savage
 #REQ:xf86-video-tdfx
+#REQ:libva
+#REQ:libva-intel-driver
+#REQ:libvdpau
+#REQ:libvdpau-va-gl
 #REQ:twm
 #REQ:xterm
 #REQ:xclock
 #REQ:xinit
-#REQ:libva-drivers
 #REQ:wayland-protocols
 
 echo "xserver-meta=>`date`" | sudo tee -a $INSTALLED_LIST

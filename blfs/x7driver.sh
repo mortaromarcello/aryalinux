@@ -3,6 +3,28 @@
 set -e
 
 . /etc/alps/alps.conf
+
+#VER:xf86-video-vmware:13.1.0
+
+#VER:xf86-video-nouveau:1.0.12
+
+#VER:xf86-video-intel:0340718
+
+#VER:xf86-video-fbdev:0.4.4
+
+#VER:xf86-video-ati:7.7.0
+
+#VER:xf86-input-wacom:0.33.0
+
+#VER:xf86-input-vmmouse:13.1.0
+
+#VER:xf86-input-synaptics:1.8.3
+
+#VER:xf86-input-evdev:2.10.3
+
+#VER:libinput:1.4.0
+
+#VER:libevdev:1.5.2
 . /var/lib/alps/functions
 
 ## Individual drivers starts from here... ##
@@ -53,7 +75,7 @@ sudo rm -rf $DIRECTORY
 
 # Start of driver installation #
 
-#REQ:x7driver#libevdev
+#REQ:x7driver
 #REQ:mtdev
 #OPT:check
 #OPT:valgrind
@@ -110,7 +132,7 @@ sudo rm -rf $DIRECTORY
 
 # Start of driver installation #
 
-#REQ:x7driver#libevdev
+#REQ:x7driver
 #REQ:mtdev
 #REQ:xorg-server
 
@@ -149,7 +171,7 @@ sudo rm -rf $DIRECTORY
 
 # Start of driver installation #
 
-#REQ:x7driver#libevdev
+#REQ:x7driver
 #REQ:xorg-server
 
 
@@ -493,264 +515,6 @@ sudo rm -rf $DIRECTORY
 
 # End of driver installation #
 
-
-# Start of driver installation #
-
-#REQ:mesa
-#OPT:doxygen
-#OPT:wayland
-
-
-cd $SOURCE_DIR
-
-URL=http://www.freedesktop.org/software/vaapi/releases/libva/libva-1.7.1.tar.bz2
-
-wget -nc http://www.freedesktop.org/software/vaapi/releases/libva/libva-1.7.1.tar.bz2
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libva/libva-1.7.1.tar.bz2
-wget -nc http://www.freedesktop.org/software/vaapi/releases/libva-intel-driver/libva-intel-driver-1.7.1.tar.bz2
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libva/libva-intel-driver-1.7.1.tar.bz2
-
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
-
-tar xf $TARBALL
-cd $DIRECTORY
-
-sed -i "/seems to be moved/s/^/#/" ltmain.sh &&
-./configure $XORG_CONFIG &&
-make
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-autoreconf -fi           &&
-./configure $XORG_CONFIG &&
-make
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-cd $SOURCE_DIR
-
-sudo rm -rf $DIRECTORY
-
-# End of driver installation #
-
-
-# Start of driver installation #
-
-#REQ:x7lib
-#OPT:doxygen
-#OPT:graphviz
-#OPT:texlive
-#OPT:tl-installer
-#OPT:mesa
-
-
-cd $SOURCE_DIR
-
-URL=http://people.freedesktop.org/~aplattner/vdpau/libvdpau-1.1.1.tar.bz2
-
-wget -nc http://people.freedesktop.org/~aplattner/vdpau/libvdpau-1.1.1.tar.bz2
-
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
-
-tar xf $TARBALL
-cd $DIRECTORY
-
-./configure $XORG_CONFIG \
-            --docdir=/usr/share/doc/libvdpau-1.1.1 &&
-make
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-cd $SOURCE_DIR
-
-sudo rm -rf $DIRECTORY
-
-# End of driver installation #
-
-
-# Start of driver installation #
-
-#REQ:cmake
-#REQ:ffmpeg
-#REQ:x7driver#libvdpau
-#REQ:x7driver#libva
-#OPT:doxygen
-#OPT:graphviz
-#OPT:texlive
-#OPT:tl-installer
-#OPT:mesa
-
-
-cd $SOURCE_DIR
-
-URL=https://github.com/i-rinat/libvdpau-va-gl/archive/v0.4.0.tar.gz
-
-wget -nc https://github.com/i-rinat/libvdpau-va-gl/archive/v0.4.0.tar.gz
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/v0/v0.4.0.tar.gz
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/v0/v0.4.0.tar.gz
-
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
-
-tar xf $TARBALL
-cd $DIRECTORY
-
-wget https://github.com/i-rinat/libvdpau-va-gl/archive/v0.4.0.tar.gz \
-     -O libvdpau-va-gl-0.4.0.tar.gz
-
-mkdir build &&
-cd    build &&
-
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$XORG_PREFIX .. &&
-make
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-echo "export VDPAU_DRIVER=va_gl" >> /etc/profile.d/xorg.sh
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-cd $SOURCE_DIR
-
-sudo rm -rf $DIRECTORY
-
-# End of driver installation #
 
 echo "x7driver=>`date`" | sudo tee -a $INSTALLED_LIST
 

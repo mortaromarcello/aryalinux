@@ -10,7 +10,7 @@ set -e
 
 #REQ:yasm
 #REC:gtk2
-#REC:x7driver#libvdpau
+#REC:x7driver
 #OPT:cdparanoia
 #OPT:libcdio
 #OPT:libdvdread

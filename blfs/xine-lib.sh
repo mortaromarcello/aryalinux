@@ -21,8 +21,7 @@ set -e
 #OPT:libmad
 #OPT:libmng
 #OPT:libtheora
-#OPT:x7driver#libva
-#OPT:x7driver#libvdpau
+#OPT:x7driver
 #OPT:libvorbis
 #OPT:libvpx
 #OPT:mesa

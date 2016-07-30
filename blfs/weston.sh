@@ -8,7 +8,7 @@ set -e
 #VER:weston:1.11.0
 
 #REQ:cairo
-#REQ:x7driver#libinput
+#REQ:x7driver
 #REQ:libjpeg
 #REQ:libxkbcommon
 #REQ:mesa
@@ -25,7 +25,7 @@ set -e
 #OPT:doxygen
 #OPT:lcms2
 #OPT:libpng
-#OPT:x7driver#libva
+#OPT:x7driver
 #OPT:libwebp
 
 

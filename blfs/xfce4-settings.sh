@@ -15,7 +15,7 @@ set -e
 #REC:libcanberra
 #REC:libnotify
 #REC:libxklavier
-#OPT:x7driver#libinput
+#OPT:x7driver
 
 
 cd $SOURCE_DIR

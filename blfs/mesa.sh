@@ -11,8 +11,7 @@ set -e
 #REQ:libdrm
 #REQ:python2
 #REC:elfutils
-#REC:x7driver#libva
-#REC:x7driver#libvdpau
+#REC:libva-wo-mesa
 #REC:llvm
 #OPT:libgcrypt
 #OPT:nettle

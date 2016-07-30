@@ -22,13 +22,13 @@ set -e
 #REQ:xcb-util-cursor
 #REC:libdbusmenu-qt
 #REC:libcanberra
-#REC:x7driver#libinput
+#REC:x7driver
 #REC:linux-pam
 #REC:lm_sensors
 #REC:oxygen-icons5
 #REC:pciutils
 #OPT:glu
-#OPT:x7driver#xorg-synaptics-driver
+#OPT:x7driver
 
 
 cd $SOURCE_DIR

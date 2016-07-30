@@ -18,6 +18,7 @@ set -e
 #REQ:libwacom
 #REQ:pulseaudio
 #REQ:upower
+#REQ:x7driver
 #REC:cups
 #REC:networkmanager
 #REC:nss
