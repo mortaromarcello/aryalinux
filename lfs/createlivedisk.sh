@@ -1,12 +1,18 @@
 #!/bin/bash
 
 ./umountal.sh
-read -p "Enter the Partition where AryaLinux is set up : " ROOT_PART
+read -p "Enter the name of the Root Partition e.g. /dev/sda10 : " ROOT_PART
+read -p "Enter the name of the home partition e.g. /dev/sda11 : " HOME_PART
 read -p "Enter the default boot entry in the Live Disk : " LABEL
-read -p "Enter the name of iso to be generated : " OUTFILE
+read -p "Enter the name of iso file to be generated : " OUTFILE
 
 export LFS=/mnt/lfs
 mount $ROOT_PART $LFS
+
+if [ "x$HOME_PART" != "x" ]
+then
+	mount $HOME_PART $LFS/home
+fi
 
 mount -v --bind /dev $LFS/dev
 
@@ -38,6 +44,7 @@ if [ -f $LFS/etc/lightdm/lightdm.conf ]
 then
 	sed -i "s@#autologin-user=@autologin-user=$USERNAME@g" $LFS/etc/lightdm/lightdm.conf
 	sed -i "s@#autologin-user-timeout=0@autologin-user-timeout=0@g" $LFS/etc/lightdm/lightdm.conf
+	sed -i "s@#pam-service=lightdm-autologin@pam-service=lightdm-autologin@g" $LFS/etc/lightdm/lightdm.conf
 else
 	mkdir -pv /etc/systemd/system/getty@tty1.service.d/
 	pushd /etc/systemd/system/getty@tty1.service.d/
@@ -58,6 +65,7 @@ if [ -f $LFS/etc/lightdm/lightdm.conf ]
 then
 	sed -i "s@autologin-user=$USERNAME@#autologin-user=@g" $LFS/etc/lightdm/lightdm.conf
 	sed -i "s@autologin-user-timeout=0@#autologin-user-timeout=0@g" $LFS/etc/lightdm/lightdm.conf
+        sed -i "s@pam-service=lightdm-autologin@#pam-service=lightdm-autologin@g" $LFS/etc/lightdm/lightdm.conf
 else
 	rm -fv /etc/systemd/system/getty@tty1.service.d/override.conf
 fi
@@ -74,12 +82,6 @@ LABEL live
     MENU DEFAULT
     KERNEL /boot/$(uname -m)/vmlinuz
     APPEND initrd=/boot/$(uname -m)/initram.fs quiet
-
-LABEL busybox
-    MENU LABEL Troubleshooting (busybox console)
-    KERNEL /boot/$(uname -m)/vmlinuz
-    APPEND initrd=/boot/$(uname -m)/initram.fs quiet busybox
-
 EOF
 
 sudo tar xf $LFS/sources/syslinux-4.06.tar.xz
@@ -101,10 +103,11 @@ genisoimage \
   -o "$OUTFILE" \
   -c boot.cat \
   -b boot/isolinux/isolinux.bin \
-     -no-emul-boot -boot-load-size 4 -boot-info-table \
+  -no-emul-boot \
+  -boot-load-size 4 \
+  -boot-info-table \
+  -joliet -l -R \
   -eltorito-alt-boot \
-  -e boot/aryaiso/efiboot.img \
-     -no-emul-boot \
   live
 
 rm -rf live
@@ -113,6 +116,8 @@ rm $LFS/boot/id_label
 
 echo "Making ISO Hybrid..."
 
-syslinux-4.06/utils/isohybrid "$OUTFILE"
+cd ~
+./syslinux-4.06/utils/isohybrid "$OUTFILE"
+./scripts/umountal.sh
 
 echo "Done..."
