@@ -3,12 +3,12 @@
 set -e
 set +h
 
-pushd /sources
+pushd ../sources
 
 wget -nc http://pkgs.fedoraproject.org/lookaside/pkgs/dosfstools/dosfstools-3.0.26.tar.xz/45012f5f56f2aae3afcd62120b9e5a08/dosfstools-3.0.26.tar.xz
 wget -nc http://ftp.gnu.org/gnu/which/which-2.21.tar.gz
 wget -nc http://ftp.de.debian.org/debian/pool/main/o/os-prober/os-prober_1.71.tar.xz
-wget -nc http://pkgs.fedoraproject.org/repo/pkgs/efivar/efivar-0.21.tar.bz2/7aa910eb493e3758b023fac3fdf7bd83/efivar-0.21.tar.bz2
+wget -nc http://pkgs.fedoraproject.org/repo/pkgs/efivar/efivar-0.23.tar.bz2/bff7aa95fdb2f5d79f4aa9721dca2bbd/efivar-0.23.tar.bz2
 wget -nc http://pkgs.fedoraproject.org/repo/pkgs/efibootmgr/efibootmgr-0.12.tar.bz2/6647f5cd807bc8484135ba74fcbcc39a/efibootmgr-0.12.tar.bz2
 wget -nc http://downloads.sourceforge.net/freetype/freetype-2.6.3.tar.bz2
 wget -nc http://unifoundry.com/pub/unifont-7.0.05/font-builds/unifont-7.0.05.pcf.gz
@@ -33,17 +33,17 @@ wget -nc http://www.linuxfromscratch.org/patches/blfs/7.6-systemd/openssl-1.0.1i
 wget -nc http://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-4.06.tar.xz
 wget -nc http://gondor.apana.org.au/~herbert/dash/files/dash-0.5.8.tar.gz
 wget -nc https://www.kernel.org/pub/linux/utils/boot/dracut/dracut-044.tar.xz
-wget -nc http://aryalinux.org/releases/2016.04/aufs-4.5.tar.gz
-wget -nc http://aryalinux.org/releases/2016.04/aufs4-base.patch
-wget -nc http://aryalinux.org/releases/2016.04/aufs4-kbuild.patch
-wget -nc http://aryalinux.org/releases/2016.04/aufs4-loopback.patch
-wget -nc http://aryalinux.org/releases/2016.04/aufs4-mmap.patch
-wget -nc http://aryalinux.org/releases/2016.04/aufs4-standalone.patch
-wget -nc http://aryalinux.org/releases/2016.04/0.21-nvme_ioctl.h.patch
+wget -nc http://aryalinux.org/releases/2016.08/aufs-4.6.tar.gz
+wget -nc http://aryalinux.org/releases/2016.08/aufs4-base.patch
+wget -nc http://aryalinux.org/releases/2016.08/aufs4-kbuild.patch
+wget -nc http://aryalinux.org/releases/2016.08/aufs4-loopback.patch
+wget -nc http://aryalinux.org/releases/2016.08/aufs4-mmap.patch
+wget -nc http://aryalinux.org/releases/2016.08/aufs4-standalone.patch
+wget -nc http://aryalinux.org/releases/2016.08/0.21-nvme_ioctl.h.patch
 
 popd
 
-cp -v functions /sources
-cp -v alps /sources
-cp -v alps.conf /sources
+cp -v functions ../sources
+cp -v alps ../sources
+cp -v alps.conf ../sources
 

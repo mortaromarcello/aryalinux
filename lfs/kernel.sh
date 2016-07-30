@@ -45,6 +45,8 @@ LINUX_SRC_DIR=`tar -tf $LINUX_TARBALL | cut "-d/" -f1 | uniq`
 tar xf $LINUX_TARBALL
 cd $LINUX_SRC_DIR
 
+CFLAGS+=-Wno-incompatible-pointer-types
+
 tar -xvf ../aufs-*.tar.gz -C .
 for patch in ../aufs4*.patch
 do
