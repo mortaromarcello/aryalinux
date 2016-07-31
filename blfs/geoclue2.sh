@@ -10,6 +10,7 @@ set -e
 #REQ:json-glib
 #REQ:libsoup
 #REC:ModemManager
+#REQ:avahi
 #OPT:libnotify
 
 

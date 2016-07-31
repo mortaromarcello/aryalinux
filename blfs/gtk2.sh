@@ -59,16 +59,16 @@ sudo rm rootscript.sh
 
 
 cat > ~/.gtkrc-2.0 << "EOF"
-include "/usr/share/themes/<em class="replaceable"><code>Glider</em>/gtk-2.0/gtkrc"
-gtk-icon-theme-name = "<em class="replaceable"><code>hicolor</em>"
+include "/usr/share/themes/Glider/gtk-2.0/gtkrc"
+gtk-icon-theme-name = "hicolor"
 EOF
 
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 cat > /etc/gtk-2.0/gtkrc << "EOF"
-include "/usr/share/themes/<em class="replaceable"><code>Clearlooks</em>/gtk-2.0/gtkrc"
-gtk-icon-theme-name = "<em class="replaceable"><code>elementary</em>"
+include "/usr/share/themes/Clearlooks/gtk-2.0/gtkrc"
+gtk-icon-theme-name = "elementary"
 EOF
 
 ENDOFROOTSCRIPT

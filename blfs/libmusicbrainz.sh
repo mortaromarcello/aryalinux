@@ -26,7 +26,7 @@ cd $DIRECTORY
 whoami > /tmp/currentuser
 
 patch -Np1 -i ../libmusicbrainz-2.1.5-missing-includes-1.patch &&
-./configure --prefix=/usr --disable-static &&
+CPPFLAGS+=" -Wno-narrowing" ./configure --prefix=/usr --disable-static &&
 make "-j`nproc`"
 
 

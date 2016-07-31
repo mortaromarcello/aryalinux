@@ -14,7 +14,7 @@ set -e
 #OPT:elfutils
 #OPT:gnutls
 #OPT:iptables
-#OPT:libgcrypt
+#REQ:libgcrypt
 #OPT:libidn
 #OPT:libxkbcommon
 #OPT:python2
@@ -23,7 +23,7 @@ set -e
 #OPT:valgrind
 #OPT:docbook
 #OPT:docbook-xsl
-#OPT:libxslt
+#REQ:libxslt
 
 
 cd $SOURCE_DIR
@@ -64,17 +64,6 @@ cc_cv_CFLAGS__flto=no                \
             --with-default-dnssec=no \
             --docdir=/usr/share/doc/systemd-230 &&
 make "-j`nproc`"
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-systemctl start rescue.target
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
@@ -126,17 +115,6 @@ auth required pam_deny.so
 password required pam_deny.so
 # End /etc/pam.d/systemd-user
 EOF
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-systemctl daemon-reload
-systemctl start multi-user.target
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

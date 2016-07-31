@@ -11,6 +11,8 @@ set -e
 #REQ:gegl
 #REQ:gtk2
 #REC:python-modules#pygtk
+#REC:libmypaint
+#REQ:exiv2
 #OPT:aalib
 #OPT:alsa-lib
 #OPT:curl
@@ -47,9 +49,10 @@ whoami > /tmp/currentuser
 
 sed -i '/gegl/s/2/3/' configure.ac &&
 sed -i '70,75 d' app/core/gimpparamspecs-duplicate.c &&
-autoreconf -fiv
+# autoreconf -fiv
 
-
+GEGL_CFLAGS="`pkg-config --cflags geg-l0.3`"
+GEGL_LIBS="`pkg-config --libs geg-l0.3`"
 sed -i "/seems to be moved/s/^/#/" ltmain.sh &&
 ./configure --prefix=/usr \
             --sysconfdir=/etc \
@@ -82,10 +85,7 @@ HELPTARBALL=`ls ../gimp-help*`
 HELPDIR=`tar tf $HELPTARBALL | cut -d/ -f1 | uniq`
 tar xf $HELPTARBALL
 cd $HELPDIR
-ALL_LINGUAS=`read -p "Enter the language for which gimp help is to be built from these ca da de el en en_GB es fr it ja ko nl nn pt_BR ru sl sv zh_CN : " LANGUAGE; echo $LANGUAGE`"" \
-./configure --prefix=/usr &&
-
-
+ALL_LINGUAS="" ./configure --prefix=/usr &&
 make
 
 

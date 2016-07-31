@@ -82,16 +82,16 @@ sudo rm rootscript.sh
 mkdir -vp ~/.config/gtk-3.0
 cat > ~/.config/gtk-3.0/settings.ini << "EOF"
 [Settings]
-gtk-theme-name = <em class="replaceable"><code>Adwaita</em>
-gtk-icon-theme-name = <em class="replaceable"><code>oxygen</em>
-gtk-font-name = <em class="replaceable"><code>DejaVu Sans 12</em>
-gtk-cursor-theme-size = <em class="replaceable"><code>18</em>
-gtk-toolbar-style = <em class="replaceable"><code>GTK_TOOLBAR_BOTH_HORIZ</em>
-gtk-xft-antialias = <em class="replaceable"><code>1</em>
-gtk-xft-hinting = <em class="replaceable"><code>1</em>
-gtk-xft-hintstyle = <em class="replaceable"><code>hintslight</em>
-gtk-xft-rgba = <em class="replaceable"><code>rgb</em>
-gtk-cursor-theme-name = <em class="replaceable"><code>Adwaita</em>
+gtk-theme-name = Adwaita
+gtk-icon-theme-name = oxygen
+gtk-font-name = DejaVu Sans 12
+gtk-cursor-theme-size = 18
+gtk-toolbar-style = GTK_TOOLBAR_BOTH_HORIZ
+gtk-xft-antialias = 1
+gtk-xft-hinting = 1
+gtk-xft-hintstyle = hintslight
+gtk-xft-rgba = rgb
+gtk-cursor-theme-name = Adwaita
 EOF
 
 

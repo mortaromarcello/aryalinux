@@ -24,6 +24,7 @@ tar -xf $TARBALL
 
 cd $DIRECTORY
 
+export CFLAGS="-Wno-error=format-nonliteral"
 ./configure --prefix=/usr --sysconfdir=/etc --disable-liblightdm-qt &&
 make "-j`nproc`"
 

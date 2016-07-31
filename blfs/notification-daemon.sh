@@ -41,10 +41,6 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
-pgrep -l notification-da &&
-notify-send -i info Information "Hi ${USER}, This is a Test"
-
-
 cd $SOURCE_DIR
 
 sudo rm -rf $DIRECTORY

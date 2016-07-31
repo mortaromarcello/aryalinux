@@ -102,9 +102,6 @@ cd $DIRECTORY
             --with-udev-dir=/lib/udev &&
 make
 
-ln -sfv ld-2.23.so.dbg /lib/ld-linux-x86-64.so.2
-
-
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
 ENDOFROOTSCRIPT
@@ -315,21 +312,6 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-cat >> ${XORG_PREFIX}/share/X11/xorg.conf.d/20-glamor.conf << "EOF"
-Section "Device"
- Identifier "radeon"
- Driver "ati"
- Option "AccelMethod" "glamor"
-EndSection
-EOF
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
 cd $SOURCE_DIR
 
 sudo rm -rf $DIRECTORY
@@ -405,21 +387,6 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-cat >> /etc/X11/xorg.conf.d/20-intel.conf << "EOF"
-Section "Device"
- Identifier "Intel Graphics"
- Driver "intel"
- Option "AccelMethod" "uxa"
-EndSection
-EOF
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
 cd $SOURCE_DIR
 
 sudo rm -rf $DIRECTORY
@@ -451,21 +418,6 @@ make
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-cat >> /etc/X11/xorg.conf.d/nvidia.conf << "EOF"
-Section "Device"
- Identifier "nvidia"
- Driver "nouveau"
- Option "AccelMethod" "glamor"
-EndSection
-EOF
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh

@@ -76,7 +76,7 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 wget -nc http://aryalinux.org/releases/2016.08/blfs-systemd-units-20160602.tar.xz -O $SOURCE_DIR/blfs-systemd-units-20160602.tar.xz
 tar xf $SOURCE_DIR/blfs-systemd-units-20160602.tar.xz -C $SOURCE_DIR
-cd $SOURCE_DIR/blfs-systemd-units-20160602.tar.xz
+cd $SOURCE_DIR/blfs-systemd-units-20160602
 make install-nfsv4-server
 
 cd $SOURCE_DIR
@@ -92,7 +92,7 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 wget -nc http://aryalinux.org/releases/2016.08/blfs-systemd-units-20160602.tar.xz -O $SOURCE_DIR/blfs-systemd-units-20160602.tar.xz
 tar xf $SOURCE_DIR/blfs-systemd-units-20160602.tar.xz -C $SOURCE_DIR
-cd $SOURCE_DIR/blfs-systemd-units-20160602.tar.xz
+cd $SOURCE_DIR/blfs-systemd-units-20160602
 make install-nfs-server
 
 cd $SOURCE_DIR
@@ -119,7 +119,7 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 wget -nc http://aryalinux.org/releases/2016.08/blfs-systemd-units-20160602.tar.xz -O $SOURCE_DIR/blfs-systemd-units-20160602.tar.xz
 tar xf $SOURCE_DIR/blfs-systemd-units-20160602.tar.xz -C $SOURCE_DIR
-cd $SOURCE_DIR/blfs-systemd-units-20160602.tar.xz
+cd $SOURCE_DIR/blfs-systemd-units-20160602
 make install-nfs-client
 
 cd $SOURCE_DIR

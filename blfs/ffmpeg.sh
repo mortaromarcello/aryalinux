@@ -1,23 +1,56 @@
 #!/bin/bash
 
 set -e
-set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:ffmpeg_.orig:3.0.2
+#VER:ffmpeg:3.1.1
 
-URL=http://archive.ubuntu.com/ubuntu/pool/universe/f/ffmpeg/ffmpeg_3.0.2.orig.tar.xz
+#REC:libass
+#REC:fdk-aac
+#REC:freetype2
+#REC:lame
+#REC:libtheora
+#REC:libvorbis
+#REC:libvpx
+#REC:opus
+#REC:x264
+#REC:x265
+#REC:yasm
+#OPT:faac
+#OPT:fontconfig
+#OPT:frei0r
+#OPT:libcdio
+#OPT:libwebp
+#OPT:opencv
+#OPT:openjpeg
+#OPT:openssl
+#OPT:gnutls
+#OPT:pulseaudio
+#OPT:speex
+#OPT:texlive
+#OPT:tl-installer
+#OPT:v4l-utils
+#OPT:xvid
+#OPT:xorg-server
+
 
 cd $SOURCE_DIR
 
-wget -nc $URL
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
+URL=http://ffmpeg.org/releases/ffmpeg-3.1.1.tar.xz
 
-tar -xf $TARBALL
+wget -nc http://ffmpeg.org/releases/ffmpeg-3.1.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ffmpeg/ffmpeg-3.1.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ffmpeg/ffmpeg-3.1.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ffmpeg/ffmpeg-3.1.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ffmpeg/ffmpeg-3.1.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ffmpeg/ffmpeg-3.1.1.tar.xz
+
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+
+tar xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
+sed -i 's/-lflite"/-lflite -lasound"/' configure &&
 ./configure --prefix=/usr        \
             --enable-gpl         \
             --enable-version3    \
@@ -36,15 +69,26 @@ cd $DIRECTORY
             --enable-libx264     \
             --enable-libx265     \
             --enable-x11grab     \
-            --docdir=/usr/share/doc/ffmpeg-3.0.2  &&
-make "-j`nproc`" &&
+            --docdir=/usr/share/doc/ffmpeg-3.1.1 &&
+make &&
 gcc tools/qt-faststart.c -o tools/qt-faststart
-sudo make install
-sudo install -v -m755    tools/qt-faststart /usr/bin
-sudo install -v -m644    doc/*.txt \
-                    /usr/share/doc/ffmpeg-3.0.2
+
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+make install &&
+install -v -m755    tools/qt-faststart /usr/bin &&
+install -v -m644    doc/*.txt \
+                    /usr/share/doc/ffmpeg-3.1.1
+
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo ./rootscript.sh
+sudo rm rootscript.sh
+
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
 
+sudo rm -rf $DIRECTORY
 echo "ffmpeg=>`date`" | sudo tee -a $INSTALLED_LIST
+

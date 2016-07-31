@@ -25,7 +25,7 @@ cd $DIRECTORY
 
 whoami > /tmp/currentuser
 
-sed -i "/seems to be moved/s/^/#/" libtool &&
+#sed -i "/seems to be moved/s/^/#/" libtool &&
 ./configure --prefix=/usr --disable-static &&
 make "-j`nproc`"
 

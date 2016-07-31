@@ -61,7 +61,7 @@ cmake -DCMAKE_BUILD_TYPE=Release  \
       -DUSE_LIBHYPHEN=OFF         \
       -DENABLE_MINIBROWSER=ON     \
       -Wno-dev .. &&
-make "-j`nproc`"
+make
 
 
 

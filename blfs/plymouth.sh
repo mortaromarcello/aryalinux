@@ -29,7 +29,7 @@ cd $SOURCE_DIR
 
 sudo tar xf arya-plymouth-theme.tar.gz -C /usr/share/plymouth/themes
 sudo plymouth-set-default-theme arya
-sudo dracut -f /boot/initrd.img-`ls /boot/vmlinuz-4.6.2 | sed "s@/boot/vmlinuz-@@g"` `ls /lib/modules`
+sudo dracut -f `ls /boot/initrd*` `ls /lib/modules`
 
 cd $SOURCE_DIR
 

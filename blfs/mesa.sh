@@ -12,6 +12,7 @@ set -e
 #REQ:python2
 #REC:elfutils
 #REC:libva-wo-mesa
+#REQ:libvdpau
 #REC:llvm
 #OPT:libgcrypt
 #OPT:nettle
@@ -39,21 +40,34 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var
 
 patch -Np1 -i ../mesa-12.0.1-add_xdemos-1.patch
 
-
-GLL_DRV="nouveau,r300,r600,radeonsi,svga,swrast,swr" &&
+EGL_PLATFORMS="drm,x11"
+DRI_DRIVERS="i915,i965,nouveau,r200,radeon,swrast"
+GLL_DRV="nouveau,r300,r600,radeonsi,svga,swrast" &&
 sed -i "/pthread-stubs/d" configure.ac      &&
-sed -i "/seems to be moved/s/^/#/" ltmain.sh &&
-./autogen.sh CFLAGS='-O2' CXXFLAGS='-O2'    \
-            --prefix=$XORG_PREFIX           \
-            --sysconfdir=/etc               \
-            --enable-texture-float          \
-            --enable-gles1                  \
-            --enable-gles2                  \
-            --enable-osmesa                 \
-            --enable-xa                     \
-            --enable-gbm                    \
-            --enable-glx-tls                \
-            --with-egl-platforms="drm,x11"  \
+#sed -i "/seems to be moved/s/^/#/" ltmain.sh &&
+export VDPAU_CFLAGS="-I@includedir@"
+export VDPAU_LIBS="-L@libdir@ -lvdpau"
+./autogen.sh CFLAGS='-O2' CXXFLAGS='-O2'		\
+            --prefix=$XORG_PREFIX				\
+            --sysconfdir=/etc					\
+            --enable-texture-float				\
+            --enable-gles1						\
+            --enable-gles2						\
+            --enable-osmesa						\
+            --enable-xa               	    	\
+			--enable-gallium-llvm				\
+			--enable-llvm-shared-libs			\
+			--enable-egl						\
+			--enable-shared-glapi				\
+            --enable-gbm        	            \
+			--enable-nine						\
+			--enable-glx						\
+			--enable-dri						\
+			--enable-dri3						\
+            --enable-glx-tls					\
+			--enable-vdpau						\
+			--with-egl-platforms="$EGL_PLATFORMS" \
+			--with-dri-drivers="$DRI_DRIVERS"	\
             --with-gallium-drivers=$GLL_DRV &&
 unset GLL_DRV &&
 make "-j`nproc`"
