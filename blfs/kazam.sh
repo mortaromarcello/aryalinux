@@ -5,11 +5,13 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:python-distutils-extra:2.39
+#VER:kazam_.orig:1.0.6
 
 #REQ:python-modules#setuptools
+#REQ:python-distutils-extra
+#REQ:python-modules#pyxdg
 
-URL=https://launchpad.net/python-distutils-extra/trunk/2.39/+download/python-distutils-extra-2.39.tar.gz
+URL=http://archive.ubuntu.com/ubuntu/pool/universe/k/kazam/kazam_1.0.6.orig.tar.gz
 
 cd $SOURCE_DIR
 
@@ -23,10 +25,7 @@ cd $DIRECTORY
 python setup.py build &&
 sudo python setup.py install
 
-python3 setup.py build &&
-sudo python3 setup.py install
-
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+rm -rf $DIRECTORY
 
-echo "python-distutils-extra=>`date`" | sudo tee -a $INSTALLED_LIST
+echo "kazam=>`date`" | sudo tee -a $INSTALLED_LIST

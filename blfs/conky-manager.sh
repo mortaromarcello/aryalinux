@@ -11,6 +11,7 @@ set +h
 #REQ:json-glib
 #REQ:rsync
 #REQ:p7zip-full
+#REQ:libgee
 
 URL=https://launchpad.net/~teejee2008/+archive/ubuntu/ppa/+files/conky-manager_2.4~136~ubuntu16.04.1.tar.xz
 

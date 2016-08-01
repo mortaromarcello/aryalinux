@@ -17,7 +17,7 @@ tar -xf $TARBALL
 
 cd $DIRECTORY
 
-./waf configure --prefix=/usr &&
+CXXFLAGS="-Wno-narrowing" ./waf configure --prefix=/usr &&
 ./waf build
 sudo ./waf install
 

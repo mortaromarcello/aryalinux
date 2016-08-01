@@ -5,7 +5,7 @@ set +h
 . /etc/alps/alps.conf
 
 #REQ:jack2
-#REQ:qt4
+#REQ:qt5
 #REQ:ffmpeg
 
 cd $SOURCE_DIR
@@ -19,12 +19,12 @@ tar -xf $TARBALL
 
 cd $DIRECTORY
 
-export QT4PREFIX="/opt/qt4"
-export QT4BINDIR="$QT4PREFIX/bin"
-export QT4DIR="$QT4PREFIX"
-export QTDIR="$QT4PREFIX"
-export PATH="$PATH:$QT4BINDIR"
-export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt4/lib/pkgconfig"
+export QT5PREFIX="/opt/QT5"
+export QT5BINDIR="$QT5PREFIX/bin"
+export QT5DIR="$QT5PREFIX"
+export QTDIR="$QT5PREFIX"
+export PATH="$PATH:$QT5BINDIR"
+export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/QT5/lib/pkgconfig"
 ./configure --prefix=/usr --enable-qt       &&
 make
 sudo make install

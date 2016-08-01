@@ -40,12 +40,12 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 
 cd $SOURCE_DIR
 
-echo "These are the languages in which firefox is available:"
+echo "These are the languages in which thunderbird is available:"
 echo ""
 wget -O /tmp/langfile https://ftp.mozilla.org/pub/thunderbird/releases/latest/README.txt &> /dev/null
 cat /tmp/langfile | grep "lang=" | grep -v "wget" | grep -v "http" | grep -v "For" | tr -s ' ' | sed "s@ (@@g" | rev | cut -d= -f1 | rev | sed "s@lang=@@g" | tr "\n" " " | sed "s@en-GB@en-US en-GB@g"
 echo ""
-read -p "Enter the language for Firefox " LANG
+read -p "Enter the language for Thunderbird " LANG
 rm /tmp/langfile
 
 if [ $(uname -m) == "x86_64" ]
