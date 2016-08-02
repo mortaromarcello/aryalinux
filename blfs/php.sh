@@ -20,7 +20,7 @@ set -e
 #REC:libpng
 #REC:libtiff
 #REC:curl
-#REC:tidy
+#REC:tidy-html5
 #REC:db
 #REC:openldap
 #REC:postgresql
