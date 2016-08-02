@@ -5,8 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:Noto-hinted:null
 #VER:v2015-09-license-adobe:29
+#VER:Noto-hinted:null
 
 #REQ:unzip
 

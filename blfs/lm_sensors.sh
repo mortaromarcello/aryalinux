@@ -14,7 +14,7 @@ cd $SOURCE_DIR
 
 URL=http://pkgs.fedoraproject.org/repo/pkgs/lm_sensors/lm_sensors-3.4.0.tar.bz2/c03675ae9d43d60322110c679416901a/lm_sensors-3.4.0.tar.bz2
 
-wget -nc http://pkgs.fedoraproject.org/repo/pkgs/lm_sensors/lm_sensors-3.4.0.tar.bz2/c03675ae9d43d60322110c679416901a/lm_sensors-3.4.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lmsensors/lm_sensors-3.4.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lmsensors/lm_sensors-3.4.0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lmsensors/lm_sensors-3.4.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lmsensors/lm_sensors-3.4.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lmsensors/lm_sensors-3.4.0.tar.bz2
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lmsensors/lm_sensors-3.4.0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lmsensors/lm_sensors-3.4.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lmsensors/lm_sensors-3.4.0.tar.bz2 || wget -nc http://pkgs.fedoraproject.org/repo/pkgs/lm_sensors/lm_sensors-3.4.0.tar.bz2/c03675ae9d43d60322110c679416901a/lm_sensors-3.4.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lmsensors/lm_sensors-3.4.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lmsensors/lm_sensors-3.4.0.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

@@ -5,8 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:speex-1.rc:2
 #VER:speexdsp-1.2rc:3
+#VER:speex-1.rc:2
 
 #REQ:libogg
 #OPT:valgrind
@@ -16,8 +16,8 @@ cd $SOURCE_DIR
 
 URL=http://downloads.us.xiph.org/releases/speex/speex-1.2rc2.tar.gz
 
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz || wget -nc http://downloads.us.xiph.org/releases/speex/speexdsp-1.2rc3.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/speex/speex-1.2rc2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/speex/speex-1.2rc2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/speex/speex-1.2rc2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/speex/speex-1.2rc2.tar.gz || wget -nc http://downloads.us.xiph.org/releases/speex/speex-1.2rc2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/speex/speex-1.2rc2.tar.gz
+wget -nc http://downloads.us.xiph.org/releases/speex/speexdsp-1.2rc3.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/speex/speex-1.2rc2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/speex/speex-1.2rc2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/speex/speex-1.2rc2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/speex/speex-1.2rc2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/speex/speex-1.2rc2.tar.gz || wget -nc http://downloads.us.xiph.org/releases/speex/speex-1.2rc2.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
