@@ -47,8 +47,6 @@ cd $DIRECTORY
 
 whoami > /tmp/currentuser
 
-sed -i "s#isnan#std::&#g" Source/JavaScriptCore/runtime/Options.cpp
-
 sed -e 's/“/\"/' -e 's/”/\"/' \
     -i Source/WebCore/xml/XMLViewer.{css,js} &&
 mkdir -vp build &&
@@ -61,7 +59,7 @@ cmake -DCMAKE_BUILD_TYPE=Release  \
       -DUSE_LIBHYPHEN=OFF         \
       -DENABLE_MINIBROWSER=ON     \
       -Wno-dev .. &&
-make
+make "-j`nproc`"
 
 
 
