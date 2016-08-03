@@ -75,12 +75,6 @@ as_root()
 export -f as_root
 
 
-grep -A9 summary *make_check.log
-
-
-
-
-
 for package in $(grep -v '^#' ../lib-7.7.md5 | awk '{print $2}')
 do
   packagedir=${package%.tar.bz2}
