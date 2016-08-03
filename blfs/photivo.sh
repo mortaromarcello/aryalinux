@@ -9,8 +9,7 @@ set +h
 #REQ:graphicsmagick
 #REQ:liblqr
 #REQ:libraw
-#REQ:qt4
-#REQ:libjpeg62
+#REQ:qt5
 #REQ:exiv2
 #REQ:lensfun
 #REQ:libfftw3
