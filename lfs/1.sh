@@ -181,6 +181,7 @@ rm -rf /tmp/*
 clear
 echo "Once again chrooting to build the kernel and install bootloader"
 echo "Please execute 4.sh by entering the following command below:"
+echo "cd /sources"
 echo "./4.sh"
 
 chroot "$LFS" /usr/bin/env -i              \

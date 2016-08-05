@@ -59,7 +59,7 @@ fi
 
 rm -f root.sfs
 
-sudo mksquashfs $LFS root.sfs -comp xz -e $LFS/sources -e $LFS/var/cache/alps/sources/* -e $LFS/tools -e $LFS/etc/fstab
+sudo mksquashfs $LFS root.sfs -b 1048576 -comp xz -Xdict-size 100% -e $LFS/sources -e $LFS/var/cache/alps/sources/* -e $LFS/tools -e $LFS/etc/fstab
 
 if [ -f $LFS/etc/lightdm/lightdm.conf ]
 then
