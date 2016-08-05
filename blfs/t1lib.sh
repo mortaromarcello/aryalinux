@@ -11,7 +11,7 @@ cd $SOURCE_DIR
 
 URL=http://fossies.org/linux/misc/t1lib-5.1.2.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-wget -c $URL
+wget -nc $URL
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
 
 tar xf $TARBALL

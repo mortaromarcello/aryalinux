@@ -51,10 +51,8 @@ sed -i '/gegl/s/2/3/' configure.ac &&
 sed -i '70,75 d' app/core/gimpparamspecs-duplicate.c &&
 # autoreconf -fiv
 
-GEGL_CFLAGS="`pkg-config --cflags geg-l0.3`"
-GEGL_LIBS="`pkg-config --libs geg-l0.3`"
 sed -i "/seems to be moved/s/^/#/" ltmain.sh &&
-./configure --prefix=/usr \
+GEGL_LIBS=`pkg-config --libs gegl-0.3` GEGL_CFLAGS=`pkg-config --cflags gegl-0.3` ./configure --prefix=/usr \
             --sysconfdir=/etc \
             --without-gvfs &&
 make "-j`nproc`"

@@ -5,6 +5,8 @@ set +h
 
 #VER:libmypaint:1.3.0
 
+#REQ:json-c
+
 . /etc/alps/alps.conf
 
 URL=https://github.com/mypaint/libmypaint/releases/download/v1.3.0-beta.1/libmypaint-1.3.0-beta.1.tar.xz

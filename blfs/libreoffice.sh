@@ -99,6 +99,7 @@ sed -e "/gzip -f/d"   \
     -e "s|.1.gz|.1|g" \
     -i bin/distro-install-desktop-integration &&
 sed -e "/distro-install-file-lists/d" -i Makefile.in &&
+sed -i "s@osl_getThreadKeyData(m_threadKey)@(CURL *) osl_getThreadKeyData(m_threadKey)@g" ucb/source/ucp/ftp/ftploaderthread.cxx &&
 chmod -v +x bin/unpack-sources &&
 ./autogen.sh --prefix=$LO_PREFIX         \
              --sysconfdir=/etc           \
