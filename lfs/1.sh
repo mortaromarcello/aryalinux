@@ -15,9 +15,6 @@ echo -e "${NC}"
 echo -e "${RED}Please note that if you have hibernate your existing Linux system and you are specifying the swap partition while building AryaLinux, you would not be able to resume from hibernation in the existing Linux system. This would not be a problem however if you either don't have another Linux installed or if that has been shutdown and not hibernated or if you do not use a swap partition at all."
 echo -e "${NC}"
 
-if [ ! -f ./build-properties ]
-then
-
 echo "Build/Installation Information:"
 read -p "Enter device name e.g. /dev/sda : " DEV_NAME
 read -p "Enter the root partition e.g. /dev/sda10 : " ROOT_PART
@@ -27,15 +24,15 @@ read -p "Enter the home partition e.g. /dev/sda12 : " HOME_PART
 clear
 echo "Computer and User Information:"
 read -p "Enter the hostname(Computer name) : " HOST_NAME
-read -p "Enter your full name " FULLNAME
-read -p "Enter the username for $FULLNAME " USERNAME
+read -p "Enter your full name : " FULLNAME
+read -p "Enter the username for $FULLNAME : " USERNAME
 read -p "Enter the domain name(Domain to which this computer would be added) e.g. aryalinux.org : " DOMAIN_NAME
 
 clear
 echo "OS Name, Version and Codename:"
 read -p "Enter OS Name e.g. AryaLinux : " OS_NAME
-read -p "Enter OS Codename : " OS_CODENAME
-read -p "Enter OS Version e.g. 2016.04 : " OS_VERSION
+read -p "Enter OS Codename e.g. Saavan : " OS_CODENAME
+read -p "Enter OS Version e.g. 2016.08 : " OS_VERSION
 
 clear
 echo "General Information about building:"
@@ -65,8 +62,6 @@ FULLNAME="$FULLNAME"
 USERNAME="$USERNAME"
 KEYBOARD="$KEYBOARD"
 EOF
-
-fi
 
 . ./build-properties
 
@@ -201,4 +196,4 @@ rm -f /usr/lib/lib{com_err,e2p,ext2fs,ss}.a
 rm -f /usr/lib/libltdl.a
 rm -f /usr/lib/libz.a
 
-
+echo "Done building the base system. You may now continue building the rest of the system."
