@@ -116,9 +116,9 @@ cat > /etc/fstab << EOF
 # file system  mount-point  type     options             dump  fsck
 #                                                              order
 
-$ROOT_PART     /            ext4     defaults            1     1
-$SWAP_PART     swap         swap     pri=1               0     0
-$HOME_PART     /home        ext4     defaults            1     1
+UUID=$ROOT_PART_BY_UUID     /            ext4     defaults            1     1
+UUID=$SWAP_PART_BY_UUID     swap         swap     pri=1               0     0
+UUID=$HOME_PART_BY_UUID     /home        ext4     defaults            1     1
 
 # End /etc/fstab
 EOF

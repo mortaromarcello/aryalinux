@@ -9,6 +9,12 @@ BLUE='\033[0;34m'
 GREEN='\033[0;32m'
 ORANGE='\033[0;33m'
 
+function get_blk_id()
+{
+	BLKID=`blkid $1 | cut '-d"' -f2`
+	echo $BLKID
+}
+
 clear
 echo -e "Welcome to the ${ORANGE}Arya${GREEN}Linux${NC} Builder."
 echo -e "${NC}"
@@ -44,11 +50,25 @@ read -p "Enter the keyboard type e.g. us : " KEYBOARD
 clear
 TIMEZONE=`tzselect`
 
+ROOT_PART_BY_UUID=$(get_blk_id $ROOT_PART)
+if [ "x$HOME_PART" != "x" ]
+then
+	HOME_PART_BY_UUID=$(get_blk_id $HOME_PART)
+fi
+
+if [ "x$SWAP_PART" != "x" ]
+then
+	SWAP_PART_BY_UUID=$(get_blk_id $SWAP_PART)
+fi
+
 cat > build-properties << EOF
 DEV_NAME="$DEV_NAME"
 ROOT_PART="$ROOT_PART"
 SWAP_PART="$SWAP_PART"
 HOME_PART="$HOME_PART"
+ROOT_PART_BY_UUID="$ROOT_PART_BY_UUID"
+HOME_PART_BY_UUID="$HOME_PART_BY_UUID"
+SWAP_PART_BY_UUID="$SWAP_PART_BY_UUID"
 OS_NAME="$OS_NAME"
 OS_CODENAME="$OS_CODENAME"
 OS_VERSION="$OS_VERSION"
@@ -72,14 +92,14 @@ export LFS=/mnt/lfs
 mkdir -pv $LFS
 mount -v -t ext4 $ROOT_PART $LFS
 
-if [ "$HOME_PART" != "" ]
+if [ "x$HOME_PART" != "x" ]
 then
 	mkdir -v $LFS/home
 	mount -v -t ext4 $HOME_PART $LFS/home
 fi
 
 
-if [ "$SWAP_PART" != "" ]
+if [ "x$SWAP_PART" != "x" ]
 then
 	mkswap $SWAP_PART
 	/sbin/swapon -v $SWAP_PART

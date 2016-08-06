@@ -32,7 +32,7 @@ install -v -m 755 lsb_release /usr/bin/lsb_release
 cat > /etc/os-release << EOF
 NAME="$OS_NAME"
 VERSION="$OS_VERSION"
-ID=$OS_CODENAME
+ID="$OS_CODENAME"
 PRETTY_NAME="$OS_NAME $OS_VERSION ($OS_CODENAME)"
 EOF
 
@@ -47,8 +47,18 @@ EOF
 
 cat > /etc/default/grub <<EOF
 GRUB_DISTRIBUTOR="$OS_NAME $OS_VERSION $OS_CODENAME"
+EOF
+
+if [ "x$SWAP_PART" != "x" ]
+then
+cat >> /etc/default/grub <<EOF
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash resume=/dev/disk/by-uuid/$SWAP_PART_BY_UUID"
+EOF
+else
+cat >> /etc/default/grub <<EOF
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
-# GRUB_DISABLE_LINUX_UUID="true"
+EOF
+fi
 EOF
 
 cd $SOURCE_DIR

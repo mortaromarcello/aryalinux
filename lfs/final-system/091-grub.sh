@@ -61,38 +61,27 @@ fi
 
 sed -i "s@GNU GRUB  version %s@$OS_NAME $OS_VERSION $OS_CODENAME \- GNU GRUB@g" grub-core/normal/main.c
 
-if [ -d /sys/firmware/efi ]
+if [ `uname -m` == "x86_64" ]
 then
-./configure --prefix=/usr  \
+	EFI_FLAGS=" --with-platform=efi --target=x86_64 "
+fi
+
+./configure --prefix=/usr      \
 	--sbindir=/sbin        \
+	--localstatedir=/var   \
 	--sysconfdir=/etc      \
-	--disable-grub-emu-usb \
-	--disable-efiemu       \
 	--enable-grub-mkfont   \
-	--with-platform=efi    \
-	--target=x86_64        \
 	--program-prefix=""    \
 	--with-bootdir="/boot" \
 	--with-grubdir="grub"  \
-	--disable-werror 
-else
-./configure --prefix=/usr          \
-            --sbindir=/sbin        \
-            --sysconfdir=/etc      \
-            --disable-grub-emu-usb \
-            --disable-efiemu       \
-            --disable-werror
-fi
+	--disable-werror       \
+	$EFI_FLAGS
 make
 make install
 
-if [ -d /sys/firmware/efi ]
-then
-	mkdir -pv /usr/share/fonts/unifont
-	gunzip -c ../unifont-7.0.05.pcf.gz > /usr/share/fonts/unifont/unifont.pcf
-	grub-mkfont -o /usr/share/grub/unicode.pf2 \
-		 /usr/share/fonts/unifont/unifont.pcf
-fi
+mkdir -pv /usr/share/fonts/unifont
+gunzip -c ../unifont-7.0.05.pcf.gz > /usr/share/fonts/unifont/unifont.pcf
+grub-mkfont -o /usr/share/grub/unicode.pf2 /usr/share/fonts/unifont/unifont.pcf
 
 cd $SOURCE_DIR
 if [ "$TARBALL" != "" ]
