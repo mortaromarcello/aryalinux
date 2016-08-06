@@ -59,7 +59,6 @@ cat >> /etc/default/grub <<EOF
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
 EOF
 fi
-EOF
 
 cd $SOURCE_DIR
 rm -rf $DIRECTORY

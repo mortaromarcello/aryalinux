@@ -100,7 +100,7 @@ then
 	SWAP_PART_BY_UUID=$(get_blk_id $SWAP_PART)
 fi
 
-cat >> build-properties <<EOF
+cat >> build-properties << EOF
 ROOT_PART_BY_UUID="$ROOT_PART_BY_UUID"
 HOME_PART_BY_UUID="$HOME_PART_BY_UUID"
 SWAP_PART_BY_UUID="$SWAP_PART_BY_UUID"
