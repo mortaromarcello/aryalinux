@@ -220,4 +220,5 @@ rm -f /usr/lib/lib{com_err,e2p,ext2fs,ss}.a
 rm -f /usr/lib/libltdl.a
 rm -f /usr/lib/libz.a
 
-echo "Done building the base system. You may now continue building the rest of the system."
+echo "Base system built successfully. You may now reboot to log into the newly built system. In case you face any issue after rebooting you may boot into this Live Media again and follow the documentation at aryalinux.org or post questions at linuxquestions.org for help or you may continue building the rest of the system by following the documentation at aryalinux.org."
+echo "Bye!"
