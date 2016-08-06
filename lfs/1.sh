@@ -50,25 +50,11 @@ read -p "Enter the keyboard type e.g. us : " KEYBOARD
 clear
 TIMEZONE=`tzselect`
 
-ROOT_PART_BY_UUID=$(get_blk_id $ROOT_PART)
-if [ "x$HOME_PART" != "x" ]
-then
-	HOME_PART_BY_UUID=$(get_blk_id $HOME_PART)
-fi
-
-if [ "x$SWAP_PART" != "x" ]
-then
-	SWAP_PART_BY_UUID=$(get_blk_id $SWAP_PART)
-fi
-
 cat > build-properties << EOF
 DEV_NAME="$DEV_NAME"
 ROOT_PART="$ROOT_PART"
 SWAP_PART="$SWAP_PART"
 HOME_PART="$HOME_PART"
-ROOT_PART_BY_UUID="$ROOT_PART_BY_UUID"
-HOME_PART_BY_UUID="$HOME_PART_BY_UUID"
-SWAP_PART_BY_UUID="$SWAP_PART_BY_UUID"
 OS_NAME="$OS_NAME"
 OS_CODENAME="$OS_CODENAME"
 OS_VERSION="$OS_VERSION"
@@ -82,8 +68,6 @@ FULLNAME="$FULLNAME"
 USERNAME="$USERNAME"
 KEYBOARD="$KEYBOARD"
 EOF
-
-. ./build-properties
 
 mkfs -v -t ext4 $ROOT_PART
 
@@ -104,6 +88,25 @@ then
 	mkswap $SWAP_PART
 	/sbin/swapon -v $SWAP_PART
 fi
+
+ROOT_PART_BY_UUID=$(get_blk_id $ROOT_PART)
+if [ "x$HOME_PART" != "x" ]
+then
+	HOME_PART_BY_UUID=$(get_blk_id $HOME_PART)
+fi
+
+if [ "x$SWAP_PART" != "x" ]
+then
+	SWAP_PART_BY_UUID=$(get_blk_id $SWAP_PART)
+fi
+
+cat >> build-properties <<EOF
+ROOT_PART_BY_UUID="$ROOT_PART_BY_UUID"
+HOME_PART_BY_UUID="$HOME_PART_BY_UUID"
+SWAP_PART_BY_UUID="$SWAP_PART_BY_UUID"
+EOF
+
+. ./build-properties
 
 mkdir -v $LFS/sources
 chmod -v a+wt $LFS/sources
