@@ -5,21 +5,22 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:v2015-09-license-adobe:29
 #VER:Noto-hinted:null
+#VER:v2015-09-license-adobe:29
 
 #REQ:unzip
 
 
 cd $SOURCE_DIR
 
-URL=https://noto-website-2.storage.googleapis.com/pkgs/Noto-hinted.zip
+#URL=https://noto-website-2.storage.googleapis.com/pkgs/Noto-hinted.zip
+#wget -nc https://noto-website-2.storage.googleapis.com/pkgs/Noto-hinted.zip
 
-wget -nc https://noto-website-2.storage.googleapis.com/pkgs/Noto-hinted.zip
+wget -nc https://github.com/googlei18n/noto-fonts/archive/v2015-09-29-license-adobe.tar.gz
 
-sudo install -d -m755         /usr/share/fonts/truetype/noto &&
-sudo unzip Noto-hinted.zip -d /usr/share/fonts/truetype/noto &&
-sudo chmod 0644               /usr/share/fonts/truetype/noto/*
+install -d -m755                           /usr/share/fonts/truetype/noto &&
+tar xf v2015-09-29-license-adobe.tar.gz -C /usr/share/fonts/truetype/noto &&
+chmod 0644                                 /usr/share/fonts/truetype/noto/*
 
 
 cd $SOURCE_DIR

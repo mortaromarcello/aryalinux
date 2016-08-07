@@ -13,7 +13,7 @@ cd $SOURCE_DIR
 
 URL=http://ftp.debian.org/debian/pool/main/libp/libpaper/libpaper_1.1.24+nmu4.tar.gz
 
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libpaper/libpaper_1.1.24+nmu4.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libpaper/libpaper_1.1.24+nmu4.tar.gz || wget -nc ftp://ftp.debian.org/debian/pool/main/libp/libpaper/libpaper_1.1.24+nmu4.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libpaper/libpaper_1.1.24+nmu4.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libpaper/libpaper_1.1.24+nmu4.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libpaper/libpaper_1.1.24+nmu4.tar.gz || wget -nc http://ftp.debian.org/debian/pool/main/libp/libpaper/libpaper_1.1.24+nmu4.tar.gz
+wget -nc http://ftp.debian.org/debian/pool/main/libp/libpaper/libpaper_1.1.24+nmu4.tar.gz || wget -nc ftp://ftp.debian.org/debian/pool/main/libp/libpaper/libpaper_1.1.24+nmu4.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libpaper/libpaper_1.1.24+nmu4.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libpaper/libpaper_1.1.24+nmu4.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libpaper/libpaper_1.1.24+nmu4.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libpaper/libpaper_1.1.24+nmu4.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libpaper/libpaper_1.1.24+nmu4.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

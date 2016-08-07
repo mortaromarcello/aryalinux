@@ -16,7 +16,7 @@ cd $SOURCE_DIR
 
 URL=http://download.kde.org/stable/frameworks/5.23/kguiaddons-5.23.0.tar.xz
 
-wget -nc http://download.kde.org/stable/frameworks/5.23/kguiaddons-5.23.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/kguiaddons/kguiaddons-5.23.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/kguiaddons/kguiaddons-5.23.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/kguiaddons/kguiaddons-5.23.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/kguiaddons/kguiaddons-5.23.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/kguiaddons/kguiaddons-5.23.0.tar.xz
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/kguiaddons/kguiaddons-5.23.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/kguiaddons/kguiaddons-5.23.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/kguiaddons/kguiaddons-5.23.0.tar.xz || wget -nc http://download.kde.org/stable/frameworks/5.23/kguiaddons-5.23.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/kguiaddons/kguiaddons-5.23.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/kguiaddons/kguiaddons-5.23.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

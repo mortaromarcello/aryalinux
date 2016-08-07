@@ -14,7 +14,7 @@ cd $SOURCE_DIR
 
 URL=http://alsa.cybermirror.org/oss-lib/alsa-oss-1.0.28.tar.bz2
 
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/alsa-oss/alsa-oss-1.0.28.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/alsa-oss/alsa-oss-1.0.28.tar.bz2 || wget -nc http://alsa.cybermirror.org/oss-lib/alsa-oss-1.0.28.tar.bz2 || wget -nc ftp://ftp.alsa-project.org/pub/oss-lib/alsa-oss-1.0.28.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/alsa-oss/alsa-oss-1.0.28.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/alsa-oss/alsa-oss-1.0.28.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/alsa-oss/alsa-oss-1.0.28.tar.bz2
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/alsa-oss/alsa-oss-1.0.28.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/alsa-oss/alsa-oss-1.0.28.tar.bz2 || wget -nc ftp://ftp.alsa-project.org/pub/oss-lib/alsa-oss-1.0.28.tar.bz2 || wget -nc http://alsa.cybermirror.org/oss-lib/alsa-oss-1.0.28.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/alsa-oss/alsa-oss-1.0.28.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/alsa-oss/alsa-oss-1.0.28.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/alsa-oss/alsa-oss-1.0.28.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

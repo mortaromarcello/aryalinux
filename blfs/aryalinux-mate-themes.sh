@@ -29,7 +29,7 @@ sudo tar xf fonts.tar.gz -C /
 cd $SOURCE_DIR
 rm -rf aryalinux-fonts
 
-for f in `find /usr/share/icons/* -name start-here.svg`
+for f in `find /usr/share/icons/Vivacious-* -name start-here.svg`
 do
 	sudo cp -v start-here.svg $f
 done

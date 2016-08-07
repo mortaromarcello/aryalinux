@@ -33,7 +33,7 @@ set +h
 #REQ:xfburn
 #REQ:ristretto
 #REQ:xfce4-notifyd
-#REQ:xfce4-mixer
+#REQ:pnmixer
 #REQ:xfce4-whiskermenu-plugin
 #REQ:xfce4-screenshooter
 #REQ:p7zip-full
@@ -43,11 +43,13 @@ set +h
 #REQ:xdg-utils
 #REQ:xdg-user-dirs
 #REQ:galculator
+#REQ:epdfview
 
 #REQ:gcr
 #REQ:gvfs
 #REQ:polkit-gnome
 
+#REQ:plymouth
 #REQ:lightdm
 #REQ:lightdm-gtk-greeter
 

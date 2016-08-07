@@ -13,7 +13,7 @@ cd $SOURCE_DIR
 
 URL=http://ftp.x.org/pub/individual/util/util-macros-1.19.0.tar.bz2
 
-wget -nc http://ftp.x.org/pub/individual/util/util-macros-1.19.0.tar.bz2 || wget -nc ftp://ftp.x.org/pub/individual/util/util-macros-1.19.0.tar.bz2
+wget -nc ftp://ftp.x.org/pub/individual/util/util-macros-1.19.0.tar.bz2 || wget -nc http://ftp.x.org/pub/individual/util/util-macros-1.19.0.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

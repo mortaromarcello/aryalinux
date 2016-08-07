@@ -43,9 +43,9 @@ cd $SOURCE_DIR
 URL=https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/47.0.1/source/firefox-47.0.1.source.tar.xz
 
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/firefox-47.0.1-gcc6-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/firefox/firefox-47.0.1-gcc6-1.patch
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/firefox-47.0.1-system_graphite2_harfbuzz-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/firefox/firefox-47.0.1-system_graphite2_harfbuzz-1.patch
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/firefox/firefox-47.0.1.source.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/firefox/firefox-47.0.1.source.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/firefox/firefox-47.0.1.source.tar.xz || wget -nc https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/47.0.1/source/firefox-47.0.1.source.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/firefox/firefox-47.0.1.source.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/firefox/firefox-47.0.1.source.tar.xz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/firefox-47.0.1-gtk320-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/firefox/firefox-47.0.1-gtk320-1.patch
+wget -nc http://www.linuxfromscratch.org/patches/downloads/firefox/firefox-47.0.1-system_graphite2_harfbuzz-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/firefox-47.0.1-system_graphite2_harfbuzz-1.patch
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/firefox/firefox-47.0.1.source.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/firefox/firefox-47.0.1.source.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/firefox/firefox-47.0.1.source.tar.xz || wget -nc https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/47.0.1/source/firefox-47.0.1.source.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/firefox/firefox-47.0.1.source.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/firefox/firefox-47.0.1.source.tar.xz
+wget -nc http://www.linuxfromscratch.org/patches/downloads/firefox/firefox-47.0.1-gtk320-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/firefox-47.0.1-gtk320-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

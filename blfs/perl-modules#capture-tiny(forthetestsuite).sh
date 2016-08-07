@@ -6,9 +6,9 @@ set +h
 . /etc/alps/alps.conf
 
 
-URL="http://search.cpan.org/CPAN/authors/id/D/DA/DAGOLDEN/Capture-Tiny-0.42.tar.gz"
+URL="http://search.cpan.org/CPAN/authors/id/D/DA/DAGOLDEN/Capture-Tiny-0.44.tar.gz"
 
-#VER:Capture-Tiny:0.42
+#VER:Capture-Tiny:0.44
 
 cd $SOURCE_DIR
 wget -nc $URL
