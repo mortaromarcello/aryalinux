@@ -13,6 +13,8 @@ set +h
 #REQ:pulseaudio
 #REQ:vte
 #REQ:cmake
+#REQ:git
+#REQ:webkitgtk
 
 cd $SOURCE_DIR
 
