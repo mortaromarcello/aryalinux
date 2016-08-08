@@ -39,6 +39,7 @@ make "-j`nproc`"
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+KF5_PREFIX=/opt/kf5
 make install  &&
 mv -v $KF5_PREFIX/share/kde4/services/khelpcenter.desktop /usr/share/applications/ &&
 rm -rv $KF5_PREFIX/share/kde4

@@ -9,7 +9,7 @@ set -e
 #REQ:fontforge
 #REQ:gtk2
 #REQ:gtk3
-#REQ:krameworks5
+#REQ:kframeworks5
 #REQ:libpwquality
 #REQ:libxkbcommon
 #REQ:mesa
