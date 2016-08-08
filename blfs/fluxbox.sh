@@ -17,7 +17,7 @@ cd $SOURCE_DIR
 
 URL=http://downloads.sourceforge.net/fluxbox/fluxbox-1.3.7.tar.xz
 
-wget -nc http://downloads.sourceforge.net/fluxbox/fluxbox-1.3.7.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/fluxbox/fluxbox-1.3.7.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/fluxbox/fluxbox-1.3.7.tar.xz || wget -nc ftp://ftp.jaist.ac.jp/pub//sourceforge/f/fl/fluxbox/fluxbox/1.3.7/fluxbox-1.3.7.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/fluxbox/fluxbox-1.3.7.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/fluxbox/fluxbox-1.3.7.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/fluxbox/fluxbox-1.3.7.tar.xz
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/fluxbox/fluxbox-1.3.7.tar.xz || wget -nc ftp://ftp.jaist.ac.jp/pub//sourceforge/f/fl/fluxbox/fluxbox/1.3.7/fluxbox-1.3.7.tar.xz || wget -nc http://downloads.sourceforge.net/fluxbox/fluxbox-1.3.7.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/fluxbox/fluxbox-1.3.7.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/fluxbox/fluxbox-1.3.7.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/fluxbox/fluxbox-1.3.7.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/fluxbox/fluxbox-1.3.7.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

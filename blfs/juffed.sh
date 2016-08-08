@@ -16,7 +16,7 @@ cd $SOURCE_DIR
 
 URL=http://anduin.linuxfromscratch.org/BLFS/juffed/juffed-0.10.r71.gc3c1a3f.tar.xz
 
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/juffed/juffed-0.10.r71.gc3c1a3f.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/juffed/juffed-0.10.r71.gc3c1a3f.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/juffed/juffed-0.10.r71.gc3c1a3f.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/juffed/juffed-0.10.r71.gc3c1a3f.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/juffed/juffed-0.10.r71.gc3c1a3f.tar.xz || wget -nc http://anduin.linuxfromscratch.org/BLFS/juffed/juffed-0.10.r71.gc3c1a3f.tar.xz
+wget -nc http://anduin.linuxfromscratch.org/BLFS/juffed/juffed-0.10.r71.gc3c1a3f.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/juffed/juffed-0.10.r71.gc3c1a3f.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/juffed/juffed-0.10.r71.gc3c1a3f.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/juffed/juffed-0.10.r71.gc3c1a3f.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/juffed/juffed-0.10.r71.gc3c1a3f.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/juffed/juffed-0.10.r71.gc3c1a3f.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

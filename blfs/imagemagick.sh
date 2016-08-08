@@ -6,8 +6,8 @@ set -e
 . /var/lib/alps/functions
 
 #VER:urt-b:3.1
-#VER:ImageMagick-7.0.1:10
 #VER:ralcgm:3.51
+#VER:ImageMagick-7.0.1:10
 
 #REC:x7lib
 #OPT:cups
@@ -43,9 +43,9 @@ cd $SOURCE_DIR
 
 URL=https://www.imagemagick.org/download/releases/ImageMagick-7.0.1-10.tar.xz
 
-wget -nc http://www.mcmurchy.com/urt/urt-3.1b.tar.gz
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ImageMagick/ImageMagick-7.0.1-10.tar.xz || wget -nc https://www.imagemagick.org/download/releases/ImageMagick-7.0.1-10.tar.xz || wget -nc http://anduin.linuxfromscratch.org/BLFS/ImageMagick/ImageMagick-7.0.1-10.tar.xz || wget -nc ftp://ftp.imagemagick.org/pub/ImageMagick/releases/ImageMagick-7.0.1-10.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ImageMagick/ImageMagick-7.0.1-10.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ImageMagick/ImageMagick-7.0.1-10.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ImageMagick/ImageMagick-7.0.1-10.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ImageMagick/ImageMagick-7.0.1-10.tar.xz
 wget -nc http://www.mcmurchy.com/ralcgm/ralcgm-3.51.tar.gz
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ImageMagick/ImageMagick-7.0.1-10.tar.xz || wget -nc ftp://ftp.imagemagick.org/pub/ImageMagick/releases/ImageMagick-7.0.1-10.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ImageMagick/ImageMagick-7.0.1-10.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ImageMagick/ImageMagick-7.0.1-10.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ImageMagick/ImageMagick-7.0.1-10.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ImageMagick/ImageMagick-7.0.1-10.tar.xz || wget -nc http://anduin.linuxfromscratch.org/BLFS/ImageMagick/ImageMagick-7.0.1-10.tar.xz || wget -nc https://www.imagemagick.org/download/releases/ImageMagick-7.0.1-10.tar.xz
+wget -nc http://www.mcmurchy.com/urt/urt-3.1b.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

@@ -5,8 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:docbook-dsssl-doc:1.79
 #VER:docbook-dsssl:1.79
+#VER:docbook-dsssl-doc:1.79
 
 #REQ:sgml-common
 #REQ:sgml-dtd-3
@@ -19,8 +19,8 @@ cd $SOURCE_DIR
 
 URL=http://downloads.sourceforge.net/docbook/docbook-dsssl-1.79.tar.bz2
 
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-doc-1.79.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-doc-1.79.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-doc-1.79.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/docbook-dsssl/docbook-dsssl-doc-1.79.tar.bz2 || wget -nc http://downloads.sourceforge.net/docbook/docbook-dsssl-doc-1.79.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-doc-1.79.tar.bz2
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-1.79.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-1.79.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/docbook-dsssl/docbook-dsssl-1.79.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-1.79.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-1.79.tar.bz2 || wget -nc http://downloads.sourceforge.net/docbook/docbook-dsssl-1.79.tar.bz2 || wget -nc ftp://mirror.ovh.net/gentoo-distfiles/distfiles/docbook-dsssl-1.79.tar.bz2
+wget -nc http://downloads.sourceforge.net/docbook/docbook-dsssl-doc-1.79.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/docbook/docbook-dsssl-doc-1.79.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/docbook/docbook-dsssl-doc-1.79.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/docbook/docbook-dsssl-doc-1.79.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook/docbook-dsssl-doc-1.79.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook/docbook-dsssl-doc-1.79.tar.bz2
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook/docbook-dsssl-1.79.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/docbook/docbook-dsssl-1.79.tar.bz2 || wget -nc http://downloads.sourceforge.net/docbook/docbook-dsssl-1.79.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/docbook/docbook-dsssl-1.79.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/docbook/docbook-dsssl-1.79.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook/docbook-dsssl-1.79.tar.bz2 || wget -nc ftp://mirror.ovh.net/gentoo-distfiles/distfiles/docbook-dsssl-1.79.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

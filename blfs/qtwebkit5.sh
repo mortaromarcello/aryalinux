@@ -54,6 +54,7 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+QT5DIR=/opt/qt5
 find $QT5DIR/lib/pkgconfig -name "*.pc" -exec perl -pi -e "s, -L$PWD/?\S+,,g" {} \;
 
 ENDOFROOTSCRIPT
@@ -64,6 +65,7 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+QT5DIR=/opt/qt5
 find $QT5DIR/ -name qt_lib_bootstrap_private.pri \
    -exec sed -i -e "s:$PWD/qtbase:/$QT5DIR/lib/:g" {} \; &&
 find $QT5DIR/ -name \*.prl \
