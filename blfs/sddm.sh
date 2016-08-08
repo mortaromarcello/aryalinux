@@ -83,17 +83,6 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-sed -e '/ServerPath/ s|usr|opt/xorg|' \
-    -i.orig /etc/sddm.conf
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 sed -e 's/-nolisten tcp//'\
     -i /etc/sddm.conf
 
@@ -175,41 +164,7 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-/etc/rc.d/init.d/sddm start
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-init 5
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-cp -v /etc/inittab{,-orig} &&
-sed -i '/initdefault/ s/3/5/' /etc/inittab
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-sddm-greeter --test-mode --theme <em class="replaceable"><code><theme path></em>
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-echo 'setxkbmap <em class="replaceable"><code>"<your keyboard comma separated list>"</em>' >> \
+echo 'setxkbmap "us,fr,gb,de,br"' >> \
      /usr/share/sddm/scripts/Xsetup
 
 ENDOFROOTSCRIPT
