@@ -7,8 +7,8 @@ set -e
 
 #VER:libkdcraw:16.04.2
 
-#REQ:krameworks5
 #REQ:libraw
+#REQ:kframeworks5
 
 
 cd $SOURCE_DIR

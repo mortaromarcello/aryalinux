@@ -7,8 +7,8 @@ set -e
 
 #VER:ark:16.04.2
 
-#REQ:krameworks5
 #REQ:libarchive
+#REQ:kframeworks5
 
 
 cd $SOURCE_DIR

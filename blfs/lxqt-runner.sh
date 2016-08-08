@@ -11,7 +11,7 @@ set -e
 #REQ:lxqt-globalkeys
 #REQ:menu-cache
 #REQ:lxqt-kwindowsystem
-#REQ:krameworks5
+#REQ:kframeworks5
 
 
 cd $SOURCE_DIR

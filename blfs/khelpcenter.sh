@@ -8,9 +8,9 @@ set -e
 #VER:khelpcenter:16.04.2
 
 #REQ:grantlee
-#REQ:krameworks5
 #REQ:libxml2
 #REQ:xapian
+#REQ:kframeworks5
 
 
 cd $SOURCE_DIR

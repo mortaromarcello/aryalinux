@@ -7,8 +7,8 @@ set -e
 
 #VER:libkexiv2:16.04.2
 
-#REQ:krameworks5
 #REQ:exiv2
+#REQ:kframeworks5
 
 
 cd $SOURCE_DIR

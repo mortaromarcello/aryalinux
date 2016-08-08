@@ -9,7 +9,6 @@ set -e
 
 #REQ:gst10-plugins-base
 #REQ:libxfce4ui
-#REQ:xdg-utils
 #REC:libnotify
 #REC:taglib
 

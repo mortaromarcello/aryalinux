@@ -7,9 +7,9 @@ set -e
 
 #VER:kdenlive:16.04.2
 
-#REQ:krameworks5
 #REQ:mlt
 #REQ:v4l-utils
+#REQ:kframeworks5
 
 
 cd $SOURCE_DIR

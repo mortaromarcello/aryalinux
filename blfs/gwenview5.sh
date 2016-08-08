@@ -8,8 +8,8 @@ set -e
 #VER:gwenview:16.04.2
 
 #REQ:exiv2
-#REQ:krameworks5
 #REQ:lcms2
+#REQ:kframeworks5
 #REC:libkdcraw
 
 

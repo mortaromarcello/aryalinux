@@ -9,7 +9,6 @@ set -e
 
 #REQ:gtk2
 #REQ:xfconf
-#REQ:gtk3
 #REC:gtk3
 #REC:startup-notification
 #OPT:gtk-doc

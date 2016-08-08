@@ -9,7 +9,7 @@ set -e
 
 #REQ:libqtxdg
 #REQ:lxqt-kwindowsystem
-#REQ:krameworks5
+#REQ:kframeworks5
 
 
 cd $SOURCE_DIR

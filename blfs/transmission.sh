@@ -11,6 +11,7 @@ set -e
 #REQ:libevent
 #REQ:openssl
 #REC:gtk3
+#REC:qt5
 #OPT:doxygen
 #OPT:gdb
 

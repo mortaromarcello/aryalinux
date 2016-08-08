@@ -7,7 +7,7 @@ set -e
 
 #VER:konsole:16.04.2
 
-#REQ:krameworks5
+#REQ:kframeworks5
 
 
 cd $SOURCE_DIR

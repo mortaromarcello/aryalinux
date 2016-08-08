@@ -7,7 +7,7 @@ set -e
 
 #VER:okular-15.12.1+df0c:412
 
-#REQ:krameworks5
+#REQ:kframeworks5
 #REC:libkexiv2
 #REC:libtiff
 #REC:poppler

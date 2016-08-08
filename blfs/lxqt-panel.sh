@@ -7,7 +7,6 @@ set -e
 
 #VER:lxqt-panel:0.10.0
 
-#REQ:krameworks5
 #REQ:lxqt-kguiaddons
 #REQ:lxqt-solid
 #REQ:lxqt-globalkeys
@@ -16,6 +15,7 @@ set -e
 #REQ:libxkbcommon
 #REQ:lxmenu-data
 #REQ:menu-cache
+#REQ:kframeworks5
 #REC:alsa-lib
 #REC:pulseaudio
 #REC:libstatgrab
