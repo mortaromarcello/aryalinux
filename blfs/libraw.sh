@@ -8,6 +8,7 @@ set -e
 #VER:LibRaw:0.17.2
 
 #REC:libjpeg
+#REQ:libjpeg8
 #REC:jasper
 #REC:lcms2
 
