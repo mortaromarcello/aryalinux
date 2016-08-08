@@ -20,8 +20,8 @@ cd $SOURCE_DIR
 
 URL=ftp://sources.redhat.com/pub/docbook-tools/new-trials/SOURCES/docbook-utils-0.6.14.tar.gz
 
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/docbook-utils-0.6.14-grep_fix-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/docbook-utils/docbook-utils-0.6.14-grep_fix-1.patch
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook/docbook-utils-0.6.14.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/docbook/docbook-utils-0.6.14.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/docbook/docbook-utils-0.6.14.tar.gz || wget -nc ftp://sources.redhat.com/pub/docbook-tools/new-trials/SOURCES/docbook-utils-0.6.14.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook/docbook-utils-0.6.14.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/docbook/docbook-utils-0.6.14.tar.gz
+wget -nc http://www.linuxfromscratch.org/patches/downloads/docbook-utils/docbook-utils-0.6.14-grep_fix-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/docbook-utils-0.6.14-grep_fix-1.patch
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook-utils/docbook-utils-0.6.14.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/docbook-utils/docbook-utils-0.6.14.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook-utils/docbook-utils-0.6.14.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/docbook-utils/docbook-utils-0.6.14.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/docbook-utils/docbook-utils-0.6.14.tar.gz || wget -nc ftp://sources.redhat.com/pub/docbook-tools/new-trials/SOURCES/docbook-utils-0.6.14.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

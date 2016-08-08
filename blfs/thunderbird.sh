@@ -41,10 +41,11 @@ wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/thunderbird/thunder
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+sudo tar xf $TARBALL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
+sudo chown -R `cat /tmp/currentuser`:`cat /tmp/currentuser` ../$DIRECTORY
 
 cat > mozconfig << "EOF"
 # If you have a multicore machine, the build may be faster if using parallel

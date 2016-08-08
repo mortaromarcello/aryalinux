@@ -20,7 +20,7 @@ cd $SOURCE_DIR
 
 URL=http://www.freedesktop.org/software/colord/releases/colord-gtk-0.1.26.tar.xz
 
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/colord-gtk/colord-gtk-0.1.26.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/colord-gtk/colord-gtk-0.1.26.tar.xz || wget -nc http://www.freedesktop.org/software/colord/releases/colord-gtk-0.1.26.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/colord-gtk/colord-gtk-0.1.26.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/colord-gtk/colord-gtk-0.1.26.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/colord-gtk/colord-gtk-0.1.26.tar.xz
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/colord-gtk/colord-gtk-0.1.26.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/colord-gtk/colord-gtk-0.1.26.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/colord-gtk/colord-gtk-0.1.26.tar.xz || wget -nc http://www.freedesktop.org/software/colord/releases/colord-gtk-0.1.26.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/colord-gtk/colord-gtk-0.1.26.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/colord-gtk/colord-gtk-0.1.26.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
