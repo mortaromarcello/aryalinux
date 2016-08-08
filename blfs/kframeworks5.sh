@@ -43,7 +43,7 @@ cd $SOURCE_DIR
 whoami > /tmp/currentuser
 
 url=http://download.kde.org/stable/frameworks/5.23/
-wget -r -nH --cut-dirs=3 -A '*.xz' -np $url
+wget -nc -r -nH --cut-dirs=3 -A '*.xz' -np $url
 
 
 cat > frameworks-5.23.0.md5 << "EOF"
@@ -216,7 +216,6 @@ while read -r line; do
   as_root rm -rf $packagedir
   as_root /sbin/ldconfig
 done < frameworks-5.23.0.md5
-exit
 
 
 sudo mv -v /opt/kf5 /opt/kf5-5.23.0
@@ -225,5 +224,5 @@ sudo ln -sfvn kf5-5.23.0 /opt/kf5
 
 cd $SOURCE_DIR
 
-echo "krameworks5=>`date`" | sudo tee -a $INSTALLED_LIST
+echo "kframeworks5=>`date`" | sudo tee -a $INSTALLED_LIST
 
