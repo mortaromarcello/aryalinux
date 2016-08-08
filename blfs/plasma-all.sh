@@ -20,6 +20,7 @@ set -e
 #REQ:qca
 #REQ:taglib
 #REQ:xcb-util-cursor
+#REQ:plymouth
 #REC:libdbusmenu-qt
 #REC:libcanberra
 #REC:x7driver
@@ -34,9 +35,10 @@ set -e
 cd $SOURCE_DIR
 
 whoami > /tmp/currentuser
+export KF5_PREFIX=/opt/kf5
 
 url=http://download.kde.org/stable/plasma/5.6.5/
-wget -r -nH --cut-dirs=3 -A '*.xz' -np $url
+wget -nc -r -nH --cut-dirs=3 -A '*.xz' -np $url
 
 
 cat > plasma-5.6.5.md5 << "EOF"
@@ -78,8 +80,8 @@ b0cf3a7e6147d1fc33ca40895a9998fa kdeplasma-addons-5.6.5.tar.xz
 3ff070fd1c450fbbfc9a7628fed15601 sddm-kcm-5.6.5.tar.xz
 3b6b859443a79ac47a04542e55f4dc52 user-manager-5.6.5.tar.xz
 ce253c1c0b1f2d70db2bf9a9b0ba9381 discover-5.6.5.tar.xz
-#8b23b0b1af6b70e335640d779ca9fc9e breeze-grub-5.6.5.tar.xz
-#97beb61c443e298196c6ec86cd7533f3 breeze-plymouth-5.6.5.tar.xz
+8b23b0b1af6b70e335640d779ca9fc9e breeze-grub-5.6.5.tar.xz
+97beb61c443e298196c6ec86cd7533f3 breeze-plymouth-5.6.5.tar.xz
 1601ae991cecb49a2fa0eda05ac056a2 kactivitymanagerd-5.6.5.tar.xz
 bf34fb0e93402001f327bf99c195cebe plasma-integration-5.6.5.tar.xz
 EOF
@@ -93,9 +95,6 @@ as_root()
   fi
 }
 export -f as_root
-
-
-bash -e
 
 
 while read -r line; do
@@ -125,20 +124,11 @@ while read -r line; do
     as_root rm -rf $packagedir
     as_root /sbin/ldconfig
 done < plasma-5.6.5.md5
-exit
+
 cd $KF5_PREFIX/share/plasma/plasmoids
 for j in $(find -name \*.js); do
   as_root ln -sfv ../code/$(basename $j) $(dirname $j)/../ui/
 done
-
-
-cat > ~/.xinitrc << "EOF"
-ck-launch-session dbus-launch --exit-with-session $KF5_PREFIX/bin/startkde
-EOF
-startx
-
-
-startx &> ~/x-session-errors
 
 
 cd $SOURCE_DIR
