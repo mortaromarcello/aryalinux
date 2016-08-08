@@ -15,7 +15,7 @@ cd $SOURCE_DIR
 
 git clone https://github.com/noodlylight/fusilli.git
 cd fusilli
-./autogen.sh --prefix=/usr &&
+./autogen.sh --prefix=/usr --disable-marco &&
 make -j4
 sudo make install
 

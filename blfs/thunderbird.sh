@@ -45,7 +45,6 @@ sudo tar xf $TARBALL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
-sudo chown -R `cat /tmp/currentuser`:`cat /tmp/currentuser` ../$DIRECTORY
 
 cat > mozconfig << "EOF"
 # If you have a multicore machine, the build may be faster if using parallel
