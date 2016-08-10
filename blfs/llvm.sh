@@ -5,9 +5,9 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:llvm-.src:3.8.1
-#VER:cfe-.src:3.8.1
 #VER:compiler-rt-.src:3.8.1
+#VER:cfe-.src:3.8.1
+#VER:llvm-.src:3.8.1
 
 #REC:cmake
 #REC:libffi
@@ -25,9 +25,9 @@ cd $SOURCE_DIR
 
 URL=http://llvm.org/releases/3.8.1/llvm-3.8.1.src.tar.xz
 
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/llvm/cfe-3.8.1.src.tar.xz || wget -nc http://llvm.org/releases/3.8.1/cfe-3.8.1.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/llvm/cfe-3.8.1.src.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/cfe-3.8.1.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/llvm/cfe-3.8.1.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/cfe-3.8.1.src.tar.xz
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/llvm-3.8.1.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/llvm/llvm-3.8.1.src.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/llvm/llvm-3.8.1.src.tar.xz || wget -nc http://llvm.org/releases/3.8.1/llvm-3.8.1.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/llvm/llvm-3.8.1.src.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/llvm-3.8.1.src.tar.xz
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/compiler-rt/compiler-rt-3.8.1.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/compiler-rt/compiler-rt-3.8.1.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/compiler-rt/compiler-rt-3.8.1.src.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/compiler-rt/compiler-rt-3.8.1.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/compiler-rt/compiler-rt-3.8.1.src.tar.xz || wget -nc http://llvm.org/releases/3.8.1/compiler-rt-3.8.1.src.tar.xz
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/llvm/cfe-3.8.1.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/cfe-3.8.1.src.tar.xz || wget -nc http://llvm.org/releases/3.8.1/cfe-3.8.1.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/llvm/cfe-3.8.1.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/llvm/cfe-3.8.1.src.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/cfe-3.8.1.src.tar.xz
+wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/compiler-rt/compiler-rt-3.8.1.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/compiler-rt/compiler-rt-3.8.1.src.tar.xz || wget -nc http://llvm.org/releases/3.8.1/compiler-rt-3.8.1.src.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/compiler-rt/compiler-rt-3.8.1.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/compiler-rt/compiler-rt-3.8.1.src.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/compiler-rt/compiler-rt-3.8.1.src.tar.xz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/llvm-3.8.1.src.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/llvm-3.8.1.src.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/llvm/llvm-3.8.1.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/llvm/llvm-3.8.1.src.tar.xz || wget -nc http://llvm.org/releases/3.8.1/llvm-3.8.1.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/llvm/llvm-3.8.1.src.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

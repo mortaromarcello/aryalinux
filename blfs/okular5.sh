@@ -7,7 +7,7 @@ set -e
 
 #VER:okular-15.12.1+df0c:412
 
-#REQ:krameworks5
+#REQ:kframeworks5
 #REC:libkexiv2
 #REC:libtiff
 #REC:poppler
@@ -18,7 +18,7 @@ cd $SOURCE_DIR
 
 URL=http://anduin.linuxfromscratch.org/BLFS/okular/okular-15.12.1+df0c412.tar.xz
 
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/okular/okular-15.12.1+df0c412.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/okular/okular-15.12.1+df0c412.tar.xz || wget -nc http://anduin.linuxfromscratch.org/BLFS/okular/okular-15.12.1+df0c412.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/okular/okular-15.12.1+df0c412.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/okular/okular-15.12.1+df0c412.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/okular/okular-15.12.1+df0c412.tar.xz
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/okular/okular-15.12.1+df0c412.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/okular/okular-15.12.1+df0c412.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/okular/okular-15.12.1+df0c412.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/okular/okular-15.12.1+df0c412.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/okular/okular-15.12.1+df0c412.tar.xz || wget -nc http://anduin.linuxfromscratch.org/BLFS/okular/okular-15.12.1+df0c412.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

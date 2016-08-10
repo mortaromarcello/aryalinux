@@ -15,7 +15,7 @@ cd $SOURCE_DIR
 
 URL=https://github.com/qterminal/qtermwidget/releases/download/0.6.0/qtermwidget-0.6.0.tar.xz
 
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qtermwidget/qtermwidget-0.6.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qtermwidget/qtermwidget-0.6.0.tar.xz || wget -nc https://github.com/qterminal/qtermwidget/releases/download/0.6.0/qtermwidget-0.6.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qtermwidget/qtermwidget-0.6.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qtermwidget/qtermwidget-0.6.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qtermwidget/qtermwidget-0.6.0.tar.xz
+wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qtermwidget/qtermwidget-0.6.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qtermwidget/qtermwidget-0.6.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qtermwidget/qtermwidget-0.6.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qtermwidget/qtermwidget-0.6.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qtermwidget/qtermwidget-0.6.0.tar.xz || wget -nc https://github.com/qterminal/qtermwidget/releases/download/0.6.0/qtermwidget-0.6.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
