@@ -18,8 +18,25 @@ function get_blk_id()
 clear
 echo -e "Welcome to the ${ORANGE}Arya${GREEN}Linux${NC} Builder."
 echo -e "${NC}"
-echo -e "${RED}Please note that if you have hibernate your existing Linux system and you are specifying the swap partition while building AryaLinux, you would not be able to resume from hibernation in the existing Linux system. This would not be a problem however if you either don't have another Linux installed or if that has been shutdown and not hibernated or if you do not use a swap partition at all."
+echo -e "${GREEN}AryaLinux Base System Build Scripts"
+echo -e "Copyright (C) 2015-16  Chandrakant Singh"
+
+echo -e "This program is free software: you can redistribute it and/or modify"
+echo -e "it under the terms of the GNU General Public License as published by"
+echo -e "the Free Software Foundation, either version 3 of the License, or"
+echo -e "(at your option) any later version."
+echo ""
+echo -e "This program is distributed in the hope that it will be useful,"
+echo -e "but WITHOUT ANY WARRANTY; without even the implied warranty of"
+echo -e "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the"
+echo -e "GNU General Public License for more details."
+
+echo -e "You should have received a copy of the GNU General Public License"
+echo -e "along with this program.  If not, see <http://www.gnu.org/licenses/>."
 echo -e "${NC}"
+
+echo "Press enter to continue..."
+read RESPONSE
 
 echo "Fetching updates on the build scripts..."
 {
