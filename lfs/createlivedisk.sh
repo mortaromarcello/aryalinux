@@ -57,9 +57,9 @@ EOF
 	popd
 fi
 
-rm -f root.sfs
+rm -f $LFS/sources/root.sfs
 
-sudo mksquashfs $LFS root.sfs -b 1048576 -comp xz -Xdict-size 100% -e $LFS/sources -e $LFS/var/cache/alps/sources/* -e $LFS/tools -e $LFS/etc/fstab
+sudo mksquashfs $LFS $LFS/sources/root.sfs -b 1048576 -comp xz -Xdict-size 100% -e $LFS/sources -e $LFS/var/cache/alps/sources/* -e $LFS/tools -e $LFS/etc/fstab
 
 if [ -f $LFS/etc/lightdm/lightdm.conf ]
 then
@@ -92,7 +92,7 @@ cp -v syslinux-4.06/core/isolinux.bin live/boot/isolinux
 cp -v syslinux-4.06/com32/menu/menu.c32 live/boot/isolinux
 mv -v isolinux.cfg                 live/boot/isolinux
 
-cp -v root.sfs live/boot/$(uname -m)
+cp -v $LFS/sources/root.sfs live/boot/$(uname -m)
 cp -v $LFS/boot/vmlinuz-$KERNEL_VERSION   live/boot/$(uname -m)/vmlinuz
 cp -v $LFS/boot/id_label live/boot/$(uname -m)
 cp -v $LFS/boot/initram.fs live/boot/$(uname -m)/initram.fs
@@ -100,7 +100,7 @@ cp -v $LFS/boot/initram.fs live/boot/$(uname -m)/initram.fs
 cp -v $LFS/sources/efiboot.img live/boot/aryaiso/
 
 genisoimage \
-  -o "$OUTFILE" \
+  -o "$LFS/sources/$OUTFILE" \
   -c boot.cat \
   -b boot/isolinux/isolinux.bin \
   -no-emul-boot \
@@ -117,7 +117,7 @@ rm $LFS/boot/id_label
 echo "Making ISO Hybrid..."
 
 cd ~
-./syslinux-4.06/utils/isohybrid "$OUTFILE"
+./syslinux-4.06/utils/isohybrid "$LFS/sources/$OUTFILE"
 ./scripts/umountal.sh
 
 echo "Done..."
