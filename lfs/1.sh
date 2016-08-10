@@ -23,10 +23,10 @@ echo -e "${NC}"
 
 echo "Fetching updates on the build scripts..."
 {
- rm -f /tmp/2016.04.zip
+ rm -rf /tmp/2016.08.zip
  wget https://github.com/FluidIdeas/aryalinux/archive/2016.08.zip -O /tmp/2016.08.zip &> /dev/null
  pushd /tmp &> /dev/null
- unzip 2016.04.zip
+ unzip 2016.08.zip
  cp -rf aryalinux-2016.08/lfs/* /root/scripts/
  popd &> /dev/null
  echo "Updated the build scripts successfully."
