@@ -22,30 +22,30 @@ echo -e "${RED}Please note that if you have hibernate your existing Linux system
 echo -e "${NC}"
 
 echo "Build/Installation Information:"
-read -p "Enter device name e.g. /dev/sda : " DEV_NAME
-read -p "Enter the root partition e.g. /dev/sda10 : " ROOT_PART
-read -p "Enter the swap partition e.g. /dev/sda11 : " SWAP_PART
-read -p "Enter the home partition e.g. /dev/sda12 : " HOME_PART
+read -p "Enter device name e.g. /dev/sda. Please note its /dev/sda and not /dev/sda1 or /dev/sda2 etc.. : " DEV_NAME
+read -p "Enter the root partition e.g. /dev/sda1 or /dev/sda2 etc. I would make a filesystem on it. So all data in this partition would get lost. Backup if necessary. : " ROOT_PART
+read -p "Enter the swap partition e.g. /dev/sda1 or /dev/sda2 etc. This partition should ideally be of size twice the size of RAM you have. 
+For instance for 2GB RAM swap partition should be of size 4GB. I would format this partition so data in this partition would get lost. Backup if necessary. : " SWAP_PART
+read -p "Enter the home partition e.g. /dev/sda1 or /dev/sda2 etc. This is where your data would be stored. I would format this partition so data in this partition would get lost. Backup if necessary : " HOME_PART
 
 clear
 echo "Computer and User Information:"
 read -p "Enter the hostname(Computer name) : " HOST_NAME
-read -p "Enter your full name : " FULLNAME
-read -p "Enter the username for $FULLNAME : " USERNAME
+read -p "Enter your full name (Spaces allowed) : " FULLNAME
+read -p "Enter the username for $FULLNAME (No special characters please) : " USERNAME
 read -p "Enter the domain name(Domain to which this computer would be added) e.g. aryalinux.org : " DOMAIN_NAME
 
 clear
 echo "OS Name, Version and Codename:"
 read -p "Enter OS Name e.g. AryaLinux : " OS_NAME
 read -p "Enter OS Codename e.g. Saavan : " OS_CODENAME
-read -p "Enter OS Version e.g. 2016.08 : " OS_VERSION
 
 clear
 echo "General Information about building:"
 read -p "Enter locale e.g. en_IN.utf8 : " LOCALE
 read -p "Enter paper size (A4/letter) : " PAPER_SIZE
-read -p "Do you want to build using multiple processors? (y/n) " MULTICORE
-read -p "Enter the keyboard type e.g. us : " KEYBOARD
+read -p "Do you want to build using multiple processors? (y/n). If you enter y here the build would complete soon but you system would have to stress a lot. If you say n here, build would take longer but system would not stress as much. Does not matter if you have a single core processor though. " MULTICORE
+read -p "Enter the keyboard type e.g. us or fr etc. : " KEYBOARD
 
 clear
 TIMEZONE=`tzselect`
@@ -57,7 +57,7 @@ SWAP_PART="$SWAP_PART"
 HOME_PART="$HOME_PART"
 OS_NAME="$OS_NAME"
 OS_CODENAME="$OS_CODENAME"
-OS_VERSION="$OS_VERSION"
+OS_VERSION="2016.08"
 LOCALE="$LOCALE"
 PAPER_SIZE="$PAPER_SIZE"
 HOST_NAME="$HOST_NAME"
@@ -68,6 +68,10 @@ FULLNAME="$FULLNAME"
 USERNAME="$USERNAME"
 KEYBOARD="$KEYBOARD"
 EOF
+
+echo "These are the parameters that I would use to build. If everything looks fine press enter and I would start the build process. Or else to cancel press Ctrl + C and you may later restart the script by entering ./1.sh"
+cat build-properties
+read RESPONSE
 
 mkfs -v -t ext4 $ROOT_PART
 
@@ -92,6 +96,7 @@ fi
 ROOT_PART_BY_UUID=$(get_blk_id $ROOT_PART)
 if [ "x$HOME_PART" != "x" ]
 then
+	mkfs -v -t ext4 $HOME_PART
 	HOME_PART_BY_UUID=$(get_blk_id $HOME_PART)
 fi
 
@@ -220,5 +225,5 @@ rm -f /usr/lib/lib{com_err,e2p,ext2fs,ss}.a
 rm -f /usr/lib/libltdl.a
 rm -f /usr/lib/libz.a
 
-echo "Base system built successfully. You may now reboot to log into the newly built system. In case you face any issue after rebooting you may boot into this Live Media again and follow the documentation at aryalinux.org or post questions at linuxquestions.org for help or you may continue building the rest of the system by following the documentation at aryalinux.org."
+echo "Base system built successfully! You may now reboot to log into the newly built system and check if everything is looks fine. To build the rest of the system you would have to boot into this builder disk again. In case you face any issue after rebooting you may boot into this Live Media again and follow the documentation at aryalinux.org or post questions at linuxquestions.org for help or you may continue building the rest of the system by following the documentation at aryalinux.org."
 echo "Bye!"
