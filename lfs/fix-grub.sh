@@ -11,9 +11,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="091-grub.sh"
 TARBALL="grub-2.02~beta2.tar.xz"
 
-if ! grep "$STEPNAME" $LOGFILE &> /dev/null
-then
-
 cd $SOURCE_DIR
 if [ "$TARBALL" != "" ]
 then
@@ -51,8 +48,4 @@ if [ "$TARBALL" != "" ]
 then
 	rm -rf $DIRECTORY
 	rm -rf {gcc,glibc,binutils}-build
-fi
-
-echo "$STEPNAME" | tee -a $LOGFILE
-
 fi
