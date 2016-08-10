@@ -21,12 +21,33 @@ echo -e "${NC}"
 echo -e "${RED}Please note that if you have hibernate your existing Linux system and you are specifying the swap partition while building AryaLinux, you would not be able to resume from hibernation in the existing Linux system. This would not be a problem however if you either don't have another Linux installed or if that has been shutdown and not hibernated or if you do not use a swap partition at all."
 echo -e "${NC}"
 
+echo "Fetching updates on the build scripts..."
+{
+ rm -f /tmp/2016.04.zip
+ wget https://github.com/FluidIdeas/aryalinux/archive/2016.08.zip -O /tmp/2016.08.zip &> /dev/null
+ pushd /tmp &> /dev/null
+ unzip 2016.04.zip
+ cp -rf aryalinux-2016.08/lfs/* /root/scripts/
+ popd &> /dev/null
+ echo "Updated the build scripts successfully."
+ echo "Checking sanity of the tarballs. In case some tarballs are missing they would be downloaded now. Please be patient."
+ ./download-sources.sh &> /dev/null
+ ./additional-downloads.sh &> /dev/null
+ echo "Tarball sanity check completed. Let's get started..."
+} || {
+ echo "Could not download the latest build scripts. Maybe you're not connected to the internet. You can either continue without the latest scripts or exit, connect to the internet and restart this script once connected so that I can download the updates."
+ read -p "Do you want to continue without the updates? (y/n) : " RESPONSE
+ if [ "x$RESPONSE" == "xn" ] || [ "x$RESPONSE" == "xN" ]
+ then
+  exit
+ fi
+}
+
 echo "Build/Installation Information:"
 read -p "Enter device name e.g. /dev/sda. Please note its /dev/sda and not /dev/sda1 or /dev/sda2 etc.. : " DEV_NAME
-read -p "Enter the root partition e.g. /dev/sda1 or /dev/sda2 etc. I would make a filesystem on it. So all data in this partition would get lost. Backup if necessary. : " ROOT_PART
-read -p "Enter the swap partition e.g. /dev/sda1 or /dev/sda2 etc. This partition should ideally be of size twice the size of RAM you have. 
-For instance for 2GB RAM swap partition should be of size 4GB. I would format this partition so data in this partition would get lost. Backup if necessary. : " SWAP_PART
-read -p "Enter the home partition e.g. /dev/sda1 or /dev/sda2 etc. This is where your data would be stored. I would format this partition so data in this partition would get lost. Backup if necessary : " HOME_PART
+read -p "Enter the root partition e.g. /dev/sda1 or /dev/sda2 etc. I would make a filesystem on it. So all data in this partition would be erased. Backup any data that's important. : " ROOT_PART
+read -p "Enter the swap partition e.g. /dev/sda1 or /dev/sda2 etc. This partition should ideally be of size twice the size of RAM you have. For instance for 2GB RAM swap partition should be of size 4GB. I would format this partition so data in this partition would get lost. Backup any data that's important. : " SWAP_PART
+read -p "Enter the home partition e.g. /dev/sda1 or /dev/sda2 etc. This is where your data would be stored. I would format this partition so data in this partition would get lost. Backup any data that's important : " HOME_PART
 
 clear
 echo "Computer and User Information:"
@@ -83,7 +104,6 @@ mount -v -t ext4 $ROOT_PART $LFS
 if [ "x$HOME_PART" != "x" ]
 then
 	mkdir -v $LFS/home
-	mount -v -t ext4 $HOME_PART $LFS/home
 fi
 
 
@@ -97,6 +117,7 @@ ROOT_PART_BY_UUID=$(get_blk_id $ROOT_PART)
 if [ "x$HOME_PART" != "x" ]
 then
 	mkfs -v -t ext4 $HOME_PART
+	mount -v -t ext4 $HOME_PART $LFS/home
 	HOME_PART_BY_UUID=$(get_blk_id $HOME_PART)
 fi
 
