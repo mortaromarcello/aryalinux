@@ -16,6 +16,9 @@ function get_blk_id()
 }
 
 clear
+if [ ! -f /tmp/updated ]
+then
+
 echo -e "Welcome to the ${ORANGE}Arya${GREEN}Linux${NC} Builder."
 echo -e "${NC}"
 echo -e "${GREEN}AryaLinux Base System Build Scripts"
@@ -34,6 +37,8 @@ echo -e "GNU General Public License for more details."
 echo -e "You should have received a copy of the GNU General Public License"
 echo -e "along with this program.  If not, see <http://www.gnu.org/licenses/>."
 echo -e "${NC}"
+
+fi
 
 {
  if [ ! -f /tmp/updated ]
