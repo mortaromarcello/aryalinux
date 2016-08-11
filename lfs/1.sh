@@ -141,8 +141,7 @@ fi
 
 if [ "x$SWAP_PART" != "x" ]
 then
-	mkswap $SWAP_PART
-	/sbin/swapon -v $SWAP_PART
+	mkswap $SWAP_PART && /sbin/swapon -v $SWAP_PART || echo "Not making swap space on #SWAP_PART because its already mounted"
 fi
 
 ROOT_PART_BY_UUID=$(get_blk_id $ROOT_PART)
