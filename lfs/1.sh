@@ -38,21 +38,26 @@ echo -e "${NC}"
 echo "Press enter to continue..."
 read RESPONSE
 
-echo "Fetching updates on the build scripts..."
 {
- rm -rf /tmp/2016.08.zip
- rm -rf /tmp/aryalinux-2016.08
- wget https://github.com/FluidIdeas/aryalinux/archive/2016.08.zip -O /tmp/2016.08.zip
- pushd /tmp &> /dev/null
- unzip 2016.08.zip
- cp -rf aryalinux-2016.08/lfs/* /root/scripts/
- popd &> /dev/null
- clear
- echo "Updated the build scripts successfully."
- echo "Checking sanity of the tarballs. In case some tarballs are missing they would be downloaded now. Please be patient."
- ./download-sources.sh
- ./additional-downloads.sh
- echo "Tarball sanity check completed. Let's get started..."
+ if [ ! -f /tmp/updated ]
+ then
+  echo "Fetching updates on the build scripts..."
+  rm -rf /tmp/2016.08.zip
+  rm -rf /tmp/aryalinux-2016.08
+  wget https://github.com/FluidIdeas/aryalinux/archive/2016.08.zip -O /tmp/2016.08.zip
+  pushd /tmp &> /dev/null
+  unzip 2016.08.zip
+  cp -rf aryalinux-2016.08/lfs/* /root/scripts/
+  popd &> /dev/null
+  clear
+  echo "Updated the build scripts successfully."
+  echo "Checking sanity of the tarballs. In case some tarballs are missing they would be downloaded now. Please be patient."
+  ./download-sources.sh
+  ./additional-downloads.sh
+  touch /tmp/updated
+  echo "Done with downloading the updated scripts. Please re-run this script by running ./1.sh"
+  exit
+ fi
 }
 ||
 {
