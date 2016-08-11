@@ -43,7 +43,7 @@ echo "Fetching updates on the build scripts..."
  rm -rf /tmp/2016.08.zip
  wget https://github.com/FluidIdeas/aryalinux/archive/2016.08.zip -O /tmp/2016.08.zip &> /dev/null
  pushd /tmp &> /dev/null
- unzip 2016.08.zip
+ unzip 2016.08.zip &> /dev/null
  cp -rf aryalinux-2016.08/lfs/* /root/scripts/
  popd &> /dev/null
  echo "Updated the build scripts successfully."
