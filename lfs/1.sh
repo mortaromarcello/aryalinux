@@ -35,12 +35,11 @@ echo -e "You should have received a copy of the GNU General Public License"
 echo -e "along with this program.  If not, see <http://www.gnu.org/licenses/>."
 echo -e "${NC}"
 
-echo "Would now go online and check for updated scripts. If you are not connected to the internet, please connect and press enter to continue..."
-read RESPONSE
-
 {
  if [ ! -f /tmp/updated ]
  then
+  echo "Would now go online and check for updated scripts. If you are not connected to the internet, please connect and press enter to continue..."
+  read RESPONSE
   echo "Fetching updates on the build scripts..."
   rm -rf /tmp/2016.08.zip
   rm -rf /tmp/aryalinux-2016.08
