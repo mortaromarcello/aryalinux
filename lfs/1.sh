@@ -58,8 +58,7 @@ read RESPONSE
   echo "Done with downloading the updated scripts. Please re-run this script by running ./1.sh"
   exit
  fi
-}
-|| {
+} || {
  echo "2."
  echo "Could not download the latest build scripts. Maybe you're not connected to the internet. You can either continue without the latest scripts or exit, connect to the internet and restart this script once connected so that I can download the updates."
  read -p "Do you want to continue without the updates? (y/n) : " RESPONSE
