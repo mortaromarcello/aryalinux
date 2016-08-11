@@ -41,17 +41,22 @@ read RESPONSE
 echo "Fetching updates on the build scripts..."
 {
  rm -rf /tmp/2016.08.zip
- wget https://github.com/FluidIdeas/aryalinux/archive/2016.08.zip -O /tmp/2016.08.zip &> /dev/null
+ rm -rf /tmp/aryalinux-2016.08
+ wget https://github.com/FluidIdeas/aryalinux/archive/2016.08.zip -O /tmp/2016.08.zip
  pushd /tmp &> /dev/null
- unzip 2016.08.zip &> /dev/null
+ unzip 2016.08.zip
  cp -rf aryalinux-2016.08/lfs/* /root/scripts/
  popd &> /dev/null
+ clear
  echo "Updated the build scripts successfully."
  echo "Checking sanity of the tarballs. In case some tarballs are missing they would be downloaded now. Please be patient."
- ./download-sources.sh &> /dev/null
- ./additional-downloads.sh &> /dev/null
+ ./download-sources.sh
+ ./additional-downloads.sh
  echo "Tarball sanity check completed. Let's get started..."
-} || {
+}
+||
+{
+ echo "2."
  echo "Could not download the latest build scripts. Maybe you're not connected to the internet. You can either continue without the latest scripts or exit, connect to the internet and restart this script once connected so that I can download the updates."
  read -p "Do you want to continue without the updates? (y/n) : " RESPONSE
  if [ "x$RESPONSE" == "xn" ] || [ "x$RESPONSE" == "xN" ]
