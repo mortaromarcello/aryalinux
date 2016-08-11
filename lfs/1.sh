@@ -114,8 +114,11 @@ USERNAME="$USERNAME"
 KEYBOARD="$KEYBOARD"
 EOF
 
-echo "These are the parameters that I would use to build. If everything looks fine press enter and I would start the build process. Or else to cancel press Ctrl + C and you may later restart the script by entering ./1.sh"
+echo "These are the parameters that I would use to build:"
+echo ""
 cat build-properties
+echo ""
+echo "If everything looks fine press enter and I would start the build process. Or else to cancel press Ctrl + C and you may later restart the script by entering ./1.sh"
 read RESPONSE
 
 mkfs -v -t ext4 $ROOT_PART
