@@ -35,7 +35,7 @@ echo -e "You should have received a copy of the GNU General Public License"
 echo -e "along with this program.  If not, see <http://www.gnu.org/licenses/>."
 echo -e "${NC}"
 
-echo "Press enter to continue..."
+echo "Would now go online and check for updated scripts. If you are not connected to the internet, please connect and press enter to continue..."
 read RESPONSE
 
 {
