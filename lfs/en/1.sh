@@ -78,6 +78,10 @@ echo ""
 echo "NAME    MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT" && lsblk | grep disk | grep -v "boot" | sed -e 's/^/\/dev\//'
 echo ""
 read -p "Enter device name e.g. /dev/sda. Please note its /dev/sda and NOT /dev/sda1 or /dev/sda2 etc.. : " DEV_NAME
+echo "These are the partitions in the selected disk:"
+echo ""
+echo "NAME    MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT" && lsblk | grep part | grep -v "boot" | sed -e 's/^/\/dev\//' | sed -e 's/├─//' | sed -e 's/└─//g'
+echo ""
 read -p "Enter the root partition e.g. /dev/sda1 or /dev/sda2 etc. I would make a filesystem on it. So all data in this partition would be erased. Backup any data that's important. : " ROOT_PART
 read -p "Enter the swap partition e.g. /dev/sda1 or /dev/sda2 etc. This partition should ideally be of size twice the size of RAM you have. For instance for 2GB RAM swap partition should be of size 4GB. I would format this partition so data in this partition would get lost. Backup any data that's important. : " SWAP_PART
 read -p "Enter the home partition e.g. /dev/sda1 or /dev/sda2 etc. This is where your data would be stored. I would format this partition so data in this partition would get lost. Backup any data that's important : " HOME_PART
