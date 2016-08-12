@@ -3,7 +3,8 @@
 set -e
 set +h
 
-mkdir -pv ../sources
-cp wget-list ../sources
-cd ../sources
+mkdir -pv ../../sources
+cp wget-list ../../sources
+pushd ../../sources
 wget -nc -i wget-list
+popd

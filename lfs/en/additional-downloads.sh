@@ -3,7 +3,7 @@
 set -e
 set +h
 
-pushd ../sources
+pushd ../../sources
 
 wget -nc http://pkgs.fedoraproject.org/lookaside/pkgs/dosfstools/dosfstools-3.0.26.tar.xz/45012f5f56f2aae3afcd62120b9e5a08/dosfstools-3.0.26.tar.xz
 wget -nc http://ftp.gnu.org/gnu/which/which-2.21.tar.gz
@@ -44,7 +44,7 @@ wget -nc http://aryalinux.org/releases/2016.08/alps-scripts-2016.08.tar.gz
 
 popd
 
-cp -v functions ../sources
-cp -v alps ../sources
-cp -v alps.conf ../sources
+cp -v functions ../../sources
+cp -v alps ../../sources
+cp -v alps.conf ../../sources
 
