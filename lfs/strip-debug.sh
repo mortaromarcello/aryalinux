@@ -10,7 +10,9 @@ mkdir -pv $LFS
 mount $ROOT_PART $LFS
 
 echo "Would be chrooting now. At the prompt please run:"
-echo "stripdebug"
+echo ""
+echo "/tools/bin/stripdebug"
+echo ""
 echo "and hit enter. You might see a lot of messages scroll by. That's normal."
 
 cat > $LFS/tools/bin/stripdebug <<EOF
@@ -35,10 +37,25 @@ umount $LFS
 
 echo "Stripping done. Rebuilding grub because grub is not meant to be stripped. Else results in a boot-time warning."
 
+sleep 5
+
+mount $ROOT_PART $LFS
+mount -v --bind /dev $LFS/dev
+
+mount -vt devpts devpts $LFS/dev/pts -o gid=5,mode=620
+mount -vt proc proc $LFS/proc
+mount -vt sysfs sysfs $LFS/sys
+mount -vt tmpfs tmpfs $LFS/run
+
+if [ -h $LFS/dev/shm ]; then
+  mkdir -pv $LFS/$(readlink $LFS/dev/shm)
+fi
+
 chroot "$LFS" /usr/bin/env -i              \
     HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \
     PATH=/bin:/usr/bin:/sbin:/usr/sbin     \
     /bin/bash /sources/fix-grub.sh
 
 clear
+./umountal.sh
 echo "Done stripping debug symbols and rebuilding grub."

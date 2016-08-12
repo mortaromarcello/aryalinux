@@ -141,7 +141,7 @@ fi
 
 if [ "x$SWAP_PART" != "x" ]
 then
-	mkswap $SWAP_PART &> /dev/null && /sbin/swapon -v $SWAP_PART &> /dev/null || echo "Not making swap space on $SWAP_PART because its already mounted"
+	mkswap $SWAP_PART && /sbin/swapon -v $SWAP_PART || echo "Not making swap space on #SWAP_PART because its already mounted"
 fi
 
 ROOT_PART_BY_UUID=$(get_blk_id $ROOT_PART)
@@ -278,4 +278,7 @@ rm -f /usr/lib/libltdl.a
 rm -f /usr/lib/libz.a
 
 echo "Base system built successfully! You may now reboot to log into the newly built system and check if everything is looks fine. To build the rest of the system you would have to boot into this builder disk again. In case you face any issue after rebooting you may boot into this Live Media again and follow the documentation at aryalinux.org or post questions at linuxquestions.org for help or you may continue building the rest of the system by following the documentation at aryalinux.org."
+echo "If you are planning on creating a distributable Live ISO. Please run:"
+echo "./strip-debug.sh"
+echo "To reduce the size of the iso that would be created. This command would strip debug symbols from libraries and executables that have been built so far."
 echo "Bye!"
