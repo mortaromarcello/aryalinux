@@ -178,5 +178,6 @@ usermod -a -G wheel $USERNAME
 echo "Done with the build process. You may now exit by entering the following :"
 echo ""
 echo "exit"
+echo ""
 
 fi
