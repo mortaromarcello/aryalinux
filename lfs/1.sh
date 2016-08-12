@@ -277,8 +277,12 @@ rm -f /usr/lib/lib{com_err,e2p,ext2fs,ss}.a
 rm -f /usr/lib/libltdl.a
 rm -f /usr/lib/libz.a
 
+{ sleep 5 && ./umountal.sh } || echo "Could not unmount the root partition. Something is wrong. Please try the ./umountal.sh command in some time."
+
 echo "Base system built successfully! You may now reboot to log into the newly built system and check if everything is looks fine. To build the rest of the system you would have to boot into this builder disk again. In case you face any issue after rebooting you may boot into this Live Media again and follow the documentation at aryalinux.org or post questions at linuxquestions.org for help or you may continue building the rest of the system by following the documentation at aryalinux.org."
 echo "If you are planning on creating a distributable Live ISO. Please run:"
+echo ""
 echo "./strip-debug.sh"
+echo ""
 echo "To reduce the size of the iso that would be created. This command would strip debug symbols from libraries and executables that have been built so far."
 echo "Bye!"
