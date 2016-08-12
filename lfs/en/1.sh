@@ -75,7 +75,7 @@ fi
 echo "Build/Installation Information:"
 echo "These are the devices in your system:"
 echo ""
-echo "NAME    MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT" && lsblk | grep disk | grep -v "boot"
+echo "NAME    MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT" && lsblk | grep disk | grep -v "boot" | sed -e 's/^/\/dev\//'
 echo ""
 read -p "Enter device name e.g. /dev/sda. Please note its /dev/sda and NOT /dev/sda1 or /dev/sda2 etc.. : " DEV_NAME
 read -p "Enter the root partition e.g. /dev/sda1 or /dev/sda2 etc. I would make a filesystem on it. So all data in this partition would be erased. Backup any data that's important. : " ROOT_PART
