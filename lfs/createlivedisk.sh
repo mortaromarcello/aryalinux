@@ -116,8 +116,7 @@ rm $LFS/boot/id_label
 
 echo "Making ISO Hybrid..."
 
-cd ~
-./syslinux-4.06/utils/isohybrid "$LFS/sources/$OUTFILE"
-./scripts/umountal.sh
+isohybrid "$LFS/sources/$OUTFILE"
+~/scripts/umountal.sh
 
-echo "Done..."
+echo "Done creating the live disk. You can find the Live ISO image in the /sources directory of the newly built system (in $ROOT_PART)."

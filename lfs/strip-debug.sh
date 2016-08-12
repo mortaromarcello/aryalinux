@@ -3,6 +3,8 @@
 set -e
 set +h
 
+./umountal.sh
+
 read -p "Enter the root partition name for AryaLinux : " ROOT_PART
 
 export LFS=/mnt/lfs
@@ -58,4 +60,8 @@ chroot "$LFS" /usr/bin/env -i              \
 
 clear
 ./umountal.sh
-echo "Done stripping debug symbols and rebuilding grub."
+
+echo "Done stripping debug symbols and rebuilding grub. In order to build an ISO from the system we just built, run the following command:"
+echo ""
+echo "./createlivedisk.sh"
+echo ""

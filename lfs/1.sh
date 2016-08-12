@@ -43,7 +43,7 @@ fi
 {
  if [ ! -f /tmp/updated ]
  then
-  echo "Would now go online and check for updated scripts. If you are not connected to the internet, please connect and press enter to continue..."
+  echo "Would now go online and check for updated scripts. If you are not connected to the internet, please connect(See network Icon on upper right corner) and then press enter to continue..."
   read RESPONSE
   echo "Fetching updates on the build scripts..."
   rm -rf /tmp/2016.08.zip
@@ -73,7 +73,7 @@ fi
 }
 
 echo "Build/Installation Information:"
-read -p "Enter device name e.g. /dev/sda. Please note its /dev/sda and not /dev/sda1 or /dev/sda2 etc.. : " DEV_NAME
+read -p "Enter device name e.g. /dev/sda. Please note its /dev/sda and NOT /dev/sda1 or /dev/sda2 etc.. : " DEV_NAME
 read -p "Enter the root partition e.g. /dev/sda1 or /dev/sda2 etc. I would make a filesystem on it. So all data in this partition would be erased. Backup any data that's important. : " ROOT_PART
 read -p "Enter the swap partition e.g. /dev/sda1 or /dev/sda2 etc. This partition should ideally be of size twice the size of RAM you have. For instance for 2GB RAM swap partition should be of size 4GB. I would format this partition so data in this partition would get lost. Backup any data that's important. : " SWAP_PART
 read -p "Enter the home partition e.g. /dev/sda1 or /dev/sda2 etc. This is where your data would be stored. I would format this partition so data in this partition would get lost. Backup any data that's important : " HOME_PART
@@ -277,12 +277,12 @@ rm -f /usr/lib/lib{com_err,e2p,ext2fs,ss}.a
 rm -f /usr/lib/libltdl.a
 rm -f /usr/lib/libz.a
 
-{ sleep 5 && ./umountal.sh } || echo "Could not unmount the root partition. Something is wrong. Please try the ./umountal.sh command in some time."
+{ sleep 5 && ./umountal.sh } || { echo "Could not unmount the root partition. Something is wrong. Please try the ./umountal.sh command in some time." && exit }
 
 echo "Base system built successfully! You may now reboot to log into the newly built system and check if everything is looks fine. To build the rest of the system you would have to boot into this builder disk again. In case you face any issue after rebooting you may boot into this Live Media again and follow the documentation at aryalinux.org or post questions at linuxquestions.org for help or you may continue building the rest of the system by following the documentation at aryalinux.org."
 echo "If you are planning on creating a distributable Live ISO. Please run:"
 echo ""
 echo "./strip-debug.sh"
 echo ""
-echo "To reduce the size of the iso that would be created. This command would strip debug symbols from libraries and executables that have been built so far."
+echo "This would reduce the size of the iso that would be created. This command would strip 'debug symbols' from libraries and executables that have been built so far and then rebuild grub. Rebuilding grub needs to be done because otherwise while booting grub would complain that symbols are not found."
 echo "Bye!"

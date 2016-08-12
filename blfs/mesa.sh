@@ -68,7 +68,8 @@ export VDPAU_LIBS="-L@libdir@ -lvdpau"
 			--enable-vdpau						\
 			--with-egl-platforms="$EGL_PLATFORMS" \
 			--with-dri-drivers="$DRI_DRIVERS"	\
-            --with-gallium-drivers=$GLL_DRV &&
+            --enable-r600-llvm-compiler         \
+            --with-gallium-drivers="$GLL_DRV" &&
 unset GLL_DRV &&
 make "-j`nproc`"
 
