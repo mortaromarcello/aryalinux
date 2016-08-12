@@ -171,9 +171,9 @@ EOF
 
 mkdir -v $LFS/sources
 chmod -v a+wt $LFS/sources
-if [ -d ../sources ]
+if [ -d ../../sources ]
 then
-	cp ../sources/* $LFS/sources/
+	cp ../../sources/* $LFS/sources/
 fi
 
 rm -rf /sources
