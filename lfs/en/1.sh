@@ -40,38 +40,6 @@ echo -e "${NC}"
 
 fi
 
-{
- if [ ! -f /tmp/updated ]
- then
-  echo "Would now go online and check for updated scripts. If you are not connected to the internet, please connect(See network Icon on upper right corner) and then press enter to continue..."
-  read RESPONSE
-  echo "Fetching updates on the build scripts..."
-  rm -rf /tmp/2016.08.zip
-  rm -rf /tmp/aryalinux-2016.08
-  wget https://github.com/FluidIdeas/aryalinux/archive/2016.08.zip -O /tmp/2016.08.zip
-  pushd /tmp &> /dev/null
-  unzip 2016.08.zip &> /dev/null
-  cp -rf aryalinux-2016.08/lfs/* /root/scripts/
-  popd &> /dev/null
-  clear
-  echo "Updated the build scripts successfully."
-  echo "Checking sanity of the tarballs. In case some tarballs are missing they would be downloaded now. Please be patient."
-  ./download-sources.sh &> /dev/null
-  ./additional-downloads.sh &> /dev/null
-  touch /tmp/updated
-  echo "Done with downloading the updated scripts. Please re-run this script by running ./1.sh"
-  exit
- fi
-} || {
- echo "2."
- echo "Could not download the latest build scripts. Maybe you're not connected to the internet. You can either continue without the latest scripts or exit, connect to the internet and restart this script once connected so that I can download the updates."
- read -p "Do you want to continue without the updates? (y/n) : " RESPONSE
- if [ "x$RESPONSE" == "xn" ] || [ "x$RESPONSE" == "xN" ]
- then
-  exit
- fi
-}
-
 echo "Build/Installation Information:"
 echo "These are the devices in your system:"
 echo ""
@@ -285,11 +253,12 @@ rm -f /usr/lib/lib{com_err,e2p,ext2fs,ss}.a
 rm -f /usr/lib/libltdl.a
 rm -f /usr/lib/libz.a
 
-{ sleep 5 && ./umountal.sh } || { echo "Could not unmount the root partition. Something is wrong. Please try the ./umountal.sh command in some time." && exit }
+( sleep 5 && ./umountal.sh ) || ( echo "Could not unmount the root partition. Something is wrong. Please try the ./umountal.sh command in some time." && exit )
 
 echo "Base system built successfully! You may now reboot to log into the newly built system and check if everything is looks fine. To build the rest of the system you would have to boot into this builder disk again. In case you face any issue after rebooting you may boot into this Live Media again and follow the documentation at aryalinux.org or post questions at linuxquestions.org for help or you may continue building the rest of the system by following the documentation at aryalinux.org."
-echo "If you are planning on creating a distributable Live ISO. Please run:"
+echo "If you are planning on creating a distributable Live ISO. Please run the following (Please replace en with the language you selected before starting to build):"
 echo ""
+echo "cd en"
 echo "./strip-debug.sh"
 echo ""
 echo "This would reduce the size of the iso that would be created. This command would strip 'debug symbols' from libraries and executables that have been built so far and then rebuild grub. Rebuilding grub needs to be done because otherwise while booting grub would complain that symbols are not found."
