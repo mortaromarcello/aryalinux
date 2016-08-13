@@ -58,15 +58,6 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
-cat > ~/.xinitrc << "EOF"
-ck-launch-session dbus-launch --exit-with-session startxfce4
-EOF
-startx
-
-
-startx &> ~/.x-session-errors
-
-
 cd $SOURCE_DIR
 
 sudo rm -rf $DIRECTORY
