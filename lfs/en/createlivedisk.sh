@@ -114,9 +114,9 @@ rm -rf live
 rm $LFS/boot/initram.fs
 rm $LFS/boot/id_label
 
-echo "Making ISO Hybrid..."
+echo "Making ISO Hybrid. You can simply use dd to write the iso onto a pen drive to create a bootable pen drive."
 
 isohybrid "$LFS/sources/$OUTFILE"
-~/scripts/umountal.sh
+~/scripts/en/umountal.sh
 
 echo "Done creating the live disk. You can find the Live ISO image in the /sources directory of the newly built system (in $ROOT_PART)."
