@@ -5,9 +5,9 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:git-manpages:2.9.2
 #VER:git:2.9.2
 #VER:git-htmldocs:2.9.2
+#VER:git-manpages:2.9.2
 
 #REC:curl
 #REC:openssl
@@ -22,9 +22,9 @@ cd $SOURCE_DIR
 
 URL=https://www.kernel.org/pub/software/scm/git/git-2.9.2.tar.xz
 
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/git/git-manpages-2.9.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/git/git-manpages-2.9.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/git/git-manpages-2.9.2.tar.xz || wget -nc https://www.kernel.org/pub/software/scm/git/git-manpages-2.9.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/git/git-manpages-2.9.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/git/git-manpages-2.9.2.tar.xz
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/git/git-2.9.2.tar.xz || wget -nc https://www.kernel.org/pub/software/scm/git/git-2.9.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/git/git-2.9.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/git/git-2.9.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/git/git-2.9.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/git/git-2.9.2.tar.xz || wget -nc ftp://ftp.kernel.org/pub/software/scm/git/git-2.9.2.tar.xz
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/git/git-htmldocs-2.9.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/git/git-htmldocs-2.9.2.tar.xz || wget -nc https://www.kernel.org/pub/software/scm/git/git-htmldocs-2.9.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/git/git-htmldocs-2.9.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/git/git-htmldocs-2.9.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/git/git-htmldocs-2.9.2.tar.xz
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/git/git-htmldocs-2.9.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/git/git-htmldocs-2.9.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/git/git-htmldocs-2.9.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/git/git-htmldocs-2.9.2.tar.xz || wget -nc https://www.kernel.org/pub/software/scm/git/git-htmldocs-2.9.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/git/git-htmldocs-2.9.2.tar.xz
+wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/git/git-manpages-2.9.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/git/git-manpages-2.9.2.tar.xz || wget -nc https://www.kernel.org/pub/software/scm/git/git-manpages-2.9.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/git/git-manpages-2.9.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/git/git-manpages-2.9.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/git/git-manpages-2.9.2.tar.xz
+wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/git/git-2.9.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/git/git-2.9.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/git/git-2.9.2.tar.xz || wget -nc https://www.kernel.org/pub/software/scm/git/git-2.9.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/git/git-2.9.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/git/git-2.9.2.tar.xz || wget -nc ftp://ftp.kernel.org/pub/software/scm/git/git-2.9.2.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
