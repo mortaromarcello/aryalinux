@@ -50,21 +50,12 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 update-desktop-database &&
-update-mime-database /usr/share/mime /usr/share/mime
+update-mime-database /usr/share/mime
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
 sudo rm rootscript.sh
-
-
-cat > ~/.xinitrc << "EOF"
-ck-launch-session dbus-launch --exit-with-session startxfce4
-EOF
-startx
-
-
-startx &> ~/.x-session-errors
 
 
 cd $SOURCE_DIR
