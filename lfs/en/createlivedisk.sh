@@ -1,6 +1,7 @@
 #!/bin/bash
 
-./umountal.sh
+( echo "Unmounting /mnt/lfs if mounted." && ./umountal.sh ) || ( echo "Done" )
+
 read -p "Enter the name of the Root Partition e.g. /dev/sda10 : " ROOT_PART
 read -p "Enter the name of the home partition e.g. /dev/sda11 : " HOME_PART
 read -p "Enter the default boot entry in the Live Disk : " LABEL

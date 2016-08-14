@@ -3,7 +3,7 @@
 set -e
 set +h
 
-./umountal.sh
+( ./umountal.sh && echo "Unmounted partition before performing actions..." ) || ( echo "Nothing mounted. Continuing..." )
 
 read -p "Enter the root partition name for AryaLinux : " ROOT_PART
 
@@ -26,6 +26,9 @@ cat > $LFS/tools/bin/stripdebug <<EOF
 
 /tools/bin/find /{bin,sbin} /usr/{bin,sbin,libexec} -type f \
     -exec /tools/bin/strip --strip-all {} ';'
+
+echo "Stripping done. Please enter exit to continue..."
+
 EOF
 chmod a+x $LFS/tools/bin/stripdebug
 
