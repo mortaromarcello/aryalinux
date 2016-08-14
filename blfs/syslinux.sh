@@ -17,6 +17,10 @@ tar -xf $TARBALL
 
 cd $DIRECTORY
 
+if [ `uname -m` != "x86_64" ]
+then
+	sed -i "s@efi32 efi64@efi32@g" Makefile
+fi
 make &&
 sudo make install
 

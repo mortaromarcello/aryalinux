@@ -13,14 +13,23 @@ set -e
 
 cd $SOURCE_DIR
 
-#URL=https://noto-website-2.storage.googleapis.com/pkgs/Noto-hinted.zip
-#wget -nc https://noto-website-2.storage.googleapis.com/pkgs/Noto-hinted.zip
+URL=https://noto-website-2.storage.googleapis.com/pkgs/Noto-hinted.zip
 
+wget -nc https://noto-website-2.storage.googleapis.com/pkgs/Noto-hinted.zip
 wget -nc https://github.com/googlei18n/noto-fonts/archive/v2015-09-29-license-adobe.tar.gz
 
-install -d -m755                           /usr/share/fonts/truetype/noto &&
-tar xf v2015-09-29-license-adobe.tar.gz -C /usr/share/fonts/truetype/noto &&
-chmod 0644                                 /usr/share/fonts/truetype/noto/*
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=''
+unzip_dirname $TARBALL DIRECTORY
+
+unzip_file $TARBALL
+cd $DIRECTORY
+
+whoami > /tmp/currentuser
+
+install -d -m755         /usr/share/fonts/truetype/noto &&
+unzip Noto-hinted.zip -d /usr/share/fonts/truetype/noto &&
+chmod 0644               /usr/share/fonts/truetype/noto/*
 
 
 cd $SOURCE_DIR

@@ -6,9 +6,9 @@ set +h
 . /etc/alps/alps.conf
 
 
-URL="http://search.cpan.org/CPAN/authors/id/M/MI/MIKEM/Net-SSLeay-1.77.tar.gz"
+URL="http://search.cpan.org/CPAN/authors/id/M/MI/MIKEM/Net-SSLeay-1.78.tar.gz"
 
-#VER:Net-SSLeay:1.77
+#VER:Net-SSLeay:1.78
 
 cd $SOURCE_DIR
 wget -nc $URL
