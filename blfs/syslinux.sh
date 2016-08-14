@@ -19,9 +19,10 @@ cd $DIRECTORY
 
 if [ `uname -m` != "x86_64" ]
 then
-	sed -i "s@efi32 efi64@efi32@g" Makefile
+	make bios efi32
+else
+	make
 fi
-make &&
 sudo make install
 
 cd $SOURCE_DIR
