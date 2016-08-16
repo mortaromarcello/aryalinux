@@ -5,7 +5,7 @@ set +h
 
 . /etc/alps/alps.conf
 
-#REQ:qt4
+#REQ:qt5
 
 cd $SOURCE_DIR
 
@@ -15,17 +15,17 @@ then
 else
 	wget -nc http://download.virtualbox.org/virtualbox/5.1.0/VirtualBox-5.1.0-108711-Linux_x86.run
 fi
-wget -nc https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.5.tar.xz
-tar xf linux-4.5.tar.xz
+wget -nc https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.7.tar.xz
+tar xf linux-4.7.tar.xz
 if [ `uname -m` == "x86_64" ]
 then
-	wget -nc aryalinux.org/releases/2016.04/config-64
-	cp config-64 linux-4.5/.config
+	wget -nc aryalinux.org/releases/2016.08/config-64
+	cp config-64 linux-4.7/.config
 else
-	wget -nc aryalinux.org/releases/2016.04/config-32
-	cp config-32 linux-4.5/.config
+	wget -nc aryalinux.org/releases/2016.08/config-32
+	cp config-32 linux-4.7/.config
 fi
-pushd linux-4.5
+pushd linux-4.7
 make oldconfig
 make prepare
 make scripts
@@ -36,7 +36,7 @@ then
 else
 	chmod a+x VirtualBox-5.1.0-108711-Linux_x86.run
 fi
-sudo KERN_DIR="`pwd`/linux-4.5" ./VirtualBox-5.1.0-108711-Linux_amd64.run
+sudo KERN_DIR="`pwd`/linux-4.7" ./VirtualBox-5.1.0-108711-Linux_amd64.run
 
 sudo ln -svf /opt/VirtualBox/virtualbox.desktop /usr/share/applications/
 sudo update-desktop-database
@@ -44,6 +44,6 @@ su
 do update-mime-database /usr/share/mime
 
 cd $SOURCE_DIR
-rm -rf linux-4.5
+rm -rf linux-4.7
 
 echo "virtualbox=>`date`" | sudo tee -a $INSTALLED_LIST

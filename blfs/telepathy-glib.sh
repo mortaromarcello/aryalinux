@@ -18,7 +18,7 @@ cd $SOURCE_DIR
 
 URL=http://telepathy.freedesktop.org/releases/telepathy-glib/telepathy-glib-0.24.1.tar.gz
 
-wget -nc http://telepathy.freedesktop.org/releases/telepathy-glib/telepathy-glib-0.24.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/telepathy-glib/telepathy-glib-0.24.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/telepathy-glib/telepathy-glib-0.24.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/telepathy-glib/telepathy-glib-0.24.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/telepathy-glib/telepathy-glib-0.24.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/telepathy-glib/telepathy-glib-0.24.1.tar.gz
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/telepathy-glib/telepathy-glib-0.24.1.tar.gz || wget -nc http://telepathy.freedesktop.org/releases/telepathy-glib/telepathy-glib-0.24.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/telepathy-glib/telepathy-glib-0.24.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/telepathy-glib/telepathy-glib-0.24.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/telepathy-glib/telepathy-glib-0.24.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/telepathy-glib/telepathy-glib-0.24.1.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

@@ -14,7 +14,7 @@ cd $SOURCE_DIR
 
 URL=http://download.kde.org/stable/applications/16.04.2/src/konsole-16.04.2.tar.xz
 
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/konsole/konsole-16.04.2.tar.xz || wget -nc http://download.kde.org/stable/applications/16.04.2/src/konsole-16.04.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/konsole/konsole-16.04.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/konsole/konsole-16.04.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/konsole/konsole-16.04.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/konsole/konsole-16.04.2.tar.xz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/konsole/konsole-16.04.2.tar.xz || wget -nc http://download.kde.org/stable/applications/16.04.2/src/konsole-16.04.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/konsole/konsole-16.04.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/konsole/konsole-16.04.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/konsole/konsole-16.04.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/konsole/konsole-16.04.2.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

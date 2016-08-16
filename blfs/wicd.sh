@@ -22,7 +22,7 @@ cd $SOURCE_DIR
 
 URL=https://launchpad.net/wicd/1.7/1.7.4/+download/wicd-1.7.4.tar.gz
 
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/wicd/wicd-1.7.4.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/wicd/wicd-1.7.4.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/wicd/wicd-1.7.4.tar.gz || wget -nc https://launchpad.net/wicd/1.7/1.7.4/+download/wicd-1.7.4.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/wicd/wicd-1.7.4.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/wicd/wicd-1.7.4.tar.gz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/wicd/wicd-1.7.4.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/wicd/wicd-1.7.4.tar.gz || wget -nc https://launchpad.net/wicd/1.7/1.7.4/+download/wicd-1.7.4.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/wicd/wicd-1.7.4.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/wicd/wicd-1.7.4.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/wicd/wicd-1.7.4.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

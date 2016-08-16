@@ -14,7 +14,7 @@ cd $SOURCE_DIR
 
 URL=http://downloads.sourceforge.net/lxde/lxinput-0.3.5.tar.xz
 
-wget -nc http://downloads.sourceforge.net/lxde/lxinput-0.3.5.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lxinput/lxinput-0.3.5.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lxinput/lxinput-0.3.5.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lxinput/lxinput-0.3.5.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxinput/lxinput-0.3.5.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxinput/lxinput-0.3.5.tar.xz
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lxinput/lxinput-0.3.5.tar.xz || wget -nc http://downloads.sourceforge.net/lxde/lxinput-0.3.5.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lxinput/lxinput-0.3.5.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxinput/lxinput-0.3.5.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxinput/lxinput-0.3.5.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lxinput/lxinput-0.3.5.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

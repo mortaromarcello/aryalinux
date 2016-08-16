@@ -5,8 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:Clearlooks:1.7
 #VER:mplayer-SVN-r:37794
+#VER:Clearlooks:1.7
 
 #REQ:yasm
 #REC:gtk2
@@ -55,8 +55,8 @@ cd $SOURCE_DIR
 
 URL=http://anduin.linuxfromscratch.org/BLFS/other/mplayer-SVN-r37794.tar.xz
 
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc ftp://ftp.mplayerhq.hu/MPlayer/skins/Clearlooks-1.7.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc https://www.mplayerhq.hu/MPlayer/skins/Clearlooks-1.7.tar.bz2
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/MPlayer/mplayer-SVN-r37794.tar.xz || wget -nc http://anduin.linuxfromscratch.org/BLFS/other/mplayer-SVN-r37794.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/MPlayer/mplayer-SVN-r37794.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/MPlayer/mplayer-SVN-r37794.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/MPlayer/mplayer-SVN-r37794.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/MPlayer/mplayer-SVN-r37794.tar.xz
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/MPlayer/mplayer-SVN-r37794.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/MPlayer/mplayer-SVN-r37794.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/MPlayer/mplayer-SVN-r37794.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/MPlayer/mplayer-SVN-r37794.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/MPlayer/mplayer-SVN-r37794.tar.xz || wget -nc http://anduin.linuxfromscratch.org/BLFS/other/mplayer-SVN-r37794.tar.xz
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc https://www.mplayerhq.hu/MPlayer/skins/Clearlooks-1.7.tar.bz2 || wget -nc ftp://ftp.mplayerhq.hu/MPlayer/skins/Clearlooks-1.7.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
