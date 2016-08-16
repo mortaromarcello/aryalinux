@@ -4,8 +4,8 @@
 
 read -p "Enter the name of the Root Partition e.g. /dev/sda10 : " ROOT_PART
 read -p "Enter the name of the home partition e.g. /dev/sda11 : " HOME_PART
-read -p "Enter the default boot entry in the Live Disk : " LABEL
-read -p "Enter the name of iso file to be generated : " OUTFILE
+read -p "Enter the default boot entry in the Live Disk e.g. My Linux : " LABEL
+read -p "Enter the name of iso file to be generated e.g. my-linux-live-i686.iso : " OUTFILE
 
 export LFS=/mnt/lfs
 mount $ROOT_PART $LFS
@@ -26,8 +26,6 @@ if [ -h $LFS/dev/shm ]; then
   mkdir -pv $LFS/$(readlink $LFS/dev/shm)
 fi
 
-. $LFS/sources/build-properties
-
 KERNEL_VERSION=`ls $LFS/boot/vmlinuz* | rev | cut -d/ -f1 | rev | sed 's@vmlinuz-@@g'`
 
 chroot "$LFS" /usr/bin/env -i              \
@@ -38,7 +36,7 @@ chroot "$LFS" /usr/bin/env -i              \
 ./umountal.sh
 mount $ROOT_PART $LFS
 
-cd $HOME
+cd $LFS/sources/
 
 read -p "Which user should be logged in by default ? " USERNAME
 if [ -f $LFS/etc/lightdm/lightdm.conf ]
@@ -70,7 +68,7 @@ then
 else
 	rm -fv /etc/systemd/system/getty@tty1.service.d/override.conf
 fi
-cd $HOME
+cd $LFS/sources/
 
 cat > isolinux.cfg << EOF
 DEFAULT menu.c32
@@ -82,7 +80,7 @@ LABEL live
     MENU LABEL $LABEL
     MENU DEFAULT
     KERNEL /boot/$(uname -m)/vmlinuz
-    APPEND initrd=/boot/$(uname -m)/initram.fs quiet
+    APPEND initrd=/boot/$(uname -m)/initram.fs quiet splash
 EOF
 
 sudo tar xf $LFS/sources/syslinux-4.06.tar.xz
