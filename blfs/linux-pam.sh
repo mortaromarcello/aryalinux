@@ -5,8 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:Linux-PAM:1.3.0
 #VER:Linux-PAM-docs:1.2.0
+#VER:Linux-PAM:1.3.0
 
 #OPT:db
 #OPT:cracklib
@@ -22,8 +22,8 @@ cd $SOURCE_DIR
 
 URL=http://linux-pam.org/library/Linux-PAM-1.3.0.tar.bz2
 
-wget -nc http://linux-pam.org/library/Linux-PAM-1.3.0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc http://linux-pam.org/documentation/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2
+wget -nc http://linux-pam.org/library/Linux-PAM-1.3.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc http://linux-pam.org/documentation/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
