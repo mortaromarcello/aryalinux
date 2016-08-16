@@ -149,6 +149,8 @@ then
 	extras/014-openssl.sh
 fi
 
+./lvm2.sh
+
 if ! grep kernel /sources/build-log &> /dev/null
 then
 	./kernel.sh
