@@ -19,10 +19,10 @@ wget -nc https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.7.tar.xz
 tar xf linux-4.7.tar.xz
 if [ `uname -m` == "x86_64" ]
 then
-	wget -nc aryalinux.org/releases/2016.08/config-64
+	wget -nc https://raw.githubusercontent.com/FluidIdeas/aryalinux/2016.08/lfs/en/config-64
 	cp config-64 linux-4.7/.config
 else
-	wget -nc aryalinux.org/releases/2016.08/config-32
+	wget -nc https://raw.githubusercontent.com/FluidIdeas/aryalinux/2016.08/lfs/en/config-32
 	cp config-32 linux-4.7/.config
 fi
 pushd linux-4.7
