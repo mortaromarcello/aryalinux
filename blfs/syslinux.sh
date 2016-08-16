@@ -17,7 +17,12 @@ tar -xf $TARBALL
 
 cd $DIRECTORY
 
-make &&
+if [ `uname -m` != "x86_64" ]
+then
+	make bios efi32
+else
+	make
+fi
 sudo make install
 
 cd $SOURCE_DIR

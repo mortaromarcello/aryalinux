@@ -14,7 +14,7 @@ cd $SOURCE_DIR
 
 URL=http://hany.sk/~hany/_data/hd2u/hd2u-1.0.3.tgz
 
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/hd2u/hd2u-1.0.3.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/hd2u/hd2u-1.0.3.tgz || wget -nc http://hany.sk/~hany/_data/hd2u/hd2u-1.0.3.tgz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/hd2u/hd2u-1.0.3.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/hd2u/hd2u-1.0.3.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/hd2u/hd2u-1.0.3.tgz
+wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/hd2u/hd2u-1.0.3.tgz || wget -nc http://hany.sk/~hany/_data/hd2u/hd2u-1.0.3.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/hd2u/hd2u-1.0.3.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/hd2u/hd2u-1.0.3.tgz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/hd2u/hd2u-1.0.3.tgz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/hd2u/hd2u-1.0.3.tgz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

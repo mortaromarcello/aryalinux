@@ -15,7 +15,7 @@ cd $SOURCE_DIR
 
 URL=http://www.abisource.com/downloads/wv/1.2.9/wv-1.2.9.tar.gz
 
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/wv/wv-1.2.9.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/wv/wv-1.2.9.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/wv/wv-1.2.9.tar.gz || wget -nc http://www.abisource.com/downloads/wv/1.2.9/wv-1.2.9.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/wv/wv-1.2.9.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/wv/wv-1.2.9.tar.gz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/wv/wv-1.2.9.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/wv/wv-1.2.9.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/wv/wv-1.2.9.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/wv/wv-1.2.9.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/wv/wv-1.2.9.tar.gz || wget -nc http://www.abisource.com/downloads/wv/1.2.9/wv-1.2.9.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

@@ -14,7 +14,7 @@ cd $SOURCE_DIR
 
 URL=http://ftp.x.org/pub/individual/app/twm-1.0.9.tar.bz2
 
-wget -nc http://ftp.x.org/pub/individual/app/twm-1.0.9.tar.bz2 || wget -nc ftp://ftp.x.org/pub/individual/app/twm-1.0.9.tar.bz2
+wget -nc ftp://ftp.x.org/pub/individual/app/twm-1.0.9.tar.bz2 || wget -nc http://ftp.x.org/pub/individual/app/twm-1.0.9.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
