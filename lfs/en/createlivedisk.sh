@@ -82,7 +82,7 @@ LABEL slientlive
     KERNEL /boot/$(uname -m)/vmlinuz
     APPEND initrd=/boot/$(uname -m)/initram.fs quiet splash
 LABEL debuglive
-    MENU LABEL "$LABEL Debug Mode"
+    MENU LABEL $LABEL Debug Mode
     KERNEL /boot/$(uname -m)/vmlinuz
     APPEND initrd=/boot/$(uname -m)/initram.fs
 EOF
