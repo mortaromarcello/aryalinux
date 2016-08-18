@@ -76,11 +76,15 @@ PROMPT 0
 MENU TITLE Select an option to boot Aryalinux
 TIMEOUT 300
 
-LABEL live
+LABEL slientlive
     MENU LABEL $LABEL
     MENU DEFAULT
     KERNEL /boot/$(uname -m)/vmlinuz
     APPEND initrd=/boot/$(uname -m)/initram.fs quiet splash
+LABEL debuglive
+    MENU LABEL "$LABEL Debug Mode"
+    KERNEL /boot/$(uname -m)/vmlinuz
+    APPEND initrd=/boot/$(uname -m)/initram.fs
 EOF
 
 sudo tar xf $LFS/sources/syslinux-4.06.tar.xz
