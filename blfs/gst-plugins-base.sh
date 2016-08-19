@@ -28,7 +28,7 @@ cd $SOURCE_DIR
 
 URL=http://ftp.gnome.org/pub/gnome/sources/gst-plugins-base/0.10/gst-plugins-base-0.10.36.tar.xz
 
-wget -nc http://www.linuxfromscratch.org/patches/blfs/systemd/gst-plugins-base-0.10.36-gcc_4_9_0_i686-1.patch
+#wget -nc http://www.linuxfromscratch.org/patches/blfs/systemd/gst-plugins-base-0.10.36-gcc_4_9_0_i686-1.patch
 wget -nc http://ftp.gnome.org/pub/gnome/sources/gst-plugins-base/0.10/gst-plugins-base-0.10.36.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gst-plugins-base/0.10/gst-plugins-base-0.10.36.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
@@ -37,7 +37,7 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
 tar xf $TARBALL
 cd $DIRECTORY
 
-patch -Np1 -i ../gst-plugins-base-0.10.36-gcc_4_9_0_i686-1.patch
+#patch -Np1 -i ../gst-plugins-base-0.10.36-gcc_4_9_0_i686-1.patch
 
 
 ./configure --prefix=/usr    \

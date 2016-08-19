@@ -18,7 +18,7 @@ cd $SOURCE_DIR
 if [ -d /sys/firmware/efi ]
 then
 
-EFIPART="$DEV_NAME`partx -s /dev/sda | tr -s ' ' | grep "EFI" | sed "s@^ *@@g" | cut "-d " -f1`"
+EFIPART="$DEV_NAME`partx -s $DEV_NAME | tr -s ' ' | grep "EFI" | sed "s@^ *@@g" | cut "-d " -f1`"
 mkdir -pv /boot/efi
 
 {
