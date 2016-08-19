@@ -48,7 +48,7 @@ make install
 
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+rm -rf $DIRECTORY
 
 echo "$STEPNAME" | tee -a $LOGFILE
 fi
