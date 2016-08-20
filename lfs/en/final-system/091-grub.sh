@@ -61,9 +61,9 @@ fi
 
 sed -i "s@GNU GRUB  version %s@$OS_NAME $OS_VERSION $OS_CODENAME \- GNU GRUB@g" grub-core/normal/main.c
 
-if [ `uname -m` == "x86_64" ] && [ -d /sys/firmware/efi ]
+if [ -d /sys/firmware/efi ]
 then
-	EFI_FLAGS=" --with-platform=efi --target=x86_64 "
+	EFI_FLAGS=" --with-platform=efi --target=`uname -m` "
 fi
 
 ./configure --prefix=/usr      \
