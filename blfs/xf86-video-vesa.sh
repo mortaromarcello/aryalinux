@@ -7,7 +7,6 @@ set +h
 
 #VER:xf86-video-vesa:2.3.4
 
-#REQ:libevdev
 #REQ:xorg-server
 #REC:mtdev
 
