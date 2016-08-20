@@ -70,7 +70,7 @@ then
 	--disable-efiemu       \
 	--enable-grub-mkfont   \
 	--with-platform=efi    \
-	--target=x86_64        \
+	--target=`uname -m`    \
 	--program-prefix=""    \
 	--with-bootdir="/boot" \
 	--with-grubdir="grub"  \
