@@ -39,8 +39,8 @@ then
 	sed -i "s@#autologin-user=@autologin-user=$USERNAME@g" $LFS/etc/lightdm/lightdm.conf
 	sed -i "s@#autologin-user-timeout=0@autologin-user-timeout=0@g" $LFS/etc/lightdm/lightdm.conf
 else
-	mkdir -pv /etc/systemd/system/getty@tty1.service.d/
-	pushd /etc/systemd/system/getty@tty1.service.d/
+	mkdir -pv $LFS/etc/systemd/system/getty@tty1.service.d/
+	pushd $LFS/etc/systemd/system/getty@tty1.service.d/
 cat >override.conf<<EOF
 [Service]
 Type=simple
