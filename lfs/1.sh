@@ -8,12 +8,12 @@ set -e
   echo "Would now go online and check for updated scripts. If you are not connected to the internet, please connect(See network Icon on upper right corner) and then press enter to continue..."
   read RESPONSE
   echo "Fetching updates on the build scripts..."
-  rm -rf /tmp/2016.08.zip
-  rm -rf /tmp/aryalinux-2016.08
-  wget https://github.com/FluidIdeas/aryalinux/archive/2016.08.zip -O /tmp/2016.08.zip
+  rm -rf /tmp/2016.04.zip
+  rm -rf /tmp/aryalinux-2016.04
+  wget https://github.com/FluidIdeas/aryalinux/archive/2016.04.zip -O /tmp/2016.04.zip
   pushd /tmp &> /dev/null
-  unzip 2016.08.zip &> /dev/null
-  cp -rf aryalinux-2016.08/lfs/* /root/scripts/
+  unzip 2016.04.zip &> /dev/null
+  cp -rf aryalinux-2016.04/lfs/* /root/scripts/
   popd &> /dev/null
   clear
   echo "Updated the build scripts successfully."
