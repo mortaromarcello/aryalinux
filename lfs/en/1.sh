@@ -64,7 +64,7 @@ read -p "Enter the domain name(Domain to which this computer would be added) e.g
 clear
 echo "OS Name, Version and Codename:"
 read -p "Enter OS Name e.g. AryaLinux : " OS_NAME
-read -p "Enter OS Codename e.g. Saavan : " OS_CODENAME
+read -p "Enter OS Codename e.g. DawnOfJustice : " OS_CODENAME
 
 clear
 echo "General Information about building:"
@@ -83,7 +83,7 @@ SWAP_PART="$SWAP_PART"
 HOME_PART="$HOME_PART"
 OS_NAME="$OS_NAME"
 OS_CODENAME="$OS_CODENAME"
-OS_VERSION="2016.08"
+OS_VERSION="2016.04"
 LOCALE="$LOCALE"
 PAPER_SIZE="$PAPER_SIZE"
 HOST_NAME="$HOST_NAME"
