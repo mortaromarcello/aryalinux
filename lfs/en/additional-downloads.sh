@@ -40,6 +40,7 @@ wget -nc http://aryalinux.org/releases/2016.04/aufs4-loopback.patch
 wget -nc http://aryalinux.org/releases/2016.04/aufs4-mmap.patch
 wget -nc http://aryalinux.org/releases/2016.04/aufs4-standalone.patch
 wget -nc http://aryalinux.org/releases/2016.04/0.21-nvme_ioctl.h.patch
+wget -nc ftp://sources.redhat.com/pub/lvm2/releases/LVM2.2.02.155.tgz
 
 popd
 

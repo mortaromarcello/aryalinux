@@ -97,6 +97,10 @@ set bell-style none
 # End /etc/inputrc
 EOF
 
+cat > /etc/vconsole.conf << EOF
+KEYMAP=$KEYBOARD
+EOF
+
 cat > /etc/shells << "EOF"
 # Begin /etc/shells
 
@@ -112,9 +116,9 @@ cat > /etc/fstab << EOF
 # file system  mount-point  type     options             dump  fsck
 #                                                              order
 
-$ROOT_PART     /            ext4     defaults            1     1
-$SWAP_PART     swap         swap     pri=1               0     0
-$HOME_PART     /home        ext4     defaults            1     1
+UUID=$ROOT_PART_BY_UUID     /            ext4     defaults            1     1
+UUID=$SWAP_PART_BY_UUID     swap         swap     pri=1               0     0
+UUID=$HOME_PART_BY_UUID     /home        ext4     defaults            1     1
 
 # End /etc/fstab
 EOF
@@ -135,10 +139,22 @@ fi
 
 fi
 
-./initramfs.sh
-extras/014-openssl.sh
+if ! grep initramfs /sources/build-log &> /dev/null
+then
+	./initramfs.sh
+fi
 
-./kernel.sh
+if ! grep "014-openssl.sh" /sources/build-log &> /dev/null
+then
+	extras/014-openssl.sh
+fi
+
+./lvm2.sh
+
+if ! grep kernel /sources/build-log &> /dev/null
+then
+	./kernel.sh
+fi
 
 for script in extras/*.sh
 do
@@ -160,5 +176,10 @@ passwd $USERNAME
 sed -i "s/# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/g" /etc/sudoers
 groupadd wheel
 usermod -a -G wheel $USERNAME
+
+echo "Done with the build process. You may now exit by entering the following :"
+echo ""
+echo "exit"
+echo ""
 
 fi
