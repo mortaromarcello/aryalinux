@@ -168,7 +168,7 @@ for device in $(ls /dev); do
     [ "${device}" == "null"    ] && continue
 
     mount -o ro /dev/${device} /mnt/medium 2> /dev/null && \
-    if [ "$(cat /mnt/medium/boot/${ARCH}/id_label)" != "${LABEL}" ]; then
+    if [ "$(cat /mnt/medium/isolinux/id_label)" != "${LABEL}" ]; then
         umount /mnt/medium
     else
         DEVICE="${device}"
@@ -184,7 +184,7 @@ if [ "${DEVICE}" == "" ]; then
 fi
 
 # Mount the system image
-mount -t squashfs -o ro,loop /mnt/medium/boot/${ARCH}/root.sfs /mnt/system || {
+mount -t squashfs -o ro,loop /mnt/medium/aryalinux/root.sfs /mnt/system || {
     echo "FATAL: Boot medium found, but system image is missing."
     /bin/busybox sh
 }
