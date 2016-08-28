@@ -89,8 +89,8 @@ EOF
 	popd
 fi
 
-#rm -f $LFS/sources/root.sfs
-#sudo mksquashfs $LFS $LFS/sources/root.sfs -b 1048576 -comp xz -Xdict-size 100% -e $LFS/sources -e $LFS/var/cache/alps/sources/* -e $LFS/tools -e $LFS/etc/fstab
+rm -f $LFS/sources/root.sfs
+sudo mksquashfs $LFS $LFS/sources/root.sfs -b 1048576 -comp xz -Xdict-size 100% -e $LFS/sources -e $LFS/var/cache/alps/sources/* -e $LFS/tools -e $LFS/etc/fstab
 
 if [ -f $LFS/etc/lightdm/lightdm.conf ]
 then
