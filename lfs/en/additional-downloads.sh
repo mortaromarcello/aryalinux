@@ -41,6 +41,9 @@ wget -nc http://aryalinux.org/releases/2016.04/aufs4-mmap.patch
 wget -nc http://aryalinux.org/releases/2016.04/aufs4-standalone.patch
 wget -nc http://aryalinux.org/releases/2016.04/0.21-nvme_ioctl.h.patch
 wget -nc ftp://sources.redhat.com/pub/lvm2/releases/LVM2.2.02.155.tgz
+wget -nc https://slackbuilds.org/mirror/slackware/slackware64-14.1/source/a/grub/txtHRnXiHYUrM.txt.gz
+wget -nc https://slackbuilds.org/mirror/slackware/slackware64-14.1/source/a/grub/etc.default.grub
+wget -nc https://raw.githubusercontent.com/openembedded/openembedded-core/master/meta/recipes-bsp/grub/files/0001-grub-core-gettext-gettext.c-main_context-secondary_c.patch
 
 popd
 
