@@ -63,7 +63,6 @@ if [ -h $LFS/dev/shm ]; then
   mkdir -pv $LFS/$(readlink $LFS/dev/shm)
 fi
 
-cp -v grub-efi.sh $LFS/sources/
 cp -v make-efibootimg.sh $LFS/sources/
 cp -v mkliveinitramfs.sh $LFS/sources/
 cp -v init.sh $LFS/sources/
