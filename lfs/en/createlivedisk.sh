@@ -9,6 +9,9 @@ mkdir -pv $LFS
 
 set -e
 
+if [ $# -ne 0 ]
+then
+
 for i in "$@"
 do
 case $i in
@@ -45,6 +48,16 @@ case $i in
     ;;
 esac
 done
+
+else
+
+read -p "Enter the root partition name E.g. /dev/sda7 : " ROOT_PART
+read -p "Enter the home partition name E.g. /dev/sda3 : " HOME_PART
+read -p "Enter the username that would be logged into live system by default : " USERNAME
+read -p "Enter the default label for the boot entry in the Live System : " LABEL
+read -p "Enter the name of the ISO file to be generated : " OUTFILE
+
+fi
 
 mount $ROOT_PART $LFS
 if [ "x$HOME_PART" != "x" ]
