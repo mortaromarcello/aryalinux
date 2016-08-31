@@ -19,13 +19,3 @@ rm -rf mnt_init
 mv initramfs.cpio.gz /boot/initram.fs
 mv id_label /boot
 
-dd if=/dev/zero bs=1M count=50 of=efiboot.img
-mkfs.fat -n "ARCHISO_EFI" efiboot.img
-mkdir -pv new
-mount -t vfat -o loop efiboot.img new
-
-LINUX_VERSION=`ls /boot/vmlinuz* | sed "s@/boot/vmlinuz-@@g"`
-
-cp -r /boot/vmlinuz-$LINUX_VERSION new/vmlinuz.efi
-umount new
-rm -rf new

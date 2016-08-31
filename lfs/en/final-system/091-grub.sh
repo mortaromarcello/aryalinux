@@ -61,7 +61,7 @@ fi
 
 sed -i "s@GNU GRUB  version %s@$OS_NAME $OS_VERSION $OS_CODENAME \- GNU GRUB@g" grub-core/normal/main.c
 
-if [ -d /sys/firmware/efi ]
+if [ `uname -m` == "x86_64" ]
 then
 ./configure --prefix=/usr  \
 	--sbindir=/sbin        \
@@ -74,19 +74,32 @@ then
 	--program-prefix=""    \
 	--with-bootdir="/boot" \
 	--with-grubdir="grub"  \
-	--disable-werror 
+	--disable-werror &&
+make
+make install
+
+make clean
+
+./configure --prefix=/usr          \
+            --sbindir=/sbin        \
+            --sysconfdir=/etc      \
+            --disable-grub-emu-usb \
+            --disable-efiemu       \
+            --disable-werror &&
+make
+make install
 else
 ./configure --prefix=/usr          \
             --sbindir=/sbin        \
             --sysconfdir=/etc      \
             --disable-grub-emu-usb \
             --disable-efiemu       \
-            --disable-werror
+            --disable-werror &&
 fi
 make
 make install
 
-if [ -d /sys/firmware/efi ]
+if [ `uname -m` == "x86_64" ]
 then
 	mkdir -pv /usr/share/fonts/unifont
 	gunzip -c ../unifont-7.0.05.pcf.gz > /usr/share/fonts/unifont/unifont.pcf

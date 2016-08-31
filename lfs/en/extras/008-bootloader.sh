@@ -33,8 +33,8 @@ efivarfs       /sys/firmware/efi/efivars  efivarfs  defaults  0      1
 EOF
 
 grub-install --target=`uname -m`-efi --efi-directory=/boot/efi  \
-   --bootloader-id="$OS_NAME $OS_VERSION $OS_CODENAME" --recheck --debug
-
+   --bootloader-id="$OS_NAME" --recheck --debug
+efibootmgr -c -d $DEVICE -p `echo $EFIPART | sed 's@$DEVICE@@g'` -L "$OS_NAME $OS_VERSION ($OS_CODENAME)" -l "$OS_NAME"
 grub-mkconfig -o /boot/grub/grub.cfg
 
 else
