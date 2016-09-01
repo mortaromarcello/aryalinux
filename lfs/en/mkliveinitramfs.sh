@@ -19,4 +19,3 @@ rm -rf mnt_init
 mv initramfs.cpio.gz /boot/initram.fs
 mv id_label /boot
 
-

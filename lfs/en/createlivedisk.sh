@@ -1,15 +1,65 @@
 #!/bin/bash
 
-( echo "Unmounting /mnt/lfs if mounted." && ./umountal.sh ) || ( echo "Done" )
+./umountal.sh
 
-read -p "Enter the name of the Root Partition e.g. /dev/sda10 : " ROOT_PART
-read -p "Enter the name of the home partition e.g. /dev/sda11 : " HOME_PART
-read -p "Enter the default boot entry in the Live Disk e.g. My Linux : " LABEL
-read -p "Enter the name of iso file to be generated e.g. my-linux-live-i686.iso : " OUTFILE
+LFS=/mnt/lfs
+mkdir -pv $LFS
 
-export LFS=/mnt/lfs
+./umountal.sh
+
+set -e
+
+if [ $# -ne 0 ]
+then
+
+for i in "$@"
+do
+case $i in
+    -r=*|--root-partition=*)
+    ROOT_PART="${i#*=}"
+    shift # past argument=value
+    ;;
+    -h=*|--home-partition=*)
+    HOME_PART="${i#*=}"
+    shift # past argument=value
+    ;;
+    -l=*|--label=*)
+    LABEL="${i#*=}"
+    shift # past argument=value
+    ;;
+    -o=*|--output=*)
+    OUTFILE="${i#*=}"
+    shift # past argument=value
+    ;;
+    -u=*|--default-user=*)
+    USERNAME="${i#*=}"
+    shift # past argument=value
+    ;;
+    -s=*|--create-squashedfs=*)
+    CREATE_ROOTSFS="${i#*=}"
+    shift # past argument=value
+    ;;
+    --default)
+    DEFAULT=YES
+    shift # past argument with no value
+    ;;
+    *)
+            # unknown option
+    ;;
+esac
+done
+
+else
+
+read -p "Enter the root partition name E.g. /dev/sda7 : " ROOT_PART
+read -p "Enter the home partition name E.g. /dev/sda3 : " HOME_PART
+read -p "Enter the username that would be logged into live system by default : " USERNAME
+read -p "Enter the default label for the boot entry in the Live System : " LABEL
+read -p "Enter the name of the ISO file to be generated : " OUTFILE
+
+fi
+
 mount $ROOT_PART $LFS
-
 if [ "x$HOME_PART" != "x" ]
 then
 	mount $HOME_PART $LFS/home
@@ -26,19 +76,36 @@ if [ -h $LFS/dev/shm ]; then
   mkdir -pv $LFS/$(readlink $LFS/dev/shm)
 fi
 
-KERNEL_VERSION=`ls $LFS/boot/vmlinuz* | rev | cut -d/ -f1 | rev | sed 's@vmlinuz-@@g'`
+cp -v make-efibootimg.sh $LFS/sources/
+cp -v mkliveinitramfs.sh $LFS/sources/
+cp -v init.sh $LFS/sources/
+
+chmod a+x $LFS/sources/*.sh
+
+chroot "$LFS" /usr/bin/env -i              \
+    HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \
+    PATH=/bin:/usr/bin:/sbin:/usr/sbin     \
+    /bin/bash /sources/make-efibootimg.sh "$LABEL"
 
 chroot "$LFS" /usr/bin/env -i              \
     HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \
     PATH=/bin:/usr/bin:/sbin:/usr/sbin     \
     /bin/bash /sources/mkliveinitramfs.sh
 
+sleep 5
+set +e
 ./umountal.sh
+set -e
+
 mount $ROOT_PART $LFS
+if [ "x$HOME_PART" != "x" ]
+then
+	mount $HOME_PART $LFS/home
+fi
 
-cd $LFS/sources/
+if [ "x$CREATE_ROOTSFS" == "xy" ] || [ "x$CREATE_ROOTSFS" == "xY" ]
+then
 
-read -p "Which user should be logged in by default ? " USERNAME
 if [ -f $LFS/etc/lightdm/lightdm.conf ]
 then
 	sed -i "s@#autologin-user=@autologin-user=$USERNAME@g" $LFS/etc/lightdm/lightdm.conf
@@ -50,13 +117,13 @@ else
 cat >override.conf<<EOF
 [Service]
 Type=simple
+ExecStart=
 ExecStart=-/sbin/agetty --autologin $USERNAME --noclear %I 38400 linux
 EOF
 	popd
 fi
 
 rm -f $LFS/sources/root.sfs
-
 sudo mksquashfs $LFS $LFS/sources/root.sfs -b 1048576 -comp xz -Xdict-size 100% -e $LFS/sources -e $LFS/var/cache/alps/sources/* -e $LFS/tools -e $LFS/etc/fstab
 
 if [ -f $LFS/etc/lightdm/lightdm.conf ]
@@ -67,9 +134,50 @@ then
 else
 	rm -fv /etc/systemd/system/getty@tty1.service.d/override.conf
 fi
+
+fi
+
 cd $LFS/sources/
 
-cat > isolinux.cfg << EOF
+tar xf $LFS/sources/syslinux-4.06.tar.xz
+rm -fr live
+
+mkdir -pv live/aryalinux
+mkdir -pv live/isolinux
+
+if [ `uname -m` == "x86_64" ]
+then
+
+mkdir -pv live/EFI/BOOT
+cp -v $LFS/sources/efiboot.img live/isolinux/
+cp -v $LFS/sources/bootx64.efi live/EFI/BOOT/
+cat > live/EFI/BOOT/grub.cfg << EOF
+set default="0"
+set timeout="30"
+set hidden_timeout_quiet=false
+
+menuentry "$LABEL"{
+  echo "Loading AryaLinux.  Please wait..."
+  linux /isolinux/vmlinuz quiet splash
+  initrd /isolinux/initram.fs
+}
+
+menuentry "$LABEL Debug Mode"{
+  echo "Loading AryaLinux in debug mode.  Please wait..."
+  linux /isolinux/vmlinuz
+  initrd /isolinux/initram.fs
+}
+EOF
+
+fi
+
+echo "AryaLinux Live" >id_label
+
+cp -v id_label live/isolinux
+cp -v syslinux-4.06/core/isolinux.bin live/isolinux
+cp -v syslinux-4.06/com32/menu/menu.c32 live/isolinux
+
+cat > live/isolinux/isolinux.cfg << EOF
 DEFAULT menu.c32
 PROMPT 0
 MENU TITLE Select an option to boot Aryalinux
@@ -78,47 +186,25 @@ TIMEOUT 300
 LABEL slientlive
     MENU LABEL $LABEL
     MENU DEFAULT
-    KERNEL /boot/$(uname -m)/vmlinuz
-    APPEND initrd=/boot/$(uname -m)/initram.fs quiet splash
+    KERNEL /isolinux/vmlinuz
+    APPEND initrd=initram.fs quiet splash
 LABEL debuglive
     MENU LABEL $LABEL Debug Mode
-    KERNEL /boot/$(uname -m)/vmlinuz
-    APPEND initrd=/boot/$(uname -m)/initram.fs
+    KERNEL /isolinux/vmlinuz
+    APPEND initrd=initram.fs
 EOF
 
-sudo tar xf $LFS/sources/syslinux-4.06.tar.xz
-rm -fr live
-mkdir -p live/boot/{isolinux,$(uname -m)}
-mkdir -p live/boot/aryaiso/
-cp -v syslinux-4.06/core/isolinux.bin live/boot/isolinux
-cp -v syslinux-4.06/com32/menu/menu.c32 live/boot/isolinux
-mv -v isolinux.cfg                 live/boot/isolinux
+cp -v $LFS/sources/root.sfs live/aryalinux/
+cp -v `ls $LFS/boot/vmlinuz*`   live/isolinux/vmlinuz
+cp -v $LFS/boot/initram.fs live/isolinux/
 
-cp -v $LFS/sources/root.sfs live/boot/$(uname -m)
-cp -v $LFS/boot/vmlinuz-$KERNEL_VERSION   live/boot/$(uname -m)/vmlinuz
-cp -v $LFS/boot/id_label live/boot/$(uname -m)
-cp -v $LFS/boot/initram.fs live/boot/$(uname -m)/initram.fs
+echo "AryaLinux Live" > live/isolinux/id_label
 
-cp -v $LFS/sources/efiboot.img live/boot/aryaiso/
+mkisofs -o $LFS/sources/$OUTFILE -R -J -A "$LABEL" -hide-rr-moved -v -d -N -no-emul-boot -boot-load-size 4 -boot-info-table -b isolinux/isolinux.bin -c isolinux/isolinux.boot -eltorito-alt-boot -no-emul-boot -eltorito-platform 0xEF -eltorito-boot isolinux/efiboot.img -V "ARYALIVE" live
 
-genisoimage \
-  -o "$LFS/sources/$OUTFILE" \
-  -c boot.cat \
-  -b boot/isolinux/isolinux.bin \
-  -no-emul-boot \
-  -boot-load-size 4 \
-  -boot-info-table \
-  -joliet -l -R \
-  -eltorito-alt-boot \
-  live
-
-rm -rf live
-rm $LFS/boot/initram.fs
-rm $LFS/boot/id_label
-
-echo "Making ISO Hybrid. You can simply use dd to write the iso onto a pen drive to create a bootable pen drive."
-
-isohybrid "$LFS/sources/$OUTFILE"
-~/scripts/en/umountal.sh
-
-echo "Done creating the live disk. You can find the Live ISO image in the /sources directory of the newly built system (in $ROOT_PART)."
+if [ `uname -m` == "x86_64" ]
+then
+	isohybrid -u $LFS/sources/$OUTFILE
+else
+	isohybrid $LFS/sources/$OUTFILE
+fi
