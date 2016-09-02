@@ -18,7 +18,16 @@ cd $SOURCE_DIR
 if [ -d /sys/firmware/efi ]
 then
 
-EFIPART="$DEV_NAME`partx -s $DEV_NAME | tr -s ' ' | grep "EFI" | sed "s@^ *@@g" | cut "-d " -f1`"
+EFIPART="$DEV_NAME`partx -s /dev/sda | tr -s ' ' | grep "EFI" | sed "s@^ *@@g" | cut "-d " -f1`"
+
+if [ "x$EFIPART" == "x$DEV_NAME" ]
+then
+
+grub-install $DEV_NAME
+grub-mkconfig -o /boot/grub/grub.cfg
+
+else
+
 mkdir -pv /boot/efi
 
 {
@@ -32,13 +41,12 @@ $EFIPART       /boot/efi    vfat     defaults            0     1
 efivarfs       /sys/firmware/efi/efivars  efivarfs  defaults  0      1
 EOF
 
-BOOTLOADER_ID=`echo $OS_NAME $OS_VERSION $OS_CODENAME | sed "s@ @_@g"`
-PARTNUMBER=`echo $EFIPART | sed "s@$DEVICE@@g"`
-
-grub-install --target=`uname -m`-efi --efi-directory=/boot/efi --bootloader-id="$BOOTLOADER_ID" --recheck --debug
-efibootmgr --create --gpt --disk /dev/sda --part $PARTNUMBER --write-signature --label "$OS_NAME $OS_VERSION $OS_CODENAME" --loader "\\EFI\\$BOOTLOADER_ID\\grubx64.efi"
-
+grub-install --target=`uname -m`-efi --efi-directory=/boot/efi  \
+   --bootloader-id="$OS_NAME" --recheck --debug
+efibootmgr -c -d $DEV_NAME -p `echo $EFIPART | sed 's@$DEV_NAME@@g'` -L "$OS_NAME $OS_VERSION ($OS_CODENAME)" -l "$OS_NAME"
 grub-mkconfig -o /boot/grub/grub.cfg
+
+fi
 
 else
 
