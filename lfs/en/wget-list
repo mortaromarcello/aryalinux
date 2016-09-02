@@ -74,8 +74,8 @@ http://www.linuxfromscratch.org/patches/lfs/development/bash-4.3.30-upstream_fix
 http://www.linuxfromscratch.org/patches/lfs/development/bc-1.06.95-memory_leak-1.patch
 http://www.linuxfromscratch.org/patches/lfs/development/bzip2-1.0.6-install_docs-1.patch
 http://www.linuxfromscratch.org/patches/lfs/development/coreutils-8.25-i18n-2.patch
-http://www.linuxfromscratch.org/patches/lfs/development/glibc-2.23-fhs-1.patch
-http://www.linuxfromscratch.org/patches/lfs/development/glibc-2.23-upstream_fixes-1.patch
+http://www.linuxfromscratch.org/patches/downloads/glibc/glibc-2.23-fhs-1.patch
+http://www.linuxfromscratch.org/patches/downloads/glibc/glibc-2.23-upstream_fixes-1.patch
 http://www.linuxfromscratch.org/patches/lfs/development/kbd-2.0.3-backspace-1.patch
 http://www.linuxfromscratch.org/patches/lfs/development/readline-6.3-upstream_fixes-3.patch
 http://www.linuxfromscratch.org/patches/lfs/development/sysvinit-2.88dsf-consolidated-1.patch

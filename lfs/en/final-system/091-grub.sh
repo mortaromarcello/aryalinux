@@ -9,7 +9,7 @@ export MAKEFLAGS="-j `nproc`"
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="091-grub.sh"
-TARBALL="grub-2.02~beta2.tar.xz"
+TARBALL="grub-2.00.tar.xz"
 
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
@@ -61,9 +61,23 @@ fi
 
 sed -i "s@GNU GRUB  version %s@$OS_NAME $OS_VERSION $OS_CODENAME \- GNU GRUB@g" grub-core/normal/main.c
 
-if [ -d /sys/firmware/efi ]
+if [ `uname -m` == "x86_64" ]
 then
-	EFI_FLAGS=" --with-platform=efi --target=`uname -m` "
+
+./configure --prefix=/usr      \
+	--sbindir=/sbin        \
+	--localstatedir=/var   \
+	--sysconfdir=/etc      \
+	--enable-grub-mkfont   \
+	--program-prefix=""    \
+	--with-bootdir="/boot" \
+	--with-grubdir="grub"  \
+	--disable-werror       \
+	--with-platform=efi --target=x86_64 &&
+make "-j`nproc`"
+make install
+make clean
+
 fi
 
 ./configure --prefix=/usr      \
@@ -75,7 +89,6 @@ fi
 	--with-bootdir="/boot" \
 	--with-grubdir="grub"  \
 	--disable-werror       \
-	$EFI_FLAGS
 make
 make install
 
