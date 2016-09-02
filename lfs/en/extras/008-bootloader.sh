@@ -19,6 +19,15 @@ if [ -d /sys/firmware/efi ]
 then
 
 EFIPART="$DEV_NAME`partx -s /dev/sda | tr -s ' ' | grep "EFI" | sed "s@^ *@@g" | cut "-d " -f1`"
+
+if [ "x$EFIPART" == "x" ]
+then
+
+grub-install $DEV_NAME
+grub-mkconfig -o /boot/grub/grub.cfg
+
+else
+
 mkdir -pv /boot/efi
 
 {
@@ -36,6 +45,8 @@ grub-install --target=`uname -m`-efi --efi-directory=/boot/efi  \
    --bootloader-id="$OS_NAME" --recheck --debug
 efibootmgr -c -d $DEVICE -p `echo $EFIPART | sed 's@$DEVICE@@g'` -L "$OS_NAME $OS_VERSION ($OS_CODENAME)" -l "$OS_NAME"
 grub-mkconfig -o /boot/grub/grub.cfg
+
+fi
 
 else
 
