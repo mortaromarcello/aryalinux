@@ -88,16 +88,19 @@ make clean
             --disable-werror &&
 make
 make install
+
 else
+
 ./configure --prefix=/usr          \
             --sbindir=/sbin        \
             --sysconfdir=/etc      \
             --disable-grub-emu-usb \
             --disable-efiemu       \
             --disable-werror &&
-fi
 make
 make install
+
+fi
 
 if [ `uname -m` == "x86_64" ]
 then
@@ -108,6 +111,7 @@ then
 fi
 
 cd $SOURCE_DIR
+
 if [ "$TARBALL" != "" ]
 then
 	rm -rf $DIRECTORY
