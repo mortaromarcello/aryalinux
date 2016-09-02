@@ -60,17 +60,34 @@ then
 fi
 
 sed -i "s@GNU GRUB  version %s@$OS_NAME $OS_VERSION $OS_CODENAME \- GNU GRUB@g" grub-core/normal/main.c
+zcat $CWD/txtHRnXiHYUrM.txt.gz | patch -p0 --verbose || exit 1
+patch -Np1 -i ../0001-grub-core-gettext-gettext.c-main_context-secondary_c.patch
+patch -Np1 -i ../grub-2.00-stdio.patch
 
 if [ `uname -m` == "x86_64" ]
 then
-./configure --prefix=/usr  \
+
+./configure --prefix=/usr      \
 	--sbindir=/sbin        \
+	--localstatedir=/var   \
 	--sysconfdir=/etc      \
-	--disable-grub-emu-usb \
-	--disable-efiemu       \
 	--enable-grub-mkfont   \
-	--with-platform=efi    \
-	--target=`uname -m`    \
+	--program-prefix=""    \
+	--with-bootdir="/boot" \
+	--with-grubdir="grub"  \
+	--disable-werror       \
+	--with-platform=efi --target=x86_64 &&
+make "-j`nproc`"
+make install
+make clean
+
+fi
+
+./configure --prefix=/usr      \
+	--sbindir=/sbin        \
+	--localstatedir=/var   \
+	--sysconfdir=/etc      \
+	--enable-grub-mkfont   \
 	--program-prefix=""    \
 	--with-bootdir="/boot" \
 	--with-grubdir="grub"  \
@@ -78,40 +95,11 @@ then
 make
 make install
 
-make clean
-
-./configure --prefix=/usr          \
-            --sbindir=/sbin        \
-            --sysconfdir=/etc      \
-            --disable-grub-emu-usb \
-            --disable-efiemu       \
-            --disable-werror &&
-make
-make install
-
-else
-
-./configure --prefix=/usr          \
-            --sbindir=/sbin        \
-            --sysconfdir=/etc      \
-            --disable-grub-emu-usb \
-            --disable-efiemu       \
-            --disable-werror &&
-make
-make install
-
-fi
-
-if [ `uname -m` == "x86_64" ]
-then
-	mkdir -pv /usr/share/fonts/unifont
-	gunzip -c ../unifont-7.0.05.pcf.gz > /usr/share/fonts/unifont/unifont.pcf
-	grub-mkfont -o /usr/share/grub/unicode.pf2 \
-		 /usr/share/fonts/unifont/unifont.pcf
-fi
+mkdir -pv /usr/share/fonts/unifont
+gunzip -c ../unifont-7.0.05.pcf.gz > /usr/share/fonts/unifont/unifont.pcf
+grub-mkfont -o /usr/share/grub/unicode.pf2 /usr/share/fonts/unifont/unifont.pcf
 
 cd $SOURCE_DIR
-
 if [ "$TARBALL" != "" ]
 then
 	rm -rf $DIRECTORY
