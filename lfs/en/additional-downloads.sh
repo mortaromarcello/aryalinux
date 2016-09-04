@@ -41,7 +41,7 @@ wget -nc http://aryalinux.org/releases/2016.04/aufs4-mmap.patch
 wget -nc http://aryalinux.org/releases/2016.04/aufs4-standalone.patch
 wget -nc http://aryalinux.org/releases/2016.04/0.21-nvme_ioctl.h.patch
 wget -nc ftp://sources.redhat.com/pub/lvm2/releases/LVM2.2.02.155.tgz
-rm cdrtools-3.01.tar.bz2
+rm -rf cdrtools-3.01.tar.bz2
 wget -nc https://sourceforge.net/projects/cdrtools/files/cdrtools-3.01.tar.bz2/download -O cdrtools-3.01.tar.bz2
 wget -nc https://launchpad.net/ubuntu/+archive/primary/+files/cdrkit_1.1.11.orig.tar.gz
 wget -nc http://www.cmake.org/files/v3.5/cmake-3.5.0.tar.gz
