@@ -23,7 +23,7 @@ set -e
   touch /tmp/updated
   echo "Done with downloading the updated scripts. These are the languages in which build scripts are available right now. Select one of these languages:"
   echo ""
-  ls
+  ls | sed -i "s@1.sh@@g"
   echo ""
   read -p "Select language : " LANG
   cd $LANG
