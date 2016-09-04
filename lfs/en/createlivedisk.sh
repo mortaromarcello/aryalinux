@@ -82,10 +82,15 @@ cp -v init.sh $LFS/sources/
 
 chmod a+x $LFS/sources/*.sh
 
+if [ `uname -m` == "x86_64" ]
+then
+
 chroot "$LFS" /usr/bin/env -i              \
     HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \
     PATH=/bin:/usr/bin:/sbin:/usr/sbin     \
     /bin/bash /sources/make-efibootimg.sh "$LABEL"
+
+fi
 
 chroot "$LFS" /usr/bin/env -i              \
     HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \
