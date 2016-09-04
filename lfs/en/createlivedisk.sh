@@ -56,6 +56,7 @@ read -p "Enter the home partition name E.g. /dev/sda3 : " HOME_PART
 read -p "Enter the username that would be logged into live system by default : " USERNAME
 read -p "Enter the default label for the boot entry in the Live System : " LABEL
 read -p "Enter the name of the ISO file to be generated : " OUTFILE
+CREATE_ROOTSFS="y"
 
 fi
 
