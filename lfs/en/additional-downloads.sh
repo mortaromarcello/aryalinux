@@ -42,11 +42,11 @@ wget -nc http://aryalinux.org/releases/2016.08/aufs4-mmap.patch
 wget -nc http://aryalinux.org/releases/2016.08/aufs4-standalone.patch
 wget -nc http://aryalinux.org/releases/2016.08/0.21-nvme_ioctl.h.patch
 wget -nc http://aryalinux.org/releases/2016.08/alps-scripts-2016.08.tar.gz
-wget -nc https://slackbuilds.org/mirror/slackware/slackware64-14.1/source/a/grub/txtHRnXiHYUrM.txt.gz
-wget -nc https://slackbuilds.org/mirror/slackware/slackware64-14.1/source/a/grub/etc.default.grub
-wget -nc https://raw.githubusercontent.com/openembedded/openembedded-core/master/meta/recipes-bsp/grub/files/0001-grub-core-gettext-gettext.c-main_context-secondary_c.patch
-wget -nc http://aryalinux.org/releases/2016.08/bootx64.efi
-wget -nc https://www.openmamba.org/pub/openmamba/milestone3/patches/grub-2.00-stdio.patch
+rm cdrtools-3.01.tar.bz2
+wget -nc https://sourceforge.net/projects/cdrtools/files/cdrtools-3.01.tar.bz2/download -O cdrtools-3.01.tar.bz2
+wget -nc https://launchpad.net/ubuntu/+archive/primary/+files/cdrkit_1.1.11.orig.tar.gz
+wget -nc http://www.cmake.org/files/v3.5/cmake-3.5.0.tar.gz
+
 popd
 
 cp -v functions ../../sources
