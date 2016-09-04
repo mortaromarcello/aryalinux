@@ -60,7 +60,7 @@ then
 fi
 
 sed -i "s@GNU GRUB  version %s@$OS_NAME $OS_VERSION $OS_CODENAME \- GNU GRUB@g" grub-core/normal/main.c
-zcat $CWD/txtHRnXiHYUrM.txt.gz | patch -p0 --verbose || exit 1
+zcat ../txtHRnXiHYUrM.txt.gz | patch -p0 --verbose || exit 1
 patch -Np1 -i ../0001-grub-core-gettext-gettext.c-main_context-secondary_c.patch
 patch -Np1 -i ../grub-2.00-stdio.patch
 
