@@ -11,9 +11,6 @@ LOGFILE="/sources/build-log"
 STEPNAME="091-grub.sh"
 TARBALL="grub-2.02~beta3.tar.xz"
 
-if ! grep "$STEPNAME" $LOGFILE &> /dev/null
-then
-
 cd $SOURCE_DIR
 
 sed -i "s@GNU GRUB  version %s@$OS_NAME $OS_VERSION $OS_CODENAME \- GNU GRUB@g" grub-core/normal/main.c
@@ -61,5 +58,3 @@ then
 fi
 
 echo "$STEPNAME" | tee -a $LOGFILE
-
-fi
