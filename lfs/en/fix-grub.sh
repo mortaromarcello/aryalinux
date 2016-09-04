@@ -12,19 +12,11 @@ STEPNAME="091-grub.sh"
 TARBALL="grub-2.02~beta3.tar.xz"
 
 cd $SOURCE_DIR
-if [ "$TARBALL" != "" ]
-then
-	DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
-	tar xf $TARBALL
-	cd $DIRECTORY
-fi
 
 sed -i "s@GNU GRUB  version %s@$OS_NAME $OS_VERSION $OS_CODENAME \- GNU GRUB@g" grub-core/normal/main.c
 
 if [ `uname -m` == "x86_64" ]
 then
-	EFI_FLAGS=" --with-platform=efi --target=x86_64 "
-fi
 
 ./configure --prefix=/usr      \
 	--sbindir=/sbin        \
@@ -35,7 +27,22 @@ fi
 	--with-bootdir="/boot" \
 	--with-grubdir="grub"  \
 	--disable-werror       \
-	$EFI_FLAGS
+	--with-platform=efi --target=x86_64 &&
+make "-j`nproc`"
+make install
+make clean
+
+fi
+
+./configure --prefix=/usr      \
+	--sbindir=/sbin        \
+	--localstatedir=/var   \
+	--sysconfdir=/etc      \
+	--enable-grub-mkfont   \
+	--program-prefix=""    \
+	--with-bootdir="/boot" \
+	--with-grubdir="grub"  \
+	--disable-werror &&
 make
 make install
 
@@ -49,3 +56,5 @@ then
 	rm -rf $DIRECTORY
 	rm -rf {gcc,glibc,binutils}-build
 fi
+
+echo "$STEPNAME" | tee -a $LOGFILE
