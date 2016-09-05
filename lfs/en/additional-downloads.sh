@@ -47,6 +47,7 @@ wget -nc https://sourceforge.net/projects/cdrtools/files/cdrtools-3.01.tar.bz2/d
 wget -nc https://launchpad.net/ubuntu/+archive/primary/+files/cdrkit_1.1.11.orig.tar.gz
 wget -nc http://www.cmake.org/files/v3.5/cmake-3.5.0.tar.gz
 wget -nv http://pkgs.fedoraproject.org/repo/pkgs/squashfs-tools/squashfs4.3.tar.gz/370d0470f3c823bf408a3b7a1f145746/squashfs4.3.tar.gz
+wget -nc aryalinux.org/releases/2016.08/bootx64.efi
 
 popd
 
