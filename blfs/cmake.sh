@@ -32,7 +32,9 @@ whoami > /tmp/currentuser
             --system-libs       \
             --mandir=/share/man \
             --no-system-jsoncpp \
-            --docdir=/share/doc/cmake-3.5.0 &&
+            --docdir=/share/doc/cmake-3.5.0 \
+            --no-system-curl    \
+            --no-system-libarchive &&
 make "-j`nproc`"
 
 
