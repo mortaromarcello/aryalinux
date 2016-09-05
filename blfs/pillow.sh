@@ -7,7 +7,7 @@ set +h
 
 #VER:pillow_.orig:3.2.0
 
-URL=http://archive.ubuntu.com/ubuntu/pool/main/p/pillow/pillow_3.2.0.orig.tar.xz
+URL=https://launchpad.net/ubuntu/+archive/primary/+files/pillow_3.2.0.orig.tar.xz
 
 cd $SOURCE_DIR
 
