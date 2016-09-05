@@ -161,6 +161,15 @@ do
 	$script
 done
 
+cd $SOURCE_DIR
+tar xf syslinux-4.06.tar.xz
+cd syslinux-4.06
+cd utils
+make
+cp isohybrid /usr/bin/
+cd $SOURCE_DIR
+rm -r syslinux-4.06
+
 if ! grep "user-and-passwords" /sources/build-log &> /dev/null
 then
 
