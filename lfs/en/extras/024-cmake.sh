@@ -27,6 +27,8 @@ fi
             --system-libs       \
             --mandir=/share/man \
             --no-system-jsoncpp \
+            --no-system-curl    \
+            --no-system-libarchive \
             --docdir=/share/doc/cmake-3.5.0 &&
 make "-j`nproc`"
 make install
