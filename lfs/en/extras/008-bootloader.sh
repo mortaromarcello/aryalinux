@@ -34,7 +34,7 @@ mkdir -pv /boot/efi
 {
 set +e
 mount -vt vfat $EFIPART /boot/efi
-mount -t efivars efivars /sys/firmware/efi/efivars
+mount -t efivarfs efivars /sys/firmware/efi/efivars
 set -e
 }
 
