@@ -18,7 +18,8 @@ cd $SOURCE_DIR
 if [ -d /sys/firmware/efi ]
 then
 
-EFIPART="$DEV_NAME`partx -s /dev/sda | tr -s ' ' | grep "EFI" | sed "s@^ *@@g" | cut "-d " -f1`"
+EFIPART="$DEV_NAME`partx -s $DEV_NAME | tr -s ' ' | grep "EFI" | sed "s@^ *@@g" | cut "-d " -f1`"
+EFIPART_UUID=`blkid $EFIPART | cut '-d"' -f2`
 
 if [ "x$EFIPART" == "x$DEV_NAME" ]
 then
@@ -38,7 +39,7 @@ set -e
 }
 
 cat >> /etc/fstab <<EOF
-$EFIPART       /boot/efi    vfat     defaults            0     1
+UUID=$EFIPART_UUID       /boot/efi    vfat     defaults            0     1
 efivarfs       /sys/firmware/efi/efivars  efivarfs  defaults  0      1
 EOF
 
