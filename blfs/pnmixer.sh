@@ -9,7 +9,7 @@ set -e
 
 #REQ:alsa-utils
 #REQ:gtk2
-
+#REQ:pavucontrol
 
 cd $SOURCE_DIR
 
