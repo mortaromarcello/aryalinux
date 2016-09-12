@@ -13,6 +13,7 @@ cd $SOURCE_DIR
 
 sudo gem install sass
 git clone https://github.com/shimmerproject/Greybird.git
+cd Greybird
 ./autogen.sh --prefix=/usr
 sudo make install
 
