@@ -17,9 +17,8 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
 tar xf $TARBALL
 cd $DIRECTORY
 
-./configure --prefix=/usr
-make
-sudo make install
+python setup.py build
+sudo python setup.py install
 
 cd $SOURCE_DIR
 sudo rm -rf $DIRECTORY
