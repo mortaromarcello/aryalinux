@@ -8,7 +8,7 @@ set -e
 #VER:gutenprint:5.2.11
 
 #REC:cups
-#REC:gimp
+#OPT:gimp
 #OPT:ijs
 #OPT:imagemagick
 #OPT:texlive

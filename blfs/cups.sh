@@ -102,7 +102,7 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-gtk-update-icon-cache
+#gtk-update-icon-cache
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
