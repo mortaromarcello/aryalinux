@@ -44,9 +44,6 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
-fluxbox/Name=Fluxbox
-
-
 cd $SOURCE_DIR
 
 echo "lxqt-session=>`date`" | sudo tee -a $INSTALLED_LIST
