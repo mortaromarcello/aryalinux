@@ -9,7 +9,7 @@ set -e
 
 #REQ:liblxqt
 #REQ:lxqt-libkscreen
-#REQ:plasma-all
+#OPT:plasma-all
 
 
 cd $SOURCE_DIR

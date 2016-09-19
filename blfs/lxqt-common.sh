@@ -9,12 +9,14 @@ set -e
 
 #REQ:liblxqt
 #REQ:openbox
-#REQ:xfwm4
+#OPT:xfwm4
 #REQ:qt5
 #REQ:librsvg
 #REQ:xdg-utils
-#REC:lxdm
-#REC:sddm
+#OPT:lxdm
+#OPT:sddm
+#REC:lightdm
+#REC:lightdm-gtk-greeter
 #REC:desktop-file-utils
 #REC:hicolor-icon-theme
 #REC:shared-mime-info
