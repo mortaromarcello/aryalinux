@@ -10,7 +10,7 @@ set -e
 #REQ:liblxqt
 #REQ:polkit-qt
 #REQ:lxqt-kwindowsystem
-#REQ:kframeworks5
+#OPT:kframeworks5
 
 
 cd $SOURCE_DIR
