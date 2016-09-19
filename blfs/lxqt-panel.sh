@@ -15,7 +15,7 @@ set -e
 #REQ:libxkbcommon
 #REQ:lxmenu-data
 #REQ:menu-cache
-#REQ:kframeworks5
+#OPT:kframeworks5
 #REC:alsa-lib
 #REC:pulseaudio
 #REC:libstatgrab
