@@ -117,25 +117,26 @@ cat > /etc/fstab << EOF
 #                                                              order
 
 UUID=$ROOT_PART_BY_UUID     /            ext4     defaults            1     1
+EOF
+
+if [ "$SWAP_PART_BY_UUID" != "x" ]
+then
+cat >> /etc/fstab <<EOF
 UUID=$SWAP_PART_BY_UUID     swap         swap     pri=1               0     0
+EOF
+fi
+
+if [ "$HOME_PART_BY_UUID" != "x" ]
+then
+cat >> /etc/fstab <<EOF
 UUID=$HOME_PART_BY_UUID     /home        ext4     defaults            1     1
+EOF
+fi
+
+cat >> /etc/fstab <<EOF
 
 # End /etc/fstab
 EOF
-
-if [ "$SWAP_PART" == "" ]
-then
-	grep -v "swap" /etc/fstab > /etc/fstab1
-	rm /etc/fstab
-	mv /etc/fstab1 /etc/fstab
-fi
-
-if [ "$HOME_PART" == "" ]
-then
-	grep -v "home" /etc/fstab > /etc/fstab1
-	rm /etc/fstab
-	mv /etc/fstab1 /etc/fstab
-fi
 
 fi
 
