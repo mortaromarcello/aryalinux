@@ -9,6 +9,8 @@ set -e
 
 #REQ:alsa-utils
 #REQ:gtk2
+#REQ:glibmm
+#REQ:gtkmm2
 #REQ:pulseaudio
 
 
