@@ -102,18 +102,42 @@ echo ""
 echo "If everything looks fine press enter and I would start the build process. Or else to cancel press Ctrl + C and you may later restart the script by entering ./1.sh"
 read RESPONSE
 
-mkfs -v -t ext4 $ROOT_PART
+# Exit if root partition not specified.
+if [ "x$ROOT_PART" == "x" ]
+then
+exit
+fi
 
 export LFS=/mnt/lfs
 
+# Unmount the partitions if mounted and then format. Else would fail.
+set +e
+swapoff $SWAP_PART
+umount $HOME_PART
+# If root partition mounted somewhere other than $LFS then this would be taken care of...
+umount $ROOT_PART
+# Anything mounted on $LFS would be taken care of...
+umount $LFS/dev/pts
+umount $LFS/dev/shm
+umount $LFS/dev
+umount $LFS/sys
+umount $LFS/proc
+umount $LFS/run
+umount $LFS/home
+umount $LFS/boot/efi
+umount $LFS
+set -e
+
+mkfs -v -t ext4 $ROOT_PART
+
 mkdir -pv $LFS
+
 mount -v -t ext4 $ROOT_PART $LFS
 
 if [ "x$HOME_PART" != "x" ]
 then
-	mkdir -v $LFS/home
+	mkdir -pv $LFS/home
 fi
-
 
 if [ "x$SWAP_PART" != "x" ]
 then
@@ -121,22 +145,29 @@ then
 fi
 
 ROOT_PART_BY_UUID=$(get_blk_id $ROOT_PART)
+
 if [ "x$HOME_PART" != "x" ]
 then
 	mkfs -v -t ext4 $HOME_PART
 	mount -v -t ext4 $HOME_PART $LFS/home
 	HOME_PART_BY_UUID=$(get_blk_id $HOME_PART)
+cat >> build-properties << EOF
+HOME_PART_BY_UUID="$HOME_PART_BY_UUID"
+EOF
+
 fi
 
 if [ "x$SWAP_PART" != "x" ]
 then
 	SWAP_PART_BY_UUID=$(get_blk_id $SWAP_PART)
+cat >> build-properties << EOF
+SWAP_PART_BY_UUID="$SWAP_PART_BY_UUID"
+EOF
+
 fi
 
 cat >> build-properties << EOF
 ROOT_PART_BY_UUID="$ROOT_PART_BY_UUID"
-HOME_PART_BY_UUID="$HOME_PART_BY_UUID"
-SWAP_PART_BY_UUID="$SWAP_PART_BY_UUID"
 EOF
 
 . ./build-properties
