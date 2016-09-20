@@ -26,7 +26,7 @@ cd $DIRECTORY
 
 whoami > /tmp/currentuser
 
-./configure --prefix=/usr &&
+./configure --prefix=/usr --disable-gtk3 &&
 make "-j`nproc`"
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
