@@ -7,7 +7,7 @@ set +h
 cd $SOURCE_DIR
 
 URL=http://sourceforge.net/projects/galculator/files/galculator/2.1.3/galculator-2.1.3.tar.bz2/download
-wget -nc $URL -O galculator-2.1.3.tar.bz2
+wget -c $URL -O galculator-2.1.3.tar.bz2
 TARBALL=galculator-2.1.3.tar.bz2
 DIRECTORY=`tar -tf $TARBALL | sed -e 's@/.*@@' | uniq `
 
