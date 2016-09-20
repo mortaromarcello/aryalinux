@@ -6,8 +6,8 @@ set +h
 
 cd $SOURCE_DIR
 
-URL=http://sourceforge.net/projects/galculator/files/galculator/2.1.3/galculator-2.1.3.tar.bz2/download
-wget -c $URL -O galculator-2.1.3.tar.bz2
+URL=http://pkgs.fedoraproject.org/repo/pkgs/galculator/galculator-2.1.3.tar.bz2/a7a333cc4c321507434fe3f8e48fcd0a/galculator-2.1.3.tar.bz2
+wget -nc $URL
 TARBALL=galculator-2.1.3.tar.bz2
 DIRECTORY=`tar -tf $TARBALL | sed -e 's@/.*@@' | uniq `
 
