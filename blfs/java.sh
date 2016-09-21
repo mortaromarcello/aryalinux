@@ -10,9 +10,9 @@ ARCH=$(uname -m)
 
 if [ $ARCH == "x86_64" ]
 then
-	URL=http://anduin.linuxfromscratch.org/files/BLFS/OpenJDK-1.8.0.51/OpenJDK-1.8.0.51-x86_64-bin.tar.xz
+	URL=http://ftp.osuosl.org/pub/blfs/conglomeration/openjdk/OpenJDK-1.8.0.51-x86_64-bin.tar.xz
 else
-	URL=http://anduin.linuxfromscratch.org/files/BLFS/OpenJDK-1.8.0.51/OpenJDK-1.8.0.51-i686-bin.tar.xz
+	URL=http://ftp.osuosl.org/pub/blfs/conglomeration/openjdk/OpenJDK-1.8.0.51-i686-bin.tar.xz
 fi
 
 wget -nc $URL
