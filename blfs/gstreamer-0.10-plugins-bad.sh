@@ -24,7 +24,7 @@ cd $DIRECTORY
 patch -Np1 -i ../buffer-overflow-mp4.patch
 patch -Np1 -i ../0003-drop-buggy-libvpx-legacy-handling.patch
 ./configure --prefix=/usr
-make
+make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR

@@ -20,7 +20,7 @@ tar xf $TARBALL
 cd $DIRECTORY
 
 ./configure --prefix=/usr
-make
+make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR

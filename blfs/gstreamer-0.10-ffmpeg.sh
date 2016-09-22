@@ -25,7 +25,7 @@ patch -Np1 -i ../0001-gcc47.patch
 patch -Np1 -i ../0002-arm-avoid-using-the-movw-instruction.patch
 
 ./configure --prefix=/usr
-make
+make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR

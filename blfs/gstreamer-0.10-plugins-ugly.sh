@@ -25,7 +25,7 @@ patch -Np1 -i ../"0001-cdio-compensate-for-libcdio-s-recent-cd-text-api-cha.patc
 patch -Np1 -i ../"0002-Fix-opencore-include-paths.patch"
 
 ./configure --prefix=/usr
-make
+make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR

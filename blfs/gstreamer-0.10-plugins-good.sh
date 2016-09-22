@@ -27,7 +27,7 @@ patch -Np1 -i ../0001-v4l2_calls-define-V4L2_CID_HCENTER-and-V4L2_CID_VCEN.patch
 patch -Np1 -i ../0407-mulawdec-fix-integer-overrun.patch
 
 ./configure --prefix=/usr
-make
+make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR

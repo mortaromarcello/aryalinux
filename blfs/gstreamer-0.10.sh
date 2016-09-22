@@ -20,7 +20,7 @@ cd $DIRECTORY
 
 patch -Np1 -i ../gstreamer-01-bison3.patch
 ./configure --prefix=/usr
-make
+make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
