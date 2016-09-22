@@ -5,6 +5,8 @@ set +h
 
 . /etc/alps/alps.conf
 
+#VER:exaile:3.4.5
+
 PACKAGE_NAME="exaile"
 
 #REQ:gstreamer-0.10
