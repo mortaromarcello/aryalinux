@@ -12,6 +12,8 @@ URL=http://archive.ubuntu.com/ubuntu/pool/universe/h/hardinfo/hardinfo_0.5.1.ori
 cd $SOURCE_DIR
 
 wget -nc $URL
+rm -rf makefile.patch
+wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/2016.08/makefile.patch
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
 
