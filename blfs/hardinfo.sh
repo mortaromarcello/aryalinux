@@ -20,6 +20,7 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
 tar -xf $TARBALL
 cd $DIRECTORY
 
+patch -Np1 -i ../makefile.patch
 ./configure --prefix=/usr --build=aryalinux &&
 make "-j`nproc`"
 sudo make install
