@@ -6,7 +6,7 @@ set -e
 . /var/lib/alps/functions
 
 #VER:Clearlooks:1.7
-#VER:mplayer-SVN-r:37794
+#VER:MPlayer:1.3.0
 
 #REQ:yasm
 #REC:gtk2
@@ -53,10 +53,10 @@ set -e
 
 cd $SOURCE_DIR
 
-URL=http://anduin.linuxfromscratch.org/BLFS/other/mplayer-SVN-r37794.tar.xz
+URL=http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.3.0.tar.xz
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc ftp://ftp.mplayerhq.hu/MPlayer/skins/Clearlooks-1.7.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc https://www.mplayerhq.hu/MPlayer/skins/Clearlooks-1.7.tar.bz2
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/MPlayer/mplayer-SVN-r37794.tar.xz || wget -nc http://anduin.linuxfromscratch.org/BLFS/other/mplayer-SVN-r37794.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/MPlayer/mplayer-SVN-r37794.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/MPlayer/mplayer-SVN-r37794.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/MPlayer/mplayer-SVN-r37794.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/MPlayer/mplayer-SVN-r37794.tar.xz
+wget -nc http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.3.0.tar.xz || wget -nc http://anduin.linuxfromscratch.org/BLFS/other/MPlayer-1.3.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -66,11 +66,11 @@ cd $DIRECTORY
 
 whoami > /tmp/currentuser
 
-sed -i 's:libsmbclient.h:samba-4.0/&:' configure stream/stream_smb.c &&
 ./configure --prefix=/usr            \
             --confdir=/etc/mplayer   \
             --enable-dynamic-plugins \
             --enable-menu            \
+            --disable-liblzo         \
             --enable-gui             &&
 make "-j`nproc`"
 
