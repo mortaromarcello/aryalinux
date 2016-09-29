@@ -27,7 +27,7 @@ cd $DIRECTORY
 
 whoami > /tmp/currentuser
 
-sed -i "/seems to be moved/s/^/#/" ltmain.sh &&
+#sed -i "/seems to be moved/s/^/#/" ltmain.sh &&
 ./configure --prefix=/usr &&
 make "-j`nproc`"
 
