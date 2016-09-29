@@ -11,6 +11,7 @@ set -e
 #REQ:gtk2
 #REQ:glibmm
 #REQ:gtkmm2
+#REQ:gtkmm3
 #REQ:pulseaudio
 
 
