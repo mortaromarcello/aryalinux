@@ -27,13 +27,13 @@ patch -Np1 -i ../0.21-nvme_ioctl.h.patch
 sed 's|-O0|-Os|g' -i Make.defaults
 sed 's|-rpath=$(TOPDIR)/src/|-rpath=$(libdir)|g' \
      -i src/test/Makefile
-make libdir="/usr/lib/" bindir="/usr/bin/" \
+CFLAGS="-Wno-error=deprecated-declarations" make libdir="/usr/lib/" bindir="/usr/bin/" \
 	mandir="/usr/share/man/"     \
 	includedir="/usr/include/" V=1 -j1
 pushd src/test
 make
 popd
-make -j1 V=1 DESTDIR="${pkgdir}/" libdir="/usr/lib/" \
+CFLAGS="-Wno-error=deprecated-declarations" make -j1 V=1 DESTDIR="${pkgdir}/" libdir="/usr/lib/" \
 	bindir="/usr/bin/" mandir="/usr/share/man"   \
 	includedir="/usr/include/" install
 install -v -D -m0755 src/test/tester /usr/bin/efivar-tester
