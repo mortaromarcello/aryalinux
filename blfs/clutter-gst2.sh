@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:clutter-gst:2.0.14
-
 cd $SOURCE_DIR
 
 URL="http://ftp.gnome.org/pub/gnome/sources/clutter-gst/2.0/clutter-gst-2.0.14.tar.xz"

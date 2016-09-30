@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:libmatewnck:1.6.1
-
 cd $SOURCE_DIR
 
 URL="http://pub.mate-desktop.org/releases/1.6/libmatewnck-1.6.1.tar.xz"

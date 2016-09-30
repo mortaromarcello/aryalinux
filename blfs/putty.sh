@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:putty_.orig:0.67
-
 #REQ:gtk2
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/p/putty/putty_0.67.orig.tar.gz

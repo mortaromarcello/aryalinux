@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:Pyrex:0.9.9
-
 #REQ:python2
 
 cd $SOURCE_DIR

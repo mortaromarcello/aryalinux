@@ -3,8 +3,6 @@
 set -e
 
 . /etc/alps/alps.conf
-
-#VER:gst-plugins-ugly:0.10.19
 . /var/lib/alps/functions
 
 #REQ:gst-plugins-base

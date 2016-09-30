@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:openexr_.orig:2.2.0
-
 URL=http://archive.ubuntu.com/ubuntu/pool/main/o/openexr/openexr_2.2.0.orig.tar.gz
 
 cd $SOURCE_DIR

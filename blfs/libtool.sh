@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:libtool_.orig:2.4.2
-
 cd $SOURCE_DIR
 
 URL="http://archive.ubuntu.com/ubuntu/pool/main/libt/libtool/libtool_2.4.2.orig.tar.gz"

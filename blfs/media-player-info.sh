@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:media-player-info:22
-
 cd $SOURCE_DIR
 
 URL="https://www.freedesktop.org/software/media-player-info/media-player-info-22.tar.gz"

@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:openshot_.orig:1.4.3
-
 #REQ:python-modules#setuptools
 #REQ:ladspa
 #REQ:fontconfig

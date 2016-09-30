@@ -4,8 +4,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:xfce4-dev-tools:4.4.0
-
 KDE_PREFIX=/usr
 cd $SOURCE_DIR
 

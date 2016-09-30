@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:network-manager-openconnect_.orig:1.0.2
-
 #REQ:openconnect
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/n/network-manager-openconnect/network-manager-openconnect_1.0.2.orig.tar.xz

@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:ccache:3.2.4
-
 cd $SOURCE_DIR
 
 URL="https://www.samba.org/ftp/ccache/ccache-3.2.4.tar.xz"

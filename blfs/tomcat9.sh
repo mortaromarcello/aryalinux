@@ -4,8 +4,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:apache-tomcat-9.0.0.M:8
-
 cd $SOURCE_DIR
 
 URL=http://mirror.fibergrid.in/apache/tomcat/tomcat-9/v9.0.0.M8/bin/apache-tomcat-9.0.0.M8.tar.gz

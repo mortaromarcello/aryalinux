@@ -4,8 +4,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:redis:3.0.5
-
 cd $SOURCE_DIR
 
 URL=http://download.redis.io/releases/redis-3.0.5.tar.gz

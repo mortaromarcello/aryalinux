@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:vpnc_0.5.3r.orig:550
-
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/v/vpnc/vpnc_0.5.3r550.orig.tar.gz
 
 cd $SOURCE_DIR

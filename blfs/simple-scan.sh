@@ -4,8 +4,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:simple-scan:3.17.90
-
 #REQ:packagekit
 #REQ:sane
 #REQ:itstool

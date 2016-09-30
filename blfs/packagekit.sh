@@ -4,8 +4,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:PackageKit:1.1.1
-
 #REQ:bash-completion
 
 cd $SOURCE_DIR

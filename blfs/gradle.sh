@@ -4,8 +4,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:gradle--bin:2.14
-
 cd $SOURCE_DIR
 
 URL=https://services.gradle.org/distributions/gradle-2.14-bin.zip

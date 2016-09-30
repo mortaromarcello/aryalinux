@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:mate-indicator-applet:1.15.0
-
 #REQ:libindicator
 
 cd $SOURCE_DIR

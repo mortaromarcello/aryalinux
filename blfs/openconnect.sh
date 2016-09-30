@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:openconnect_.orig:7.06
-
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/o/openconnect/openconnect_7.06.orig.tar.gz
 

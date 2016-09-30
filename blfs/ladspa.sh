@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:ladspa-sdk_.orig:1.13
-
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/l/ladspa-sdk/ladspa-sdk_1.13.orig.tar.gz
 
 cd $SOURCE_DIR

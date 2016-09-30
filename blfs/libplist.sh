@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:libplist_.orig:1.12
-
 URL=http://archive.ubuntu.com/ubuntu/pool/main/libp/libplist/libplist_1.12.orig.tar.bz2
 
 cd $SOURCE_DIR

@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:openal-soft_.orig:1.17.2
-
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/o/openal-soft/openal-soft_1.17.2.orig.tar.bz2
 
 cd $SOURCE_DIR

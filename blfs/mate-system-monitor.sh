@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:mate-system-monitor:1.15.0
-
 #REQ:gtkmm3
 #REQ:glibmm
 

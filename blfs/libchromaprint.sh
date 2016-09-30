@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:chromaprint_.orig:1.3
-
 #REQ:ffmpeg
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/c/chromaprint/chromaprint_1.3.orig.tar.gz

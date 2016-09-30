@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:libgpod_.orig:0.8.3
-
 #REQ:libplist
 
 URL=http://archive.ubuntu.com/ubuntu/pool/main/libg/libgpod/libgpod_0.8.3.orig.tar.bz2

@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:libvncserver_+dfsg.orig:0.9.10
-
 URL=http://archive.ubuntu.com/ubuntu/pool/main/libv/libvncserver/libvncserver_0.9.10+dfsg.orig.tar.xz
 
 cd $SOURCE_DIR

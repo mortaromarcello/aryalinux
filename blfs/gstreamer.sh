@@ -3,8 +3,6 @@
 set -e
 
 . /etc/alps/alps.conf
-
-#VER:gstreamer:0.10.36
 . /var/lib/alps/functions
 
 #REQ:glib2

@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:sparsehash_.orig:2.0.2
-
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/s/sparsehash/sparsehash_2.0.2.orig.tar.gz
 
 cd $SOURCE_DIR

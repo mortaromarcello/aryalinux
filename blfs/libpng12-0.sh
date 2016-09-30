@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:libpng_.orig:1.2.50
-
 URL=http://http.debian.net/debian/pool/main/libp/libpng/libpng_1.2.50.orig.tar.xz
 
 cd $SOURCE_DIR

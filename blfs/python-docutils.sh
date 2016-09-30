@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:python-docutils_+dfsg.orig:0.12
-
 cd $SOURCE_DIR
 
 URL="http://archive.ubuntu.com/ubuntu/pool/main/p/python-docutils/python-docutils_0.12+dfsg.orig.tar.gz"

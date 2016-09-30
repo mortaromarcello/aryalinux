@@ -3,8 +3,6 @@
 set -e
 
 . /etc/alps/alps.conf
-
-#VER:gst-ffmpeg:0.10.13
 . /var/lib/alps/functions
 
 #REQ:gst-plugins-base

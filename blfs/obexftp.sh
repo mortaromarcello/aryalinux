@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:obexftp--Source:0.24.2
-
 cd $SOURCE_DIR
 
 URL="http://heanet.dl.sourceforge.net/project/openobex/obexftp/0.24.2/obexftp-0.24.2-Source.tar.gz"

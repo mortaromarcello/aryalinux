@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:jemalloc_.orig:3.6.0
-
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/j/jemalloc/jemalloc_3.6.0.orig.tar.bz2
 
 cd $SOURCE_DIR

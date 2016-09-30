@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:pygoocanvas_.orig:0.14.1
-
 #REQ:goocanvas
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/p/pygoocanvas/pygoocanvas_0.14.1.orig.tar.gz

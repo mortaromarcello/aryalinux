@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:libssh_.orig:0.7.3
-
 URL=http://archive.ubuntu.com/ubuntu/pool/main/libs/libssh/libssh_0.7.3.orig.tar.xz
 
 cd $SOURCE_DIR

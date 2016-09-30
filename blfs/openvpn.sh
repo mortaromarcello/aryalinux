@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:openvpn_.orig:2.3.7
-
 #REQ:liblzo2
 
 URL=http://archive.ubuntu.com/ubuntu/pool/main/o/openvpn/openvpn_2.3.7.orig.tar.gz

@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:mate-utils:1.15.0
-
 #REQ:libgtop
 
 cd $SOURCE_DIR

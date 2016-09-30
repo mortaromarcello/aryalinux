@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:grilo:0.2.12
-
 cd $SOURCE_DIR
 
 URL="http://ftp.gnome.org/pub/gnome/sources/grilo/0.2/grilo-0.2.12.tar.xz"

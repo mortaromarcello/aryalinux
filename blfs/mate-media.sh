@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:mate-media:1.15.0
-
 #REQ:libmatemixer
 
 cd $SOURCE_DIR

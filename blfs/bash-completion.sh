@@ -4,8 +4,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:bash-completion_.orig:2.1
-
 cd $SOURCE_DIR
 
 URL=https://launchpad.net/ubuntu/+archive/primary/+files/bash-completion_2.1.orig.tar.bz2

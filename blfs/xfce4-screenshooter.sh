@@ -4,8 +4,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:xfce4-screenshooter:1.8.2
-
 #REQ:libsoup
 
 KDE_PREFIX=/usr

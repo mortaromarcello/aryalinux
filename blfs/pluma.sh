@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:pluma:1.15.0
-
 #REQ:gtksourceview2
 #REQ:enchant
 

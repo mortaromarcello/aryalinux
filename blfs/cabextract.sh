@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:cabextract_.orig:1.4
-
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/c/cabextract/cabextract_1.4.orig.tar.gz
 
 cd $SOURCE_DIR

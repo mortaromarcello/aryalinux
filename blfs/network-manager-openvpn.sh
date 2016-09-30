@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:NetworkManager-openvpn:1.0.8
-
 #REQ:openvpn
 
 URL=http://ftp.gnome.org/pub/gnome/sources/NetworkManager-openvpn/1.0/NetworkManager-openvpn-1.0.8.tar.xz

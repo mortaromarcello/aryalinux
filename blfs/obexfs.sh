@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:obexfs:0.12
-
 #REQ:openobex
 #REQ:obexftp
 

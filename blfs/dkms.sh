@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:dkms_.orig:2.2.0.3
-
 #REQ:kmod
 
 URL=http://archive.ubuntu.com/ubuntu/pool/main/d/dkms/dkms_2.2.0.3.orig.tar.gz

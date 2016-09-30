@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:goocanvas_.orig:1.0.0
-
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/g/goocanvas/goocanvas_1.0.0.orig.tar.gz
 
 cd $SOURCE_DIR

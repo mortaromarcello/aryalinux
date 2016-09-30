@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:fftw:3.3.4
-
 URL=http://www.fftw.org/fftw-3.3.4.tar.gz
 
 cd $SOURCE_DIR

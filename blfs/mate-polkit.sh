@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:mate-polkit:1.15.0
-
 #REQ:gvfs
 #REQ:udisks2
 

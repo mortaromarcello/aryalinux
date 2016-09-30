@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:mate-icon-theme:1.15.0
-
 cd $SOURCE_DIR
 
 URL="http://pub.mate-desktop.org/releases/1.15/mate-icon-theme-1.15.0.tar.xz"

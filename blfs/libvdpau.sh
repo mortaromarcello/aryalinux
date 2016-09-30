@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:libvdpau:1.1.1
-
 #REQ:x7lib
 #OPT:doxygen
 #OPT:graphviz

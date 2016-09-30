@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:frei0r.orig:_1.4
-
 #REQ:cairo
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/f/frei0r/frei0r_1.4.orig.tar.gz

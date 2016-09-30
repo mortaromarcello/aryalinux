@@ -4,8 +4,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:mtools:4.0.18
-
 cd $SOURCE_DIR
 
 URL=ftp://ftp.gnu.org/gnu/mtools/mtools-4.0.18.tar.bz2

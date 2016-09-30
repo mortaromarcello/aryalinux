@@ -9,8 +9,6 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 
 . /etc/alps/alps.conf
 
-#VER:wine:1.8.3
-
 cd $SOURCE_DIR
 
 URL="http://dl.winehq.org/wine/source/1.8/wine-1.8.3.tar.bz2"

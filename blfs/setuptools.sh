@@ -4,8 +4,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:setuptools:18.5
-
 cd $SOURCE_DIR
 
 URL=https://pypi.python.org/packages/source/s/setuptools/setuptools-18.5.tar.gz

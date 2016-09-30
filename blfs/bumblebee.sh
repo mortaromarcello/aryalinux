@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:bumblebee_.orig:3.2.1
-
 #REQ:libbsd
 #REQ:bbswitch
 

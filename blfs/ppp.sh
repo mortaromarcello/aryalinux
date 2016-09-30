@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:ppp_.orig:2.4.6
-
 URL=http://archive.ubuntu.com/ubuntu/pool/main/p/ppp/ppp_2.4.6.orig.tar.gz
 
 cd $SOURCE_DIR

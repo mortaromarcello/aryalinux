@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:libjpeg8_8d.orig:1
-
 URL=http://http.debian.net/debian/pool/main/libj/libjpeg8/libjpeg8_8d1.orig.tar.gz
 
 cd $SOURCE_DIR

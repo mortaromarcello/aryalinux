@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:qjson_.orig:0.8.1
-
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/q/qjson/qjson_0.8.1.orig.tar.bz2
 
 cd $SOURCE_DIR

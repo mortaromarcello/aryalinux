@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:libcrypto++_.orig:5.6.3
-
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/libc/libcrypto++/libcrypto++_5.6.3.orig.tar.xz
 
 cd $SOURCE_DIR

@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:mlt:6.0.0
-
 #REQ:swig
 #REQ:jackd2
 #REQ:jackrack

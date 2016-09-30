@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:glew_.orig:1.13.0
-
 URL=http://archive.ubuntu.com/ubuntu/pool/main/g/glew/glew_1.13.0.orig.tar.gz
 
 cd $SOURCE_DIR

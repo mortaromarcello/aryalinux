@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:intltool:0.50.2
-
 cd $SOURCE_DIR
 
 URL="https://launchpad.net/intltool/trunk/0.50.2/+download/intltool-0.50.2.tar.gz"

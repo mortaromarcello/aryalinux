@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:liblastfm_.orig:1.0.9
-
 #REQ:libfftw3
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/libl/liblastfm/liblastfm_1.0.9.orig.tar.gz

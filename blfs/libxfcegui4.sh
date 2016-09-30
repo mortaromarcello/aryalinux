@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:libxfcegui4:4.10.0
-
 #REQ:libglade
 #REQ:libxfce4util
 cd $SOURCE_DIR

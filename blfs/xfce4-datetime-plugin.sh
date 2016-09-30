@@ -4,8 +4,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:xfce4-datetime-plugin:0.6.1
-
 #REQ:libxfcegui4
 
 KDE_PREFIX=/usr

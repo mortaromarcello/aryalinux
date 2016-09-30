@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:gtksourceview:2.10.5
-
 #REQ:gtksourceview
 
 cd $SOURCE_DIR

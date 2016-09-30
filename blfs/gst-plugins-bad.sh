@@ -3,8 +3,6 @@
 set -e
 
 . /etc/alps/alps.conf
-
-#VER:gst-plugins-bad:0.10.23
 . /var/lib/alps/functions
 
 #REQ:gst-plugins-base

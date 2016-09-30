@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:pillow_.orig:3.2.0
-
 URL=http://archive.ubuntu.com/ubuntu/pool/main/p/pillow/pillow_3.2.0.orig.tar.xz
 
 cd $SOURCE_DIR

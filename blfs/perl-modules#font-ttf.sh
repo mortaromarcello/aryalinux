@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:Font-TTF:1.05
-
 URL=http://search.cpan.org/CPAN/authors/id/M/MH/MHOSKEN/Font-TTF-1.05.tar.gz
 
 cd $SOURCE_DIR

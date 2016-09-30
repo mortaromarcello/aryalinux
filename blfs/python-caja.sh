@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:python-caja:1.15.0
-
 #REQ:python-modules#pygobject2
 
 cd $SOURCE_DIR

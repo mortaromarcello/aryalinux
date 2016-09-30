@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:network-manager-pptp_.orig:0.9.10.0
-
 URL=http://archive.ubuntu.com/ubuntu/pool/main/n/network-manager-pptp/network-manager-pptp_0.9.10.0.orig.tar.xz
 
 cd $SOURCE_DIR

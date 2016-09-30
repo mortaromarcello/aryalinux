@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:lightdm-gtk-greeter-settings:1.2.1
-
 #REQ:python-distutils-extra
 
 URL=https://launchpad.net/lightdm-gtk-greeter-settings/1.2/1.2.1/+download/lightdm-gtk-greeter-settings-1.2.1.tar.gz

@@ -4,8 +4,6 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
-
-#VER:caja-dropbox:1.15.0
 #REQ:python-docutils
 #REQ:python-modules#pygtk
 

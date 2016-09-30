@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:v:0.4.0
-
 #REQ:cmake
 #REQ:ffmpeg
 #REQ:x7driver

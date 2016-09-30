@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:murrine:0.98.2
-
 cd $SOURCE_DIR
 
 URL=https://download.gnome.org/sources/murrine/0.98/murrine-0.98.2.tar.xz

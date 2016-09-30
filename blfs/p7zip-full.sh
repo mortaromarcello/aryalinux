@@ -4,8 +4,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:p7zip_src_all:_9.38.1
-
 cd $SOURCE_DIR
 
 URL=http://liquidtelecom.dl.sourceforge.net/project/p7zip/p7zip/9.38.1/p7zip_9.38.1_src_all.tar.bz2

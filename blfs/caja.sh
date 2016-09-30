@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:caja:1.15.0
-
 #REQ:mate-polkit
 
 cd $SOURCE_DIR

@@ -4,8 +4,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:jack:1.9.10
-
 cd $SOURCE_DIR
 
 URL=https://dl.dropboxusercontent.com/u/28869550/jack-1.9.10.tar.bz2

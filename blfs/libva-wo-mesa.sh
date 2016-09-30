@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:libva:1.7.1
-
 #REQ:mesa
 #OPT:doxygen
 #OPT:wayland

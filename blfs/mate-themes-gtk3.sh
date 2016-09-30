@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:mate-themes:3.20.8
-
 cd $SOURCE_DIR
 
 URL="http://pub.mate-desktop.org/releases/themes/3.20/mate-themes-3.20.8.tar.xz"

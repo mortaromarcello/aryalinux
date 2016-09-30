@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:protobuf_.orig:2.6.1
-
 URL=http://archive.ubuntu.com/ubuntu/pool/main/p/protobuf/protobuf_2.6.1.orig.tar.gz
 
 cd $SOURCE_DIR

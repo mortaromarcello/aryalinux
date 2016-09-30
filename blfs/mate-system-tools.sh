@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:mate-system-tools:1.8.1
-
 cd $SOURCE_DIR
 
 URL="http://pub.mate-desktop.org/releases/1.8/mate-system-tools-1.8.1.tar.xz"

@@ -4,8 +4,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:xdg-user-dirs:0.15
-
 cd $SOURCE_DIR
 
 URL=http://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.15.tar.gz

@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:gamin:0.1.9
-
 cd $SOURCE_DIR
 
 URL="https://people.gnome.org/~veillard/gamin/sources/gamin-0.1.9.tar.gz"

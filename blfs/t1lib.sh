@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:t1lib:5.1.2
-
 cd $SOURCE_DIR
 
 URL=http://fossies.org/linux/misc/t1lib-5.1.2.tar.gz

@@ -4,8 +4,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:dosfstools:3.0.26
-
 cd $SOURCE_DIR
 
 URL=http://daniel-baumann.ch/files/software/dosfstools/dosfstools-3.0.26.tar.xz

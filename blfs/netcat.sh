@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:netcat:0.7.1
-
 URL=http://sourceforge.net/projects/netcat/files/netcat/0.7.1/netcat-0.7.1.tar.bz2
 
 cd $SOURCE_DIR

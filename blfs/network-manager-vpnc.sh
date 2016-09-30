@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:network-manager-vpnc_.orig:0.9.10.0
-
 #REQ:vpnc
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/n/network-manager-vpnc/network-manager-vpnc_0.9.10.0.orig.tar.xz

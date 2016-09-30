@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:mate-power-manager:1.15.0
-
 #REQ:gnome-keyring
 
 cd $SOURCE_DIR

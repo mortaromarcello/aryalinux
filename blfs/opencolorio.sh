@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:v:1.0.8
-
 #REQ:openimageio
 
 URL=http://github.com/imageworks/OpenColorIO/tarball/v1.0.8

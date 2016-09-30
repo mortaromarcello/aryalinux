@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:libmygpo-qt_1.0.9~git.orig:20151122
-
 #REQ:libqjson0
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/libm/libmygpo-qt/libmygpo-qt_1.0.9~git20151122.orig.tar.gz

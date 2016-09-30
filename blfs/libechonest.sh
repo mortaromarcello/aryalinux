@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:libechonest_.orig:2.3.1
-
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/libe/libechonest/libechonest_2.3.1.orig.tar.gz
 
 cd $SOURCE_DIR

@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:liblqr-1:0.4.2
-
 URL=liblqr.wdfiles.com/local--files/en:download-page/liblqr-1-0.4.2.tar.bz2
 
 cd $SOURCE_DIR

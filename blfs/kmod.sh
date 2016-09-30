@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:kmod:23
-
 URL=https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-23.tar.xz
 
 cd $SOURCE_DIR

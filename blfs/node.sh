@@ -4,8 +4,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:node-v:4.2.2
-
 cd $SOURCE_DIR
 
 URL=https://nodejs.org/dist/v4.2.2/node-v4.2.2.tar.gz

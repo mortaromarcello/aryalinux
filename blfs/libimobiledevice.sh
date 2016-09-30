@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:libimobiledevice_+dfsg.orig:1.2.0
-
 #REQ:libplist
 #REQ:libusbmuxd
 

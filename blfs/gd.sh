@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:libgd:2.1.1
-
 cd $SOURCE_DIR
 
 URL=https://bitbucket.org/libgd/gd-libgd/downloads/libgd-2.1.1.tar.xz

@@ -4,8 +4,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:mongodb-src-r:3.0.7
-
 #REQ:scons
 
 cd $SOURCE_DIR

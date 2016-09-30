@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:conky-manager_2.4~136~ubuntu:16.04.1
-
 #REQ:conky
 #REQ:json-glib
 #REQ:rsync

@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:libusbmuxd_.orig:1.0.10
-
 URL=http://archive.ubuntu.com/ubuntu/pool/main/libu/libusbmuxd/libusbmuxd_1.0.10.orig.tar.bz2
 
 cd $SOURCE_DIR

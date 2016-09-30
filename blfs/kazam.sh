@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:kazam_.orig:1.0.6
-
 #REQ:python-modules#setuptools
 #REQ:python-distutils-extra
 #REQ:python-modules#pyxdg

@@ -4,8 +4,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:apache-tomcat:7.0.70
-
 cd $SOURCE_DIR
 
 URL=http://mirror.fibergrid.in/apache/tomcat/tomcat-7/v7.0.70/bin/apache-tomcat-7.0.70.tar.gz

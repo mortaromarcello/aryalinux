@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:plymouth:0.9.2
-
 cd $SOURCE_DIR
 
 URL="https://www.freedesktop.org/software/plymouth/releases/plymouth-0.9.2.tar.bz2"

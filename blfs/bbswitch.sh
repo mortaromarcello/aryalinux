@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:bbswitch_.orig:0.8
-
 #REQ:dkms
 
 URL=http://archive.ubuntu.com/ubuntu/pool/main/b/bbswitch/bbswitch_0.8.orig.tar.gz

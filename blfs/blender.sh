@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:blender_2.77.a+dfsg.orig:0
-
 #REQ:fonts-dejavu
 #REQ:ffmpeg
 #REQ:boost

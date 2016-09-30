@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:mate-terminal:1.15.0
-
 #REQ:vte2
 #REQ:vte
 

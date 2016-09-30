@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:jackd2_1.9.10+20150825git1ed50c~dfsg.orig:92
-
 #REQ:jack2
 
 URL=http://archive.ubuntu.com/ubuntu/pool/main/j/jackd2/jackd2_1.9.10+20150825git1ed50c92~dfsg.orig.tar.gz

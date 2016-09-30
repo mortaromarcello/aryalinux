@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:lensfun_.orig:0.3.2
-
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/l/lensfun/lensfun_0.3.2.orig.tar.gz
 
 cd $SOURCE_DIR

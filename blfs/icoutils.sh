@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:icoutils_.orig:0.31.0
-
 #REQ:perl-modules#perl-lwp
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/i/icoutils/icoutils_0.31.0.orig.tar.bz2

@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:libindicator:12.10.1
-
 cd $SOURCE_DIR
 
 URL="https://launchpad.net/libindicator/12.10/12.10.1/+download/libindicator-12.10.1.tar.gz"

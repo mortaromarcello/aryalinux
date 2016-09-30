@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:pptp-linux_.orig:1.8.0
-
 #REQ:ppp
 
 URL=http://archive.ubuntu.com/ubuntu/pool/main/p/pptp-linux/pptp-linux_1.8.0.orig.tar.gz

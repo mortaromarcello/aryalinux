@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:libmtp_.orig:1.1.11
-
 URL=http://archive.ubuntu.com/ubuntu/pool/main/libm/libmtp/libmtp_1.1.11.orig.tar.gz
 
 cd $SOURCE_DIR
