@@ -293,21 +293,6 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-cat >> ${XORG_PREFIX}/share/X11/xorg.conf.d/20-glamor.conf << "EOF"
-Section "Device"
- Identifier "radeon"
- Driver "ati"
- Option "AccelMethod" "glamor"
-EndSection
-EOF
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
 cd $SOURCE_DIR
 
 sudo rm -rf $DIRECTORY
