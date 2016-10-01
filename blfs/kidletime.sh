@@ -7,6 +7,8 @@ set -e
 
 #VER:kidletime:5.25.0
 
+#REQ:extra-cmake-modules
+
 cd $SOURCE_DIR
 
 URL=http://download.kde.org/stable/frameworks/5.25/kidletime-5.25.0.tar.xz
@@ -21,7 +23,9 @@ cd $DIRECTORY
 
 whoami > /tmp/currentuser
 
-./configure --prefix=/usr --sysconfdir=/etc &&
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/usr .. &&
 make "-j`nproc`"
 
 
