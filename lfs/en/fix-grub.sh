@@ -54,6 +54,8 @@ gunzip -c ../unifont-7.0.05.pcf.gz > /usr/share/fonts/unifont/unifont.pcf
 grub-mkfont -o /usr/share/grub/unicode.pf2 /usr/share/fonts/unifont/unifont.pcf
 
 cd $SOURCE_DIR
+rm -r grub-2.02~beta3
+
 if [ "$TARBALL" != "" ]
 then
 	rm -rf $DIRECTORY
