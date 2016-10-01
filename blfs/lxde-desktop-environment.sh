@@ -21,4 +21,4 @@ set +h
 #REQ:lxtask
 #REQ:lxterminal
 
-echo "gnome-desktop-environment=>`date`" | sudo tee -a $INSTALLED_LIST
+echo "lxde-desktop-environment=>`date`" | sudo tee -a $INSTALLED_LIST
