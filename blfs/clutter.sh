@@ -13,7 +13,7 @@ set -e
 #REC:gobject-introspection
 #REC:gtk3
 #REC:libgudev
-#REC:x7driver#libinput
+#REC:x7driver
 #REC:libxkbcommon
 #REC:wayland
 #OPT:gtk-doc

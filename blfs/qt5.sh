@@ -35,7 +35,7 @@ set -e
 #OPT:bluez
 #OPT:harfbuzz
 #OPT:ibus
-#OPT:x7driver#libinput
+#OPT:x7driver
 #OPT:mariadb
 #OPT:pciutils
 #OPT:postgresql

@@ -8,7 +8,7 @@ set -e
 #VER:weston:1.11.0
 
 #REQ:cairo
-#REQ:x7driver#libinput
+#REQ:x7driver
 #REQ:libjpeg
 #REQ:libxkbcommon
 #REQ:mesa

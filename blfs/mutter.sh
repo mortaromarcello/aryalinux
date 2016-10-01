@@ -15,7 +15,7 @@ set -e
 #REC:gobject-introspection
 #REC:libcanberra
 #REC:startup-notification
-#REC:x7driver#libinput
+#REC:x7driver
 #REC:wayland
 #REC:wayland-protocols
 #REC:xorg-server
