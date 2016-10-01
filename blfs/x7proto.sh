@@ -69,9 +69,6 @@ as_root()
 export -f as_root
 
 
-
-
-
 for package in $(grep -v '^#' ../proto-7.7.md5 | awk '{print $2}')
 do
   packagedir=${package%.tar.bz2}

@@ -80,8 +80,6 @@ export -f as_root
 
 
 
-
-
 for package in $(grep -v '^#' ../app-7.7.md5 | awk '{print $2}')
 do
   packagedir=${package%.tar.bz2}
@@ -108,11 +106,7 @@ do
 done
 
 
-
-
-
 as_root rm -f $XORG_PREFIX/bin/xkeystone
-
 
 cd $SOURCE_DIR
 

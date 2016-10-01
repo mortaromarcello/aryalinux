@@ -75,12 +75,6 @@ as_root()
 export -f as_root
 
 
-grep -A9 summary *make_check.log
-
-
-
-
-
 for package in $(grep -v '^#' ../lib-7.7.md5 | awk '{print $2}')
 do
   packagedir=${package%.tar.bz2}
@@ -103,15 +97,11 @@ do
     ;;
   esac
   make "-j`nproc`"
-  #make check 2>&1 | tee ../$packagedir-make_check.log
   as_root make install
   popd
   rm -rf $packagedir
   as_root /sbin/ldconfig
 done
-
-
-
 
 
 cd $SOURCE_DIR

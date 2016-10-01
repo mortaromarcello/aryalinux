@@ -74,9 +74,6 @@ as_root()
 export -f as_root
 
 
-
-
-
 for package in $(grep -v '^#' ../font-7.7.md5 | awk '{print $2}')
 do
   packagedir=${package%.tar.bz2}
@@ -91,9 +88,6 @@ done
 
 
 
-
-
-
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 install -v -d -m755 /usr/share/fonts                               &&
 ln -svfn $XORG_PREFIX/share/fonts/X11/OTF /usr/share/fonts/X11-OTF &&
@@ -101,7 +95,7 @@ ln -svfn $XORG_PREFIX/share/fonts/X11/TTF /usr/share/fonts/X11-TTF
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
+#sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
