@@ -43,16 +43,6 @@ make "-j`nproc`"
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-systemctl start rescue.target
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
 
 ENDOFROOTSCRIPT
@@ -74,37 +64,6 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-chown -v root:messagebus /usr/libexec/dbus-daemon-launch-helper &&
-chmod -v      4750       /usr/libexec/dbus-daemon-launch-helper
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-systemctl daemon-reload
-systemctl start multi-user.target
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-make distclean                     &&
-./configure --enable-tests         \
-            --enable-asserts       \
-            --disable-doxygen-docs \
-            --disable-xml-docs     &&
-make                               &&
-make check
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 cat > /etc/dbus-1/session-local.conf << "EOF"
 <!DOCTYPE busconfig PUBLIC
  "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
@@ -119,15 +78,6 @@ ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
 sudo rm rootscript.sh
-
-
-# Start the D-Bus session daemon
-eval `dbus-launch`
-export DBUS_SESSION_BUS_ADDRESS
-
-
-# Kill the D-Bus session daemon
-kill $DBUS_SESSION_BUS_PID
 
 
 cd $SOURCE_DIR
