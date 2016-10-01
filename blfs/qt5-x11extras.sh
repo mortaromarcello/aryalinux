@@ -8,7 +8,6 @@ set -e
 #VER:qt5-x11extras:5.6.1
 
 #REQ:qt5
-#REQ:qmake
 
 
 cd $SOURCE_DIR
