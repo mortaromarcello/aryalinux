@@ -63,11 +63,6 @@ sudo rm rootscript.sh
 cat > ~/.xinitrc << "EOF"
 ck-launch-session dbus-launch --exit-with-session startlxde
 EOF
-startx
-
-
-startx &> ~/.x-session-errors
-
 
 cd $SOURCE_DIR
 
