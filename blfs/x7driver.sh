@@ -53,7 +53,7 @@ sudo rm -rf $DIRECTORY
 
 # Start of driver installation #
 
-#REQ:x7driver#libevdev
+#REQ:x7driver
 #REQ:mtdev
 #OPT:check
 #OPT:valgrind
@@ -110,7 +110,7 @@ sudo rm -rf $DIRECTORY
 
 # Start of driver installation #
 
-#REQ:x7driver#libevdev
+#REQ:x7driver
 #REQ:mtdev
 #REQ:xorg-server
 
@@ -149,7 +149,7 @@ sudo rm -rf $DIRECTORY
 
 # Start of driver installation #
 
-#REQ:x7driver#libevdev
+#REQ:x7driver
 #REQ:xorg-server
 
 
