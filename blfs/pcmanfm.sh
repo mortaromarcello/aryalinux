@@ -9,7 +9,6 @@ set -e
 
 #REQ:libfm
 #REC:adwaita-icon-theme
-#REC:oxygen-icons5
 #REC:lxde-icon-theme
 
 
