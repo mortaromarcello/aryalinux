@@ -10,7 +10,7 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 . /etc/alps/alps.conf
 
 #REQ:lightdm
-
+#REQ:gtk3
 
 cd $SOURCE_DIR
 
