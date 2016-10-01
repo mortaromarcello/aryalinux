@@ -41,7 +41,7 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
-echo 'LSB_VERSION="1.4"' >> /etc/lsb-release
+echo 'LSB_VERSION="1.4"' | sudo tee -a /etc/lsb-release
 
 
 cd $SOURCE_DIR
