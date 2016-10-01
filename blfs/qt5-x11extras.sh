@@ -8,6 +8,7 @@ set -e
 #VER:qt5-x11extras:5.6.1
 
 #REQ:qt5
+#REQ:qmake
 
 
 cd $SOURCE_DIR
@@ -24,15 +25,13 @@ cd $DIRECTORY
 
 whoami > /tmp/currentuser
 
-mkdir build &&
-cd    build &&
-cmake -DCMAKE_INSTALL_PREFIX=/usr .. &&
+qmake &&
 make "-j`nproc`"
 
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
+sudo make install INSTALL_ROOT=/
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
