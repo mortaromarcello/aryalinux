@@ -25,7 +25,7 @@ set -e
 #OPT:doxygen
 #OPT:lcms2
 #OPT:libpng
-#OPT:x7driver#libva
+#OPT:x7driver
 #OPT:libwebp
 
 

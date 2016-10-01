@@ -31,7 +31,7 @@ set -e
 #OPT:libmpeg2
 #OPT:libpng
 #OPT:libtheora
-#OPT:x7driver#libva
+#OPT:x7driver
 #OPT:libvorbis
 #OPT:opus
 #OPT:speex

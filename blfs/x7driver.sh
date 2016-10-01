@@ -664,7 +664,7 @@ sudo rm -rf $DIRECTORY
 #REQ:cmake
 #REQ:ffmpeg
 #REQ:x7driver#libvdpau
-#REQ:x7driver#libva
+#REQ:x7driver
 #OPT:doxygen
 #OPT:graphviz
 #OPT:texlive
