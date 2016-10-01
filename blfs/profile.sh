@@ -175,7 +175,7 @@ sudo rm rootscript.sh
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 cat > /etc/profile.d/i18n.sh << "EOF"
 # Set up i18n variables
-export LANG=<em class="replaceable"><code><ll></em>_<em class="replaceable"><code><CC></em>.<em class="replaceable"><code><charmap></em><em class="replaceable"><code><@modifiers></em>
+export LANG=$LANG
 EOF
 
 ENDOFROOTSCRIPT
