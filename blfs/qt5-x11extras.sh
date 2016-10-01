@@ -30,7 +30,7 @@ make "-j`nproc`"
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-sudo make install INSTALL_ROOT=/
+sudo make install
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
