@@ -20,5 +20,7 @@ set +h
 #REQ:lxrandr
 #REQ:lxtask
 #REQ:lxterminal
+#REQ:lightdm
+#REQ:lightdm-gtk-greeter
 
 echo "lxde-desktop-environment=>`date`" | sudo tee -a $INSTALLED_LIST
