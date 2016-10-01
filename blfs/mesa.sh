@@ -12,7 +12,7 @@ set -e
 #REQ:python2
 #REC:elfutils
 #REC:x7driver
-#REC:x7driver#libvdpau
+#REC:x7driver
 #REC:llvm
 #OPT:libgcrypt
 #OPT:nettle

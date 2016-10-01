@@ -22,7 +22,7 @@ set -e
 #OPT:libmng
 #OPT:libtheora
 #OPT:x7driver
-#OPT:x7driver#libvdpau
+#OPT:x7driver
 #OPT:libvorbis
 #OPT:libvpx
 #OPT:mesa

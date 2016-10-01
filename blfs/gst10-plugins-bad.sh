@@ -25,7 +25,7 @@ set -e
 #OPT:libexif
 #OPT:libgcrypt
 #OPT:libmpeg2
-#OPT:x7driver#libvdpau
+#OPT:x7driver
 #OPT:libwebp
 #OPT:mesa
 #OPT:mpg123

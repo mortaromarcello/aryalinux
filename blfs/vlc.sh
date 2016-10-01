@@ -41,7 +41,7 @@ set -e
 #OPT:freetype2
 #OPT:fribidi
 #OPT:librsvg
-#OPT:x7driver#libvdpau
+#OPT:x7driver
 #OPT:sdl
 #OPT:pulseaudio
 #OPT:libsamplerate
