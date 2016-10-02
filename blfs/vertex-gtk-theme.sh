@@ -17,4 +17,4 @@ sudo make install
 cd $SOURCE_DIR
 rm -rf vertex-theme
 
-echo "arc-gtk-theme=>`date`" | sudo tee -a $INSTALLED_LIST
+echo "vertex-gtk-theme=>`date`" | sudo tee -a $INSTALLED_LIST
