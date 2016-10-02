@@ -26,6 +26,7 @@ cd $DIRECTORY
 
 whoami > /tmp/currentuser
 
+export LXQT_PREFIX=/usr
 mkdir -v build &&
 cd       build &&
 cmake -DCMAKE_INSTALL_PREFIX=$LXQT_PREFIX \
