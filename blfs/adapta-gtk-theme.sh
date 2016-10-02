@@ -11,6 +11,10 @@ set +h
 cd $SOURCE_DIR
 
 wget -nc https://github.com/tista500/Adapta/archive/3.22.1.6.tar.gz
+
+tar xf 3.22.1.6.tar.gz
+cd Adapta-3.22.1.6
+
 ./autogen.sh --prefix=/usr
 make -j4
 sudo make install
