@@ -16,7 +16,7 @@ set -e
 #REC:llvm
 #OPT:libgcrypt
 #OPT:nettle
-#OPT:wayland
+#REQ:wayland
 #OPT:plasma-all
 
 
