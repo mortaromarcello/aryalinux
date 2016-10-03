@@ -40,7 +40,7 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var
 
 patch -Np1 -i ../mesa-12.0.1-add_xdemos-1.patch
 
-EGL_PLATFORMS="drm,x11"
+EGL_PLATFORMS="drm,x11,wayland"
 DRI_DRIVERS="i915,i965,nouveau,r200,radeon,swrast"
 GLL_DRV="nouveau,r300,r600,radeonsi,svga,swrast" &&
 sed -i "/pthread-stubs/d" configure.ac      &&

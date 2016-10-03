@@ -21,9 +21,9 @@ set -e
 
 cd $SOURCE_DIR
 
-URL=http://ftp.acc.umu.se/pub/gnome/sources/clutter/1.22/clutter-1.22.4.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/clutter/1.26/clutter-1.26.0.tar.xz
 
-wget -nc http://ftp.acc.umu.se/pub/gnome/sources/clutter/1.22/clutter-1.22.4.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/clutter/1.26/clutter-1.26.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`

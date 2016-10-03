@@ -32,7 +32,7 @@ cd $DIRECTORY
 
 whoami > /tmp/currentuser
 
-./configure --prefix=/usr --enable-gles1 --enable-gles2 &&
+./configure --prefix=/usr --enable-gles1 --enable-gles2 --enable-kms-egl-platform --enable-wayland-egl-platform --enable-xlib-egl-platform --enable-wayland-egl-server &&
 make "-j`nproc`"
 
 
