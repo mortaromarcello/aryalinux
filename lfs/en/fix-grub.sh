@@ -60,4 +60,7 @@ then
 	rm -rf {gcc,glibc,binutils}-build
 fi
 
+cd $SOURCE_DIR
+rm -r $DURECTORY
+
 echo "$STEPNAME" | tee -a $LOGFILE
