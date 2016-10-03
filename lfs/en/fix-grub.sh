@@ -61,6 +61,6 @@ then
 fi
 
 cd $SOURCE_DIR
-rm -r $DURECTORY
+rm -r $DIRECTORY
 
 echo "$STEPNAME" | tee -a $LOGFILE
