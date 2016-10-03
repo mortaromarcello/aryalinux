@@ -56,11 +56,11 @@ grub-mkfont -o /usr/share/grub/unicode.pf2 /usr/share/fonts/unifont/unifont.pcf
 cd $SOURCE_DIR
 if [ "$TARBALL" != "" ]
 then
-	rm -rf $DIRECTORY
+	rm -rf grub-2.02~beta3 
 	rm -rf {gcc,glibc,binutils}-build
 fi
 
 cd $SOURCE_DIR
-rm -r $DIRECTORY
+rm -r grub-2.02~beta3
 
 echo "$STEPNAME" | tee -a $LOGFILE
