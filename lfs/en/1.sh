@@ -193,7 +193,7 @@ then
 fi
 
 groupadd lfs
-useradd -s /bin/bash -g lfs -m -k /dev/null lfs
+useradd -s /bin/bash -g lfs -m -k /etc/skel lfs
 
 chown -v lfs $LFS/tools
 chown -v lfs $LFS/sources
