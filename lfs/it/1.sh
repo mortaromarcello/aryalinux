@@ -66,7 +66,7 @@ read -p "Inserisci il nome in codice del'OS ad esempio Earth : " OS_CODENAME
 
 clear
 echo "Informazioni generali sulla compilazione:"
-read -p "Inserisci la lingua locale esempio en_IN.utf8 : " LOCALE
+read -p "Inserisci la lingua locale esempio it_IT.utf8 : " LOCALE
 read -p "Inserisci la dimensione della carta(A4/lettera) : " PAPER_SIZE
 read -p "Vuoi usare il sistema con processori multipli? (y/n). Se scegli y (YES) il tuo sistema compilerà tutto in minor tempo ma sarà più stressato. Se non sei sicuro di avere processori multipli oppure stai usando una macchina virtuale scegli n (NO). " MULTICORE
 read -p "Inserisci il tipo della tastiera:  " KEYBOARD
