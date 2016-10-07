@@ -7,21 +7,26 @@ set -e
 
 #VER:light-locker:1.7.0
 
+#REQ:gnome-common
 #REQ:lightdm
 #REQ:systemd
 #REQ:upower
-#REQ:gnome-common
 
 cd $SOURCE_DIR
 
-git clone https://github.com/the-cavalry/light-locker.git
-DIRECTORY=light-locker
+URL=https://github.com/the-cavalry/light-locker/releases/download/v1.7.0/light-locker-1.7.0.tar.bz2
 
+wget -nc $URL
+
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+
+tar xf $TARBALL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
 
-./autogen.sh --prefix=/usr &&
+./configure --prefix=/usr &&
 make
 sudo make install
 
