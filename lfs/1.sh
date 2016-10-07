@@ -22,6 +22,7 @@ set -e
   ./download-sources.sh
   ./additional-downloads.sh
   cd ..
+  clear
   touch /tmp/updated
   echo "Done with downloading the updated scripts. These are the languages in which build scripts are available right now. Select one of these languages:"
   echo ""
