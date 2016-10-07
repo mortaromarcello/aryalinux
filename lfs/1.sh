@@ -18,8 +18,10 @@ set -e
   clear
   echo "Updated the build scripts successfully."
   echo "Checking sanity of the tarballs. In case some tarballs are missing they would be downloaded now. Please be patient."
-  en/download-sources.sh
-  en/additional-downloads.sh
+  cd en
+  ./download-sources.sh
+  ./additional-downloads.sh
+  cd ..
   touch /tmp/updated
   echo "Done with downloading the updated scripts. These are the languages in which build scripts are available right now. Select one of these languages:"
   echo ""
