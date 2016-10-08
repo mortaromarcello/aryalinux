@@ -121,15 +121,15 @@ fi
 # If root partition mounted somewhere other than $LFS then this would be taken care of...
 umount $ROOT_PART
 # Anything mounted on $LFS would be taken care of...
-umount $LFS/dev/pts
-umount $LFS/dev/shm
-umount $LFS/dev
-umount $LFS/sys
-umount $LFS/proc
-umount $LFS/run
-umount $LFS/home
-umount $LFS/boot/efi
-umount $LFS
+umount $LFS/dev/pts &> /dev/null
+umount $LFS/dev/shm &> /dev/null
+umount $LFS/dev &> /dev/null
+umount $LFS/sys &> /dev/null
+umount $LFS/proc &> /dev/null
+umount $LFS/run &> /dev/null
+umount $LFS/home &> /dev/null
+umount $LFS/boot/efi &> /dev/null
+umount $LFS &> /dev/null
 set -e
 
 mkfs -v -t ext4 $ROOT_PART
@@ -196,7 +196,7 @@ then
 	userdel -r lfs &> /dev/null
 fi
 
-rm /etc/profile.d/newuser.sh
+rm -rf /etc/profile.d/newuser.sh
 rm -r /etc/skel/.config
 
 groupadd lfs
