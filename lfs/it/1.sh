@@ -114,7 +114,10 @@ if [ "x$SWAP_PART" != "x" ]
 then
 swapoff $SWAP_PART
 fi
+if [ "x$HOME_PART" != "x" ]
+then
 umount $HOME_PART
+fi
 # If root partition mounted somewhere other than $LFS then this would be taken care of...
 umount $ROOT_PART
 # Anything mounted on $LFS would be taken care of...
