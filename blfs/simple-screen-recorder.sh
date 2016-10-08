@@ -20,12 +20,12 @@ tar -xf $TARBALL
 
 cd $DIRECTORY
 
-export QT5PREFIX="/opt/QT5"
+export QT5PREFIX="/opt/qt5"
 export QT5BINDIR="$QT5PREFIX/bin"
 export QT5DIR="$QT5PREFIX"
 export QTDIR="$QT5PREFIX"
 export PATH="$PATH:$QT5BINDIR"
-export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/QT5/lib/pkgconfig"
+export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt5/lib/pkgconfig"
 CXXFLAGS=fPIC ./configure --prefix=/usr --with-qt5 --with-jack --with-pulseaudio &&
 make "-j`nproc`"
 sudo make install
