@@ -25,8 +25,8 @@ export QT5DIR="$QT5PREFIX"
 export QTDIR="$QT5PREFIX"
 export PATH="$PATH:$QT5BINDIR"
 export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/QT5/lib/pkgconfig"
-./configure --prefix=/usr --enable-qt       &&
-make
+CXXFLAGS=fPIC ./configure --prefix=/usr --enable-qt5 --enable-jack --enable-pulseaudio &&
+make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
