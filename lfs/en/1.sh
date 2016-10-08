@@ -195,6 +195,9 @@ then
 	userdel -r lfs &> /dev/null
 fi
 
+rm /etc/profile.d/newuser.sh
+rm -r /etc/skel/.config
+
 groupadd lfs
 useradd -s /bin/bash -g lfs -m -k /dev/null lfs
 rm -rf /home/lfs/.config
