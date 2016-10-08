@@ -14,6 +14,8 @@ cd $SOURCE_DIR
 git clone https://github.com/chjj/compton.git
 make
 sudo make MANPAGES= install
+mkdir -pv ~/.config
+cp v compton.sample.conf ~/.config/compton.conf
 
 cd $SOURCE_DIR
 rm -rf compton
