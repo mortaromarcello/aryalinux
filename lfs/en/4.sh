@@ -119,14 +119,14 @@ cat > /etc/fstab << EOF
 UUID=$ROOT_PART_BY_UUID     /            ext4     defaults            1     1
 EOF
 
-if [ "$SWAP_PART_BY_UUID" != "x" ]
+if [ "x$SWAP_PART_BY_UUID" != "x" ]
 then
 cat >> /etc/fstab <<EOF
 UUID=$SWAP_PART_BY_UUID     swap         swap     pri=1               0     0
 EOF
 fi
 
-if [ "$HOME_PART_BY_UUID" != "x" ]
+if [ "x$HOME_PART_BY_UUID" != "x" ]
 then
 cat >> /etc/fstab <<EOF
 UUID=$HOME_PART_BY_UUID     /home        ext4     defaults            1     1
