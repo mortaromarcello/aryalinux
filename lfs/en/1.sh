@@ -112,20 +112,26 @@ export LFS=/mnt/lfs
 
 # Unmount the partitions if mounted and then format. Else would fail.
 set +e
+if [ "x$SWAP_PART" != "x" ]
+then
 swapoff $SWAP_PART
+fi
+if [ "x$HOME_PART" != "x" ]
+then
 umount $HOME_PART
+fi
 # If root partition mounted somewhere other than $LFS then this would be taken care of...
 umount $ROOT_PART
 # Anything mounted on $LFS would be taken care of...
-umount $LFS/dev/pts
-umount $LFS/dev/shm
-umount $LFS/dev
-umount $LFS/sys
-umount $LFS/proc
-umount $LFS/run
-umount $LFS/home
-umount $LFS/boot/efi
-umount $LFS
+umount $LFS/dev/pts &> /dev/null
+umount $LFS/dev/shm &> /dev/null
+umount $LFS/dev &> /dev/null
+umount $LFS/sys &> /dev/null
+umount $LFS/proc &> /dev/null
+umount $LFS/run &> /dev/null
+umount $LFS/home &> /dev/null
+umount $LFS/boot/efi &> /dev/null
+umount $LFS &> /dev/null
 set -e
 
 mkfs -v -t ext4 $ROOT_PART
@@ -192,9 +198,12 @@ then
 	userdel -r lfs &> /dev/null
 fi
 
+rm -rf /etc/profile.d/newuser.sh
+rm -rf /etc/skel/.config
+
 groupadd lfs
 useradd -s /bin/bash -g lfs -m -k /dev/null lfs
-rm -r /home/lfs/.config
+rm -rf /home/lfs/.config
 
 chown -v lfs $LFS/tools
 chown -v lfs $LFS/sources
