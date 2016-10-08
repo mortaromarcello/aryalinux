@@ -197,7 +197,7 @@ then
 fi
 
 rm -rf /etc/profile.d/newuser.sh
-rm -r /etc/skel/.config
+rm -rf /etc/skel/.config
 
 groupadd lfs
 useradd -s /bin/bash -g lfs -m -k /dev/null lfs
