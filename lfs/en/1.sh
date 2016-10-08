@@ -194,7 +194,7 @@ fi
 
 groupadd lfs
 useradd -s /bin/bash -g lfs -m -k /dev/null lfs
-rm -r /home/lfs/.config
+rm -rf /home/lfs/.config
 
 chown -v lfs $LFS/tools
 chown -v lfs $LFS/sources
