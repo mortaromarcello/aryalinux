@@ -12,6 +12,7 @@ set +h
 cd $SOURCE_DIR
 
 git clone https://github.com/chjj/compton.git
+cd compton
 make
 sudo make MANPAGES= install
 mkdir -pv ~/.config
