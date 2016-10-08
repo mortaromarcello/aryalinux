@@ -112,7 +112,10 @@ export LFS=/mnt/lfs
 
 # Unmount the partitions if mounted and then format. Else would fail.
 set +e
+if [ "x$SWAP_PART" != "x" ]
+then
 swapoff $SWAP_PART
+fi
 umount $HOME_PART
 # If root partition mounted somewhere other than $LFS then this would be taken care of...
 umount $ROOT_PART
