@@ -16,7 +16,7 @@ cd compton
 make
 sudo make MANPAGES= install
 mkdir -pv ~/.config
-cp v compton.sample.conf ~/.config/compton.conf
+cp -v compton.sample.conf ~/.config/compton.conf
 
 cd $SOURCE_DIR
 rm -rf compton
