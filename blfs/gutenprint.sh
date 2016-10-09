@@ -52,16 +52,6 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-systemctl restart org.cups.cupsd
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
 cd $SOURCE_DIR
 
 sudo rm -rf $DIRECTORY
