@@ -83,27 +83,6 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-systemctl daemon-reload
-systemctl start multi-user.target
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-make distclean                     &&
-./configure --enable-tests         \
-            --enable-asserts       \
-            --disable-doxygen-docs \
-            --disable-xml-docs     &&
-make                               &&
-make check
-
-
-
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 cat > /etc/dbus-1/session-local.conf << "EOF"
 <!DOCTYPE busconfig PUBLIC
