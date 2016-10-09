@@ -43,16 +43,6 @@ make "-j`nproc`"
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-systemctl start rescue.target
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
 
 ENDOFROOTSCRIPT
