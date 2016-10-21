@@ -51,7 +51,7 @@ cmake -G "Unix Makefiles"         \
 make &&
 # Build server
 cp -vR ../unix/xserver unix/ &&
-tar -xf ../xorg-server-1.18.0.tar.bz2 -C unix/xserver --strip-components=1         &&
+tar -xf ../../xorg-server-1.18.0.tar.bz2 -C unix/xserver --strip-components=1         &&
 pushd unix/xserver &&
   patch -Np1 -i ../../../unix/xserver117.patch &&
   autoreconf -fi   &&
