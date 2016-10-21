@@ -6,20 +6,9 @@ set +h
 
 cd $SOURCE_DIR
 
-URL=http://aryalinux.org/packages/2015/aryalinux-font.tar.xz
+URL=http://aryalinux.org/releases/2016.04/aryalinux-fonts-2016.04.tar.gz
 wget -nc $URL
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar -tf $TARBALL | sed -e 's@/.*@@' | uniq `
 
-tar -xf $TARBALL
-
-cd $DIRECTORY
-
-sudo tar xf fonts.tar.gz -C /
-
-cd $SOURCE_DIR
-rm -rf $DIRECTORY
+sudo tar xf aryalinux-fonts-2016.04.tar.gz -C /
 
 echo "aryalinux-fonts=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
