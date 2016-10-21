@@ -61,7 +61,7 @@ EOF
 mkdir -pv lib &&
 cd lib &&
 grep -v '^#' ../lib-7.7.md5 | awk '{print $2}' | wget -i- -c \
-    -B https://www.x.org/archive//individual/lib/ &&
+    -B http://ftp.kaist.ac.kr/x.org/individual/lib/ &&
 md5sum -c ../lib-7.7.md5
 
 

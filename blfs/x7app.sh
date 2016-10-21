@@ -65,7 +65,7 @@ EOF
 mkdir -pv app &&
 cd app &&
 grep -v '^#' ../app-7.7.md5 | awk '{print $2}' | wget -i- -c \
-    -B https://www.x.org/archive//individual/app/ &&
+    -B http://ftp.kaist.ac.kr/x.org/individual/app/ &&
 md5sum -c ../app-7.7.md5
 
 

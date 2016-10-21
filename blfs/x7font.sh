@@ -60,7 +60,7 @@ EOF
 mkdir -pv font &&
 cd font &&
 grep -v '^#' ../font-7.7.md5 | awk '{print $2}' | wget -i- -c \
-    -B https://www.x.org/archive//individual/font/ &&
+    -B http://ftp.kaist.ac.kr/x.org/individual/font/ &&
 md5sum -c ../font-7.7.md5
 
 
