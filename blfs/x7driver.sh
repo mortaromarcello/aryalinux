@@ -136,9 +136,9 @@ sudo rm -rf $DIRECTORY
 
 cd $SOURCE_DIR
 
-URL=http://ftp.x.org/pub/individual/driver/xf86-input-evdev-2.10.3.tar.bz2
+URL=http://mirror.csclub.uwaterloo.ca/x.org/individual/driver/xf86-input-evdev-2.10.3.tar.bz2
 
-wget -nc http://ftp.x.org/pub/individual/driver/xf86-input-evdev-2.10.3.tar.bz2
+wget -nc http://mirror.csclub.uwaterloo.ca/x.org/individual/driver/xf86-input-evdev-2.10.3.tar.bz2
 wget -nc ftp://ftp.x.org/pub/individual/driver/xf86-input-evdev-2.10.3.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
@@ -174,9 +174,9 @@ sudo rm -rf $DIRECTORY
 
 cd $SOURCE_DIR
 
-URL=http://ftp.x.org/pub/individual/driver/xf86-input-synaptics-1.8.3.tar.bz2
+URL=http://mirror.csclub.uwaterloo.ca/x.org/individual/driver/xf86-input-synaptics-1.8.3.tar.bz2
 
-wget -nc http://ftp.x.org/pub/individual/driver/xf86-input-synaptics-1.8.3.tar.bz2
+wget -nc http://mirror.csclub.uwaterloo.ca/x.org/individual/driver/xf86-input-synaptics-1.8.3.tar.bz2
 wget -nc ftp://ftp.x.org/pub/individual/driver/xf86-input-synaptics-1.8.3.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
@@ -211,9 +211,9 @@ sudo rm -rf $DIRECTORY
 
 cd $SOURCE_DIR
 
-URL=http://ftp.x.org/pub/individual/driver/xf86-input-vmmouse-13.1.0.tar.bz2
+URL=http://mirror.csclub.uwaterloo.ca/x.org/individual/driver/xf86-input-vmmouse-13.1.0.tar.bz2
 
-wget -nc http://ftp.x.org/pub/individual/driver/xf86-input-vmmouse-13.1.0.tar.bz2
+wget -nc http://mirror.csclub.uwaterloo.ca/x.org/individual/driver/xf86-input-vmmouse-13.1.0.tar.bz2
 wget -nc ftp://ftp.x.org/pub/individual/driver/xf86-input-vmmouse-13.1.0.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
@@ -289,9 +289,9 @@ sudo rm -rf $DIRECTORY
 
 cd $SOURCE_DIR
 
-URL=http://ftp.x.org/pub/individual/driver/xf86-video-ati-7.7.0.tar.bz2
+URL=http://mirror.csclub.uwaterloo.ca/x.org/individual/driver/xf86-video-ati-7.7.0.tar.bz2
 
-wget -nc http://ftp.x.org/pub/individual/driver/xf86-video-ati-7.7.0.tar.bz2
+wget -nc http://mirror.csclub.uwaterloo.ca/x.org/individual/driver/xf86-video-ati-7.7.0.tar.bz2
 wget -nc ftp://ftp.x.org/pub/individual/driver/xf86-video-ati-7.7.0.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
@@ -326,9 +326,9 @@ sudo rm -rf $DIRECTORY
 
 cd $SOURCE_DIR
 
-URL=http://ftp.x.org/pub/individual/driver/xf86-video-fbdev-0.4.4.tar.bz2
+URL=http://mirror.csclub.uwaterloo.ca/x.org/individual/driver/xf86-video-fbdev-0.4.4.tar.bz2
 
-wget -nc http://ftp.x.org/pub/individual/driver/xf86-video-fbdev-0.4.4.tar.bz2
+wget -nc http://mirror.csclub.uwaterloo.ca/x.org/individual/driver/xf86-video-fbdev-0.4.4.tar.bz2
 wget -nc ftp://ftp.x.org/pub/individual/driver/xf86-video-fbdev-0.4.4.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
@@ -401,9 +401,9 @@ sudo rm -rf $DIRECTORY
 
 cd $SOURCE_DIR
 
-URL=http://ftp.x.org/pub/individual/driver/xf86-video-nouveau-1.0.12.tar.bz2
+URL=http://mirror.csclub.uwaterloo.ca/x.org/individual/driver/xf86-video-nouveau-1.0.12.tar.bz2
 
-wget -nc http://ftp.x.org/pub/individual/driver/xf86-video-nouveau-1.0.12.tar.bz2
+wget -nc http://mirror.csclub.uwaterloo.ca/x.org/individual/driver/xf86-video-nouveau-1.0.12.tar.bz2
 wget -nc ftp://ftp.x.org/pub/individual/driver/xf86-video-nouveau-1.0.12.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
@@ -438,9 +438,9 @@ sudo rm -rf $DIRECTORY
 
 cd $SOURCE_DIR
 
-URL=http://ftp.x.org/pub/individual/driver/xf86-video-vmware-13.1.0.tar.bz2
+URL=http://mirror.csclub.uwaterloo.ca/x.org/individual/driver/xf86-video-vmware-13.1.0.tar.bz2
 
-wget -nc http://ftp.x.org/pub/individual/driver/xf86-video-vmware-13.1.0.tar.bz2
+wget -nc http://mirror.csclub.uwaterloo.ca/x.org/individual/driver/xf86-video-vmware-13.1.0.tar.bz2
 wget -nc ftp://ftp.x.org/pub/individual/driver/xf86-video-vmware-13.1.0.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
