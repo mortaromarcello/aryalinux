@@ -108,39 +108,39 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
-qemu-img create -f qcow2 vdisk.img 10G
+#qemu-img create -f qcow2 vdisk.img 10G
 
 
-qemu -enable-kvm -hda vdisk.img            \
-     -cdrom Fedora-16-x86_64-Live-LXDE.iso \
-     -boot d                               \
-     -m 384
+#qemu -enable-kvm -hda vdisk.img            \
+#     -cdrom Fedora-16-x86_64-Live-LXDE.iso \
+#     -boot d                               \
+#     -m 384
 
 
-qemu -enable-kvm vdisk.img -m 384
+#qemu -enable-kvm vdisk.img -m 384
 
 
-qemu -enable-kvm             \
-     -cdrom /home/fernando/ISO/linuxmint-17.1-mate-32bit.iso \
-     -boot order=d           \
-     -m 1G,slots=3,maxmem=4G \
-     -machine smm=off        \
-     -soundhw es1370         \
-     -cpu host               \
-     -smp cores=4,threads=2  \
-     -vga std                \
-     vdisk.img
+#qemu -enable-kvm             \
+#     -cdrom /home/fernando/ISO/linuxmint-17.1-mate-32bit.iso \
+#     -boot order=d           \
+#     -m 1G,slots=3,maxmem=4G \
+#     -machine smm=off        \
+#     -soundhw es1370         \
+#     -cpu host               \
+#     -smp cores=4,threads=2  \
+#     -vga std                \
+#     vdisk.img
 
 
-qemu -enable-kvm             \
-     -machine smm=off        \
-     -boot order=d           \
-     -m 1G,slots=3,maxmem=4G \
-     -soundhw es1370         \
-     -cpu host               \
-     -smp cores=4,threads=2  \
-     -vga vmware             \
-     -hda vdisk.img
+#qemu -enable-kvm             \
+#     -machine smm=off        \
+#     -boot order=d           \
+#     -m 1G,slots=3,maxmem=4G \
+#     -soundhw es1370         \
+#     -cpu host               \
+#     -smp cores=4,threads=2  \
+#     -vga vmware             \
+#     -hda vdisk.img
 
 
 
@@ -173,7 +173,7 @@ EOF
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
+#sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
@@ -183,7 +183,7 @@ sysctl -w net.ipv4.ip_forward=1
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
+#sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
@@ -195,7 +195,7 @@ EOF
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
+#sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
@@ -206,7 +206,7 @@ chmod 4750 /usr/libexec/qemu-bridge-helper
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
+#sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
@@ -216,7 +216,7 @@ echo 'allow br0' > /etc/qemu/bridge.conf
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
+#sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
