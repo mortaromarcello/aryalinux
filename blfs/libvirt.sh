@@ -19,7 +19,7 @@ DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
 tar xf $TARBALL
 cd $DIRECTORY
 
-./configure --prefix=/usr
+./configure --prefix=/usr --localstatedir=/var --sysconfdir=/etc &&
 make "-j`nproc`"
 sudo make install
 
