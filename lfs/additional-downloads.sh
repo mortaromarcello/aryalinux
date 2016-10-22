@@ -34,14 +34,14 @@ wget -nc http://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-4.06.tar.x
 wget -nc http://gondor.apana.org.au/~herbert/dash/files/dash-0.5.8.tar.gz
 wget -nc https://www.kernel.org/pub/linux/utils/boot/dracut/dracut-044.tar.xz
 wget -nc ftp://sources.redhat.com/pub/lvm2/releases/LVM2.2.02.155.tgz
-wget -nc http://aryalinux.org/releases/2016.08/aufs-4.7.tar.gz
-wget -nc http://aryalinux.org/releases/2016.08/aufs4-base.patch
-wget -nc http://aryalinux.org/releases/2016.08/aufs4-kbuild.patch
-wget -nc http://aryalinux.org/releases/2016.08/aufs4-loopback.patch
-wget -nc http://aryalinux.org/releases/2016.08/aufs4-mmap.patch
-wget -nc http://aryalinux.org/releases/2016.08/aufs4-standalone.patch
+wget -nc http://aryalinux.org/releases/2016.11/aufs-4.8.tar.gz
+wget -nc http://aryalinux.org/releases/2016.11/aufs4-base.patch
+wget -nc http://aryalinux.org/releases/2016.11/aufs4-kbuild.patch
+wget -nc http://aryalinux.org/releases/2016.11/aufs4-loopback.patch
+wget -nc http://aryalinux.org/releases/2016.11/aufs4-mmap.patch
+wget -nc http://aryalinux.org/releases/2016.11/aufs4-standalone.patch
 wget -nc http://aryalinux.org/releases/2016.08/0.21-nvme_ioctl.h.patch
-wget -nc http://aryalinux.org/releases/2016.08/alps-scripts-2016.08.tar.gz
+wget -nc http://aryalinux.org/releases/2016.11/alps-scripts-2016.11.tar.gz
 wget -c https://sourceforge.net/projects/cdrtools/files/cdrtools-3.01.tar.bz2/download -O cdrtools-3.01.tar.bz2
 wget -nc https://launchpad.net/ubuntu/+archive/primary/+files/cdrkit_1.1.11.orig.tar.gz
 wget -nc http://www.cmake.org/files/v3.5/cmake-3.5.0.tar.gz

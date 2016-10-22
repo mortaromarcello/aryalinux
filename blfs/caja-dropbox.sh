@@ -5,13 +5,13 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:caja-dropbox:1.15.0
+#VER:caja-dropbox:1.16.0
 #REQ:python-docutils
 #REQ:python-modules#pygtk
 
 cd $SOURCE_DIR
 
-URL="http://pub.mate-desktop.org/releases/1.15/caja-dropbox-1.15.0.tar.xz"
+URL="http://pub.mate-desktop.org/releases/1.16/caja-dropbox-1.16.0.tar.xz"
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
