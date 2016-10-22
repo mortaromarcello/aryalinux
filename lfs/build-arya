@@ -1,0 +1,206 @@
+#!/usr/bin/python
+
+import os
+import pwd
+import subprocess
+import sys
+from subprocess import check_output
+
+propsFile = 'build-properties'
+
+def runWithEnvAs(user, commands, env, cwd):
+	userRecord = pwd.getpwnam(user)
+	userUid = userRecord.pw_uid
+	userGid = userRecord.pw_gid
+	process = subprocess.Popen(
+		commands, preexec_fn=demote(userUid, userGid), cwd=cwd, env=env
+	)
+	result = process.wait()
+
+def demote(user_uid, user_gid):
+    def result():
+        os.setgid(user_gid)
+        os.setuid(user_uid)
+    return result
+
+def runScriptWithEnvAs(user, script, env, cwd):
+	runWithEnvAs(user, ['/bin/bash', script], env, cwd)
+
+def runScript(script, cwd):
+	process = subprocess.Popen(['/bin/bash', script], cwd=cwd)
+	process.wait()
+
+def runScriptWithArgs(script, cwd, args):
+	lst = ['/bin/bash', script]
+	lst.extend(args)
+	process = subprocess.Popen(lst, cwd=cwd)
+	process.wait()
+
+def readInput(message, varName, fileName, append=True):
+	if append:
+		with open(fileName, 'a') as f:
+			response = raw_input(message)
+			f.write(varName + '="' + response + '"\n')
+	else:
+                with open(fileName, 'w') as f:
+                        response = raw_input(message)
+                        f.write(varName + '="' + response + '"\n')
+
+def getParamValue(paramName):
+	with open(propsFile) as f:
+		for line in f:
+			if line.startswith(paramName):
+				return line.replace(paramName, '').replace('"', '').replace('=', '').strip()
+	return None
+
+def makeLogEntry(message, logFile):
+	with open(logFile, 'a') as f:
+		f.write(message + '\n')
+
+def logCurrentStage(stageName):
+	if os.path.exists('/sources/currentstage'):
+		with open('/sources/currentstage', 'w') as f:
+			f.write(stageName)
+
+def getCurrentStage():
+	try:
+		with open('/sources/currentstage', 'r') as f:
+			line = f.readline()
+		return line.strip()
+	except:
+		return 0
+
+def inputBuildProperties():
+	readInput("Bootloader Device: ", 'DEV_NAME', propsFile, False)
+	readInput("Root Partition: ", 'ROOT_PART', propsFile)
+	readInput("Home Partition: ", 'HOME_PART', propsFile)
+	readInput("Swap Partition: ", 'SWAP_PART', propsFile)
+	readInput("Locale: ", 'LOCALE', propsFile)
+	readInput("OS Name: ", 'OS_NAME', propsFile)
+	readInput("OS Version: ", 'OS_VERSION', propsFile)
+	readInput("OS Codename: ", 'OS_CODENAME', propsFile)
+	readInput("Domain Name: ", 'DOMAIN_NAME', propsFile)
+	readInput("Keyboard Layout: (e.g. us, fr) ", 'KEYBOARD', propsFile)
+	readInput("Printer Paper Size: (A4/letter) ", 'PAPER_SIZE', propsFile)
+	readInput('Enter full name: ', 'FULLNAME', propsFile)
+	readInput('Username: ', 'USERNAME', propsFile)
+	readInput('Computer Name: ', 'HOST_NAME', propsFile)
+
+	readInput("Install X Server? (y/N) ", 'INSTALL_XSERVER', propsFile)
+	if getParamValue('INSTALL_XSERVER') == 'y' or getParamValue('INSTALL_XSERVER') == 'Y':
+		readInput("Install Desktop Environment? (y/N) ", 'INSTALL_DESKTOP_ENVIRONMENT', propsFile)
+		if getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'y' or getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'Y':
+			readInput("Choose the Desktop Environment you want to install:\n1) XFCE\n2) Mate\n3) KDE\n4) Gnome\n5) LXDE\n\nEnter your choice (1-5): ", 'DESKTOP_ENVIRONMENT', propsFile)
+
+def freshBuild(startFrom):
+	startFrom = int(startFrom)
+
+	if startFrom == 1:
+		logCurrentStage('1')
+		inputBuildProperties()
+		startFrom = startFrom + 1
+
+	if startFrom == 2:
+		try:
+			logCurrentStage('2')
+			runScript('stage1.sh', None)
+			startFrom = startFrom + 1
+		except Exception as ex:
+			print 'Error occured while executing stage 1 : '
+			print ex
+			exit()
+
+	if startFrom == 3:
+		logCurrentStage('3')
+		env={}
+		LFS='/mnt/lfs'
+		LC_ALL='POSIX'
+		LFS_TGT=check_output("echo $(uname -m)-lfs-linux-gnu", shell=True).strip('\n')
+		PATH='/tools/bin:/bin:/usr/bin'
+
+		env['LFS'] = LFS
+		env['LC_ALL'] = LC_ALL
+		env['PATH'] = PATH
+		env['LFS_TGT']=LFS_TGT
+
+		try:
+			runScriptWithEnvAs('lfs', 'stage2.sh', env, '/home/lfs')
+			startFrom = startFrom + 1
+		except Exception as ex:
+			print 'Error occured while executing stage 2 :'
+			print ex
+			exit()
+
+	if startFrom == 4:
+		logCurrentStage('4')
+		try:
+			runScript('/sources/stage3.sh', '/sources')
+			startFrom = startFrom + 1
+		except Exception as ex:
+			print 'Error occured while running stage 3 :'
+			print ex
+			exit()
+
+	if startFrom == 5:
+		print 'Starting stage 5'
+		logCurrentStage('5')
+		try:
+			runScript('/sources/stage6.sh', '/sources')
+			startFrom = startFrom + 1
+		except:
+			print 'Error occured while running stage 4 :'
+			print ex
+			exit()
+
+	if startFrom == 6:
+		print '"' + getParamValue('INSTALL_XSERVER') + '"'
+		print getParamValue('INSTALL_XSERVER') == 'y' or getParamValue('INSTALL_XSERVER') == 'Y'
+		if getParamValue('INSTALL_XSERVER') == 'y' or getParamValue('INSTALL_XSERVER') == 'Y':
+			try:
+				logCurrentStage('6')
+				runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/essentials.sh', getParamValue('USERNAME')])
+				runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'xserver-meta'])
+				startFrom = startFrom + 1
+			except Exception as ex:
+				print 'Error occured in the installation of x-server'
+				print ex
+				exit()
+
+	if startFrom == 7:
+		if getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'y' or getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'Y':
+			try:
+				logCurrentStage('7')
+				if getParamValue('DESKTOP_ENVIRONMENT') == '2':
+					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'mate-desktop-environment'])
+				elif getParamValue('DESKTOP_ENVIRONMENT') == '1':
+					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'xfce-desktop-environment'])
+				startFrom = startFrom + 1
+			except Exception as ex:
+				print 'Error occured in the installation of desktop environment :'
+				print ex
+				exit()
+
+	runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/final-stage.sh'])
+
+print 'Do you want to start a new build or resume a build that was previously started ?'
+print '1. Strart a fresh build'
+print '2. Resume the last build'
+response = raw_input('Enter your choice (1 ... 2): ')
+if response == '1':
+	freshBuild(1)
+else:
+	rootPartition = raw_input('Enter the root partition where the build was in progress. Enter to exit: ')
+	if rootPartition != '':
+		if not os.path.exists('/mnt/lfs/sources/build-properties'):
+			runScript('./umountal.sh', None)
+			check_output('mkdir -pv /mnt/lfs', shell=True)
+			check_output('mount -v ' + rootPartition + ' /mnt/lfs', shell=True)
+			check_output('rm -rf /sources', shell=True)
+			check_output('ln -svf /mnt/lfs/sources /', shell=True)
+		if os.path.exists('/sources/build-properties'):
+			stage = getCurrentStage()
+			freshBuild(stage)
+		else:
+			check_output('./umountal.sh', shell=True)
+			print 'This is not the partition where build was in progress. Cannot continue. Exiting.'
+			print 'Please re-run this script with right inputs.'
