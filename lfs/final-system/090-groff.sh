@@ -7,13 +7,13 @@ set +h
 
 if [ "x$MULTICORE" == "xy" ] || [ "x$MULTICORE" == "xY" ]
 then
-	export MAKEFLAGS="-j `nproc`"
+	export MAKEFLAGS="-j 1"
 fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="088-findutils.sh"
-TARBALL="findutils-4.6.0.tar.gz"
+STEPNAME="090-groff.sh"
+TARBALL="groff-1.22.3.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,11 +29,9 @@ then
 	cd $DIRECTORY
 fi
 
-./configure --prefix=/usr --localstatedir=/var/lib/locate
+PAGE=PAPER_SIZE ./configure --prefix=/usr
 make
 make install
-mv -v /usr/bin/find /bin
-sed -i 's|find:=${BINDIR}|find:=/bin|' /usr/bin/updatedb
 
 
 cd $SOURCE_DIR

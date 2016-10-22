@@ -12,7 +12,7 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="094-kbd.sh"
+STEPNAME="095-kbd.sh"
 TARBALL="kbd-2.0.3.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track

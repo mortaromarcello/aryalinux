@@ -160,8 +160,19 @@ echo "CONFIG_SQUASHFS_FRAGMENT_CACHE_SIZE=3" >> .config
 sed "s@CONFIG_MESSAGE_LOGLEVEL_DEFAULT=4@CONFIG_MESSAGE_LOGLEVEL_DEFAULT=7@g" .config
 
 
+sed -i "s@# CONFIG_INOTIFY_USER is not set@CONFIG_INOTIFY_USER=y@g" .config
+sed -i "s@CONFIG_SYSFS_DEPRECATED=y@# CONFIG_SYSFS_DEPRECATED is not set@g" .config
+sed -i "s@# CONFIG_CGROUPS is not set@CONFIG_CGROUPS=y@g" .config
+sed -i "s@# CONFIG_DMIID is not set@CONFIG_DMIID=y@g" .config
+sed -i "s@# CONFIG_TMPFS_XATTR is not set@CONFIG_TMPFS_XATTR=y@g" .config
+sed -i "s@CONFIG_FW_LOADER_USER_HELPER=y@# CONFIG_FW_LOADER_USER_HELPER is not set@g" .config
+sed -i "s@CONFIG_AUDIT=y@# CONFIG_AUDIT is not set@g" .config
+sed -i "s@# CONFIG_SECCOMP is not set@CONFIG_SECCOMP=y@g" .config
 sed -i "s@# CONFIG_DEVTMPFS is not set@CONFIG_DEVTMPFS=y@g" .config
+sed -i "s@CONFIG_SYSFS_DEPRECATED_V2=y@# CONFIG_SYSFS_DEPRECATED_V2 is not set@g" .config
+sed -i "s@# CONFIG_FHANDLE is not set@CONFIG_FHANDLE=y@g" .config
 sed -i "s@CONFIG_UEVENT_HELPER=y@# CONFIG_UEVENT_HELPER is not set@g" .config
+sed -i "s@# CONFIG_TMPFS_POSIX_ACL is not set@CONFIG_TMPFS_POSIX_ACL=y@g" .config
 
 
 make "-j`nproc`"

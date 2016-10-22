@@ -12,7 +12,7 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="084-e2fsprogs.sh"
+STEPNAME="085-e2fsprogs.sh"
 TARBALL="e2fsprogs-1.43.3.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track

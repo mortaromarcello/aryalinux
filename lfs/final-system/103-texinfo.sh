@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="105-vim.sh"
-TARBALL="vim-8.0.tar.bz2"
+STEPNAME="103-texinfo.sh"
+TARBALL="texinfo-6.3.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,25 +29,16 @@ then
 	cd $DIRECTORY
 fi
 
-echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
-./configure --prefix=/usr
+./configure --prefix=/usr --disable-static
 make
 make install
-ln -sv vim /usr/bin/vi
-for L in  /usr/share/man/{,*/}man1/vim.1; do
-    ln -sv vim.1 $(dirname $L)/vi.1
+make TEXMF=/usr/share/texmf install-tex
+pushd /usr/share/info
+rm -v dir
+for f in *
+  do install-info $f dir 2>/dev/null
 done
-ln -sv ../vim/vim80/doc /usr/share/doc/vim-8.0
-cat > /etc/vimrc << "EOF"
-" Begin /etc/vimrc
-set nocompatible
-set backspace=2
-syntax on
-if (&term == "iterm") || (&term == "putty")
- set background=dark
-endif
-" End /etc/vimrc
-EOF
+popd
 
 
 cd $SOURCE_DIR

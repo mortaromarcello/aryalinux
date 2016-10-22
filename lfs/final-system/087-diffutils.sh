@@ -12,7 +12,7 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="086-diffutils.sh"
+STEPNAME="087-diffutils.sh"
 TARBALL="diffutils-3.5.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track

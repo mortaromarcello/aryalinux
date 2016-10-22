@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="102-man-db.sh"
-TARBALL="man-db-2.7.5.tar.xz"
+STEPNAME="097-make.sh"
+TARBALL="make-4.2.1.tar.bz2"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,16 +29,9 @@ then
 	cd $DIRECTORY
 fi
 
-./configure --prefix=/usr                        \
-            --docdir=/usr/share/doc/man-db-2.7.5 \
-            --sysconfdir=/etc                    \
-            --disable-setuid                     \
-            --with-browser=/usr/bin/lynx         \
-            --with-vgrind=/usr/bin/vgrind        \
-            --with-grap=/usr/bin/grap
+./configure --prefix=/usr
 make
 make install
-sed -i "s:man root:root root:g" /usr/lib/tmpfiles.d/man-db.conf
 
 
 cd $SOURCE_DIR

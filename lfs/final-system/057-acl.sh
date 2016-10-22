@@ -34,7 +34,6 @@ sed -i "s:| sed.*::g" test/{sbits-restore,cp,misc}.test
 sed -i -e "/TABS-1;/a if (x > (TABS-1)) x = (TABS-1);" \
     libacl/__acl_to_any_text.c
 ./configure --prefix=/usr    \
-            --bindir=/bin    \
             --disable-static \
             --libexecdir=/usr/lib
 make

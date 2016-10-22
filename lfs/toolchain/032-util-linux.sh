@@ -29,10 +29,11 @@ then
 	cd $DIRECTORY
 fi
 
-./configure --prefix=/tools                \
-            --without-python               \
-            --disable-makeinstall-chown    \
-            --without-systemdsystemunitdir \
+./configure --prefix=/tools                   \
+            --without-python                  \
+            --disable-makeinstall-chown       \
+            --without-systemdsystemunitdir    \
+            --enable-libmount-force-mountinfo \
             PKG_CONFIG=""
 make
 make install

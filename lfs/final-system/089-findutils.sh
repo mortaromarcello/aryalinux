@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="101-util-linux.sh"
-TARBALL="linux-4.8.1.tar.xz"
+STEPNAME="089-findutils.sh"
+TARBALL="findutils-4.6.0.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,22 +29,11 @@ then
 	cd $DIRECTORY
 fi
 
-mkdir -pv /var/lib/hwclock
-./configure ADJTIME_PATH=/var/lib/hwclock/adjtime   \
-            --docdir=/usr/share/doc/util-linux-2.28.2 \
-            --disable-chfn-chsh  \
-            --disable-login      \
-            --disable-nologin    \
-            --disable-su         \
-            --disable-setpriv    \
-            --disable-runuser    \
-            --disable-pylibmount \
-            --disable-static     \
-            --without-python     \
-            --without-systemd    \
-            --without-systemdsystemunitdir
+./configure --prefix=/usr --localstatedir=/var/lib/locate
 make
 make install
+mv -v /usr/bin/find /bin
+sed -i 's|find:=${BINDIR}|find:=/bin|' /usr/bin/updatedb
 
 
 cd $SOURCE_DIR

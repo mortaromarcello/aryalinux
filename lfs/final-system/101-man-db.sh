@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="098-sysklogd.sh"
-TARBALL="sysklogd-1.5.1.tar.gz"
+STEPNAME="101-man-db.sh"
+TARBALL="man-db-2.7.5.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,21 +29,16 @@ then
 	cd $DIRECTORY
 fi
 
-sed -i '/Error loading kernel symbols/{n;n;d}' ksym_mod.c
-sed -i 's/union wait/int/' syslogd.c
+./configure --prefix=/usr                        \
+            --docdir=/usr/share/doc/man-db-2.7.5 \
+            --sysconfdir=/etc                    \
+            --disable-setuid                     \
+            --with-browser=/usr/bin/lynx         \
+            --with-vgrind=/usr/bin/vgrind        \
+            --with-grap=/usr/bin/grap
 make
-make BINDIR=/sbin install
-cat > /etc/syslog.conf << "EOF"
-# Begin /etc/syslog.conf
-auth,authpriv.* -/var/log/auth.log
-*.*;auth,authpriv.none -/var/log/sys.log
-daemon.* -/var/log/daemon.log
-kern.* -/var/log/kern.log
-mail.* -/var/log/mail.log
-user.* -/var/log/user.log
-*.emerg *
-# End /etc/syslog.conf
-EOF
+make install
+sed -i "s:man root:root root:g" /usr/lib/tmpfiles.d/man-db.conf
 
 
 cd $SOURCE_DIR

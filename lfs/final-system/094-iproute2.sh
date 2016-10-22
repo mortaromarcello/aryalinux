@@ -7,13 +7,13 @@ set +h
 
 if [ "x$MULTICORE" == "xy" ] || [ "x$MULTICORE" == "xY" ]
 then
-	export MAKEFLAGS="-j 1"
+	export MAKEFLAGS="-j `nproc`"
 fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="089-groff.sh"
-TARBALL="groff-1.22.3.tar.gz"
+STEPNAME="094-iproute2.sh"
+TARBALL="iproute2-4.7.0.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,9 +29,12 @@ then
 	cd $DIRECTORY
 fi
 
-PAGE=PAPER_SIZE ./configure --prefix=/usr
+sed -i /ARPD/d Makefile
+sed -i 's/arpd.8//' man/man8/Makefile
+rm -v doc/arpd.sgml
+sed -i 's/m_ipt.o//' tc/Makefile
 make
-make install
+make DOCDIR=/usr/share/doc/iproute2-4.7.0 install
 
 
 cd $SOURCE_DIR

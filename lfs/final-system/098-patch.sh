@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="093-iproute2.sh"
-TARBALL="iproute2-4.7.0.tar.xz"
+STEPNAME="098-patch.sh"
+TARBALL="patch-2.7.5.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,12 +29,9 @@ then
 	cd $DIRECTORY
 fi
 
-sed -i /ARPD/d Makefile
-sed -i 's/arpd.8//' man/man8/Makefile
-rm -v doc/arpd.sgml
-sed -i 's/m_ipt.o//' tc/Makefile
+./configure --prefix=/usr
 make
-make DOCDIR=/usr/share/doc/iproute2-4.7.0 install
+make install
 
 
 cd $SOURCE_DIR

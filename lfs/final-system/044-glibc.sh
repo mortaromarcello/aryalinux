@@ -40,6 +40,8 @@ touch /etc/ld.so.conf
 make install
 cp -v ../nscd/nscd.conf /etc/nscd.conf
 mkdir -pv /var/cache/nscd
+install -v -Dm644 ../nscd/nscd.tmpfiles /usr/lib/tmpfiles.d/nscd.conf
+install -v -Dm644 ../nscd/nscd.service /lib/systemd/system/nscd.service
 mkdir -pv /usr/lib/locale
 localedef -i cs_CZ -f UTF-8 cs_CZ.UTF-8
 localedef -i de_DE -f ISO-8859-1 de_DE
@@ -88,7 +90,7 @@ done
 cp -v zone.tab zone1970.tab iso3166.tab $ZONEINFO
 zic -d $ZONEINFO -p America/New_York
 unset ZONEINFO
-cp -v /usr/share/zoneinfo/$TIMEZONE /etc/localtime
+ln -sfv /usr/share/zoneinfo/$TIMEZONE /etc/localtime
 cat > /etc/ld.so.conf << "EOF"
 # Begin /etc/ld.so.conf
 /usr/local/lib

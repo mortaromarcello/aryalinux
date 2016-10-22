@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="096-make.sh"
-TARBALL="make-4.2.1.tar.bz2"
+STEPNAME="100-util-linux.sh"
+TARBALL="linux-4.8.1.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,7 +29,19 @@ then
 	cd $DIRECTORY
 fi
 
-./configure --prefix=/usr
+mkdir -pv /var/lib/hwclock
+./configure ADJTIME_PATH=/var/lib/hwclock/adjtime   \
+            --docdir=/usr/share/doc/util-linux-2.28.2 \
+            --disable-chfn-chsh  \
+            --disable-login      \
+            --disable-nologin    \
+            --disable-su         \
+            --disable-setpriv    \
+            --disable-runuser    \
+            --disable-pylibmount \
+            --disable-static     \
+            --without-python     \
+            --enable-libmount-force-mountinfo
 make
 make install
 

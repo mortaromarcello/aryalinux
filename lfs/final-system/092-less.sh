@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="097-patch.sh"
-TARBALL="patch-2.7.5.tar.xz"
+STEPNAME="092-less.sh"
+TARBALL="less-481.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,7 +29,7 @@ then
 	cd $DIRECTORY
 fi
 
-./configure --prefix=/usr
+./configure --prefix=/usr --sysconfdir=/etc
 make
 make install
 
