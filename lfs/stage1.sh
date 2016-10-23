@@ -55,7 +55,6 @@ then
 	# End checking if swap active
 else
 	echo "No valid swap partition specified. Continuing without swap partition..."
-	exit 1
 fi
 # End checking id swap is a valid block device
 
