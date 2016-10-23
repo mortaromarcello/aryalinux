@@ -3,7 +3,7 @@
 set -e
 set +h
 
-. ./build-properties
+. /sources/build-properties
 
 STEPNAME="kernel"
 LOGFILE="/sources/build-log"
