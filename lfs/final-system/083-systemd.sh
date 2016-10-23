@@ -70,7 +70,7 @@ done
 ln -sfv ../lib/systemd/systemd /sbin/init
 systemd-machine-id-setup
 rm -fv /etc/resolv.conf
-ln -sv /run/systemd/resolve/resolv.conf /etc/resolv.conf
+# ln -sv /run/systemd/resolve/resolv.conf /etc/resolv.conf
 
 
 cd $SOURCE_DIR
