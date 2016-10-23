@@ -33,7 +33,7 @@ URL=ftp://ftp.isc.org/isc/bind9/9.11.0/bind-9.11.0.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar --no-overwrite-dir xf $TARBALL
+tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser

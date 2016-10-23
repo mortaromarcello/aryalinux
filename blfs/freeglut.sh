@@ -33,7 +33,7 @@ URL=http://downloads.sourceforge.net/freeglut/freeglut-3.0.0.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar --no-overwrite-dir xf $TARBALL
+tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser

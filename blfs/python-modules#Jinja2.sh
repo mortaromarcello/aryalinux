@@ -31,7 +31,7 @@ URL=https://pypi.python.org/packages/f2/2f/0b98b06a345a761bec91a079ccae392d28269
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar --no-overwrite-dir xf $TARBALL
+tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
 

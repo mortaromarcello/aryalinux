@@ -41,7 +41,7 @@ URL=http://ftp.gnome.org/pub/gnome/sources/eog/3.20/eog-3.20.4.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar --no-overwrite-dir xf $TARBALL
+tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser

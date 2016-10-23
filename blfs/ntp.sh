@@ -35,7 +35,7 @@ URL=https://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-4.2.8p8.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar --no-overwrite-dir xf $TARBALL
+tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser

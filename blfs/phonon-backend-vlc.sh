@@ -32,7 +32,7 @@ URL=http://download.kde.org/stable/phonon/phonon-backend-vlc/0.9.0/phonon-backen
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar --no-overwrite-dir xf $TARBALL
+tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
