@@ -23,55 +23,58 @@ echo "LFS=/mnt/lfs" >> build-properties
 
 export LFS=/mnt/lfs
 
-if [ ! -z "${ROOT_PART}" ]
-then
-
-if [ -b "${ROOT_PART}" ]
+# Checking root is valid block device
+if [ ! -z "${ROOT_PART}" ] && [ -b "${ROOT_PART}" ]
 then
 	mkfs -F -v -t ext4 ${ROOT_PART}
 else
-	print "${ROOT_PART} is not a valid partition. Aborting..."
+	print "${ROOT_PART} is not a valid block device. Aborting..."
 	exit 1
 fi
+# End checking root is valid block device
+
 mkdir -pv $LFS
 mount -v -t ext4 $ROOT_PART $LFS
 
-else
-	echo "You must specify a root partition for build to proceed."
-	exit 1
-fi
-
-if [ -b "${SWAP_PART}" ]
+# Checking swap is a valid block device
+if [ ! -z "${SWAP_PART}" ] && [ -b "${SWAP_PART}" ]
 then
-	if [ -z `swapon -s` | grep "${SWAP_PART} " ]
+	# Checking swap active
+	if [ -z `swapon -s | grep "${SWAP_PART} "` ]
 	then
+		# Checking if swap needs to be formatted
 		if [ "${FORMAT_SWAP}" == "y" ] || [ "${FORMAT_SWAP}" == "Y" ]
 		then
 			mkswap ${SWAP_PART}
 		fi
+		# End checking if swap needs to be formatted
 		swapon ${SWAP_PART}
 	else
 		echo 'Swap partition exists and is active. Not formatting'
 	fi
+	# End checking if swap active
 else
 	print "${SWAP_PART} is not a valid partition. Aborting..."
 	exit 1
 fi
+# End checking id swap is a valid block device
 
-if [ ! -z "${HOME_PART}" ]
-	if [ -b "${HOME_PART}" ]
+# Checking if home is a valid block device
+if [ ! -z "${HOME_PART}" ] && [ -b "${HOME_PART}" ]
+then
+	# Checking if home needs to be formatted
+	if [ "${FORMAT_HOME}" == "y" ] || [ "${FORMAT_HOME}" == "Y" ]
 	then
-		if [ "${FORMAT_HOME}" == "y" ] || [ "${FORMAT_HOME}" == "Y" ]
-		then
-			mkfs.ext4 -F -v "${HOME_PART}"
-		fi
-		mkdir -pv $LFS/home
-		mount ${HOME_PART} $LFS/home
-	else
-		print "${HOME_PART} is not a valid home partition. Aborting..."
-		exit 1
+		mkfs.ext4 -F -v "${HOME_PART}"
 	fi
+	# End checking if home needs to be formatted
+	mkdir -pv $LFS/home
+	mount ${HOME_PART} $LFS/home
+else
+	print "${HOME_PART} is not a valid home partition. Aborting..."
+	exit 1
 fi
+# End checking if home is a valid block device
 
 mkdir -v $LFS/sources
 chmod -v a+wt $LFS/sources
