@@ -176,6 +176,6 @@ sed -i "s/# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/g" /et
 groupadd wheel
 usermod -a -G wheel $USERNAME
 
-echo "admin-user" >> /source/build-log
+echo "admin-user" >> /sources/build-log
 
 fi
