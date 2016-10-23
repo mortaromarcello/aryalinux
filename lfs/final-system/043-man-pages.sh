@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="043-man-pages.sh"
-TARBALL="man-db-2.7.5.tar.xz"
+TARBALL="man-pages-4.08.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 

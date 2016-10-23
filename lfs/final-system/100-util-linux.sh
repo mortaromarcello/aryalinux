@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="100-util-linux.sh"
-TARBALL="linux-4.8.1.tar.xz"
+TARBALL="util-linux-2.28.2.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
