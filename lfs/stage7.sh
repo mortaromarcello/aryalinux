@@ -166,3 +166,16 @@ rm -r syslinux-4.06
 echo "syslinux" >> /sources/build-log
 
 fi
+
+if ! grep "admin-user" /sources/build-log &> /dev/null
+then
+
+echo "Creating user with name $FULLNAME and username : $USERNAME"
+useradd -m -c "$FULLNAME" -s /bin/bash $USERNAME
+sed -i "s/# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/g" /etc/sudoers
+groupadd wheel
+usermod -a -G wheel $USERNAME
+
+echo "admin-user" >> /source/build-log
+
+fi
