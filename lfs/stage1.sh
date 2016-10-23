@@ -43,7 +43,7 @@ fi
 
 if [ -b "${SWAP_PART}" ]
 then
-	if [ -z `swapon -s` | grep "${SWAP_PART}" ]
+	if [ -z `swapon -s` | grep "${SWAP_PART} " ]
 	then
 		if [ "${FORMAT_SWAP}" == "y" ] || [ "${FORMAT_SWAP}" == "Y" ]
 		then
