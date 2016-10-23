@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:xchat:2.8.8
+#DESCRIPTION:br3ak XChat is an IRC chat program. Itbr3ak allows you to join multiple IRC channels (chat rooms) at the samebr3ak time, talk publicly, have private one-on-one conversations, etc.br3ak File transfers are also possible.br3ak
+#SECTION:xsoft
+
+whoami > /tmp/currentuser
 
 #REQ:glib2
 #REC:gtk2
@@ -17,17 +21,25 @@ set -e
 #OPT:tcl
 
 
-cd $SOURCE_DIR
+#VER:xchat:2.8.8
 
-URL=http://www.xchat.org/files/source/2.8/xchat-2.8.8.tar.bz2
+
+NAME="xchat"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xchat/xchat-2.8.8.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xchat/xchat-2.8.8.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xchat/xchat-2.8.8.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xchat/xchat-2.8.8.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xchat/xchat-2.8.8.tar.bz2 || wget -nc http://www.xchat.org/files/source/2.8/xchat-2.8.8.tar.bz2 || wget -nc ftp://mirror.ovh.net/gentoo-distfiles/distfiles/xchat-2.8.8.tar.bz2
 wget -nc http://www.linuxfromscratch.org/patches/downloads/xchat/xchat-2.8.8-glib-2.31-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/xchat-2.8.8-glib-2.31-1.patch
 
+
+URL=http://www.xchat.org/files/source/2.8/xchat-2.8.8.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -53,8 +65,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "xchat=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

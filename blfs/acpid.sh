@@ -1,24 +1,36 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+#DESCRIPTION:br3ak The acpid (Advanced Configurationbr3ak and Power Interface event daemon) is a completely flexible, totallybr3ak extensible daemon for delivering ACPI events. It listens on netlinkbr3ak interface and when an event occurs, executes programs to handle thebr3ak event. The programs it executes are configured through a set ofbr3ak configuration files, which can be dropped into place by packages orbr3ak by the user.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
+
+
+
 #VER:acpid:2.0.28
 
 
+NAME="acpid"
 
-cd $SOURCE_DIR
-
-URL=http://downloads.sourceforge.net/acpid2/acpid-2.0.28.tar.xz
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/acpid/acpid-2.0.28.tar.xz || wget -nc http://downloads.sourceforge.net/acpid2/acpid-2.0.28.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/acpid/acpid-2.0.28.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/acpid/acpid-2.0.28.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/acpid/acpid-2.0.28.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/acpid/acpid-2.0.28.tar.xz
 
+
+URL=http://downloads.sourceforge.net/acpid2/acpid-2.0.28.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -75,8 +87,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "acpid=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

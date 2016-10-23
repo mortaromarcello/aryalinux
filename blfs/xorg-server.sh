@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:xorg-server:1.18.4
+#DESCRIPTION:br3ak The Xorg Server is the core of thebr3ak X Window system.br3ak
+#SECTION:x
+
+whoami > /tmp/currentuser
 
 #REQ:openssl
 #REQ:nettle
@@ -27,17 +31,25 @@ set -e
 #OPT:xmlto
 
 
-cd $SOURCE_DIR
+#VER:xorg-server:1.18.4
+
+
+NAME="xorg-server"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
+
+wget -nc http://ftp.x.org/pub/individual/xserver/xorg-server-1.18.4.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2 || wget -nc ftp://ftp.x.org/pub/individual/xserver/xorg-server-1.18.4.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2
+wget -nc http://www.linuxfromscratch.org/patches/downloads/xorg-server/xorg-server-1.18.4-add_prime_support-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/xorg-server-1.18.4-add_prime_support-1.patch
+
 
 URL=http://ftp.x.org/pub/individual/xserver/xorg-server-1.18.4.tar.bz2
-
-wget -nc http://www.linuxfromscratch.org/patches/downloads/xorg-server/xorg-server-1.18.4-add_prime_support-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/xorg-server-1.18.4-add_prime_support-1.patch
-wget -nc http://ftp.x.org/pub/individual/xserver/xorg-server-1.18.4.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2 || wget -nc ftp://ftp.x.org/pub/individual/xserver/xorg-server-1.18.4.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2
-
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -66,8 +78,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "xorg-server=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

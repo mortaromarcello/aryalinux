@@ -1,28 +1,39 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:docbook-xml:4.5
+#DESCRIPTION:br3ak The DocBook XML DTD-4.5 packagebr3ak contains document type definitions for verification of XML databr3ak files against the DocBook rule set. These are useful forbr3ak structuring books and software documentation to a standard allowingbr3ak you to utilize transformations already written for that standard.br3ak
+#SECTION:pst
+
+whoami > /tmp/currentuser
 
 #REQ:libxml2
 #REQ:sgml-common
 #REQ:unzip
 
 
-cd $SOURCE_DIR
+#VER:docbook-xml:4.5
 
-URL=http://www.docbook.org/xml/4.5/docbook-xml-4.5.zip
+
+NAME="docbook"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook-xml/docbook-xml-4.5.zip || wget -nc http://www.docbook.org/xml/4.5/docbook-xml-4.5.zip || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/docbook-xml/docbook-xml-4.5.zip || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/docbook-xml/docbook-xml-4.5.zip || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook-xml/docbook-xml-4.5.zip || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/docbook-xml/docbook-xml-4.5.zip
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=''
-unzip_dirname $TARBALL DIRECTORY
 
-unzip_file $TARBALL
+URL=http://www.docbook.org/xml/4.5/docbook-xml-4.5.zip
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -157,8 +168,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "docbook=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

@@ -1,26 +1,38 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:libisoburn:1.4.6
+#DESCRIPTION:br3ak libisoburn is a frontend forbr3ak libraries libburn and libisofs which enables creation and expansionbr3ak of ISO-9660 filesystems on all CD/DVD/BD media supported bybr3ak libburn. This includes media likebr3ak DVD+RW, which do not support multi-session management on mediabr3ak level and even plain disk files or block devices.br3ak
+#SECTION:multimedia
+
+whoami > /tmp/currentuser
 
 #REQ:libburn
 #REQ:libisofs
 
 
-cd $SOURCE_DIR
+#VER:libisoburn:1.4.6
 
-URL=http://files.libburnia-project.org/releases/libisoburn-1.4.6.tar.gz
+
+NAME="libisoburn"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libisoburn/libisoburn-1.4.6.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libisoburn/libisoburn-1.4.6.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libisoburn/libisoburn-1.4.6.tar.gz || wget -nc http://files.libburnia-project.org/releases/libisoburn-1.4.6.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libisoburn/libisoburn-1.4.6.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libisoburn/libisoburn-1.4.6.tar.gz
 
+
+URL=http://files.libburnia-project.org/releases/libisoburn-1.4.6.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -41,8 +53,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "libisoburn=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

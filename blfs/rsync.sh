@@ -1,25 +1,37 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:rsync:3.1.2
+#DESCRIPTION:br3ak The rsync package contains thebr3ak <span class="command"><strong>rsync</strong> utility. Thisbr3ak is useful for synchronizing large file archives over a network.br3ak
+#SECTION:basicnet
+
+whoami > /tmp/currentuser
 
 #REC:popt
 
 
-cd $SOURCE_DIR
+#VER:rsync:3.1.2
 
-URL=https://www.samba.org/ftp/rsync/src/rsync-3.1.2.tar.gz
+
+NAME="rsync"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc https://www.samba.org/ftp/rsync/src/rsync-3.1.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/rsync/rsync-3.1.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/rsync/rsync-3.1.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/rsync/rsync-3.1.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/rsync/rsync-3.1.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/rsync/rsync-3.1.2.tar.gz
 
+
+URL=https://www.samba.org/ftp/rsync/src/rsync-3.1.2.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -102,8 +114,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "rsync=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

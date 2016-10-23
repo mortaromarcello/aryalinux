@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:wireshark:2.2.1
+#DESCRIPTION:br3ak The Wireshark package contains abr3ak network protocol analyzer, also known as a “<span class="quote">sniffer”. This is useful for analyzing databr3ak captured “<span class="quote">off the wire” frombr3ak a live network connection, or data read from a capture file.br3ak
+#SECTION:basicnet
+
+whoami > /tmp/currentuser
 
 #REQ:glib2
 #REC:gtk3
@@ -21,17 +25,25 @@ set -e
 #OPT:gtk2
 
 
-cd $SOURCE_DIR
+#VER:wireshark:2.2.1
+
+
+NAME="wireshark"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
+
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/wireshark/wireshark-2.2.1.tar.bz2 || wget -nc https://www.wireshark.org/download/src/all-versions/wireshark-2.2.1.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/wireshark/wireshark-2.2.1.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/wireshark/wireshark-2.2.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/wireshark/wireshark-2.2.1.tar.bz2 || wget -nc ftp://ftp.uni-kl.de/pub/wireshark/src/wireshark-2.2.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/wireshark/wireshark-2.2.1.tar.bz2
+wget -nc http://www.linuxfromscratch.org/patches/downloads/wireshark/wireshark-2.2.1-lua_5_3_1-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/wireshark-2.2.1-lua_5_3_1-1.patch
+
 
 URL=https://www.wireshark.org/download/src/all-versions/wireshark-2.2.1.tar.bz2
-
-wget -nc http://www.linuxfromscratch.org/patches/downloads/wireshark/wireshark-2.2.1-lua_5_3_1-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/wireshark-2.2.1-lua_5_3_1-1.patch
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/wireshark/wireshark-2.2.1.tar.bz2 || wget -nc https://www.wireshark.org/download/src/all-versions/wireshark-2.2.1.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/wireshark/wireshark-2.2.1.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/wireshark/wireshark-2.2.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/wireshark/wireshark-2.2.1.tar.bz2 || wget -nc ftp://ftp.uni-kl.de/pub/wireshark/src/wireshark-2.2.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/wireshark/wireshark-2.2.1.tar.bz2
-
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -97,8 +109,9 @@ sudo usermod -a -G wireshark `cat /tmp/currentuser`
 
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "wireshark=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

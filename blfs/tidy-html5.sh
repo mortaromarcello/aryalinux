@@ -1,27 +1,39 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:tidy-html5:5.2.0
+#DESCRIPTION:br3ak The Tidy HTML5 package contains abr3ak command line tool and libraries used to read HTML, XHTML and XMLbr3ak files and write cleaned up markup. It detects and corrects manybr3ak common coding errors and strives to produce visually equivalentbr3ak markup that is both W3C compliant and compatible with mostbr3ak browsers.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:cmake
 #REC:libxslt
 #OPT:doxygen
 
 
-cd $SOURCE_DIR
+#VER:tidy-html5:5.2.0
 
-URL=https://github.com/htacg/tidy-html5/archive/5.2.0.tar.gz
+
+NAME="tidy-html5"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc https://github.com/htacg/tidy-html5/archive/5.2.0.tar.gz
 
+
+URL=https://github.com/htacg/tidy-html5/archive/5.2.0.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -49,8 +61,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "tidy-html5=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

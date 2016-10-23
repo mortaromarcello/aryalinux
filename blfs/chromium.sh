@@ -1,12 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:chromium:53.0.2785.143
-#VER:v:3
+#DESCRIPTION:br3ak Chromium is an open-source browserbr3ak project that aims to build a safer, faster, and more stable way forbr3ak all users to experience the web.br3ak
+#SECTION:xsoft
+
+whoami > /tmp/currentuser
 
 #REQ:alsa-lib
 #REQ:cups
@@ -42,17 +45,26 @@ set -e
 #OPT:libvpx
 
 
-cd $SOURCE_DIR
+#VER:chromium:53.0.2785.143
+#VER:v:3
 
-URL=https://commondatastorage.googleapis.com/chromium-browser-official/chromium-53.0.2785.143.tar.xz
+
+NAME="chromium"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/chromium/chromium-53.0.2785.143.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/chromium/chromium-53.0.2785.143.tar.xz || wget -nc https://commondatastorage.googleapis.com/chromium-browser-official/chromium-53.0.2785.143.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/chromium/chromium-53.0.2785.143.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/chromium/chromium-53.0.2785.143.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/chromium/chromium-53.0.2785.143.tar.xz
 wget -nc https://github.com/foutrelis/chromium-launcher/archive/v3.tar.gz
 
+
+URL=https://commondatastorage.googleapis.com/chromium-browser-official/chromium-53.0.2785.143.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -235,8 +247,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "chromium=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

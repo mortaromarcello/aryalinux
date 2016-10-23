@@ -1,24 +1,36 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+#DESCRIPTION:br3ak This package is intended to provide a simple way for applicationsbr3ak to take actions based on a system or user-specified paper size.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
+
+
+
 #VER:libpaper_1.1.2+nmu:4
 
 
+NAME="libpaper"
 
-cd $SOURCE_DIR
-
-URL=http://ftp.debian.org/debian/pool/main/libp/libpaper/libpaper_1.1.24+nmu4.tar.gz
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.debian.org/debian/pool/main/libp/libpaper/libpaper_1.1.24+nmu4.tar.gz || wget -nc ftp://ftp.debian.org/debian/pool/main/libp/libpaper/libpaper_1.1.24+nmu4.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libpaper/libpaper_1.1.24+nmu4.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libpaper/libpaper_1.1.24+nmu4.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libpaper/libpaper_1.1.24+nmu4.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libpaper/libpaper_1.1.24+nmu4.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libpaper/libpaper_1.1.24+nmu4.tar.gz
 
+
+URL=http://ftp.debian.org/debian/pool/main/libp/libpaper/libpaper_1.1.24+nmu4.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -97,8 +109,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "libpaper=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:seamonkey-.source:2.40
+#DESCRIPTION:br3ak SeaMonkey is a browser suite, thebr3ak Open Source sibling of Netscape.br3ak It includes the browser, composer, mail and news clients, and anbr3ak IRC client. It is the follow-on to the Mozilla browser suite.br3ak
+#SECTION:xsoft
+
+whoami > /tmp/currentuser
 
 #REQ:alsa-lib
 #REQ:gtk2
@@ -33,17 +37,25 @@ set -e
 #OPT:wireless_tools
 
 
-cd $SOURCE_DIR
+#VER:seamonkey-.source:2.40
 
-URL=https://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/2.40/source/seamonkey-2.40.source.tar.xz
+
+NAME="seamonkey"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc https://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/2.40/source/seamonkey-2.40.source.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/seamonkey/seamonkey-2.40.source.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/seamonkey/seamonkey-2.40.source.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/seamonkey/seamonkey-2.40.source.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/seamonkey/seamonkey-2.40.source.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/seamonkey/seamonkey-2.40.source.tar.xz
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/seamonkey-2.40-gcc6-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/seamonkey/seamonkey-2.40-gcc6-1.patch
 
+
+URL=https://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/2.40/source/seamonkey-2.40.source.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -169,8 +181,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "seamonkey=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

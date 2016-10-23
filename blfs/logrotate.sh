@@ -1,26 +1,38 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:logrotate:3.9.1
+#DESCRIPTION:br3ak The logrotate package allowsbr3ak automatic rotation, compression, removal, and mailing of log files.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:popt
 #REC:fcron
 
 
-cd $SOURCE_DIR
+#VER:logrotate:3.9.1
 
-URL=https://fedorahosted.org/releases/l/o/logrotate/logrotate-3.9.1.tar.gz
+
+NAME="logrotate"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/logrotate/logrotate-3.9.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/logrotate/logrotate-3.9.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/logrotate/logrotate-3.9.1.tar.gz || wget -nc https://fedorahosted.org/releases/l/o/logrotate/logrotate-3.9.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/logrotate/logrotate-3.9.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/logrotate/logrotate-3.9.1.tar.gz
 
+
+URL=https://fedorahosted.org/releases/l/o/logrotate/logrotate-3.9.1.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -133,8 +145,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "logrotate=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

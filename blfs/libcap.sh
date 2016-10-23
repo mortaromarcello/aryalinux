@@ -1,25 +1,37 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:libcap:2.25
+#DESCRIPTION:br3ak The libcap package was installedbr3ak in LFS, but if Linux-PAM supportbr3ak is desired, the PAM module must be built (after installation ofbr3ak Linux-PAM).br3ak
+#SECTION:postlfs
+
+whoami > /tmp/currentuser
 
 #REQ:linux-pam
 
 
-cd $SOURCE_DIR
+#VER:libcap:2.25
 
-URL=https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.25.tar.xz
+
+NAME="libcap"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libcap/libcap-2.25.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libcap/libcap-2.25.tar.xz || wget -nc https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.25.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libcap/libcap-2.25.tar.xz || wget -nc ftp://ftp.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.25.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libcap/libcap-2.25.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libcap/libcap-2.25.tar.xz
 
+
+URL=https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.25.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -38,8 +50,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "libcap=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

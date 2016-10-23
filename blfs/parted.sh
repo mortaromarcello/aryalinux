@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:parted:3.2
+#DESCRIPTION:br3ak The Parted package is a diskbr3ak partitioning and partition resizing tool.br3ak
+#SECTION:postlfs
+
+whoami > /tmp/currentuser
 
 #REC:lvm2
 #OPT:pth
@@ -13,17 +17,25 @@ set -e
 #OPT:tl-installer
 
 
-cd $SOURCE_DIR
+#VER:parted:3.2
+
+
+NAME="parted"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
+
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/parted/parted-3.2.tar.xz || wget -nc http://ftp.gnu.org/gnu/parted/parted-3.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/parted/parted-3.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/parted/parted-3.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/parted/parted-3.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/parted/parted-3.2.tar.xz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/parted-3.2-devmapper-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/parted/parted-3.2-devmapper-1.patch
+
 
 URL=http://ftp.gnu.org/gnu/parted/parted-3.2.tar.xz
-
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/parted-3.2-devmapper-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/parted/parted-3.2-devmapper-1.patch
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/parted/parted-3.2.tar.xz || wget -nc http://ftp.gnu.org/gnu/parted/parted-3.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/parted/parted-3.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/parted/parted-3.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/parted/parted-3.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/parted/parted-3.2.tar.xz
-
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -56,8 +68,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "parted=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

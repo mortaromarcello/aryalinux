@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:vim:8.0
+#DESCRIPTION:br3ak The Vim package, which is anbr3ak abbreviation for VI IMproved, contains a <span class="command"><strong>vi</strong> clone with extra features asbr3ak compared to the original <span class="command"><strong>vi</strong>.br3ak
+#SECTION:postlfs
+
+whoami > /tmp/currentuser
 
 #REC:gtk2
 #REC:xorg-server
@@ -16,16 +20,24 @@ set -e
 #OPT:tcl
 
 
-cd $SOURCE_DIR
+#VER:vim:8.0
 
-URL=http://ftp.vim.org/vim/unix/vim-8.0.tar.bz2
+
+NAME="vim"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/vim/vim-8.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/vim/vim-8.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/vim/vim-8.0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/vim/vim-8.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/vim/vim-8.0.tar.bz2 || wget -nc http://ftp.vim.org/vim/unix/vim-8.0.tar.bz2
 
+
+URL=http://ftp.vim.org/vim/unix/vim-8.0.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -96,8 +108,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "vim=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

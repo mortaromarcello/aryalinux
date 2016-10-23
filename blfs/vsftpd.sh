@@ -1,27 +1,39 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:vsftpd:3.0.3
+#DESCRIPTION:br3ak The vsftpd package contains a verybr3ak secure and very small FTP daemon. This is useful for serving filesbr3ak over a network.br3ak
+#SECTION:server
+
+whoami > /tmp/currentuser
 
 #OPT:libcap
 #OPT:linux-pam
 #OPT:openssl
 
 
-cd $SOURCE_DIR
+#VER:vsftpd:3.0.3
 
-URL=https://security.appspot.com/downloads/vsftpd-3.0.3.tar.gz
+
+NAME="vsftpd"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/vsftpd/vsftpd-3.0.3.tar.gz || wget -nc https://security.appspot.com/downloads/vsftpd-3.0.3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/vsftpd/vsftpd-3.0.3.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/vsftpd/vsftpd-3.0.3.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/vsftpd/vsftpd-3.0.3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/vsftpd/vsftpd-3.0.3.tar.gz
 
+
+URL=https://security.appspot.com/downloads/vsftpd-3.0.3.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -109,8 +121,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "vsftpd=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

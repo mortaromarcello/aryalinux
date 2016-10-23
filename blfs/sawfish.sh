@@ -1,26 +1,38 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:sawfish_:1.12.0
+#DESCRIPTION:br3ak The sawfish package contains abr3ak window manager. This is useful for organizing and displayingbr3ak windows where all window decorations are configurable and allbr3ak user-interface policy is controlled through the extension language.br3ak
+#SECTION:x
+
+whoami > /tmp/currentuser
 
 #REQ:rep-gtk
 #REQ:general_which
 
 
-cd $SOURCE_DIR
+#VER:sawfish_:1.12.0
 
-URL=http://download.tuxfamily.org/sawfish/sawfish_1.12.0.tar.xz
+
+NAME="sawfish"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/sawfish/sawfish_1.12.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/sawfish/sawfish_1.12.0.tar.xz || wget -nc http://download.tuxfamily.org/sawfish/sawfish_1.12.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/sawfish/sawfish_1.12.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/sawfish/sawfish_1.12.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/sawfish/sawfish_1.12.0.tar.xz
 
+
+URL=http://download.tuxfamily.org/sawfish/sawfish_1.12.0.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -44,8 +56,9 @@ exec sawfish
 EOF
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "sawfish=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

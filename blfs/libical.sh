@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:libical:2.0.0
+#DESCRIPTION:br3ak The libical package contains anbr3ak implementation of the iCalendar protocols and data formats.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:cmake
 #OPT:db
@@ -14,16 +18,24 @@ set -e
 #OPT:icu
 
 
-cd $SOURCE_DIR
+#VER:libical:2.0.0
 
-URL=https://github.com/libical/libical/releases/download/v2.0.0/libical-2.0.0.tar.gz
+
+NAME="libical"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libical/libical-2.0.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libical/libical-2.0.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libical/libical-2.0.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libical/libical-2.0.0.tar.gz || wget -nc https://github.com/libical/libical/releases/download/v2.0.0/libical-2.0.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libical/libical-2.0.0.tar.gz
 
+
+URL=https://github.com/libical/libical/releases/download/v2.0.0/libical-2.0.0.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -47,8 +59,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "libical=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

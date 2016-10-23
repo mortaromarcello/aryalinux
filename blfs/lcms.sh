@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:lcms:1.19
+#DESCRIPTION:br3ak The Little CMS library is used bybr3ak other programs to provide color management facilities.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #OPT:libtiff
 #OPT:libjpeg
@@ -13,17 +17,25 @@ set -e
 #OPT:swig
 
 
-cd $SOURCE_DIR
+#VER:lcms:1.19
 
-URL=http://downloads.sourceforge.net/lcms/lcms-1.19.tar.gz
+
+NAME="lcms"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://downloads.sourceforge.net/lcms/lcms-1.19.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lcms/lcms-1.19.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lcms/lcms-1.19.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lcms/lcms-1.19.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lcms/lcms-1.19.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lcms/lcms-1.19.tar.gz
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/lcms-1.19-cve_2013_4276-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/lcms/lcms-1.19-cve_2013_4276-1.patch
 
+
+URL=http://downloads.sourceforge.net/lcms/lcms-1.19.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -46,8 +58,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "lcms=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

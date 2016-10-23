@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:v:2.1.2
+#DESCRIPTION:br3ak OpenJPEG is an open-sourcebr3ak implementation of the JPEG-2000 standard. OpenJPEG fully respectsbr3ak the JPEG-2000 specifications and can compress/decompress losslessbr3ak 16-bit images.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:cmake
 #OPT:lcms2
@@ -14,16 +18,24 @@ set -e
 #OPT:doxygen
 
 
-cd $SOURCE_DIR
+#VER:v:2.1.2
 
-URL=https://github.com/uclouvain/openjpeg/archive/v2.1.2.tar.gz
+
+NAME="openjpeg2"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc https://github.com/uclouvain/openjpeg/archive/v2.1.2.tar.gz
 
+
+URL=https://github.com/uclouvain/openjpeg/archive/v2.1.2.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -53,8 +65,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "openjpeg2=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

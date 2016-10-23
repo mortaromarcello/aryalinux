@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:fontconfig:2.12.1
+#DESCRIPTION:br3ak The Fontconfig package contains abr3ak library and support programs used for configuring and customizingbr3ak font access.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:freetype2
 #OPT:docbook-utils
@@ -14,16 +18,24 @@ set -e
 #OPT:tl-installer
 
 
-cd $SOURCE_DIR
+#VER:fontconfig:2.12.1
 
-URL=http://www.freedesktop.org/software/fontconfig/release/fontconfig-2.12.1.tar.bz2
+
+NAME="fontconfig"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/fontconfig/fontconfig-2.12.1.tar.bz2 || wget -nc http://www.freedesktop.org/software/fontconfig/release/fontconfig-2.12.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/fontconfig/fontconfig-2.12.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/fontconfig/fontconfig-2.12.1.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/fontconfig/fontconfig-2.12.1.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/fontconfig/fontconfig-2.12.1.tar.bz2
 
+
+URL=http://www.freedesktop.org/software/fontconfig/release/fontconfig-2.12.1.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -64,8 +76,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "fontconfig=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

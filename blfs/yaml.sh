@@ -1,25 +1,37 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:yaml:0.1.6
+#DESCRIPTION:br3ak The YAML package contains a Cbr3ak library for parsing and emitting YAML (YAML Ain't Markup Language).br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #OPT:doxygen
 
 
-cd $SOURCE_DIR
+#VER:yaml:0.1.6
 
-URL=http://pyyaml.org/download/libyaml/yaml-0.1.6.tar.gz
+
+NAME="yaml"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/yaml/yaml-0.1.6.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/yaml/yaml-0.1.6.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/yaml/yaml-0.1.6.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/yaml/yaml-0.1.6.tar.gz || wget -nc http://pyyaml.org/download/libyaml/yaml-0.1.6.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/yaml/yaml-0.1.6.tar.gz
 
+
+URL=http://pyyaml.org/download/libyaml/yaml-0.1.6.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -38,8 +50,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "yaml=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

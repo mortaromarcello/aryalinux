@@ -1,24 +1,36 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+#DESCRIPTION:br3ak This package provides a library for learning linear classifiers forbr3ak large scale applications. It supports Support Vector Machines (SVM)br3ak with L2 and L1 loss, logistic regression, multi classbr3ak classification and also Linear Programming Machines (L1-regularizedbr3ak SVMs). Its computational complexity scales linearly with the numberbr3ak of training examples making it one of the fastest SVM solversbr3ak around.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
+
+
+
 #VER:v:210
 
 
+NAME="liblinear"
 
-cd $SOURCE_DIR
-
-URL=https://github.com/cjlin1/liblinear/archive/v210.tar.gz
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc https://github.com/cjlin1/liblinear/archive/v210.tar.gz
 
+
+URL=https://github.com/cjlin1/liblinear/archive/v210.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -42,8 +54,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "liblinear=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

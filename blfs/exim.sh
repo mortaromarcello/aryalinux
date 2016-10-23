@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:exim:4.87
+#DESCRIPTION:br3ak The Exim package contains a Mailbr3ak Transport Agent written by the University of Cambridge, releasedbr3ak under the GNU Public License.br3ak
+#SECTION:server
+
+whoami > /tmp/currentuser
 
 #REQ:pcre
 #OPT:db
@@ -21,16 +25,24 @@ set -e
 #OPT:xorg-server
 
 
-cd $SOURCE_DIR
+#VER:exim:4.87
 
-URL=http://mirrors-usa.go-parts.com/eximftp/exim/exim4/exim-4.87.tar.bz2
+
+NAME="exim"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/exim/exim-4.87.tar.bz2 || wget -nc ftp://ftp.exim.org/pub/exim/exim4/exim-4.87.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/exim/exim-4.87.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/exim/exim-4.87.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/exim/exim-4.87.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/eximftp/exim/exim4/exim-4.87.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/exim/exim-4.87.tar.bz2
 
+
+URL=http://mirrors-usa.go-parts.com/eximftp/exim/exim4/exim-4.87.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -110,8 +122,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "exim=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

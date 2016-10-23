@@ -1,26 +1,38 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+#DESCRIPTION:br3ak The ISC DHCP package contains bothbr3ak the client and server programs for DHCP. <span class="command"><strong>dhclient</strong> (the client) is used forbr3ak connecting to a network which uses DHCP to assign networkbr3ak addresses. <span class="command"><strong>dhcpd</strong> (thebr3ak server) is used for assigning network addresses on privatebr3ak networks.br3ak
+#SECTION:basicnet
+
+whoami > /tmp/currentuser
+
+
+
 #VER:dhcp:4.3.5
 
 
+NAME="dhcp"
 
-cd $SOURCE_DIR
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
-URL=ftp://ftp.isc.org/isc/dhcp/4.3.5/dhcp-4.3.5.tar.gz
-
-wget -nc http://www.linuxfromscratch.org/patches/downloads/dhcp/dhcp-4.3.5-missing_ipv6-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/dhcp-4.3.5-missing_ipv6-1.patch
 wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/dhcp/dhcp-4.3.5.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/dhcp/dhcp-4.3.5.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/dhcp/dhcp-4.3.5.tar.gz || wget -nc ftp://ftp.isc.org/isc/dhcp/4.3.5/dhcp-4.3.5.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/dhcp/dhcp-4.3.5.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/dhcp/dhcp-4.3.5.tar.gz
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/dhcp-4.3.5-client_script-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/dhcp/dhcp-4.3.5-client_script-1.patch
+wget -nc http://www.linuxfromscratch.org/patches/downloads/dhcp/dhcp-4.3.5-missing_ipv6-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/dhcp-4.3.5-missing_ipv6-1.patch
 
+
+URL=ftp://ftp.isc.org/isc/dhcp/4.3.5/dhcp-4.3.5.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -201,8 +213,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "dhcp=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

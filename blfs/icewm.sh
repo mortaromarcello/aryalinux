@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:icewm:1.3.12
+#DESCRIPTION:br3ak IceWM is a window manager with thebr3ak goals of speed, simplicity, and not getting in the user's way.br3ak
+#SECTION:x
+
+whoami > /tmp/currentuser
 
 #REQ:gdk-pixbuf
 #REQ:xorg-server
@@ -13,16 +17,24 @@ set -e
 #OPT:alsa-lib
 
 
-cd $SOURCE_DIR
+#VER:icewm:1.3.12
 
-URL=https://github.com/bbidulock/icewm/releases/download/1.3.12/icewm-1.3.12.tar.bz2
+
+NAME="icewm"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/icewm/icewm-1.3.12.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/icewm/icewm-1.3.12.tar.bz2 || wget -nc https://github.com/bbidulock/icewm/releases/download/1.3.12/icewm-1.3.12.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/icewm/icewm-1.3.12.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/icewm/icewm-1.3.12.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/icewm/icewm-1.3.12.tar.bz2
 
+
+URL=https://github.com/bbidulock/icewm/releases/download/1.3.12/icewm-1.3.12.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -65,8 +77,9 @@ EOF &&
 chmod +x ~/.icewm/startup
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "icewm=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

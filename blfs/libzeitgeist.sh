@@ -1,26 +1,38 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:libzeitgeist:0.3.18
+#DESCRIPTION:br3ak The libzeitgeist package containsbr3ak a client library used to access and manage the Zeitgeist event logbr3ak from languages such as C and Vala. Zeitgeist is a service whichbr3ak logs the user's activities and events (files opened, websitesbr3ak visited, conversations hold with other people, etc.) and makes thebr3ak relevant information available to other applications.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:glib2
 #OPT:gtk-doc
 
 
-cd $SOURCE_DIR
+#VER:libzeitgeist:0.3.18
 
-URL=https://launchpad.net/libzeitgeist/0.3/0.3.18/+download/libzeitgeist-0.3.18.tar.gz
+
+NAME="libzeitgeist"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libzeitgeist/libzeitgeist-0.3.18.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libzeitgeist/libzeitgeist-0.3.18.tar.gz || wget -nc https://launchpad.net/libzeitgeist/0.3/0.3.18/+download/libzeitgeist-0.3.18.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libzeitgeist/libzeitgeist-0.3.18.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libzeitgeist/libzeitgeist-0.3.18.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libzeitgeist/libzeitgeist-0.3.18.tar.gz
 
+
+URL=https://launchpad.net/libzeitgeist/0.3/0.3.18/+download/libzeitgeist-0.3.18.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -40,8 +52,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "libzeitgeist=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

@@ -1,28 +1,40 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:pycairo:1.10.0
+#DESCRIPTION:%DESCRIPTION%
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:cairo
 #REQ:python3
 
 
-cd $SOURCE_DIR
+#VER:pycairo:1.10.0
 
-URL=http://cairographics.org/releases/pycairo-1.10.0.tar.bz2
 
+NAME="python-modules#pycairo"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
+
+wget -nc http://cairographics.org/releases/pycairo-1.10.0.tar.bz2
 wget -nc http://www.linuxfromscratch.org/patches/downloads/pycairo/pycairo-1.10.0-waf_unpack-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/pycairo-1.10.0-waf_unpack-1.patch
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/pycairo-1.10.0-waf_python_3_4-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/pycairo/pycairo-1.10.0-waf_python_3_4-1.patch
-wget -nc http://cairographics.org/releases/pycairo-1.10.0.tar.bz2
 
+
+URL=http://cairographics.org/releases/pycairo-1.10.0.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 patch -Np1 -i ../pycairo-1.10.0-waf_unpack-1.patch     &&
@@ -43,8 +55,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "python-modules#pycairo=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

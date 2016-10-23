@@ -1,25 +1,37 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:2.4.3.1:null
+#DESCRIPTION:br3ak The Tripwire package containsbr3ak programs used to verify the integrity of the files on a givenbr3ak system.br3ak
+#SECTION:postlfs
+
+whoami > /tmp/currentuser
 
 #REC:openssl
 
 
-cd $SOURCE_DIR
+#VER:2.4.3.1:null
 
-URL=https://github.com/Tripwire/tripwire-open-source/archive/2.4.3.1.tar.gz
+
+NAME="tripwire"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc https://github.com/Tripwire/tripwire-open-source/archive/2.4.3.1.tar.gz
 
+
+URL=https://github.com/Tripwire/tripwire-open-source/archive/2.4.3.1.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -90,8 +102,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "tripwire=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

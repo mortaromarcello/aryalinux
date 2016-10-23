@@ -1,12 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:python-docs-html:3.5.2
-#VER:Python:3.5.2
+#DESCRIPTION:br3ak The Python 3 package contains thebr3ak Python development environment.br3ak This is useful for object-oriented programming, writing scripts,br3ak prototyping large programs or developing entire applications.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REC:libffi
 #OPT:bluez
@@ -18,17 +21,26 @@ set -e
 #OPT:tk
 
 
-cd $SOURCE_DIR
+#VER:python-docs-html:3.5.2
+#VER:Python:3.5.2
 
-URL=https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tar.xz
+
+NAME="python3"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/Python/Python-3.5.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/Python/Python-3.5.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/Python/Python-3.5.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/Python/Python-3.5.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/Python/Python-3.5.2.tar.xz
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/Python/python-3.5.2-docs-html.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/Python/python-3.5.2-docs-html.tar.bz2 || wget -nc https://docs.python.org/3.5/archives/python-3.5.2-docs-html.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/Python/python-3.5.2-docs-html.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/Python/python-3.5.2-docs-html.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/Python/python-3.5.2-docs-html.tar.bz2
 
+
+URL=https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -89,8 +101,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "python3=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

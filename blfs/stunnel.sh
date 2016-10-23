@@ -1,25 +1,37 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:stunnel:5.36
+#DESCRIPTION:br3ak The stunnel package contains abr3ak program that allows you to encrypt arbitrary TCP connections insidebr3ak SSL (Secure Sockets Layer) so you can easily communicate withbr3ak clients over secure channels. stunnel can be used to add SSL functionalitybr3ak to commonly used Inetd daemonsbr3ak such as POP-2, POP-3, and IMAP servers, along with standalonebr3ak daemons such as NNTP, SMTP, and HTTP. stunnel can also be used to tunnel PPP overbr3ak network sockets without changes to the server package source code.br3ak
+#SECTION:postlfs
+
+whoami > /tmp/currentuser
 
 #REQ:openssl
 
 
-cd $SOURCE_DIR
+#VER:stunnel:5.36
 
-URL=ftp://ftp.stunnel.org/stunnel/archive/5.x/stunnel-5.36.tar.gz
+
+NAME="stunnel"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/stunnel/stunnel-5.36.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/stunnel/stunnel-5.36.tar.gz || wget -nc ftp://ftp.stunnel.org/stunnel/archive/5.x/stunnel-5.36.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/stunnel/stunnel-5.36.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/stunnel/stunnel-5.36.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/stunnel/stunnel-5.36.tar.gz
 
+
+URL=ftp://ftp.stunnel.org/stunnel/archive/5.x/stunnel-5.36.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -124,8 +136,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "stunnel=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

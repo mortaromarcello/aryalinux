@@ -1,10 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+#DESCRIPTION:br3ak Final steps, before starting LXQt.br3ak
+#SECTION:lxqt
+
+whoami > /tmp/currentuser
 
 #REQ:openbox
 #REQ:xfwm4
@@ -18,7 +23,23 @@ set -e
 #REC:xscreensaver
 
 
-cd $SOURCE_DIR
+
+
+NAME="post-install"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
+
+
+
+URL=
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+
+tar --no-overwrite-dir xf $URL
+cd $DIRECTORY
 
 whoami > /tmp/currentuser
 
@@ -64,7 +85,9 @@ startx
 startx &> ~/.x-session-errors
 
 
+
+
 cd $SOURCE_DIR
+sudo rm -rf $DIRECTORY
 
-echo "post-install=>`date`" | sudo tee -a $INSTALLED_LIST
-
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

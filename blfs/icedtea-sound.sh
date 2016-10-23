@@ -1,27 +1,39 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:icedtea-sound:1.0.1
+#DESCRIPTION:br3ak The IcedTea-Sound package containsbr3ak the <a class="xref" href="pulseaudio.html" title="PulseAudio-9.0">PulseAudio-9.0</a> provider which was removed frombr3ak IcedTea itself from version 2.5.0 onwards. More providers may bebr3ak included in the future.br3ak
+#SECTION:multimedia
+
+whoami > /tmp/currentuser
 
 #REQ:openjdk
 #REQ:java
 #REQ:pulseaudio
 
 
-cd $SOURCE_DIR
+#VER:icedtea-sound:1.0.1
 
-URL=http://icedtea.classpath.org/download/source/icedtea-sound-1.0.1.tar.xz
+
+NAME="icedtea-sound"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/icedtea/icedtea-sound-1.0.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/icedtea/icedtea-sound-1.0.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/icedtea/icedtea-sound-1.0.1.tar.xz || wget -nc http://icedtea.classpath.org/download/source/icedtea-sound-1.0.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/icedtea/icedtea-sound-1.0.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/icedtea/icedtea-sound-1.0.1.tar.xz
 
+
+URL=http://icedtea.classpath.org/download/source/icedtea-sound-1.0.1.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -62,8 +74,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "icedtea-sound=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

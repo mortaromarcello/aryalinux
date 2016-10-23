@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:lxdm:0.5.3
+#DESCRIPTION:br3ak The LXDM is a lightweight Displaybr3ak Manager for the LXDE desktop. Itbr3ak can also be used as an alternative to other Display Managers suchbr3ak as GNOME's GDM or LightDM.br3ak
+#SECTION:x
+
+whoami > /tmp/currentuser
 
 #REQ:gtk2
 #REQ:iso-codes
@@ -14,16 +18,24 @@ set -e
 #OPT:gtk3
 
 
-cd $SOURCE_DIR
+#VER:lxdm:0.5.3
 
-URL=http://downloads.sourceforge.net/lxdm/lxdm-0.5.3.tar.xz
+
+NAME="lxdm"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://downloads.sourceforge.net/lxdm/lxdm-0.5.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxdm/lxdm-0.5.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxdm/lxdm-0.5.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lxdm/lxdm-0.5.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lxdm/lxdm-0.5.3.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lxdm/lxdm-0.5.3.tar.xz
 
+
+URL=http://downloads.sourceforge.net/lxdm/lxdm-0.5.3.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -80,8 +92,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "lxdm=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

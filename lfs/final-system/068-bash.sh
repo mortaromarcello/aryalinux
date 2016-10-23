@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="068-bash.sh"
-TARBALL="bash-4.4.tar.gz"
+TARBALL="bash-4.3.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 

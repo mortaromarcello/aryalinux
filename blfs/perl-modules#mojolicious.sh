@@ -6,9 +6,9 @@ set +h
 . /etc/alps/alps.conf
 
 
-URL="http://search.cpan.org/CPAN/authors/id/S/SR/SRI/Mojolicious-7.08.tar.gz"
+URL="http://search.cpan.org/CPAN/authors/id/S/SR/SRI/Mojolicious-7.09.tar.gz"
 
-#VER:Mojolicious:7.08
+#VER:Mojolicious:7.09
 
 cd $SOURCE_DIR
 wget -nc $URL

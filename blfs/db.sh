@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:db:6.2.23
+#DESCRIPTION:br3ak The Berkeley DB package containsbr3ak programs and utilities used by many other applications for databasebr3ak related functions.br3ak
+#SECTION:server
+
+whoami > /tmp/currentuser
 
 #OPT:tcl
 #OPT:openjdk
@@ -13,16 +17,24 @@ set -e
 #OPT:sharutils
 
 
-cd $SOURCE_DIR
+#VER:db:6.2.23
 
-URL=http://download.oracle.com/berkeley-db/db-6.2.23.tar.gz
+
+NAME="db"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/db/db-6.2.23.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/db/db-6.2.23.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/db/db-6.2.23.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/db/db-6.2.23.tar.gz || wget -nc http://download.oracle.com/berkeley-db/db-6.2.23.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/db/db-6.2.23.tar.gz
 
+
+URL=http://download.oracle.com/berkeley-db/db-6.2.23.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -51,8 +63,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "db=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:openssh:7.3p1
+#DESCRIPTION:br3ak The OpenSSH package containsbr3ak <span class="command"><strong>ssh</strong> clients and thebr3ak <span class="command"><strong>sshd</strong> daemon. This isbr3ak useful for encrypting authentication and subsequent traffic over abr3ak network. The <span class="command"><strong>ssh</strong> andbr3ak <span class="command"><strong>scp</strong> commands arebr3ak secure implementions of <span class="command"><strong>telnet</strong> and <span class="command"><strong>rcp</strong> respectively.br3ak
+#SECTION:postlfs
+
+whoami > /tmp/currentuser
 
 #REQ:openssl
 #OPT:linux-pam
@@ -16,16 +20,24 @@ set -e
 #OPT:xorg-server
 
 
-cd $SOURCE_DIR
+#VER:openssh:7.3p1
 
-URL=http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-7.3p1.tar.gz
+
+NAME="openssh"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/openssh/openssh-7.3p1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/openssh/openssh-7.3p1.tar.gz || wget -nc http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-7.3p1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/openssh/openssh-7.3p1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/openssh/openssh-7.3p1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/openssh/openssh-7.3p1.tar.gz
 
+
+URL=http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-7.3p1.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -119,8 +131,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "openssh=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:appstream-glib:0.6.3
+#DESCRIPTION:br3ak The Appstream-GLib packagebr3ak contains a library that provides GObjects and helper methods tobr3ak make it easy to read and write AppStream metadata. It also providesbr3ak a simple DOM implementation that makes it easy to edit nodes andbr3ak convert to and from the standardized XML representation.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:gdk-pixbuf
 #REQ:json-glib
@@ -22,16 +26,24 @@ set -e
 #OPT:gtk-doc
 
 
-cd $SOURCE_DIR
+#VER:appstream-glib:0.6.3
 
-URL=http://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-0.6.3.tar.xz
+
+NAME="appstream-glib"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/appstream-glib/appstream-glib-0.6.3.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/appstream-glib/appstream-glib-0.6.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/appstream-glib/appstream-glib-0.6.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/appstream-glib/appstream-glib-0.6.3.tar.xz || wget -nc http://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-0.6.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/appstream-glib/appstream-glib-0.6.3.tar.xz
 
+
+URL=http://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-0.6.3.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -50,8 +62,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "appstream-glib=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

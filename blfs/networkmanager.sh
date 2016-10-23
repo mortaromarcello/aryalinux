@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:NetworkManager:1.4.2
+#DESCRIPTION:br3ak NetworkManager is a set ofbr3ak co-operative tools that make networking simple and straightforward.br3ak Whether WiFi, wired, 3G, or Bluetooth, NetworkManager allows you tobr3ak quickly move from one network to another: Once a network has beenbr3ak configured and joined once, it can be detected and re-joinedbr3ak automatically the next time it's available.br3ak
+#SECTION:basicnet
+
+whoami > /tmp/currentuser
 
 #REQ:dbus-glib
 #REQ:libgudev
@@ -30,16 +34,24 @@ set -e
 #OPT:valgrind
 
 
-cd $SOURCE_DIR
+#VER:NetworkManager:1.4.2
 
-URL=http://ftp.gnome.org/pub/gnome/sources/NetworkManager/1.4/NetworkManager-1.4.2.tar.xz
+
+NAME="networkmanager"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.gnome.org/pub/gnome/sources/NetworkManager/1.4/NetworkManager-1.4.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/networkmanager/NetworkManager-1.4.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/networkmanager/NetworkManager-1.4.2.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/NetworkManager/1.4/NetworkManager-1.4.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/networkmanager/NetworkManager-1.4.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/networkmanager/NetworkManager-1.4.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/networkmanager/NetworkManager-1.4.2.tar.xz
 
+
+URL=http://ftp.gnome.org/pub/gnome/sources/NetworkManager/1.4/NetworkManager-1.4.2.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -104,8 +116,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "networkmanager=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

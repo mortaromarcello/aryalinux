@@ -1,26 +1,38 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:libsysstat:0.3.2
+#DESCRIPTION:br3ak The libsysstat package contains abr3ak library used to query system info and statistics.br3ak
+#SECTION:lxqt
+
+whoami > /tmp/currentuser
 
 #REQ:cmake
 #REQ:qt5
 
 
-cd $SOURCE_DIR
+#VER:libsysstat:0.3.2
 
-URL=http://downloads.lxqt.org/libsysstat/0.3.2/libsysstat-0.3.2.tar.xz
+
+NAME="libsysstat"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libsysstat/libsysstat-0.3.2.tar.xz || wget -nc http://downloads.lxqt.org/libsysstat/0.3.2/libsysstat-0.3.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libsysstat/libsysstat-0.3.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libsysstat/libsysstat-0.3.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libsysstat/libsysstat-0.3.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libsysstat/libsysstat-0.3.2.tar.xz
 
+
+URL=http://downloads.lxqt.org/libsysstat/0.3.2/libsysstat-0.3.2.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -44,8 +56,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "libsysstat=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

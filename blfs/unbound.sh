@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:unbound:1.5.10
+#DESCRIPTION:br3ak Unbound is a validating,br3ak recursive, and caching DNS resolver. It is designed as a set ofbr3ak modular components that incorporate modern features, such asbr3ak enhanced security (DNSSEC) validation, Internet Protocol Version 6br3ak (IPv6), and a client resolver library API as an integral part ofbr3ak the architecture.br3ak
+#SECTION:server
+
+whoami > /tmp/currentuser
 
 #REQ:openssl
 #OPT:libevent
@@ -15,16 +19,24 @@ set -e
 #OPT:doxygen
 
 
-cd $SOURCE_DIR
+#VER:unbound:1.5.10
 
-URL=http://www.unbound.net/downloads/unbound-1.5.10.tar.gz
+
+NAME="unbound"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://www.unbound.net/downloads/unbound-1.5.10.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/unbound/unbound-1.5.10.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/unbound/unbound-1.5.10.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/unbound/unbound-1.5.10.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/unbound/unbound-1.5.10.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/unbound/unbound-1.5.10.tar.gz
 
+
+URL=http://www.unbound.net/downloads/unbound-1.5.10.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -106,8 +118,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "unbound=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

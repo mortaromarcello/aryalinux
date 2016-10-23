@@ -1,10 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+#DESCRIPTION:%DESCRIPTION%
+#SECTION:kde
+
+whoami > /tmp/currentuser
 
 #REQ:boost
 #REQ:extra-cmake-modules
@@ -40,7 +45,23 @@ set -e
 #OPT:upower
 
 
-cd $SOURCE_DIR
+
+
+NAME="krameworks5"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
+
+
+
+URL=
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+
+tar --no-overwrite-dir xf $URL
+cd $DIRECTORY
 
 whoami > /tmp/currentuser
 
@@ -169,7 +190,9 @@ mv -v /opt/kf5 /opt/kf5-5.25.0
 ln -sfvn kf5-5.25.0 /opt/kf5
 
 
+
+
 cd $SOURCE_DIR
+sudo rm -rf $DIRECTORY
 
-echo "krameworks5=>`date`" | sudo tee -a $INSTALLED_LIST
-
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

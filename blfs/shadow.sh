@@ -1,26 +1,38 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:shadow:4.2.1
+#DESCRIPTION:br3ak Shadow was indeed installed in LFSbr3ak and there is no reason to reinstall it unless you installedbr3ak CrackLib or Linux-PAM after your LFS system was completed.br3ak If you have installed CrackLibbr3ak after LFS, then reinstalling Shadow will enable strong password support. Ifbr3ak you have installed Linux-PAM,br3ak reinstalling Shadow will allowbr3ak programs such as <span class="command"><strong>login</strong> and <span class="command"><strong>su</strong> to utilize PAM.br3ak
+#SECTION:postlfs
+
+whoami > /tmp/currentuser
 
 #REQ:linux-pam
 #REQ:cracklib
 
 
-cd $SOURCE_DIR
+#VER:shadow:4.2.1
 
-URL=http://pkg-shadow.alioth.debian.org/releases/shadow-4.2.1.tar.xz
+
+NAME="shadow"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/shadow/shadow-4.2.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/shadow/shadow-4.2.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/shadow/shadow-4.2.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/shadow/shadow-4.2.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/shadow/shadow-4.2.1.tar.xz || wget -nc http://pkg-shadow.alioth.debian.org/releases/shadow-4.2.1.tar.xz
 
+
+URL=http://pkg-shadow.alioth.debian.org/releases/shadow-4.2.1.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -233,8 +245,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "shadow=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:gtk-doc:1.25
+#DESCRIPTION:br3ak The GTK-Doc package contains abr3ak code documenter. This is useful for extracting specially formattedbr3ak comments from the code to create API documentation. This package isbr3ak <span class="emphasis"><em>optional</em>; if it is notbr3ak installed, packages will not build the documentation. This does notbr3ak mean that you will not have any documentation. If GTK-Doc is not available, the install processbr3ak will copy any pre-built documentation to your system.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:docbook
 #REQ:docbook-xsl
@@ -21,16 +25,24 @@ set -e
 #OPT:rarian
 
 
-cd $SOURCE_DIR
+#VER:gtk-doc:1.25
 
-URL=http://ftp.gnome.org/pub/gnome/sources/gtk-doc/1.25/gtk-doc-1.25.tar.xz
+
+NAME="gtk-doc"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gtk-doc/gtk-doc-1.25.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gtk-doc/gtk-doc-1.25.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gtk-doc/gtk-doc-1.25.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/gtk-doc/1.25/gtk-doc-1.25.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gtk-doc/1.25/gtk-doc-1.25.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gtk-doc/gtk-doc-1.25.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gtk-doc/gtk-doc-1.25.tar.xz
 
+
+URL=http://ftp.gnome.org/pub/gnome/sources/gtk-doc/1.25/gtk-doc-1.25.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -49,8 +61,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "gtk-doc=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:udisks:1.0.5
+#DESCRIPTION:br3ak The UDisks package provides abr3ak storage daemon that implements well-defined D-Bus interfaces thatbr3ak can be used to query and manipulate storage devices.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:dbus-glib
 #REQ:libatasmart
@@ -20,16 +24,24 @@ set -e
 #OPT:sudo
 
 
-cd $SOURCE_DIR
+#VER:udisks:1.0.5
 
-URL=http://hal.freedesktop.org/releases/udisks-1.0.5.tar.gz
+
+NAME="udisks"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/udisks/udisks-1.0.5.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/udisks/udisks-1.0.5.tar.gz || wget -nc http://hal.freedesktop.org/releases/udisks-1.0.5.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/udisks/udisks-1.0.5.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/udisks/udisks-1.0.5.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/udisks/udisks-1.0.5.tar.gz
 
+
+URL=http://hal.freedesktop.org/releases/udisks-1.0.5.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -50,8 +62,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "udisks=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

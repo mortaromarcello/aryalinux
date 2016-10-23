@@ -1,14 +1,35 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+#DESCRIPTION:%DESCRIPTION%
+#SECTION:lxqt
+
+whoami > /tmp/currentuser
 
 
 
-cd $SOURCE_DIR
+
+
+NAME="pre-install"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
+
+
+
+URL=
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+
+tar --no-overwrite-dir xf $URL
+cd $DIRECTORY
 
 whoami > /tmp/currentuser
 
@@ -104,7 +125,9 @@ sed -i '/declarative/d'
 ./configure <book flags> $(cat tempconf)
 
 
+
+
 cd $SOURCE_DIR
+sudo rm -rf $DIRECTORY
 
-echo "pre-install=>`date`" | sudo tee -a $INSTALLED_LIST
-
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

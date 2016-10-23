@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:exo:0.10.7
+#DESCRIPTION:br3ak Exo is a support library used inbr3ak the Xfce desktop. It also has somebr3ak helper applications that are used throughout Xfce.br3ak
+#SECTION:xfce
+
+whoami > /tmp/currentuser
 
 #REQ:libxfce4ui
 #REQ:libxfce4util
@@ -13,16 +17,24 @@ set -e
 #OPT:gtk-doc
 
 
-cd $SOURCE_DIR
+#VER:exo:0.10.7
 
-URL=http://archive.xfce.org/src/xfce/exo/0.10/exo-0.10.7.tar.bz2
+
+NAME="exo"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/exo/exo-0.10.7.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/exo/exo-0.10.7.tar.bz2 || wget -nc http://archive.xfce.org/src/xfce/exo/0.10/exo-0.10.7.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/exo/exo-0.10.7.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/exo/exo-0.10.7.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/exo/exo-0.10.7.tar.bz2
 
+
+URL=http://archive.xfce.org/src/xfce/exo/0.10/exo-0.10.7.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -41,8 +53,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "exo=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

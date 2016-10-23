@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:valgrind:3.11.0
+#DESCRIPTION:br3ak Valgrind is an instrumentationbr3ak framework for building dynamic analysis tools. There are Valgrindbr3ak tools that can automatically detect many memory management andbr3ak threading bugs, and profile programs in detail. Valgrind can alsobr3ak be used to build new tools.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #OPT:boost
 #OPT:llvm
@@ -18,17 +22,25 @@ set -e
 #OPT:tl-installer
 
 
-cd $SOURCE_DIR
+#VER:valgrind:3.11.0
 
-URL=http://valgrind.org/downloads/valgrind-3.11.0.tar.bz2
+
+NAME="valgrind"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/valgrind/valgrind-3.11.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/valgrind/valgrind-3.11.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/valgrind/valgrind-3.11.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/valgrind/valgrind-3.11.0.tar.bz2 || wget -nc http://valgrind.org/downloads/valgrind-3.11.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/valgrind/valgrind-3.11.0.tar.bz2
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/valgrind-3.11.0-upstream_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/valgrind/valgrind-3.11.0-upstream_fixes-1.patch
 
+
+URL=http://valgrind.org/downloads/valgrind-3.11.0.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -52,8 +64,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "valgrind=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

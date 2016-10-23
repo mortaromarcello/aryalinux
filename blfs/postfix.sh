@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:postfix:3.1.2
+#DESCRIPTION:br3ak The Postfix package contains abr3ak Mail Transport Agent (MTA). This is useful for sending email tobr3ak other users of your host machine. It can also be configured to be abr3ak central mail server for your domain, a mail relay agent or simply abr3ak mail delivery agent to your local Internet Service Provider.br3ak
+#SECTION:server
+
+whoami > /tmp/currentuser
 
 #REC:db
 #REC:cyrus-sasl
@@ -18,16 +22,24 @@ set -e
 #OPT:sqlite
 
 
-cd $SOURCE_DIR
+#VER:postfix:3.1.2
 
-URL=ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-3.1.2.tar.gz
+
+NAME="postfix"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/postfix/postfix-3.1.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/postfix/postfix-3.1.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/postfix/postfix-3.1.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/postfix/postfix-3.1.2.tar.gz || wget -nc ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-3.1.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/postfix/postfix-3.1.2.tar.gz
 
+
+URL=ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-3.1.2.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -123,8 +135,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "postfix=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

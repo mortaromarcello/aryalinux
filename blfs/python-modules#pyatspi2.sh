@@ -1,26 +1,38 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:pyatspi:2.20.2
+#DESCRIPTION:%DESCRIPTION%
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:python-modules#pygobject3
 #REC:at-spi2-core
 
 
-cd $SOURCE_DIR
+#VER:pyatspi:2.20.2
 
-URL=http://ftp.gnome.org/pub/gnome/sources/pyatspi/2.20/pyatspi-2.20.2.tar.xz
+
+NAME="python-modules#pyatspi2"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.gnome.org/pub/gnome/sources/pyatspi/2.20/pyatspi-2.20.2.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/pyatspi/2.20/pyatspi-2.20.2.tar.xz
 
+
+URL=http://ftp.gnome.org/pub/gnome/sources/pyatspi/2.20/pyatspi-2.20.2.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 mkdir python2 &&
@@ -53,8 +65,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "python-modules#pyatspi2=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

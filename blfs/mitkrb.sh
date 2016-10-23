@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:krb5:1.14.4
+#DESCRIPTION:br3ak MIT Kerberos V5 is a freebr3ak implementation of Kerberos 5. Kerberos is a network authenticationbr3ak protocol. It centralizes the authentication database and usesbr3ak kerberized applications to work with servers or services thatbr3ak support Kerberos allowing single logins and encrypted communicationbr3ak over internal networks or the Internet.br3ak
+#SECTION:postlfs
+
+whoami > /tmp/currentuser
 
 #OPT:dejagnu
 #OPT:gnupg
@@ -15,16 +19,24 @@ set -e
 #OPT:rpcbind
 
 
-cd $SOURCE_DIR
+#VER:krb5:1.14.4
 
-URL=http://web.mit.edu/kerberos/dist/krb5/1.14/krb5-1.14.4.tar.gz
+
+NAME="mitkrb"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/krb5/krb5-1.14.4.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/krb5/krb5-1.14.4.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/krb5/krb5-1.14.4.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/krb5/krb5-1.14.4.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/krb5/krb5-1.14.4.tar.gz || wget -nc http://web.mit.edu/kerberos/dist/krb5/1.14/krb5-1.14.4.tar.gz
 
+
+URL=http://web.mit.edu/kerberos/dist/krb5/1.14/krb5-1.14.4.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -88,8 +100,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "mitkrb=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

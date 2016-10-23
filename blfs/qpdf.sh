@@ -1,27 +1,39 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:qpdf:6.0.0
+#DESCRIPTION:br3ak The Qpdf package containsbr3ak command-line programs and library that do structural,br3ak content-preserving transformations on PDF files.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:pcre
 #OPT:fop
 #OPT:libxslt
 
 
-cd $SOURCE_DIR
+#VER:qpdf:6.0.0
 
-URL=http://downloads.sourceforge.net/qpdf/qpdf-6.0.0.tar.gz
+
+NAME="qpdf"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qpdf/qpdf-6.0.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qpdf/qpdf-6.0.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qpdf/qpdf-6.0.0.tar.gz || wget -nc http://downloads.sourceforge.net/qpdf/qpdf-6.0.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qpdf/qpdf-6.0.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qpdf/qpdf-6.0.0.tar.gz
 
+
+URL=http://downloads.sourceforge.net/qpdf/qpdf-6.0.0.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -42,8 +54,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "qpdf=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

@@ -1,26 +1,38 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:openjade:1.3.2
+#DESCRIPTION:br3ak The OpenJade package contains abr3ak DSSSL engine. This is useful for SGML and XML transformations intobr3ak RTF, TeX, SGML and XML.br3ak
+#SECTION:pst
+
+whoami > /tmp/currentuser
 
 #REQ:opensp
 
 
-cd $SOURCE_DIR
+#VER:openjade:1.3.2
+
+
+NAME="openjade"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
+
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/openjade/openjade-1.3.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/openjade/openjade-1.3.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/openjade/openjade-1.3.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/openjade/openjade-1.3.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/openjade/openjade-1.3.2.tar.gz || wget -nc http://downloads.sourceforge.net/openjade/openjade-1.3.2.tar.gz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/openjade-1.3.2-gcc_4.6-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/openjade/openjade-1.3.2-gcc_4.6-1.patch
+
 
 URL=http://downloads.sourceforge.net/openjade/openjade-1.3.2.tar.gz
-
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/openjade-1.3.2-gcc_4.6-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/openjade/openjade-1.3.2-gcc_4.6-1.patch
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/openjade/openjade-1.3.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/openjade/openjade-1.3.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/openjade/openjade-1.3.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/openjade/openjade-1.3.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/openjade/openjade-1.3.2.tar.gz || wget -nc http://downloads.sourceforge.net/openjade/openjade-1.3.2.tar.gz
-
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -77,8 +89,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "openjade=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

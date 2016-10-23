@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:postgresql:9.6.0
+#DESCRIPTION:br3ak PostgreSQL is an advancedbr3ak object-relational database management system (ORDBMS), derived frombr3ak the Berkeley Postgres database management system.br3ak
+#SECTION:server
+
+whoami > /tmp/currentuser
 
 #OPT:python2
 #OPT:tcl
@@ -21,16 +25,24 @@ set -e
 #OPT:perl-modules#perl-sgmlspm
 
 
-cd $SOURCE_DIR
+#VER:postgresql:9.6.0
 
-URL=http://ftp.postgresql.org/pub/source/v9.6.0/postgresql-9.6.0.tar.bz2
+
+NAME="postgresql"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/postgresql/postgresql-9.6.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/postgresql/postgresql-9.6.0.tar.bz2 || wget -nc ftp://ftp.postgresql.org/pub/source/v9.6.0/postgresql-9.6.0.tar.bz2 || wget -nc http://ftp.postgresql.org/pub/source/v9.6.0/postgresql-9.6.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/postgresql/postgresql-9.6.0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/postgresql/postgresql-9.6.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/postgresql/postgresql-9.6.0.tar.bz2
 
+
+URL=http://ftp.postgresql.org/pub/source/v9.6.0/postgresql-9.6.0.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -138,8 +150,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "postgresql=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

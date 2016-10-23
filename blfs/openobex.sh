@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:openobex-Source:1.7.2
+#DESCRIPTION:br3ak The OpenOBEX package contains abr3ak library that implements Object Exchange Protocol used for binarybr3ak file transfers between devices.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:cmake
 #REQ:libusb
@@ -16,16 +20,24 @@ set -e
 #OPT:xmlto
 
 
-cd $SOURCE_DIR
+#VER:openobex-Source:1.7.2
 
-URL=http://downloads.sourceforge.net/openobex/openobex-1.7.2-Source.tar.gz
+
+NAME="openobex"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://downloads.sourceforge.net/openobex/openobex-1.7.2-Source.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/openobex/openobex-1.7.2-Source.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/openobex/openobex-1.7.2-Source.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/openobex/openobex-1.7.2-Source.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/openobex/openobex-1.7.2-Source.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/openobex/openobex-1.7.2-Source.tar.gz
 
+
+URL=http://downloads.sourceforge.net/openobex/openobex-1.7.2-Source.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -59,8 +71,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "openobex=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

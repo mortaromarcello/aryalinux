@@ -1,25 +1,37 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:twm:1.0.9
+#DESCRIPTION:br3ak The twm package contains a verybr3ak minimal window manager.br3ak
+#SECTION:x
+
+whoami > /tmp/currentuser
 
 #REQ:xorg-server
 
 
-cd $SOURCE_DIR
+#VER:twm:1.0.9
 
-URL=http://ftp.x.org/pub/individual/app/twm-1.0.9.tar.bz2
+
+NAME="twm"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.x.org/pub/individual/app/twm-1.0.9.tar.bz2 || wget -nc ftp://ftp.x.org/pub/individual/app/twm-1.0.9.tar.bz2
 
+
+URL=http://ftp.x.org/pub/individual/app/twm-1.0.9.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -42,8 +54,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "twm=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

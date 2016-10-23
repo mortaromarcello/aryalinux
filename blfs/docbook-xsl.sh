@@ -1,12 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:docbook-xsl:1.79.1
-#VER:docbook-xsl-doc:1.79.1
+#DESCRIPTION:br3ak The DocBook XSL Stylesheetsbr3ak package contains XSL stylesheets. These are useful for performingbr3ak transformations on XML DocBook files.br3ak
+#SECTION:pst
+
+whoami > /tmp/currentuser
 
 #REC:libxml2
 #OPT:apache-ant
@@ -17,17 +20,26 @@ set -e
 #OPT:zip
 
 
-cd $SOURCE_DIR
+#VER:docbook-xsl:1.79.1
+#VER:docbook-xsl-doc:1.79.1
 
-URL=http://downloads.sourceforge.net/docbook/docbook-xsl-1.79.1.tar.bz2
+
+NAME="docbook-xsl"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/docbook-xsl/docbook-xsl-1.79.1.tar.bz2 || wget -nc http://downloads.sourceforge.net/docbook/docbook-xsl-1.79.1.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook-xsl/docbook-xsl-1.79.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/docbook-xsl/docbook-xsl-1.79.1.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook-xsl/docbook-xsl-1.79.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/docbook-xsl/docbook-xsl-1.79.1.tar.bz2
 wget -nc http://downloads.sourceforge.net/docbook/docbook-xsl-doc-1.79.1.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook-xsl-doc/docbook-xsl-doc-1.79.1.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook-xsl-doc/docbook-xsl-doc-1.79.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/docbook-xsl-doc/docbook-xsl-doc-1.79.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/docbook-xsl-doc/docbook-xsl-doc-1.79.1.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/docbook-xsl-doc/docbook-xsl-doc-1.79.1.tar.bz2
 
+
+URL=http://downloads.sourceforge.net/docbook/docbook-xsl-1.79.1.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -94,8 +106,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "docbook-xsl=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

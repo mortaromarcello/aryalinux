@@ -1,15 +1,36 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+#DESCRIPTION:%DESCRIPTION%
+#SECTION:postlfs
+
+whoami > /tmp/currentuser
 
 #REQ:cpio
 
 
-cd $SOURCE_DIR
+
+
+NAME="initramfs"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
+
+
+
+URL=
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+
+tar --no-overwrite-dir xf $URL
+cd $DIRECTORY
 
 whoami > /tmp/currentuser
 
@@ -278,7 +299,9 @@ sudo rm rootscript.sh
 mkinitramfs `read -p "Enter the kernel version : " KERN_VERSION; echo $KERN_VERSION`
 
 
+
+
 cd $SOURCE_DIR
+sudo rm -rf $DIRECTORY
 
-echo "initramfs=>`date`" | sudo tee -a $INSTALLED_LIST
-
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

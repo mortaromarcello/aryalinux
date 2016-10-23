@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:xfconf:4.12.0
+#DESCRIPTION:br3ak Xfconf is the configurationbr3ak storage system for Xfce.br3ak
+#SECTION:xfce
+
+whoami > /tmp/currentuser
 
 #REQ:dbus-glib
 #REQ:libxfce4util
@@ -14,16 +18,24 @@ set -e
 #OPT:perl-modules#perl-auto-install
 
 
-cd $SOURCE_DIR
+#VER:xfconf:4.12.0
 
-URL=http://archive.xfce.org/src/xfce/xfconf/4.12/xfconf-4.12.0.tar.bz2
+
+NAME="xfconf"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xfconf/xfconf-4.12.0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xfconf/xfconf-4.12.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xfconf/xfconf-4.12.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xfconf/xfconf-4.12.0.tar.bz2 || wget -nc http://archive.xfce.org/src/xfce/xfconf/4.12/xfconf-4.12.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xfconf/xfconf-4.12.0.tar.bz2
 
+
+URL=http://archive.xfce.org/src/xfce/xfconf/4.12/xfconf-4.12.0.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -42,8 +54,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "xfconf=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

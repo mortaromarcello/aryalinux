@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:epdfview:0.1.8
+#DESCRIPTION:br3ak ePDFView is a free standalonebr3ak lightweight PDF document viewer using Poppler and GTK+ libraries. It is a good replacement forbr3ak Evince as it does not rely uponbr3ak GNOME libraries.br3ak
+#SECTION:pst
+
+whoami > /tmp/currentuser
 
 #REQ:gtk2
 #REQ:poppler
@@ -14,17 +18,25 @@ set -e
 #OPT:cups
 
 
-cd $SOURCE_DIR
+#VER:epdfview:0.1.8
 
-URL=http://anduin.linuxfromscratch.org/BLFS/epdfview/epdfview-0.1.8.tar.bz2
+
+NAME="epdfview"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/epdfview/epdfview-0.1.8.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/epdfview/epdfview-0.1.8.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/epdfview/epdfview-0.1.8.tar.bz2 || wget -nc http://anduin.linuxfromscratch.org/BLFS/epdfview/epdfview-0.1.8.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/epdfview/epdfview-0.1.8.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/epdfview/epdfview-0.1.8.tar.bz2
 wget -nc http://www.linuxfromscratch.org/patches/downloads/epdfview/epdfview-0.1.8-fixes-2.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/epdfview-0.1.8-fixes-2.patch
 
+
+URL=http://anduin.linuxfromscratch.org/BLFS/epdfview/epdfview-0.1.8.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -60,8 +72,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "epdfview=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

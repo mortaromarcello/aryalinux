@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:eog:3.20.4
+#DESCRIPTION:br3ak EOG is an application used forbr3ak viewing and cataloging image files on the GNOME Desktop. It has basic editingbr3ak capabilites.br3ak
+#SECTION:gnome
+
+whoami > /tmp/currentuser
 
 #REQ:adwaita-icon-theme
 #REQ:gnome-desktop
@@ -20,16 +24,24 @@ set -e
 #OPT:libexif
 
 
-cd $SOURCE_DIR
+#VER:eog:3.20.4
 
-URL=http://ftp.gnome.org/pub/gnome/sources/eog/3.20/eog-3.20.4.tar.xz
+
+NAME="eog"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.gnome.org/pub/gnome/sources/eog/3.20/eog-3.20.4.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/eog/eog-3.20.4.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/eog/eog-3.20.4.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/eog/eog-3.20.4.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/eog/3.20/eog-3.20.4.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/eog/eog-3.20.4.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/eog/eog-3.20.4.tar.xz
 
+
+URL=http://ftp.gnome.org/pub/gnome/sources/eog/3.20/eog-3.20.4.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -48,8 +60,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "eog=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

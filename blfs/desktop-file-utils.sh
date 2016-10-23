@@ -1,26 +1,38 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:desktop-file-utils:0.23
+#DESCRIPTION:br3ak The Desktop File Utils packagebr3ak contains command line utilities for working with <a class="ulink" br3ak href="http://standards.freedesktop.org/desktop-entry-spec/latest/">Desktopbr3ak entries</a>. These utilities are used by Desktop Environments andbr3ak other applications to manipulate the MIME-types applicationbr3ak databases and help adhere to the Desktop Entry Specification.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:glib2
 #OPT:emacs
 
 
-cd $SOURCE_DIR
+#VER:desktop-file-utils:0.23
 
-URL=http://freedesktop.org/software/desktop-file-utils/releases/desktop-file-utils-0.23.tar.xz
+
+NAME="desktop-file-utils"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/desktop-file-utils/desktop-file-utils-0.23.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/desktop-file-utils/desktop-file-utils-0.23.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/desktop-file-utils/desktop-file-utils-0.23.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/desktop-file-utils/desktop-file-utils-0.23.tar.xz || wget -nc http://freedesktop.org/software/desktop-file-utils/releases/desktop-file-utils-0.23.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/desktop-file-utils/desktop-file-utils-0.23.tar.xz
 
+
+URL=http://freedesktop.org/software/desktop-file-utils/releases/desktop-file-utils-0.23.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -39,8 +51,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "desktop-file-utils=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

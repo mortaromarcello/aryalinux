@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:wget:1.18
+#DESCRIPTION:br3ak The Wget package contains abr3ak utility useful for non-interactive downloading of files from thebr3ak Web.br3ak
+#SECTION:basicnet
+
+whoami > /tmp/currentuser
 
 #REC:gnutls
 #OPT:libidn
@@ -14,16 +18,24 @@ set -e
 #OPT:valgrind
 
 
-cd $SOURCE_DIR
+#VER:wget:1.18
 
-URL=http://ftp.gnu.org/gnu/wget/wget-1.18.tar.xz
+
+NAME="wget"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/wget/wget-1.18.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/wget/wget-1.18.tar.xz || wget -nc http://ftp.gnu.org/gnu/wget/wget-1.18.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/wget/wget-1.18.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/wget/wget-1.18.tar.xz || wget -nc ftp://ftp.gnu.org/gnu/wget/wget-1.18.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/wget/wget-1.18.tar.xz
 
+
+URL=http://ftp.gnu.org/gnu/wget/wget-1.18.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -53,8 +65,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "wget=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

@@ -1,24 +1,36 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+#DESCRIPTION:br3ak The chrpath modify the dynamicbr3ak library load path (rpath and runpath) of compiled programs andbr3ak libraries.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
+
+
+
 #VER:chrpath:0.16
 
 
+NAME="chrpath"
 
-cd $SOURCE_DIR
-
-URL=https://alioth.debian.org/frs/download.php/latestfile/813/chrpath-0.16.tar.gz
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/chrpath/chrpath-0.16.tar.gz || wget -nc https://alioth.debian.org/frs/download.php/latestfile/813/chrpath-0.16.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/chrpath/chrpath-0.16.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/chrpath/chrpath-0.16.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/chrpath/chrpath-0.16.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/chrpath/chrpath-0.16.tar.gz
 
+
+URL=https://alioth.debian.org/frs/download.php/latestfile/813/chrpath-0.16.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -37,8 +49,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "chrpath=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

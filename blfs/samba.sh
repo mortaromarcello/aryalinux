@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:samba:4.5.0
+#DESCRIPTION:br3ak The Samba package provides filebr3ak and print services to SMB/CIFS clients and Windows networking tobr3ak Linux clients. Samba can also bebr3ak configured as a Windows Domain Controller replacement, a file/printbr3ak server acting as a member of a Windows Active Directory domain andbr3ak a NetBIOS (rfc1001/1002) nameserver (which among other thingsbr3ak provides LAN browsing support).br3ak
+#SECTION:basicnet
+
+whoami > /tmp/currentuser
 
 #REQ:python2
 #REC:libtirpc
@@ -32,16 +36,24 @@ set -e
 #OPT:xfsprogs
 
 
-cd $SOURCE_DIR
+#VER:samba:4.5.0
 
-URL=https://download.samba.org/pub/samba/stable/samba-4.4.2.tar.gz
+
+NAME="samba"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc https://download.samba.org/pub/samba/stable/samba-4.4.2.tar.gz
 
+
+URL=https://download.samba.org/pub/samba/stable/samba-4.4.2.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -132,8 +144,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "samba=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

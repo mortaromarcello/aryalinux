@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:qemu:2.7.0
+#DESCRIPTION:br3ak qemu is a full virtualizationbr3ak solution for Linux on x86 hardware containing virtualizationbr3ak extensions (Intel VT or AMD-V).br3ak
+#SECTION:postlfs
+
+whoami > /tmp/currentuser
 
 #REQ:glib2
 #REQ:python2
@@ -28,16 +32,24 @@ set -e
 #OPT:vte
 
 
-cd $SOURCE_DIR
+#VER:qemu:2.7.0
 
-URL=http://wiki.qemu.org/download/qemu-2.7.0.tar.bz2
+
+NAME="qemu"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qemu/qemu-2.7.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qemu/qemu-2.7.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qemu/qemu-2.7.0.tar.bz2 || wget -nc http://wiki.qemu.org/download/qemu-2.7.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qemu/qemu-2.7.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qemu/qemu-2.7.0.tar.bz2
 
+
+URL=http://wiki.qemu.org/download/qemu-2.7.0.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -220,8 +232,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "qemu=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

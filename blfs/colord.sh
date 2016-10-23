@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:colord:1.2.12
+#DESCRIPTION:br3ak Colord is a system activatedbr3ak daemon that maps devices to color profiles. It is used bybr3ak GNOME Color Manager for systembr3ak integration and use when there are no users logged in.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:dbus
 #REQ:glib2
@@ -26,16 +30,24 @@ set -e
 #OPT:sane
 
 
-cd $SOURCE_DIR
+#VER:colord:1.2.12
 
-URL=http://www.freedesktop.org/software/colord/releases/colord-1.2.12.tar.xz
+
+NAME="colord"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://www.freedesktop.org/software/colord/releases/colord-1.2.12.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/colord/colord-1.2.12.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/colord/colord-1.2.12.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/colord/colord-1.2.12.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/colord/colord-1.2.12.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/colord/colord-1.2.12.tar.xz
 
+
+URL=http://www.freedesktop.org/software/colord/releases/colord-1.2.12.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -74,8 +86,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "colord=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

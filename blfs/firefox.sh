@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:firefox-.source:49.0.1
+#DESCRIPTION:br3ak Firefox is a stand-alone browserbr3ak based on the Mozilla codebase.br3ak
+#SECTION:xsoft
+
+whoami > /tmp/currentuser
 
 #REQ:alsa-lib
 #REQ:autoconf213
@@ -36,17 +40,25 @@ set -e
 #OPT:harfbuzz
 
 
-cd $SOURCE_DIR
+#VER:firefox-.source:49.0.1
 
-URL=https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/49.0.1/source/firefox-49.0.1.source.tar.xz
+
+NAME="firefox"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/firefox/firefox-49.0.1.source.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/firefox/firefox-49.0.1.source.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/firefox/firefox-49.0.1.source.tar.xz || wget -nc https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/49.0.1/source/firefox-49.0.1.source.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/firefox/firefox-49.0.1.source.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/firefox/firefox-49.0.1.source.tar.xz
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/firefox-49.0.1-system_graphite2_harfbuzz-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/firefox/firefox-49.0.1-system_graphite2_harfbuzz-1.patch
 
+
+URL=https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/49.0.1/source/firefox-49.0.1.source.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar --no-overwrite-dir -xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -169,8 +181,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "firefox=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

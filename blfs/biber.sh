@@ -1,12 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:biblatex-biber:null
-#VER:biblatex-.tds:3.5
+#DESCRIPTION:br3ak Biber is a BibTeX replacement for users of biblatex, written inbr3ak Perl, with full Unicode support.br3ak
+#SECTION:pst
+
+whoami > /tmp/currentuser
 
 #REQ:perl-modules#perl-autovivification
 #REQ:perl-modules#perl-business-isbn
@@ -44,17 +47,26 @@ set -e
 #OPT:perl-modules#perl-test-differences
 
 
-cd $SOURCE_DIR
+#VER:biblatex-biber:null
+#VER:biblatex-.tds:3.5
+
+
+NAME="biber"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
+
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex-biber/biblatex-biber.tar.gz || wget -nc http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/current/biblatex-biber.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/biblatex-biber/biblatex-biber.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex-biber/biblatex-biber.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/biblatex-biber/biblatex-biber.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/biblatex-biber/biblatex-biber.tar.gz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc http://sourceforge.net/projects/biblatex/files/biblatex-3.5/biblatex-3.5.tds.tgz
+
 
 URL=http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/current/biblatex-biber.tar.gz
-
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc http://sourceforge.net/projects/biblatex/files/biblatex-3.5/biblatex-3.5.tds.tgz
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex-biber/biblatex-biber.tar.gz || wget -nc http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/current/biblatex-biber.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/biblatex-biber/biblatex-biber.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex-biber/biblatex-biber.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/biblatex-biber/biblatex-biber.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/biblatex-biber/biblatex-biber.tar.gz
-
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -75,8 +87,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "biber=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

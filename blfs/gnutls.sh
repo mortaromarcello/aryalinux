@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:gnutls:3.5.5
+#DESCRIPTION:br3ak The GnuTLS package containsbr3ak libraries and userspace tools which provide a secure layer over abr3ak reliable transport layer. Currently the GnuTLS library implements the proposedbr3ak standards by the IETF's TLS working group. Quoting from the TLSbr3ak protocol specification:br3ak
+#SECTION:postlfs
+
+whoami > /tmp/currentuser
 
 #REQ:nettle
 #REC:cacerts
@@ -22,16 +26,24 @@ set -e
 #OPT:valgrind
 
 
-cd $SOURCE_DIR
+#VER:gnutls:3.5.5
 
-URL=ftp://ftp.gnutls.org/gcrypt/gnutls/v3.5/gnutls-3.5.5.tar.xz
+
+NAME="gnutls"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnutls/gnutls-3.5.5.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnutls/gnutls-3.5.5.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnutls/gnutls-3.5.5.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnutls/gnutls-3.5.5.tar.xz || wget -nc ftp://ftp.gnutls.org/gcrypt/gnutls/v3.5/gnutls-3.5.5.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnutls/gnutls-3.5.5.tar.xz
 
+
+URL=ftp://ftp.gnutls.org/gcrypt/gnutls/v3.5/gnutls-3.5.5.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -61,8 +73,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "gnutls=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

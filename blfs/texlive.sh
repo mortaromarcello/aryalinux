@@ -1,12 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:texlive-b-texmf:20160523
-#VER:texlive-b-source:20160523
+#DESCRIPTION:br3ak Most of TeX Live can be built from source without a pre-existingbr3ak installation, but xindy (forbr3ak indexing) needs working versions of <span class="command"><strong>latex</strong> and <span class="command"><strong>pdflatex</strong> when configure is run,br3ak and the testsuite and install for <span class="command"><strong>asy</strong> (for vector graphics) willbr3ak fail if TeX has not already been installed. Additionally,br3ak biber is not provided within thebr3ak texlive source.br3ak
+#SECTION:pst
+
+whoami > /tmp/currentuser
 
 #REC:gs
 #REC:fontconfig
@@ -23,19 +26,28 @@ set -e
 #REC:xorg-server
 
 
-cd $SOURCE_DIR
+#VER:texlive-b-texmf:20160523
+#VER:texlive-b-source:20160523
 
-URL=ftp://tug.org/texlive/historic/2016/texlive-20160523b-source.tar.xz
 
+NAME="texlive"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
+
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20160523b-source.tar.xz || wget -nc ftp://tug.org/texlive/historic/2016/texlive-20160523b-source.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/texlive/texlive-20160523b-source.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20160523b-source.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20160523b-source.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20160523b-source.tar.xz
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20160523b-texmf.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/texlive/texlive-20160523b-texmf.tar.xz || wget -nc ftp://tug.org/texlive/historic/2016/texlive-20160523b-texmf.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20160523b-texmf.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20160523b-texmf.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20160523b-texmf.tar.xz
 wget -nc http://www.linuxfromscratch.org/patches/downloads/texlive/texlive-20160523b-source-upstream_fixes-2.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/texlive-20160523b-source-upstream_fixes-2.patch
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/texlive-20160523b-texmf-upstream_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/texlive/texlive-20160523b-texmf-upstream_fixes-1.patch
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20160523b-texmf.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/texlive/texlive-20160523b-texmf.tar.xz || wget -nc ftp://tug.org/texlive/historic/2016/texlive-20160523b-texmf.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20160523b-texmf.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20160523b-texmf.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20160523b-texmf.tar.xz
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20160523b-source.tar.xz || wget -nc ftp://tug.org/texlive/historic/2016/texlive-20160523b-source.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/texlive/texlive-20160523b-source.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20160523b-source.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20160523b-source.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20160523b-source.tar.xz
 
+
+URL=ftp://tug.org/texlive/historic/2016/texlive-20160523b-source.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -132,8 +144,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "texlive=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

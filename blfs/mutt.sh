@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:mutt:1.7.1
+#DESCRIPTION:br3ak The Mutt package contains a Mailbr3ak User Agent. This is useful for reading, writing, replying to,br3ak saving, and deleting your email.br3ak
+#SECTION:basicnet
+
+whoami > /tmp/currentuser
 
 #OPT:aspell
 #OPT:cyrus-sasl
@@ -27,16 +31,24 @@ set -e
 #OPT:tl-installer
 
 
-cd $SOURCE_DIR
+#VER:mutt:1.7.1
 
-URL=ftp://ftp.mutt.org/pub/mutt/mutt-1.7.1.tar.gz
+
+NAME="mutt"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mutt/mutt-1.7.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mutt/mutt-1.7.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mutt/mutt-1.7.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mutt/mutt-1.7.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mutt/mutt-1.7.1.tar.gz || wget -nc ftp://ftp.mutt.org/pub/mutt/mutt-1.7.1.tar.gz
 
+
+URL=ftp://ftp.mutt.org/pub/mutt/mutt-1.7.1.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -105,8 +117,9 @@ chmod -v 2755 /usr/bin/mutt_dotclock
 cat /usr/share/doc/mutt-1.7.1/samples/gpg.rc >> ~/.muttrc
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "mutt=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

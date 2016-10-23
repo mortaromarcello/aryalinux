@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:gegl:0.3.8
+#DESCRIPTION:br3ak This package provides the GEneric Graphics Library, which is abr3ak graph based image processing format.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:babl
 #REQ:json-glib
@@ -29,16 +33,24 @@ set -e
 #OPT:w3m
 
 
-cd $SOURCE_DIR
+#VER:gegl:0.3.8
 
-URL=http://download.gimp.org/pub/gegl/0.3/gegl-0.3.8.tar.bz2
+
+NAME="gegl"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gegl/gegl-0.3.8.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gegl/gegl-0.3.8.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gegl/gegl-0.3.8.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gegl/gegl-0.3.8.tar.bz2 || wget -nc http://download.gimp.org/pub/gegl/0.3/gegl-0.3.8.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gegl/gegl-0.3.8.tar.bz2
 
+
+URL=http://download.gimp.org/pub/gegl/0.3/gegl-0.3.8.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -63,8 +75,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "gegl=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

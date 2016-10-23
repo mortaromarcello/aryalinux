@@ -1,25 +1,37 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:nettle:3.3
+#DESCRIPTION:br3ak The Nettle package contains thebr3ak low-level cryptographic library that is designed to fit easily inbr3ak many contexts.br3ak
+#SECTION:postlfs
+
+whoami > /tmp/currentuser
 
 #OPT:openssl
 
 
-cd $SOURCE_DIR
+#VER:nettle:3.3
 
-URL=https://ftp.gnu.org/gnu/nettle/nettle-3.3.tar.gz
+
+NAME="nettle"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc https://ftp.gnu.org/gnu/nettle/nettle-3.3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/nettle/nettle-3.3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/nettle/nettle-3.3.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/nettle/nettle-3.3.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/nettle/nettle-3.3.tar.gz || wget -nc ftp://ftp.gnu.org/gnu/nettle/nettle-3.3.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/nettle/nettle-3.3.tar.gz
 
+
+URL=https://ftp.gnu.org/gnu/nettle/nettle-3.3.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -41,8 +53,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "nettle=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

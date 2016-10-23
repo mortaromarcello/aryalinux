@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:bind:9.11.0
+#DESCRIPTION:br3ak The BIND package provides a DNSbr3ak server and client utilities. If you are only interested in thebr3ak utilities, refer to the <a class="xref" href="../basicnet/bind-utils.html" title="BIND Utilities-9.11.0">BINDbr3ak Utilities-9.11.0</a>.br3ak
+#SECTION:server
+
+whoami > /tmp/currentuser
 
 #OPT:libcap
 #OPT:libxml2
@@ -24,17 +28,25 @@ set -e
 #OPT:tl-installer
 
 
-cd $SOURCE_DIR
+#VER:bind:9.11.0
 
-URL=ftp://ftp.isc.org/isc/bind9/9.11.0/bind-9.11.0.tar.gz
+
+NAME="bind"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.isc.org/isc/bind9/9.11.0/bind-9.11.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/bind/bind-9.11.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/bind/bind-9.11.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/bind/bind-9.11.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/bind/bind-9.11.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/bind/bind-9.11.0.tar.gz
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/bind-9.11.0-use_iproute2-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/bind/bind-9.11.0-use_iproute2-1.patch
 
+
+URL=ftp://ftp.isc.org/isc/bind9/9.11.0/bind-9.11.0.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -313,8 +325,9 @@ dig www.linuxfromscratch.org &&
 dig www.linuxfromscratch.org
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "bind=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

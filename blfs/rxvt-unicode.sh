@@ -1,27 +1,39 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:rxvt-unicode:9.22
+#DESCRIPTION:br3ak rxvt-unicode is a clone of thebr3ak terminal emulator rxvt, an Xbr3ak Window System terminal emulator which includes support for XFT andbr3ak Unicode.br3ak
+#SECTION:xsoft
+
+whoami > /tmp/currentuser
 
 #REQ:xorg-server
 #OPT:gdk-pixbuf
 #OPT:startup-notification
 
 
-cd $SOURCE_DIR
+#VER:rxvt-unicode:9.22
 
-URL=http://dist.schmorp.de/rxvt-unicode/Attic/rxvt-unicode-9.22.tar.bz2
+
+NAME="rxvt-unicode"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/rxvt-unicode/rxvt-unicode-9.22.tar.bz2 || wget -nc http://dist.schmorp.de/rxvt-unicode/Attic/rxvt-unicode-9.22.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/rxvt-unicode/rxvt-unicode-9.22.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/rxvt-unicode/rxvt-unicode-9.22.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/rxvt-unicode/rxvt-unicode-9.22.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/rxvt-unicode/rxvt-unicode-9.22.tar.bz2
 
+
+URL=http://dist.schmorp.de/rxvt-unicode/Attic/rxvt-unicode-9.22.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -87,8 +99,9 @@ EOF
 update-desktop-database -q
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "rxvt-unicode=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

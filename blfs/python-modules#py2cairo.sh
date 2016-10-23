@@ -1,26 +1,38 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:py2cairo:1.10.0
+#DESCRIPTION:%DESCRIPTION%
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:python2
 #REQ:cairo
 
 
-cd $SOURCE_DIR
+#VER:py2cairo:1.10.0
 
-URL=http://cairographics.org/releases/py2cairo-1.10.0.tar.bz2
+
+NAME="python-modules#py2cairo"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://cairographics.org/releases/py2cairo-1.10.0.tar.bz2
 
+
+URL=http://cairographics.org/releases/py2cairo-1.10.0.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 ./waf configure --prefix=/usr &&
@@ -35,8 +47,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "python-modules#py2cairo=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

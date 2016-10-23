@@ -1,28 +1,40 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:heirloom-mailx_.orig:12.5
+#DESCRIPTION:br3ak The Heirloom mailx packagebr3ak (formerly known as the Nailbr3ak package) contains <span class="command"><strong>mailx</strong>, a command-line Mail Userbr3ak Agent derived from Berkeley Mail. It is intended to provide thebr3ak functionality of the POSIX <span class="command"><strong>mailx</strong> command with additionalbr3ak support for MIME messages, IMAP (including caching), POP3, SMTP,br3ak S/MIME, message threading/sorting, scoring, and filtering.br3ak Heirloom mailx is especiallybr3ak useful for writing scripts and batch processing.br3ak
+#SECTION:basicnet
+
+whoami > /tmp/currentuser
 
 #OPT:openssl
 #OPT:nss
 #OPT:mitkrb
 
 
-cd $SOURCE_DIR
+#VER:heirloom-mailx_.orig:12.5
 
-URL=http://ftp.debian.org/debian/pool/main/h/heirloom-mailx/heirloom-mailx_12.5.orig.tar.gz
+
+NAME="mailx"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/heirloom/heirloom-mailx_12.5.orig.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/heirloom/heirloom-mailx_12.5.orig.tar.gz || wget -nc ftp://ftp.debian.org/debian/pool/main/h/heirloom-mailx/heirloom-mailx_12.5.orig.tar.gz || wget -nc http://ftp.debian.org/debian/pool/main/h/heirloom-mailx/heirloom-mailx_12.5.orig.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/heirloom/heirloom-mailx_12.5.orig.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/heirloom/heirloom-mailx_12.5.orig.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/heirloom/heirloom-mailx_12.5.orig.tar.gz
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/heirloom-mailx-12.5-fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/heirloom-mailx/heirloom-mailx-12.5-fixes-1.patch
 
+
+URL=http://ftp.debian.org/debian/pool/main/h/heirloom-mailx/heirloom-mailx_12.5.orig.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -45,8 +57,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "mailx=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

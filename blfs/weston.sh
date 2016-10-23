@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:weston:1.12.0
+#DESCRIPTION:br3ak Weston is the referencebr3ak implementation of a Waylandbr3ak compositor, and a useful compositor in its own right. It hasbr3ak various backends that lets it run on Linux kernel modesetting andbr3ak evdev input as well as under X11. Weston also ships with a few example clients,br3ak from simple clients that demonstrate certain aspects of thebr3ak protocol to more complete clients and a simplistic toolkit.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:cairo
 #REQ:x7driver
@@ -29,16 +33,24 @@ set -e
 #OPT:libwebp
 
 
-cd $SOURCE_DIR
+#VER:weston:1.12.0
 
-URL=http://wayland.freedesktop.org/releases/weston-1.12.0.tar.xz
+
+NAME="weston"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/weston/weston-1.12.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/weston/weston-1.12.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/weston/weston-1.12.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/weston/weston-1.12.0.tar.xz || wget -nc http://wayland.freedesktop.org/releases/weston-1.12.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/weston/weston-1.12.0.tar.xz
 
+
+URL=http://wayland.freedesktop.org/releases/weston-1.12.0.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -66,8 +78,9 @@ weston-launch
 weston-launch -- --backend=fbdev-backend.so
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "weston=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

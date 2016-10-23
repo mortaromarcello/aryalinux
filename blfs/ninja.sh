@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:v:1.7.1
+#DESCRIPTION:br3ak Ninja is a small build system withbr3ak a focus on speed.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:python2
 #OPT:emacs
@@ -13,16 +17,24 @@ set -e
 #OPT:doxygen
 
 
-cd $SOURCE_DIR
+#VER:v:1.7.1
 
-URL=https://github.com/ninja-build/ninja/archive/v1.7.1.tar.gz
+
+NAME="ninja"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc https://github.com/ninja-build/ninja/archive/v1.7.1.tar.gz
 
+
+URL=https://github.com/ninja-build/ninja/archive/v1.7.1.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -71,8 +83,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "ninja=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

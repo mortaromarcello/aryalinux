@@ -1,26 +1,38 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:pixman:0.34.0
+#DESCRIPTION:br3ak The Pixman package contains abr3ak library that provides low-level pixel manipulation features such asbr3ak image compositing and trapezoid rasterization.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #OPT:gtk2
 #OPT:libpng
 
 
-cd $SOURCE_DIR
+#VER:pixman:0.34.0
 
-URL=http://cairographics.org/releases/pixman-0.34.0.tar.gz
+
+NAME="pixman"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/pixman/pixman-0.34.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/pixman/pixman-0.34.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/pixman/pixman-0.34.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/pixman/pixman-0.34.0.tar.gz || wget -nc http://cairographics.org/releases/pixman-0.34.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/pixman/pixman-0.34.0.tar.gz
 
+
+URL=http://cairographics.org/releases/pixman-0.34.0.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -39,8 +51,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "pixman=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

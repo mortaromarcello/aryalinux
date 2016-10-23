@@ -1,12 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:MPlayer:1.3.0
-#VER:Clearlooks:1.7
+#DESCRIPTION:br3ak MPlayer is a powerful audio/videobr3ak player controlled via the command line or a graphical interfacebr3ak that is able to play almost every popular audio and video filebr3ak format. With supported video hardware and additional drivers,br3ak MPlayer can play video filesbr3ak without an X Window Systembr3ak installed.br3ak
+#SECTION:multimedia
+
+whoami > /tmp/currentuser
 
 #REQ:yasm
 #REC:gtk2
@@ -51,17 +54,26 @@ set -e
 #OPT:docbook-xsl
 
 
-cd $SOURCE_DIR
+#VER:MPlayer:1.3.0
+#VER:Clearlooks:1.7
+
+
+NAME="mplayer"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
+
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz || wget -nc ftp://ftp.mplayerhq.hu/MPlayer/releases/MPlayer-1.3.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz || wget -nc http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.3.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc ftp://ftp.mplayerhq.hu/MPlayer/skins/Clearlooks-1.7.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc https://www.mplayerhq.hu/MPlayer/skins/Clearlooks-1.7.tar.bz2
+
 
 URL=http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.3.0.tar.xz
-
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc ftp://ftp.mplayerhq.hu/MPlayer/skins/Clearlooks-1.7.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc https://www.mplayerhq.hu/MPlayer/skins/Clearlooks-1.7.tar.bz2
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz || wget -nc ftp://ftp.mplayerhq.hu/MPlayer/releases/MPlayer-1.3.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz || wget -nc http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.3.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz
-
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -144,8 +156,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "mplayer=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

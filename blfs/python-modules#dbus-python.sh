@@ -1,27 +1,39 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:dbus-python:1.2.4
+#DESCRIPTION:%DESCRIPTION%
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:dbus-glib
 #REQ:python2
 #REQ:python3
 
 
-cd $SOURCE_DIR
+#VER:dbus-python:1.2.4
 
-URL=http://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.4.tar.gz
+
+NAME="python-modules#dbus-python"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/dbus-python/dbus-python-1.2.4.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/dbus-python/dbus-python-1.2.4.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/dbus-python/dbus-python-1.2.4.tar.gz || wget -nc http://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.4.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/dbus-python/dbus-python-1.2.4.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/dbus-python/dbus-python-1.2.4.tar.gz
 
+
+URL=http://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.4.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 mkdir python2 &&
@@ -56,8 +68,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "python-modules#dbus-python=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

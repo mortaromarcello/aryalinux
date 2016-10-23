@@ -1,26 +1,38 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:libkcddb-2016-09:11
+#DESCRIPTION:br3ak The libkcddb package contains abr3ak library used to retrieve audio CD meta data from the internet.br3ak
+#SECTION:kde
+
+whoami > /tmp/currentuser
 
 #REQ:libmusicbrainz5
 #REQ:kframeworks5
 
 
-cd $SOURCE_DIR
+#VER:libkcddb-2016-09:11
 
-URL=http://anduin.linuxfromscratch.org/BLFS/libkcddb/libkcddb-2016-09-11.tar.xz
+
+NAME="libkcddb"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libkcddb/libkcddb-2016-09-11.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libkcddb/libkcddb-2016-09-11.tar.xz || wget -nc http://anduin.linuxfromscratch.org/BLFS/libkcddb/libkcddb-2016-09-11.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libkcddb/libkcddb-2016-09-11.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libkcddb/libkcddb-2016-09-11.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libkcddb/libkcddb-2016-09-11.tar.xz
 
+
+URL=http://anduin.linuxfromscratch.org/BLFS/libkcddb/libkcddb-2016-09-11.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -45,8 +57,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "libkcddb=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

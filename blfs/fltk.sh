@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:fltk-source:1.3.3
+#DESCRIPTION:br3ak FLTK (pronounced "fulltick") is a cross-platform C++ GUI toolkit.br3ak FLTK provides modern GUI functionality and supports 3D graphics viabr3ak OpenGL and its built-in GLUT emulation libraries used for creatingbr3ak graphical user interfaces for applications.br3ak
+#SECTION:x
+
+whoami > /tmp/currentuser
 
 #REQ:x7lib
 #REC:hicolor-icon-theme
@@ -20,16 +24,24 @@ set -e
 #OPT:tl-installer
 
 
-cd $SOURCE_DIR
+#VER:fltk-source:1.3.3
 
-URL=http://fltk.org/pub/fltk/1.3.3/fltk-1.3.3-source.tar.gz
+
+NAME="fltk"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/fltk/fltk-1.3.3-source.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/fltk/fltk-1.3.3-source.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/fltk/fltk-1.3.3-source.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/fltk/fltk-1.3.3-source.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/fltk/fltk-1.3.3-source.tar.gz || wget -nc http://fltk.org/pub/fltk/1.3.3/fltk-1.3.3-source.tar.gz
 
+
+URL=http://fltk.org/pub/fltk/1.3.3/fltk-1.3.3-source.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -53,8 +65,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "fltk=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

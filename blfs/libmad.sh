@@ -1,25 +1,37 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+#DESCRIPTION:br3ak libmad is a high-quality MPEGbr3ak audio decoder capable of 24-bit output.br3ak
+#SECTION:multimedia
+
+whoami > /tmp/currentuser
+
+
+
 #VER:libmad-b:0.15.1
 
 
+NAME="libmad"
 
-cd $SOURCE_DIR
-
-URL=http://downloads.sourceforge.net/mad/libmad-0.15.1b.tar.gz
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libmad/libmad-0.15.1b.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libmad/libmad-0.15.1b.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libmad/libmad-0.15.1b.tar.gz || wget -nc http://downloads.sourceforge.net/mad/libmad-0.15.1b.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libmad/libmad-0.15.1b.tar.gz || wget -nc ftp://ftp.mars.org/pub/mpeg/libmad-0.15.1b.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libmad/libmad-0.15.1b.tar.gz
 wget -nc http://www.linuxfromscratch.org/patches/downloads/libmad/libmad-0.15.1b-fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/libmad-0.15.1b-fixes-1.patch
 
+
+URL=http://downloads.sourceforge.net/mad/libmad-0.15.1b.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -63,8 +75,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "libmad=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

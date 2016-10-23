@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:brasero:3.12.1
+#DESCRIPTION:br3ak Brasero is an application used tobr3ak burn CD/DVD on the GNOME Desktop.br3ak It is designed to be as simple as possible and has some uniquebr3ak features that enable users to create their discs easily andbr3ak quickly.br3ak
+#SECTION:gnome
+
+whoami > /tmp/currentuser
 
 #REQ:gst10-plugins-base
 #REQ:itstool
@@ -23,16 +27,24 @@ set -e
 #OPT:libdvdcss
 
 
-cd $SOURCE_DIR
+#VER:brasero:3.12.1
 
-URL=http://ftp.gnome.org/pub/gnome/sources/brasero/3.12/brasero-3.12.1.tar.xz
+
+NAME="brasero"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/brasero/brasero-3.12.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/brasero/brasero-3.12.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/brasero/brasero-3.12.1.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/brasero/3.12/brasero-3.12.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/brasero/brasero-3.12.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/brasero/brasero-3.12.1.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/brasero/3.12/brasero-3.12.1.tar.xz
 
+
+URL=http://ftp.gnome.org/pub/gnome/sources/brasero/3.12/brasero-3.12.1.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -53,8 +65,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "brasero=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

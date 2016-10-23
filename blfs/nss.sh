@@ -1,27 +1,39 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:nss:3.27.1
+#DESCRIPTION:br3ak The Network Security Services (NSS) package is a set of libraries designed tobr3ak support cross-platform development of security-enabled client andbr3ak server applications. Applications built with NSS can support SSL v2br3ak and v3, TLS, PKCS #5, PKCS #7, PKCS #11, PKCS #12, S/MIME, X.509 v3br3ak certificates, and other security standards. This is useful forbr3ak implementing SSL and S/MIME or other Internet security standardsbr3ak into an application.br3ak
+#SECTION:postlfs
+
+whoami > /tmp/currentuser
 
 #REQ:nspr
 #REC:sqlite
 
 
-cd $SOURCE_DIR
+#VER:nss:3.27.1
 
-URL=https://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_27_1_RTM/src/nss-3.27.1.tar.gz
+
+NAME="nss"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/nss/nss-3.27.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/nss/nss-3.27.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/nss/nss-3.27.1.tar.gz || wget -nc https://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_27_1_RTM/src/nss-3.27.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/nss/nss-3.27.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/nss/nss-3.27.1.tar.gz
 wget -nc http://www.linuxfromscratch.org/patches/downloads/nss/nss-3.27.1-standalone-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/nss-3.27.1-standalone-1.patch
 
+
+URL=https://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_27_1_RTM/src/nss-3.27.1.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -53,8 +65,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "nss=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

@@ -1,25 +1,37 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:taglib:1.11
+#DESCRIPTION:br3ak Taglib is a library used forbr3ak reading, writing and manipulating audio file tags and is used bybr3ak applications such as Amarok andbr3ak VLC.br3ak
+#SECTION:multimedia
+
+whoami > /tmp/currentuser
 
 #REQ:cmake
 
 
-cd $SOURCE_DIR
+#VER:taglib:1.11
 
-URL=https://taglib.github.io/releases/taglib-1.11.tar.gz
+
+NAME="taglib"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/taglib/taglib-1.11.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/taglib/taglib-1.11.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/taglib/taglib-1.11.tar.gz || wget -nc https://taglib.github.io/releases/taglib-1.11.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/taglib/taglib-1.11.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/taglib/taglib-1.11.tar.gz
 
+
+URL=https://taglib.github.io/releases/taglib-1.11.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -43,8 +55,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "taglib=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

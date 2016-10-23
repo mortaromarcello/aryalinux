@@ -1,27 +1,39 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:kwindowsystem:5.25.0
+#DESCRIPTION:br3ak The kwindowsystem providesbr3ak information about, and allows interaction with, the windowingbr3ak system. It provides a high level API that is windowing systembr3ak independent and has platform specific implementations.br3ak
+#SECTION:lxqt
+
+whoami > /tmp/currentuser
 
 #REQ:extra-cmake-modules
 #REQ:x7lib
 #REQ:qt5
 
 
-cd $SOURCE_DIR
+#VER:kwindowsystem:5.25.0
 
-URL=http://download.kde.org/stable/frameworks/5.25/kwindowsystem-5.25.0.tar.xz
+
+NAME="lxqt-kwindowsystem"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/kwindowsystem/kwindowsystem-5.25.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/kwindowsystem/kwindowsystem-5.25.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/kwindowsystem/kwindowsystem-5.25.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/kwindowsystem/kwindowsystem-5.25.0.tar.xz || wget -nc http://download.kde.org/stable/frameworks/5.25/kwindowsystem-5.25.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/kwindowsystem/kwindowsystem-5.25.0.tar.xz
 
+
+URL=http://download.kde.org/stable/frameworks/5.25/kwindowsystem-5.25.0.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -46,7 +58,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
+sudo rm -rf $DIRECTORY
 
-echo "lxqt-kwindowsystem=>`date`" | sudo tee -a $INSTALLED_LIST
-
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

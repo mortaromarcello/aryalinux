@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:guile:2.0.13
+#DESCRIPTION:br3ak The Guile package contains the GNUbr3ak Project's extension language library. Guile also contains a stand alone Scheme interpreter.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:gc
 #REQ:libffi
@@ -14,16 +18,24 @@ set -e
 #OPT:gdb
 
 
-cd $SOURCE_DIR
+#VER:guile:2.0.13
 
-URL=http://ftp.gnu.org/pub/gnu/guile/guile-2.0.13.tar.xz
+
+NAME="guile"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/guile/guile-2.0.13.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/guile/guile-2.0.13.tar.xz || wget -nc http://ftp.gnu.org/pub/gnu/guile/guile-2.0.13.tar.xz || wget -nc ftp://ftp.gnu.org/pub/gnu/guile/guile-2.0.13.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/guile/guile-2.0.13.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/guile/guile-2.0.13.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/guile/guile-2.0.13.tar.xz
 
+
+URL=http://ftp.gnu.org/pub/gnu/guile/guile-2.0.13.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -59,8 +71,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "guile=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

@@ -1,24 +1,36 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+#DESCRIPTION:br3ak The next part of this chapter deals with firewalls. The principalbr3ak firewall tool for Linux is Iptables. You will need to installbr3ak Iptables if you intend on usingbr3ak any form of a firewall.br3ak
+#SECTION:postlfs
+
+whoami > /tmp/currentuser
+
+
+
 #VER:iptables:1.6.0
 
 
+NAME="iptables"
 
-cd $SOURCE_DIR
-
-URL=http://www.netfilter.org/projects/iptables/files/iptables-1.6.0.tar.bz2
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://www.netfilter.org/projects/iptables/files/iptables-1.6.0.tar.bz2 || wget -nc ftp://ftp.netfilter.org/pub/iptables/iptables-1.6.0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/iptables/iptables-1.6.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/iptables/iptables-1.6.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/iptables/iptables-1.6.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/iptables/iptables-1.6.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/iptables/iptables-1.6.0.tar.bz2
 
+
+URL=http://www.netfilter.org/projects/iptables/files/iptables-1.6.0.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -63,8 +75,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "iptables=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

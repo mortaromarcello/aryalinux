@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:libchamplain:0.12.14
+#DESCRIPTION:br3ak The libchamplain is a Clutterbr3ak based widget used to display rich, eye-candy and interactive maps.br3ak
+#SECTION:gnome
+
+whoami > /tmp/currentuser
 
 #REQ:clutter
 #REQ:gtk3
@@ -16,16 +20,24 @@ set -e
 #OPT:gtk-doc
 
 
-cd $SOURCE_DIR
+#VER:libchamplain:0.12.14
 
-URL=http://ftp.gnome.org/pub/gnome/sources/libchamplain/0.12/libchamplain-0.12.14.tar.xz
+
+NAME="libchamplain"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libchamplain/libchamplain-0.12.14.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/libchamplain/0.12/libchamplain-0.12.14.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/libchamplain/0.12/libchamplain-0.12.14.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libchamplain/libchamplain-0.12.14.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libchamplain/libchamplain-0.12.14.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libchamplain/libchamplain-0.12.14.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libchamplain/libchamplain-0.12.14.tar.xz
 
+
+URL=http://ftp.gnome.org/pub/gnome/sources/libchamplain/0.12/libchamplain-0.12.14.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -46,8 +58,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "libchamplain=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

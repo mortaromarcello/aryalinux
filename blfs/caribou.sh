@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:caribou:0.4.21
+#DESCRIPTION:br3ak Caribou is an input assistivebr3ak technology intended for switch and pointer users.br3ak
+#SECTION:gnome
+
+whoami > /tmp/currentuser
 
 #REQ:clutter
 #REQ:gtk3
@@ -19,16 +23,24 @@ set -e
 #OPT:python-modules#pyatspi2
 
 
-cd $SOURCE_DIR
+#VER:caribou:0.4.21
 
-URL=http://ftp.gnome.org/pub/gnome/sources/caribou/0.4/caribou-0.4.21.tar.xz
+
+NAME="caribou"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/caribou/caribou-0.4.21.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/caribou/caribou-0.4.21.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/caribou/caribou-0.4.21.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/caribou/0.4/caribou-0.4.21.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/caribou/caribou-0.4.21.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/caribou/caribou-0.4.21.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/caribou/0.4/caribou-0.4.21.tar.xz
 
+
+URL=http://ftp.gnome.org/pub/gnome/sources/caribou/0.4/caribou-0.4.21.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -50,8 +62,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "caribou=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

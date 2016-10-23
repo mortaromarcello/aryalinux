@@ -1,24 +1,36 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+#DESCRIPTION:br3ak The hicolor-icon-theme packagebr3ak contains a default fallback theme for implementations of the iconbr3ak theme specification.br3ak
+#SECTION:x
+
+whoami > /tmp/currentuser
+
+
+
 #VER:hicolor-icon-theme:0.15
 
 
+NAME="hicolor-icon-theme"
 
-cd $SOURCE_DIR
-
-URL=http://icon-theme.freedesktop.org/releases/hicolor-icon-theme-0.15.tar.xz
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/hicolor-icon-theme/hicolor-icon-theme-0.15.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/hicolor-icon-theme/hicolor-icon-theme-0.15.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/hicolor-icon-theme/hicolor-icon-theme-0.15.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/hicolor-icon-theme/hicolor-icon-theme-0.15.tar.xz || wget -nc http://icon-theme.freedesktop.org/releases/hicolor-icon-theme-0.15.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/hicolor-icon-theme/hicolor-icon-theme-0.15.tar.xz
 
+
+URL=http://icon-theme.freedesktop.org/releases/hicolor-icon-theme-0.15.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -36,8 +48,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "hicolor-icon-theme=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

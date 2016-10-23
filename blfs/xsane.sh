@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:xsane:0.999
+#DESCRIPTION:br3ak XSane is another front end forbr3ak <a class="xref" href="sane.html" title="SANE-1.0.25">SANE-1.0.25</a>. It has additional features tobr3ak improve the image quality and ease of use compared to <span class="command"><strong>xscanimage</strong>.br3ak
+#SECTION:pst
+
+whoami > /tmp/currentuser
 
 #REQ:gtk2
 #REQ:sane
@@ -13,16 +17,24 @@ set -e
 #OPT:gimp
 
 
-cd $SOURCE_DIR
+#VER:xsane:0.999
 
-URL=http://www.xsane.org/download/xsane-0.999.tar.gz
+
+NAME="xsane"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xsane/xsane-0.999.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xsane/xsane-0.999.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xsane/xsane-0.999.tar.gz || wget -nc http://www.xsane.org/download/xsane-0.999.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xsane/xsane-0.999.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xsane/xsane-0.999.tar.gz
 
+
+URL=http://www.xsane.org/download/xsane-0.999.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -63,8 +75,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "xsane=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

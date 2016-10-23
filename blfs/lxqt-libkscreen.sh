@@ -1,25 +1,37 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:libkscreen:5.7.3
+#DESCRIPTION:br3ak The Libkscreen package containsbr3ak the KDE Screen Management library.br3ak
+#SECTION:lxqt
+
+whoami > /tmp/currentuser
 
 #REQ:lxqt-kwayland
 
 
-cd $SOURCE_DIR
+#VER:libkscreen:5.7.3
 
-URL=http://download.kde.org/stable/plasma/5.7.3/libkscreen-5.7.3.tar.xz
+
+NAME="lxqt-libkscreen"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libkscreen/libkscreen-5.7.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libkscreen/libkscreen-5.7.3.tar.xz || wget -nc http://download.kde.org/stable/plasma/5.7.3/libkscreen-5.7.3.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libkscreen/libkscreen-5.7.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libkscreen/libkscreen-5.7.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libkscreen/libkscreen-5.7.3.tar.xz
 
+
+URL=http://download.kde.org/stable/plasma/5.7.3/libkscreen-5.7.3.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -44,7 +56,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
+sudo rm -rf $DIRECTORY
 
-echo "lxqt-libkscreen=>`date`" | sudo tee -a $INSTALLED_LIST
-
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

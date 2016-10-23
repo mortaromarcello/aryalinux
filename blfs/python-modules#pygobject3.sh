@@ -1,27 +1,39 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:pygobject:3.22.0
+#DESCRIPTION:%DESCRIPTION%
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:gobject-introspection
 #REQ:python-modules#py2cairo
 #REQ:python-modules#pycairo
 
 
-cd $SOURCE_DIR
+#VER:pygobject:3.22.0
 
-URL=http://ftp.gnome.org/pub/gnome/sources/pygobject/3.22/pygobject-3.22.0.tar.xz
+
+NAME="python-modules#pygobject3"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.gnome.org/pub/gnome/sources/pygobject/3.22/pygobject-3.22.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/pygobject/3.22/pygobject-3.22.0.tar.xz
 
+
+URL=http://ftp.gnome.org/pub/gnome/sources/pygobject/3.22/pygobject-3.22.0.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 mkdir python2 &&
@@ -54,8 +66,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "python-modules#pygobject3=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

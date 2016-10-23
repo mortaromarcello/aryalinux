@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:gcc:6.2.0
+#DESCRIPTION:br3ak See the introduction to the Java language and system at <a class="xref" href="java.html" title="Java-1.8.0.112">Java-1.8.0.112</a>.br3ak The GNU Compiler Collection (GCC) contains a Java compiler tobr3ak native code. Together with the ecjbr3ak Java compiler from Eclipse (to bytecode), it provides a way tobr3ak build an acceptable JVM from source. However, since the release ofbr3ak OpenJDK, the development ofbr3ak GCC-Java has almost stopped, and the built JVM is an old version,br3ak which cannot be used for building <a class="xref" href="openjdk.html" title="OpenJDK-1.8.0.112">OpenJDK-1.8.0.112</a>.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:unzip
 #REQ:general_which
@@ -14,16 +18,24 @@ set -e
 #OPT:gtk2
 
 
-cd $SOURCE_DIR
+#VER:gcc:6.2.0
 
-URL=http://ftpmirror.gnu.org/gcc/gcc-6.2.0/gcc-6.2.0.tar.bz2
+
+NAME="gcc-java"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gcc/gcc-6.2.0.tar.bz2 || wget -nc http://ftpmirror.gnu.org/gcc/gcc-6.2.0/gcc-6.2.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gcc/gcc-6.2.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gcc/gcc-6.2.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gcc/gcc-6.2.0.tar.bz2 || wget -nc ftp://ftp.gnu.org/gnu/gcc/gcc-6.2.0/gcc-6.2.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gcc/gcc-6.2.0.tar.bz2
 
+
+URL=http://ftpmirror.gnu.org/gcc/gcc-6.2.0/gcc-6.2.0.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -72,8 +84,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "gcc-java=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

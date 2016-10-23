@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:curl:7.50.3
+#DESCRIPTION:br3ak The cURL package contains anbr3ak utility and a library used for transferring files with URL syntaxbr3ak to any of the following protocols: FTP, FTPS, HTTP, HTTPS, SCP,br3ak SFTP, TFTP, TELNET, DICT, LDAP, LDAPS and FILE. Its ability to bothbr3ak download and upload files can be incorporated into other programsbr3ak to support functions like streaming media.br3ak
+#SECTION:basicnet
+
+whoami > /tmp/currentuser
 
 #REC:cacerts
 #REC:openssl
@@ -19,16 +23,24 @@ set -e
 #OPT:valgrind
 
 
-cd $SOURCE_DIR
+#VER:curl:7.50.3
 
-URL=https://curl.haxx.se/download/curl-7.50.3.tar.lzma
+
+NAME="curl"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/curl/curl-7.50.3.tar.lzma || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/curl/curl-7.50.3.tar.lzma || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/curl/curl-7.50.3.tar.lzma || wget -nc https://curl.haxx.se/download/curl-7.50.3.tar.lzma || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/curl/curl-7.50.3.tar.lzma || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/curl/curl-7.50.3.tar.lzma
 
+
+URL=https://curl.haxx.se/download/curl-7.50.3.tar.lzma
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -56,8 +68,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "curl=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

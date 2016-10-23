@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:midori__all_:0.5.11
+#DESCRIPTION:br3ak Midori is a lightweight webbr3ak browser that uses WebKitGTK+.br3ak
+#SECTION:xfce
+
+whoami > /tmp/currentuser
 
 #REQ:cmake
 #REQ:gcr
@@ -18,16 +22,24 @@ set -e
 #OPT:libzeitgeist
 
 
-cd $SOURCE_DIR
+#VER:midori__all_:0.5.11
 
-URL=http://www.midori-browser.org/downloads/midori_0.5.11_all_.tar.bz2
+
+NAME="midori"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://www.midori-browser.org/downloads/midori_0.5.11_all_.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/midori/midori_0.5.11_all_.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/midori/midori_0.5.11_all_.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/midori/midori_0.5.11_all_.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/midori/midori_0.5.11_all_.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/midori/midori_0.5.11_all_.tar.bz2
 
+
+URL=http://www.midori-browser.org/downloads/midori_0.5.11_all_.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -54,8 +66,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "midori=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:fontforge-dist:20161004
+#DESCRIPTION:br3ak The FontForge package contains anbr3ak outline font editor that lets you create your own postscript,br3ak truetype, opentype, cid-keyed, multi-master, cff, svg and bitmapbr3ak (bdf, FON, NFNT) fonts, or edit existing ones.br3ak
+#SECTION:xsoft
+
+whoami > /tmp/currentuser
 
 #REQ:freetype2
 #REQ:glib2
@@ -25,16 +29,24 @@ set -e
 #OPT:wget
 
 
-cd $SOURCE_DIR
+#VER:fontforge-dist:20161004
 
-URL=https://github.com/fontforge/fontforge/releases/download/20161005/fontforge-dist-20161004.tar.gz
+
+NAME="fontforge"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/fontforge/fontforge-dist-20161004.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/fontforge/fontforge-dist-20161004.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/fontforge/fontforge-dist-20161004.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/fontforge/fontforge-dist-20161004.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/fontforge/fontforge-dist-20161004.tar.gz || wget -nc https://github.com/fontforge/fontforge/releases/download/20161005/fontforge-dist-20161004.tar.gz
 
+
+URL=https://github.com/fontforge/fontforge/releases/download/20161005/fontforge-dist-20161004.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -56,8 +68,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "fontforge=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:gst-plugins-base:1.8.3
+#DESCRIPTION:br3ak The GStreamer Base Plug-ins is abr3ak well-groomed and well-maintained collection of GStreamer plug-ins and elements, spanning thebr3ak range of possible types of elements one would want to write forbr3ak GStreamer. You will need at leastbr3ak one of Good, Bad, Ugly or Libav plugins for GStreamer applications to function properly.br3ak
+#SECTION:multimedia
+
+whoami > /tmp/currentuser
 
 #REQ:gstreamer10
 #REC:alsa-lib
@@ -23,16 +27,24 @@ set -e
 #OPT:valgrind
 
 
-cd $SOURCE_DIR
+#VER:gst-plugins-base:1.8.3
 
-URL=http://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.8.3.tar.xz
+
+NAME="gst10-plugins-base"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gst-plugins/gst-plugins-base-1.8.3.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gst-plugins/gst-plugins-base-1.8.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gst-plugins/gst-plugins-base-1.8.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gst-plugins/gst-plugins-base-1.8.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gst-plugins/gst-plugins-base-1.8.3.tar.xz || wget -nc http://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.8.3.tar.xz
 
+
+URL=http://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.8.3.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -53,8 +65,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "gst10-plugins-base=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

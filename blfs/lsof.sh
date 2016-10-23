@@ -1,25 +1,37 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:lsof_:4.89
+#DESCRIPTION:br3ak The lsof package is useful to LiStbr3ak Open Files for a given running application or process.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:libtirpc
 
 
-cd $SOURCE_DIR
+#VER:lsof_:4.89
 
-URL=https://www.mirrorservice.org/sites/lsof.itap.purdue.edu/pub/tools/unix/lsof/lsof_4.89.tar.bz2
+
+NAME="lsof"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lsof/lsof_4.89.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lsof/lsof_4.89.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lsof/lsof_4.89.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lsof/lsof_4.89.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lsof/lsof_4.89.tar.bz2 || wget -nc https://www.mirrorservice.org/sites/lsof.itap.purdue.edu/pub/tools/unix/lsof/lsof_4.89.tar.bz2
 
+
+URL=https://www.mirrorservice.org/sites/lsof.itap.purdue.edu/pub/tools/unix/lsof/lsof_4.89.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -41,8 +53,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "lsof=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

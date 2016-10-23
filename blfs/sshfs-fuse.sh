@@ -1,27 +1,39 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:sshfs-fuse:2.5
+#DESCRIPTION:br3ak The Sshfs Fuse package contains abr3ak filesystem client based on the SSH File Transfer Protocol. This isbr3ak useful for mounting a remote computer that you have ssh access tobr3ak as a local filesystem. This allows you to drag and drop files orbr3ak run shell commands on the remote files as if they were on yourbr3ak local computer.br3ak
+#SECTION:postlfs
+
+whoami > /tmp/currentuser
 
 #REQ:fuse
 #REQ:glib2
 #REQ:openssh
 
 
-cd $SOURCE_DIR
+#VER:sshfs-fuse:2.5
 
-URL=https://github.com/libfuse/sshfs/releases/download/sshfs_2_5/sshfs-fuse-2.5.tar.gz
+
+NAME="sshfs-fuse"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/sshfs-fuse/sshfs-fuse-2.5.tar.gz || wget -nc https://github.com/libfuse/sshfs/releases/download/sshfs_2_5/sshfs-fuse-2.5.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/sshfs-fuse/sshfs-fuse-2.5.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/sshfs-fuse/sshfs-fuse-2.5.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/sshfs-fuse/sshfs-fuse-2.5.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/sshfs-fuse/sshfs-fuse-2.5.tar.gz
 
+
+URL=https://github.com/libfuse/sshfs/releases/download/sshfs_2_5/sshfs-fuse-2.5.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -46,8 +58,9 @@ sshfs THINGY:~ ~/MOUNTPATH
 fusermount -u ~/MOUNTPATH
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "sshfs-fuse=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

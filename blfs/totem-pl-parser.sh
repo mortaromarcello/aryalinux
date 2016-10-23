@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:totem-pl-parser:3.10.7
+#DESCRIPTION:br3ak The Totem PL Parser packagebr3ak contains a simple GObject-based library used to parse a host ofbr3ak playlist formats, as well as save those.br3ak
+#SECTION:gnome
+
+whoami > /tmp/currentuser
 
 #REQ:gmime
 #REQ:libsoup
@@ -15,16 +19,24 @@ set -e
 #OPT:gtk-doc
 
 
-cd $SOURCE_DIR
+#VER:totem-pl-parser:3.10.7
 
-URL=http://ftp.gnome.org/pub/gnome/sources/totem-pl-parser/3.10/totem-pl-parser-3.10.7.tar.xz
+
+NAME="totem-pl-parser"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/totem-pl-parser/totem-pl-parser-3.10.7.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/totem-pl-parser/3.10/totem-pl-parser-3.10.7.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/totem-pl-parser/totem-pl-parser-3.10.7.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/totem-pl-parser/3.10/totem-pl-parser-3.10.7.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/totem-pl-parser/totem-pl-parser-3.10.7.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/totem-pl-parser/totem-pl-parser-3.10.7.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/totem-pl-parser/totem-pl-parser-3.10.7.tar.xz
 
+
+URL=http://ftp.gnome.org/pub/gnome/sources/totem-pl-parser/3.10/totem-pl-parser-3.10.7.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -43,8 +55,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "totem-pl-parser=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

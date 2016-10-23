@@ -1,24 +1,36 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+#DESCRIPTION:br3ak The Tcsh package containsbr3ak “<span class="quote">an enhanced but completely compatiblebr3ak version of the Berkeley Unix C shell (<span class="command"><strong>csh</strong>)”. This isbr3ak useful as an alternative shell for those who prefer C syntax tobr3ak that of the <span class="command"><strong>bash</strong>br3ak shell, and also because some programs require the C shell in orderbr3ak to perform installation tasks.br3ak
+#SECTION:postlfs
+
+whoami > /tmp/currentuser
+
+
+
 #VER:tcsh:6.19.00
 
 
+NAME="tcsh"
 
-cd $SOURCE_DIR
-
-URL=http://fossies.org/linux/misc/tcsh-6.19.00.tar.gz
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/tcsh/tcsh-6.19.00.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/tcsh/tcsh-6.19.00.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/tcsh/tcsh-6.19.00.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/tcsh/tcsh-6.19.00.tar.gz || wget -nc ftp://ftp.astron.com/pub/tcsh/tcsh-6.19.00.tar.gz || wget -nc http://fossies.org/linux/misc/tcsh-6.19.00.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/tcsh/tcsh-6.19.00.tar.gz
 
+
+URL=http://fossies.org/linux/misc/tcsh-6.19.00.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -94,8 +106,9 @@ unset red green yellow blue magenta cyan yellow white end
 EOF
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "tcsh=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

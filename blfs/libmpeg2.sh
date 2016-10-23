@@ -1,26 +1,38 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:libmpeg2:0.5.1
+#DESCRIPTION:br3ak The libmpeg2 package contains abr3ak library for decoding MPEG-2 and MPEG-1 video streams. The librarybr3ak is able to decode all MPEG streams that conform to certainbr3ak restrictions: “<span class="quote">constrainedbr3ak parameters” for MPEG-1, and “<span class="quote">main profile” for MPEG-2. This is useful forbr3ak programs and applications needing to decode MPEG-2 and MPEG-1 videobr3ak streams.br3ak
+#SECTION:multimedia
+
+whoami > /tmp/currentuser
 
 #OPT:sdl
 #OPT:xorg-server
 
 
-cd $SOURCE_DIR
+#VER:libmpeg2:0.5.1
 
-URL=http://libmpeg2.sourceforge.net/files/libmpeg2-0.5.1.tar.gz
+
+NAME="libmpeg2"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libmpeg2/libmpeg2-0.5.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libmpeg2/libmpeg2-0.5.1.tar.gz || wget -nc ftp://mirror.ovh.net/gentoo-distfiles/distfiles/libmpeg2-0.5.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libmpeg2/libmpeg2-0.5.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libmpeg2/libmpeg2-0.5.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libmpeg2/libmpeg2-0.5.1.tar.gz || wget -nc http://libmpeg2.sourceforge.net/files/libmpeg2-0.5.1.tar.gz
 
+
+URL=http://libmpeg2.sourceforge.net/files/libmpeg2-0.5.1.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -45,8 +57,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "libmpeg2=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

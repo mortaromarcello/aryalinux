@@ -1,27 +1,39 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:clucene-core:2.3.3.4
+#DESCRIPTION:br3ak CLucene is a C++ version ofbr3ak Lucene, a high performance text search engine.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
 
 #REQ:cmake
 #REC:boost
 
 
-cd $SOURCE_DIR
+#VER:clucene-core:2.3.3.4
 
-URL=http://downloads.sourceforge.net/clucene/clucene-core-2.3.3.4.tar.gz
+
+NAME="clucene"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/clucene/clucene-core-2.3.3.4.tar.gz || wget -nc http://downloads.sourceforge.net/clucene/clucene-core-2.3.3.4.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/clucene/clucene-core-2.3.3.4.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/clucene/clucene-core-2.3.3.4.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/clucene/clucene-core-2.3.3.4.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/clucene/clucene-core-2.3.3.4.tar.gz
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/clucene-2.3.3.4-contribs_lib-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/clucene/clucene-2.3.3.4-contribs_lib-1.patch
 
+
+URL=http://downloads.sourceforge.net/clucene/clucene-core-2.3.3.4.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -44,8 +56,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "clucene=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

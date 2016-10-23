@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:lxde-common:0.99.1
+#DESCRIPTION:br3ak The LXDE Common package provides abr3ak set of default configuration for LXDE.br3ak
+#SECTION:lxde
+
+whoami > /tmp/currentuser
 
 #REQ:lxde-icon-theme
 #REQ:lxpanel
@@ -20,16 +24,24 @@ set -e
 #OPT:xfce4-notifyd
 
 
-cd $SOURCE_DIR
+#VER:lxde-common:0.99.1
 
-URL=http://downloads.sourceforge.net/lxde/lxde-common-0.99.1.tar.xz
+
+NAME="lxde-common"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxde-common/lxde-common-0.99.1.tar.xz || wget -nc http://downloads.sourceforge.net/lxde/lxde-common-0.99.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lxde-common/lxde-common-0.99.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lxde-common/lxde-common-0.99.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lxde-common/lxde-common-0.99.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxde-common/lxde-common-0.99.1.tar.xz
 
+
+URL=http://downloads.sourceforge.net/lxde/lxde-common-0.99.1.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -69,8 +81,9 @@ startx
 startx &> ~/.x-session-errors
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "lxde-common=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

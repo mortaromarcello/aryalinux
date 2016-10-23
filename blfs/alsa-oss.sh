@@ -1,25 +1,37 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:alsa-oss:1.0.28
+#DESCRIPTION:br3ak The ALSA OSS package contains thebr3ak ALSA OSS compatibility library. This is used by programs which wishbr3ak to use the ALSA OSS sound interface.br3ak
+#SECTION:multimedia
+
+whoami > /tmp/currentuser
 
 #REQ:alsa-lib
 
 
-cd $SOURCE_DIR
+#VER:alsa-oss:1.0.28
 
-URL=http://alsa.cybermirror.org/oss-lib/alsa-oss-1.0.28.tar.bz2
+
+NAME="alsa-oss"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/alsa-oss/alsa-oss-1.0.28.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/alsa-oss/alsa-oss-1.0.28.tar.bz2 || wget -nc ftp://ftp.alsa-project.org/pub/oss-lib/alsa-oss-1.0.28.tar.bz2 || wget -nc http://alsa.cybermirror.org/oss-lib/alsa-oss-1.0.28.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/alsa-oss/alsa-oss-1.0.28.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/alsa-oss/alsa-oss-1.0.28.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/alsa-oss/alsa-oss-1.0.28.tar.bz2
 
+
+URL=http://alsa.cybermirror.org/oss-lib/alsa-oss-1.0.28.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -38,8 +50,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "alsa-oss=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

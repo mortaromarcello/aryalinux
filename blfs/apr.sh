@@ -1,24 +1,36 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+#DESCRIPTION:br3ak The Apache Portable Runtime (APR) is a supporting library for thebr3ak Apache web server. It provides a set of application programmingbr3ak interfaces (APIs) that map to the underlying Operating System (OS).br3ak Where the OS doesn't support a particular function, APR willbr3ak provide an emulation. Thus programmers can use the APR to make abr3ak program portable across different platforms.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
+
+
+
 #VER:apr:1.5.2
 
 
+NAME="apr"
 
-cd $SOURCE_DIR
-
-URL=http://archive.apache.org/dist/apr/apr-1.5.2.tar.bz2
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/apr/apr-1.5.2.tar.bz2 || wget -nc http://archive.apache.org/dist/apr/apr-1.5.2.tar.bz2 || wget -nc ftp://ftp.mirrorservice.org/sites/ftp.apache.org/apr/apr-1.5.2.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/apr/apr-1.5.2.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/apr/apr-1.5.2.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/apr/apr-1.5.2.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/apr/apr-1.5.2.tar.bz2
 
+
+URL=http://archive.apache.org/dist/apr/apr-1.5.2.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -40,8 +52,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "apr=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

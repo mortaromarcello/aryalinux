@@ -1,24 +1,36 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+#DESCRIPTION:%DESCRIPTION%
+#SECTION:x
+
+whoami > /tmp/currentuser
+
+
+
 #VER:fireflysung:1.3.0
 
 
+NAME="xorg-config"
 
-cd $SOURCE_DIR
-
-URL=http://ftp.osuosl.org/pub/blfs/conglomeration/Xorg//fireflysung-1.3.0.tar.gz
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/Xorg//fireflysung-1.3.0.tar.gz
 
+
+URL=http://ftp.osuosl.org/pub/blfs/conglomeration/Xorg//fireflysung-1.3.0.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -78,8 +90,9 @@ EndSection
 EOF
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "xorg-config=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

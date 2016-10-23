@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:re-alpine:2.03
+#DESCRIPTION:br3ak Re-alpine is the continuation ofbr3ak Alpine; a text-based email client developed by the University ofbr3ak Washington.br3ak
+#SECTION:basicnet
+
+whoami > /tmp/currentuser
 
 #REC:openssl
 #OPT:openldap
@@ -15,16 +19,24 @@ set -e
 #OPT:linux-pam
 
 
-cd $SOURCE_DIR
+#VER:re-alpine:2.03
 
-URL=http://sourceforge.net/projects/re-alpine/files/re-alpine-2.03.tar.bz2
+
+NAME="re-alpine"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/re-alpine/re-alpine-2.03.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/re-alpine/re-alpine-2.03.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/re-alpine/re-alpine-2.03.tar.bz2 || wget -nc http://sourceforge.net/projects/re-alpine/files/re-alpine-2.03.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/re-alpine/re-alpine-2.03.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/re-alpine/re-alpine-2.03.tar.bz2
 
+
+URL=http://sourceforge.net/projects/re-alpine/files/re-alpine-2.03.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -48,8 +60,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "re-alpine=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

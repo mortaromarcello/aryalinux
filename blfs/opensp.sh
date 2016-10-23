@@ -1,26 +1,38 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:OpenSP:1.5.2
+#DESCRIPTION:br3ak The OpenSP package contains abr3ak C++ library for using SGML/XMLbr3ak files. This is useful for validating, parsing and manipulating SGMLbr3ak and XML documents.br3ak
+#SECTION:pst
+
+whoami > /tmp/currentuser
 
 #REQ:sgml-common
 #OPT:xmlto
 
 
-cd $SOURCE_DIR
+#VER:OpenSP:1.5.2
 
-URL=http://downloads.sourceforge.net/openjade/OpenSP-1.5.2.tar.gz
+
+NAME="opensp"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/OpenSP/OpenSP-1.5.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/OpenSP/OpenSP-1.5.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/OpenSP/OpenSP-1.5.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/OpenSP/OpenSP-1.5.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/OpenSP/OpenSP-1.5.2.tar.gz || wget -nc http://downloads.sourceforge.net/openjade/OpenSP-1.5.2.tar.gz
 
+
+URL=http://downloads.sourceforge.net/openjade/OpenSP-1.5.2.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -57,8 +69,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "opensp=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

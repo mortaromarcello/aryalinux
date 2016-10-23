@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:fluxbox:1.3.7
+#DESCRIPTION:br3ak The Fluxbox package contains abr3ak window manager.br3ak
+#SECTION:x
+
+whoami > /tmp/currentuser
 
 #REQ:xorg-server
 #OPT:dbus
@@ -13,16 +17,24 @@ set -e
 #OPT:imlib2
 
 
-cd $SOURCE_DIR
+#VER:fluxbox:1.3.7
 
-URL=http://downloads.sourceforge.net/fluxbox/fluxbox-1.3.7.tar.xz
+
+NAME="fluxbox"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://downloads.sourceforge.net/fluxbox/fluxbox-1.3.7.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/fluxbox/fluxbox-1.3.7.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/fluxbox/fluxbox-1.3.7.tar.xz || wget -nc ftp://ftp.jaist.ac.jp/pub//sourceforge/f/fl/fluxbox/fluxbox/1.3.7/fluxbox-1.3.7.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/fluxbox/fluxbox-1.3.7.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/fluxbox/fluxbox-1.3.7.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/fluxbox/fluxbox-1.3.7.tar.xz
 
+
+URL=http://downloads.sourceforge.net/fluxbox/fluxbox-1.3.7.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -74,8 +86,9 @@ echo "background.pixmap: </path/to/nice/image.ext>" >> ~/.fluxbox/theme ||
 echo "background.pixmap: </path/to/nice/image.ext>" >> ~/.fluxbox/theme/theme.cfg
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "fluxbox=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

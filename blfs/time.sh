@@ -1,24 +1,36 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+#DESCRIPTION:br3ak The time utility is a program thatbr3ak measures many of the CPU resources, such as time and memory, thatbr3ak other programs use. The GNU version can format the output inbr3ak arbitrary ways by using a printf-style format string to includebr3ak various resource measurements.br3ak
+#SECTION:general
+
+whoami > /tmp/currentuser
+
+
+
 #VER:time:1.7
 
 
+NAME="time"
 
-cd $SOURCE_DIR
-
-URL=http://ftp.gnu.org/gnu/time/time-1.7.tar.gz
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/time/time-1.7.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/time/time-1.7.tar.gz || wget -nc ftp://ftp.gnu.org/gnu/time/time-1.7.tar.gz || wget -nc http://ftp.gnu.org/gnu/time/time-1.7.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/time/time-1.7.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/time/time-1.7.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/time/time-1.7.tar.gz
 
+
+URL=http://ftp.gnu.org/gnu/time/time-1.7.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -39,8 +51,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "time=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

@@ -1,12 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:docbook-dsssl-doc:1.79
-#VER:docbook-dsssl:1.79
+#DESCRIPTION:br3ak The DocBook DSSSL Stylesheetsbr3ak package contains DSSSL stylesheets. These are used by OpenJade or other tools to transform SGML andbr3ak XML DocBook files.br3ak
+#SECTION:pst
+
+whoami > /tmp/currentuser
 
 #REQ:sgml-common
 #REQ:sgml-dtd-3
@@ -15,17 +18,26 @@ set -e
 #REQ:openjade
 
 
-cd $SOURCE_DIR
+#VER:docbook-dsssl-doc:1.79
+#VER:docbook-dsssl:1.79
+
+
+NAME="docbook-dsssl"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
+
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-1.79.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-1.79.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/docbook-dsssl/docbook-dsssl-1.79.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-1.79.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-1.79.tar.bz2 || wget -nc http://downloads.sourceforge.net/docbook/docbook-dsssl-1.79.tar.bz2 || wget -nc ftp://mirror.ovh.net/gentoo-distfiles/distfiles/docbook-dsssl-1.79.tar.bz2
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-doc-1.79.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-doc-1.79.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-doc-1.79.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/docbook-dsssl/docbook-dsssl-doc-1.79.tar.bz2 || wget -nc http://downloads.sourceforge.net/docbook/docbook-dsssl-doc-1.79.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-doc-1.79.tar.bz2
+
 
 URL=http://downloads.sourceforge.net/docbook/docbook-dsssl-1.79.tar.bz2
-
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-doc-1.79.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-doc-1.79.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-doc-1.79.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/docbook-dsssl/docbook-dsssl-doc-1.79.tar.bz2 || wget -nc http://downloads.sourceforge.net/docbook/docbook-dsssl-doc-1.79.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-doc-1.79.tar.bz2
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-1.79.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-1.79.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/docbook-dsssl/docbook-dsssl-1.79.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-1.79.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/docbook-dsssl/docbook-dsssl-1.79.tar.bz2 || wget -nc http://downloads.sourceforge.net/docbook/docbook-dsssl-1.79.tar.bz2 || wget -nc ftp://mirror.ovh.net/gentoo-distfiles/distfiles/docbook-dsssl-1.79.tar.bz2
-
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -116,8 +128,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "docbook-dsssl=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

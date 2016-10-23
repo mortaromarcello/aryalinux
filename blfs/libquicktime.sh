@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:libquicktime:1.2.4
+#DESCRIPTION:br3ak The libquicktime package containsbr3ak the <code class="filename">libquicktime library, variousbr3ak plugins and codecs, along with graphical and command line utilitiesbr3ak used for encoding and decoding QuickTime files. This is useful forbr3ak reading and writing files in the QuickTime format. The goal of thebr3ak project is to enhance, while providing compatibility with thebr3ak Quicktime 4 Linux library.br3ak
+#SECTION:multimedia
+
+whoami > /tmp/currentuser
 
 #OPT:alsa-lib
 #OPT:doxygen
@@ -22,17 +26,25 @@ set -e
 #OPT:x7lib
 
 
-cd $SOURCE_DIR
+#VER:libquicktime:1.2.4
 
-URL=http://downloads.sourceforge.net/libquicktime/libquicktime-1.2.4.tar.gz
+
+NAME="libquicktime"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://downloads.sourceforge.net/libquicktime/libquicktime-1.2.4.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libquicktime/libquicktime-1.2.4.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libquicktime/libquicktime-1.2.4.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libquicktime/libquicktime-1.2.4.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libquicktime/libquicktime-1.2.4.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libquicktime/libquicktime-1.2.4.tar.gz
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/libquicktime-1.2.4-ffmpeg3-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/libquicktime/libquicktime-1.2.4-ffmpeg3-1.patch
 
+
+URL=http://downloads.sourceforge.net/libquicktime/libquicktime-1.2.4.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -58,8 +70,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "libquicktime=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

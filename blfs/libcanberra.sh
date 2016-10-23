@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:libcanberra:0.30
+#DESCRIPTION:br3ak libcanberra is an implementationbr3ak of the XDG Sound Theme and Name Specifications, for generatingbr3ak event sounds on free desktops, such as GNOME.br3ak
+#SECTION:multimedia
+
+whoami > /tmp/currentuser
 
 #REQ:libvorbis
 #REC:alsa-lib
@@ -16,16 +20,24 @@ set -e
 #OPT:pulseaudio
 
 
-cd $SOURCE_DIR
+#VER:libcanberra:0.30
 
-URL=http://0pointer.de/lennart/projects/libcanberra/libcanberra-0.30.tar.xz
+
+NAME="libcanberra"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc http://0pointer.de/lennart/projects/libcanberra/libcanberra-0.30.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libcanberra/libcanberra-0.30.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libcanberra/libcanberra-0.30.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libcanberra/libcanberra-0.30.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libcanberra/libcanberra-0.30.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libcanberra/libcanberra-0.30.tar.xz
 
+
+URL=http://0pointer.de/lennart/projects/libcanberra/libcanberra-0.30.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -44,8 +56,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "libcanberra=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

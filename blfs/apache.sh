@@ -1,11 +1,15 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:httpd:2.4.23
+#DESCRIPTION:br3ak The Apache HTTPD package containsbr3ak an open-source HTTP server. It is useful for creating localbr3ak intranet web sites or running huge web serving operations.br3ak
+#SECTION:server
+
+whoami > /tmp/currentuser
 
 #REQ:apr-util
 #REQ:pcre
@@ -22,17 +26,25 @@ set -e
 #OPT:lua
 
 
-cd $SOURCE_DIR
+#VER:httpd:2.4.23
 
-URL=https://archive.apache.org/dist/httpd/httpd-2.4.23.tar.bz2
+
+NAME="apache"
+
+if [ "$NAME" != "sudo" ]
+then
+	DOSUDO="sudo"
+fi
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/httpd/httpd-2.4.23.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/httpd/httpd-2.4.23.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/httpd/httpd-2.4.23.tar.bz2 || wget -nc https://archive.apache.org/dist/httpd/httpd-2.4.23.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/httpd/httpd-2.4.23.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/httpd/httpd-2.4.23.tar.bz2
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/httpd-2.4.23-blfs_layout-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/httpd/httpd-2.4.23-blfs_layout-1.patch
 
+
+URL=https://archive.apache.org/dist/httpd/httpd-2.4.23.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar xf $TARBALL
+tar --no-overwrite-dir xf $URL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
@@ -97,8 +109,9 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
-
 sudo rm -rf $DIRECTORY
-echo "apache=>`date`" | sudo tee -a $INSTALLED_LIST
 
+echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST
