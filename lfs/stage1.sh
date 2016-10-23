@@ -60,7 +60,7 @@ fi
 # End checking id swap is a valid block device
 
 # Checking if home is a valid block device
-if [ ! -z "${HOME_PART}" ] && [ -b "${HOME_PART}" ]
+if [ ! -z "${HOME_PART}" ] && [ -b "${HOME_PART}" ] && [ "${HOME_PART}" != "${ROOT_PART}" ]
 then
 	# Checking if home needs to be formatted
 	if [ "${FORMAT_HOME}" == "y" ] || [ "${FORMAT_HOME}" == "Y" ]
@@ -71,7 +71,7 @@ then
 	mkdir -pv $LFS/home
 	mount ${HOME_PART} $LFS/home
 else
-	echo "No valid home partition specified. Continuing without home partition..."
+	echo "No valid and different home partition specified. Continuing with home on root partition..."
 fi
 # End checking if home is a valid block device
 
