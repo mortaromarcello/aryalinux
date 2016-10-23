@@ -54,7 +54,7 @@ then
 	fi
 	# End checking if swap active
 else
-	print "${SWAP_PART} is not a valid partition. Aborting..."
+	echo "${SWAP_PART} is not a valid partition. Aborting..."
 	exit 1
 fi
 # End checking id swap is a valid block device
@@ -71,8 +71,7 @@ then
 	mkdir -pv $LFS/home
 	mount ${HOME_PART} $LFS/home
 else
-	print "${HOME_PART} is not a valid home partition. Aborting..."
-	exit 1
+	echo "${HOME_PART} is not a valid home partition. Continuing without home partition..."
 fi
 # End checking if home is a valid block device
 
