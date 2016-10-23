@@ -11,4 +11,3 @@ bash $script
 
 done
 
-chown -R root:root $LFS/tools
