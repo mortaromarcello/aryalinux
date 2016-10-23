@@ -29,17 +29,12 @@ Busybox is used in the initrd. Dracut immensely simplifies the process of creati
 
 The base system can be built by running the following command:
 
-./1.sh
+./build-arya
 
-The scripts that run and follow are interactive and expect user input at regular intervals.
+This command runs several scripts which in turn build part of the complete system.
 Once all the scripts complete execution, the base system would be built and installed and
-one could boot into it.
-
-X-SERVER AND DESKTOP ENVIRONMENT
-
-Once the base system is built one can use the alps tool(that gets installed with the base system)
-to build the rest of the system i.e. X-Server and XFCE/Mate. Other desktop environments are not
-currently supported but soon we would support Gnome, KDE and LXDE as well.
+one could boot into it. If the script is instructed to build x-server and desktop environments then
+it would go ahead and build/install xserver and the desktop environment.
 
 APPLICATIONS
 
@@ -69,27 +64,11 @@ Once 4.sh finishes, your system would be ready. You can reboot to log into the n
 Once this is done, to build the rest of the system you can follow our online documentation that
 is available in aryalinux.org/documentation/
 
-To Enter the chroot environment, you need to do the following:
-
 * Boot into the system that you used to build Aryalinux. In case your grub menu does not show that
 option any more, just boot into AryaLinux and run this command:
 
 grub-mkconfig -o /boot/grub/grub.cfg
 
-* Open a terminal and log in as root:
-
-sudo su
-
-* Then run the follwing commands:
-
-cd /root
-cd scripts
-./enteral.sh
-
-Enter the partition details asked for. Then run:
-
-su - <username>
-
-Packages can now be installed using the following command:
+* Packages can now be installed using the following command:
 
 alps install <package-name>
