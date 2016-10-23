@@ -207,9 +207,10 @@ else:
 	if rootPartition != '':
 		if not os.path.exists('/mnt/lfs/sources/build-properties'):
 			runScript('./umountal.sh', None)
+			check_output('rm -rf /sources', shell=True)
+			check_output('rm -rf /mnt/lfs', shell=True)
 			check_output('mkdir -pv /mnt/lfs', shell=True)
 			check_output('mount -v ' + rootPartition + ' /mnt/lfs', shell=True)
-			check_output('rm -rf /sources', shell=True)
 			check_output('ln -svf /mnt/lfs/sources /', shell=True)
 		if os.path.exists('/sources/build-properties'):
 			stage = getCurrentStage()
