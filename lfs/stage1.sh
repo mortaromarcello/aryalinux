@@ -71,7 +71,7 @@ then
 	mkdir -pv $LFS/home
 	mount ${HOME_PART} $LFS/home
 else
-	echo "${HOME_PART} is not a valid home partition. Continuing without home partition..."
+	echo "No valid home partition specified. Continuing without home partition..."
 fi
 # End checking if home is a valid block device
 
