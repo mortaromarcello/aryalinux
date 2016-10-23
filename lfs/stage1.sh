@@ -15,6 +15,8 @@ cat >> build-properties << EOF
 TIMEZONE=$TIMEZONE
 EOF
 
+clear
+
 echo "LFS=/mnt/lfs" >> build-properties
 
 . ./build-properties
