@@ -10,17 +10,6 @@ SOURCE_DIR="/sources"
 if ! grep "config-files" /sources/build-log &> /dev/null
 then
 
-cat > /etc/resolv.conf << EOF
-# Begin /etc/resolv.conf
-
-domain $DOMAIN_NAME
-
-nameserver 8.8.8.8
-nameserver 8.8.4.4
-
-# End /etc/resolv.conf
-EOF
-
 echo "$HOST_NAME" > /etc/hostname
 
 cat > /etc/hosts << "EOF"
