@@ -42,7 +42,7 @@ URL=http://mirrors-usa.go-parts.com/eximftp/exim/exim4/exim-4.87.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar --no-overwrite-dir xf $URL
+tar --no-overwrite-dir xf $TARBALL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser

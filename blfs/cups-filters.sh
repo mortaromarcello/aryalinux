@@ -44,7 +44,7 @@ URL=https://www.openprinting.org/download/cups-filters/cups-filters-1.11.3.tar.x
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar --no-overwrite-dir xf $URL
+tar --no-overwrite-dir xf $TARBALL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser

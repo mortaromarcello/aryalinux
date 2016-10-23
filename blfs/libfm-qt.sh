@@ -35,7 +35,7 @@ URL=http://downloads.lxqt.org/libfm-qt/0.11.1/libfm-qt-0.11.1.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar --no-overwrite-dir xf $URL
+tar --no-overwrite-dir xf $TARBALL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser

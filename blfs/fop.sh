@@ -38,7 +38,7 @@ URL=https://archive.apache.org/dist/xmlgraphics/fop/source/fop-2.1-src.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar --no-overwrite-dir xf $URL
+tar --no-overwrite-dir xf $TARBALL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser

@@ -30,7 +30,7 @@ URL=http://ftp.debian.org/debian/pool/main/libp/libpaper/libpaper_1.1.24+nmu4.ta
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar --no-overwrite-dir xf $URL
+tar --no-overwrite-dir xf $TARBALL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser

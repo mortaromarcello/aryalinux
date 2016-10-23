@@ -30,7 +30,7 @@ URL=https://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v4.13/src/nspr-4.13.ta
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar --no-overwrite-dir xf $URL
+tar --no-overwrite-dir xf $TARBALL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser

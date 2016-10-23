@@ -37,7 +37,7 @@ URL=http://ftp.gnome.org/pub/gnome/sources/gnome-maps/3.22/gnome-maps-3.22.0.tar
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
-tar --no-overwrite-dir xf $URL
+tar --no-overwrite-dir xf $TARBALL
 cd $DIRECTORY
 
 whoami > /tmp/currentuser
