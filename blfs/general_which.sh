@@ -16,7 +16,7 @@ whoami > /tmp/currentuser
 #VER:which:2.21
 
 
-NAME="which"
+NAME="general_which"
 
 if [ "$NAME" != "sudo" ]
 then
