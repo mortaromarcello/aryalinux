@@ -46,7 +46,7 @@ cmake -DCMAKE_BUILD_TYPE=Release  \
       -DUSE_SYSTEM_QXT=OFF        \
       -DUSE_QT5=true              \
       ..       &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 make -C docs/latex
@@ -65,6 +65,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

@@ -45,7 +45,7 @@ sed -i -e '/AM_PATH_AALIB,/s/AM_PATH_AALIB/[&]/' aalib.m4
             --infodir=/usr/share/info \
             --mandir=/usr/share/man   \
             --disable-static          &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -61,6 +61,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

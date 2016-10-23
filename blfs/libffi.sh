@@ -42,7 +42,7 @@ sed -e '/^includedir/ s/=.*$/=@includedir@/' \
     -e 's/^Cflags: -I${includedir}/Cflags:/' \
     -i libffi.pc.in        &&
 ./configure --prefix=/usr --disable-static &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -58,6 +58,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

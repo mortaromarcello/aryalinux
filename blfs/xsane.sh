@@ -41,7 +41,7 @@ whoami > /tmp/currentuser
 
 sed -i -e 's/png_ptr->jmpbuf/png_jmpbuf(png_ptr)/' src/xsane-save.c &&
 ./configure --prefix=/usr                                           &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -78,6 +78,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

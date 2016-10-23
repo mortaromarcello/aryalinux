@@ -177,7 +177,7 @@ while read -r line; do
             -DLIB_INSTALL_DIR=lib              \
             -DBUILD_TESTING=OFF                \
             -Wno-dev ..
-      make "-j`nproc`"
+      make "-j`nproc`" || make
       as_root make install
   popd
   as_root rm -rf $packagedir
@@ -193,6 +193,6 @@ ln -sfvn kf5-5.25.0 /opt/kf5
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

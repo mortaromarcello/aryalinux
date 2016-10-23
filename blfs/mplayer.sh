@@ -83,7 +83,7 @@ whoami > /tmp/currentuser
             --enable-dynamic-plugins \
             --enable-menu            \
             --enable-gui             &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 make doc
@@ -159,6 +159,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

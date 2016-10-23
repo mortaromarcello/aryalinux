@@ -41,7 +41,7 @@ patch -Np1 -i ../autoconf-2.13-consolidated_fixes-1.patch &&
 mv -v autoconf.texi autoconf213.texi                      &&
 rm -v autoconf.info                                       &&
 ./configure --prefix=/usr --program-suffix=2.13           &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -59,6 +59,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

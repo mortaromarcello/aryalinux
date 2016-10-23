@@ -62,7 +62,7 @@ sed -i "s:cups.service:org.cups.cupsd.service:g" utils/cups-browsed.service
         --with-gs-path=/usr/bin/gs      \
         --with-pdftops-path=/usr/bin/gs \
         --docdir=/usr/share/doc/cups-filters-1.11.3 &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -98,6 +98,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

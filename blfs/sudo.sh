@@ -45,7 +45,7 @@ whoami > /tmp/currentuser
             --with-env-editor          \
             --docdir=/usr/share/doc/sudo-1.8.18p1 \
             --with-passprompt="[sudo] password for %p" &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 make install &&
@@ -70,6 +70,6 @@ chmod 644 /etc/pam.d/sudo
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

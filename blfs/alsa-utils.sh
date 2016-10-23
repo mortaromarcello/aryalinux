@@ -42,7 +42,7 @@ whoami > /tmp/currentuser
             --disable-bat   \
             --disable-xmlto \
             --with-curses=ncursesw &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -73,6 +73,6 @@ sudo usermod -a -G audio `cat /tmp/currentuser`
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

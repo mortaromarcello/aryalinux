@@ -61,7 +61,7 @@ whoami > /tmp/currentuser
 patch -Np1 -i ../graphviz-2.38.0-consolidated_fixes-1.patch &&
 autoreconf                               &&
 ./configure --prefix=/usr --disable-php  &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -88,6 +88,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

@@ -43,7 +43,7 @@ whoami > /tmp/currentuser
 ./configure --prefix=/usr                     \
             --sysconfdir=/etc                 \
             --docdir=/usr/share/icewm-1.3.12 &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -80,6 +80,6 @@ chmod +x ~/.icewm/startup
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

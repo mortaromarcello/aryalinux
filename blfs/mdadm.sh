@@ -36,7 +36,7 @@ cd $DIRECTORY
 whoami > /tmp/currentuser
 
 sed -i 's/-Werror//' Makefile &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 sed -i 's# if.* == "1"#& -a -e $targetdir/log#' test &&
@@ -59,6 +59,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

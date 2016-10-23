@@ -64,7 +64,7 @@ do
   esac
   pushd $tool_dir
     ./configure --prefix=/usr
-    make "-j`nproc`"
+    make "-j`nproc`" || make
     as_root make install
     as_root /sbin/ldconfig
   popd
@@ -75,6 +75,6 @@ unset tool tool_dir
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

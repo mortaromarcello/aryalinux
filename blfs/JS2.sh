@@ -47,7 +47,7 @@ sed -i 's/(defined\((@TEMPLATE_FILE)\))/\1/' config/milestone.pl &&
             --enable-threadsafe \
             --with-system-ffi   \
             --with-system-nspr &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -67,6 +67,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

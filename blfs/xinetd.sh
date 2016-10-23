@@ -38,7 +38,7 @@ whoami > /tmp/currentuser
 sed -i -e "s/exec_server/child_process/" xinetd/builtins.c       &&
 sed -i -e "/register unsigned count/s/register//" xinetd/itox.c  &&
 ./configure --prefix=/usr --mandir=/usr/share/man --with-loadavg &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -225,6 +225,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

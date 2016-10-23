@@ -53,7 +53,7 @@ cd $DIRECTORY
 whoami > /tmp/currentuser
 
 ./configure --prefix=/usr &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -69,7 +69,7 @@ sudo rm rootscript.sh
 tar -xf ../abiword-docs-3.0.1.tar.gz &&
 cd abiword-docs-3.0.1                &&
 ./configure --prefix=/usr            &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -93,6 +93,6 @@ install -v -m640    /usr/share/abiword-3.0/templates/normal.awt-<em class="repla
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

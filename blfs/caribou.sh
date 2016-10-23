@@ -49,7 +49,7 @@ whoami > /tmp/currentuser
             --sysconfdir=/etc     \
             --disable-gtk2-module \
             --disable-static &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -65,6 +65,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

@@ -47,7 +47,7 @@ patch -Np1 -i ../w3m-0.5.3-bdwgc72-1.patch &&
 sed -i 's/file_handle/file_foo/' istream.{c,h} &&
 sed -i 's#gdk-pixbuf-xlib-2.0#& x11#' configure &&
 ./configure --prefix=/usr --sysconfdir=/etc &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -68,6 +68,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

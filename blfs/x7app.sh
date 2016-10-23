@@ -122,7 +122,7 @@ do
     ;;
   esac
   ./configure $XORG_CONFIG
-  make "-j`nproc`"
+  make "-j`nproc`" || make
   as_root make install
   popd
   rm -rf $packagedir
@@ -138,6 +138,6 @@ as_root rm -f $XORG_PREFIX/bin/xkeystone
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

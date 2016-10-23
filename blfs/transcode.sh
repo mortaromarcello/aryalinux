@@ -67,7 +67,7 @@ patch -Np1 -i ../transcode-1.1.7-ffmpeg3-1.patch                   &&
 ./configure --prefix=/usr \
             --enable-alsa \
             --enable-libmpeg2 &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -83,6 +83,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

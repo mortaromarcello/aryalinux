@@ -40,7 +40,7 @@ whoami > /tmp/currentuser
 patch -Np1 -i ../bridge-utils-1.5-linux_3.8_fix-2.patch &&
 autoconf -o configure configure.in &&
 ./configure --prefix=/usr          &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -56,6 +56,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

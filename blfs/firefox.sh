@@ -133,12 +133,12 @@ export CFLAGS_HOLD=$CFLAGS &&
 export CXXFLAGS_HOLD=$CXXFLAGS &&
 export CFLAGS+=" -fno-delete-null-pointer-checks -fno-lifetime-dse -fno-schedule-insns2" &&
 export CXXFLAGS+=" -fno-delete-null-pointer-checks -fno-lifetime-dse -fno-schedule-insns2" &&
-make "-j`nproc`" -f client.mk
+make "-j`nproc`" || make -f client.mk
 
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make "-j`nproc`" -f client.mk install INSTALL_SDK= &&
+make "-j`nproc`" || make -f client.mk install INSTALL_SDK= &&
 chown -R 0:0 /usr/lib/firefox-49.0.1   &&
 mkdir -pv    /usr/lib/mozilla/plugins  &&
 ln    -sfv   ../../mozilla/plugins /usr/lib/firefox-49.0.1/browser
@@ -184,6 +184,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

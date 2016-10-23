@@ -36,7 +36,7 @@ cd $DIRECTORY
 whoami > /tmp/currentuser
 
 sed 's@/usr/local@/usr@g' Makefile.unix > Makefile &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -55,6 +55,6 @@ lp -o number-up=2 <em class="replaceable"><code><filename></em>
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

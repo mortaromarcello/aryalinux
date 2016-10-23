@@ -41,7 +41,7 @@ sed "s@AM_CONFIG_HEADER@AC_CONFIG_HEADERS@g" -i configure.ac &&
 touch NEWS AUTHORS ChangeLog                                 &&
 autoreconf -fi                                               &&
 ./configure --prefix=/usr --disable-static &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -78,6 +78,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

@@ -42,7 +42,7 @@ sed -i '/skipping/d' util/packer.c &&
 ./configure --prefix=/usr    \
             --disable-static \
             --with-default-dict=/lib/cracklib/pw_dict &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -80,6 +80,6 @@ make test
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

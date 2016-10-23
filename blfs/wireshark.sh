@@ -60,7 +60,7 @@ sudo rm rootscript.sh
 
 patch -Np1 -i ../wireshark-2.2.1-lua_5_3_1-1.patch  &&
 ./configure --prefix=/usr --sysconfdir=/etc &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -112,6 +112,6 @@ sudo usermod -a -G wireshark `cat /tmp/currentuser`
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

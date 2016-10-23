@@ -63,7 +63,7 @@ sed -e 's,^BIN_DIR.*$,BIN_DIRECTORY=/usr/sbin,' \
     -e 's,^EXIM_USER.*$,EXIM_USER=exim,' \
     -e 's,^EXIM_MONITOR,#EXIM_MONITOR,' src/EDITME > Local/Makefile &&
 printf "USE_GDBM = yes\nDBMLIB = -lgdbm\n" >> Local/Makefile &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -125,6 +125,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

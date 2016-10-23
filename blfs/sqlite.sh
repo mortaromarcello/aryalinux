@@ -47,7 +47,7 @@ unzip -q ../sqlite-doc-3150000.zip
             -DSQLITE_ENABLE_UNLOCK_NOTIFY=1       \
             -DSQLITE_SECURE_DELETE=1              \
             -DSQLITE_ENABLE_DBSTAT_VTAB=1" &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -74,6 +74,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

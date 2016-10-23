@@ -52,7 +52,7 @@ export CXXFLAGS="$CXXFLAGS -fno-lifetime-dse"            &&
             --enable-default-catalog=/etc/sgml/catalog   \
             --enable-default-search-path=/usr/share/sgml \
             --datadir=/usr/share/sgml/openjade-1.3.2   &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -92,6 +92,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

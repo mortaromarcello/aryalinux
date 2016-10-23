@@ -46,7 +46,7 @@ whoami > /tmp/currentuser
 ./configure --prefix=/usr   \
             --enable-shared \
             --docdir=/usr/share/doc/ruby-2.3.1 &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 make capi
@@ -65,6 +65,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

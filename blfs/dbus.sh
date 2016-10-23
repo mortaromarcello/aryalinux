@@ -50,7 +50,7 @@ whoami > /tmp/currentuser
             --disable-static               \
             --with-console-auth-dir=/run/console/ \
             --docdir=/usr/share/doc/dbus-1.10.10   &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -145,6 +145,6 @@ kill $DBUS_SESSION_BUS_PID
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

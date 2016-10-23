@@ -70,7 +70,7 @@ cd        build &&
              --audio-drv-list=alsa       \
              --docdir=/usr/share/doc/qemu-2.7.0 &&
 unset QEMU_ARCH &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -235,6 +235,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

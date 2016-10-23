@@ -45,7 +45,7 @@ sed -e 's|TWDB="${prefix}|TWDB="/var|'   \
     -e '/TWDOCS/s|${prefix}/doc/tripwire|/usr/share/doc/tripwire-2.4.3.1| \
     -i   install/install.cfg                         &&                     
 ./configure --prefix=/usr --sysconfdir=/etc/tripwire &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -105,6 +105,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

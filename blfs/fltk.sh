@@ -49,7 +49,7 @@ whoami > /tmp/currentuser
 sed -i -e '/cat./d' documentation/Makefile       &&
 ./configure --prefix=/usr    \
             --enable-shared  &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 make -C documentation html
@@ -68,6 +68,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

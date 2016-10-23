@@ -45,7 +45,7 @@ cd $DIRECTORY
 whoami > /tmp/currentuser
 
 ./configure --prefix=/usr --sysconfdir=/etc &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -61,7 +61,7 @@ sudo rm rootscript.sh
 tar -xf ../dconf-editor-3.22.0.tar.xz &&
 cd dconf-editor-3.22.0 &&
 ./configure --prefix=/usr --sysconfdir=/etc &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -77,6 +77,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

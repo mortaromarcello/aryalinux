@@ -40,7 +40,7 @@ cd $DIRECTORY
 whoami > /tmp/currentuser
 
 ./configure --prefix=/usr &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -89,6 +89,6 @@ echo "background.pixmap: </path/to/nice/image.ext>" >> ~/.fluxbox/theme/theme.cf
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

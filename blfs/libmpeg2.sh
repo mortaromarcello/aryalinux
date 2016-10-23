@@ -41,7 +41,7 @@ sed -i 's/static const/static/' libmpeg2/idct_mmx.c &&
 ./configure --prefix=/usr    \
             --enable-shared  \
             --disable-static &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -60,6 +60,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

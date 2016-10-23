@@ -44,7 +44,7 @@ whoami > /tmp/currentuser
 ./configure --prefix=/usr \
             --with-package-name="GStreamer 1.8.3 BLFS" \
             --with-package-origin="http://www.linuxfromscratch.org/blfs/view/svn/" &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -60,6 +60,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

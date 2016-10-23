@@ -63,7 +63,7 @@ sed -i "/seems to be moved/s/^/#/" ltmain.sh &&
             --disable-gtkspell    \
             --disable-pst-import  \
             --disable-libcryptui  &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -79,6 +79,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

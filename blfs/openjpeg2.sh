@@ -47,7 +47,7 @@ wget -c https://github.com/uclouvain/openjpeg/archive/v2.1.2.tar.gz \
 mkdir -v build &&
 cd       build &&
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr .. &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -68,6 +68,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

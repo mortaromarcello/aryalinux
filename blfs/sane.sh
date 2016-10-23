@@ -79,7 +79,7 @@ sudo usermod -a -G scanner `cat /tmp/currentuser`
             --localstatedir=/var \
             --with-group=scanner \
             --with-docdir=/usr/share/doc/sane-backend-1.0.25 &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -98,6 +98,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

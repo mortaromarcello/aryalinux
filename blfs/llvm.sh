@@ -64,7 +64,7 @@ cmake -DCMAKE_INSTALL_PREFIX=/usr           \
       -DLLVM_BUILD_LLVM_DYLIB=ON            \
       -DLLVM_TARGETS_TO_BUILD="host;AMDGPU" \
       -Wno-dev ..                           &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -80,6 +80,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

@@ -44,7 +44,7 @@ cd    bld &&
 cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_INSTALL_PREFIX=/usr \
       -DENABLE_STATIC=OFF         \
       ../source                   &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -60,6 +60,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

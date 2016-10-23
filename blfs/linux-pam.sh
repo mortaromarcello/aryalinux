@@ -54,7 +54,7 @@ tar -xf ../Linux-PAM-1.2.0-docs.tar.bz2 --strip-components=1
             --disable-regenerate-docu        \
             --enable-securedir=/lib/security \
             --docdir=/usr/share/doc/Linux-PAM-1.3.0 &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -185,6 +185,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

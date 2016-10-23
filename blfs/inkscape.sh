@@ -54,7 +54,7 @@ patch -Np1 -i ../inkscape-0.91-testfiles-1.patch &&
 sed -e 's/ScopedPtr<char>/make_unique_ptr_gfree/' \
     -i src/ui/clipboard.cpp  &&
 CXXFLAGS="-g -O2 -std=c++11" ./configure --prefix=/usr &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -81,6 +81,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

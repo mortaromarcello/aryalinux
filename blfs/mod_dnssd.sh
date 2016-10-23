@@ -41,7 +41,7 @@ whoami > /tmp/currentuser
 sed -i 's/unixd_setup_child/ap_&/' src/mod_dnssd.c &&
 ./configure --prefix=/usr \
             --disable-lynx &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -58,6 +58,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

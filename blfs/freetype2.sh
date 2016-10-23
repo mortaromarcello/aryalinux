@@ -47,7 +47,7 @@ sed -ri "s:.*(AUX_MODULES.*valid):\1:" modules.cfg &&
 sed -r "s:.*(#.*SUBPIXEL_(RENDERING|HINTING 2)) .*:\1:g" \
     -i include/freetype/config/ftoption.h  &&
 ./configure --prefix=/usr --disable-static &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -69,7 +69,7 @@ sed -ri "s:.*(AUX_MODULES.*valid):\1:" modules.cfg &&
 sed -r "s:.*(#.*SUBPIXEL_(RENDERING|HINTING 2)) .*:\1:g" \
     -i include/freetype/config/ftoption.h  &&
 ./configure --prefix=/usr --disable-static &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -87,6 +87,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

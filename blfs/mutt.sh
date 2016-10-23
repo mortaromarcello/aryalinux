@@ -120,6 +120,6 @@ cat /usr/share/doc/mutt-1.7.1/samples/gpg.rc >> ~/.muttrc
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

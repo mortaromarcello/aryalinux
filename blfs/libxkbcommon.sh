@@ -42,7 +42,7 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var
 
 ./configure $XORG_CONFIG     \
             --docdir=/usr/share/doc/libxkbcommon-0.6.1 &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -58,6 +58,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

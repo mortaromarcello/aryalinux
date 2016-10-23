@@ -41,7 +41,7 @@ gzip -cd ../libpng-1.6.24-apng.patch.gz | patch -p0
 
 
 ./configure --prefix=/usr --disable-static &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -59,6 +59,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

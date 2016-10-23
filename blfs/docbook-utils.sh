@@ -46,7 +46,7 @@ whoami > /tmp/currentuser
 patch -Np1 -i ../docbook-utils-0.6.14-grep_fix-1.patch &&
 sed -i 's:/html::' doc/HTML/Makefile.in                &&
 ./configure --prefix=/usr --mandir=/usr/share/man      &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -75,6 +75,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

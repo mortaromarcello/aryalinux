@@ -76,7 +76,7 @@ sed '/dir.*CFG_PREFIX/s@^@#@' -i support/apxs.in            &&
             --with-suexec-logfile=/var/log/httpd/suexec.log \
             --with-suexec-uidmin=100                        \
             --with-suexec-userdir=public_html               &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -112,6 +112,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

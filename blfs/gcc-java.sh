@@ -56,7 +56,7 @@ cd    build &&
     --with-jvm-root-dir=/opt/gcj \
     --with-antlr-jar=$(pwd)/../../antlr-4.5.1-complete.jar \
     --enable-languages=java &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 ulimit -s 32768 &&
@@ -87,6 +87,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

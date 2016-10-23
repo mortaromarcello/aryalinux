@@ -42,7 +42,7 @@ whoami > /tmp/currentuser
 ./configure --prefix=/usr    \
             --disable-static \
             --docdir=/usr/share/doc/speex-1.2rc2 &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -61,7 +61,7 @@ cd speexdsp-1.2rc3             &&
 ./configure --prefix=/usr    \
             --disable-static \
             --docdir=/usr/share/doc/speexdsp-1.2rc3 &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -77,6 +77,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

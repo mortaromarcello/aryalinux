@@ -52,7 +52,7 @@ autoreconf -fi &&
             --enable-auth-sasldb \
             --with-dbpath=/var/lib/sasl/sasldb2 \
             --with-saslauthd=/var/run/saslauthd &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -88,6 +88,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

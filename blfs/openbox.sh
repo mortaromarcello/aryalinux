@@ -58,7 +58,7 @@ sed 's/python/python3/' -i data/autostart/openbox-xdg-autostart
             --sysconfdir=/etc \
             --disable-static  \
             --docdir=/usr/share/doc/openbox-3.6.1 &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -74,6 +74,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

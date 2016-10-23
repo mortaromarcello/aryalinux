@@ -38,7 +38,7 @@ whoami > /tmp/currentuser
 
 patch -Np1 -i ../net-tools-CVS_20101030-remove_dups-1.patch &&
 yes "" | make config &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -54,6 +54,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

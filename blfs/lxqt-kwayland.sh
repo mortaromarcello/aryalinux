@@ -47,7 +47,7 @@ cmake -DCMAKE_INSTALL_PREFIX=$LXQT_PREFIX                          \
       -DBUILD_TESTING=OFF                                          \
       -DECM_MKSPECS_INSTALL_DIR=$LXQT_PREFIX/share/mkspecs/modules \
       -Wno-dev ..                                                  &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -63,6 +63,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

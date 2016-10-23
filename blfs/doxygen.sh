@@ -52,7 +52,7 @@ cmake -G "Unix Makefiles"         \
       -DCMAKE_BUILD_TYPE=Release  \
       -DCMAKE_INSTALL_PREFIX=/usr \
       .. &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 cmake -DDOC_INSTALL_DIR=share/doc/doxygen-1.8.12 -Dbuild_doc=ON .. &&
@@ -73,6 +73,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

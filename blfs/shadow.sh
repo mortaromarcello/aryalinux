@@ -48,7 +48,7 @@ sed -i -e 's@#ENCRYPT_METHOD DES@ENCRYPT_METHOD SHA512@' \
        -e 's@/var/spool/mail@/var/mail@' etc/login.defs &&
 sed -i 's/1000/999/' etc/useradd &&
 ./configure --sysconfdir=/etc --with-group-name-max-length=32 &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -248,6 +248,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

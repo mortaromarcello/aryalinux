@@ -41,7 +41,7 @@ autoreconf -fi &&
             --enable-shared  \
             --disable-static \
             --docdir=/usr/share/doc/libatomic_ops-7.4.4 &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -60,6 +60,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

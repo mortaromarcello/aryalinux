@@ -45,7 +45,7 @@ printf '\tkbs=\\177,\n' >> terminfo &&
 TERMINFO=/usr/share/terminfo \
 ./configure $XORG_CONFIG     \
     --with-app-defaults=/etc/X11/app-defaults &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -78,6 +78,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

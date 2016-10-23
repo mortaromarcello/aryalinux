@@ -43,7 +43,7 @@ whoami > /tmp/currentuser
             --with-pty-group=5                \
             --with-sys-screenrc=/etc/screenrc &&
 sed -i -e "s%/usr/local/etc/screenrc%/etc/screenrc%" {etc,doc}/* &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -60,6 +60,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

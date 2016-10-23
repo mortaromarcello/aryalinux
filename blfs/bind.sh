@@ -62,7 +62,7 @@ patch -Np1 -i ../bind-9.11.0-use_iproute2-1.patch
             --with-libtool          \
             --disable-static        \
             --with-randomdev=/dev/urandom &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -328,6 +328,6 @@ dig www.linuxfromscratch.org
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

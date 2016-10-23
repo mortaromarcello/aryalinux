@@ -55,7 +55,7 @@ export TEXARCH=$(uname -m | sed -e 's/i.86/i386/' -e 's/$/-linux/') &&
  --enable-gc=system \
  --with-latex=/opt/texlive/2016/texmf-dist/tex/latex \
  --with-context=/opt/texlive/2016/texmf-dist/tex/context/third &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -71,6 +71,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

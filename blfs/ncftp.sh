@@ -37,7 +37,7 @@ whoami > /tmp/currentuser
 
 ./configure --prefix=/usr --sysconfdir=/etc &&
 make -C libncftp shared &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -52,7 +52,7 @@ sudo rm rootscript.sh
 
 
 ./configure --prefix=/usr --sysconfdir=/etc &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -68,6 +68,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

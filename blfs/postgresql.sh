@@ -51,7 +51,7 @@ sed -i '/DEFAULT_PGSOCKET_DIR/s@/tmp@/run/postgresql@' src/include/pg_config_man
 ./configure --prefix=/usr          \
             --enable-thread-safety \
             --docdir=/usr/share/doc/postgresql-9.6.0 &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -153,6 +153,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

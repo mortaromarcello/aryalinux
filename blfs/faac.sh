@@ -40,7 +40,7 @@ patch -Np1 -i ../faac-1.28-glibc_fixes-1.patch &&
 sed -i -e '/obj-type/d' -e '/Long Term/d' frontend/main.c &&
 CFLAGS=-std=c99 CXXFLAGS=-std=c++98 \
 ./configure --prefix=/usr --disable-static &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -56,6 +56,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

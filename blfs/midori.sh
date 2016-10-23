@@ -53,7 +53,7 @@ cmake -DCMAKE_INSTALL_PREFIX=/usr \
       -DUSE_GTK3=1                \
       -DCMAKE_INSTALL_DOCDIR=/usr/share/doc/midori-0.5.11 \
       ..  &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -69,6 +69,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST

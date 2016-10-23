@@ -72,7 +72,7 @@ sed -e 's/\(xcb-shape >= 1.0\)/xcb \1/' \
             --disable-vcd          \
             --with-external-dvdnav \
             --docdir=/usr/share/doc/xine-lib-1.2.6 &&
-make "-j`nproc`"
+make "-j`nproc`" || make
 
 
 
@@ -88,6 +88,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+$DOSUDO rm -rf $DIRECTORY
 
 echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST
