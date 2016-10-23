@@ -9,3 +9,5 @@ umount $LFS/proc &> /dev/null
 umount $LFS/run &> /dev/null
 umount $LFS/home &> /dev/null
 umount $LFS &> /dev/null
+
+exit 0
