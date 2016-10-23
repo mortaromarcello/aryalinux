@@ -44,6 +44,10 @@ whoami > /tmp/currentuser
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+if grep sshd /etc/passwd &> /dev/null
+then
+	userdel -r sshd
+fi
 install  -v -m700 -d /var/lib/sshd &&
 chown    -v root:sys /var/lib/sshd &&
 groupadd -g 50 sshd        &&

@@ -37,7 +37,7 @@ cd $DIRECTORY
 whoami > /tmp/currentuser
 
 ./configure --prefix=/usr --disable-static &&
-make "-j`nproc`" || make
+sudo make "-j`nproc`" || make
 
 
 
