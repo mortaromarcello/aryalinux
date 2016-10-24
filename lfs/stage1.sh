@@ -40,7 +40,7 @@ mount -v -t ext4 $ROOT_PART $LFS
 if [ ! -z "${SWAP_PART}" ] && [ -b "${SWAP_PART}" ]
 then
 	# Checking swap active
-	if -z `swapon -s | grep "${SWAP_PART} "`
+	if [ -z '`swapon -s | grep "${SWAP_PART} "`' ]
 	then
 		# Checking if swap needs to be formatted
 		if [ "${FORMAT_SWAP}" == "y" ] || [ "${FORMAT_SWAP}" == "Y" ]
