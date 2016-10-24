@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak rox-filer is a fast, lightweight,br3ak gtk2 file manager.br3ak
 #SECTION:xsoft
 

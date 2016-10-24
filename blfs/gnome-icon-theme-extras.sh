@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The GNOME Icon Theme Extrasbr3ak package contains extra icons for the GNOME Desktop.br3ak
 #SECTION:x
 

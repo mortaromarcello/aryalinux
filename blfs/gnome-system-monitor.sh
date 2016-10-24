@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The GNOME System Monitor packagebr3ak contains GNOME's replacement forbr3ak <span class="command"><strong>gtop</strong>.br3ak
 #SECTION:gnome
 

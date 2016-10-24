@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The libwebp package contains abr3ak library and support programs to encode and decode images in WebPbr3ak format.br3ak
 #SECTION:general
 

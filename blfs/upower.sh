@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The UPower package provides anbr3ak interface to enumerating power devices, listening to device eventsbr3ak and querying history and statistics. Any application or service onbr3ak the system can access the org.freedesktop.UPower service via thebr3ak system message bus.br3ak
 #SECTION:general
 

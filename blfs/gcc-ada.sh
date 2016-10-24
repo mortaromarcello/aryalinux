@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Ada is a modern programming language designed for large, long-livedbr3ak applications — and embedded systems in particular —br3ak where reliability and efficiency are essential. It has a set ofbr3ak unique technical features that make it highly effective for use inbr3ak large, complex and safety-critical projects.br3ak
 #SECTION:general
 

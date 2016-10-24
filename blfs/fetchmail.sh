@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Fetchmail package contains abr3ak mail retrieval program. It retrieves mail from remote mail serversbr3ak and forwards it to the local (client) machine's delivery system, sobr3ak it can then be read by normal mail user agents.br3ak
 #SECTION:basicnet
 

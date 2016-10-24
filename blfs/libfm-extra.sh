@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The libfm-extra package contains abr3ak library and other files required by <span class="command"><strong>menu-cache-gen</strong> libexec ofbr3ak <a class="xref" href="menu-cache.html" title="menu-cache-1.0.1">menu-cache-1.0.1</a>.br3ak
 #SECTION:lxde
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Colord GTK package containsbr3ak GTK+ bindings for Colord.br3ak
 #SECTION:x
 

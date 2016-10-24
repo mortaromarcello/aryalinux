@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Opus is a lossy audio compressionbr3ak format developed by the Internet Engineering Task Force (IETF) thatbr3ak is particularly suitable for interactive speech and audiobr3ak transmission over the Internet. This package provides the Opusbr3ak development library and headers.br3ak
 #SECTION:multimedia
 

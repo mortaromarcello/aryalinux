@@ -5,6 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #VER:geoclue:2.4.3
 
 #REQ:json-glib

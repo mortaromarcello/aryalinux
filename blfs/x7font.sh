@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Xorg font packages providebr3ak needed fonts to the Xorgbr3ak applications.br3ak
 #SECTION:x
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Nmap is a utility for networkbr3ak exploration and security auditing. It supports ping scanning, portbr3ak scanning and TCP/IP fingerprinting.br3ak
 #SECTION:basicnet
 

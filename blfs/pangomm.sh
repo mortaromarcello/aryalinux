@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Pangomm package provides a C++br3ak interface to Pango.br3ak
 #SECTION:x
 

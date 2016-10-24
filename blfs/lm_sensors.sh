@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The lm_sensors package providesbr3ak user-space support for the hardware monitoring drivers in the Linuxbr3ak kernel. This is useful for monitoring the temperature of the CPUbr3ak and adjusting the performance of some hardware (such as coolingbr3ak fans).br3ak
 #SECTION:general
 

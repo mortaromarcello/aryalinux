@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The reiserfsprogs package containsbr3ak various utilities for use with the Reiser file system.br3ak
 #SECTION:postlfs
 

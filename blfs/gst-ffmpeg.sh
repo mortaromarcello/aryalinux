@@ -7,6 +7,8 @@ set -e
 #VER:gst-ffmpeg:0.10.13
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #REQ:gst-plugins-base
 #REQ:yasm
 

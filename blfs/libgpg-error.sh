@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The libgpg-error package containsbr3ak a library that defines common error values for all GnuPG components. .br3ak
 #SECTION:general
 

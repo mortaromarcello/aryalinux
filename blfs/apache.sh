@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Apache HTTPD package containsbr3ak an open-source HTTP server. It is useful for creating localbr3ak intranet web sites or running huge web serving operations.br3ak
 #SECTION:server
 

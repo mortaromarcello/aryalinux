@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak neon is an HTTP and WebDAV clientbr3ak library, with a C interface.br3ak
 #SECTION:basicnet
 

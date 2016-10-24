@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The libchamplain is a Clutterbr3ak based widget used to display rich, eye-candy and interactive maps.br3ak
 #SECTION:gnome
 

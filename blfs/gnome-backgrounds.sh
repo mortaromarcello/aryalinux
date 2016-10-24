@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The GNOME Backgrounds packagebr3ak contains a collection of graphics files which can be used asbr3ak backgrounds in the GNOME Desktopbr3ak environment. Additionally, the package creates the proper frameworkbr3ak and directory structure so that you can add your own files to thebr3ak collection.br3ak
 #SECTION:gnome
 

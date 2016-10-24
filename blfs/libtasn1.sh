@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak libtasn1 is a highly portable Cbr3ak library that encodes and decodes DER/BER data following an ASN.1br3ak schema.br3ak
 #SECTION:general
 

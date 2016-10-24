@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Hdparm package contains abr3ak utility that is useful for controlling ATA/IDE controllers and hardbr3ak drives both to increase performance and sometimes to increasebr3ak stability.br3ak
 #SECTION:general
 

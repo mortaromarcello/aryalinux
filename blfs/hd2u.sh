@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The hd2u package contains an anybr3ak to any text format converter.br3ak
 #SECTION:general
 

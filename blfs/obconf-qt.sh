@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The obconf-qt package is anbr3ak OpenBox Qt based configurationbr3ak tool.br3ak
 #SECTION:lxqt
 

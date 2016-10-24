@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Yelp XSL package contains XSLbr3ak stylesheets that are used by the Yelp help browser to format Docbook andbr3ak Mallard documents.br3ak
 #SECTION:gnome
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The tree application, as the namebr3ak suggests, is useful to display, in a terminal, directory contents,br3ak including directories, files, links.br3ak
 #SECTION:general
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Yasm is a complete rewrite of thebr3ak <a class="xref" href="nasm.html" title="NASM-2.12.02">NASM-2.12.02</a> assembler. It supports the x86 andbr3ak AMD64 instruction sets, accepts NASM and GAS assembler syntaxes andbr3ak outputs binary, ELF32 and ELF64 object formats.br3ak
 #SECTION:general
 

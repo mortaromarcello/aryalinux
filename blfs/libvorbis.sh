@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The libvorbis package contains abr3ak general purpose audio and music encoding format. This is useful forbr3ak creating (encoding) and playing (decoding) sound in an open (patentbr3ak free) format.br3ak
 #SECTION:multimedia
 

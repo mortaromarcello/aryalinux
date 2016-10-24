@@ -5,6 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #VER:vlc-3.0.0:20160606
 
 #REQ:qt5

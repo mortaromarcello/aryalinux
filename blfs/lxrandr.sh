@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The LXRandR package contains abr3ak monitor configuration tool for LXDE.br3ak
 #SECTION:lxde
 

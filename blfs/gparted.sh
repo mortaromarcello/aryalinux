@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Gparted is the Gnome Partition Editor, a Gtk 2 GUI for otherbr3ak command line tools that can create, reorganise or delete diskbr3ak partitions.br3ak
 #SECTION:xsoft
 

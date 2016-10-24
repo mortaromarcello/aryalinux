@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The BlueZ package contains thebr3ak Bluetooth protocol stack for Linux.br3ak
 #SECTION:general
 

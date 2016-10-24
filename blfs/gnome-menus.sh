@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The GNOME Menus package containsbr3ak an implementation of the draft <a class="ulink" href="http://www.freedesktop.org/Standards/menu-spec">Desktop Menubr3ak Specification</a> from freedesktop.org. It also contains thebr3ak GNOME menu layout configurationbr3ak files, <code class="filename">.directory files and a menubr3ak related utility program.br3ak
 #SECTION:gnome
 

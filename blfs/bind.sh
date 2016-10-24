@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The BIND package provides a DNSbr3ak server and client utilities. If you are only interested in thebr3ak utilities, refer to the <a class="xref" href="../basicnet/bind-utils.html" title="BIND Utilities-9.11.0">BINDbr3ak Utilities-9.11.0</a>.br3ak
 #SECTION:server
 

@@ -7,6 +7,8 @@ set -e
 #VER:jdk8u66-b:17
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #REQ:java
 #REQ:alsa-lib
 #REQ:cpio

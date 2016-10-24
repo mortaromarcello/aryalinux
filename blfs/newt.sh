@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Newt is a programming library forbr3ak color text mode, widget based user interfaces. It can be used tobr3ak add stacked windows, entry widgets, checkboxes, radio buttons,br3ak labels, plain text fields, scrollbars, etc., to text mode userbr3ak interfaces. Newt is based on thebr3ak S-Lang library.br3ak
 #SECTION:general
 

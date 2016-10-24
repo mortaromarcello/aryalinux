@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Xfce4 Terminal is a GTK+3 terminal emulator. This is useful forbr3ak running commands or programs in the comfort of an Xorg window; youbr3ak can drag and drop files into the Xfce4br3ak Terminal or copy and paste text with your mouse.br3ak
 #SECTION:xfce
 

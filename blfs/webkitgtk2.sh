@@ -5,6 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #VER:webkitgtk:2.4.11
 
 #REQ:gst10-plugins-base

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The libwnck package contains thebr3ak Window Navigator Construction Kit.br3ak
 #SECTION:gnome
 

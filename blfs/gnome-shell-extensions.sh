@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The GNOME Shell Extensions packagebr3ak contains a collection of extensions providing additional andbr3ak optional functionality to the GNOMEbr3ak Shell.br3ak
 #SECTION:gnome
 

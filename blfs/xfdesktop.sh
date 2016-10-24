@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Xfdesktop is a desktop manager forbr3ak the Xfce Desktop Environment.br3ak Xfdesktop sets the backgroundbr3ak image / color, creates the right click menu and window list andbr3ak displays the file icons on the desktop using Thunar libraries.br3ak
 #SECTION:xfce
 

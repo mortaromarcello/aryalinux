@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Linux PAM package containsbr3ak Pluggable Authentication Modules used to enable the local systembr3ak administrator to choose how applications authenticate users.br3ak
 #SECTION:postlfs
 

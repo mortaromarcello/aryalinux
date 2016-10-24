@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The XScreenSaver is a modularbr3ak screen saver and locker for the X Window System. It is highlybr3ak customizable and allows the use of any program that can draw on thebr3ak root window as a display mode. The purpose of XScreenSaver is to display pretty pictures onbr3ak your screen when it is not in use, in keeping with the philosophybr3ak that unattended monitors should always be doing somethingbr3ak interesting, just like they do in the movies. However, XScreenSaver can also be used as a screenbr3ak locker, to prevent others from using your terminal while you arebr3ak away.br3ak
 #SECTION:xsoft
 

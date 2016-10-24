@@ -5,6 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #VER:tiff:4.0.6
 
 #OPT:freeglut

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The startup-notification packagebr3ak contains <code class="filename">startup-notificationbr3ak libraries. These are useful for building a consistent manner tobr3ak notify the user through the cursor that the application is loading.br3ak
 #SECTION:x
 

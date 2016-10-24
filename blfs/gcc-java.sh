@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak See the introduction to the Java language and system at <a class="xref" href="java.html" title="Java-1.8.0.112">Java-1.8.0.112</a>.br3ak The GNU Compiler Collection (GCC) contains a Java compiler tobr3ak native code. Together with the ecjbr3ak Java compiler from Eclipse (to bytecode), it provides a way tobr3ak build an acceptable JVM from source. However, since the release ofbr3ak OpenJDK, the development ofbr3ak GCC-Java has almost stopped, and the built JVM is an old version,br3ak which cannot be used for building <a class="xref" href="openjdk.html" title="OpenJDK-1.8.0.112">OpenJDK-1.8.0.112</a>.br3ak
 #SECTION:general
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The GTK Xfce Engine packagebr3ak contains several GTK+ 2 andbr3ak GTK+ 3 themes and libraries neededbr3ak to display them. This is useful for customising the appearance ofbr3ak your Xfce desktop.br3ak
 #SECTION:xfce
 

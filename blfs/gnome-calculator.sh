@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak GNOME Calculator is a powerfulbr3ak graphical calculator with financial, logical and scientific modes.br3ak It uses a multiple precision package to do its arithmetic to give abr3ak high degree of accuracy.br3ak
 #SECTION:gnome
 

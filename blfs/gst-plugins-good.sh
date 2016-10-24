@@ -7,6 +7,8 @@ set -e
 #VER:gst-plugins-good:0.10.31
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #REQ:gst-plugins-base
 #REC:cairo
 #REC:flac

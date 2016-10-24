@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The libusb package contains abr3ak library used by some applications for USB device access.br3ak
 #SECTION:general
 

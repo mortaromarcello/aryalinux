@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The libusb-compat package aims tobr3ak look, feel and behave exactly like libusb-0.1. It is a compatibility layer neededbr3ak by packages that have not been upgraded to the libusb-1.0 API.br3ak
 #SECTION:general
 

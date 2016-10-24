@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The xclock package contains abr3ak simple clock application which is used in the default xinitbr3ak configuration.br3ak
 #SECTION:x
 

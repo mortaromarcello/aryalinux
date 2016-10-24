@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The IJS package contains a librarybr3ak which implements a protocol for transmission of raster page images.br3ak
 #SECTION:general
 

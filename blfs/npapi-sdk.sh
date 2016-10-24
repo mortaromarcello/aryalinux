@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak NPAPI-SDK is a bundle of Netscapebr3ak Plugin Application Programming Interface headers by Mozilla. Thisbr3ak package provides a clear way to install those headers and depend onbr3ak them.br3ak
 #SECTION:general
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The mtdev package containsbr3ak Multitouch Protocol Translation Library which is used to transformbr3ak all variants of kernel MT (Multitouch) events to the slotted type Bbr3ak protocol.br3ak
 #SECTION:general
 

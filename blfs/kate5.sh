@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Kate package contains anbr3ak advanced KF5 based graphical text editor.br3ak
 #SECTION:kde
 

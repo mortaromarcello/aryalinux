@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Pidgin is a Gtk+ 2 instantbr3ak messaging client that can connect with a wide range of networksbr3ak including AIM, ICQ, GroupWise, MSN, Jabber, IRC, Napster,br3ak Gadu-Gadu, SILC, Zephyr and Yahoo!br3ak
 #SECTION:xsoft
 

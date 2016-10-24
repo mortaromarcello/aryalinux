@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak DejaGnu is a framework for runningbr3ak test suites on GNU tools. It is written in <span class="command"><strong>expect</strong>, which uses Tcl (Tool command language). It was installedbr3ak by LFS in the temporary <code class="filename">/toolsbr3ak directory. These instructions install it permanently.br3ak
 #SECTION:general
 

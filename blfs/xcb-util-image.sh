@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The xcb-util-image packagebr3ak provides additional extensions to the XCB library.br3ak
 #SECTION:x
 

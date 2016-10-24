@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The IcedTea-Web package containsbr3ak both a Java browser plugin, and abr3ak new webstart implementation, licensed under GPLV3.br3ak
 #SECTION:xsoft
 

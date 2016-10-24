@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The mpg123 package contains abr3ak console-based MP3 player. It claims to be the fastest MP3 decoderbr3ak for Unix.br3ak
 #SECTION:multimedia
 

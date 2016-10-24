@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The LAME package contains an MP3br3ak encoder and optionally, an MP3 frame analyzer. This is useful forbr3ak creating and analyzing compressed audio files.br3ak
 #SECTION:multimedia
 

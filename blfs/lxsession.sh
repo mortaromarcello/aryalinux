@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The LXSession package contains thebr3ak default session manager for LXDE.br3ak
 #SECTION:lxde
 

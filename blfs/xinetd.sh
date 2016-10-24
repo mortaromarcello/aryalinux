@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak xinetd is the eXtended InterNETbr3ak services daemon, a secure replacement for <span class="command"><strong>inetd</strong>.br3ak
 #SECTION:server
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The LXMenu Data package providesbr3ak files required to build freedesktop.org menu spec-compliant desktopbr3ak menus for LXDE.br3ak
 #SECTION:lxde
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The icon-naming-utils packagebr3ak contains a Perl script used forbr3ak maintaining backwards compatibility with current desktop iconbr3ak themes, while migrating to the names specified in the <a class="ulink" href="http://standards.freedesktop.org/icon-naming-spec/latest/">Iconbr3ak Naming Specification</a>.br3ak
 #SECTION:x
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The lxqt-notificationd package isbr3ak the LXQt notification daemon.br3ak
 #SECTION:lxqt
 

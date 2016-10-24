@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The kwindowsystem providesbr3ak information about, and allows interaction with, the windowingbr3ak system. It provides a high level API that is windowing systembr3ak independent and has platform specific implementations.br3ak
 #SECTION:lxqt
 

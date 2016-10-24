@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The logrotate package allowsbr3ak automatic rotation, compression, removal, and mailing of log files.br3ak
 #SECTION:general
 

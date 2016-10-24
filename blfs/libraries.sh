@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The original libraries were simply an archive of routines frombr3ak which the required routines were extracted and linked into thebr3ak executable program. These are described as static librariesbr3ak (libfoo.a). On some old operating systems they are the only typebr3ak available.br3ak
 #SECTION:introduction
 

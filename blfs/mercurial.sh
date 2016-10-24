@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Mercurial is a distributed sourcebr3ak control management tool similar to Git and Bazaar. Mercurial is written in Python and is used by projects such as Mozillabr3ak and Vim.br3ak
 #SECTION:general
 

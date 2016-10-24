@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The lxqt-session package containsbr3ak the default session manager for LXQt.br3ak
 #SECTION:lxqt
 

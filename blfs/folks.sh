@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Folks is a library that aggregatesbr3ak people from multiple sources (e.g, Telepathy connection managers and eventuallybr3ak Evolution Data Server, Facebook,br3ak etc.) to create metacontacts.br3ak
 #SECTION:gnome
 

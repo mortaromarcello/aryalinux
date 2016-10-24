@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak SWIG (Simplified Wrapper andbr3ak Interface Generator) is a compiler that integrates C and C++br3ak with languages including Perl,br3ak Python, Tcl, Ruby,br3ak PHP, Java, C#,br3ak D, Go, Lua,br3ak Octave, R, Scheme,br3ak Ocaml, Modula-3, Commonbr3ak Lisp, and Pike.br3ak SWIG can also export its parsebr3ak tree into Lisp s-expressions andbr3ak XML.br3ak
 #SECTION:general
 

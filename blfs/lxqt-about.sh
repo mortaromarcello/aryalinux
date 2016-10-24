@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The lxqt-about package providesbr3ak the standalone LXQtbr3ak “<span class="quote">About” dialog.br3ak
 #SECTION:lxqt
 

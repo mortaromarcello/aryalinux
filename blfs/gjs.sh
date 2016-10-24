@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Gjs is a set of Javascriptbr3ak bindings for GNOME.br3ak
 #SECTION:gnome
 

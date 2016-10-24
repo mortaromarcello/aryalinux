@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Redland is a set of free softwarebr3ak C libraries that provide support for the Resource Descriptionbr3ak Framework (RDF).br3ak
 #SECTION:general
 

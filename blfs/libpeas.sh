@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak libpeas is a GObject based pluginsbr3ak engine, and is targeted at giving every application the chance tobr3ak assume its own extensibility.br3ak
 #SECTION:gnome
 

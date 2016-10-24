@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Tcl package contains the Toolbr3ak Command Language, a robust general-purpose scripting language.br3ak
 #SECTION:general
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Unbound is a validating,br3ak recursive, and caching DNS resolver. It is designed as a set ofbr3ak modular components that incorporate modern features, such asbr3ak enhanced security (DNSSEC) validation, Internet Protocol Version 6br3ak (IPv6), and a client resolver library API as an integral part ofbr3ak the architecture.br3ak
 #SECTION:server
 

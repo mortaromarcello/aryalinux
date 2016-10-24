@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak paps is a text to PostScriptbr3ak converter that works through Pango. Its input is a UTF-8 encoded text filebr3ak and it outputs vectorized PostScript. It may be used for printingbr3ak any complex script supported by Pango.br3ak
 #SECTION:pst
 

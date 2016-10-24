@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Vinagre is a VNC client for thebr3ak GNOME Desktop.br3ak
 #SECTION:gnome
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The enchant package provide abr3ak generic interface into various existing spell checking libraries.br3ak
 #SECTION:general
 

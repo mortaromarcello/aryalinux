@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak This is a library for handling page faults in user mode. A pagebr3ak fault occurs when a program tries to access to a region of memorybr3ak that is currently not available. Catching and handling a page faultbr3ak is a useful technique for implementing pageable virtual memory,br3ak memory-mapped access to persistent databases, generational garbagebr3ak collectors, stack overflow handlers, and distributed shared memory.br3ak
 #SECTION:general
 

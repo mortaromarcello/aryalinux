@@ -25,7 +25,10 @@ set -e
 #VER:libinput:1.4.0
 
 #VER:libevdev:1.5.2
+
 . /var/lib/alps/functions
+
+cd $SOURCE_DIR
 
 ## Individual drivers starts from here... ##
 

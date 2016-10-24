@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The GConf package contains abr3ak configuration database system used by many GNOME applications.br3ak
 #SECTION:gnome
 

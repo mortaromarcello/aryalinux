@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak AAlib is a library to render anybr3ak graphic into ASCII Art.br3ak
 #SECTION:general
 

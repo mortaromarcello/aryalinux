@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The libffi library provides abr3ak portable, high level programming interface to various callingbr3ak conventions. This allows a programmer to call any functionbr3ak specified by a call interface description at run time.br3ak
 #SECTION:general
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The GNOME Control Center packagebr3ak contains the GNOME settingsbr3ak manager.br3ak
 #SECTION:gnome
 

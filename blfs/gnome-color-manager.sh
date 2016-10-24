@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak GNOME Color Manager is a sessionbr3ak framework for the GNOME desktopbr3ak environment that makes it easy to manage, install and generatebr3ak color profiles.br3ak
 #SECTION:gnome
 

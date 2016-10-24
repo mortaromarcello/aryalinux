@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Sound Theme Freedesktopbr3ak package contains sound themes for the desktop.br3ak
 #SECTION:multimedia
 

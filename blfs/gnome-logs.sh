@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The GNOME Logs package contains abr3ak log viewer for the systemd journal.br3ak
 #SECTION:gnome
 

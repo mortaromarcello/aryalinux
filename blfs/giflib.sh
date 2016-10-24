@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The giflib package containsbr3ak libraries for reading and writing GIFs as well as programs forbr3ak converting and working with GIF files.br3ak
 #SECTION:general
 

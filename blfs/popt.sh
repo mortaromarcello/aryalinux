@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The popt package contains thebr3ak popt libraries which are used bybr3ak some programs to parse command-line options.br3ak
 #SECTION:general
 

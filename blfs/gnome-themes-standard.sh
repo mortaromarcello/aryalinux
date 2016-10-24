@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The GNOME Themes Standard packagebr3ak contains various components of the default GNOME theme.br3ak
 #SECTION:x
 

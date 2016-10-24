@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The jfsutils package containsbr3ak administration and debugging tools for the jfs file system.br3ak
 #SECTION:postlfs
 

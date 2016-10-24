@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak XviD is an MPEG-4 compliant videobr3ak CODEC.br3ak
 #SECTION:multimedia
 

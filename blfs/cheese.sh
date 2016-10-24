@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Cheese is used to take photos andbr3ak videos with fun graphical effects.br3ak
 #SECTION:gnome
 

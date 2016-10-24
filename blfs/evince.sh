@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Evince is a document viewer forbr3ak multiple document formats. It supports PDF, Postscript, DjVu, TIFFbr3ak and DVI. It is useful for viewing documents of various types usingbr3ak one simple application instead of the multiple document viewersbr3ak that once existed on the GNOMEbr3ak Desktop.br3ak
 #SECTION:gnome
 

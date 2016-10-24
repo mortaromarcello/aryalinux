@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak As the name suggests, the qtermwidget is a terminal widget forbr3ak Qt.br3ak
 #SECTION:lxqt
 

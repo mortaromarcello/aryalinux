@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak libatomic_ops providesbr3ak implementations for atomic memory update operations on a number ofbr3ak architectures. This allows direct use of these in reasonablybr3ak portable code. Unlike earlier similar packages, this one explicitlybr3ak considers memory barrier semantics, and allows the construction ofbr3ak code that involves minimum overhead across a variety ofbr3ak architectures.br3ak
 #SECTION:general
 

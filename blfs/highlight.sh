@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Highlight is an utility thatbr3ak converts source code to formatted text with syntax highlighting.br3ak
 #SECTION:general
 

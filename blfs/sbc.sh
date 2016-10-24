@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The SBC is a digital audio encoderbr3ak and decoder used to transfer data to Bluetooth audio output devicesbr3ak like headphones or loudspeakers.br3ak
 #SECTION:multimedia
 

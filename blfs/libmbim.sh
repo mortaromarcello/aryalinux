@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The libmbim package contains abr3ak GLib-based library for talking to WWAN modems and devices whichbr3ak speak the Mobile Interface Broadband Model (MBIM) protocol.br3ak
 #SECTION:general
 

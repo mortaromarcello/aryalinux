@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Midori is a lightweight webbr3ak browser that uses WebKitGTK+.br3ak
 #SECTION:xfce
 

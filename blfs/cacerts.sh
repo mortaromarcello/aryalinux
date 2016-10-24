@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak CA Certificate Download: <a class="ulink" href="http://anduin.linuxfromscratch.org/BLFS/other/certdata.txt">http://anduin.linuxfromscratch.org/BLFS/other/certdata.txt</a>br3ak
 #SECTION:postlfs
 

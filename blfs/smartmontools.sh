@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The smartmontools package containsbr3ak utility programs (smartctl, smartd) to control/monitor storagebr3ak systems using the Self-Monitoring, Analysis and Reportingbr3ak Technology System (S.M.A.R.T.) built into most modern ATA and SCSIbr3ak disks.br3ak
 #SECTION:postlfs
 

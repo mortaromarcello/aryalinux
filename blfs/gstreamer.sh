@@ -7,6 +7,8 @@ set -e
 #VER:gstreamer:0.10.36
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #REQ:glib2
 #REQ:libxml2
 #OPT:gobject-introspection

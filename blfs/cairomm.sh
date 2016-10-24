@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Cairomm package provides a C++br3ak interface to Cairo.br3ak
 #SECTION:x
 

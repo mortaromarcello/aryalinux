@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak GNOME Tweak Tool is a simplebr3ak program used to tweak advanced GNOME settings.br3ak
 #SECTION:gnome
 

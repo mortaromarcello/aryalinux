@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak FLTK (pronounced "fulltick") is a cross-platform C++ GUI toolkit.br3ak FLTK provides modern GUI functionality and supports 3D graphics viabr3ak OpenGL and its built-in GLUT emulation libraries used for creatingbr3ak graphical user interfaces for applications.br3ak
 #SECTION:x
 

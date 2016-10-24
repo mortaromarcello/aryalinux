@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak libidn is a package designed forbr3ak internationalized string handling based on the <a class="ulink" br3ak href="http://www.ietf.org/rfc/rfc3454.txt">Stringprep</a>,br3ak <a class="ulink" href="http://www.ietf.org/rfc/rfc3492.txt">Punycode</a> and <a class="ulink" href="http://www.ietf.org/rfc/rfc3490.txt">IDNA</a>br3ak specifications defined by the Internet Engineering Task Forcebr3ak (IETF) Internationalized Domain Names (IDN) working group, used forbr3ak internationalized domain names. This is useful for converting databr3ak from the system's native representation into UTF-8, transformingbr3ak Unicode strings into ASCII strings, allowing applications to usebr3ak certain ASCII name labels (beginning with a special prefix) tobr3ak represent non-ASCII name labels, and converting entire domain namesbr3ak to and from the ASCII Compatible Encoding (ACE) form.br3ak
 #SECTION:general
 

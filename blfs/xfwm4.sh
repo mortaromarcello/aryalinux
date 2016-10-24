@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Xfwm4 is the window manager forbr3ak Xfce.br3ak
 #SECTION:xfce
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The libqtxdg is a Qtbr3ak implementation of freedesktop.org xdg specifications.br3ak
 #SECTION:lxqt
 

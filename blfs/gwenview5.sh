@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Gwenview is a fast and easy-to-usebr3ak image viewer for KDE.br3ak
 #SECTION:kde
 

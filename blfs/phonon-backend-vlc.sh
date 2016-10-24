@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak This package provides a Phononbr3ak backend which utilizes the VLCbr3ak media framework.br3ak
 #SECTION:kde
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The librep package contains a Lispbr3ak system. This is useful for scripting or for applications that maybr3ak use the Lisp interpreter as an extension language.br3ak
 #SECTION:general
 

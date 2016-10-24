@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The xcursor-themes packagebr3ak contains the redglass and whiteglass animated cursor themes.br3ak
 #SECTION:x
 

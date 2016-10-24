@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The ALSA Tools package containsbr3ak advanced tools for certain sound cards.br3ak
 #SECTION:multimedia
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Parted package is a diskbr3ak partitioning and partition resizing tool.br3ak
 #SECTION:postlfs
 

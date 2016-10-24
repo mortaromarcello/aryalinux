@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The LXInput package contains abr3ak small program used to configure keyboard and mouse for LXDE.br3ak
 #SECTION:lxde
 

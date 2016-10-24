@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak CLucene is a C++ version ofbr3ak Lucene, a high performance text search engine.br3ak
 #SECTION:general
 

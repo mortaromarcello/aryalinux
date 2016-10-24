@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The lsof package is useful to LiStbr3ak Open Files for a given running application or process.br3ak
 #SECTION:general
 

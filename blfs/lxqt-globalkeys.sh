@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The lxqt-globalkeys packagebr3ak contains a daemon used to register global keyboard shortcuts and abr3ak key shortcut GUI editor.br3ak
 #SECTION:lxqt
 

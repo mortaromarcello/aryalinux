@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Python 2 package contains thebr3ak Python development environment. Itbr3ak is useful for object-oriented programming, writing scripts,br3ak prototyping large programs or developing entire applications. Thisbr3ak version is for backward compatibility with other dependentbr3ak packages.br3ak
 #SECTION:general
 

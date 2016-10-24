@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak JS is Mozilla's JavaScript enginebr3ak written in C/C++.br3ak
 #SECTION:general
 

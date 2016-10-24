@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Desktop File Utils packagebr3ak contains command line utilities for working with <a class="ulink" br3ak href="http://standards.freedesktop.org/desktop-entry-spec/latest/">Desktopbr3ak entries</a>. These utilities are used by Desktop Environments andbr3ak other applications to manipulate the MIME-types applicationbr3ak databases and help adhere to the Desktop Entry Specification.br3ak
 #SECTION:general
 

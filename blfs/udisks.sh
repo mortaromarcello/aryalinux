@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The UDisks package provides abr3ak storage daemon that implements well-defined D-Bus interfaces thatbr3ak can be used to query and manipulate storage devices.br3ak
 #SECTION:general
 

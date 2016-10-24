@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The GTK Engines package containsbr3ak eight themes/engines and two additional engines for GTK2.br3ak
 #SECTION:x
 

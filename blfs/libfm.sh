@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The libfm package contains abr3ak library used to develop file managers providing some filebr3ak management utilities.br3ak
 #SECTION:lxde
 

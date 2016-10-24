@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak libisofs is a library to create anbr3ak ISO-9660 filesystem with extensions like RockRidge or Joliet.br3ak
 #SECTION:multimedia
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The libdaemon package is abr3ak lightweight C library that eases the writing of UNIX daemons.br3ak
 #SECTION:general
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak GNOME Maps is a map applicationbr3ak for GNOME.br3ak
 #SECTION:gnome
 

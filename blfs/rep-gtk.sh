@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The rep-gtk package contains abr3ak Lisp and GTK binding. This is useful for extendingbr3ak GTK-2 and GDK libraries with Lisp. Starting at rep-gtk-0.15, the package contains thebr3ak bindings to GTK and uses the samebr3ak instructions. Both can be installed, if needed.br3ak
 #SECTION:general
 

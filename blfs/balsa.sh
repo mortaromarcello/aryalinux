@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Balsa package contains abr3ak GNOME-2 based mail client.br3ak
 #SECTION:xsoft
 

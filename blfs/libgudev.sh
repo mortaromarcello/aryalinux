@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The libgudev package containsbr3ak GObject bindings for libudev.br3ak
 #SECTION:general
 

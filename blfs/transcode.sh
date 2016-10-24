@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Transcode is a fast, versatile andbr3ak command-line based audio/video everything to everything converter.br3ak For a rundown of the features and capabilities, along with usagebr3ak examples, visit the Transcode Wiki at <a class="ulink" href="http://www.transcoding.org/">http://www.transcoding.org/</a>.br3ak
 #SECTION:multimedia
 

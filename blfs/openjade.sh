@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The OpenJade package contains abr3ak DSSSL engine. This is useful for SGML and XML transformations intobr3ak RTF, TeX, SGML and XML.br3ak
 #SECTION:pst
 

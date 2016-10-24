@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak ATK provides the set ofbr3ak accessibility interfaces that are implemented by other toolkits andbr3ak applications. Using the ATKbr3ak interfaces, accessibility tools have full access to view andbr3ak control running applications.br3ak
 #SECTION:x
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Speex is an audio compressionbr3ak format designed especially for speech. It is well-adapted tobr3ak internet applications and provides useful features that are notbr3ak present in most other CODECs.br3ak
 #SECTION:multimedia
 

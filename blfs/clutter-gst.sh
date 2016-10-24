@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Clutter Gst is an integrationbr3ak library for using GStreamer withbr3ak Clutter. Its purpose is tobr3ak implement the ClutterMedia interface using GStreamer.br3ak
 #SECTION:x
 

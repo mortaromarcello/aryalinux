@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Pnmixer package provides abr3ak lightweight volume control with a tray icon.br3ak
 #SECTION:multimedia
 

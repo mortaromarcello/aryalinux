@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Little CMS library is used bybr3ak other programs to provide color management facilities.br3ak
 #SECTION:general
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Ristretto is a fast andbr3ak lightweight image viewer for the Xfce desktop.br3ak
 #SECTION:xfce
 

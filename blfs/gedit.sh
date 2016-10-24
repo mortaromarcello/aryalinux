@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Gedit package contains abr3ak lightweight UTF-8 text editor for the GNOME Desktop.br3ak
 #SECTION:gnome
 

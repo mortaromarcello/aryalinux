@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The xbitmaps package containsbr3ak bitmap images used by multiple applications built in Xorg chapter.br3ak
 #SECTION:x
 

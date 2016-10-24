@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The qterminal package contains abr3ak Qt widget based terminal emulator for Qt with support for multiple tabs.br3ak
 #SECTION:lxqt
 

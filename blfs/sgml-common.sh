@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The SGML Common package containsbr3ak <span class="command"><strong>install-catalog</strong>. Thisbr3ak is useful for creating and maintaining centralized SGML catalogs.br3ak
 #SECTION:pst
 

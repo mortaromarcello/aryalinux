@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The oxygen-fonts package is a setbr3ak of fonts used by KF5.br3ak
 #SECTION:kde
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Polkit GNOME package providesbr3ak an Authentication Agent for Polkitbr3ak that integrates well with the GNOME Desktop environment.br3ak
 #SECTION:gnome
 

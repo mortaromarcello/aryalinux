@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Gcr package contains librariesbr3ak used for displaying certificates and accessing key stores. It alsobr3ak provides the viewer for crypto files on the GNOME Desktop.br3ak
 #SECTION:gnome
 

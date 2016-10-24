@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The GSettings Desktop Schemasbr3ak package contains a collection of GSettings schemas for settingsbr3ak shared by various components of a GNOME Desktop.br3ak
 #SECTION:gnome
 

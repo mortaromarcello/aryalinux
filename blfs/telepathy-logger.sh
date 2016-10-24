@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Telepathy Logger package is abr3ak headless observer client that logs information received by thebr3ak Telepathy framework. It featuresbr3ak pluggable backends to log different sorts of messages in differentbr3ak formats.br3ak
 #SECTION:gnome
 

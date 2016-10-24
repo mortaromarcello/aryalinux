@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The libsigc++ package implements abr3ak typesafe callback system for standard C++.br3ak
 #SECTION:general
 

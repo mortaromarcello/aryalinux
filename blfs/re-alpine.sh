@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Re-alpine is the continuation ofbr3ak Alpine; a text-based email client developed by the University ofbr3ak Washington.br3ak
 #SECTION:basicnet
 

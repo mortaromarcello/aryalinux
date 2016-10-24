@@ -5,6 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #VER:libreoffice-dictionaries:5.1.4.2
 #VER:libreoffice-help:5.1.4.2
 #VER:libreoffice:5.1.4.2

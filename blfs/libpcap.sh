@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak libpcap provides functions forbr3ak user-level packet capture, used in low-level network monitoring.br3ak
 #SECTION:basicnet
 

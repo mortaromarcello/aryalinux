@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The lxqt-powermanagement packagebr3ak provides the power management module for LXQt.br3ak
 #SECTION:lxqt
 

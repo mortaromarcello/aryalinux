@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Bluefish is a GTK+ text editor targeted towards programmersbr3ak and web designers, with many options to write websites, scripts andbr3ak programming code. Bluefishbr3ak supports many programming and markup languages, and it focuses onbr3ak editing dynamic and interactive websites.br3ak
 #SECTION:postlfs
 

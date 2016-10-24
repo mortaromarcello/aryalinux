@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Gutenprint (formerlybr3ak Gimp-Print) package contains highbr3ak quality drivers for many brands and models of printers for use withbr3ak <a class="xref" href="gs.html" title="ghostscript-9.20">ghostscript-9.20</a>, <a class="xref" href="cups.html" title="Cups-2.2.1">Cups-2.2.1</a>, <a class="ulink" br3ak href="http://www.linuxfoundation.org/collaborate/workgroups/openprinting/database/foomatic">br3ak Foomatic</a>, and the GIMP-2.0.br3ak See a list of supported printers at <a class="ulink" href="http://gutenprint.sourceforge.net/p_Supported_Printers.php">http://gutenprint.sourceforge.net/p_Supported_Printers.php</a>.br3ak
 #SECTION:pst
 

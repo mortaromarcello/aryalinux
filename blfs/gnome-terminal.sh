@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The GNOME Terminal packagebr3ak contains the terminal emulator for GNOME Desktop.br3ak
 #SECTION:gnome
 

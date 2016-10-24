@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The uhttpmock package contains abr3ak library for mocking web service APIs which use HTTP or HTTPS.br3ak
 #SECTION:basicnet
 

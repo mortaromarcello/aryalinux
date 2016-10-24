@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The KMix package contains a KF5br3ak based Sound Mixer application.br3ak
 #SECTION:kde
 

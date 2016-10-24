@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak libiodbc is an API to ODBCbr3ak compatible databases.br3ak
 #SECTION:general
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Garcon package contains abr3ak freedesktop.org compliant menu implementation based on GLib and GIO.br3ak
 #SECTION:xfce
 

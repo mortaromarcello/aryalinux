@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Avahi package is a systembr3ak which facilitates service discovery on a local network.br3ak
 #SECTION:basicnet
 

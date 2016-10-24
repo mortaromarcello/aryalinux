@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The DocBook XSL Stylesheetsbr3ak package contains XSL stylesheets. These are useful for performingbr3ak transformations on XML DocBook files.br3ak
 #SECTION:pst
 

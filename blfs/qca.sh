@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Qca aims to provide abr3ak straightforward and cross-platform crypto API, using Qt datatypes and conventions. Qca separates the API from the implementation,br3ak using plugins known as Providers.br3ak
 #SECTION:general
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Exo is a support library used inbr3ak the Xfce desktop. It also has somebr3ak helper applications that are used throughout Xfce.br3ak
 #SECTION:xfce
 

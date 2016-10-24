@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The GNOME Video Effects packagebr3ak contains a collection of GStreamerbr3ak effects.br3ak
 #SECTION:gnome
 

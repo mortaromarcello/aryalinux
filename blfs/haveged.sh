@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Haveged package contains abr3ak daemon that generates an unpredictable stream of random numbers andbr3ak feeds the /dev/random device.br3ak
 #SECTION:postlfs
 

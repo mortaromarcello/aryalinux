@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Polkit-Qt provides an API tobr3ak PolicyKit in the Qt environment.br3ak
 #SECTION:kde
 

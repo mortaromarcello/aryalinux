@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Enscript converts ASCII text filesbr3ak to PostScript, HTML, RTF, ANSI and overstrikes.br3ak
 #SECTION:pst
 

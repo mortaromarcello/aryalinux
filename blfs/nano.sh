@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Nano package contains a small,br3ak simple text editor which aims to replace Pico, the default editor in the Pine package.br3ak
 #SECTION:postlfs
 

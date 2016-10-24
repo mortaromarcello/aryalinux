@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Weston is the referencebr3ak implementation of a Waylandbr3ak compositor, and a useful compositor in its own right. It hasbr3ak various backends that lets it run on Linux kernel modesetting andbr3ak evdev input as well as under X11. Weston also ships with a few example clients,br3ak from simple clients that demonstrate certain aspects of thebr3ak protocol to more complete clients and a simplistic toolkit.br3ak
 #SECTION:general
 

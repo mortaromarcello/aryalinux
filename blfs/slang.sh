@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak S-Lang is an interpreted languagebr3ak that may be embedded into an application to make the applicationbr3ak extensible. It provides facilities required by interactivebr3ak applications such as display/screen management, keyboard input andbr3ak keymaps.br3ak
 #SECTION:general
 

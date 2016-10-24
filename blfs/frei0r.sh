@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Frei0r is a minimalistic pluginbr3ak API for video effects. Note that the 0 in the name is a zero, not abr3ak capital letter o.br3ak
 #SECTION:multimedia
 

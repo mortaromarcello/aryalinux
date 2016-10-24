@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak libepoxy is a library for handlingbr3ak OpenGL function pointer management.br3ak
 #SECTION:x
 

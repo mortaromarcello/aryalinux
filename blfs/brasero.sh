@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Brasero is an application used tobr3ak burn CD/DVD on the GNOME Desktop.br3ak It is designed to be as simple as possible and has some uniquebr3ak features that enable users to create their discs easily andbr3ak quickly.br3ak
 #SECTION:gnome
 

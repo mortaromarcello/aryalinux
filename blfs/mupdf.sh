@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak MuPDF is a lightweight PDF and XPSbr3ak viewer.br3ak
 #SECTION:pst
 

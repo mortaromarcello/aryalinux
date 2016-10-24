@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Xorg applications provide thebr3ak expected applications available in previous X Windowbr3ak implementations.br3ak
 #SECTION:x
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Libsndfile is a library of Cbr3ak routines for reading and writing files containing sampled audiobr3ak data.br3ak
 #SECTION:multimedia
 

@@ -5,6 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #VER:kde4-desktop-environment:4.11.20
 
 cd $SOURCE_DIR

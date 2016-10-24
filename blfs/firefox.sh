@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Firefox is a stand-alone browserbr3ak based on the Mozilla codebase.br3ak
 #SECTION:xsoft
 

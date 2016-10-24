@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Appstream-GLib packagebr3ak contains a library that provides GObjects and helper methods tobr3ak make it easy to read and write AppStream metadata. It also providesbr3ak a simple DOM implementation that makes it easy to edit nodes andbr3ak convert to and from the standardized XML representation.br3ak
 #SECTION:general
 

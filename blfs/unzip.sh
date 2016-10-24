@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The UnZip package containsbr3ak <code class="filename">ZIP extraction utilities. These arebr3ak useful for extracting files from <code class="filename">ZIPbr3ak archives. <code class="filename">ZIP archives are createdbr3ak with PKZIP or Info-ZIP utilities, primarily in a DOSbr3ak environment.br3ak
 #SECTION:general
 

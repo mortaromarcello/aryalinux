@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak JOE (Joe's own editor) is a smallbr3ak text editor capable of emulating WordStar, Pico, and Emacs.br3ak
 #SECTION:postlfs
 

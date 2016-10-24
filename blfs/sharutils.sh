@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Sharutils package containsbr3ak utilities that can create 'shell' archives.br3ak
 #SECTION:general
 

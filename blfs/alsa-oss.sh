@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The ALSA OSS package contains thebr3ak ALSA OSS compatibility library. This is used by programs which wishbr3ak to use the ALSA OSS sound interface.br3ak
 #SECTION:multimedia
 

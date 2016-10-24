@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The GNOME Power Manager packagebr3ak contains a tool used to report on power management on the system.br3ak
 #SECTION:gnome
 

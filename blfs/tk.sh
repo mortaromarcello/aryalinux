@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Tk package contains a TCL GUIbr3ak Toolkit.br3ak
 #SECTION:general
 

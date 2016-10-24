@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Traceroute package contains abr3ak program which is used to display the network route that packetsbr3ak take to reach a specified host. This is a standard networkbr3ak troubleshooting tool. If you find yourself unable to connect tobr3ak another system, traceroute can help pinpoint the problem.br3ak
 #SECTION:basicnet
 

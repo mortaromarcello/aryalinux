@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Cyrus SASL package contains abr3ak Simple Authentication and Security Layer, a method for addingbr3ak authentication support to connection-based protocols. To use SASL,br3ak a protocol includes a command for identifying and authenticating abr3ak user to a server and for optionally negotiating protection ofbr3ak subsequent protocol interactions. If its use is negotiated, abr3ak security layer is inserted between the protocol and the connection.br3ak
 #SECTION:postlfs
 

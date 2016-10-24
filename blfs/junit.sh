@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The JUnit package contains abr3ak simple, open source framework to write and run repeatable tests. Itbr3ak is an instance of the xUnit architecture for unit testingbr3ak frameworks. JUnit features include assertions for testing expectedbr3ak results, test fixtures for sharing common test data, and testbr3ak runners for running tests.br3ak
 #SECTION:general
 

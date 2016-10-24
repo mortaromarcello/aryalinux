@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The GStreamer Ugly Plug-ins is abr3ak set of plug-ins considered by the GStreamer developers to have good quality andbr3ak correct functionality, but distributing them might pose problems.br3ak The license on either the plug-ins or the supporting librariesbr3ak might not be how the GStreamerbr3ak developers would like. The code might be widely known to presentbr3ak patent problems.br3ak
 #SECTION:multimedia
 

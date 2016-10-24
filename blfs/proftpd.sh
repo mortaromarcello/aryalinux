@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The ProFTPD package contains abr3ak secure and highly configurable FTP daemon. This is useful forbr3ak serving large file archives over a network.br3ak
 #SECTION:server
 

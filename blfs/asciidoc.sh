@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Asciidoc package is a textbr3ak document format for writing notes, documentation, articles, books,br3ak ebooks, slideshows, web pages, man pages and blogs. AsciiDoc filesbr3ak can be translated to many formats including HTML, PDF, EPUB, andbr3ak man page.br3ak
 #SECTION:general
 

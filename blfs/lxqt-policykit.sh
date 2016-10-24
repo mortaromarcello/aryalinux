@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The lxqt-policykit package is thebr3ak LXQt PolicyKit agent.br3ak
 #SECTION:lxqt
 

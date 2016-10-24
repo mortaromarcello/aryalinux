@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Xfconf is the configurationbr3ak storage system for Xfce.br3ak
 #SECTION:xfce
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The GNOME Keyring package containsbr3ak a daemon that keeps passwords and other secrets for users.br3ak
 #SECTION:gnome
 

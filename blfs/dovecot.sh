@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Dovecot is an Internet Messagebr3ak Access Protocol (IMAP) and Post Office Protocol (POP) server,br3ak written primarily with security in mind. Dovecot aims to be lightweight, fast and easybr3ak to set up as well as highly configurable and easily extensible withbr3ak plugins.br3ak
 #SECTION:server
 

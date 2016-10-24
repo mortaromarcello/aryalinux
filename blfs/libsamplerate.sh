@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak libsamplerate is a sample ratebr3ak converter for audio.br3ak
 #SECTION:multimedia
 

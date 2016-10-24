@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The xcb-util package providesbr3ak additional extensions to the XCBbr3ak library, many that were previously found in Xlib, but are not part of core X protocol.br3ak
 #SECTION:x
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The cURL package contains anbr3ak utility and a library used for transferring files with URL syntaxbr3ak to any of the following protocols: FTP, FTPS, HTTP, HTTPS, SCP,br3ak SFTP, TFTP, TELNET, DICT, LDAP, LDAPS and FILE. Its ability to bothbr3ak download and upload files can be incorporated into other programsbr3ak to support functions like streaming media.br3ak
 #SECTION:basicnet
 

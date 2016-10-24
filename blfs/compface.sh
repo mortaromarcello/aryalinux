@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Compface provides utilities and abr3ak library to convert from/to X-Face format, a 48x48 bitmap formatbr3ak used to carry thumbnails of email authors in a mail header.br3ak
 #SECTION:general
 

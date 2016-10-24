@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The libical package contains anbr3ak implementation of the iCalendar protocols and data formats.br3ak
 #SECTION:general
 

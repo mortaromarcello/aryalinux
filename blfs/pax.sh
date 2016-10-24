@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak pax is an archiving utilitybr3ak created by POSIX and defined by the POSIX.1-2001 standard. Ratherbr3ak than sort out the incompatible options that have crept up betweenbr3ak tar and cpio, along with their implementations acrossbr3ak various versions of UNIX, the IEEE designed a new archive utility.br3ak The name “<span class="quote">pax” is an acronymbr3ak for portable archive exchange. Furthermore, “<span class="quote">pax” means “<span class="quote">peace” in Latin, so its name implies that itbr3ak shall create peace between the tarbr3ak and cpio format supporters. Thebr3ak command invocation and command structure is somewhat a unificationbr3ak of both tar and cpio.br3ak
 #SECTION:general
 

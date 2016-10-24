@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The xcb-util-cursor packagebr3ak provides a module that implements the XCB cursor library. It is abr3ak the XCB replacement forbr3ak libXcursor.br3ak
 #SECTION:x
 

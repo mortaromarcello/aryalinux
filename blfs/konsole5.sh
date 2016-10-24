@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Konsole package is a KF5 basedbr3ak terminal emulator.br3ak
 #SECTION:kde
 

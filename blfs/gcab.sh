@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The Gcab package contains abr3ak program and a library used to create Microsoft cabinet (.cab)br3ak archives.br3ak
 #SECTION:general
 

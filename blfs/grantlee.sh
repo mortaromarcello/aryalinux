@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak Grantlee is a set of free software libraries written using the Qtbr3ak framework. Currently two libraries are shipped with Grantlee:br3ak Grantlee Templates and Grantlee TextDocument. The goal of Grantleebr3ak Templates is to make it easier for application developers tobr3ak separate the structure of documents from the data they contain,br3ak opening the door for theming.br3ak
 #SECTION:general
 

@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The LXPanel package contains abr3ak lightweight X11 desktop panel.br3ak
 #SECTION:lxde
 

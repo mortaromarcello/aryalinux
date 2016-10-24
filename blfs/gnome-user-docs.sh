@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The GNOME User Docs packagebr3ak contains documentation for GNOME.br3ak
 #SECTION:gnome
 

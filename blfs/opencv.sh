@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The opencv package containsbr3ak graphics libraries mainly aimed at real-time computer vision.br3ak
 #SECTION:general
 

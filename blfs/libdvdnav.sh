@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak libdvdnav is a library that allowsbr3ak easy use of sophisticated DVD navigation features such as DVDbr3ak menus, multiangle playback and even interactive DVD games.br3ak
 #SECTION:multimedia
 

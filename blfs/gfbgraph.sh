@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+cd $SOURCE_DIR
+
 #DESCRIPTION:br3ak The gfbgraph package contains abr3ak GObject wrapper for the Facebook Graph API.br3ak
 #SECTION:gnome
 
