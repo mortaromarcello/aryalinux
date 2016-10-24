@@ -10,3 +10,8 @@ echo "Installing $2..."
 alps selfupdate
 alps updatescripts
 su - $USERNAME -c "alps install-no-prompt $PACKAGE"
+if ! grep "$PACKAGE" /etc/alps/installed-list &> /dev/null
+then
+	echo "Application installation incomplete ($PACKAGE). Aborting..."
+	exit 1
+fi
