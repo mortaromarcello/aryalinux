@@ -6,8 +6,7 @@ set +h
 . /etc/alps/alps.conf
 
 #REQ:libxml2
-#REQ:perl-modules#perl-xml-sax-base
-URL="http://search.cpan.org/CPAN/authors/id/G/GR/GRANTM/XML-SAX-0.99.tar.gz"
+URL="http://search.cpan.org/CPAN/authors/id/G/GR/GRANTM/XML-SAX-Base-1.08.tar.gz"
 
 #VER::null
 
@@ -36,5 +35,5 @@ cd $SOURCE_DIR
 
 sudo rm -rf $DIRECTORY
 
-echo "perl-modules#perl-xml-sax=>`date`" | sudo tee -a $INSTALLED_LIST
+echo "perl-modules#perl-xml-sax-base=>`date`" | sudo tee -a $INSTALLED_LIST
 
