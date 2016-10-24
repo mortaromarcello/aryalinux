@@ -28,7 +28,7 @@ if [ ! -z "${ROOT_PART}" ] && [ -b "${ROOT_PART}" ]
 then
 	mkfs -F -v -t ext4 ${ROOT_PART}
 else
-	print "${ROOT_PART} is not a valid block device. Aborting..."
+	echo "${ROOT_PART} is not a valid block device. Aborting..."
 	exit 1
 fi
 # End checking root is valid block device
