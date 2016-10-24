@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 
 
-URL="http://search.cpan.org/dist/Test-Warnings/"
+URL="http://search.cpan.org/CPAN/authors/id/E/ET/ETHER/Test-Warnings-0.026.tar.gz"
 
 #VER::null
 
