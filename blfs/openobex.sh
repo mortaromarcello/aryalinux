@@ -46,7 +46,10 @@ whoami > /tmp/currentuser
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+if ! grep plugdev /etc/group &> /dev/null
+then
 groupadd -g 90 plugdev
+fi
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
