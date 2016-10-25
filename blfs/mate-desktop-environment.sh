@@ -42,7 +42,7 @@ set +h
 #REQ:libnotify
 #REQ:libwnck2
 #REQ:zenity
-#REQ:yelp
+#OPT:yelp
 #REQ:xdg-utils
 #REQ:xdg-user-dirs
 
