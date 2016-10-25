@@ -60,7 +60,7 @@ set +h
 #REQ:wpa_supplicant
 #REQ:networkmanager
 #REQ:network-manager-applet
-#REQ:net-tools
+#OPT:net-tools
 #REQ:ModemManager
 #REQ:usb_modeswitch
 
