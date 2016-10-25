@@ -5,14 +5,14 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:mate-polkit:1.15.0
+#VER:mate-polkit:1.16.0
 
 #REQ:gvfs
 #REQ:udisks2
 
 cd $SOURCE_DIR
 
-URL="http://pub.mate-desktop.org/releases/1.15/mate-polkit-1.15.0.tar.xz"
+URL="http://pub.mate-desktop.org/releases/1.16/mate-polkit-1.16.0.tar.xz"
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
