@@ -94,5 +94,6 @@ set +h
 #OPT:net-tools
 #REQ:ModemManager
 #REQ:usb_modeswitch
+#REQ:compton
 
 echo "mate-desktop-environment=>`date`" | sudo tee -a $INSTALLED_LIST

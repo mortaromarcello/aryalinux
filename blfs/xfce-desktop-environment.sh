@@ -63,5 +63,6 @@ set +h
 #OPT:net-tools
 #REQ:ModemManager
 #REQ:usb_modeswitch
+#REQ:compton
 
 echo "xfce-desktop-environment=>`date`" | sudo tee -a $INSTALLED_LIST
