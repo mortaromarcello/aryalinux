@@ -15,20 +15,22 @@ then
 fi
 
 export LFS=/mnt/lfs
+mkdir -pv $LFS
 
-#mkdir -pv $LFS
-#mount -v -t ext4 $ROOT_PART $LFS
+if [ "$COMMAND" == "chroot" ]
+then
+	mount -v -t ext4 $ROOT_PART $LFS
+fi
 
 if [ "$HOME_PART" != "" ]
 then
-	mkdir -v $LFS/home
+	mkdir -pv $LFS/home
 	mount -v -t ext4 $HOME_PART $LFS/home
 fi
 
-if [ "$SWAP_PART" != "" ]
+if [ "$SWAP_PART" != "" ] && [ ! -z '`swapon -s | grep "$SWAP_PART"`' ]
 then
-	mkswap $SWAP_PART
-	/sbin/swapon -v $SWAP_PART
+	swapon -v $SWAP_PART
 fi
 
 mount -v --bind /dev $LFS/dev

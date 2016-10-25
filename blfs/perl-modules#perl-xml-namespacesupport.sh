@@ -5,8 +5,9 @@ set +h
 
 . /etc/alps/alps.conf
 
-
-URL="http://search.cpan.org/CPAN/authors/id/D/DA/DAGOLDEN/Capture-Tiny-0.44.tar.gz"
+#REQ:libxml2
+#REQ:perl-modules#perl-xml-sax-base
+URL="http://search.cpan.org/CPAN/authors/id/P/PE/PERIGRIN/XML-NamespaceSupport-1.11.tar.gz"
 
 #VER::null
 
@@ -35,5 +36,5 @@ cd $SOURCE_DIR
 
 sudo rm -rf $DIRECTORY
 
-echo "perl-modules#perl-capture-tiny=>`date`" | sudo tee -a $INSTALLED_LIST
+echo "perl-modules#perl-xml-namespacesupport=>`date`" | sudo tee -a $INSTALLED_LIST
 

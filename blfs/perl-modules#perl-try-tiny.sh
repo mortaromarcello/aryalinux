@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 
 
-URL="http://search.cpan.org/dist/Try-Tiny/"
+URL="http://search.cpan.org/CPAN/authors/id/E/ET/ETHER/Try-Tiny-0.27.tar.gz"
 
 #VER::null
 

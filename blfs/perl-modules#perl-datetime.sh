@@ -9,7 +9,7 @@ set +h
 #REQ:perl-modules#perl-sub-identify
 #REQ:perl-modules#cpan-meta-check
 
-URL="http://search.cpan.org/dist/DateTime/"
+URL="http://search.cpan.org/CPAN/authors/id/D/DR/DROLSKY/DateTime-1.39.tar.gz"
 
 #VER::null
 

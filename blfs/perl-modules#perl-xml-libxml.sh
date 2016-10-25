@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 
 #REQ:libxml2
-URL="http://search.cpan.org/dist/XML-LibXML/"
+URL="http://search.cpan.org/CPAN/authors/id/S/SH/SHLOMIF/XML-LibXML-2.0128.tar.gz"
 
 #VER::null
 
