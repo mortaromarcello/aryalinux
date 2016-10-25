@@ -5,6 +5,8 @@ set +h
 
 . /etc/alps/alps.conf
 
+#VER:numix-gtk-theme:2.6.4
+
 #REQ:gtk2
 #REQ:gtk3
 

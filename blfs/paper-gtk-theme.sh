@@ -5,6 +5,8 @@ set +h
 
 . /etc/alps/alps.conf
 
+#VER:paper-gtk-theme:2.1.0
+
 #REQ:gtk2
 #REQ:gtk3
 
