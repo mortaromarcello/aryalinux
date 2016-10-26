@@ -42,7 +42,7 @@ wget -nc http://aryalinux.org/releases/2016.11/aufs4-mmap.patch
 wget -nc http://aryalinux.org/releases/2016.11/aufs4-standalone.patch
 wget -nc http://aryalinux.org/releases/2016.08/0.21-nvme_ioctl.h.patch
 wget -nc http://aryalinux.org/releases/2016.11/alps-scripts-2016.11.tar.gz
-wget -c https://sourceforge.net/projects/cdrtools/files/cdrtools-3.01.tar.bz2/download -O cdrtools-3.01.tar.bz2
+wget -nc https://sourceforge.net/projects/cdrtools/files/cdrtools-3.01.tar.bz2
 wget -nc https://launchpad.net/ubuntu/+archive/primary/+files/cdrkit_1.1.11.orig.tar.gz
 wget -nc http://www.cmake.org/files/v3.5/cmake-3.5.0.tar.gz
 wget -nc http://pkgs.fedoraproject.org/repo/pkgs/squashfs-tools/squashfs4.3.tar.gz/370d0470f3c823bf408a3b7a1f145746/squashfs4.3.tar.gz
