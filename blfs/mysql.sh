@@ -27,7 +27,7 @@ fi
 sudo groupadd -g 40 mysql &&
 sudo useradd -c "MySQL Server" -d /srv/mysql -g mysql -s /bin/false -u 40 mysql
 
-URL=http://ftp.jaist.ac.jp/pub/mysql/Downloads/MySQL-5.6/mysql-5.6.27.tar.gz
+URL=http://pkgs.fedoraproject.org/repo/pkgs/community-mysql/mysql-5.6.27.tar.gz/7754df40bb5567b03b041ccb6b5ddffa/mysql-5.6.27.tar.gz
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | sed -e 's@/.*@@' | uniq `
