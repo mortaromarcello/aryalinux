@@ -20,7 +20,7 @@ tar xf $TARBALL
 cd $DIRECTORY
 
 patch -Np1 -i ../net-snmp-5.7.3-fixes.patch &&
-./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static &&
+yes "" | ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static &&
 make "-j`nproc`"
 
 sudo make install
