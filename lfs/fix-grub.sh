@@ -60,4 +60,5 @@ then
 	rm -rf {gcc,glibc,binutils}-build
 fi
 
-echo "$STEPNAME" | tee -a $LOGFILE
+
+rm -rf grub-2.02~beta3
