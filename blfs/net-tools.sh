@@ -41,7 +41,8 @@ whoami > /tmp/currentuser
 
 patch -Np1 -i ../net-tools-CVS_20101030-remove_dups-1.patch &&
 patch -Np1 -i ../net-tools-1.60-kernel_headers-3.patch &&
-yes "" | make config &&
+for i in $(seq 1 45); do echo "" >> ../net-tools-config-input; done;
+make config < ../net-tools-config-input &&
 make "-j`nproc`" || make
 
 
