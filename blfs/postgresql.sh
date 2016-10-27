@@ -84,7 +84,7 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-su - postgreo -c '/usr/bin/initdb -D /srv/pgsql/data'
+su - postgres -c '/usr/bin/initdb -D /srv/pgsql/data'
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
