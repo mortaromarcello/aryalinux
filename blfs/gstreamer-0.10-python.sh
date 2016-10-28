@@ -5,6 +5,8 @@ set +h
 
 . /etc/alps/alps.conf
 
+#VER:gst0.10-python.orig:_0.10.22
+
 PACKAGE_NAME="gstreamer-0.10-python"
 
 #REQ:gstreamer-0.10

@@ -6,12 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
 #DESCRIPTION:br3ak The Xorg applications provide thebr3ak expected applications available in previous X Windowbr3ak implementations.br3ak
 #SECTION:x
-
-whoami > /tmp/currentuser
 
 #REQ:libpng
 #REQ:mesa
@@ -24,17 +20,14 @@ whoami > /tmp/currentuser
 
 NAME="x7app"
 
-if [ "$NAME" != "sudo" ]
-then
-	DOSUDO="sudo"
-fi
 
 
+URL=
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
 
-whoami > /tmp/currentuser
-
-export XORG_PREFIX=/usr
-export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
+tar --no-overwrite-dir -xf $TARBALL
+cd $DIRECTORY
 
 cat > app-7.7.md5 << "EOF"
 53a48e1fdfec29ab2e89f86d4b7ca902 bdftopcf-1.0.5.tar.bz2
@@ -77,13 +70,11 @@ b777bafb674555e48fd8437618270931 xwininfo-1.1.3.tar.bz2
 3025b152b4f13fdffd0c46d0be587be6 xwud-1.0.4.tar.bz2
 EOF
 
-
-mkdir -pv app &&
+mkdir app &&
 cd app &&
 grep -v '^#' ../app-7.7.md5 | awk '{print $2}' | wget -i- -c \
     -B http://ftp.x.org/pub/individual/app/ &&
 md5sum -c ../app-7.7.md5
-
 
 as_root()
 {
@@ -92,11 +83,10 @@ as_root()
   else                            su -c \\"$*\\"
   fi
 }
+
 export -f as_root
 
-
-
-
+bash -e
 
 for package in $(grep -v '^#' ../app-7.7.md5 | awk '{print $2}')
 do
@@ -109,6 +99,7 @@ do
       line2="#  undef _XOPEN_SOURCE"
       line3="#  define _XOPEN_SOURCE 600"
       line4="#endif"
+
       sed -i -e "s@#ifdef HAVE_CONFIG_H@$line1\n$line2\n$line3\n$line4\n\n&@" sys.c
       unset line1 line2 line3 line4
     ;;
@@ -117,21 +108,19 @@ do
     ;;
   esac
   ./configure $XORG_CONFIG
-  make "-j`nproc`" || make
+  make
   as_root make install
   popd
   rm -rf $packagedir
 done
 
-
-
-
+exit
 
 as_root rm -f $XORG_PREFIX/bin/xkeystone
 
 
 
-
 cd $SOURCE_DIR
+cleanup "$NAME" $DIRECTORY
 
-echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST
+register_installed "$NAME" "$INSTALLED_LIST"

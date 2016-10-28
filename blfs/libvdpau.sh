@@ -27,6 +27,10 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
 tar xf $TARBALL
 cd $DIRECTORY
 
+export XORG_PREFIX=/usr
+export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
+    --localstatedir=/var --disable-static"
+
 ./configure $XORG_CONFIG \
             --docdir=/usr/share/doc/libvdpau-1.1.1 &&
 make

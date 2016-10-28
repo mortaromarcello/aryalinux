@@ -4,9 +4,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#REQ:unzip
-#VER:tlp:SVN`date --iso-8601`
-
 cd $SOURCE_DIR
 
 wget https://github.com/linrunner/TLP/archive/master.zip -O tlp.zip

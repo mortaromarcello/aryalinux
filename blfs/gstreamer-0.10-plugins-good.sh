@@ -5,6 +5,8 @@ set +h
 
 . /etc/alps/alps.conf
 
+#VER:gst-plugins-good.orig:0.10_0.10.31
+
 PACKAGE_NAME="gstreamer-0.10-plugins-good"
 
 #REQ:gstreamer-0.10

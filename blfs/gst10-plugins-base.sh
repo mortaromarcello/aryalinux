@@ -6,12 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
 #DESCRIPTION:br3ak The GStreamer Base Plug-ins is abr3ak well-groomed and well-maintained collection of GStreamer plug-ins and elements, spanning thebr3ak range of possible types of elements one would want to write forbr3ak GStreamer. You will need at leastbr3ak one of Good, Bad, Ugly or Libav plugins for GStreamer applications to function properly.br3ak
 #SECTION:multimedia
-
-whoami > /tmp/currentuser
 
 #REQ:gstreamer10
 #REC:alsa-lib
@@ -34,33 +30,24 @@ whoami > /tmp/currentuser
 
 NAME="gst10-plugins-base"
 
-if [ "$NAME" != "sudo" ]
-then
-	DOSUDO="sudo"
-fi
-
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gst-plugins/gst-plugins-base-1.8.3.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gst-plugins/gst-plugins-base-1.8.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gst-plugins/gst-plugins-base-1.8.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gst-plugins/gst-plugins-base-1.8.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gst-plugins/gst-plugins-base-1.8.3.tar.xz || wget -nc http://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.8.3.tar.xz
 
 
 URL=http://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.8.3.tar.xz
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
-whoami > /tmp/currentuser
-
 ./configure --prefix=/usr \
             --with-package-name="GStreamer Base Plugins 1.8.3 BLFS" \
             --with-package-origin="http://www.linuxfromscratch.org/blfs/view/svn/" &&
-make "-j`nproc`" || make
-
+make
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -70,6 +57,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-$DOSUDO rm -rf $DIRECTORY
+cleanup "$NAME" $DIRECTORY
 
-echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST
+register_installed "$NAME" "$INSTALLED_LIST"

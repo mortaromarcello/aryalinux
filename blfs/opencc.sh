@@ -5,6 +5,8 @@ set +h
 
 . /etc/alps/alps.conf
 
+#VER:opencc_.orig:1.0.4
+
 PACKAGE_NAME="opencc"
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/o/opencc/opencc_1.0.4.orig.tar.gz

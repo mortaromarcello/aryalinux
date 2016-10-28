@@ -10,7 +10,7 @@ set +h
 #REQ:xorg-server
 #REC:mtdev
 
-URL=https://www.x.org/archive//individual/driver/xf86-video-vesa-2.3.4.tar.bz2
+URL=http://ftp.kaist.ac.kr/x.org/individual/driver/xf86-video-vesa-2.3.4.tar.bz2
 
 export XORG_PREFIX=/usr
 export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"

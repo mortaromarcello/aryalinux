@@ -6,12 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
 #DESCRIPTION:br3ak The Exim package contains a Mailbr3ak Transport Agent written by the University of Cambridge, releasedbr3ak under the GNU Public License.br3ak
 #SECTION:server
-
-whoami > /tmp/currentuser
 
 #REQ:pcre
 #OPT:db
@@ -24,7 +20,7 @@ whoami > /tmp/currentuser
 #OPT:gnutls
 #OPT:postgresql
 #OPT:sqlite
-#OPT:xorg-server
+#OPT:installing
 
 
 #VER:exim:4.87
@@ -32,28 +28,20 @@ whoami > /tmp/currentuser
 
 NAME="exim"
 
-if [ "$NAME" != "sudo" ]
-then
-	DOSUDO="sudo"
-fi
-
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/exim/exim-4.87.tar.bz2 || wget -nc ftp://ftp.exim.org/pub/exim/exim4/exim-4.87.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/exim/exim-4.87.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/exim/exim-4.87.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/exim/exim-4.87.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/eximftp/exim/exim4/exim-4.87.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/exim/exim-4.87.tar.bz2
 
 
 URL=http://mirrors-usa.go-parts.com/eximftp/exim/exim4/exim-4.87.tar.bz2
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
-
-whoami > /tmp/currentuser
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 groupadd -g 31 exim &&
 useradd -d /dev/null -c "Exim Daemon" -g exim -s /bin/false -u 31 exim
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -65,8 +53,7 @@ sed -e 's,^BIN_DIR.*$,BIN_DIRECTORY=/usr/sbin,' \
     -e 's,^EXIM_USER.*$,EXIM_USER=exim,' \
     -e 's,^EXIM_MONITOR,#EXIM_MONITOR,' src/EDITME > Local/Makefile &&
 printf "USE_GDBM = yes\nDBMLIB = -lgdbm\n" >> Local/Makefile &&
-make "-j`nproc`" || make
-
+make
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
@@ -76,7 +63,6 @@ install -v -d -m755 /usr/share/doc/exim-4.87    &&
 install -v -m644 doc/* /usr/share/doc/exim-4.87 &&
 ln -sfv exim /usr/sbin/sendmail                   &&
 install -v -d -m750 -o exim -g exim /var/spool/exim
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -86,7 +72,6 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 chmod -v a+wt /var/mail
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -101,7 +86,6 @@ MAILER-DAEMON: root
 EOF
 exim -v -bi &&
 /usr/sbin/exim -bd -q15m
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -115,7 +99,6 @@ wget -nc http://aryalinux.org/releases/2016.11/blfs-systemd-units-20160602.tar.b
 tar xf $SOURCE_DIR/blfs-systemd-units-20160602.tar.bz2 -C $SOURCE_DIR
 cd $SOURCE_DIR/blfs-systemd-units-20160602
 make install-exim
-
 cd $SOURCE_DIR
 rm -rf blfs-systemd-units-20160602
 ENDOFROOTSCRIPT
@@ -127,6 +110,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-$DOSUDO rm -rf $DIRECTORY
+cleanup "$NAME" $DIRECTORY
 
-echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST
+register_installed "$NAME" "$INSTALLED_LIST"

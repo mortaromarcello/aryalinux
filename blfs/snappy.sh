@@ -5,6 +5,8 @@ set +h
 
 . /etc/alps/alps.conf
 
+#VER:snappy:1.0.5
+
 PACKAGE_NAME="snappy"
 URL=http://pkgs.fedoraproject.org/repo/pkgs/snappy/snappy-1.0.5.tar.gz/4c0af044e654f5983f4acbf00d1ac236/snappy-1.0.5.tar.gz
 

@@ -5,6 +5,8 @@ set +h
 
 . /etc/alps/alps.conf
 
+#VER:marisa_.orig:0.2.4
+
 PACKAGE_NAME="marisa"
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/m/marisa/marisa_0.2.4.orig.tar.gz

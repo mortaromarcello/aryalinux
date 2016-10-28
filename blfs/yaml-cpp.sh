@@ -5,6 +5,8 @@ set +h
 
 . /etc/alps/alps.conf
 
+#VER:yaml-cpp:0.5.3
+
 PACKAGE_NAME="yaml-cpp"
 
 URL=https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-0.5.3.tar.gz

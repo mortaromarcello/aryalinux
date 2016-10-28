@@ -5,6 +5,8 @@ set +h
 
 . /etc/alps/alps.conf
 
+#VER:leveldb_.orig:1.18
+
 PACKAGE_NAME="leveldb"
 
 #REQ:snappy

@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 
 
-URL="http://search.cpan.org/CPAN/authors/id/T/TO/TOKUHIROM/Test-Requires-0.10.tar.gz"
+URL="http://search.cpan.org/dist/Test-Requires/"
 
 #VER::null
 

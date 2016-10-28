@@ -5,6 +5,8 @@ set +h
 
 . /etc/alps/alps.conf
 
+#VER:v:0.3.4
+
 PACKAGE_NAME="glog"
 URL=https://github.com/google/glog/archive/v0.3.4.tar.gz
 

@@ -6,12 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
 #DESCRIPTION:%DESCRIPTION%
 #SECTION:kde
-
-whoami > /tmp/currentuser
 
 #REQ:boost
 #REQ:extra-cmake-modules
@@ -51,25 +47,17 @@ whoami > /tmp/currentuser
 
 NAME="krameworks5"
 
-if [ "$NAME" != "sudo" ]
-then
-	DOSUDO="sudo"
-fi
-
 
 
 URL=
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
-whoami > /tmp/currentuser
-
 url=http://download.kde.org/stable/frameworks/5.25/
 wget -r -nH --cut-dirs=3 -A '*.xz' -np $url
-
 
 cat > frameworks-5.25.0.md5 << "EOF"
 000a8c34e6c4e548f53493c4519c3c1c attica-5.25.0.tar.xz
@@ -146,7 +134,6 @@ a844acb7da10a7b23fa50dade3b523c6 portingAids/kmediaplayer-5.25.0.tar.xz
 bb96fd634617bcac31974f9b63f41252 portingAids/kross-5.25.0.tar.xz
 EOF
 
-
 as_root()
 {
   if   [ $EUID = 0 ];        then $*
@@ -154,47 +141,52 @@ as_root()
   else                            su -c \\"$*\\"
   fi
 }
-export -f as_root
 
+export -f as_root
 
 rm -rf /opt/kf5
 
-
 bash -e
 
-
 while read -r line; do
+
     # Get the file name, ignoring comments and blank lines
     if $(echo $line | grep -E -q '^ *$|^#' ); then continue; fi
     file=$(echo $line | cut -d" " -f2)
+
     pkg=$(echo $file|sed 's|^.*/||')          # Remove directory
     packagedir=$(echo $pkg|sed 's|\.tar.*||') # Package directory
+
     tar -xf $file
     pushd $packagedir
+
       mkdir build
       cd    build
+
       cmake -DCMAKE_INSTALL_PREFIX=$KF5_PREFIX \
             -DCMAKE_PREFIX_PATH=$QT5DIR        \
             -DCMAKE_BUILD_TYPE=Release         \
             -DLIB_INSTALL_DIR=lib              \
             -DBUILD_TESTING=OFF                \
             -Wno-dev ..
-      make "-j`nproc`" || make
+      make
       as_root make install
   popd
+
+
   as_root rm -rf $packagedir
   as_root /sbin/ldconfig
-done < frameworks-5.25.0.md5
-exit
 
+done < frameworks-5.25.0.md5
+
+exit
 
 mv -v /opt/kf5 /opt/kf5-5.25.0
 ln -sfvn kf5-5.25.0 /opt/kf5
 
 
 
-
 cd $SOURCE_DIR
-$DOSUDO rm -rf $DIRECTORY
+cleanup "$NAME" $DIRECTORY
 
-echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST
+register_installed "$NAME" "$INSTALLED_LIST"

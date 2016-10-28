@@ -1,13 +1,13 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
-#VER:ModemManager:1.5.992
+#DESCRIPTION:br3ak ModemManager provides a unifiedbr3ak high level API for communicating with mobile broadband modems,br3ak regardless of the protocol used to communicate with the actualbr3ak device.br3ak
+#SECTION:general
 
 #REQ:libgudev
 #REC:gobject-introspection
@@ -18,31 +18,32 @@ cd $SOURCE_DIR
 #OPT:gtk-doc
 
 
-cd $SOURCE_DIR
+#VER:ModemManager:1.6.2
 
-URL=https://www.freedesktop.org/software/ModemManager/ModemManager-1.5.992.tar.xz
 
-wget -nc $URL
+NAME="ModemManager"
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ModemManager/ModemManager-1.6.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ModemManager/ModemManager-1.6.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ModemManager/ModemManager-1.6.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ModemManager/ModemManager-1.6.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ModemManager/ModemManager-1.6.2.tar.xz || wget -nc http://www.freedesktop.org/software/ModemManager/ModemManager-1.6.2.tar.xz
 
-tar xf $TARBALL
+
+URL=http://www.freedesktop.org/software/ModemManager/ModemManager-1.6.2.tar.xz
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+
+tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
-whoami > /tmp/currentuser
-
-./configure --prefix=/usr        \
-            --sysconfdir=/etc    \
-            --localstatedir=/var \
-            --disable-static     &&
-make "-j`nproc`"
-
+./configure --prefix=/usr                 \
+            --sysconfdir=/etc             \
+            --localstatedir=/var          \
+            --enable-more-warnings=no     \
+            --with-suspend-resume=systemd \
+            --disable-static &&
+make
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -52,15 +53,15 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 systemctl enable ModemManager
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
+cleanup "$NAME" $DIRECTORY
 
-sudo rm -rf $DIRECTORY
-echo "ModemManager=>`date`" | sudo tee -a $INSTALLED_LIST
-
+register_installed "$NAME" "$INSTALLED_LIST"

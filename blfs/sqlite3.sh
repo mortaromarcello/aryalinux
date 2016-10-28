@@ -5,8 +5,6 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
 #VER:sqlite-autoconf:3110000
 #VER:sqlite-doc:3110000
 

@@ -9,7 +9,7 @@ set +h
 
 cd $SOURCE_DIR
 
-URL=http://pkgs.fedoraproject.org/repo/pkgs/gtk-murrine-engine/murrine-0.98.2.tar.xz/bf01e0097b5f1e164dbcf807f4b9745e/murrine-0.98.2.tar.xz
+URL=https://download.gnome.org/sources/murrine/0.98/murrine-0.98.2.tar.xz
 wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`

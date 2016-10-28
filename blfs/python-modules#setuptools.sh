@@ -6,12 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
 #DESCRIPTION:%DESCRIPTION%
 #SECTION:general
-
-whoami > /tmp/currentuser
 
 #REQ:python2
 #REQ:python3
@@ -22,17 +18,12 @@ whoami > /tmp/currentuser
 
 NAME="python-modules#setuptools"
 
-if [ "$NAME" != "sudo" ]
-then
-	DOSUDO="sudo"
-fi
-
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/setuptools/setuptools-27.2.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/setuptools/setuptools-27.2.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/setuptools/setuptools-27.2.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/setuptools/setuptools-27.2.0.tar.gz || wget -nc https://pypi.python.org/packages/87/ba/54197971d107bc06f5f3fbdc0d728a7ae0b10cafca46acfddba65a0899d8/setuptools-27.2.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/setuptools/setuptools-27.2.0.tar.gz
 
 
 URL=https://pypi.python.org/packages/87/ba/54197971d107bc06f5f3fbdc0d728a7ae0b10cafca46acfddba65a0899d8/setuptools-27.2.0.tar.gz
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
@@ -58,6 +49,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-$DOSUDO rm -rf $DIRECTORY
+cleanup "$NAME" $DIRECTORY
 
-echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST
+register_installed "$NAME" "$INSTALLED_LIST"

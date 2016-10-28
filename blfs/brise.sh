@@ -5,6 +5,8 @@ set +h
 
 . /etc/alps/alps.conf
 
+#VER:brise_.orig:0.35
+
 PACKAGE_NAME="brise"
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/b/brise/brise_0.35.orig.tar.gz

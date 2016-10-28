@@ -5,6 +5,8 @@ set +h
 
 . /etc/alps/alps.conf
 
+#VER:ibus-rime_.orig:1.2
+
 PACKAGE_NAME="ibus-rime"
 
 #REQ:ibus

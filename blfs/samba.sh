@@ -6,12 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
 #DESCRIPTION:br3ak The Samba package provides filebr3ak and print services to SMB/CIFS clients and Windows networking tobr3ak Linux clients. Samba can also bebr3ak configured as a Windows Domain Controller replacement, a file/printbr3ak server acting as a member of a Windows Active Directory domain andbr3ak a NetBIOS (rfc1001/1002) nameserver (which among other thingsbr3ak provides LAN browsing support).br3ak
 #SECTION:basicnet
-
-whoami > /tmp/currentuser
 
 #REQ:python2
 #REC:libtirpc
@@ -43,22 +39,15 @@ whoami > /tmp/currentuser
 
 NAME="samba"
 
-if [ "$NAME" != "sudo" ]
-then
-	DOSUDO="sudo"
-fi
-
-wget -nc https://download.samba.org/pub/samba/stable/samba-4.4.2.tar.gz
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/samba/samba-4.5.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/samba/samba-4.5.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/samba/samba-4.5.0.tar.gz || wget -nc https://download.samba.org/pub/samba/stable/samba-4.5.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/samba/samba-4.5.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/samba/samba-4.5.0.tar.gz
 
 
-URL=https://download.samba.org/pub/samba/stable/samba-4.4.2.tar.gz
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+URL=https://download.samba.org/pub/samba/stable/samba-4.5.0.tar.gz
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
-
-whoami > /tmp/currentuser
 
 ./configure                            \
     --prefix=/usr                      \
@@ -67,24 +56,28 @@ whoami > /tmp/currentuser
     --with-piddir=/run/samba           \
     --with-pammodulesdir=/lib/security \
     --enable-fhs &&
-make "-j`nproc`" || make
-
+make
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install &&
+
 mv -v /usr/lib/libnss_win{s,bind}.so*   /lib                       &&
 ln -v -sf ../../lib/libnss_winbind.so.2 /usr/lib/libnss_winbind.so &&
 ln -v -sf ../../lib/libnss_wins.so.2    /usr/lib/libnss_wins.so    &&
+
 install -v -m644    examples/smb.conf.default /etc/samba &&
+
 mkdir -pv /etc/openldap/schema                        &&
+
 install -v -m644    examples/LDAP/README              \
                     /etc/openldap/schema/README.LDAP  &&
+
 install -v -m644    examples/LDAP/samba*              \
                     /etc/openldap/schema              &&
+
 install -v -m755    examples/LDAP/{get*,ol*} \
                     /etc/openldap/schema
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -94,7 +87,6 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 ln -v -sf /usr/bin/smbspool /usr/lib/cups/backend/smb
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -108,7 +100,6 @@ wget -nc http://aryalinux.org/releases/2016.11/blfs-systemd-units-20160602.tar.b
 tar xf $SOURCE_DIR/blfs-systemd-units-20160602.tar.bz2 -C $SOURCE_DIR
 cd $SOURCE_DIR/blfs-systemd-units-20160602
 make install-samba
-
 cd $SOURCE_DIR
 rm -rf blfs-systemd-units-20160602
 ENDOFROOTSCRIPT
@@ -124,7 +115,6 @@ wget -nc http://aryalinux.org/releases/2016.11/blfs-systemd-units-20160602.tar.b
 tar xf $SOURCE_DIR/blfs-systemd-units-20160602.tar.bz2 -C $SOURCE_DIR
 cd $SOURCE_DIR/blfs-systemd-units-20160602
 make install-winbindd
-
 cd $SOURCE_DIR
 rm -rf blfs-systemd-units-20160602
 ENDOFROOTSCRIPT
@@ -139,7 +129,6 @@ systemctl stop smbd &&
 systemctl disable smbd &&
 systemctl enable smbd.socket &&
 systemctl start smbd.socket
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -149,6 +138,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-$DOSUDO rm -rf $DIRECTORY
+cleanup "$NAME" $DIRECTORY
 
-echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST
+register_installed "$NAME" "$INSTALLED_LIST"

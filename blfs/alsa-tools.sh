@@ -6,12 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
 #DESCRIPTION:br3ak The ALSA Tools package containsbr3ak advanced tools for certain sound cards.br3ak
 #SECTION:multimedia
-
-whoami > /tmp/currentuser
 
 #REQ:alsa-lib
 #OPT:gtk2
@@ -24,22 +20,15 @@ whoami > /tmp/currentuser
 
 NAME="alsa-tools"
 
-if [ "$NAME" != "sudo" ]
-then
-	DOSUDO="sudo"
-fi
-
 wget -nc http://alsa.cybermirror.org/tools/alsa-tools-1.1.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/alsa-tools/alsa-tools-1.1.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/alsa-tools/alsa-tools-1.1.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/alsa-tools/alsa-tools-1.1.0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/alsa-tools/alsa-tools-1.1.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/alsa-tools/alsa-tools-1.1.0.tar.bz2 || wget -nc ftp://ftp.alsa-project.org/pub/tools/alsa-tools-1.1.0.tar.bz2
 
 
 URL=http://alsa.cybermirror.org/tools/alsa-tools-1.1.0.tar.bz2
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
-
-whoami > /tmp/currentuser
 
 as_root()
 {
@@ -48,11 +37,12 @@ as_root()
   else                            su -c \\"$*\\"
   fi
 }
+
 export -f as_root
 
+bash -e
 
 rm -rf qlo10k1 Makefile gitcompile
-
 
 for tool in *
 do
@@ -64,19 +54,22 @@ do
       tool_dir=$tool
     ;;
   esac
+
   pushd $tool_dir
     ./configure --prefix=/usr
-    make "-j`nproc`" || make
+    make
     as_root make install
     as_root /sbin/ldconfig
   popd
+
 done
 unset tool tool_dir
 
+exit
 
 
 
 cd $SOURCE_DIR
-$DOSUDO rm -rf $DIRECTORY
+cleanup "$NAME" $DIRECTORY
 
-echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST
+register_installed "$NAME" "$INSTALLED_LIST"

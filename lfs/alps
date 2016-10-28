@@ -20,7 +20,6 @@ def help():
 	print 'Usage : alps <command> [packages...]'
 	print 'Where <command> can be one of the following:\n'
 	print 'install        install packages if not installed'
-	# print 'forceinstall   install packages even if they are installed'
 	print 'reinstall      force installation of an already installed package'
 	print 'updatescripts  update the package build scripts'
 	print 'selfupdate     update alps to latest version online'
@@ -113,11 +112,13 @@ def getConfirmation(packages, prompt=True):
 		for package in packages:
 			runScript(package)
 def runScript(packageName):
-	script = configuration['SCRIPTS_DIR'] + '/' + packageName + '.sh'
+	if os.environ['PKG_BUILDER'] == 'ARYALINUX':
+		cmd = [ 'makepkg.sh', packageName ]
+	else:
+		cmd = [configuration['SCRIPTS_DIR'] + '/' + packageName + '.sh']
+	fi
 	print 'Executing ' + script
-	cmd = []
-	cmd.append(script)
-	p = subprocess.Popen(cmd, stdout=subprocess.PIPE, bufsize=1)
+	p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
 	for line in iter(p.stdout.readline, b''):
 		print line,
 	p.stdout.close()
@@ -138,7 +139,7 @@ def runScript(packageName):
 					os.system('echo "' + outstr + '" | sudo tee -a /etc/alps/versions &> /dev/null');
 
 def runCommand(cmd, actionName):
-	p = subprocess.Popen(cmd, stdout=subprocess.PIPE, bufsize=1)
+	p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
 	for line in iter(p.stdout.readline, b''):
 		print line,
 	p.stdout.close()

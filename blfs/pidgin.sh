@@ -6,12 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
 #DESCRIPTION:br3ak Pidgin is a Gtk+ 2 instantbr3ak messaging client that can connect with a wide range of networksbr3ak including AIM, ICQ, GroupWise, MSN, Jabber, IRC, Napster,br3ak Gadu-Gadu, SILC, Zephyr and Yahoo!br3ak
 #SECTION:xsoft
-
-whoami > /tmp/currentuser
 
 #REQ:gtk2
 #REC:libgcrypt
@@ -38,22 +34,15 @@ whoami > /tmp/currentuser
 
 NAME="pidgin"
 
-if [ "$NAME" != "sudo" ]
-then
-	DOSUDO="sudo"
-fi
-
 wget -nc http://downloads.sourceforge.net/pidgin/pidgin-2.11.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/pidgin/pidgin-2.11.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/pidgin/pidgin-2.11.0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/pidgin/pidgin-2.11.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/pidgin/pidgin-2.11.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/pidgin/pidgin-2.11.0.tar.bz2
 
 
 URL=http://downloads.sourceforge.net/pidgin/pidgin-2.11.0.tar.bz2
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
-
-whoami > /tmp/currentuser
 
 ./configure --prefix=/usr        \
             --sysconfdir=/etc    \
@@ -65,15 +54,23 @@ whoami > /tmp/currentuser
             --disable-nm         \
             --disable-vv         \
             --disable-tcl        &&
-make "-j`nproc`" || make
-
+make
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install &&
 mkdir -pv /usr/share/doc/pidgin-2.11.0 &&
 cp -v README doc/gtkrc-2.0 /usr/share/doc/pidgin-2.11.0
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo ./rootscript.sh
+sudo rm rootscript.sh
 
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+mkdir -pv /usr/share/doc/pidgin-2.11.0/api &&
+cp -v doc/html/* /usr/share/doc/pidgin-2.11.0/api
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -84,7 +81,6 @@ sudo rm rootscript.sh
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 gtk-update-icon-cache &&
 update-desktop-database
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -94,6 +90,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-$DOSUDO rm -rf $DIRECTORY
+cleanup "$NAME" $DIRECTORY
 
-echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST
+register_installed "$NAME" "$INSTALLED_LIST"

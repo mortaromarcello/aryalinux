@@ -5,8 +5,6 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
 #VER:libunique3:3.0.2
 
 #REQ:gtk2

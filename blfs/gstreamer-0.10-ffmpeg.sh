@@ -5,6 +5,8 @@ set +h
 
 . /etc/alps/alps.conf
 
+#VER:gstreamer0.10-ffmpeg.orig:_0.10.13
+
 PACKAGE_NAME="gstreamer-0.10-ffmpeg"
 
 #REQ:gstreamer-0.10

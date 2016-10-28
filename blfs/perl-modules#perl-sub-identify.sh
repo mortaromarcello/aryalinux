@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 
 
-URL="http://search.cpan.org/CPAN/authors/id/R/RG/RGARCIA/Sub-Identify-0.12.tar.gz"
+URL="http://search.cpan.org/dist/Sub-Identify/"
 
 #VER::null
 

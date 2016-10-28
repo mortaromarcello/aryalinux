@@ -5,6 +5,8 @@ set +h
 
 . /etc/alps/alps.conf
 
+#VER:mutagen_.orig:1.30
+
 PACKAGE_NAME="mutagen"
 
 cd $SOURCE_DIR

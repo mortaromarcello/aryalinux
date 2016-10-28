@@ -8,6 +8,8 @@ set +h
 #VER:fonts-dejavu_.orig:2.35
 
 #REQ:fontforge
+#REQ:perl-modules#font-ttf
+#REQ:perl-modules#io-string
 
 URL=http://archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/fonts-dejavu_2.35.orig.tar.bz2
 

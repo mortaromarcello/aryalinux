@@ -7,7 +7,7 @@ set +h
 
 #REQ:perl-modules#perl-module-build
 
-URL="http://search.cpan.org/CPAN/authors/id/Z/ZE/ZEFRAM/Module-Runtime-0.014.tar.gz"
+URL="http://search.cpan.org/dist/Module-Runtime/"
 
 #VER::null
 

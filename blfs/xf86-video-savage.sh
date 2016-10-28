@@ -11,7 +11,7 @@ set +h
 
 cd $SOURCE_DIR
 
-URL="https://www.x.org/archive/individual/driver/xf86-video-savage-2.3.8.tar.bz2"
+URL="http://ftp.kaist.ac.kr/x.org/individual/driver/xf86-video-savage-2.3.8.tar.bz2"
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`

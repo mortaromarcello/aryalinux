@@ -6,12 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
 #DESCRIPTION:br3ak WPA Supplicant is a Wi-Fibr3ak Protected Access (WPA) client and IEEE 802.1X supplicant. Itbr3ak implements WPA key negotiation with a WPA Authenticator andbr3ak Extensible Authentication Protocol (EAP) authentication with anbr3ak Authentication Server. In addition, it controls the roaming andbr3ak IEEE 802.11 authentication/association of the wireless LAN driver.br3ak This is useful for connecting to a password protected wirelessbr3ak access point.br3ak
 #SECTION:basicnet
-
-whoami > /tmp/currentuser
 
 #REC:libnl
 #REC:openssl
@@ -25,22 +21,15 @@ whoami > /tmp/currentuser
 
 NAME="wpa_supplicant"
 
-if [ "$NAME" != "sudo" ]
-then
-	DOSUDO="sudo"
-fi
-
 wget -nc http://hostap.epitest.fi/releases/wpa_supplicant-2.6.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/wpa_supplicant/wpa_supplicant-2.6.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/wpa_supplicant/wpa_supplicant-2.6.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/wpa_supplicant/wpa_supplicant-2.6.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/wpa_supplicant/wpa_supplicant-2.6.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/wpa_supplicant/wpa_supplicant-2.6.tar.gz
 
 
 URL=http://hostap.epitest.fi/releases/wpa_supplicant-2.6.tar.gz
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
-
-whoami > /tmp/currentuser
 
 cat > wpa_supplicant/.config << "EOF"
 CONFIG_BACKEND=file
@@ -70,24 +59,25 @@ CONFIG_WPS=y
 CFLAGS += -I/usr/include/libnl3
 EOF
 
-
 cat >> wpa_supplicant/.config << "EOF"
 CONFIG_CTRL_IFACE_DBUS=y
 CONFIG_CTRL_IFACE_DBUS_NEW=y
 CONFIG_CTRL_IFACE_DBUS_INTRO=y
 EOF
 
-
 cd wpa_supplicant &&
 make BINDIR=/sbin LIBDIR=/lib
 
+pushd wpa_gui-qt4 &&
+qmake wpa_gui.pro &&
+make &&
+popd
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 install -v -m755 wpa_{cli,passphrase,supplicant} /sbin/ &&
 install -v -m644 doc/docbook/wpa_supplicant.conf.5 /usr/share/man/man5/ &&
 install -v -m644 doc/docbook/wpa_{cli,passphrase,supplicant}.8 /usr/share/man/man8/
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -97,7 +87,6 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 install -v -m644 systemd/*.service /lib/systemd/system/
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -110,7 +99,6 @@ install -v -m644 dbus/fi.{epitest.hostap.WPASupplicant,w1.wpa_supplicant1}.servi
                  /usr/share/dbus-1/system-services/ &&
 install -v -m644 dbus/dbus-wpa_supplicant.conf \
                  /etc/dbus-1/system.d/wpa_supplicant.conf
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -120,7 +108,18 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 systemctl enable wpa_supplicant
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo ./rootscript.sh
+sudo rm rootscript.sh
 
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+install -v -m755 wpa_gui-qt4/wpa_gui /usr/bin/ &&
+install -v -m644 doc/docbook/wpa_gui.8 /usr/share/man/man8/ &&
+install -v -m644 wpa_gui-qt4/wpa_gui.desktop /usr/share/applications/ &&
+install -v -m644 wpa_gui-qt4/icons/wpa_gui.svg /usr/share/pixmaps/
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -130,7 +129,34 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 update-desktop-database
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo ./rootscript.sh
+sudo rm rootscript.sh
 
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+install -v -dm755 /etc/wpa_supplicant &&
+wpa_passphrase <em class="replaceable"><code>SSID</em> <em class="replaceable"><code>SECRET_PASSWORD</em> > /etc/wpa_supplicant/wpa_supplicant-<em class="replaceable"><code>wifi0</em>.conf
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo ./rootscript.sh
+sudo rm rootscript.sh
+
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+systemctl start wpa_supplicant@<em class="replaceable"><code>wlan0</em>
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo ./rootscript.sh
+sudo rm rootscript.sh
+
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+systemctl enable wpa_supplicant@<em class="replaceable"><code>wlan0</em>
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -140,6 +166,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-$DOSUDO rm -rf $DIRECTORY
+cleanup "$NAME" $DIRECTORY
 
-echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST
+register_installed "$NAME" "$INSTALLED_LIST"

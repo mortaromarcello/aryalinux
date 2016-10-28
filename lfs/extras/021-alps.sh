@@ -16,6 +16,7 @@ then
 cd $SOURCE_DIR
 
 cp -v alps /usr/bin/
+cp -v makepkg.sh /usr/bin
 mkdir -pv /etc/alps
 cp -v alps.conf /etc/alps/
 mkdir -pv /var/cache/alps/scripts
@@ -25,6 +26,7 @@ mkdir -pv /var/lib/alps
 cp -v functions /var/lib/alps
 tar xf alps-scripts*.tar.gz -C /var/cache/alps/scripts/
 chmod a+x /usr/bin/alps
+chmod a+x /usr/bin/makepkg.sh
 touch /etc/alps/installed-list
 touch /etc/alps/versions
 

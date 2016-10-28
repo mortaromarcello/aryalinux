@@ -7,8 +7,6 @@ set -e
 #VER:gst-plugins-ugly:0.10.19
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
 #REQ:gst-plugins-base
 #REC:lame
 #REC:libdvdnav

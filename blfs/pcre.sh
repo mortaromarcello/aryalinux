@@ -6,12 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
 #DESCRIPTION:br3ak The PCRE package containsbr3ak Perl Compatible Regular Expressionbr3ak libraries. These are useful for implementing regular expressionbr3ak pattern matching using the same syntax and semantics asbr3ak Perl 5.br3ak
 #SECTION:general
-
-whoami > /tmp/currentuser
 
 #OPT:valgrind
 
@@ -21,22 +17,15 @@ whoami > /tmp/currentuser
 
 NAME="pcre"
 
-if [ "$NAME" != "sudo" ]
-then
-	DOSUDO="sudo"
-fi
-
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/pcre/pcre-8.39.tar.bz2 || wget -nc ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.39.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/pcre/pcre-8.39.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/pcre/pcre-8.39.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/pcre/pcre-8.39.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/pcre/pcre-8.39.tar.bz2
 
 
 URL=ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.39.tar.bz2
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
-
-whoami > /tmp/currentuser
 
 ./configure --prefix=/usr                     \
             --docdir=/usr/share/doc/pcre-8.39 \
@@ -47,15 +36,13 @@ whoami > /tmp/currentuser
             --enable-pcregrep-libbz2          \
             --enable-pcretest-libreadline     \
             --disable-static                 &&
-make "-j`nproc`" || make
-
+make
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install                     &&
 mv -v /usr/lib/libpcre.so.* /lib &&
 ln -sfv ../../lib/$(readlink /usr/lib/libpcre.so) /usr/lib/libpcre.so
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -65,6 +52,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-$DOSUDO rm -rf $DIRECTORY
+cleanup "$NAME" $DIRECTORY
 
-echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST
+register_installed "$NAME" "$INSTALLED_LIST"

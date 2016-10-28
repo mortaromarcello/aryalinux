@@ -1,29 +1,46 @@
 #!/bin/bash
+
 set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
+
+#DESCRIPTION:br3ak Xdg-user-dirs is a tool to helpbr3ak manage “<span class="quote">well known” userbr3ak directories like the desktop folder and the music folder. It alsobr3ak handles localization (i.e. translation) of the filenames.br3ak
+#SECTION:general
+
+
 
 #VER:xdg-user-dirs:0.15
 
-cd $SOURCE_DIR
+
+NAME="xdg-user-dirs"
+
+wget -nc http://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.15.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.15.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.15.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.15.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.15.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.15.tar.gz
+
 
 URL=http://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.15.tar.gz
-wget -nc $URL
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar -tf $TARBALL | sed -e 's@/.*@@' | uniq `
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
 
-tar -xf $TARBALL
-
+tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
-./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static &&
+./configure --prefix=/usr --sysconfdir=/etc &&
 make
-sudo make install
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+make install
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo ./rootscript.sh
+sudo rm rootscript.sh
+
+
+
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" $DIRECTORY
 
-echo "xdg-user-dirs=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
+register_installed "$NAME" "$INSTALLED_LIST"

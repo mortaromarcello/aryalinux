@@ -6,12 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
 #DESCRIPTION:br3ak Tigervnc is an advanced VNCbr3ak (Virtual Network Computing) implementation. It allows creation ofbr3ak an Xorg server not tied to a physical console and also provides abr3ak client for viewing of the remote graphical desktop.br3ak
 #SECTION:xsoft
-
-whoami > /tmp/currentuser
 
 #REQ:cmake
 #REQ:fltk
@@ -30,43 +26,38 @@ whoami > /tmp/currentuser
 
 NAME="tigervnc"
 
-if [ "$NAME" != "sudo" ]
-then
-	DOSUDO="sudo"
-fi
-
 wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/tigervnc/tigervnc-1.7.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/tigervnc/tigervnc-1.7.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/tigervnc/tigervnc-1.7.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/tigervnc/tigervnc-1.7.0.tar.gz || wget -nc http://anduin.linuxfromscratch.org/BLFS/tigervnc/tigervnc-1.7.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/tigervnc/tigervnc-1.7.0.tar.gz
 wget -nc http://ftp.x.org/pub/individual/xserver/xorg-server-1.18.4.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2
 wget -nc http://www.linuxfromscratch.org/patches/downloads/tigervnc/tigervnc-1.7.0-gethomedir-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/tigervnc-1.7.0-gethomedir-1.patch
 
 
 URL=http://anduin.linuxfromscratch.org/BLFS/tigervnc/tigervnc-1.7.0.tar.gz
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
-whoami > /tmp/currentuser
-
-export XORG_PREFIX=/usr
-export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
-
 patch -Np1 -i ../tigervnc-1.7.0-gethomedir-1.patch &&
+
 mkdir -vp build &&
 cd        build &&
+
 # Build viewer
 cmake -G "Unix Makefiles"         \
       -DCMAKE_INSTALL_PREFIX=/usr \
       -DCMAKE_BUILD_TYPE=Release  \
       -Wno-dev .. &&
 make &&
+
 # Build server
 cp -vR ../unix/xserver unix/ &&
 tar -xf ../xorg-server-1.18.4.tar.bz2 -C unix/xserver --strip-components=1         &&
+
 pushd unix/xserver &&
   patch -Np1 -i ../../../unix/xserver117.patch &&
   autoreconf -fi   &&
+
   ./configure $XORG_CONFIG \
       --disable-xwayland    --disable-dri        --disable-dmx         \
       --disable-xorg        --disable-xnest      --disable-xvfb        \
@@ -80,16 +71,16 @@ pushd unix/xserver &&
 popd
 
 
-
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 #Install viewer
 make install &&
+
 #Install server
 pushd unix/xserver/hw/vnc &&
   make install &&
 popd &&
-[ -e /usr/bin/Xvnc ] || ln -svf $XORG_PREFIX/bin/Xvnc /usr/bin/Xvnc
 
+[ -e /usr/bin/Xvnc ] || ln -svf $XORG_PREFIX/bin/Xvnc /usr/bin/Xvnc
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -109,9 +100,9 @@ Terminal=false
 StartupNotify=false
 Categories=Network;RemoteAccess;
 EOF
+
 install -vm644 ../media/icons/tigervnc_24.png /usr/share/pixmaps &&
 ln -sfv tigervnc_24.png /usr/share/pixmaps/tigervnc.png
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -121,6 +112,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-$DOSUDO rm -rf $DIRECTORY
+cleanup "$NAME" $DIRECTORY
 
-echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST
+register_installed "$NAME" "$INSTALLED_LIST"

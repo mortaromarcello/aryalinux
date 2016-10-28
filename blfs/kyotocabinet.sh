@@ -5,6 +5,8 @@ set +h
 
 . /etc/alps/alps.conf
 
+#VER:kyotocabinet_.orig:1.2.76
+
 PACKAGE_NAME="kyotocabinet"
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/k/kyotocabinet/kyotocabinet_1.2.76.orig.tar.gz

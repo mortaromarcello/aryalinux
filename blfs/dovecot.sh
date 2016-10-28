@@ -6,12 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
 #DESCRIPTION:br3ak Dovecot is an Internet Messagebr3ak Access Protocol (IMAP) and Post Office Protocol (POP) server,br3ak written primarily with security in mind. Dovecot aims to be lightweight, fast and easybr3ak to set up as well as highly configurable and easily extensible withbr3ak plugins.br3ak
 #SECTION:server
-
-whoami > /tmp/currentuser
 
 #OPT:clucene
 #OPT:icu
@@ -31,22 +27,15 @@ whoami > /tmp/currentuser
 
 NAME="dovecot"
 
-if [ "$NAME" != "sudo" ]
-then
-	DOSUDO="sudo"
-fi
-
 wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/dovecot/dovecot-2.2.25.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/dovecot/dovecot-2.2.25.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/dovecot/dovecot-2.2.25.tar.gz || wget -nc http://www.dovecot.org/releases/2.2/dovecot-2.2.25.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/dovecot/dovecot-2.2.25.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/dovecot/dovecot-2.2.25.tar.gz
 
 
 URL=http://www.dovecot.org/releases/2.2/dovecot-2.2.25.tar.gz
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
-
-whoami > /tmp/currentuser
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
@@ -56,7 +45,6 @@ useradd -c "Dovecot unprivileged user" -d /dev/null -u 42 \
 groupadd -g 43 dovenull &&
 useradd -c "Dovecot login user" -d /dev/null -u 43 \
         -g dovenull -s /bin/false dovenull
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -69,13 +57,11 @@ sudo rm rootscript.sh
             --docdir=/usr/share/doc/dovecot-2.2.25 \
             --disable-static                       \
             --with-systemdsystemunitdir=/lib/systemd/system &&
-make "-j`nproc`" || make
-
+make
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -85,7 +71,6 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 cp -rv /usr/share/doc/dovecot-2.2.25/example-config/* /etc/dovecot
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -109,7 +94,6 @@ passdb {
  driver = shadow
 }
 EOF
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -119,7 +103,6 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 systemctl enable dovecot
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -129,6 +112,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-$DOSUDO rm -rf $DIRECTORY
+cleanup "$NAME" $DIRECTORY
 
-echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST
+register_installed "$NAME" "$INSTALLED_LIST"

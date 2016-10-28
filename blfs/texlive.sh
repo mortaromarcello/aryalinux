@@ -6,14 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
 #DESCRIPTION:br3ak Most of TeX Live can be built from source without a pre-existingbr3ak installation, but xindy (forbr3ak indexing) needs working versions of <span class="command"><strong>latex</strong> and <span class="command"><strong>pdflatex</strong> when configure is run,br3ak and the testsuite and install for <span class="command"><strong>asy</strong> (for vector graphics) willbr3ak fail if TeX has not already been installed. Additionally,br3ak biber is not provided within thebr3ak texlive source.br3ak
 #SECTION:pst
 
-whoami > /tmp/currentuser
-
 #REC:gs
+#REC:installing
 #REC:fontconfig
 #REC:freetype2
 #REC:gc
@@ -25,7 +22,6 @@ whoami > /tmp/currentuser
 #REC:poppler
 #REC:python2
 #REC:ruby
-#REC:xorg-server
 
 
 #VER:texlive-b-texmf:20160523
@@ -34,11 +30,6 @@ whoami > /tmp/currentuser
 
 NAME="texlive"
 
-if [ "$NAME" != "sudo" ]
-then
-	DOSUDO="sudo"
-fi
-
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20160523b-source.tar.xz || wget -nc ftp://tug.org/texlive/historic/2016/texlive-20160523b-source.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/texlive/texlive-20160523b-source.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20160523b-source.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20160523b-source.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20160523b-source.tar.xz
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20160523b-texmf.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/texlive/texlive-20160523b-texmf.tar.xz || wget -nc ftp://tug.org/texlive/historic/2016/texlive-20160523b-texmf.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20160523b-texmf.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20160523b-texmf.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20160523b-texmf.tar.xz
 wget -nc http://www.linuxfromscratch.org/patches/downloads/texlive/texlive-20160523b-source-upstream_fixes-2.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/texlive-20160523b-source-upstream_fixes-2.patch
@@ -46,22 +37,21 @@ wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/texlive-20160523b-texm
 
 
 URL=ftp://tug.org/texlive/historic/2016/texlive-20160523b-source.tar.xz
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
-
-whoami > /tmp/currentuser
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 cat >> /etc/ld.so.conf << EOF
 # Begin texlive 2016 addition
+
 /opt/texlive/2016/lib
+
 # End texlive 2016 addition
 EOF
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -69,9 +59,12 @@ sudo rm rootscript.sh
 
 
 export TEXARCH=$(uname -m | sed -e 's/i.86/i386/' -e 's/$/-linux/') &&
-patch -Np1 -i ../texlive-20160523b-source-upstream_fixes-1.patch &&
+
+patch -Np1 -i ../texlive-20160523b-source-upstream_fixes-2.patch &&
+
 mkdir texlive-build &&
 cd texlive-build    &&
+
 ../configure                                        \
     --prefix=/opt/texlive/2016                      \
     --bindir=/opt/texlive/2016/bin/$TEXARCH         \
@@ -98,8 +91,8 @@ cd texlive-build    &&
     --with-system-xpdf                              \
     --with-system-zlib                              \
     --with-banner-add=" - BLFS" &&
-make "-j`nproc`" || make
 
+make
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
@@ -112,7 +105,6 @@ make texlinks &&
 ldconfig &&
 mkdir -pv /opt/texlive/2016/tlpkg/TeXLive/ &&
 install -v -m644 ../texk/tests/TeXLive/* /opt/texlive/2016/tlpkg/TeXLive/
-
 cd $SOURCE_DIR
 rm -rf blfs-systemd-units-20160602
 ENDOFROOTSCRIPT
@@ -139,7 +131,6 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 mktexlsr &&
 fmtutil-sys --all &&
 mtxrun --generate
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -149,6 +140,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-$DOSUDO rm -rf $DIRECTORY
+cleanup "$NAME" $DIRECTORY
 
-echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST
+register_installed "$NAME" "$INSTALLED_LIST"

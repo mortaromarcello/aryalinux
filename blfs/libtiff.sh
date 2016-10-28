@@ -1,49 +1,49 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
-#VER:tiff:4.0.6
+#DESCRIPTION:br3ak The LibTIFF package contains thebr3ak TIFF libraries and associated utilities. The libraries are used bybr3ak many programs for reading and writing TIFF files and the utilitiesbr3ak are used for general work with TIFF files.br3ak
+#SECTION:general
 
 #OPT:freeglut
 #OPT:libjpeg
 
 
-cd $SOURCE_DIR
+#VER:tiff:4.0.6
+
+
+NAME="libtiff"
+
+wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/tiff/tiff-4.0.6.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/tiff/tiff-4.0.6.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/tiff/tiff-4.0.6.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/tiff/tiff-4.0.6.tar.gz || wget -nc http://download.osgeo.org/libtiff/tiff-4.0.6.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/tiff/tiff-4.0.6.tar.gz
+
 
 URL=http://download.osgeo.org/libtiff/tiff-4.0.6.tar.gz
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
 
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/tiff/tiff-4.0.6.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/tiff/tiff-4.0.6.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/tiff/tiff-4.0.6.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/tiff/tiff-4.0.6.tar.gz || wget -nc ftp://ftp.remotesensing.org/libtiff/tiff-4.0.6.tar.gz || wget -nc http://download.osgeo.org/libtiff/tiff-4.0.6.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/tiff/tiff-4.0.6.tar.gz
-
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
-tar xf $TARBALL
+tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
-whoami > /tmp/currentuser
-
-#sed -i "/seems to be moved/s/^/#/" libtool &&
+sed -i "/seems to be moved/s/^/#/" config/ltmain.sh &&
 ./configure --prefix=/usr --disable-static &&
-make "-j`nproc`"
-
+make
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+
+
 cd $SOURCE_DIR
+cleanup "$NAME" $DIRECTORY
 
-sudo rm -rf $DIRECTORY
-echo "libtiff=>`date`" | sudo tee -a $INSTALLED_LIST
-
+register_installed "$NAME" "$INSTALLED_LIST"

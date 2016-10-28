@@ -10,7 +10,7 @@ set +h
 #REQ:perl-modules#perl-test-fatal
 #REQ:perl-modules#perl-test-requires
 
-URL="http://search.cpan.org/CPAN/authors/id/D/DR/DROLSKY/Module-Implementation-0.09.tar.gz"
+URL="http://search.cpan.org/dist/Module-Implementation/"
 
 #VER::null
 

@@ -28,3 +28,27 @@ function unzip_file()
 		unzip $1
 	fi
 }
+
+function register_installed()
+{
+	packagename="$1"
+	installed_list="$2"
+	if [ "$packagename" == "sudo" ]
+	then
+		echo "$packagename=>`date`" >> $installed_list
+	else
+		echo "$packagename=>`date`" | sudo tee -a $installed_list
+	fi
+}
+
+function cleanup()
+{
+	packagename="$1"
+	directory="$2"
+	if [ "$packagename" == "sudo" ]
+	then
+		rm -rf "$directory"
+	else
+		sudo rm -rf "$directory"
+	fi
+}

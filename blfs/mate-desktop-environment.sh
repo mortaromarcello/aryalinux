@@ -42,7 +42,7 @@ set +h
 #REQ:libnotify
 #REQ:libwnck2
 #REQ:zenity
-#OPT:yelp
+#REQ:yelp
 #REQ:xdg-utils
 #REQ:xdg-user-dirs
 
@@ -91,7 +91,7 @@ set +h
 #REQ:wpa_supplicant
 #REQ:networkmanager
 #REQ:network-manager-applet
-#OPT:net-tools
+#REQ:net-tools
 #REQ:ModemManager
 #REQ:usb_modeswitch
 #REQ:compton

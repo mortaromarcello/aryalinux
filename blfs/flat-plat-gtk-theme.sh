@@ -5,8 +5,6 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:flat-plat-gtk-theme:SVN`date --iso-8601`
-
 #REQ:gtk2
 #REQ:gtk3
 

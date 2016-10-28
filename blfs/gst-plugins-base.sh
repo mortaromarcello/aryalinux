@@ -7,8 +7,6 @@ set -e
 #VER:gst-plugins-base:0.10.36
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
 #REQ:gstreamer
 #REQ:pango
 #REC:alsa-lib

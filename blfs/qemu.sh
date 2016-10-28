@@ -6,17 +6,14 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
 #DESCRIPTION:br3ak qemu is a full virtualizationbr3ak solution for Linux on x86 hardware containing virtualizationbr3ak extensions (Intel VT or AMD-V).br3ak
 #SECTION:postlfs
 
-whoami > /tmp/currentuser
-
 #REQ:glib2
 #REQ:python2
-#REQ:xorg-server
+#REQ:installing
 #REC:sdl
+#OPT:alsa
 #OPT:bluez
 #OPT:check
 #OPT:curl
@@ -39,46 +36,40 @@ whoami > /tmp/currentuser
 
 NAME="qemu"
 
-if [ "$NAME" != "sudo" ]
-then
-	DOSUDO="sudo"
-fi
-
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qemu/qemu-2.7.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qemu/qemu-2.7.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qemu/qemu-2.7.0.tar.bz2 || wget -nc http://wiki.qemu.org/download/qemu-2.7.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qemu/qemu-2.7.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qemu/qemu-2.7.0.tar.bz2
 
 
 URL=http://wiki.qemu.org/download/qemu-2.7.0.tar.bz2
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
-whoami > /tmp/currentuser
-
 egrep '^flags.*(vmx|svm)' /proc/cpuinfo
-
 
 if [ $(uname -m) = i686 ]; then
    QEMU_ARCH=i386-softmmu
 else
    QEMU_ARCH=x86_64-softmmu
 fi
+
 mkdir -vp build &&
 cd        build &&
+
 ../configure --prefix=/usr               \
              --sysconfdir=/etc           \
              --target-list=$QEMU_ARCH    \
              --audio-drv-list=alsa       \
              --docdir=/usr/share/doc/qemu-2.7.0 &&
-unset QEMU_ARCH &&
-make "-j`nproc`" || make
 
+unset QEMU_ARCH &&
+
+make
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -88,16 +79,19 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 groupadd -g 61 kvm
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
-whoami > /tmp/currentuser
-sudo usermod -a -G kvm `cat /tmp/currentuser`
 
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+usermod -a -G kvm <em class="replaceable"><code><username></em>
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo ./rootscript.sh
+sudo rm rootscript.sh
 
 
 
@@ -105,7 +99,6 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 cat > /lib/udev/rules.d/65-kvm.rules << "EOF"
 KERNEL=="kvm", GROUP="kvm", MODE="0660"
 EOF
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -115,7 +108,6 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 ln -sv qemu-system-`uname -m` /usr/bin/qemu
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -124,15 +116,12 @@ sudo rm rootscript.sh
 
 qemu-img create -f qcow2 vdisk.img 10G
 
-
 qemu -enable-kvm -hda vdisk.img            \
      -cdrom Fedora-16-x86_64-Live-LXDE.iso \
      -boot d                               \
      -m 384
 
-
 qemu -enable-kvm vdisk.img -m 384
-
 
 qemu -enable-kvm             \
      -cdrom /home/fernando/ISO/linuxmint-17.1-mate-32bit.iso \
@@ -145,7 +134,6 @@ qemu -enable-kvm             \
      -vga std                \
      vdisk.img
 
-
 qemu -enable-kvm             \
      -machine smm=off        \
      -boot order=d           \
@@ -155,7 +143,6 @@ qemu -enable-kvm             \
      -smp cores=4,threads=2  \
      -vga vmware             \
      -hda vdisk.img
-
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
@@ -169,22 +156,25 @@ Section "Monitor"
  HorizSync 1-200
  VertRefresh 1-200
 EndSection
+
 Section "Device"
  Identifier "VMware SVGA II Adapter"
  Option "Monitor" "default"
  Driver "vmware"
 EndSection
+
 Section "Screen"
  Identifier "Default Screen"
  Device "VMware SVGA II Adapter"
  Monitor "Monitor0"
+
  SubSection "Display"
  Depth 24
  Modes "1600x900" "1440x900" "1366x768" "1280x720" "800x480"
  EndSubSection
+
 EndSection
 EOF
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -194,7 +184,6 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 sysctl -w net.ipv4.ip_forward=1
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -206,7 +195,6 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 cat >> /etc/sysctl.d/60-net-forward.conf << EOF
 net.ipv4.ip_forward=1
 EOF
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -217,7 +205,6 @@ sudo rm rootscript.sh
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 chgrp kvm  /usr/libexec/qemu-bridge-helper &&
 chmod 4750 /usr/libexec/qemu-bridge-helper
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -227,7 +214,6 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 echo 'allow br0' > /etc/qemu/bridge.conf
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -237,6 +223,6 @@ sudo rm rootscript.sh
 
 
 cd $SOURCE_DIR
-$DOSUDO rm -rf $DIRECTORY
+cleanup "$NAME" $DIRECTORY
 
-echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST
+register_installed "$NAME" "$INSTALLED_LIST"

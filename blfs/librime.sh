@@ -5,6 +5,8 @@ set +h
 
 . /etc/alps/alps.conf
 
+#VER:rime:1.2.9
+
 PACKAGE_NAME="librime"
 
 #REQ:glog

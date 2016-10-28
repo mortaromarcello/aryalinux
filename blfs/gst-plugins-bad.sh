@@ -7,8 +7,6 @@ set -e
 #VER:gst-plugins-bad:0.10.23
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
 #REQ:gst-plugins-base
 #REC:faac
 #REC:libpng

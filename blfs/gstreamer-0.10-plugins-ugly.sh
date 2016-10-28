@@ -5,6 +5,8 @@ set +h
 
 . /etc/alps/alps.conf
 
+#VER:gst-plugins-ugly.orig:0.10_0.10.19
+
 PACKAGE_NAME="gstreamer-0.10-plugins-ugly"
 
 #REQ:gstreamer-0.10

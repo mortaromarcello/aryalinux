@@ -5,6 +5,8 @@ set +h
 
 . /etc/alps/alps.conf
 
+#VER:alacarte_.orig:3.11.91
+
 #REQ:gnome-menus
 
 URL="http://archive.ubuntu.com/ubuntu/pool/universe/a/alacarte/alacarte_3.11.91.orig.tar.xz"

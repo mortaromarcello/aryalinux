@@ -6,16 +6,12 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
-
 #DESCRIPTION:br3ak The FOP (Formatting Objectsbr3ak Processor) package contains a print formatter driven by XSLbr3ak formatting objects (XSL-FO). It is a Java application that reads a formattingbr3ak object tree and renders the resulting pages to a specified output.br3ak Output formats currently supported include PDF, PCL, PostScript,br3ak SVG, XML (area tree representation), print, AWT, MIF and ASCIIbr3ak text. The primary output target is PDF.br3ak
 #SECTION:pst
 
-whoami > /tmp/currentuser
-
 #REQ:apache-ant
 #OPT:junit
-#OPT:xorg-server
+#OPT:installing
 
 
 #VER:jai-1_1_3-lib-linux-amd:64
@@ -25,11 +21,6 @@ whoami > /tmp/currentuser
 
 NAME="fop"
 
-if [ "$NAME" != "sudo" ]
-then
-	DOSUDO="sudo"
-fi
-
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/fop/fop-2.1-src.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/fop/fop-2.1-src.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/fop/fop-2.1-src.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/fop/fop-2.1-src.tar.gz || wget -nc https://archive.apache.org/dist/xmlgraphics/fop/source/fop-2.1-src.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/fop/fop-2.1-src.tar.gz
 wget -nc http://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-i586.tar.gz
 wget -nc http://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-amd64.tar.gz
@@ -37,13 +28,11 @@ wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/fop-2.1-listNPE-1.patc
 
 
 URL=https://archive.apache.org/dist/xmlgraphics/fop/source/fop-2.1-src.tar.gz
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
-
-whoami > /tmp/currentuser
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
@@ -53,13 +42,13 @@ case `uname -m` in
     cp -v jai-1_1_3/lib/{jai*,mlibwrapper_jai.jar} $JAVA_HOME/jre/lib/ext/
     cp -v jai-1_1_3/lib/libmlib_jai.so             $JAVA_HOME/jre/lib/i386/
     ;;
+
   x86_64)
     tar -xf ../jai-1_1_3-lib-linux-amd64.tar.gz
     cp -v jai-1_1_3/lib/{jai*,mlibwrapper_jai.jar} $JAVA_HOME/jre/lib/ext/
     cp -v jai-1_1_3/lib/libmlib_jai.so             $JAVA_HOME/jre/lib/amd64/
     ;;
 esac
-
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -68,21 +57,20 @@ sudo rm rootscript.sh
 
 sed -i '\@</javad@i<arg value="-Xdoclint:none"/>' build.xml
 
-
 patch -Np1 -i ../fop-2.1-listNPE-1.patch &&
+
 ant compile &&
 ant jar-main &&
 ant javadocs &&
 mv build/javadocs .
 
 
-
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 install -v -d -m755                          /opt/fop-2.1 &&
 cp -v  KEYS LICENSE NOTICE README            /opt/fop-2.1 &&
 cp -va build conf examples fop* javadocs lib /opt/fop-2.1 &&
-ln -v -sf fop-2.1 /opt/fop
 
+ln -v -sf fop-2.1 /opt/fop
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -96,8 +84,7 @@ EOF
 
 
 
-
 cd $SOURCE_DIR
-$DOSUDO rm -rf $DIRECTORY
+cleanup "$NAME" $DIRECTORY
 
-echo "$NAME=>`date`" | $DOSUDO tee -a $INSTALLED_LIST
+register_installed "$NAME" "$INSTALLED_LIST"
