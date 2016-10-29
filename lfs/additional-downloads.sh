@@ -51,5 +51,6 @@ wget -nc http://downloads.sourceforge.net/infozip/unzip60.tar.gz
 wget -nc https://raw.githubusercontent.com/FluidIdeas/alps/master/var/lib/alps/functions
 wget -nc https://raw.githubusercontent.com/FluidIdeas/alps/master/usr/bin/alps
 wget -nc https://raw.githubusercontent.com/FluidIdeas/alps/master/etc/alps/alps.conf
+wget -nc https://raw.githubusercontent.com/FluidIdeas/package-builder/master/makepkg.sh
 
 popd
