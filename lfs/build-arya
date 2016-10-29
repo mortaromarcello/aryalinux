@@ -208,14 +208,19 @@ if response == '1':
 else:
 	rootPartition = raw_input('Enter the root partition where the build was in progress. Enter to exit: ')
 	if rootPartition != '':
+		if os.path.exists('/mnt/lfs/tmp/mountpoint'):
+                        try:
+                                check_output('umount -v /mnt/lfs/tmp/mountpoint/dev/pts', shell=True)
+                                check_output('umount -v /mnt/lfs/tmp/mountpoint/dev', shell=True)
+                                check_output('umount -v /mnt/lfs/tmp/mountpoint', shell=True)
+                                check_output('umount -v /mnt/lfs/tmp/mountpoint/sys', shell=True)
+                                check_output('umount -v /mnt/lfs/tmp/mountpoint/proc', shell=True)
+                                check_output('umount -v /mnt/lfs/tmp/mountpoint/run', shell=True)
+                                print 'Package builder directories unmounted successfully'
+                        except:
+                                print 'Un-mounting wasnt successful. Continuing without it...'
+
 		if not os.path.exists('/mnt/lfs/sources/build-properties'):
-			check_output('umount /mnt/lfs/tmp/mountpoint/dev/pts', shell=True)
-                        check_output('umount /mnt/lfs/tmp/mountpoint/dev', shell=True)
-                        check_output('umount /mnt/lfs/tmp/mountpoint', shell=True)
-                        check_output('umount /mnt/lfs/tmp/mountpoint/sys', shell=True)
-                        check_output('umount /mnt/lfs/tmp/mountpoint/proc', shell=True)
-                        check_output('umount /mnt/lfs/tmp/mountpoint/run', shell=True)
-			check_outout('rm -r /mnt/lfs/tmp/mountpoint', shell=True)
 			runScript('./umountal.sh', None)
 			check_output('rm -rf /sources', shell=True)
 			check_output('rm -rf /mnt/lfs', shell=True)
