@@ -3,8 +3,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:xfce4-datetime-plugin:0.6.1
+NAME="xfce4-datetime-plugin"
+VERSION="0.6.1"
 
 #REQ:libxfcegui4
 
@@ -25,7 +27,6 @@ make
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "xfce4-datetime-plugin=>`date`" | sudo tee -a $INSTALLED_LIST
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

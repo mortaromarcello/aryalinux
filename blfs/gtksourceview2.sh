@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:gtksourceview:2.10.5
+NAME="gtksourceview"
+VERSION="2.10.5"
 
 #REQ:gtksourceview
 
@@ -26,6 +28,6 @@ sudo make install
 
 cd $SOURCE_DIR
 
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "gtksourceview2=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

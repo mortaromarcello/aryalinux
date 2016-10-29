@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:bumblebee_.orig:3.2.1
+NAME="bumblebee_.orig"
+VERSION="3.2.1"
 
 #REQ:libbsd
 #REQ:bbswitch
@@ -26,6 +28,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "bumblebee=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -3,6 +3,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 cd $SOURCE_DIR
 
@@ -39,6 +40,6 @@ Categories=Java;Development;Debugger;
 EOF
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "eclipse-ide=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

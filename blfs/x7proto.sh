@@ -6,8 +6,9 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:br3ak The Xorg protocol headers providebr3ak the header files required to build the system, and to allow otherbr3ak applications to build against the installed X Window system.br3ak
-#SECTION:x
+DESCRIPTION="br3ak The Xorg protocol headers providebr3ak the header files required to build the system, and to allow otherbr3ak applications to build against the installed X Window system.br3ak"
+SECTION="x"
+NAME="x7proto"
 
 #REQ:util-macros
 #REC:sudo
@@ -20,16 +21,17 @@ set +h
 
 
 
-NAME="x7proto"
-
-
-
 URL=
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+
+whoami > /tmp/currentuser
+
+export XORG_PREFIX=/usr
+export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
 
 cat > proto-7.7.md5 << "EOF"
 1a05fb01fa1d5198894c931cf925c025 bigreqsproto-1.1.2.tar.bz2
@@ -60,11 +62,13 @@ e793ecefeaecfeabd1aed6a01095174e xf86vidmodeproto-2.3.1.tar.bz2
 16791f7ca8c51a20608af11702e51083 xproto-7.0.31.tar.bz2
 EOF
 
-mkdir proto &&
+
+mkdir -pv proto &&
 cd proto &&
 grep -v '^#' ../proto-7.7.md5 | awk '{print $2}' | wget -i- -c \
     -B http://ftp.x.org/pub/individual/proto/ &&
 md5sum -c ../proto-7.7.md5
+
 
 as_root()
 {
@@ -73,10 +77,11 @@ as_root()
   else                            su -c \\"$*\\"
   fi
 }
-
 export -f as_root
 
-bash -e
+
+
+
 
 for package in $(grep -v '^#' ../proto-7.7.md5 | awk '{print $2}')
 do
@@ -89,11 +94,12 @@ do
   rm -rf $packagedir
 done
 
-exit
+
+
 
 
 
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:python-distutils-extra:2.39
+NAME="python-distutils-extra"
+VERSION="2.39"
 
 #REQ:python-modules#setuptools
 
@@ -27,6 +29,6 @@ python3 setup.py build &&
 sudo python3 setup.py install
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "python-distutils-extra=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

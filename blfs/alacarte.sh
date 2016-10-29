@@ -4,8 +4,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
-
-#VER:alacarte_.orig:3.11.91
+. /var/lib/alps/functions
 
 #REQ:gnome-menus
 
@@ -27,4 +26,4 @@ sudo make install
 cd $SOURCE_DIR
 
 rm -r $DIRECTORY
-echo "alacarte=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

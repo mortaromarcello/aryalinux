@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:v:0.4.0
+NAME="v"
+VERSION="0.4.0"
 
 #REQ:cmake
 #REQ:ffmpeg
@@ -58,6 +60,6 @@ sudo rm rootscript.sh
 
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "libvdpau-va-gl=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -3,8 +3,11 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:xfce4-screenshooter:1.8.2
+DESCRIPTION="An application to take screenshots. Default screenshot application for XFCE"
+NAME="xfce4-screenshooter"
+VERSION="1.8.2"
 
 #REQ:libsoup
 
@@ -25,7 +28,6 @@ make
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "xfce4-screenshooter=>`date`" | sudo tee -a $INSTALLED_LIST
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -3,8 +3,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:simple-scan:3.17.90
+NAME="simple-scan"
+VERSION="3.17.90"
 
 #REQ:packagekit
 #REQ:sane
@@ -26,8 +28,6 @@ make
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "simple-scan=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

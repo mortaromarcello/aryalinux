@@ -6,8 +6,10 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:br3ak Biber is a BibTeX replacement for users of biblatex, written inbr3ak Perl, with full Unicode support.br3ak
-#SECTION:pst
+DESCRIPTION="br3ak Biber is a BibTeX replacement for users of biblatex, written inbr3ak Perl, with full Unicode support.br3ak"
+SECTION="pst"
+VERSION=3.5
+NAME="biber"
 
 #REQ:perl-modules#perl-autovivification
 #REQ:perl-modules#perl-business-isbn
@@ -45,31 +47,29 @@ set +h
 #OPT:perl-modules#perl-test-differences
 
 
-#VER:biblatex-biber:null
-#VER:biblatex-.tds:3.5
-
-
-NAME="biber"
-
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex-biber/biblatex-biber.tar.gz || wget -nc http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/current/biblatex-biber.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/biblatex-biber/biblatex-biber.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex-biber/biblatex-biber.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/biblatex-biber/biblatex-biber.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/biblatex-biber/biblatex-biber.tar.gz
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc http://sourceforge.net/projects/biblatex/files/biblatex-3.5/biblatex-3.5.tds.tgz
 
 
 URL=http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/current/biblatex-biber.tar.gz
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 perl ./Build.PL &&
 ./Build
+
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 tar -xf ../biblatex-3.5.tds.tgz -C /opt/texlive/2016/texmf-dist &&
 texhash &&
 ./Build install
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -77,8 +77,7 @@ sudo rm rootscript.sh
 
 
 
-
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -3,8 +3,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
-
-#VER:galculator:2.1.3
+. /var/lib/alps/functions
 
 cd $SOURCE_DIR
 
@@ -22,8 +21,6 @@ make
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "galculator=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

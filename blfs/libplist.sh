@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:libplist_.orig:1.12
+NAME="libplist_.orig"
+VERSION="1.12"
 
 URL=http://archive.ubuntu.com/ubuntu/pool/main/libp/libplist/libplist_1.12.orig.tar.bz2
 
@@ -23,6 +25,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "libplist=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

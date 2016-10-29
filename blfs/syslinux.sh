@@ -3,8 +3,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:syslinux:6.03
+NAME="syslinux"
+VERSION="6.03"
 
 cd $SOURCE_DIR
 
@@ -26,8 +28,6 @@ fi
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "syslinux=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

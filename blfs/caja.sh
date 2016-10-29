@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:caja:1.15.0
+NAME="caja"
+VERSION="1.15.0"
 
 #REQ:mate-polkit
 
@@ -26,6 +28,6 @@ sudo make install
 
 cd $SOURCE_DIR
 
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "caja=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

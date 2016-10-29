@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:libjpeg6b_6b.orig:2
+NAME="libjpeg6b_6b.orig"
+VERSION="2"
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/libj/libjpeg6b/libjpeg6b_6b2.orig.tar.gz
 
@@ -23,6 +25,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "libjpeg62=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

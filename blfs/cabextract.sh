@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:cabextract_.orig:1.4
+NAME="cabextract_.orig"
+VERSION="1.4"
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/c/cabextract/cabextract_1.4.orig.tar.gz
 
@@ -23,6 +25,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "cabextract=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -6,6 +6,7 @@ set +h
 #REQ:numix-icons
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 cd $SOURCE_DIR
 
@@ -17,8 +18,6 @@ sudo cp -r Numix-Circle /usr/share/icons
 sudo cp -r Numix-Circle-Light /usr/share/icons
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "numix-icons-circle=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

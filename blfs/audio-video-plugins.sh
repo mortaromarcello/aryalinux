@@ -4,6 +4,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:fltk
 #REQ:alsa-plugins
@@ -54,4 +55,4 @@ set +h
 #REQ:taglib
 #REQ:ffmpeg
 
-echo "audio-video-plugins=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -3,6 +3,11 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
+
+DESCRIPTION="USB Modeswitch helps the USB modems to be recognized by the Linux System by altering Device and Vendor ID for devices that do not get detected as modems by default."
+NAME="usb_modeswitch"
+VERSION="2.2.5"
 
 cd $SOURCE_DIR
 
@@ -26,4 +31,4 @@ sudo make install
 cd $SOURCE_DIR
 rm -rf usb-modeswitch-data-20150627
 
-echo "usb_modeswitch=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

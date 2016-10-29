@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:t1lib:5.1.2
+NAME="t1lib"
+VERSION="5.1.2"
 
 cd $SOURCE_DIR
 
@@ -23,6 +25,6 @@ make "-j`nproc`" without_doc
 sudo make install
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "t1lib=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

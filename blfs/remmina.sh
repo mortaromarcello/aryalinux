@@ -4,6 +4,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:avahi
 #REQ:libssh
@@ -30,6 +31,6 @@ sudo ln -svf /opt/remmina_devel/remmina/bin/remmina /usr/bin/
 sudo ln -svf /opt/remmina_devel/remmina/share/applications/remmina.desktop /usr/share/applications/
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "remmina=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

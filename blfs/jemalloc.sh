@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:jemalloc_.orig:3.6.0
+NAME="jemalloc"
+VERSION="3.6.0"
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/j/jemalloc/jemalloc_3.6.0.orig.tar.bz2
 
@@ -23,6 +25,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "jemalloc=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

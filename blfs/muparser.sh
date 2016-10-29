@@ -5,7 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:muparser:2.2.3
+NAME="muparser"
+VERSION="2.2.3"
 
 cd $SOURCE_DIR
 
@@ -37,6 +38,5 @@ sudo rm rootscript.sh
 
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
-echo "muparser=>`date`" | sudo tee -a $INSTALLED_LIST
-
+cleanup "$NAME" "$DIRECTORY"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

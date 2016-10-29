@@ -6,13 +6,16 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:br3ak The GTK+ 3 package containsbr3ak libraries used for creating graphical user interfaces forbr3ak applications.br3ak
-#SECTION:x
+DESCRIPTION="br3ak The GTK+ 3 package containsbr3ak libraries used for creating graphical user interfaces forbr3ak applications.br3ak"
+SECTION="x"
+VERSION=3.22.1
+NAME="gtk3"
 
 #REQ:at-spi2-atk
 #REQ:gdk-pixbuf
 #REQ:libepoxy
 #REQ:pango
+#REQ:wayland-protocols
 #REC:hicolor-icon-theme
 #REC:adwaita-icon-theme
 #REC:gobject-introspection
@@ -27,20 +30,17 @@ set +h
 #OPT:wayland-protocols
 
 
-#VER:gtk+:3.22.1
-
-
-NAME="gtk3"
-
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gtk+/gtk+-3.22.1.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gtk+/3.22/gtk+-3.22.1.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/gtk+/3.22/gtk+-3.22.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gtk+/gtk+-3.22.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gtk+/gtk+-3.22.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gtk+/gtk+-3.22.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gtk+/gtk+-3.22.1.tar.xz
 
 
 URL=http://ftp.gnome.org/pub/gnome/sources/gtk+/3.22/gtk+-3.22.1.tar.xz
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+
+whoami > /tmp/currentuser
 
 sed -i "/seems to be moved/s/^/#/" build-aux/ltmain.sh &&
 ./configure --prefix=/usr             \
@@ -48,11 +48,13 @@ sed -i "/seems to be moved/s/^/#/" build-aux/ltmain.sh &&
             --enable-broadway-backend \
             --enable-x11-backend      \
             --disable-wayland-backend &&
-make
+make "-j`nproc`" || make
+
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -62,6 +64,7 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 gtk-query-immodules-3.0 --update-cache
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -71,6 +74,7 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 glib-compile-schemas /usr/share/glib-2.0/schemas
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -95,6 +99,6 @@ EOF
 
 
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

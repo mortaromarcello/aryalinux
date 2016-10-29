@@ -6,8 +6,10 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:br3ak The GTK-Doc package contains abr3ak code documenter. This is useful for extracting specially formattedbr3ak comments from the code to create API documentation. This package isbr3ak <span class="emphasis"><em>optional</em>; if it is notbr3ak installed, packages will not build the documentation. This does notbr3ak mean that you will not have any documentation. If GTK-Doc is not available, the install processbr3ak will copy any pre-built documentation to your system.br3ak
-#SECTION:general
+DESCRIPTION="br3ak The GTK-Doc package contains abr3ak code documenter. This is useful for extracting specially formattedbr3ak comments from the code to create API documentation. This package isbr3ak <span class="emphasis"><em>optional</em>; if it is notbr3ak installed, packages will not build the documentation. This does notbr3ak mean that you will not have any documentation. If GTK-Doc is not available, the install processbr3ak will copy any pre-built documentation to your system.br3ak"
+SECTION="general"
+VERSION=1.25
+NAME="gtk-doc"
 
 #REQ:docbook
 #REQ:docbook-xsl
@@ -23,27 +25,26 @@ set +h
 #OPT:rarian
 
 
-#VER:gtk-doc:1.25
-
-
-NAME="gtk-doc"
-
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gtk-doc/gtk-doc-1.25.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gtk-doc/gtk-doc-1.25.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gtk-doc/gtk-doc-1.25.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/gtk-doc/1.25/gtk-doc-1.25.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gtk-doc/1.25/gtk-doc-1.25.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gtk-doc/gtk-doc-1.25.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gtk-doc/gtk-doc-1.25.tar.xz
 
 
 URL=http://ftp.gnome.org/pub/gnome/sources/gtk-doc/1.25/gtk-doc-1.25.tar.xz
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 ./configure --prefix=/usr &&
-make
+make "-j`nproc`" || make
+
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -51,8 +52,7 @@ sudo rm rootscript.sh
 
 
 
-
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

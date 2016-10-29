@@ -3,8 +3,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:node-v:4.2.2
+NAME="node-v"
+VERSION="4.2.2"
 
 cd $SOURCE_DIR
 
@@ -22,8 +24,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "node=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

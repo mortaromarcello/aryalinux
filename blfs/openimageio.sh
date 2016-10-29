@@ -4,6 +4,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 URL=https://github.com/OpenImageIO/oiio/archive/release.zip
 
@@ -23,4 +24,4 @@ sudo make install
 cd $SOURCE_DIR
 rm -rf oiio-release
 
-echo "openimageio=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

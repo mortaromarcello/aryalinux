@@ -5,7 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:simpleburn:1.8.1
+NAME="simpleburn"
+VERSION="1.8.1"
 
 #REQ:libcddb
 #REQ:cmake
@@ -61,6 +62,5 @@ sudo usermod -a -G cdrom `cat /tmp/currentuser`
 
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
-echo "simpleburn=>`date`" | sudo tee -a $INSTALLED_LIST
-
+cleanup "$NAME" "$DIRECTORY"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

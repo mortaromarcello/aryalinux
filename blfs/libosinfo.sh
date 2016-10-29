@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:libosinfo:0.3.1
+NAME="libosinfo"
+VERSION="0.3.1"
 
 #REQ:check
 
@@ -25,6 +27,6 @@ sudo make install
 
 cd $SOURCE_DIR
 
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "libosinfo=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

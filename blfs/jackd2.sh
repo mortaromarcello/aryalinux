@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:jackd2_1.9.10+20150825git1ed50c~dfsg.orig:92
+NAME="jackd2_1.9.10+20150825git1ed50c~dfsg.orig"
+VERSION="92"
 
 #REQ:jack2
 
@@ -25,6 +27,6 @@ cd $DIRECTORY
 sudo ./waf install
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "jackd2=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

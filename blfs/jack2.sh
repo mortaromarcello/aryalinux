@@ -3,8 +3,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:jack:1.9.10
+NAME="jack"
+VERSION="1.9.10"
 
 cd $SOURCE_DIR
 
@@ -22,8 +24,6 @@ CXXFLAGS="-Wno-narrowing" ./waf configure --prefix=/usr &&
 sudo ./waf install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "jack2=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

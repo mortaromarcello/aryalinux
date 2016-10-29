@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:playonlinux_.orig:4.2.2
+NAME="playonlinux"
+VERSION="4.2.2"
 
 #REQ:cabextract
 #REQ:curl
@@ -91,6 +93,6 @@ sudo update-desktop-database
 sudo update-mime-database /usr/share/mime
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "playonlinux=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

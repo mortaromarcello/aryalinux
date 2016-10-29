@@ -5,7 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:hamlib:3.0.1
+NAME="hamlib"
+VERSION="3.0.1"
 
 cd $SOURCE_DIR
 
@@ -32,6 +33,5 @@ sudo rm rootscript.sh
 
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
-echo "hamlib=>`date`" | sudo tee -a $INSTALLED_LIST
-
+cleanup "$NAME" "$DIRECTORY"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

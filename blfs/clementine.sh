@@ -4,6 +4,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 
 #REQ:audio-video-plugins
@@ -38,7 +39,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "clementine=>`date`" | sudo tee -a $INSTALLED_LIST
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

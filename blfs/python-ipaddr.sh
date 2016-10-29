@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:python-ipaddr:2.1.11
+NAME="python-ipaddr"
+VERSION="2.1.11"
 
 #REQ:python2
 #REQ:python-modules#setuptools
@@ -25,6 +27,6 @@ sudo python setup.py install
 
 cd $SOURCE_DIR
 
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "python-ipaddr=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

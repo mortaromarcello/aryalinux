@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:v:1.0.8
+NAME="v"
+VERSION="1.0.8"
 
 #REQ:openimageio
 
@@ -25,4 +27,4 @@ sudo make install
 cd $SOURCE_DIR
 rm -rf imageworks-OpenColorIO-8883824
 
-echo "opencolorio=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -6,8 +6,9 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:br3ak The Xorg libraries provide librarybr3ak routines that are used within all X Window applications.br3ak
-#SECTION:x
+DESCRIPTION="br3ak The Xorg libraries provide librarybr3ak routines that are used within all X Window applications.br3ak"
+SECTION="x"
+NAME="x7lib"
 
 #REQ:fontconfig
 #REQ:libxcb
@@ -20,16 +21,17 @@ set +h
 
 
 
-NAME="x7lib"
-
-
-
 URL=
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+
+whoami > /tmp/currentuser
+
+export XORG_PREFIX=/usr
+export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
 
 cat > lib-7.7.md5 << "EOF"
 c5ba432dd1514d858053ffe9f4737dd8 xtrans-1.3.5.tar.bz2
@@ -66,11 +68,13 @@ ace78aec799b1cf6dfaea55d3879ed9f libpciaccess-0.13.4.tar.bz2
 66662e76899112c0f99e22f2fc775a7e libxshmfence-1.2.tar.bz2
 EOF
 
-mkdir lib &&
+
+mkdir -pv lib &&
 cd lib &&
 grep -v '^#' ../lib-7.7.md5 | awk '{print $2}' | wget -i- -c \
     -B http://ftp.x.org/pub/individual/lib/ &&
 md5sum -c ../lib-7.7.md5
+
 
 as_root()
 {
@@ -79,12 +83,14 @@ as_root()
   else                            su -c \\"$*\\"
   fi
 }
-
 export -f as_root
+
 
 grep -A9 summary *make_check.log
 
-bash -e
+
+
+
 
 for package in $(grep -v '^#' ../lib-7.7.md5 | awk '{print $2}')
 do
@@ -107,7 +113,7 @@ do
       ./configure $XORG_CONFIG
     ;;
   esac
-  make
+  make "-j`nproc`" || make
   #make check 2>&1 | tee ../$packagedir-make_check.log
   as_root make install
   popd
@@ -115,21 +121,12 @@ do
   as_root /sbin/ldconfig
 done
 
-exit
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-ln -sv $XORG_PREFIX/lib/X11 /usr/lib/X11 &&
-ln -sv $XORG_PREFIX/include/X11 /usr/include/X11
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
 
 
 
 
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

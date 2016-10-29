@@ -5,6 +5,7 @@ set +h
 #REQ:git
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 cd $SOURCE_DIR
 
@@ -16,8 +17,6 @@ sudo cp -r Numix /usr/share/icons
 sudo cp -r Numix-Light /usr/share/icons
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "numix-icons=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

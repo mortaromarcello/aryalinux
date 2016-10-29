@@ -6,8 +6,9 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:br3ak Final steps, before starting LXQt.br3ak
-#SECTION:lxqt
+DESCRIPTION="br3ak Final steps, before starting LXQt.br3ak"
+SECTION="lxqt"
+NAME="post-install"
 
 #REQ:openbox
 #REQ:xfwm4
@@ -23,36 +24,30 @@ set +h
 
 
 
-NAME="post-install"
-
-
-
 URL=
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 ln -svfn $LXQT_PREFIX/share/lxqt /usr/share/lxqt &&
-
 cp -v {$LXQT_PREFIX,/usr}/share/xsessions/lxqt.desktop &&
-
 for i in $LXQT_PREFIX/share/applications/*
 do
   ln -svf $i /usr/share/applications/
 done
-
 for i in $LXQT_PREFIX/share/desktop-directories/*
 do
   ln -svf $i /usr/share/desktop-directories/
 done
-
 unset i
-
 ldconfig
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -64,6 +59,7 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 update-mime-database /usr/share/mime          &&
 xdg-icon-resource forceupdate --theme hicolor &&
 update-desktop-database -q
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -73,14 +69,14 @@ sudo rm rootscript.sh
 cat > ~/.xinitrc << "EOF"
 dbus-launch --exit-with-session startlxqt
 EOF
-
 startx
+
 
 startx &> ~/.x-session-errors
 
 
 
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:libpng_.orig:1.2.50
+NAME="libpng_.orig"
+VERSION="1.2.50"
 
 URL=http://http.debian.net/debian/pool/main/libp/libpng/libpng_1.2.50.orig.tar.xz
 
@@ -23,6 +25,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "libpng12-0=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

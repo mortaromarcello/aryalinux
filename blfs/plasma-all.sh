@@ -6,13 +6,13 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:%DESCRIPTION%
-#SECTION:kde
+DESCRIPTION="%DESCRIPTION%"
+SECTION="kde"
+NAME="plasma-all"
 
 #REQ:fontforge
 #REQ:gtk2
 #REQ:gtk3
-#REQ:krameworks5
 #REQ:libpwquality
 #REQ:libxkbcommon
 #REQ:mesa
@@ -23,6 +23,7 @@ set +h
 #REQ:qca
 #REQ:taglib
 #REQ:xcb-util-cursor
+#REQ:kframeworks5
 #REC:libdbusmenu-qt
 #REC:libcanberra
 #REC:x7driver
@@ -36,19 +37,18 @@ set +h
 
 
 
-NAME="plasma-all"
-
-
-
 URL=
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 url=http://download.kde.org/stable/plasma/5.7.3/
 wget -r -nH --cut-dirs=3 -A '*.xz' -np $url
+
 
 cat > plasma-5.7.3.md5 << "EOF"
 bc2dd43ace2d8674f1d0468e1205474a kde-cli-tools-5.7.3.tar.xz
@@ -93,6 +93,7 @@ e82aed1e04ae3e39fa91b7c16e4338e2 sddm-kcm-5.7.3.tar.xz
 5f950d13d8715162ea4bdfec73e06b7d plasma-integration-5.7.3.tar.xz
 EOF
 
+
 as_root()
 {
   if   [ $EUID = 0 ];        then $*
@@ -100,68 +101,57 @@ as_root()
   else                            su -c \\"$*\\"
   fi
 }
-
 export -f as_root
+
 
 bash -e
 
-while read -r line; do
 
+while read -r line; do
     # Get the file name, ignoring comments and blank lines
     if $(echo $line | grep -E -q '^ *$|^#' ); then continue; fi
     file=$(echo $line | cut -d" " -f2)
-
     pkg=$(echo $file|sed 's|^.*/||')          # Remove directory
     packagedir=$(echo $pkg|sed 's|\.tar.*||') # Package directory
-
     # Correct the name of the extracted directory
     case $packagedir in
       plasma-workspace-5.6.5.1 )
         packagedir=plasma-workspace-5.6.5
         ;;
     esac
-
     tar -xf $file
     pushd $packagedir
-
        mkdir build
        cd    build
-
        cmake -DCMAKE_INSTALL_PREFIX=$KF5_PREFIX \
              -DCMAKE_BUILD_TYPE=Release         \
              -DLIB_INSTALL_DIR=lib              \
              -DBUILD_TESTING=OFF                \
              -Wno-dev ..  &&
-
-        make
+        make "-j`nproc`" || make
         as_root make install
     popd
-
-
     as_root rm -rf $packagedir
     as_root /sbin/ldconfig
-
 done < plasma-5.7.3.md5
-
 exit
-
 cd $KF5_PREFIX/share/plasma/plasmoids
-
 for j in $(find -name \*.js); do
   as_root ln -sfv ../code/$(basename $j) $(dirname $j)/../ui/
 done
 
+
 cat > ~/.xinitrc << "EOF"
 dbus-launch --exit-with-session $KF5_PREFIX/bin/startkde
 EOF
-
 startx
+
 
 startx &> ~/x-session-errors
 
 
 
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

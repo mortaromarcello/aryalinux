@@ -6,34 +6,35 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:br3ak The GTK Xfce Engine packagebr3ak contains several GTK+ 2 andbr3ak GTK+ 3 themes and libraries neededbr3ak to display them. This is useful for customising the appearance ofbr3ak your Xfce desktop.br3ak
-#SECTION:xfce
+DESCRIPTION="br3ak The GTK Xfce Engine packagebr3ak contains several GTK+ 2 andbr3ak GTK+ 3 themes and libraries neededbr3ak to display them. This is useful for customising the appearance ofbr3ak your Xfce desktop.br3ak"
+SECTION="xfce"
+VERSION=3.2.0
+NAME="gtk-xfce-engine"
 
 #REQ:gtk2
 #REC:gtk3
 
 
-#VER:gtk-xfce-engine:3.2.0
-
-
-NAME="gtk-xfce-engine"
-
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gtk-xfce-engine/gtk-xfce-engine-3.2.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gtk-xfce-engine/gtk-xfce-engine-3.2.0.tar.bz2 || wget -nc http://archive.xfce.org/src/xfce/gtk-xfce-engine/3.2/gtk-xfce-engine-3.2.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gtk-xfce-engine/gtk-xfce-engine-3.2.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gtk-xfce-engine/gtk-xfce-engine-3.2.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gtk-xfce-engine/gtk-xfce-engine-3.2.0.tar.bz2
 
 
 URL=http://archive.xfce.org/src/xfce/gtk-xfce-engine/3.2/gtk-xfce-engine-3.2.0.tar.bz2
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 ./configure --prefix=/usr --enable-gtk3 &&
-make
+make "-j`nproc`" || make
+
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -41,8 +42,7 @@ sudo rm rootscript.sh
 
 
 
-
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

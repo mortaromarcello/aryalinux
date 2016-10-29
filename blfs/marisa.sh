@@ -4,10 +4,9 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:marisa_.orig:0.2.4
-
-PACKAGE_NAME="marisa"
+NAME="marisa"
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/m/marisa/marisa_0.2.4.orig.tar.gz
 
@@ -27,4 +26,4 @@ sudo make install
 cd $SOURCE_DIR
 sudo rm -r $DIRECTORY
 
-echo "$PACKAGE_NAME=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

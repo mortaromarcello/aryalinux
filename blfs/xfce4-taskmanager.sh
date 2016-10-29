@@ -4,8 +4,11 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:xfce4-taskmanager:1.0.0
+DESCRIPTION="A very simple task manager for XFCE"
+NAME="xfce4-taskmanager"
+VERSION="1.0.0"
 
 URL="http://archive.xfce.org/src/apps/xfce4-taskmanager/1.0/xfce4-taskmanager-1.0.0.tar.bz2"
 
@@ -25,4 +28,4 @@ sudo make install
 cd $SOURCE_DIR
 
 rm -r $DIRECTORY
-echo "xfce4-taskmanager=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

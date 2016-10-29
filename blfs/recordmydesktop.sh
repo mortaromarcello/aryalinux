@@ -5,7 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:recordmydesktop:0.3.8.1
+NAME="recordmydesktop"
+VERSION="0.3.8.1"
 
 #REC:jack2
 #REC:audio-video-libraries
@@ -35,6 +36,5 @@ sudo rm rootscript.sh
 
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
-echo "recordmydesktop=>`date`" | sudo tee -a $INSTALLED_LIST
-
+cleanup "$NAME" "$DIRECTORY"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

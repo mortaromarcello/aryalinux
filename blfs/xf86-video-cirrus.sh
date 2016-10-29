@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:xf86-video-cirrus:1.5.3
+NAME="xf86-video-cirrus"
+VERSION="1.5.3"
 
 #REQ:xorg-server
 
@@ -29,8 +31,6 @@ sudo make install
 
 cd $SOURCE_DIR
 
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "xf86-video-cirrus=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

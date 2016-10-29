@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:hardinfo:0.5.1
+NAME="hardinfo"
+VERSION="0.5.1"
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/h/hardinfo/hardinfo_0.5.1.orig.tar.gz
 
@@ -26,6 +28,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "hardinfo=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

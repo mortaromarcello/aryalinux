@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:b43-fwcutter:018
+NAME="b43-fwcutter"
+VERSION="018"
 
 #REQ:xorg-server
 
@@ -34,7 +36,6 @@ sudo b43-fwcutter -w "$FIRMWARE_INSTALL_DIR" broadcom-wl-5.100.138/linux/wl_apst
 
 cd $SOURCE_DIR
 
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "b43-fwcutter=>`date`" | sudo tee -a $INSTALLED_LIST
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

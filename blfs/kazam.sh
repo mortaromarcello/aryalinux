@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:kazam_.orig:1.0.6
+NAME="kazam_.orig"
+VERSION="1.0.6"
 
 #REQ:python-modules#setuptools
 #REQ:python-distutils-extra
@@ -26,6 +28,6 @@ python setup.py build &&
 sudo python setup.py install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "kazam=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

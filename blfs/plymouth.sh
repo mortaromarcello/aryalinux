@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:plymouth:0.9.2
+NAME="plymouth"
+VERSION="0.9.2"
 
 cd $SOURCE_DIR
 
@@ -33,6 +35,6 @@ sudo dracut -f `ls /boot/initrd*` `ls /lib/modules`
 
 cd $SOURCE_DIR
 
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "plymouth=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

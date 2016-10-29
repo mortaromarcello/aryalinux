@@ -3,6 +3,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 cd $SOURCE_DIR
 
@@ -36,6 +37,4 @@ done
 
 sudo tar xf arya-plymouth-theme.tar.gz -C /usr/share/plymouth/themes/
 
-echo "aryalinux-default-themes-mate=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

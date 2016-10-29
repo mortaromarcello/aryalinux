@@ -3,8 +3,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:mysql:5.6.27
+NAME="mysql"
+VERSION="5.6.27"
 
 #REQ:cmake
 #REQ:openssl
@@ -153,6 +155,6 @@ sudo systemctl enable mysqld
 popd
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "mysql=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:fonts-dejavu_.orig:2.35
+NAME="fonts-dejavu_.orig"
+VERSION="2.35"
 
 #REQ:fontforge
 #REQ:perl-modules#font-ttf
@@ -27,6 +29,6 @@ sudo mkdir -pv /usr/share/fonts/truetype/dejavu/
 sudo cp -v build/*.ttf /usr/share/fonts/truetype/dejavu/
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "fonts-dejavu=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

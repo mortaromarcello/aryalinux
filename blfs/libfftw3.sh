@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:fftw:3.3.4
+NAME="fftw"
+VERSION="3.3.4"
 
 URL=http://www.fftw.org/fftw-3.3.4.tar.gz
 
@@ -32,6 +34,6 @@ sudo make install
 make clean
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "libfftw3=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

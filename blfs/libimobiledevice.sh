@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:libimobiledevice_+dfsg.orig:1.2.0
+NAME="libimobiledevice_+dfsg.orig"
+VERSION="1.2.0"
 
 #REQ:libplist
 #REQ:libusbmuxd
@@ -26,6 +28,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "libimobiledevice=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

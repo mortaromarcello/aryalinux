@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:blender_2.77.a+dfsg.orig:0
+NAME="blender_2.77.a+dfsg.orig"
+VERSION="0"
 
 #REQ:fonts-dejavu
 #REQ:ffmpeg
@@ -73,6 +75,6 @@ pathappend /opt/blender-2.77
 EOF
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "blender=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

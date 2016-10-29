@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:conky-manager_2.4~136~ubuntu:16.04.1
+NAME="conky-manager_2.4~136~ubuntu"
+VERSION="16.04.1"
 
 #REQ:conky
 #REQ:json-glib
@@ -28,6 +30,6 @@ make
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "conky-manager=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

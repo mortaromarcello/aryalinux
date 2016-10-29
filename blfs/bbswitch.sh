@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:bbswitch_.orig:0.8
+NAME="bbswitch_.orig"
+VERSION="0.8"
 
 #REQ:dkms
 
@@ -35,6 +37,6 @@ make
 sudo make install
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "bbswitch=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

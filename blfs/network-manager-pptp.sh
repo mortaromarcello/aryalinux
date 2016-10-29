@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:network-manager-pptp_.orig:0.9.10.0
+NAME="network-manager-pptp_.orig"
+VERSION="0.9.10.0"
 
 URL=http://archive.ubuntu.com/ubuntu/pool/main/n/network-manager-pptp/network-manager-pptp_0.9.10.0.orig.tar.xz
 
@@ -23,6 +25,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "network-manager-pptp=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

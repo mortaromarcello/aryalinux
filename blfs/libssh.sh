@@ -4,8 +4,11 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:libssh_.orig:0.7.3
+NAME="libssh"
+VERSION="0.7.3"
+SECTION="basicnet"
 
 URL=http://archive.ubuntu.com/ubuntu/pool/main/libs/libssh/libssh_0.7.3.orig.tar.xz
 
@@ -25,6 +28,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "libssh=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

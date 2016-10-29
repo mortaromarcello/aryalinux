@@ -4,10 +4,11 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:snappy:1.0.5
+NAME="snappy"
+VERSION="1.0.5"
 
-PACKAGE_NAME="snappy"
 URL=http://pkgs.fedoraproject.org/repo/pkgs/snappy/snappy-1.0.5.tar.gz/4c0af044e654f5983f4acbf00d1ac236/snappy-1.0.5.tar.gz
 
 cd $SOURCE_DIR
@@ -26,4 +27,4 @@ sudo make install
 cd $SOURCE_DIR
 sudo rm -r $DIRECTORY
 
-echo "$PACKAGE_NAME=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -4,7 +4,8 @@ set -e
 
 . /etc/alps/alps.conf
 
-#VER:gst-ffmpeg:0.10.13
+NAME="gst-ffmpeg"
+VERSION="0.10.13"
 . /var/lib/alps/functions
 
 #REQ:gst-plugins-base
@@ -43,6 +44,5 @@ sudo rm rootscript.sh
 
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
-echo "gst-ffmpeg=>`date`" | sudo tee -a $INSTALLED_LIST
-
+cleanup "$NAME" "$DIRECTORY"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

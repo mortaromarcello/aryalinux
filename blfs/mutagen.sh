@@ -4,10 +4,9 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:mutagen_.orig:1.30
-
-PACKAGE_NAME="mutagen"
+NAME="mutagen"
 
 cd $SOURCE_DIR
 URL="http://archive.ubuntu.com/ubuntu/pool/main/m/mutagen/mutagen_1.30.orig.tar.gz"
@@ -23,6 +22,6 @@ python setup.py build
 sudo python setup.py install
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "$PACKAGE_NAME=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

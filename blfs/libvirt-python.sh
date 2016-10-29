@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:libvirt-python:2.0.0
+NAME="libvirt-python"
+VERSION="2.0.0"
 
 #REQ:libvirt
 
@@ -24,6 +26,6 @@ sudo python setup.py install
 
 cd $SOURCE_DIR
 
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "libvirt-python=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:python-docutils_+dfsg.orig:0.12
+NAME="python-docutils"
+VERSION="0.12"
 
 cd $SOURCE_DIR
 
@@ -22,6 +24,6 @@ sudo python setup.py install
 
 cd $SOURCE_DIR
 
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "python-docutils=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

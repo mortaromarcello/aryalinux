@@ -3,8 +3,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:apache-maven--bin:3.3.9
+NAME="apache-maven--bin"
+VERSION="3.3.9"
 
 cd $SOURCE_DIR
 
@@ -22,6 +24,4 @@ EOF
 
 cd $SOURCE_DIR
 
-echo "maven=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

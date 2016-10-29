@@ -4,6 +4,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:gobject-introspection
 #REQ:desktop-file-utils
@@ -96,4 +97,4 @@ set +h
 #REQ:usb_modeswitch
 #REQ:compton
 
-echo "mate-desktop-environment=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

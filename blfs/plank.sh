@@ -3,8 +3,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:plank:0.11.1
+NAME="plank"
+VERSION="0.11.1"
 
 #REQ:libgee
 #REQ:libbamf3
@@ -25,9 +27,6 @@ make
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "plank=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

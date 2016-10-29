@@ -8,6 +8,7 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
     --localstatedir=/var --disable-static"
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:cups
 #REQ:GConf
@@ -142,4 +143,4 @@ StartupWMClass=chromium-browser
 
 EOF
 
-echo "chromium-bin=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

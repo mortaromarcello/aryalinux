@@ -4,11 +4,13 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 
 URL="http://search.cpan.org/CPAN/authors/id/S/SA/SADAHIRO/Unicode-Collate-1.14.tar.gz"
 
-#VER:Unicode-Collate:1.14
+NAME="Unicode-Collate"
+VERSION="1.14"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -33,7 +35,6 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#perl-unicode-collate=>`date`" | sudo tee -a $INSTALLED_LIST
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

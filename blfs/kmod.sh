@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:kmod:23
+NAME="kmod"
+VERSION="23"
 
 URL=https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-23.tar.xz
 
@@ -32,6 +34,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "kmod=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

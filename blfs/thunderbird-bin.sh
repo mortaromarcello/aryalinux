@@ -8,6 +8,10 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
     --localstatedir=/var --disable-static"
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
+
+NAME="thunderbird-bin"
+VERSION="`date`"
 
 #REQ:curl
 #REQ:alsa-lib
@@ -98,6 +102,6 @@ sudo rm -rf 1434987998846.sh
 
  
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
  
-echo "thunderbird-bin=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

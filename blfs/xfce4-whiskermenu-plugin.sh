@@ -8,6 +8,11 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
     --localstatedir=/var --disable-static"
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
+
+DESCRIPTION="The Whisker Menu presents a Windows-Like start menu for XFCE panel"
+NAME="xfce4-whiskermenu-plugin"
+VERSION="1.5.0"
 
 #REQ:cmake
 
@@ -40,6 +45,6 @@ sudo rm -rf 1434987998845.sh
 
  
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
  
-echo "xfce4-whiskermenu-plugin=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

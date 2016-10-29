@@ -3,8 +3,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:xfce4-dev-tools:4.4.0
+NAME="xfce4-dev-tools"
+VERSION="4.4.0"
 
 KDE_PREFIX=/usr
 cd $SOURCE_DIR
@@ -23,7 +25,6 @@ make
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "xfce4-dev-tools=>`date`" | sudo tee -a $INSTALLED_LIST
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:libva:1.7.1
+NAME="libva"
+VERSION="1.7.1"
 
 #REQ:mesa
 #OPT:doxygen
@@ -38,6 +40,6 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "libva-wo-mesa=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

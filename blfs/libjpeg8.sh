@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:libjpeg8_8d.orig:1
+NAME="libjpeg8_8d.orig"
+VERSION="1"
 
 URL=http://http.debian.net/debian/pool/main/libj/libjpeg8/libjpeg8_8d1.orig.tar.gz
 
@@ -23,6 +25,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "libjpeg8=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

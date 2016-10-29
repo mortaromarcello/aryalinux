@@ -3,10 +3,12 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:gtkmm3
 
-#VER:grub-customizer:5.0.6
+NAME="grub-customizer"
+VERSION="5.0.6"
 
 cd $SOURCE_DIR
 
@@ -21,6 +23,4 @@ sudo make install
 cd $SOURCE_DIR
 rm -rf grub-customizer-5.0.6
 
-echo "grub-customizer=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

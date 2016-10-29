@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:squashfs-tools:4.3
+NAME="squashfs-tools"
+VERSION="4.3"
 
 cd $SOURCE_DIR
 
@@ -25,6 +27,6 @@ sudo make INSTALL_DIR=/bin install
 
 cd $SOURCE_DIR
 
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "squashfs-tools=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

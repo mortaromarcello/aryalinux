@@ -6,25 +6,22 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:%DESCRIPTION%
-#SECTION:general
+DESCRIPTION="%DESCRIPTION%"
+SECTION="general"
+VERSION=3.22.0
+NAME="python-modules#pygobject3"
 
 #REQ:gobject-introspection
 #REQ:python-modules#py2cairo
 #REQ:python-modules#pycairo
 
 
-#VER:pygobject:3.22.0
-
-
-NAME="python-modules#pygobject3"
-
 wget -nc http://ftp.gnome.org/pub/gnome/sources/pygobject/3.22/pygobject-3.22.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/pygobject/3.22/pygobject-3.22.0.tar.xz
 
 
 URL=http://ftp.gnome.org/pub/gnome/sources/pygobject/3.22/pygobject-3.22.0.tar.xz
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
@@ -60,8 +57,7 @@ sudo rm rootscript.sh
 
 
 
-
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

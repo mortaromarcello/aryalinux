@@ -3,8 +3,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:mongodb-src-r:3.0.7
+NAME="mongodb-src-r"
+VERSION="3.0.7"
 
 #REQ:scons
 
@@ -22,8 +24,6 @@ cd $DIRECTORY
 sudo scons all --disable-warnings-as-errors --prefix=/usr install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "mongodb=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

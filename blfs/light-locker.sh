@@ -5,7 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:light-locker:1.7.0
+NAME="light-locker"
+VERSION="1.7.0"
 
 #REQ:gnome-common
 #REQ:lightdm
@@ -32,6 +33,5 @@ sudo make install
 
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
-echo "light-locker=>`date`" | sudo tee -a $INSTALLED_LIST
-
+cleanup "$NAME" "$DIRECTORY"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

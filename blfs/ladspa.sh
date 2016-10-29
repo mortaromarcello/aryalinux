@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:ladspa-sdk_.orig:1.13
+NAME="ladspa-sdk_.orig"
+VERSION="1.13"
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/l/ladspa-sdk/ladspa-sdk_1.13.orig.tar.gz
 
@@ -25,6 +27,6 @@ sudo make install
 popd
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "ladspa=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -4,7 +4,8 @@ set -e
 
 . /etc/alps/alps.conf
 
-#VER:gstreamer:0.10.36
+NAME="gstreamer"
+VERSION="0.10.36"
 . /var/lib/alps/functions
 
 #REQ:glib2
@@ -65,6 +66,5 @@ gst-launch -v fakesrc num_buffers=5 ! fakesink
 
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
-echo "gstreamer=>`date`" | sudo tee -a $INSTALLED_LIST
-
+cleanup "$NAME" "$DIRECTORY"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

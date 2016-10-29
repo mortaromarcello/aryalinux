@@ -3,8 +3,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:redis:3.0.5
+NAME="redis"
+VERSION="3.0.5"
 
 cd $SOURCE_DIR
 
@@ -21,8 +23,6 @@ make "-j`nproc`"
 sudo make PREFIX=/usr install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "redis=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

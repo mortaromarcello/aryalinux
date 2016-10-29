@@ -3,8 +3,11 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:wxwidgets:3.0.2
+DESCRIPTION="A cross platform UI library for which bindings are available in C++, Python etc."
+NAME="wxwidgets"
+VERSION="3.0.2"
 
 cd $SOURCE_DIR
 
@@ -25,8 +28,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "wxwidgets=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:lensfun_.orig:0.3.2
+NAME="lensfun_.orig"
+VERSION="0.3.2"
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/l/lensfun/lensfun_0.3.2.orig.tar.gz
 
@@ -25,6 +27,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "lensfun=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

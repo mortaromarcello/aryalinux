@@ -4,10 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:yaml-cpp:0.5.3
-
-PACKAGE_NAME="yaml-cpp"
+NAME="yaml-cpp"
+VERSION="0.5.3"
 
 URL=https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-0.5.3.tar.gz
 
@@ -27,4 +27,4 @@ sudo make install
 cd $SOURCE_DIR
 sudo rm -r $DIRECTORY
 
-echo "$PACKAGE_NAME=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

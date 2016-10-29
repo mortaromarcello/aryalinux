@@ -4,10 +4,9 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:brise_.orig:0.35
-
-PACKAGE_NAME="brise"
+NAME="brise"
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/b/brise/brise_0.35.orig.tar.gz
 
@@ -26,4 +25,4 @@ sudo make install
 cd $SOURCE_DIR
 sudo rm -r $DIRECTORY
 
-echo "$PACKAGE_NAME=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

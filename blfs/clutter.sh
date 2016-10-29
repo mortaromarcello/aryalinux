@@ -6,8 +6,10 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:br3ak The Clutter package contains anbr3ak open source software library used for creating fast, visually richbr3ak and animated graphical user interfaces.br3ak
-#SECTION:x
+DESCRIPTION="br3ak The Clutter package contains anbr3ak open source software library used for creating fast, visually richbr3ak and animated graphical user interfaces.br3ak"
+SECTION="x"
+VERSION=1.26.0
+NAME="clutter"
 
 #REQ:atk
 #REQ:cogl
@@ -21,20 +23,17 @@ set +h
 #OPT:gtk-doc
 
 
-#VER:clutter:1.26.0
+wget -nc http://ftp.acc.umu.se/pub/gnome/sources/clutter/1.22/clutter-1.22.4.tar.xz
 
 
-NAME="clutter"
-
-wget -nc ftp://ftp.gnome.org/pub/gnome/sources/clutter/1.26/clutter-1.26.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/clutter/clutter-1.26.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/clutter/clutter-1.26.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/clutter/clutter-1.26.0.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/clutter/1.26/clutter-1.26.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/clutter/clutter-1.26.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/clutter/clutter-1.26.0.tar.xz
-
-
-URL=http://ftp.gnome.org/pub/gnome/sources/clutter/1.26/clutter-1.26.0.tar.xz
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+URL=http://ftp.acc.umu.se/pub/gnome/sources/clutter/1.22/clutter-1.22.4.tar.xz
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+
+whoami > /tmp/currentuser
 
 ./configure --prefix=/usr               \
             --sysconfdir=/etc           \
@@ -42,11 +41,13 @@ cd $DIRECTORY
             --enable-evdev-input        \
             --enable-wayland-backend    \
             --enable-wayland-compositor &&
-make
+make "-j`nproc`" || make
+
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -54,8 +55,7 @@ sudo rm rootscript.sh
 
 
 
-
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:qjson_.orig:0.8.1
+NAME="qjson_.orig"
+VERSION="0.8.1"
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/q/qjson/qjson_0.8.1.orig.tar.bz2
 
@@ -25,6 +27,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "libqjson0=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

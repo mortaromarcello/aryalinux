@@ -4,6 +4,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 cd $SOURCE_DIR
 
@@ -27,4 +28,4 @@ sudo cp -vf *ttf /usr/share/fonts/msttcorefonts/
 cd $SOURCE_DIR
 rm -rf msttcorefonts
 
-echo "msttcorefonts=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -8,6 +8,10 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
     --localstatedir=/var --disable-static"
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
+
+NAME="thunar-plugins"
+VERSION="0.4.1"
 
 #REQ:xfce4-dev-tools
 #REQ:thunar
@@ -60,6 +64,6 @@ sudo rm -rf 1434987998824.sh
 
  
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
  
-echo "thunar-plugins=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

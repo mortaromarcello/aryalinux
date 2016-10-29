@@ -3,11 +3,13 @@
 set -e
 set +h
 
-#VER:libmypaint:1.3.0
+NAME="libmypaint"
+VERSION="1.3.0"
 
 #REQ:json-c
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 URL=https://github.com/mypaint/libmypaint/releases/download/v1.3.0-beta.1/libmypaint-1.3.0-beta.1.tar.xz
 
@@ -25,6 +27,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "libmypaint=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

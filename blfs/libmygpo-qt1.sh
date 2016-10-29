@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:libmygpo-qt_1.0.9~git.orig:20151122
+NAME="libmygpo-qt_1.0.9~git.orig"
+VERSION="20151122"
 
 #REQ:libqjson0
 
@@ -27,6 +29,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "libmygpo-qt1=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -6,17 +6,14 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:%DESCRIPTION%
-#SECTION:general
+DESCRIPTION="%DESCRIPTION%"
+SECTION="general"
+VERSION=1.10.0
+NAME="python-modules#pycairo"
 
 #REQ:cairo
 #REQ:python3
 
-
-#VER:pycairo:1.10.0
-
-
-NAME="python-modules#pycairo"
 
 wget -nc http://cairographics.org/releases/pycairo-1.10.0.tar.bz2
 wget -nc http://www.linuxfromscratch.org/patches/downloads/pycairo/pycairo-1.10.0-waf_unpack-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/pycairo-1.10.0-waf_unpack-1.patch
@@ -24,8 +21,8 @@ wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/pycairo-1.10.0-waf_pyt
 
 
 URL=http://cairographics.org/releases/pycairo-1.10.0.tar.bz2
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
@@ -49,8 +46,7 @@ sudo rm rootscript.sh
 
 
 
-
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

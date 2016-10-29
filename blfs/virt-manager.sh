@@ -4,8 +4,11 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:virt-manager:1.4.0
+DESCRIPTION="A UI for managing virtual machines for Qemu, VirtualBox, VMWare etc."
+NAME="virt-manager"
+VERSION="1.4.0"
 
 #REQ:python2
 #REQ:gtk3
@@ -40,6 +43,6 @@ sudo sed -i "s@Exec=virt-manager@Exec=sudo virt-manager@g" /usr/share/applicatio
 
 cd $SOURCE_DIR
 
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "virt-manager=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

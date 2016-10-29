@@ -6,24 +6,21 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:%DESCRIPTION%
-#SECTION:general
+DESCRIPTION="%DESCRIPTION%"
+SECTION="general"
+VERSION=0.25
+NAME="python-modules#pyxdg"
 
 #REQ:python2
 #REQ:python3
 
 
-#VER:pyxdg:0.25
-
-
-NAME="python-modules#pyxdg"
-
 wget -nc http://people.freedesktop.org/~takluyver/pyxdg-0.25.tar.gz
 
 
 URL=http://people.freedesktop.org/~takluyver/pyxdg-0.25.tar.gz
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
@@ -47,8 +44,7 @@ sudo rm rootscript.sh
 
 
 
-
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

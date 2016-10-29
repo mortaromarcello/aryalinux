@@ -4,10 +4,9 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:kyotocabinet_.orig:1.2.76
-
-PACKAGE_NAME="kyotocabinet"
+NAME="kyotocabinet"
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/k/kyotocabinet/kyotocabinet_1.2.76.orig.tar.gz
 
@@ -42,4 +41,4 @@ sudo make install
 cd $SOURCE_DIR
 sudo rm -r $DIRECTORY
 
-echo "$PACKAGE_NAME=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

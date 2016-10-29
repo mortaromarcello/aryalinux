@@ -237,5 +237,4 @@ sudo ln -sfvn kf5-5.27.0 /opt/kf5
 
 cd $SOURCE_DIR
 
-echo "kframeworks5=>`date`" | sudo tee -a $INSTALLED_LIST
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

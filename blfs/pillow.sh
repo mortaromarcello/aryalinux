@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:pillow_.orig:3.2.0
+NAME="pillow_.orig"
+VERSION="3.2.0"
 
 URL=https://launchpad.net/ubuntu/+archive/primary/+files/pillow_3.2.0.orig.tar.xz
 
@@ -22,6 +24,6 @@ python setup.py build &&
 sudo python setup.py install
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "pillow=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

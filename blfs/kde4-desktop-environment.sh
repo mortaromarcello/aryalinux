@@ -5,7 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:kde4-desktop-environment:4.11.20
+NAME="kde4-desktop-environment"
+VERSION="4.11.20"
 
 cd $SOURCE_DIR
 
@@ -55,8 +56,5 @@ rm rootscript
 
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
-echo "kde4-desktop-environment=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
-
+cleanup "$NAME" "$DIRECTORY"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

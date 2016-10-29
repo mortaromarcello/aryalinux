@@ -8,6 +8,7 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
     --localstatedir=/var --disable-static"
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:lightdm
 #REQ:greybird-gtk-theme
@@ -51,6 +52,6 @@ EOF
 
  
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
  
-echo "lightdm-gtk-greeter=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:blueman:2.0.4
+NAME="blueman"
+VERSION="2.0.4"
 
 #REQ:obex-data-server
 #REQ:python-modules#dbus-python
@@ -58,6 +60,6 @@ sudo chmod a+x /usr/bin/obex_filemanager.sh
 
 cd $SOURCE_DIR
 
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "blueman=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

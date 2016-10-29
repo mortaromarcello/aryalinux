@@ -6,25 +6,22 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:%DESCRIPTION%
-#SECTION:general
+DESCRIPTION="%DESCRIPTION%"
+SECTION="general"
+VERSION=1.2.4
+NAME="python-modules#dbus-python"
 
 #REQ:dbus-glib
 #REQ:python2
 #REQ:python3
 
 
-#VER:dbus-python:1.2.4
-
-
-NAME="python-modules#dbus-python"
-
 wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/dbus-python/dbus-python-1.2.4.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/dbus-python/dbus-python-1.2.4.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/dbus-python/dbus-python-1.2.4.tar.gz || wget -nc http://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.4.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/dbus-python/dbus-python-1.2.4.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/dbus-python/dbus-python-1.2.4.tar.gz
 
 
 URL=http://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.4.tar.gz
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
@@ -62,8 +59,7 @@ sudo rm rootscript.sh
 
 
 
-
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -6,38 +6,38 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:br3ak libmad is a high-quality MPEGbr3ak audio decoder capable of 24-bit output.br3ak
-#SECTION:multimedia
-
-
-
-#VER:libmad-b:0.15.1
-
-
+DESCRIPTION="br3ak libmad is a high-quality MPEGbr3ak audio decoder capable of 24-bit output.br3ak"
+SECTION="multimedia"
+VERSION=0.15.1
 NAME="libmad"
+
+
 
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libmad/libmad-0.15.1b.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libmad/libmad-0.15.1b.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libmad/libmad-0.15.1b.tar.gz || wget -nc http://downloads.sourceforge.net/mad/libmad-0.15.1b.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libmad/libmad-0.15.1b.tar.gz || wget -nc ftp://ftp.mars.org/pub/mpeg/libmad-0.15.1b.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libmad/libmad-0.15.1b.tar.gz
 wget -nc http://www.linuxfromscratch.org/patches/downloads/libmad/libmad-0.15.1b-fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/libmad-0.15.1b-fixes-1.patch
 
 
 URL=http://downloads.sourceforge.net/mad/libmad-0.15.1b.tar.gz
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+
+whoami > /tmp/currentuser
 
 patch -Np1 -i ../libmad-0.15.1b-fixes-1.patch                &&
 sed "s@AM_CONFIG_HEADER@AC_CONFIG_HEADERS@g" -i configure.ac &&
 touch NEWS AUTHORS ChangeLog                                 &&
 autoreconf -fi                                               &&
-
 ./configure --prefix=/usr --disable-static &&
-make
+make "-j`nproc`" || make
+
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -51,7 +51,6 @@ prefix=/usr
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include
-
 Name: mad
 Description: MPEG audio decoder
 Requires:
@@ -59,6 +58,7 @@ Version: 0.15.1b
 Libs: -L${libdir} -lmad
 Cflags: -I${includedir}
 EOF
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -66,8 +66,7 @@ sudo rm rootscript.sh
 
 
 
-
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

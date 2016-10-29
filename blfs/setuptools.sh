@@ -3,8 +3,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:setuptools:18.5
+NAME="setuptools"
+VERSION="18.5"
 
 cd $SOURCE_DIR
 
@@ -21,9 +23,6 @@ python setup.py build &&
 sudo python setup.py install
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "setuptools=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

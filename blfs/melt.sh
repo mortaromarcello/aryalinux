@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:mlt:6.0.0
+NAME="mlt"
+VERSION="6.0.0"
 
 #REQ:swig
 #REQ:jackd2
@@ -32,6 +34,6 @@ sudo cp -v mlt_wrap.o /usr/lib/python2.7/site-packages/
 popd
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "melt=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -4,10 +4,9 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:v:0.3.4
-
-PACKAGE_NAME="glog"
+NAME="glog"
 URL=https://github.com/google/glog/archive/v0.3.4.tar.gz
 
 cd $SOURCE_DIR
@@ -26,4 +25,4 @@ sudo make install
 cd $SOURCE_DIR
 sudo rm -r $DIRECTORY
 
-echo "$PACKAGE_NAME=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

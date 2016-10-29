@@ -3,8 +3,11 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:apache-tomcat:7.0.70
+DESCRIPTION="The apache tomcat server."
+NAME="apache-tomcat"
+VERSION="7.0.70"
 
 cd $SOURCE_DIR
 
@@ -22,6 +25,4 @@ EOF
 
 cd $SOURCE_DIR
 
-echo "tomcat7=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -6,8 +6,10 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:br3ak The LXDE Common package provides abr3ak set of default configuration for LXDE.br3ak
-#SECTION:lxde
+DESCRIPTION="br3ak The LXDE Common package provides abr3ak set of default configuration for LXDE.br3ak"
+SECTION="lxde"
+VERSION=0.99.1
+NAME="lxde-common"
 
 #REQ:lxde-icon-theme
 #REQ:lxpanel
@@ -22,27 +24,26 @@ set +h
 #OPT:xfce4-notifyd
 
 
-#VER:lxde-common:0.99.1
-
-
-NAME="lxde-common"
-
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxde-common/lxde-common-0.99.1.tar.xz || wget -nc http://downloads.sourceforge.net/lxde/lxde-common-0.99.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lxde-common/lxde-common-0.99.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lxde-common/lxde-common-0.99.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lxde-common/lxde-common-0.99.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxde-common/lxde-common-0.99.1.tar.xz
 
 
 URL=http://downloads.sourceforge.net/lxde/lxde-common-0.99.1.tar.xz
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 ./configure --prefix=/usr --sysconfdir=/etc &&
-make
+make "-j`nproc`" || make
+
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -54,6 +55,7 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 update-mime-database /usr/share/mime &&
 gtk-update-icon-cache -qf /usr/share/icons/hicolor &&
 update-desktop-database -q
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -63,14 +65,14 @@ sudo rm rootscript.sh
 cat > ~/.xinitrc << "EOF"
 ck-launch-session dbus-launch --exit-with-session startlxde
 EOF
-
 startx
+
 
 startx &> ~/.x-session-errors
 
 
 
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

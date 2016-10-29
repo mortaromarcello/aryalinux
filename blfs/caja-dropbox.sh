@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:caja-dropbox:1.15.0
+NAME="caja-dropbox"
+VERSION="1.15.0"
 #REQ:python-docutils
 #REQ:python-modules#pygtk
 
@@ -26,6 +28,6 @@ sudo make install
 
 cd $SOURCE_DIR
 
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "caja-dropbox=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

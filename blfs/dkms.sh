@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:dkms_.orig:2.2.0.3
+NAME="dkms_.orig"
+VERSION="2.2.0.3"
 
 #REQ:kmod
 
@@ -23,6 +25,6 @@ cd $DIRECTORY
 sudo make install
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "dkms=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

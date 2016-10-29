@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:openvpn_.orig:2.3.7
+NAME="openvpn_.orig"
+VERSION="2.3.7"
 
 #REQ:liblzo2
 
@@ -29,6 +31,6 @@ sudo cp ./distro/systemd/openvpn-server@.service /lib/systemd/system/
 sudo systemctl enable openvpn-client@.service
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "openvpn=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

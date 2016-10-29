@@ -6,24 +6,26 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:br3ak The Xorg font packages providebr3ak needed fonts to the Xorgbr3ak applications.br3ak
-#SECTION:x
+DESCRIPTION="br3ak The Xorg font packages providebr3ak needed fonts to the Xorgbr3ak applications.br3ak"
+SECTION="x"
+NAME="x7font"
 
 #REQ:xcursor-themes
 
 
 
 
-NAME="x7font"
-
-
-
 URL=
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+
+whoami > /tmp/currentuser
+
+export XORG_PREFIX=/usr
+export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
 
 cat > font-7.7.md5 << "EOF"
 23756dab809f9ec5011bb27fb2c3c7d6 font-util-1.3.1.tar.bz2
@@ -65,11 +67,13 @@ beef61a9b0762aba8af7b736bb961f86 font-sony-misc-1.0.3.tar.bz2
 3eeb3fb44690b477d510bbd8f86cf5aa font-xfree86-type1-1.0.4.tar.bz2
 EOF
 
-mkdir font &&
+
+mkdir -pv font &&
 cd font &&
 grep -v '^#' ../font-7.7.md5 | awk '{print $2}' | wget -i- -c \
     -B http://ftp.x.org/pub/individual/font/ &&
 md5sum -c ../font-7.7.md5
+
 
 as_root()
 {
@@ -78,10 +82,11 @@ as_root()
   else                            su -c \\"$*\\"
   fi
 }
-
 export -f as_root
 
-bash -e
+
+
+
 
 for package in $(grep -v '^#' ../font-7.7.md5 | awk '{print $2}')
 do
@@ -89,19 +94,22 @@ do
   tar -xf $package
   pushd $packagedir
   ./configure $XORG_CONFIG
-  make
+  make "-j`nproc`" || make
   as_root make install
   popd
   as_root rm -rf $packagedir
 done
 
-exit
+
+
+
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 install -v -d -m755 /usr/share/fonts                               &&
 ln -svfn $XORG_PREFIX/share/fonts/X11/OTF /usr/share/fonts/X11-OTF &&
 ln -svfn $XORG_PREFIX/share/fonts/X11/TTF /usr/share/fonts/X11-TTF
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -109,8 +117,7 @@ sudo rm rootscript.sh
 
 
 
-
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

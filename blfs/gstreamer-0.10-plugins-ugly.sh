@@ -4,10 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:gst-plugins-ugly.orig:0.10_0.10.19
-
-PACKAGE_NAME="gstreamer-0.10-plugins-ugly"
+NAME="gstreamer-0.10-plugins-ugly"
+VERSION="0.10.19"
 
 #REQ:gstreamer-0.10
 
@@ -31,6 +31,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "$PACKAGE_NAME=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

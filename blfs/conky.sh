@@ -3,8 +3,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:conky:svn
+NAME="conky"
+VERSION="svn"
 
 #REQ:cmake
 #REQ:git
@@ -25,6 +27,4 @@ sudo make install
 cd $SOURCE_DIR
 rm -rf conky
 
-echo "conky=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -4,10 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:gstreamer0.10-ffmpeg.orig:_0.10.13
-
-PACKAGE_NAME="gstreamer-0.10-ffmpeg"
+NAME="gstreamer-0.10-ffmpeg"
+VERSION="0.10.13"
 
 #REQ:gstreamer-0.10
 
@@ -31,6 +31,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "$PACKAGE_NAME=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

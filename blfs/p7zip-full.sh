@@ -3,8 +3,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:p7zip_src_all:_9.38.1
+NAME="p7zip_src_all"
+VERSION="_9.38.1"
 
 cd $SOURCE_DIR
 
@@ -26,8 +28,6 @@ sed -i 's@DEST_HOME=/usr/local@DEST_HOME=/usr@g' install.sh
 sudo ./install.sh
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "p7zip-full=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

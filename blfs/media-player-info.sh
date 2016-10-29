@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:media-player-info:22
+NAME="media-player-info"
+VERSION="22"
 
 cd $SOURCE_DIR
 
@@ -23,9 +25,6 @@ sudo make install
 
 cd $SOURCE_DIR
 
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "media-player-info=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

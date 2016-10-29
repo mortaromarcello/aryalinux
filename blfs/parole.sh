@@ -6,8 +6,10 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:br3ak Parole is a DVD/CD/music playerbr3ak for Xfce that uses GStreamer.br3ak
-#SECTION:xfce
+DESCRIPTION="br3ak Parole is a DVD/CD/music playerbr3ak for Xfce that uses GStreamer.br3ak"
+SECTION="xfce"
+VERSION=0.8.1
+NAME="parole"
 
 #REQ:gst10-plugins-base
 #REQ:libxfce4ui
@@ -15,27 +17,26 @@ set +h
 #REC:taglib
 
 
-#VER:parole:0.8.1
-
-
-NAME="parole"
-
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/parole/parole-0.8.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/parole/parole-0.8.1.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/parole/parole-0.8.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/parole/parole-0.8.1.tar.bz2 || wget -nc http://archive.xfce.org/src/apps/parole/0.8/parole-0.8.1.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/parole/parole-0.8.1.tar.bz2
 
 
 URL=http://archive.xfce.org/src/apps/parole/0.8/parole-0.8.1.tar.bz2
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 ./configure --prefix=/usr &&
-make
+make "-j`nproc`" || make
+
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -43,8 +44,7 @@ sudo rm rootscript.sh
 
 
 
-
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

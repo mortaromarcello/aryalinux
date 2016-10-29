@@ -6,8 +6,10 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:br3ak The lxqt-runner package provides abr3ak tool used to launch programs quickly by typing their names.br3ak
-#SECTION:lxqt
+DESCRIPTION="br3ak The lxqt-runner package provides abr3ak tool used to launch programs quickly by typing their names.br3ak"
+SECTION="lxqt"
+VERSION=0.11.0
+NAME="lxqt-runner"
 
 #REQ:lxqt-globalkeys
 #REQ:menu-cache
@@ -15,38 +17,34 @@ set +h
 #OPT:lxqt-l10n
 
 
-#VER:lxqt-runner:0.11.0
-
-
-NAME="lxqt-runner"
-
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lxqt-runner/lxqt-runner-0.11.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-runner/lxqt-runner-0.11.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-runner/lxqt-runner-0.11.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-runner/lxqt-runner-0.11.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-runner/lxqt-runner-0.11.0.tar.xz || wget -nc http://downloads.lxqt.org/lxqt/0.11.0/lxqt-runner-0.11.0.tar.xz
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/lxqt-runner-0.11.0-fix_endif-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/lxqt-runner/lxqt-runner-0.11.0-fix_endif-1.patch
 
 
 URL=http://downloads.lxqt.org/lxqt/0.11.0/lxqt-runner-0.11.0.tar.xz
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
-patch -p1 -i ../lxqt-runner-0.11.0-fix_endif-1.patch &&
+whoami > /tmp/currentuser
 
+patch -p1 -i ../lxqt-runner-0.11.0-fix_endif-1.patch &&
 mkdir -v build &&
 cd       build &&
-
 cmake -DCMAKE_BUILD_TYPE=Release          \
       -DRUNNER_MATH=OFF                   \
       -DCMAKE_INSTALL_PREFIX=$LXQT_PREFIX \
       -DPULL_TRANSLATIONS=no              \
       ..       &&
+make "-j`nproc`" || make
 
-make
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -54,8 +52,7 @@ sudo rm rootscript.sh
 
 
 
-
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

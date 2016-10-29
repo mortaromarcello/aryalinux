@@ -6,8 +6,10 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:br3ak Chromium is an open-source browserbr3ak project that aims to build a safer, faster, and more stable way forbr3ak all users to experience the web.br3ak
-#SECTION:xsoft
+DESCRIPTION="br3ak Chromium is an open-source browserbr3ak project that aims to build a safer, faster, and more stable way forbr3ak all users to experience the web.br3ak"
+SECTION="xsoft"
+VERSION=3
+NAME="chromium"
 
 #REQ:alsa-lib
 #REQ:cups
@@ -22,7 +24,7 @@ set +h
 #REQ:nss
 #REQ:python2
 #REQ:usbutils
-#REQ:installing
+#REQ:xorg-server
 #REC:flac
 #REC:GConf
 #REC:gnome-keyring
@@ -43,32 +45,31 @@ set +h
 #OPT:libvpx
 
 
-#VER:chromium:53.0.2785.143
-#VER:v:3
-
-
-NAME="chromium"
-
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/chromium/chromium-53.0.2785.143.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/chromium/chromium-53.0.2785.143.tar.xz || wget -nc https://commondatastorage.googleapis.com/chromium-browser-official/chromium-53.0.2785.143.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/chromium/chromium-53.0.2785.143.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/chromium/chromium-53.0.2785.143.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/chromium/chromium-53.0.2785.143.tar.xz
 wget -nc https://github.com/foutrelis/chromium-launcher/archive/v3.tar.gz
 
 
 URL=https://commondatastorage.googleapis.com/chromium-browser-official/chromium-53.0.2785.143.tar.xz
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 wget https://github.com/foutrelis/chromium-launcher/archive/v3.tar.gz \
      -O chromium-launcher-3.tar.gz
+
 
 python build/download_nacl_toolchains.py --packages \
     nacl_x86_newlib,pnacl_newlib,pnacl_translator \
     sync --extract
 
+
 sed "s/WIDEVINE_CDM_AVAILABLE/&\n\n#define WIDEVINE_CDM_VERSION_STRING \"Pinkie Pie\"/" \
     -i third_party/widevine/cdm/stub/widevine_cdm_version.h
+
 
 CHROMIUM_CONFIG=(
 -Dgoogle_api_key=AIzaSyDxKL42zsPjbke5O8_rPVpVrLrJ8aeE9rQ
@@ -115,18 +116,24 @@ CHROMIUM_CONFIG=(
 -Ddisable_fatal_linker_warnings=1
 -Ddisable_glibc=1)
 
+
 export CFLAGS+=' -fno-delete-null-pointer-checks'
+
 
 sed 's/#include <cups\/cups\.h>/&\n#include <cups\/ppd.h>/' \
     -i printing/backend/cups_helper.h
 
+
 sed 's/#include \<sys\/mman\.h>/&\n\n#if defined(MADV_FREE)\n#undef MADV_FREE\n#endif\n/' \
     -i.bak third_party/WebKit/Source/wtf/allocator/PageAllocator.cpp
+
 
 build/linux/unbundle/replace_gyp_files.py "${CHROMIUM_CONFIG[@]}" &&
 build/gyp_chromium --depth=. "${CHROMIUM_CONFIG[@]}"
 
+
 ninja -C out/Release chrome chrome_sandbox chromedriver
+
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
@@ -139,15 +146,13 @@ install -vDm755  out/Release/chromedriver \
 ln -svf /usr/lib/chromium/chromium /usr/bin              &&
 ln -svf /usr/lib/chromium/chromedriver /usr/bin/         &&
 install -vDm644 out/Release/icudtl.dat /usr/lib/chromium &&
-
 install -vm644 out/Release/{*.pak,*.bin} \
                /usr/lib/chromium/                        &&
-
 cp -av out/Release/locales /usr/lib/chromium/            &&
 chown -Rv root:root /usr/lib/chromium/locales            &&
-
 install -vDm644 out/Release/chrome.1 \
                 /usr/share/man/man1/chromium.1
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -159,12 +164,10 @@ for size in 16 32; do
         "chrome/app/theme/default_100_percent/chromium/product_logo_$size.png" \
         "/usr/share/icons/hicolor/${size}x${size}/apps/chromium.png"
 done &&
-
 for size in 22 24 48 64 128 256; do
     install -vDm644 "chrome/app/theme/chromium/product_logo_$size.png" \
         "/usr/share/icons/hicolor/${size}x${size}/apps/chromium.png"
 done &&
-
 cat > /usr/share/applications/chromium.desktop << "EOF"
 [Desktop Entry]
 Encoding=UTF-8
@@ -179,22 +182,27 @@ Categories=GTK;Network;WebBrowser;
 MimeType=application/xhtml+xml;text/xml;application/xhtml+xml;text/mml;x-scheme-handler/http;x-scheme-handler/https;
 EOF
 
+
 install -vm755 out/Release/nacl_helper{,_bootstrap} \
               out/Release/nacl_irt_*.nexe \
               /usr/lib/chromium/
 
+
 install -vm755 out/Release/libwidevinecdmadapter.so \
                /usr/lib/chromium/
+
 
 tar -xf ../chromium-launcher-3.tar.gz &&
 cd chromium-launcher-3 &&
 make PREFIX=/usr
 
 
+
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 rm -f /usr/bin/chromium        &&
 make PREFIX=/usr install-strip &&
 cd ..
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -207,9 +215,11 @@ ar -x ../../google-chrome-stable_53.0.2785.143*.deb &&
 tar -xf data.tar.xz
 
 
+
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 install -vdm755 /usr/lib/PepperFlash &&
 install -vm755 opt/google/chrome/PepperFlash/* /usr/lib/PepperFlash
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -219,6 +229,7 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 install -vm755 opt/google/chrome/libwidevinecdm.so /usr/lib/chromium/
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -226,8 +237,7 @@ sudo rm rootscript.sh
 
 
 
-
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

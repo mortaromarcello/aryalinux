@@ -8,8 +8,10 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
     --localstatedir=/var --disable-static"
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:wine:1.8.3
+NAME="wine"
+VERSION="1.8.3"
 
 cd $SOURCE_DIR
 
@@ -35,6 +37,6 @@ then
 fi
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "wine=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

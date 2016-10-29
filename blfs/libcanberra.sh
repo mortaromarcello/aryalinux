@@ -6,8 +6,10 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:br3ak libcanberra is an implementationbr3ak of the XDG Sound Theme and Name Specifications, for generatingbr3ak event sounds on free desktops, such as GNOME.br3ak
-#SECTION:multimedia
+DESCRIPTION="br3ak libcanberra is an implementationbr3ak of the XDG Sound Theme and Name Specifications, for generatingbr3ak event sounds on free desktops, such as GNOME.br3ak"
+SECTION="multimedia"
+VERSION=0.30
+NAME="libcanberra"
 
 #REQ:libvorbis
 #REC:alsa-lib
@@ -18,27 +20,26 @@ set +h
 #OPT:pulseaudio
 
 
-#VER:libcanberra:0.30
-
-
-NAME="libcanberra"
-
 wget -nc http://0pointer.de/lennart/projects/libcanberra/libcanberra-0.30.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libcanberra/libcanberra-0.30.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libcanberra/libcanberra-0.30.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libcanberra/libcanberra-0.30.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libcanberra/libcanberra-0.30.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libcanberra/libcanberra-0.30.tar.xz
 
 
 URL=http://0pointer.de/lennart/projects/libcanberra/libcanberra-0.30.tar.xz
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 ./configure --prefix=/usr --disable-oss &&
-make
+make "-j`nproc`" || make
+
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make docdir=/usr/share/doc/libcanberra-0.30 install
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -46,8 +47,7 @@ sudo rm rootscript.sh
 
 
 
-
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

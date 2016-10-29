@@ -4,10 +4,9 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:ibus-rime_.orig:1.2
-
-PACKAGE_NAME="ibus-rime"
+NAME="ibus-rime"
 
 #REQ:ibus
 #REQ:librime
@@ -29,4 +28,4 @@ sudo ./install.sh
 cd $SOURCE_DIR
 sudo rm -r $DIRECTORY
 
-echo "$PACKAGE_NAME=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

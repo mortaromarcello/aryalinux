@@ -4,7 +4,8 @@ set -e
 
 . /etc/alps/alps.conf
 
-#VER:gst-plugins-base:0.10.36
+NAME="gst-plugins-base"
+VERSION="0.10.36"
 . /var/lib/alps/functions
 
 #REQ:gstreamer
@@ -59,6 +60,5 @@ sudo rm rootscript.sh
 
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
-echo "gst-plugins-base=>`date`" | sudo tee -a $INSTALLED_LIST
-
+cleanup "$NAME" "$DIRECTORY"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

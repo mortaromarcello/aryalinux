@@ -4,6 +4,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:qt5
 
@@ -46,4 +47,4 @@ do update-mime-database /usr/share/mime
 cd $SOURCE_DIR
 rm -rf linux-4.7
 
-echo "virtualbox=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

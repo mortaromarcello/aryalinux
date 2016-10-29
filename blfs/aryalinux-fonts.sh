@@ -3,8 +3,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
-
-#VER:aryalinux-fonts:2016.04
+. /var/lib/alps/functions
 
 cd $SOURCE_DIR
 
@@ -13,4 +12,4 @@ wget -nc $URL
 
 sudo tar xf aryalinux-fonts-2016.04.tar.gz -C /
 
-echo "aryalinux-fonts=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

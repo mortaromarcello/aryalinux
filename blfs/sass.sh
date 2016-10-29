@@ -4,15 +4,16 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:ruby
 
 cd $SOURCE_DIR
 
-PACKAGE_NAME="sass"
+NAME="sass"
 
 sudo gem install sass
 
 cd $SOURCE_DIR
 
-echo "$PACKAGE_NAME=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

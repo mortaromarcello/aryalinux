@@ -3,8 +3,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:gradle--bin:2.14
+NAME="gradle--bin"
+VERSION="2.14"
 
 cd $SOURCE_DIR
 
@@ -22,6 +24,4 @@ EOF
 
 cd $SOURCE_DIR
 
-echo "gradle=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

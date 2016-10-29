@@ -4,7 +4,8 @@ set -e
 
 . /etc/alps/alps.conf
 
-#VER:gst-plugins-good:0.10.31
+NAME="gst-plugins-good"
+VERSION="0.10.31"
 . /var/lib/alps/functions
 
 #REQ:gst-plugins-base
@@ -70,6 +71,5 @@ sudo rm rootscript.sh
 
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
-echo "gst-plugins-good=>`date`" | sudo tee -a $INSTALLED_LIST
-
+cleanup "$NAME" "$DIRECTORY"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

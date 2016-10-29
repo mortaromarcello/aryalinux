@@ -4,10 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:gstreamer.orig:0.10_0.10.36
-
-PACKAGE_NAME="gstreamer-0.10"
+NAME="gstreamer-0.10"
+VERSION="0.10.36"
 
 cd $SOURCE_DIR
 URL="http://archive.ubuntu.com/ubuntu/pool/universe/g/gstreamer0.10/gstreamer0.10_0.10.36.orig.tar.bz2"
@@ -26,6 +26,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "$PACKAGE_NAME=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

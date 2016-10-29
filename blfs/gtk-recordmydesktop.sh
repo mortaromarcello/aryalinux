@@ -5,7 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:gtk-recordmydesktop:0.3.8
+NAME="gtk-recordmydesktop"
+VERSION="0.3.8"
 
 #REQ:gtk2
 #REC:recordmydesktop
@@ -35,6 +36,5 @@ sudo rm rootscript.sh
 
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
-echo "gtk-recordmydesktop=>`date`" | sudo tee -a $INSTALLED_LIST
-
+cleanup "$NAME" "$DIRECTORY"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

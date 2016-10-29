@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:libvncserver_+dfsg.orig:0.9.10
+NAME="libvncserver_+dfsg.orig"
+VERSION="0.9.10"
 
 URL=http://archive.ubuntu.com/ubuntu/pool/main/libv/libvncserver/libvncserver_0.9.10+dfsg.orig.tar.xz
 
@@ -25,6 +27,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "libvncserver=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

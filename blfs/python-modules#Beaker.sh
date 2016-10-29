@@ -6,23 +6,20 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:%DESCRIPTION%
-#SECTION:general
+DESCRIPTION="%DESCRIPTION%"
+SECTION="general"
+VERSION=1.8.0
+NAME="python-modules#Beaker"
 
 #REQ:python-modules#setuptools
 
-
-#VER:Beaker:1.8.0
-
-
-NAME="python-modules#Beaker"
 
 wget -nc https://pypi.python.org/packages/source/B/Beaker/Beaker-1.8.0.tar.gz
 
 
 URL=https://pypi.python.org/packages/source/B/Beaker/Beaker-1.8.0.tar.gz
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
@@ -46,8 +43,7 @@ sudo rm rootscript.sh
 
 
 
-
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

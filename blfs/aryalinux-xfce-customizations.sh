@@ -4,6 +4,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 cd $SOURCE_DIR
 
@@ -19,6 +20,4 @@ sudo cp -rvf /etc/skel/.config ~
 sudo chown -R $UID:$UID ~
 
 cd $SOURCE_DIR
-echo "aryalinux-xfce-customizations=>`date`" | sudo tee -a $INSTALLED_LIST
-
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

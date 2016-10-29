@@ -4,6 +4,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 whoami > /tmp/currentuser
 sudo usermod -a -G video `cat /tmp/currentuser`
@@ -49,4 +50,4 @@ sudo usermod -a -G video `cat /tmp/currentuser`
 #REQ:xinit
 #REQ:wayland-protocols
 
-echo "xserver-meta=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:goocanvas_.orig:1.0.0
+NAME="goocanvas_.orig"
+VERSION="1.0.0"
 
 URL=http://archive.ubuntu.com/ubuntu/pool/universe/g/goocanvas/goocanvas_1.0.0.orig.tar.gz
 
@@ -23,6 +25,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "goocanvas=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:python-requests:2.10.0
+NAME="python-requests"
+VERSION="2.10.0"
 
 #REQ:python2
 
@@ -24,6 +26,6 @@ sudo python setup.py install
 
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "python-requests=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

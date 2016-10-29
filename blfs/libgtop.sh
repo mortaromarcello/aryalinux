@@ -6,8 +6,10 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:br3ak The libgtop package contains thebr3ak GNOME top libraries.br3ak
-#SECTION:gnome
+DESCRIPTION="br3ak The libgtop package contains thebr3ak GNOME top libraries.br3ak"
+SECTION="gnome"
+VERSION=2.34.1
+NAME="libgtop"
 
 #REQ:glib2
 #REQ:x7lib
@@ -15,27 +17,26 @@ set +h
 #OPT:gtk-doc
 
 
-#VER:libgtop:2.34.1
-
-
-NAME="libgtop"
-
 wget -nc http://ftp.gnome.org/pub/gnome/sources/libgtop/2.34/libgtop-2.34.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libgtop/libgtop-2.34.1.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/libgtop/2.34/libgtop-2.34.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libgtop/libgtop-2.34.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libgtop/libgtop-2.34.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libgtop/libgtop-2.34.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libgtop/libgtop-2.34.1.tar.xz
 
 
 URL=http://ftp.gnome.org/pub/gnome/sources/libgtop/2.34/libgtop-2.34.1.tar.xz
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 ./configure --prefix=/usr --disable-static &&
-make
+make "-j`nproc`" || make
+
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -43,8 +44,7 @@ sudo rm rootscript.sh
 
 
 
-
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -4,10 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:leveldb_.orig:1.18
-
-PACKAGE_NAME="leveldb"
+NAME="leveldb"
+VERSION="1.18"
 
 #REQ:snappy
 
@@ -30,4 +30,4 @@ sudo cp -a ./libleveldb.so* /usr/lib/
 cd $SOURCE_DIR
 sudo rm -r $DIRECTORY
 
-echo "$PACKAGE_NAME=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

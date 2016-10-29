@@ -5,8 +5,10 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:sqlite-autoconf:3110000
-#VER:sqlite-doc:3110000
+NAME="sqlite-autoconf"
+VERSION="3110000"
+NAME="sqlite-doc"
+VERSION="3110000"
 
 #OPT:unzip
 
@@ -63,6 +65,5 @@ sudo rm rootscript.sh
 
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
-echo "sqlite=>`date`" | sudo tee -a $INSTALLED_LIST
-
+cleanup "$NAME" "$DIRECTORY"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

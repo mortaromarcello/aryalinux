@@ -6,8 +6,10 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:br3ak The LVM2 package is a set of toolsbr3ak that manage logical partitions. It allows spanning of file systemsbr3ak across multiple physical disks and disk partitions and provides forbr3ak dynamic growing or shrinking of logical partitions, mirroring andbr3ak low storage footprint snapshots.br3ak
-#SECTION:postlfs
+DESCRIPTION="br3ak The LVM2 package is a set of toolsbr3ak that manage logical partitions. It allows spanning of file systemsbr3ak across multiple physical disks and disk partitions and provides forbr3ak dynamic growing or shrinking of logical partitions, mirroring andbr3ak low storage footprint snapshots.br3ak"
+SECTION="postlfs"
+VERSION=2.2.02.164
+NAME="lvm2"
 
 #OPT:mdadm
 #OPT:reiserfs
@@ -16,20 +18,17 @@ set +h
 #OPT:xfsprogs
 
 
-#VER:LVM:2.2.02.164
-
-
-NAME="lvm2"
-
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lvm2/LVM2.2.02.164.tgz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lvm2/LVM2.2.02.164.tgz || wget -nc ftp://sources.redhat.com/pub/lvm2/releases/LVM2.2.02.164.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lvm2/LVM2.2.02.164.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lvm2/LVM2.2.02.164.tgz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lvm2/LVM2.2.02.164.tgz
 
 
 URL=ftp://sources.redhat.com/pub/lvm2/releases/LVM2.2.02.164.tgz
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+
+whoami > /tmp/currentuser
 
 SAVEPATH=$PATH                  &&
 PATH=$PATH:/sbin:/usr/sbin      &&
@@ -45,28 +44,22 @@ PATH=$SAVEPATH                  &&
 unset SAVEPATH
 
 
+
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make -C tools install_dmsetup_dynamic &&
 make -C udev  install                 &&
 make -C libdm install
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
 sudo rm rootscript.sh
 
-
---with-thin-check=    \
-     --with-thin-dump=     \
-     --with-thin-repair=   \
-     --with-thin-restore=  \
-     --with-cache-check=   \
-     --with-cache-dump=    \
-     --with-cache-repair=  \
-     --with-cache-restore= \
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -74,8 +67,7 @@ sudo rm rootscript.sh
 
 
 
-
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

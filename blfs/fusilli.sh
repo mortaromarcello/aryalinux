@@ -4,6 +4,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:startup-notification
 #REQ:python-modules#py2cairo
@@ -23,4 +24,4 @@ cd $SOURCE_DIR
 
 rm -rf fusilli
 
-echo "fusilli=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

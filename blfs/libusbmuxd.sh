@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:libusbmuxd_.orig:1.0.10
+NAME="libusbmuxd"
+VERSION="1.0.10"
 
 URL=http://archive.ubuntu.com/ubuntu/pool/main/libu/libusbmuxd/libusbmuxd_1.0.10.orig.tar.bz2
 
@@ -23,6 +25,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "libusbmuxd=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

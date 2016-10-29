@@ -6,8 +6,10 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:br3ak OpenJDK is an open-sourcebr3ak implementation of Oracle's Java Standard Edition platform.br3ak OpenJDK is useful for developingbr3ak Java programs, and provides abr3ak complete runtime environment to run Java programs.br3ak
-#SECTION:general
+DESCRIPTION="br3ak OpenJDK is an open-sourcebr3ak implementation of Oracle's Java Standard Edition platform.br3ak OpenJDK is useful for developingbr3ak Java programs, and provides abr3ak complete runtime environment to run Java programs.br3ak"
+SECTION="general"
+VERSION=675
+NAME="openjdk"
 
 #REQ:java
 #REQ:ojdk-conf
@@ -25,24 +27,19 @@ set +h
 #OPT:twm
 
 
-#VER:jdk8u112-b:15
-#VER:icedtea-web:1.6.2
-#VER:jtreg-4.2-b03:675
-
-
-NAME="openjdk"
-
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/jdk/jdk8u112-b15.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/jdk/jdk8u112-b15.tar.bz2 || wget -nc http://hg.openjdk.java.net/jdk8u/jdk8u/archive/jdk8u112-b15.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/jdk/jdk8u112-b15.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/jdk/jdk8u112-b15.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/jdk/jdk8u112-b15.tar.bz2
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/openjdk/jtreg-4.2-b03-675.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/openjdk/jtreg-4.2-b03-675.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/openjdk/jtreg-4.2-b03-675.tar.gz || wget -nc http://anduin.linuxfromscratch.org/BLFS/OpenJDK/OpenJDK-1.8.0.112/jtreg-4.2-b03-675.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/openjdk/jtreg-4.2-b03-675.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/openjdk/jtreg-4.2-b03-675.tar.gz
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/icedtea/icedtea-web-1.6.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/icedtea/icedtea-web-1.6.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/icedtea/icedtea-web-1.6.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/icedtea/icedtea-web-1.6.2.tar.gz || wget -nc http://icedtea.classpath.org/download/source/icedtea-web-1.6.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/icedtea/icedtea-web-1.6.2.tar.gz
 
 
 URL=http://hg.openjdk.java.net/jdk8u/jdk8u/archive/jdk8u112-b15.tar.bz2
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+
+whoami > /tmp/currentuser
 
 cat > subprojects.md5 << EOF &&
 9bf02dac9f3f79a220af140778ed003e  corba.tar.bz2
@@ -53,20 +50,19 @@ ced983a635486e02a2a7bc3c2a9416dd  langtools.tar.bz2
 b8da9095c290358a85f533a089570b66  jdk.tar.bz2
 d34ca91c7e0040635aaf9e9d9b5f86b6  nashorn.tar.bz2
 EOF
-
 for subproject in corba hotspot jaxp jaxws langtools jdk nashorn; do
   wget -c http://hg.openjdk.java.net/jdk8u/jdk8u/${subproject}/archive/jdk8u112-b15.tar.bz2 \
        -O ${subproject}.tar.bz2
 done &&
-
 md5sum -c subprojects.md5 &&
-
 for subproject in corba hotspot jaxp jaxws langtools jdk nashorn; do
   mkdir -pv ${subproject} &&
   tar -xf ${subproject}.tar.bz2 --strip-components=1 -C ${subproject}
 done
 
+
 tar -xf ../jtreg-4.2-b03-675.tar.gz
+
 
 unset JAVA_HOME               &&
 sh ./configure                \
@@ -97,6 +93,7 @@ echo $! > twm.pid
 echo Waiting for twm to initialize; sleep 1
 xhost +
 
+
 echo -e "
 jdk_all = :jdk_core           \\
           :jdk_svc            \\
@@ -113,9 +110,11 @@ sed -e 's/all:.*jck.*/all: jtreg/'      \
     -e '/^JTREG /s@\$(JT_PLATFORM)/@@'  \
     -i langtools/test/Makefile
 
+
 JT_JAVA=$(type -p javac | sed 's@/bin.*@@') &&
 JT_HOME=$(pwd)/jtreg                        &&
 PRODUCT_HOME=$(echo $(pwd)/build/*/images/j2sdk-image)
+
 
 LANG=C make -k -C test                      \
             JT_HOME=${JT_HOME}              \
@@ -127,6 +126,7 @@ LANG=C ${JT_HOME}/bin/jtreg -a -v:fail,error \
                 -jdk:${PRODUCT_HOME}         \
                 :jdk
 
+
 kill -9 `cat twm.pid`  &&
 kill -9 `cat Xvfb.pid` &&
 rm -f Xvfb.out twm.out &&
@@ -136,9 +136,11 @@ if [ -n "$OLD_DISP" ]; then
 fi
 
 
+
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 cp -RT build/*/images/j2sdk-image /opt/OpenJDK-1.8.0.112 &&
 chown -R root:root /opt/OpenJDK-1.8.0.112
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -148,6 +150,7 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 ln -v -nsf OpenJDK-1.8.0.112 /opt/jdk
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -159,9 +162,9 @@ tar -xf ../icedtea-web-1.6.2.tar.gz  \
         --strip-components=1
 
 
+
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 mkdir -pv /usr/share/applications &&
-
 cat > /usr/share/applications/openjdk-8-policytool.desktop << "EOF" &&
 [Desktop Entry]
 Name=OpenJDK Java Policy Tool
@@ -174,8 +177,8 @@ Type=Application
 Icon=javaws
 Categories=Settings;
 EOF
-
 install -v -Dm0644 javaws.png /usr/share/pixmaps/javaws.png
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -187,14 +190,12 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 cat > /opt/jdk/bin/mkcacerts << "EOF"
 #!/bin/sh
 # Simple script to extract x509 certificates and create a JRE cacerts file.
-
 function get_args()
  {
  if test -z "${1}" ; then
  showhelp
  exit 1
  fi
-
  while test -n "${1}" ; do
  case "${1}" in
  -f | --cafile)
@@ -233,7 +234,6 @@ function get_args()
  esac
  done
  }
-
 function check_arg()
  {
  echo "${2}" | grep -v "^-" > /dev/null
@@ -242,7 +242,6 @@ function check_arg()
  exit 1
  fi
  }
-
 # The date binary is not reliable on 32bit systems for dates after 2038
 function mydate()
  {
@@ -250,9 +249,7 @@ function mydate()
  local M=$( echo $1 | cut -d" " -f1 )
  local d=$( echo $1 | cut -d" " -f2 )
  local m
-
  if [ ${d} -lt 10 ]; then d="0${d}"; fi
-
  case $M in
  Jan) m="01";;
  Feb) m="02";;
@@ -267,10 +264,8 @@ function mydate()
  Nov) m="11";;
  Dec) m="12";;
  esac
-
  certdate="${y}${m}${d}"
  }
-
 function showhelp()
  {
  echo "`basename ${0}` creates a valid cacerts file for use with IcedTea."
@@ -293,7 +288,6 @@ function showhelp()
  echo ""
  echo ""
  }
-
 # Initialize empty variables so that the shell does not pollute the script
 CAFILE=""
 CADIR=""
@@ -303,10 +297,8 @@ KEYTOOL=""
 certdate=""
 date=""
 today=$( date +%Y%m%d )
-
 # Process command line arguments
 get_args ${@}
-
 # Handle common errors
 if test "${CAFILE}x" == "x" -a "${CADIR}x" == "x" ; then
  echo "ERROR! You must provide an x509 certificate store!"
@@ -314,48 +306,39 @@ if test "${CAFILE}x" == "x" -a "${CADIR}x" == "x" ; then
  echo ""
  exit 1
 fi
-
 if test "${CAFILE}x" != "x" -a "${CADIR}x" != "x" ; then
  echo "ERROR! You cannot provide two x509 certificate stores!"
  echo "\'$(basename ${0}) --help\' for more info."
  echo ""
  exit 1
 fi
-
 if test "${KEYTOOL}x" == "x" ; then
  echo "ERROR! You must provide a valid keytool program!"
  echo "\'$(basename ${0}) --help\' for more info."
  echo ""
  exit 1
 fi
-
 if test "${OPENSSL}x" == "x" ; then
  echo "ERROR! You must provide a valid path to openssl!"
  echo "\'$(basename ${0}) --help\' for more info."
  echo ""
  exit 1
 fi
-
 if test "${OUTFILE}x" == "x" ; then
  echo "ERROR! You must provide a valid output file!"
  echo "\'$(basename ${0}) --help\' for more info."
  echo ""
  exit 1
 fi
-
 # Get on with the work
-
 # If using a CAFILE, split it into individual files in a temp directory
 if test "${CAFILE}x" != "x" ; then
  TEMPDIR=`mktemp -d`
  CADIR="${TEMPDIR}"
-
  # Get a list of staring lines for each cert
  CERTLIST=`grep -n "^-----BEGIN" "${CAFILE}" | cut -d ":" -f 1`
-
  # Get a list of ending lines for each cert
  ENDCERTLIST=`grep -n "^-----END" "${CAFILE}" | cut -d ":" -f 1`
-
  # Start a loop
  for certbegin in `echo "${CERTLIST}"` ; do
  for certend in `echo "${ENDCERTLIST}"` ; do
@@ -368,11 +351,9 @@ if test "${CAFILE}x" != "x" ; then
  echo "Generated PEM file with hash: ${keyhash}."
  done
 fi
-
 # Write the output file
 for cert in `find "${CADIR}" -type f -name "*.pem" -o -name "*.crt"`
 do
-
  # Make sure the certificate date is valid...
  date=$( ${OPENSSL} x509 -enddate -in "${cert}" -noout | sed 's/^notAfter=//' )
  mydate "${date}"
@@ -394,14 +375,13 @@ do
  -file "${tempfile}"
  rm "${tempfile}"
 done
-
 if test "${TEMPDIR}x" != "x" ; then
  rm -rf "${TEMPDIR}"
 fi
 exit 0
 EOF
-
 chmod -c 0755 /opt/jdk/bin/mkcacerts
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -419,6 +399,7 @@ fi &&
         -k "/opt/jdk/bin/keytool"      \
         -s "/usr/bin/openssl"          \
         -o "/opt/jdk/jre/lib/security/cacerts"
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -429,6 +410,7 @@ sudo rm rootscript.sh
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 cd /opt/jdk
 bin/keytool -list -keystore jre/lib/security/cacerts
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -436,8 +418,7 @@ sudo rm rootscript.sh
 
 
 
-
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

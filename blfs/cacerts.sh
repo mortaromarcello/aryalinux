@@ -6,8 +6,9 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:br3ak CA Certificate Download: <a class="ulink" href="http://anduin.linuxfromscratch.org/BLFS/other/certdata.txt">http://anduin.linuxfromscratch.org/BLFS/other/certdata.txt</a>br3ak
-#SECTION:postlfs
+DESCRIPTION="br3ak CA Certificate Download: <a class="ulink" href="http://anduin.linuxfromscratch.org/BLFS/other/certdata.txt">http://anduin.linuxfromscratch.org/BLFS/other/certdata.txt</a>br3ak"
+SECTION="postlfs"
+NAME="cacerts"
 
 #REQ:openssl
 #REC:wget
@@ -15,22 +16,19 @@ set +h
 
 
 
-NAME="cacerts"
-
-
-
 URL=
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+
+whoami > /tmp/currentuser
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 cat > /usr/bin/make-cert.pl << "EOF"
 #!/usr/bin/perl -w
-
 # Used to generate PEM encoded files from Mozilla certdata.txt.
 # Run as ./make-cert.pl > certificate.crt
 #
@@ -44,14 +42,10 @@ cat > /usr/bin/make-cert.pl << "EOF"
 # Bruce Dubbs
 #
 # Version 20120211
-
 my $certdata = './tempfile.cer';
-
 open( IN, "cat $certdata|" )
  || die "could not open $certdata";
-
 my $incert = 0;
-
 while ( <IN> )
 {
  if ( /^CKA_VALUE MULTILINE_OCTAL/ )
@@ -60,14 +54,12 @@ while ( <IN> )
  open( OUT, "|openssl x509 -text -inform DER -fingerprint" )
  || die "could not pipe to openssl x509";
  }
-
  elsif ( /^END/ && $incert )
  {
  close( OUT );
  $incert = 0;
  print "\n\n";
  }
-
  elsif ($incert)
  {
  my @bs = split( /\\/ );
@@ -79,8 +71,8 @@ while ( <IN> )
  }
 }
 EOF
-
 chmod +x /usr/bin/make-cert.pl
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -101,40 +93,29 @@ cat > /usr/bin/make-ca.sh << "EOF"
 # Bruce Dubbs
 #
 # Version 20120211
-
 # Some data in the certs have UTF-8 characters
 export LANG=en_US.utf8
-
 certdata="certdata.txt"
-
 if [ ! -r $certdata ]; then
  echo "$certdata must be in the local directory"
  exit 1
 fi
-
 REVISION=$(grep CVS_ID $certdata | cut -f4 -d'$')
-
 if [ -z "${REVISION}" ]; then
  echo "$certfile has no 'Revision' in CVS_ID"
  exit 1
 fi
-
 VERSION=$(echo $REVISION | cut -f2 -d" ")
-
 TEMPDIR=$(mktemp -d)
 TRUSTATTRIBUTES="CKA_TRUST_SERVER_AUTH"
 BUNDLE="BLFS-ca-bundle-${VERSION}.crt"
 CONVERTSCRIPT="/usr/bin/make-cert.pl"
 SSLDIR="/etc/ssl"
-
 mkdir "${TEMPDIR}/certs"
-
 # Get a list of starting lines for each cert
 CERTBEGINLIST=$(grep -n "^# Certificate" "${certdata}" | cut -d ":" -f1)
-
 # Get a list of ending lines for each cert
 CERTENDLIST=`grep -n "^CKA_TRUST_STEP_UP_APPROVED" "${certdata}" | cut -d ":" -f 1`
-
 # Start a loop
 for certbegin in ${CERTBEGINLIST}; do
  for certend in ${CERTENDLIST}; do
@@ -142,21 +123,16 @@ for certbegin in ${CERTBEGINLIST}; do
  break
  fi
  done
-
  # Dump to a temp file with the name of the file as the beginning line number
  sed -n "${certbegin},${certend}p" "${certdata}" > "${TEMPDIR}/certs/${certbegin}.tmp"
 done
-
 unset CERTBEGINLIST CERTDATA CERTENDLIST certbegin certend
-
 mkdir -p certs
 rm -f certs/* # Make sure the directory is clean
-
 for tempfile in ${TEMPDIR}/certs/*.tmp; do
  # Make sure that the cert is trusted...
  grep "CKA_TRUST_SERVER_AUTH" "${tempfile}" | \
  egrep "TRUST_UNKNOWN|NOT_TRUSTED" > /dev/null
-
  if test "${?}" = "0"; then
  # Throw a meaningful error and remove the file
  cp "${tempfile}" tempfile.cer
@@ -166,10 +142,8 @@ for tempfile in ${TEMPDIR}/certs/*.tmp; do
  rm -f tempfile.cer tempfile.crt "${tempfile}"
  continue
  fi
-
  # If execution made it to here in the loop, the temp cert is trusted
  # Find the cert data and generate a cert file for it
-
  cp "${tempfile}" tempfile.cer
  perl ${CONVERTSCRIPT} > tempfile.crt
  keyhash=$(openssl x509 -noout -in tempfile.crt -hash)
@@ -177,20 +151,18 @@ for tempfile in ${TEMPDIR}/certs/*.tmp; do
  rm -f tempfile.cer "${tempfile}"
  echo "Created ${keyhash}.pem"
 done
-
 # Remove blacklisted files
 # MD5 Collision Proof of Concept CA
 if test -f certs/8f111d69.pem; then
  echo "Certificate 8f111d69 is not trusted! Removing..."
  rm -f certs/8f111d69.pem
 fi
-
 # Finally, generate the bundle and clean up.
 cat certs/*.pem > ${BUNDLE}
 rm -r "${TEMPDIR}"
 EOF
-
 chmod +x /usr/bin/make-ca.sh
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -204,7 +176,6 @@ cat > /usr/sbin/remove-expired-certs.sh << "EOF"
 # Begin /usr/sbin/remove-expired-certs.sh
 #
 # Version 20120211
-
 # Make sure the date is parsed correctly on all systems
 mydate()
 {
@@ -212,9 +183,7 @@ mydate()
  local M=$( echo $1 | cut -d" " -f1 )
  local d=$( echo $1 | cut -d" " -f2 )
  local m
-
  if [ ${d} -lt 10 ]; then d="0${d}"; fi
-
  case $M in
  Jan) m="01";;
  Feb) m="02";;
@@ -229,33 +198,27 @@ mydate()
  Nov) m="11";;
  Dec) m="12";;
  esac
-
  certdate="${y}${m}${d}"
 }
-
 OPENSSL=/usr/bin/openssl
 DIR=/etc/ssl/certs
-
 if [ $# -gt 0 ]; then
  DIR="$1"
 fi
-
 certs=$( find ${DIR} -type f -name "*.pem" -o -name "*.crt" )
 today=$( date +%Y%m%d )
-
 for cert in $certs; do
  notafter=$( $OPENSSL x509 -enddate -in "${cert}" -noout )
  date=$( echo ${notafter} | sed 's/^notAfter=//' )
  mydate "$date"
-
  if [ ${certdate} -lt ${today} ]; then
  echo "${cert} expired on ${certdate}! Removing..."
  rm -f "${cert}"
  fi
 done
 EOF
-
 chmod u+x /usr/sbin/remove-expired-certs.sh
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -269,6 +232,7 @@ make-ca.sh         &&
 unset URL
 
 
+
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 SSLDIR=/etc/ssl                                              &&
 remove-expired-certs.sh certs                                &&
@@ -278,6 +242,7 @@ c_rehash                                                     &&
 install BLFS-ca-bundle*.crt ${SSLDIR}/ca-bundle.crt          &&
 ln -sfv ../ca-bundle.crt ${SSLDIR}/certs/ca-certificates.crt &&
 unset SSLDIR
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -289,6 +254,6 @@ rm -r certs BLFS-ca-bundle*
 
 
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

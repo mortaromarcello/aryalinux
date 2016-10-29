@@ -4,6 +4,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:cmake
 #REQ:cups
@@ -31,6 +32,6 @@ sudo ldconfig
 sudo ln -svf /opt/remmina_devel/freerdp/bin/xfreerdp /usr/bin/
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "free-rdp=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

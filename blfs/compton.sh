@@ -4,6 +4,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:gtk2
 #REQ:gtk3
@@ -22,4 +23,4 @@ cp -v compton.sample.conf ~/.config/compton.conf
 cd $SOURCE_DIR
 rm -rf compton
 
-echo "compton=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

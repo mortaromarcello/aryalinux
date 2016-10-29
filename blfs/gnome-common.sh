@@ -5,7 +5,8 @@ set -e
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#VER:gnome-common:3.18.0
+NAME="gnome-common"
+VERSION="3.18.0"
 
 
 
@@ -29,6 +30,5 @@ sudo make install
 
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
-echo "gnome-common=>`date`" | sudo tee -a $INSTALLED_LIST
-
+cleanup "$NAME" "$DIRECTORY"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

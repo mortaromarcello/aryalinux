@@ -4,10 +4,12 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:exaile:3.4.5
+NAME="exaile"
+VERSION="3.4.5"
 
-PACKAGE_NAME="exaile"
+NAME="exaile"
 
 #REQ:gstreamer-0.10
 #REQ:gstreamer-0.10-plugins-base
@@ -33,6 +35,6 @@ make
 sudo make install
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "$PACKAGE_NAME=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

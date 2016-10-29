@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:libvirt-glib:0.2.3
+NAME="libvirt-glib"
+VERSION="0.2.3"
 
 cd $SOURCE_DIR
 
@@ -25,4 +27,4 @@ cd $SOURCE_DIR
 
 rm -rf check
 
-echo "libvirt-glib=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

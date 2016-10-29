@@ -4,12 +4,14 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:perl-modules#encode-iso2022
 
 URL="http://search.cpan.org/CPAN/authors/id/N/NE/NEZUMI/Encode-JISX0213-0.04.tar.gz"
 
-#VER:Encode-JISX0213:0.04
+NAME="Encode-JISX0213"
+VERSION="0.04"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -34,7 +36,6 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#encode-jisx0213=>`date`" | sudo tee -a $INSTALLED_LIST
-
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

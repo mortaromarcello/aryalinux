@@ -6,33 +6,34 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#DESCRIPTION:br3ak The jfsutils package containsbr3ak administration and debugging tools for the jfs file system.br3ak
-#SECTION:postlfs
-
-
-
-#VER:jfsutils:1.1.15
-
-
+DESCRIPTION="br3ak The jfsutils package containsbr3ak administration and debugging tools for the jfs file system.br3ak"
+SECTION="postlfs"
+VERSION=1.1.15
 NAME="jfsutils"
+
+
 
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/jfsutils/jfsutils-1.1.15.tar.gz || wget -nc http://jfs.sourceforge.net/project/pub/jfsutils-1.1.15.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/jfsutils/jfsutils-1.1.15.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/jfsutils/jfsutils-1.1.15.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/jfsutils/jfsutils-1.1.15.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/jfsutils/jfsutils-1.1.15.tar.gz
 
 
 URL=http://jfs.sourceforge.net/project/pub/jfsutils-1.1.15.tar.gz
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$")
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
 
+whoami > /tmp/currentuser
+
 sed "s@<unistd.h>@&\n#include <sys/types.h>@g" -i fscklog/extract.c &&
 ./configure &&
-make
+make "-j`nproc`" || make
+
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
+
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
@@ -40,8 +41,7 @@ sudo rm rootscript.sh
 
 
 
-
 cd $SOURCE_DIR
-cleanup "$NAME" $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$INSTALLED_LIST"
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

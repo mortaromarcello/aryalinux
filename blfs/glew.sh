@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:glew_.orig:1.13.0
+NAME="glew_.orig"
+VERSION="1.13.0"
 
 URL=http://archive.ubuntu.com/ubuntu/pool/main/g/glew/glew_1.13.0.orig.tar.gz
 
@@ -22,6 +24,6 @@ make "-j`nproc`"
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "glew=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

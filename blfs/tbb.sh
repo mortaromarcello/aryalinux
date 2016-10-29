@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:tbb44_20160526oss_src:_0
+NAME="tbb44_20160526oss_src"
+VERSION="_0"
 
 URL=https://www.threadingbuildingblocks.org/sites/default/files/software_releases/source/tbb44_20160526oss_src_0.tgz
 
@@ -20,4 +22,4 @@ cd $DIRECTORY
 
 sudo make
 
-echo "tbb=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

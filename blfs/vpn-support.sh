@@ -14,4 +14,4 @@ set -e
 #REQ:openvpn
 #REQ:network-manager-openvpn
 
-echo "vpn-support=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:audacity_.orig:2.1.2
+NAME="audacity_.orig"
+VERSION="2.1.2"
 
 
 #REQ:audio-video-plugins
@@ -43,6 +45,6 @@ fi
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "audacity=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

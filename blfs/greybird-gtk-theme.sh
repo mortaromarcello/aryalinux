@@ -4,6 +4,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:gtk2
 #REQ:gtk3
@@ -20,4 +21,4 @@ sudo make install
 cd $SOURCE_DIR
 rm -rf Greybird
 
-echo "greybird-gtk-theme=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

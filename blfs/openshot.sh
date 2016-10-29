@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:openshot_.orig:1.4.3
+NAME="openshot_.orig"
+VERSION="1.4.3"
 
 #REQ:python-modules#setuptools
 #REQ:ladspa
@@ -33,6 +35,6 @@ python setup.py build &&
 sudo python setup.py install
 
 cd $SOURCE_DIR
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "openshot=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

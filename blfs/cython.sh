@@ -4,8 +4,10 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
-#VER:Cython:0.24
+NAME="Cython"
+VERSION="0.24"
 
 cd $SOURCE_DIR
 
@@ -21,6 +23,6 @@ sudo python setup.py install
 
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "cython=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
