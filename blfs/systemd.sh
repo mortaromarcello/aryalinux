@@ -75,16 +75,6 @@ make "-j`nproc`" || make
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-systemctl start rescue.target
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
 
 ENDOFROOTSCRIPT
@@ -133,17 +123,6 @@ auth required pam_deny.so
 password required pam_deny.so
 # End /etc/pam.d/systemd-user
 EOF
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-systemctl daemon-reload
-systemctl start multi-user.target
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
