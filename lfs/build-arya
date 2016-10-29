@@ -209,6 +209,13 @@ else:
 	rootPartition = raw_input('Enter the root partition where the build was in progress. Enter to exit: ')
 	if rootPartition != '':
 		if not os.path.exists('/mnt/lfs/sources/build-properties'):
+			check_output('umount /mnt/lfs/tmp/mountpoint/dev/pts', shell=True)
+                        check_output('umount /mnt/lfs/tmp/mountpoint/dev', shell=True)
+                        check_output('umount /mnt/lfs/tmp/mountpoint', shell=True)
+                        check_output('umount /mnt/lfs/tmp/mountpoint/sys', shell=True)
+                        check_output('umount /mnt/lfs/tmp/mountpoint/proc', shell=True)
+                        check_output('umount /mnt/lfs/tmp/mountpoint/run', shell=True)
+			check_outout('rm -r /mnt/lfs/tmp/mountpoint', shell=True)
 			runScript('./umountal.sh', None)
 			check_output('rm -rf /sources', shell=True)
 			check_output('rm -rf /mnt/lfs', shell=True)
