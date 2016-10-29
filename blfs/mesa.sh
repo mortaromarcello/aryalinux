@@ -15,8 +15,9 @@ NAME="mesa"
 #REQ:libdrm
 #REQ:python2
 #REC:elfutils
-#REC:x7driver
 #REC:llvm
+#REC:libva-wo-mesa
+#REC:libvdpau
 #OPT:libgcrypt
 #OPT:nettle
 #OPT:wayland
