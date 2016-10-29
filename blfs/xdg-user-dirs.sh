@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak Xdg-user-dirs is a tool to helpbr3ak manage “<span class="quote">well known” userbr3ak directories like the desktop folder and the music folder. It alsobr3ak handles localization (i.e. translation) of the filenames.br3ak"
+DESCRIPTION="br3ak Xdg-user-dirs is a tool to helpbr3ak manage “<span class="quote">well known” userbr3ak directories like the desktop folder and the music folder. It alsobr3ak handles localization \(i.e. translation\) of the filenames.br3ak"
 SECTION="general"
 VERSION=0.15
 NAME="xdg-user-dirs"

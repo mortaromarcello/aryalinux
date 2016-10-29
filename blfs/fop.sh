@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The FOP (Formatting Objectsbr3ak Processor) package contains a print formatter driven by XSLbr3ak formatting objects (XSL-FO). It is a Java application that reads a formattingbr3ak object tree and renders the resulting pages to a specified output.br3ak Output formats currently supported include PDF, PCL, PostScript,br3ak SVG, XML (area tree representation), print, AWT, MIF and ASCIIbr3ak text. The primary output target is PDF.br3ak"
+DESCRIPTION="br3ak The FOP \(Formatting Objectsbr3ak Processor\) package contains a print formatter driven by XSLbr3ak formatting objects \(XSL-FO\). It is a Java application that reads a formattingbr3ak object tree and renders the resulting pages to a specified output.br3ak Output formats currently supported include PDF, PCL, PostScript,br3ak SVG, XML \(area tree representation\), print, AWT, MIF and ASCIIbr3ak text. The primary output target is PDF.br3ak"
 SECTION="pst"
 VERSION=586
 NAME="fop"

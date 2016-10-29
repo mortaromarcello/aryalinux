@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The p11-kit package provides a waybr3ak to load and enumerate PKCS #11 (a Cryptographic Token Interfacebr3ak Standard) modules.br3ak"
+DESCRIPTION="br3ak The p11-kit package provides a waybr3ak to load and enumerate PKCS #11 \(a Cryptographic Token Interfacebr3ak Standard\) modules.br3ak"
 SECTION="postlfs"
 VERSION=0.23.2
 NAME="p11-kit"

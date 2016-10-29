@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak Vte is a library (libvte)br3ak implementing a terminal emulator widget for GTK+ 2, and a minimal demonstrationbr3ak application (vte) that uses libvte.br3ak"
+DESCRIPTION="br3ak Vte is a library \(libvte\)br3ak implementing a terminal emulator widget for GTK+ 2, and a minimal demonstrationbr3ak application \(vte\) that uses libvte.br3ak"
 SECTION="xfce"
 VERSION=0.28.2
 NAME="vte2"

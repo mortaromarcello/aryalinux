@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The ISC DHCP package contains bothbr3ak the client and server programs for DHCP. <span class="command"><strong>dhclient</strong> (the client) is used forbr3ak connecting to a network which uses DHCP to assign networkbr3ak addresses. <span class="command"><strong>dhcpd</strong> (thebr3ak server) is used for assigning network addresses on privatebr3ak networks.br3ak"
+DESCRIPTION="br3ak The ISC DHCP package contains bothbr3ak the client and server programs for DHCP. <span class="command"><strong>dhclient</strong> \(the client\) is used forbr3ak connecting to a network which uses DHCP to assign networkbr3ak addresses. <span class="command"><strong>dhcpd</strong> \(thebr3ak server\) is used for assigning network addresses on privatebr3ak networks.br3ak"
 SECTION="basicnet"
 VERSION=4.3.5
 NAME="dhcp"

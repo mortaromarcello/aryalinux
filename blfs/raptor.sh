@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak Raptor is a C library thatbr3ak provides a set of parsers and serializers that generate Resourcebr3ak Description Framework (RDF) triples.br3ak"
+DESCRIPTION="br3ak Raptor is a C library thatbr3ak provides a set of parsers and serializers that generate Resourcebr3ak Description Framework \(RDF\) triples.br3ak"
 SECTION="general"
 VERSION=2.0.15
 NAME="raptor"

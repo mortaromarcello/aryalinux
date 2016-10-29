@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak Itstool extracts messages from XMLbr3ak files and outputs PO template files, then merges translations frombr3ak MO files to create translated XML files. It determines what tobr3ak translate and how to chunk it into messages using the W3Cbr3ak Internationalization Tag Set (ITS).br3ak"
+DESCRIPTION="br3ak Itstool extracts messages from XMLbr3ak files and outputs PO template files, then merges translations frombr3ak MO files to create translated XML files. It determines what tobr3ak translate and how to chunk it into messages using the W3Cbr3ak Internationalization Tag Set \(ITS\).br3ak"
 SECTION="pst"
 VERSION=2.0.2
 NAME="itstool"

@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak libburn is a library for writingbr3ak preformatted data onto optical media: CD, DVD and BD (Blu-Ray).br3ak"
+DESCRIPTION="br3ak libburn is a library for writingbr3ak preformatted data onto optical media: CD, DVD and BD \(Blu-Ray\).br3ak"
 SECTION="multimedia"
 VERSION=1.4.6
 NAME="libburn"

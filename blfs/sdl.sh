@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The Simple DirectMedia Layer (SDLbr3ak for short) is a cross-platform library designed to make it easy tobr3ak write multimedia software, such as games and emulators.br3ak"
+DESCRIPTION="br3ak The Simple DirectMedia Layer \(SDLbr3ak for short\) is a cross-platform library designed to make it easy tobr3ak write multimedia software, such as games and emulators.br3ak"
 SECTION="multimedia"
 VERSION=1.2.15
 NAME="sdl"

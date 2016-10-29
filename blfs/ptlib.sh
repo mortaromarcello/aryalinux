@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The Ptlib (Portable Tools Library)br3ak package contains a class library that has its genesis many yearsbr3ak ago as PWLib (portable Windows Library), a method to producebr3ak applications to run on various platforms.br3ak"
+DESCRIPTION="br3ak The Ptlib \(Portable Tools Library\)br3ak package contains a class library that has its genesis many yearsbr3ak ago as PWLib \(portable Windows Library\), a method to producebr3ak applications to run on various platforms.br3ak"
 SECTION="general"
 VERSION=2.10.11
 NAME="ptlib"

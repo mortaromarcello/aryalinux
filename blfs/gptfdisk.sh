@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The gptfdisk package is a set ofbr3ak programs for creation and maintenance of GUID Partition Table (GPT)br3ak disk drives. A GPT partitioned disk is required for drives greaterbr3ak than 2 TB and is a modern replacement for legacy PC-BIOSbr3ak partitioned disk drives that use a Master Boot Record (MBR). Thebr3ak main program, <span class="command"><strong>gdisk</strong>,br3ak has an inteface similar to the classic <span class="command"><strong>fdisk</strong> program.br3ak"
+DESCRIPTION="br3ak The gptfdisk package is a set ofbr3ak programs for creation and maintenance of GUID Partition Table \(GPT\)br3ak disk drives. A GPT partitioned disk is required for drives greaterbr3ak than 2 TB and is a modern replacement for legacy PC-BIOSbr3ak partitioned disk drives that use a Master Boot Record \(MBR\). Thebr3ak main program, <span class="command"><strong>gdisk</strong>,br3ak has an inteface similar to the classic <span class="command"><strong>fdisk</strong> program.br3ak"
 SECTION="postlfs"
 VERSION=1.0.1
 NAME="gptfdisk"

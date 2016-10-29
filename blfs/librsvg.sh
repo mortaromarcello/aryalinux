@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The librsvg package contains abr3ak library and tools used to manipulate, convert and view Scalablebr3ak Vector Graphic (SVG) images.br3ak"
+DESCRIPTION="br3ak The librsvg package contains abr3ak library and tools used to manipulate, convert and view Scalablebr3ak Vector Graphic \(SVG\) images.br3ak"
 SECTION="general"
 VERSION=2.40.16
 NAME="librsvg"

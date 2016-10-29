@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The libtirpc package containsbr3ak libraries that support programs that use the Remote Procedure Callbr3ak (RPC) API. It replaces the RPC, but not the NIS library entriesbr3ak that used to be in glibc.br3ak"
+DESCRIPTION="br3ak The libtirpc package containsbr3ak libraries that support programs that use the Remote Procedure Callbr3ak \(RPC\) API. It replaces the RPC, but not the NIS library entriesbr3ak that used to be in glibc.br3ak"
 SECTION="basicnet"
 VERSION=1.0.1
 NAME="libtirpc"

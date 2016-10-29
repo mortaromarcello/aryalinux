@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The Apache Portable Runtime (APR) is a supporting library for thebr3ak Apache web server. It provides a set of application programmingbr3ak interfaces (APIs) that map to the underlying Operating System (OS).br3ak Where the OS doesn't support a particular function, APR willbr3ak provide an emulation. Thus programmers can use the APR to make abr3ak program portable across different platforms.br3ak"
+DESCRIPTION="br3ak The Apache Portable Runtime \(APR\) is a supporting library for thebr3ak Apache web server. It provides a set of application programmingbr3ak interfaces \(APIs\) that map to the underlying Operating System \(OS\).br3ak Where the OS doesn't support a particular function, APR willbr3ak provide an emulation. Thus programmers can use the APR to make abr3ak program portable across different platforms.br3ak"
 SECTION="general"
 VERSION=1.5.2
 NAME="apr"

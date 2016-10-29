@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak NASM (Netwide Assembler) is anbr3ak 80x86 assembler designed for portability and modularity. Itbr3ak includes a disassembler as well.br3ak"
+DESCRIPTION="br3ak NASM \(Netwide Assembler\) is anbr3ak 80x86 assembler designed for portability and modularity. Itbr3ak includes a disassembler as well.br3ak"
 SECTION="general"
 VERSION=2.12.02
 NAME="nasm"

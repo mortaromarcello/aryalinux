@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak Exempi is an implementation of XMPbr3ak (Adobe's Extensible Metadata Platform).br3ak"
+DESCRIPTION="br3ak Exempi is an implementation of XMPbr3ak \(Adobe's Extensible Metadata Platform\).br3ak"
 SECTION="general"
 VERSION=2.3.0
 NAME="exempi"

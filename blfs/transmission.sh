@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak Transmission is a cross-platform,br3ak open source BitTorrent client. This is useful for downloading largebr3ak files (such as Linux ISOs) and reduces the need for thebr3ak distributors to provide server bandwidth.br3ak"
+DESCRIPTION="br3ak Transmission is a cross-platform,br3ak open source BitTorrent client. This is useful for downloading largebr3ak files \(such as Linux ISOs\) and reduces the need for thebr3ak distributors to provide server bandwidth.br3ak"
 SECTION="xsoft"
 VERSION=2.92
 NAME="transmission"

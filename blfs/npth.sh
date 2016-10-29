@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The NPth package contains a verybr3ak portable POSIX/ANSI-C based library for Unix platforms whichbr3ak provides non-preemptive priority-based scheduling for multiplebr3ak threads of execution (multithreading) inside event-drivenbr3ak applications. All threads run in the same address space of thebr3ak server application, but each thread has its own individualbr3ak program-counter, run-time stack, signal mask and errno variable.br3ak"
+DESCRIPTION="br3ak The NPth package contains a verybr3ak portable POSIX/ANSI-C based library for Unix platforms whichbr3ak provides non-preemptive priority-based scheduling for multiplebr3ak threads of execution \(multithreading\) inside event-drivenbr3ak applications. All threads run in the same address space of thebr3ak server application, but each thread has its own individualbr3ak program-counter, run-time stack, signal mask and errno variable.br3ak"
 SECTION="general"
 VERSION=1.2
 NAME="npth"

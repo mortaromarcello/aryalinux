@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The sg3_utils package contains lowbr3ak level utilities for devices that use a SCSI command set. Apart frombr3ak SCSI parallel interface (SPI) devices, the SCSI command set is usedbr3ak by ATAPI devices (CD/DVDs and tapes), USB mass storage devices,br3ak Fibre Channel disks, IEEE 1394 storage devices (that use the "SBP"br3ak protocol), SAS, iSCSI and FCoE devices (amongst others).br3ak"
+DESCRIPTION="br3ak The sg3_utils package contains lowbr3ak level utilities for devices that use a SCSI command set. Apart frombr3ak SCSI parallel interface \(SPI\) devices, the SCSI command set is usedbr3ak by ATAPI devices \(CD/DVDs and tapes\), USB mass storage devices,br3ak Fibre Channel disks, IEEE 1394 storage devices \(that use the "SBP"br3ak protocol\), SAS, iSCSI and FCoE devices \(amongst others\).br3ak"
 SECTION="general"
 VERSION=1.42
 NAME="sg3_utils"

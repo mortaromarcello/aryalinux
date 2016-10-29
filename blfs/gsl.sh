@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The GNU Scientific Library (GSL) is a numerical library for C andbr3ak C++ programmers. It provides a wide range of mathematical routinesbr3ak such as random number generators, special functions andbr3ak least-squares fitting.br3ak"
+DESCRIPTION="br3ak The GNU Scientific Library \(GSL\) is a numerical library for C andbr3ak C++ programmers. It provides a wide range of mathematical routinesbr3ak such as random number generators, special functions andbr3ak least-squares fitting.br3ak"
 SECTION="general"
 VERSION=2.2.1
 NAME="gsl"

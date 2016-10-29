@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The libogg package contains thebr3ak Ogg file structure. This is useful for creating (encoding) orbr3ak playing (decoding) a single physical bit stream.br3ak"
+DESCRIPTION="br3ak The libogg package contains thebr3ak Ogg file structure. This is useful for creating \(encoding\) orbr3ak playing \(decoding\) a single physical bit stream.br3ak"
 SECTION="multimedia"
 VERSION=1.3.2
 NAME="libogg"

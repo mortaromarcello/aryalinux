@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak Download (HTTP): <a class="ulink" href="http://ftp.gnu.org/gnu/which/which-2.21.tar.gz">http://ftp.gnu.org/gnu/which/which-2.21.tar.gz</a>br3ak"
+DESCRIPTION="br3ak Download \(HTTP\): <a class="ulink" href="http://ftp.gnu.org/gnu/which/which-2.21.tar.gz">http://ftp.gnu.org/gnu/which/which-2.21.tar.gz</a>br3ak"
 SECTION="general"
 VERSION=2.21
 NAME="which"

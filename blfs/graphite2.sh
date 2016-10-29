@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak Graphite2 is a rendering enginebr3ak for graphite fonts. These are TrueType fonts with additional tablesbr3ak containing smart rendering information and were originallybr3ak developed to support complex non-Roman writing systems. They maybr3ak contain rules for e.g. ligatures, glyph substitution, kerning,br3ak justification - this can make them useful even on text written inbr3ak Roman writing systems such as English. Note that firefox by default provides an internal copybr3ak of the graphite engine and cannot use a system version (although itbr3ak can now be patched to use it), but it too should benefit from thebr3ak availability of graphite fonts.br3ak"
+DESCRIPTION="br3ak Graphite2 is a rendering enginebr3ak for graphite fonts. These are TrueType fonts with additional tablesbr3ak containing smart rendering information and were originallybr3ak developed to support complex non-Roman writing systems. They maybr3ak contain rules for e.g. ligatures, glyph substitution, kerning,br3ak justification - this can make them useful even on text written inbr3ak Roman writing systems such as English. Note that firefox by default provides an internal copybr3ak of the graphite engine and cannot use a system version \(although itbr3ak can now be patched to use it\), but it too should benefit from thebr3ak availability of graphite fonts.br3ak"
 SECTION="general"
 VERSION=1.3.8
 NAME="graphite2"

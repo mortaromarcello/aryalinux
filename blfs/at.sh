@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The at package provide delayed jobbr3ak execution and batch processing. It is required for Linux Standardsbr3ak Base (LSB) conformance.br3ak"
+DESCRIPTION="br3ak The at package provide delayed jobbr3ak execution and batch processing. It is required for Linux Standardsbr3ak Base \(LSB\) conformance.br3ak"
 SECTION="general"
 VERSION=3.1.20
 NAME="at"
