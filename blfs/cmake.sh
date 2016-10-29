@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The CMake package contains abr3ak modern toolset used for generating Makefiles. It is a successor ofbr3ak the auto-generated <span class="command"><strong>configure</strong> script and aims to bebr3ak platform- and compiler-independent. A significant user ofbr3ak CMake is KDE since version 4.br3ak"
+DESCRIPTION="br3ak The CMake package contains abr3ak modern toolset used for generating Makefiles. It is a successor ofbr3ak the auto-generated <span class=\"command\"><strong>configure</strong> script and aims to bebr3ak platform- and compiler-independent. A significant user ofbr3ak CMake is KDE since version 4.br3ak"
 SECTION="general"
 VERSION=3.6.2
 NAME="cmake"

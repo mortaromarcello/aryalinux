@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The stunnel package contains abr3ak program that allows you to encrypt arbitrary TCP connections insidebr3ak SSL \(Secure Sockets Layer\) so you can easily communicate withbr3ak clients over secure channels. stunnel can be used to add SSL functionalitybr3ak to commonly used Inetd daemonsbr3ak such as POP-2, POP-3, and IMAP servers, along with standalonebr3ak daemons such as NNTP, SMTP, and HTTP. stunnel can also be used to tunnel PPP overbr3ak network sockets without changes to the server package source code.br3ak"
+DESCRIPTION="br3ak The stunnel package contains abr3ak program that allows you to encrypt arbitrary TCP connections insidebr3ak SSL (Secure Sockets Layer) so you can easily communicate withbr3ak clients over secure channels. stunnel can be used to add SSL functionalitybr3ak to commonly used Inetd daemonsbr3ak such as POP-2, POP-3, and IMAP servers, along with standalonebr3ak daemons such as NNTP, SMTP, and HTTP. stunnel can also be used to tunnel PPP overbr3ak network sockets without changes to the server package source code.br3ak"
 SECTION="postlfs"
 VERSION=5.36
 NAME="stunnel"

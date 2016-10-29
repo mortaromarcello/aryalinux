@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The Serf package contains abr3ak C-based HTTP client library built upon the Apache Portable Runtimebr3ak \(APR\) library. It multiplexes connections, running the read/writebr3ak communication asynchronously. Memory copies and transformations arebr3ak kept to a minimum to provide high performance operation.br3ak"
+DESCRIPTION="br3ak The Serf package contains abr3ak C-based HTTP client library built upon the Apache Portable Runtimebr3ak (APR) library. It multiplexes connections, running the read/writebr3ak communication asynchronously. Memory copies and transformations arebr3ak kept to a minimum to provide high performance operation.br3ak"
 SECTION="basicnet"
 VERSION=1.3.9
 NAME="serf"

@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The OpenSSL package containsbr3ak management tools and libraries relating to cryptography. These arebr3ak useful for providing cryptography functions to other packages, suchbr3ak as OpenSSH, email applications andbr3ak web browsers \(for accessing HTTPS sites\).br3ak"
+DESCRIPTION="br3ak The OpenSSL package containsbr3ak management tools and libraries relating to cryptography. These arebr3ak useful for providing cryptography functions to other packages, suchbr3ak as OpenSSH, email applications andbr3ak web browsers (for accessing HTTPS sites).br3ak"
 SECTION="postlfs"
 VERSION=1.0.2j
 NAME="openssl"

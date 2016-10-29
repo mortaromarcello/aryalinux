@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak Whois is a client-side applicationbr3ak which queries the whois directory service for informationbr3ak pertaining to a particular domain name. This package will installbr3ak two programs by default: <span class="command"><strong>whois</strong> and <span class="command"><strong>mkpasswd</strong>. The <span class="command"><strong>mkpasswd</strong> command is alsobr3ak installed by the <a class="xref" href="../general/expect.html" br3ak title="Expect-5.45">Expect-5.45</a> package.br3ak"
+DESCRIPTION="br3ak Whois is a client-side applicationbr3ak which queries the whois directory service for informationbr3ak pertaining to a particular domain name. This package will installbr3ak two programs by default: <span class=\"command\"><strong>whois</strong> and <span class=\"command\"><strong>mkpasswd</strong>. The <span class=\"command\"><strong>mkpasswd</strong> command is alsobr3ak installed by the <a class=\"xref\" href=\"../general/expect.html\" br3ak title=\"Expect-5.45\">Expect-5.45</a> package.br3ak"
 SECTION="basicnet"
 VERSION=5.2.12
 NAME="whois"

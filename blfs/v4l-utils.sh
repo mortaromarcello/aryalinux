@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak v4l-utils provides a series ofbr3ak utilities for media devices, allowing to handle the proprietarybr3ak formats available at most webcams \(libv4l\), and providing tools tobr3ak test V4L devices.br3ak"
+DESCRIPTION="br3ak v4l-utils provides a series ofbr3ak utilities for media devices, allowing to handle the proprietarybr3ak formats available at most webcams (libv4l), and providing tools tobr3ak test V4L devices.br3ak"
 SECTION="multimedia"
 VERSION=1.10.1
 NAME="v4l-utils"

@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The elfutils package contains abr3ak set of utilities and libraries for handling ELF \(Executable andbr3ak Linkable Format\) files.br3ak"
+DESCRIPTION="br3ak The elfutils package contains abr3ak set of utilities and libraries for handling ELF (Executable andbr3ak Linkable Format) files.br3ak"
 SECTION="general"
 VERSION=0.167
 NAME="elfutils"

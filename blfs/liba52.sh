@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak liba52 is a free library forbr3ak decoding ATSC A/52 \(also known as AC-3\) streams. The A/52 standardbr3ak is used in a variety of applications, including digital televisionbr3ak and DVD.br3ak"
+DESCRIPTION="br3ak liba52 is a free library forbr3ak decoding ATSC A/52 (also known as AC-3) streams. The A/52 standardbr3ak is used in a variety of applications, including digital televisionbr3ak and DVD.br3ak"
 SECTION="multimedia"
 VERSION=0.7.4
 NAME="liba52"

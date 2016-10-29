@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The SGML Common package containsbr3ak <span class="command"><strong>install-catalog</strong>. Thisbr3ak is useful for creating and maintaining centralized SGML catalogs.br3ak"
+DESCRIPTION="br3ak The SGML Common package containsbr3ak <span class=\"command\"><strong>install-catalog</strong>. Thisbr3ak is useful for creating and maintaining centralized SGML catalogs.br3ak"
 SECTION="pst"
 VERSION=0.6.3
 NAME="sgml-common"

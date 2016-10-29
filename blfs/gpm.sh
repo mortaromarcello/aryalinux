@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The GPM \(General Purpose Mousebr3ak daemon\) package contains a mouse server for the console andbr3ak <span class="command"><strong>xterm</strong>. It not onlybr3ak provides cut and paste support generally, but its library componentbr3ak is used by various software such as Links to provide mouse support to thebr3ak application. It is useful on desktops, especially if followingbr3ak \(Beyond\) Linux From Scratch instructions; it's often much easierbr3ak \(and less error prone\) to cut and paste between two console windowsbr3ak than to type everything by hand!br3ak"
+DESCRIPTION="br3ak The GPM (General Purpose Mousebr3ak daemon) package contains a mouse server for the console andbr3ak <span class=\"command\"><strong>xterm</strong>. It not onlybr3ak provides cut and paste support generally, but its library componentbr3ak is used by various software such as Links to provide mouse support to thebr3ak application. It is useful on desktops, especially if followingbr3ak (Beyond) Linux From Scratch instructions; it's often much easierbr3ak (and less error prone) to cut and paste between two console windowsbr3ak than to type everything by hand!br3ak"
 SECTION="general"
 VERSION=1.20.7
 NAME="gpm"

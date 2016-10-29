@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The chrpath modify the dynamicbr3ak library load path \(rpath and runpath\) of compiled programs andbr3ak libraries.br3ak"
+DESCRIPTION="br3ak The chrpath modify the dynamicbr3ak library load path (rpath and runpath) of compiled programs andbr3ak libraries.br3ak"
 SECTION="general"
 VERSION=0.16
 NAME="chrpath"

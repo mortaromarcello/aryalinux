@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak Seahorse is a graphical interfacebr3ak for managing and using encryption keys. Currently it supports PGPbr3ak keys \(using GPG/GPGME\) and SSH keys.br3ak"
+DESCRIPTION="br3ak Seahorse is a graphical interfacebr3ak for managing and using encryption keys. Currently it supports PGPbr3ak keys (using GPG/GPGME) and SSH keys.br3ak"
 SECTION="gnome"
 VERSION=3.20.0
 NAME="seahorse"

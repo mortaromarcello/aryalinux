@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The libglade package containsbr3ak <code class="filename">libglade libraries. These are usefulbr3ak for loading Glade interface files in a program at runtime.br3ak"
+DESCRIPTION="br3ak The libglade package containsbr3ak <code class=\"filename\">libglade libraries. These are usefulbr3ak for loading Glade interface files in a program at runtime.br3ak"
 SECTION="x"
 VERSION=2.6.4
 NAME="libglade"

@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-DESCRIPTION="br3ak The JuffEd package is a Qt basedbr3ak editor with support for multiple tabs. It is simple and clear, butbr3ak very powerful. It supports language syntax highlighting,br3ak auto-indents in accordance with file type, code blocks folding,br3ak matching braces highlighting with instant jumps between them,br3ak powerful search and replacing text using regular expressionsbr3ak \(including multiline ones\) with the opportunity to use matches \1,br3ak \2, … in substitutions, a terminal emulator, saving namedbr3ak sessions and many other features.br3ak"
+DESCRIPTION="br3ak The JuffEd package is a Qt basedbr3ak editor with support for multiple tabs. It is simple and clear, butbr3ak very powerful. It supports language syntax highlighting,br3ak auto-indents in accordance with file type, code blocks folding,br3ak matching braces highlighting with instant jumps between them,br3ak powerful search and replacing text using regular expressionsbr3ak (including multiline ones) with the opportunity to use matches \1,br3ak \2, … in substitutions, a terminal emulator, saving namedbr3ak sessions and many other features.br3ak"
 SECTION="lxqt"
 VERSION=3
 NAME="juffed"
