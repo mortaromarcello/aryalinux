@@ -30,16 +30,20 @@ NAME="opencv"
 #OPT:python3
 
 
+cd $SOURCE_DIR
+
+URL=http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/3.1.0/opencv-3.1.0.zip
+
+if [ ! -z $URL ]
+then
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/opencv/opencv-3.1.0.zip || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/opencv/opencv-3.1.0.zip || wget -nc http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/3.1.0/opencv-3.1.0.zip || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/opencv/opencv-3.1.0.zip || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/opencv/opencv-3.1.0.zip || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/opencv/opencv-3.1.0.zip
 wget -nc https://raw.githubusercontent.com/Itseez/opencv_3rdparty/81a676001ca8075ada498583e4166079e5744668/ippicv/ippicv_linux_20151201.tgz
 
-
-URL=http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/3.1.0/opencv-3.1.0.zip
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -73,7 +77,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

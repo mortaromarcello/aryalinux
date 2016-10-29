@@ -16,15 +16,19 @@ NAME="gnome-tweak-tool"
 #REQ:python-modules#pygobject3
 
 
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.22.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.22.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-tweak-tool/3.22/gnome-tweak-tool-3.22.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.22.0.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-tweak-tool/3.22/gnome-tweak-tool-3.22.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.22.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.22.0.tar.xz
-
+cd $SOURCE_DIR
 
 URL=http://ftp.gnome.org/pub/gnome/sources/gnome-tweak-tool/3.22/gnome-tweak-tool-3.22.0.tar.xz
+
+if [ ! -z $URL ]
+then
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.22.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.22.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-tweak-tool/3.22/gnome-tweak-tool-3.22.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.22.0.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-tweak-tool/3.22/gnome-tweak-tool-3.22.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.22.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.22.0.tar.xz
+
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -43,7 +47,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

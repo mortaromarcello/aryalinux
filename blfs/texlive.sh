@@ -26,18 +26,22 @@ NAME="texlive"
 #REC:xorg-server
 
 
+cd $SOURCE_DIR
+
+URL=ftp://tug.org/texlive/historic/2016/texlive-20160523b-source.tar.xz
+
+if [ ! -z $URL ]
+then
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20160523b-source.tar.xz || wget -nc ftp://tug.org/texlive/historic/2016/texlive-20160523b-source.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/texlive/texlive-20160523b-source.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20160523b-source.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20160523b-source.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20160523b-source.tar.xz
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20160523b-texmf.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/texlive/texlive-20160523b-texmf.tar.xz || wget -nc ftp://tug.org/texlive/historic/2016/texlive-20160523b-texmf.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20160523b-texmf.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20160523b-texmf.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20160523b-texmf.tar.xz
 wget -nc http://www.linuxfromscratch.org/patches/downloads/texlive/texlive-20160523b-source-upstream_fixes-2.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/texlive-20160523b-source-upstream_fixes-2.patch
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/texlive-20160523b-texmf-upstream_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/texlive/texlive-20160523b-texmf-upstream_fixes-1.patch
 
-
-URL=ftp://tug.org/texlive/historic/2016/texlive-20160523b-source.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -134,7 +138,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

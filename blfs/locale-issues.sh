@@ -12,14 +12,18 @@ NAME="locale-issues"
 
 
 
-
+cd $SOURCE_DIR
 
 URL=
+
+if [ ! -z $URL ]
+then
+
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -27,7 +31,7 @@ find /usr/share/man -type f | xargs checkman.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -15,17 +15,21 @@ NAME="python-modules#pycairo"
 #REQ:python3
 
 
+cd $SOURCE_DIR
+
+URL=http://cairographics.org/releases/pycairo-1.10.0.tar.bz2
+
+if [ ! -z $URL ]
+then
 wget -nc http://cairographics.org/releases/pycairo-1.10.0.tar.bz2
 wget -nc http://www.linuxfromscratch.org/patches/downloads/pycairo/pycairo-1.10.0-waf_unpack-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/pycairo-1.10.0-waf_unpack-1.patch
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/pycairo-1.10.0-waf_python_3_4-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/pycairo/pycairo-1.10.0-waf_python_3_4-1.patch
 
-
-URL=http://cairographics.org/releases/pycairo-1.10.0.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 patch -Np1 -i ../pycairo-1.10.0-waf_unpack-1.patch     &&
 wafdir=$(./waf unpack) &&
@@ -46,7 +50,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

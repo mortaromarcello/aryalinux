@@ -17,16 +17,20 @@ NAME="java"
 #REQ:x7lib
 
 
+cd $SOURCE_DIR
+
+URL=http://anduin.linuxfromscratch.org/BLFS/OpenJDK/OpenJDK-1.8.0.112/OpenJDK-1.8.0.92-i686-bin.tar.xz
+
+if [ ! -z $URL ]
+then
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/openjdk/OpenJDK-1.8.0.92-i686-bin.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/openjdk/OpenJDK-1.8.0.92-i686-bin.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/openjdk/OpenJDK-1.8.0.92-i686-bin.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/openjdk/OpenJDK-1.8.0.92-i686-bin.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/openjdk/OpenJDK-1.8.0.92-i686-bin.tar.xz || wget -nc http://anduin.linuxfromscratch.org/BLFS/OpenJDK/OpenJDK-1.8.0.112/OpenJDK-1.8.0.92-i686-bin.tar.xz
 wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/openjdk/OpenJDK-1.8.0.112-x86_64-bin.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/openjdk/OpenJDK-1.8.0.112-x86_64-bin.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/openjdk/OpenJDK-1.8.0.112-x86_64-bin.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/openjdk/OpenJDK-1.8.0.112-x86_64-bin.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/openjdk/OpenJDK-1.8.0.112-x86_64-bin.tar.xz || wget -nc http://anduin.linuxfromscratch.org/BLFS/OpenJDK/OpenJDK-1.8.0.112/OpenJDK-1.8.0.112-x86_64-bin.tar.xz
 
-
-URL=http://anduin.linuxfromscratch.org/BLFS/OpenJDK/OpenJDK-1.8.0.112/OpenJDK-1.8.0.92-i686-bin.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -53,7 +57,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -14,16 +14,20 @@ NAME="sqlite"
 #OPT:unzip
 
 
+cd $SOURCE_DIR
+
+URL=http://sqlite.org/2016/sqlite-autoconf-3150000.tar.gz
+
+if [ ! -z $URL ]
+then
 wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/sqlite/sqlite-autoconf-3150000.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/sqlite/sqlite-autoconf-3150000.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/sqlite/sqlite-autoconf-3150000.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/sqlite/sqlite-autoconf-3150000.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/sqlite/sqlite-autoconf-3150000.tar.gz || wget -nc http://sqlite.org/2016/sqlite-autoconf-3150000.tar.gz
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/sqlite/sqlite-doc-3150000.zip || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/sqlite/sqlite-doc-3150000.zip || wget -nc http://sqlite.org/2016/sqlite-doc-3150000.zip || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/sqlite/sqlite-doc-3150000.zip || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/sqlite/sqlite-doc-3150000.zip || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/sqlite/sqlite-doc-3150000.zip
 
-
-URL=http://sqlite.org/2016/sqlite-autoconf-3150000.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -61,7 +65,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

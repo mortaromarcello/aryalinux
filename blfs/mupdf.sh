@@ -20,17 +20,21 @@ NAME="mupdf"
 #OPT:openssl
 
 
+cd $SOURCE_DIR
+
+URL=http://www.mupdf.com/downloads/archive/mupdf-1.9-source.tar.gz
+
+if [ ! -z $URL ]
+then
 wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mupdf/mupdf-1.9-source.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mupdf/mupdf-1.9-source.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mupdf/mupdf-1.9-source.tar.gz || wget -nc http://www.mupdf.com/downloads/archive/mupdf-1.9-source.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mupdf/mupdf-1.9-source.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mupdf/mupdf-1.9-source.tar.gz
 wget -nc http://www.linuxfromscratch.org/patches/downloads/mupdf/mupdf-1.9-upstream_fix-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/mupdf-1.9-upstream_fix-1.patch
 wget -nc http://www.linuxfromscratch.org/patches/downloads/mupdf/mupdf-1.9-openjpeg21-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/mupdf-1.9-openjpeg21-1.patch
 
-
-URL=http://www.mupdf.com/downloads/archive/mupdf-1.9-source.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -57,7 +61,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

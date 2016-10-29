@@ -14,15 +14,19 @@ NAME="tripwire"
 #REC:openssl
 
 
-wget -nc https://github.com/Tripwire/tripwire-open-source/archive/2.4.3.1.tar.gz
-
+cd $SOURCE_DIR
 
 URL=https://github.com/Tripwire/tripwire-open-source/archive/2.4.3.1.tar.gz
+
+if [ ! -z $URL ]
+then
+wget -nc https://github.com/Tripwire/tripwire-open-source/archive/2.4.3.1.tar.gz
+
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -93,7 +97,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

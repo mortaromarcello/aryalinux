@@ -15,15 +15,19 @@ NAME="python-modules#pyatspi2"
 #REC:at-spi2-core
 
 
-wget -nc ftp://ftp.gnome.org/pub/gnome/sources/pyatspi/2.20/pyatspi-2.20.2.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/pyatspi/2.20/pyatspi-2.20.2.tar.xz
-
+cd $SOURCE_DIR
 
 URL=http://ftp.gnome.org/pub/gnome/sources/pyatspi/2.20/pyatspi-2.20.2.tar.xz
+
+if [ ! -z $URL ]
+then
+wget -nc ftp://ftp.gnome.org/pub/gnome/sources/pyatspi/2.20/pyatspi-2.20.2.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/pyatspi/2.20/pyatspi-2.20.2.tar.xz
+
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 mkdir python2 &&
 pushd python2 &&
@@ -56,7 +60,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -47,16 +47,20 @@ NAME="qt5"
 #OPT:unixodbc
 
 
+cd $SOURCE_DIR
+
+URL=http://download.qt.io/archive/qt/5.7/5.7.0/single/qt-everywhere-opensource-src-5.7.0.tar.xz
+
+if [ ! -z $URL ]
+then
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.7.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.7.0.tar.xz || wget -nc http://download.qt.io/archive/qt/5.7/5.7.0/single/qt-everywhere-opensource-src-5.7.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.7.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.7.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.7.0.tar.xz
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/qt-5.7.0-qtwebengine_glibc224-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/qt/qt-5.7.0-qtwebengine_glibc224-1.patch
 
-
-URL=http://download.qt.io/archive/qt/5.7/5.7.0/single/qt-everywhere-opensource-src-5.7.0.tar.xz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -264,7 +268,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

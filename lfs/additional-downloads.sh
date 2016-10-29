@@ -48,10 +48,8 @@ wget -nc http://www.cmake.org/files/v3.5/cmake-3.5.0.tar.gz
 wget -nc http://pkgs.fedoraproject.org/repo/pkgs/squashfs-tools/squashfs4.3.tar.gz/370d0470f3c823bf408a3b7a1f145746/squashfs4.3.tar.gz
 wget -nc aryalinux.org/releases/2016.08/bootx64.efi
 wget -nc http://downloads.sourceforge.net/infozip/unzip60.tar.gz
+wget -nc https://raw.githubusercontent.com/FluidIdeas/alps/master/var/lib/alps/functions
+wget -nc https://raw.githubusercontent.com/FluidIdeas/alps/master/usr/bin/alps
+wget -nc https://raw.githubusercontent.com/FluidIdeas/alps/master/etc/alps/alps.conf
 
 popd
-
-cp -v functions ../sources
-cp -v alps ../sources
-cp -v alps.conf ../sources
-

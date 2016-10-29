@@ -13,15 +13,19 @@ NAME="mlt"
 
 
 
-wget -nc http://sourceforge.net/projects/mlt/files/mlt-6.2.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mlt/mlt-6.2.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mlt/mlt-6.2.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mlt/mlt-6.2.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mlt/mlt-6.2.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mlt/mlt-6.2.0.tar.gz
-
+cd $SOURCE_DIR
 
 URL=http://sourceforge.net/projects/mlt/files/mlt-6.2.0.tar.gz
+
+if [ ! -z $URL ]
+then
+wget -nc http://sourceforge.net/projects/mlt/files/mlt-6.2.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mlt/mlt-6.2.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mlt/mlt-6.2.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mlt/mlt-6.2.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mlt/mlt-6.2.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mlt/mlt-6.2.0.tar.gz
+
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -46,7 +50,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

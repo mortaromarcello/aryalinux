@@ -14,16 +14,20 @@ NAME="noto-fonts"
 #REQ:unzip
 
 
+cd $SOURCE_DIR
+
+URL=https://github.com/googlei18n/noto-fonts/archive/v2015-09-29-license-adobe.tar.gz
+
+if [ ! -z $URL ]
+then
 wget -nc https://github.com/googlei18n/noto-fonts/archive/v2015-09-29-license-adobe.tar.gz
 wget -nc https://noto-website-2.storage.googleapis.com/pkgs/Noto-hinted.zip
 
-
-URL=https://github.com/googlei18n/noto-fonts/archive/v2015-09-29-license-adobe.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -41,7 +45,7 @@ fc-cache
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

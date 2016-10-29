@@ -23,16 +23,20 @@ NAME="tl-installer"
 #REC:xorg-server
 
 
+cd $SOURCE_DIR
+
+URL=http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+
+if [ ! -z $URL ]
+then
 wget -nc http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 wget -nc ftp://ftp.gnu.org/gnu/readline/readline-5.2.tar.gz
 
-
-URL=http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -47,7 +51,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

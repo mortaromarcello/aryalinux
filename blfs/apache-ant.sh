@@ -16,16 +16,20 @@ NAME="apache-ant"
 #REQ:glib2
 
 
+cd $SOURCE_DIR
+
+URL=https://archive.apache.org/dist/ant/source/apache-ant-1.9.7-src.tar.bz2
+
+if [ ! -z $URL ]
+then
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/apache-ant/apache-ant-1.9.7-src.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/apache-ant/apache-ant-1.9.7-src.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/apache-ant/apache-ant-1.9.7-src.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/apache-ant/apache-ant-1.9.7-src.tar.bz2 || wget -nc https://archive.apache.org/dist/ant/source/apache-ant-1.9.7-src.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/apache-ant/apache-ant-1.9.7-src.tar.bz2
 wget -nc http://hamcrest.googlecode.com/files/hamcrest-1.3.tgz
 
-
-URL=https://archive.apache.org/dist/ant/source/apache-ant-1.9.7-src.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -63,7 +67,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

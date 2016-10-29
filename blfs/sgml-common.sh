@@ -13,16 +13,20 @@ NAME="sgml-common"
 
 
 
+cd $SOURCE_DIR
+
+URL=ftp://sources.redhat.com/pub/docbook-tools/new-trials/SOURCES/sgml-common-0.6.3.tgz
+
+if [ ! -z $URL ]
+then
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/sgml-common/sgml-common-0.6.3.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/sgml-common/sgml-common-0.6.3.tgz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/sgml-common/sgml-common-0.6.3.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/sgml-common/sgml-common-0.6.3.tgz || wget -nc ftp://sources.redhat.com/pub/docbook-tools/new-trials/SOURCES/sgml-common-0.6.3.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/sgml-common/sgml-common-0.6.3.tgz
 wget -nc http://www.linuxfromscratch.org/patches/downloads/sgml-common/sgml-common-0.6.3-manpage-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/sgml-common-0.6.3-manpage-1.patch
 
-
-URL=ftp://sources.redhat.com/pub/docbook-tools/new-trials/SOURCES/sgml-common-0.6.3.tgz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -62,7 +66,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

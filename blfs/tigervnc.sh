@@ -22,17 +22,21 @@ NAME="tigervnc"
 #REC:linux-pam
 
 
+cd $SOURCE_DIR
+
+URL=http://anduin.linuxfromscratch.org/BLFS/tigervnc/tigervnc-1.7.0.tar.gz
+
+if [ ! -z $URL ]
+then
 wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/tigervnc/tigervnc-1.7.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/tigervnc/tigervnc-1.7.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/tigervnc/tigervnc-1.7.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/tigervnc/tigervnc-1.7.0.tar.gz || wget -nc http://anduin.linuxfromscratch.org/BLFS/tigervnc/tigervnc-1.7.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/tigervnc/tigervnc-1.7.0.tar.gz
 wget -nc http://ftp.x.org/pub/individual/xserver/xorg-server-1.18.4.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2
 wget -nc http://www.linuxfromscratch.org/patches/downloads/tigervnc/tigervnc-1.7.0-gethomedir-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/tigervnc-1.7.0-gethomedir-1.patch
 
-
-URL=http://anduin.linuxfromscratch.org/BLFS/tigervnc/tigervnc-1.7.0.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -106,7 +110,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

@@ -15,15 +15,19 @@ NAME="python-modules#py2cairo"
 #REQ:cairo
 
 
-wget -nc http://cairographics.org/releases/py2cairo-1.10.0.tar.bz2
-
+cd $SOURCE_DIR
 
 URL=http://cairographics.org/releases/py2cairo-1.10.0.tar.bz2
+
+if [ ! -z $URL ]
+then
+wget -nc http://cairographics.org/releases/py2cairo-1.10.0.tar.bz2
+
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 ./waf configure --prefix=/usr &&
 ./waf build
@@ -38,7 +42,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

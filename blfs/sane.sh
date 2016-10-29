@@ -24,16 +24,20 @@ NAME="sane"
 #OPT:xorg-server
 
 
+cd $SOURCE_DIR
+
+URL=http://fossies.org/linux/misc/sane-backends-1.0.25.tar.gz
+
+if [ ! -z $URL ]
+then
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/sane-backends/sane-backends-1.0.25.tar.gz || wget -nc http://fossies.org/linux/misc/sane-backends-1.0.25.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/sane-backends/sane-backends-1.0.25.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/sane-backends/sane-backends-1.0.25.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/sane-backends/sane-backends-1.0.25.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/sane-backends/sane-backends-1.0.25.tar.gz
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/sane-frontends/sane-frontends-1.0.14.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/sane-frontends/sane-frontends-1.0.14.tar.gz || wget -nc http://alioth.debian.org/frs/download.php/file/1140/sane-frontends-1.0.14.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/sane-frontends/sane-frontends-1.0.14.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/sane-frontends/sane-frontends-1.0.14.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/sane-frontends/sane-frontends-1.0.14.tar.gz
 
-
-URL=http://fossies.org/linux/misc/sane-backends-1.0.25.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -85,7 +89,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

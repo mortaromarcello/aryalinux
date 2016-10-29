@@ -27,17 +27,21 @@ NAME="openjdk"
 #OPT:twm
 
 
+cd $SOURCE_DIR
+
+URL=http://hg.openjdk.java.net/jdk8u/jdk8u/archive/jdk8u112-b15.tar.bz2
+
+if [ ! -z $URL ]
+then
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/jdk/jdk8u112-b15.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/jdk/jdk8u112-b15.tar.bz2 || wget -nc http://hg.openjdk.java.net/jdk8u/jdk8u/archive/jdk8u112-b15.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/jdk/jdk8u112-b15.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/jdk/jdk8u112-b15.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/jdk/jdk8u112-b15.tar.bz2
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/openjdk/jtreg-4.2-b03-675.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/openjdk/jtreg-4.2-b03-675.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/openjdk/jtreg-4.2-b03-675.tar.gz || wget -nc http://anduin.linuxfromscratch.org/BLFS/OpenJDK/OpenJDK-1.8.0.112/jtreg-4.2-b03-675.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/openjdk/jtreg-4.2-b03-675.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/openjdk/jtreg-4.2-b03-675.tar.gz
 wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/icedtea/icedtea-web-1.6.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/icedtea/icedtea-web-1.6.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/icedtea/icedtea-web-1.6.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/icedtea/icedtea-web-1.6.2.tar.gz || wget -nc http://icedtea.classpath.org/download/source/icedtea-web-1.6.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/icedtea/icedtea-web-1.6.2.tar.gz
 
-
-URL=http://hg.openjdk.java.net/jdk8u/jdk8u/archive/jdk8u112-b15.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -418,7 +422,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

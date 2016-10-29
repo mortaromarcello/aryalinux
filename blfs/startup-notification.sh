@@ -15,15 +15,19 @@ NAME="startup-notification"
 #REQ:xcb-util
 
 
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/startup-notification/startup-notification-0.12.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/startup-notification/startup-notification-0.12.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/startup-notification/startup-notification-0.12.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/startup-notification/startup-notification-0.12.tar.gz || wget -nc http://www.freedesktop.org/software/startup-notification/releases/startup-notification-0.12.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/startup-notification/startup-notification-0.12.tar.gz
-
+cd $SOURCE_DIR
 
 URL=http://www.freedesktop.org/software/startup-notification/releases/startup-notification-0.12.tar.gz
+
+if [ ! -z $URL ]
+then
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/startup-notification/startup-notification-0.12.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/startup-notification/startup-notification-0.12.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/startup-notification/startup-notification-0.12.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/startup-notification/startup-notification-0.12.tar.gz || wget -nc http://www.freedesktop.org/software/startup-notification/releases/startup-notification-0.12.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/startup-notification/startup-notification-0.12.tar.gz
+
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -44,7 +48,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

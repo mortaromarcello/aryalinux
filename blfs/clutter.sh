@@ -23,15 +23,19 @@ NAME="clutter"
 #OPT:gtk-doc
 
 
-wget -nc http://ftp.acc.umu.se/pub/gnome/sources/clutter/1.22/clutter-1.22.4.tar.xz
-
+cd $SOURCE_DIR
 
 URL=http://ftp.acc.umu.se/pub/gnome/sources/clutter/1.22/clutter-1.22.4.tar.xz
+
+if [ ! -z $URL ]
+then
+wget -nc http://ftp.acc.umu.se/pub/gnome/sources/clutter/1.22/clutter-1.22.4.tar.xz
+
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -55,7 +59,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

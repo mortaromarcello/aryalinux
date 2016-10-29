@@ -13,16 +13,20 @@ NAME="cdparanoia"
 
 
 
+cd $SOURCE_DIR
+
+URL=http://downloads.xiph.org/releases/cdparanoia/cdparanoia-III-10.2.src.tgz
+
+if [ ! -z $URL ]
+then
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/cdparanoia/cdparanoia-III-10.2.src.tgz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/cdparanoia/cdparanoia-III-10.2.src.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/cdparanoia/cdparanoia-III-10.2.src.tgz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/cdparanoia/cdparanoia-III-10.2.src.tgz || wget -nc http://downloads.xiph.org/releases/cdparanoia/cdparanoia-III-10.2.src.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/cdparanoia/cdparanoia-III-10.2.src.tgz
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/cdparanoia-III-10.2-gcc_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/cdparanoia/cdparanoia-III-10.2-gcc_fixes-1.patch
 
-
-URL=http://downloads.xiph.org/releases/cdparanoia/cdparanoia-III-10.2.src.tgz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -43,7 +47,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

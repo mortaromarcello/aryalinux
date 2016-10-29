@@ -28,16 +28,20 @@ NAME="AbiWord"
 #OPT:telepathy-glib
 
 
+cd $SOURCE_DIR
+
+URL=http://www.abisource.com/downloads/abiword/3.0.1/source/abiword-3.0.1.tar.gz
+
+if [ ! -z $URL ]
+then
 wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/abiword/abiword-3.0.1.tar.gz || wget -nc http://www.abisource.com/downloads/abiword/3.0.1/source/abiword-3.0.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/abiword/abiword-3.0.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/abiword/abiword-3.0.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/abiword/abiword-3.0.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/abiword/abiword-3.0.1.tar.gz
 wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/abiword/abiword-docs-3.0.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/abiword/abiword-docs-3.0.1.tar.gz || wget -nc http://www.abisource.com/downloads/abiword/3.0.1/source/abiword-docs-3.0.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/abiword/abiword-docs-3.0.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/abiword/abiword-docs-3.0.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/abiword/abiword-docs-3.0.1.tar.gz
 
-
-URL=http://www.abisource.com/downloads/abiword/3.0.1/source/abiword-3.0.1.tar.gz
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -80,7 +84,7 @@ install -v -m640    /usr/share/abiword-3.0/templates/normal.awt-<em class="repla
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

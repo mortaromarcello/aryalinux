@@ -21,16 +21,20 @@ NAME="xchat"
 #OPT:tcl
 
 
+cd $SOURCE_DIR
+
+URL=http://www.xchat.org/files/source/2.8/xchat-2.8.8.tar.bz2
+
+if [ ! -z $URL ]
+then
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xchat/xchat-2.8.8.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xchat/xchat-2.8.8.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xchat/xchat-2.8.8.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xchat/xchat-2.8.8.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xchat/xchat-2.8.8.tar.bz2 || wget -nc http://www.xchat.org/files/source/2.8/xchat-2.8.8.tar.bz2 || wget -nc ftp://mirror.ovh.net/gentoo-distfiles/distfiles/xchat-2.8.8.tar.bz2
 wget -nc http://www.linuxfromscratch.org/patches/downloads/xchat/xchat-2.8.8-glib-2.31-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/xchat-2.8.8-glib-2.31-1.patch
 
-
-URL=http://www.xchat.org/files/source/2.8/xchat-2.8.8.tar.bz2
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -56,7 +60,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

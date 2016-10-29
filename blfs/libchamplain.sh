@@ -20,15 +20,19 @@ NAME="libchamplain"
 #OPT:gtk-doc
 
 
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libchamplain/libchamplain-0.12.14.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/libchamplain/0.12/libchamplain-0.12.14.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/libchamplain/0.12/libchamplain-0.12.14.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libchamplain/libchamplain-0.12.14.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libchamplain/libchamplain-0.12.14.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libchamplain/libchamplain-0.12.14.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libchamplain/libchamplain-0.12.14.tar.xz
-
+cd $SOURCE_DIR
 
 URL=http://ftp.gnome.org/pub/gnome/sources/libchamplain/0.12/libchamplain-0.12.14.tar.xz
+
+if [ ! -z $URL ]
+then
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libchamplain/libchamplain-0.12.14.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/libchamplain/0.12/libchamplain-0.12.14.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/libchamplain/0.12/libchamplain-0.12.14.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libchamplain/libchamplain-0.12.14.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libchamplain/libchamplain-0.12.14.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libchamplain/libchamplain-0.12.14.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libchamplain/libchamplain-0.12.14.tar.xz
+
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
 tar --no-overwrite-dir -xf $TARBALL
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
@@ -49,7 +53,7 @@ sudo rm rootscript.sh
 
 
 
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
