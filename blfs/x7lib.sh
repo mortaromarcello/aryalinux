@@ -90,9 +90,6 @@ as_root()
 export -f as_root
 
 
-grep -A9 summary *make_check.log
-
-
 
 
 
