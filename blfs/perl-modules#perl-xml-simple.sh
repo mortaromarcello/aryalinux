@@ -4,6 +4,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:perl-modules#perl-xml-sax
 #REQ:perl-modules#xml-sax-expat
@@ -12,7 +13,8 @@ set +h
 
 URL="http://cpan.org/authors/id/G/GR/GRANTM/XML-Simple-2.22.tar.gz"
 
-#VER:XML-Simple:2.22
+VERSION=2.22
+NAME="perl-modules#xml-simple"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -37,7 +39,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#perl-xml-simple=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

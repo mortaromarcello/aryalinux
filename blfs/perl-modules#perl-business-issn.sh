@@ -4,11 +4,13 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 
 URL="http://www.cpan.org/authors/id/B/BD/BDFOY/Business-ISSN-1.001.tar.gz"
 
-#VER:Business-ISSN:1.001
+VERSION=1.001
+NAME="perl-modules#business-issn"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -33,7 +35,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#perl-business-issn=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

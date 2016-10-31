@@ -4,11 +4,13 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 
 URL="http://anduin.linuxfromscratch.org/BLFS/perl-modules/SGMLSpm-1.1.tar.gz"
 
-#VER:SGMLSpm:1.1
+VERSION=1.1
+NAME="perl-modules#sgmlspm"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -33,7 +35,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#perl-sgmlspm=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

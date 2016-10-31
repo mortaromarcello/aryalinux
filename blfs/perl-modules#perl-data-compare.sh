@@ -4,12 +4,14 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:perl-modules#file-find-rule
 
 URL="http://www.cpan.org/authors/id/D/DC/DCANTRELL/Data-Compare-1.25.tar.gz"
 
-#VER:Data-Compare:1.25
+VERSION=1.25
+NAME="perl-modules#data-compare"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -34,7 +36,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#perl-data-compare=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

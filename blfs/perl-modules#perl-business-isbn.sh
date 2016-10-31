@@ -4,13 +4,15 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:perl-modules#business-isbn-data
 #REQ:perl-modules#mojolicious
 
 URL="http://www.cpan.org/authors/id/B/BD/BDFOY/Business-ISBN-3.003.tar.gz"
 
-#VER:Business-ISBN:3.003
+VERSION=3.003
+NAME="perl-modules#business-isbn"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -35,7 +37,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#perl-business-isbn=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

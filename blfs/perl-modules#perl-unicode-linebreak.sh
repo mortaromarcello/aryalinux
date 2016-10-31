@@ -4,12 +4,14 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:perl-modules#mime-charset
 #REQ:.._basicnet_wget
 URL="http://www.cpan.org/authors/id/N/NE/NEZUMI/Unicode-LineBreak-2016.003.tar.gz"
 
-#VER:Unicode-LineBreak:2016.003
+VERSION=2016.003
+NAME="perl-modules#unicode-linebreak"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -34,7 +36,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#perl-unicode-linebreak=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

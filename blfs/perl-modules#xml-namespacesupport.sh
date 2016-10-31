@@ -4,13 +4,11 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
-. /var/lib/alps/functions
 
 
 URL="http://search.cpan.org/CPAN/authors/id/P/PE/PERIGRIN/XML-NamespaceSupport-1.11.tar.gz"
 
-NAME="XML-NamespaceSupport"
-VERSION="1.11"
+#VER:XML-NamespaceSupport:1.11
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -35,6 +33,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-cleanup "$NAME" "$DIRECTORY"
+sudo rm -rf $DIRECTORY
 
-register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+echo "perl-modules#xml-namespacesupport=>`date`" | sudo tee -a $INSTALLED_LIST
+

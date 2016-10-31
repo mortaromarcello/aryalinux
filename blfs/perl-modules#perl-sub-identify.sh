@@ -4,11 +4,13 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 
-URL="http://search.cpan.org/dist/Sub-Identify/"
+URL="http://search.cpan.org//CPAN/authors/id/R/RG/RGARCIA/Sub-Identify-0.12.tar.gz"
 
-#VER::null
+VERSION=0.12
+NAME="perl-modules#sub-identify"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -33,7 +35,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#perl-sub-identify=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

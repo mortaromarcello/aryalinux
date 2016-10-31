@@ -7,10 +7,10 @@ set +h
 . /var/lib/alps/functions
 
 
-URL="http://search.cpan.org/CPAN/authors/id/D/DA/DAGOLDEN/Capture-Tiny-0.44.tar.gz"
+URL="http://search.cpan.org/CPAN/authors/id/T/TY/TYEMQ/Algorithm-Diff-1.1903.tar.gz"
 
-NAME="Capture-Tiny"
-VERSION="0.44"
+VERSION=1.1903
+NAME="perl-modules#algorithm-diff"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -37,4 +37,5 @@ cd $SOURCE_DIR
 
 cleanup "$NAME" "$DIRECTORY"
 
-register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
+

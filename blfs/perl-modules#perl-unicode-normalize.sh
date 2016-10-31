@@ -4,13 +4,11 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
-. /var/lib/alps/functions
 
 
 URL="http://www.cpan.org/authors/id/K/KH/KHW/Unicode-Normalize-1.25.tar.gz"
 
-NAME="Unicode-Normalize"
-VERSION="1.25"
+#VER:Unicode-Normalize:1.25
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -35,6 +33,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-cleanup "$NAME" "$DIRECTORY"
+sudo rm -rf $DIRECTORY
 
-register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+echo "perl-modules#perl-unicode-normalize=>`date`" | sudo tee -a $INSTALLED_LIST
+

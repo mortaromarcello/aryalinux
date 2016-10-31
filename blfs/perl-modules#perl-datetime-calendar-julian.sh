@@ -4,12 +4,14 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:perl-modules#perl-datetime
 
 URL="http://www.cpan.org/authors/id/P/PI/PIJLL/DateTime-Calendar-Julian-0.04.tar.gz"
 
-#VER:DateTime-Calendar-Julian:0.04
+VERSION=0.04
+NAME="perl-modules#datetime-calendar-julian"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -34,7 +36,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#perl-datetime-calendar-julian=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

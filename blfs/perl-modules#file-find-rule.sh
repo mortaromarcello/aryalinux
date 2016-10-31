@@ -4,13 +4,15 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:perl-modules#number-compare
 #REQ:perl-modules#text-glob
 
 URL="http://search.cpan.org/CPAN/authors/id/R/RC/RCLAMP/File-Find-Rule-0.34.tar.gz"
 
-#VER:File-Find-Rule:0.34
+VERSION=0.34
+NAME="perl-modules#file-find-rule"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -35,7 +37,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#file-find-rule=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

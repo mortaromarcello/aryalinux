@@ -4,13 +4,15 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:perl-modules#xsloader
 #REQ:perl-modules#exporter-tiny
 
 URL="http://www.cpan.org/authors/id/R/RE/REHSACK/List-MoreUtils-0.416.tar.gz"
 
-#VER:List-MoreUtils:0.416
+VERSION=0.416
+NAME="perl-modules#list-moreutils"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -35,7 +37,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#perl-list-moreutils=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

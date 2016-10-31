@@ -4,6 +4,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:perl-modules#encode-locale
 #REQ:perl-modules#perl-uri
@@ -16,7 +17,8 @@ set +h
 
 URL="https://cpan.metacpan.org/authors/id/E/ET/ETHER/libwww-perl-6.15.tar.gz"
 
-#VER:libwww-perl:6.15
+VERSION=6.15
+NAME="perl-modules#libwww-perl"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -41,7 +43,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#perl-lwp=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

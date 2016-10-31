@@ -4,14 +4,16 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:perl-modules#perl-module-runtime
 #REQ:perl-modules#perl-sub-identify
 #REQ:perl-modules#cpan-meta-check
 
-URL="http://search.cpan.org/dist/DateTime/"
+URL="http://search.cpan.org//CPAN/authors/id/D/DR/DROLSKY/DateTime-1.39.tar.gz"
 
-#VER::null
+VERSION=1.39
+NAME="perl-modules#datetime"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -36,7 +38,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#perl-datetime=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

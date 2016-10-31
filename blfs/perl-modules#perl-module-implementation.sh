@@ -4,15 +4,17 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:perl-modules#perl-module-runtime
 #REQ:perl-modules#perl-try-tiny
 #REQ:perl-modules#perl-test-fatal
 #REQ:perl-modules#perl-test-requires
 
-URL="http://search.cpan.org/dist/Module-Implementation/"
+URL="http://search.cpan.org//CPAN/authors/id/D/DR/DROLSKY/Module-Implementation-0.09.tar.gz"
 
-#VER::null
+VERSION=0.09
+NAME="perl-modules#module-implementation"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -37,7 +39,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#perl-module-implementation=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

@@ -4,6 +4,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:perl-modules#digest-hmac
 #REQ:perl-modules#io-socket-inet6
@@ -11,7 +12,8 @@ set +h
 
 URL="http://www.cpan.org/authors/id/N/NL/NLNETLABS/Net-DNS-1.06.tar.gz"
 
-#VER:Net-DNS:1.06
+VERSION=1.06
+NAME="perl-modules#net-dns"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -36,7 +38,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#perl-net-dns=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

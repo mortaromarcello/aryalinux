@@ -4,10 +4,8 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
-. /var/lib/alps/functions
 
-NAME="Font-TTF"
-VERSION="1.05"
+#VER:Font-TTF:1.05
 
 URL=http://search.cpan.org/CPAN/authors/id/M/MH/MHOSKEN/Font-TTF-1.05.tar.gz
 
@@ -25,6 +23,6 @@ make
 sudo make install
 
 cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+rm -rf $DIRECTORY
 
-register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+echo "perl-modules#font-ttf=>`date`" | sudo tee -a $INSTALLED_LIST

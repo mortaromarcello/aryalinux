@@ -4,13 +4,15 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:.._postlfs_openssl#REQ:perl-modules#perl-lwp
 #REQ:perl-modules#io-socket-ssl
 
 URL="http://www.cpan.org/authors/id/M/MS/MSCHILLI/LWP-Protocol-https-6.06.tar.gz"
 
-#VER:LWP-Protocol-https:6.06
+VERSION=6.06
+NAME="perl-modules#lwp-protocol-https"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -35,7 +37,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#perl-lwp-protocol-https=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

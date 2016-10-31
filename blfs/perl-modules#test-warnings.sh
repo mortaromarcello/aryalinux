@@ -4,14 +4,12 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
-. /var/lib/alps/functions
 
 #REQ:perl-modules#cpan-meta-check
 
 URL="http://search.cpan.org/CPAN/authors/id/E/ET/ETHER/Test-Warnings-0.026.tar.gz"
 
-NAME="Test-Warnings"
-VERSION="0.026"
+#VER:Test-Warnings:0.026
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -36,6 +34,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-cleanup "$NAME" "$DIRECTORY"
+sudo rm -rf $DIRECTORY
 
-register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+echo "perl-modules#test-warnings=>`date`" | sudo tee -a $INSTALLED_LIST
+

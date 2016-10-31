@@ -4,13 +4,15 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:perl-modules#html-tagset
 #REQ:perl-modules#perl-lwp
 
 URL="http://www.cpan.org/authors/id/G/GA/GAAS/HTML-Parser-3.72.tar.gz"
 
-#VER:HTML-Parser:3.72
+VERSION=3.72
+NAME="perl-modules#html-parser"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -35,7 +37,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#perl-html-parser=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

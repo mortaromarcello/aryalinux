@@ -4,12 +4,14 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:perl-modules#algorithm-diff(forthetestsuite)
 
 URL="http://search.cpan.org/CPAN/authors/id/N/NE/NEILB/Text-Diff-1.44.tar.gz"
 
-#VER:Text-Diff:1.44
+VERSION=1.44
+NAME="perl-modules#text-diff"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -34,7 +36,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#text-diff(forthetestsuite)=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

@@ -4,6 +4,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:perl-modules#params-util
 #REQ:perl-modules#sub-install
@@ -11,7 +12,8 @@ set +h
 
 URL="http://search.cpan.org/CPAN/authors/id/D/DR/DROLSKY/Package-DeprecationManager-0.17.tar.gz"
 
-#VER:Package-DeprecationManager:0.17
+VERSION=0.17
+NAME="perl-modules#package-deprecationmanager"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -36,7 +38,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#package-deprecationmanager=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

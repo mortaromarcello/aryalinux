@@ -4,6 +4,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:perl-modules#perl-module-build
 #REQ:perl-modules#perl-datetime
@@ -11,7 +12,8 @@ set +h
 
 URL="http://www.cpan.org/authors/id/D/DR/DROLSKY/DateTime-Format-Builder-0.81.tar.gz"
 
-#VER:DateTime-Format-Builder:0.81
+VERSION=0.81
+NAME="perl-modules#datetime-format-builder"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -36,7 +38,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#perl-datetime-format-builder=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

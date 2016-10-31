@@ -4,11 +4,13 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 
 URL="http://www.linuxfromscratch.org/patches/blfs/svn/Data-Uniqid-0.12-disable_failing_test-1.patch"
 
-#VER:Data-Uniqid-0.2-disable_failing_test-.patch:1
+VERSION=1
+NAME="perl-modules#data-uniqid-0.2-disable_failing_test-.patch"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -33,7 +35,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#perl-data-uniqid=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

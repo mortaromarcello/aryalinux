@@ -4,6 +4,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:perl-modules#perl-xml-sax
 #REQ:perl-modules#perl-xml-libxml
@@ -11,7 +12,8 @@ set +h
 
 URL="http://cpan.org/authors/id/M/MA/MARKOV/XML-LibXML-Simple-0.97.tar.gz"
 
-#VER:XML-LibXML-Simple:0.97
+VERSION=0.97
+NAME="perl-modules#xml-libxml-simple"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -36,7 +38,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#perl-xml-libxml-simple=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

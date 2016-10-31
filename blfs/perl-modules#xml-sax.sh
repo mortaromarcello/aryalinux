@@ -4,15 +4,13 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
-. /var/lib/alps/functions
 
 #REQ:perl-modules#xml-namespacesupport
 #REQ:perl-modules#xml-sax-base
 
 URL="http://search.cpan.org/CPAN/authors/id/G/GR/GRANTM/XML-SAX-0.99.tar.gz"
 
-NAME="XML-SAX"
-VERSION="0.99"
+#VER:XML-SAX:0.99
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -37,6 +35,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-cleanup "$NAME" "$DIRECTORY"
+sudo rm -rf $DIRECTORY
 
-register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+echo "perl-modules#xml-sax=>`date`" | sudo tee -a $INSTALLED_LIST
+

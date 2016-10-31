@@ -4,11 +4,13 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 #REQ:libxml2
-URL="http://search.cpan.org/dist/XML-LibXML/"
+URL="http://search.cpan.org//CPAN/authors/id/S/SH/SHLOMIF/XML-LibXML-2.0128.tar.gz"
 
-#VER::null
+VERSION=2.0128
+NAME="perl-modules#xml-libxml"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -33,7 +35,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#perl-xml-libxml=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 
