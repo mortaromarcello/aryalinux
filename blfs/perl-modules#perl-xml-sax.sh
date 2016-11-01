@@ -7,6 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 #REQ:libxml2
+#REQ:perl-modules#xml-namespacesupport
+#REQ:perl-modules#xml-sax-base
+
 SOURCE_ONLY=y
 URL="http://search.cpan.org//CPAN/authors/id/G/GR/GRANTM/XML-SAX-0.99.tar.gz"
 VERSION=0.99
