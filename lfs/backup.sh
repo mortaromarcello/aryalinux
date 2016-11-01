@@ -8,6 +8,9 @@ set +h
 . ./build-properties
 
 LABEL=$1
+echo "Backing up for $LABEL."
+sleep 5
+
 LFS=/mnt/lfs
 mount $ROOT_PART $LFS
 
