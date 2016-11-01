@@ -167,7 +167,8 @@ def freshBuild(startFrom):
 			exit()
 
         print 'Backing up...'
-        p = subprocess.Popen(['/sources/backup.sh'], shell=True)
+        p = subprocess.Popen(['/root/scripts/backup.sh'], shell=True)
+	p.wait()
 
 	if startFrom == 6:
 		print '"' + getParamValue('INSTALL_XSERVER') + '"'
