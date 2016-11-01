@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The GtkHTML package contains abr3ak lightweight HTML rendering/printing/editing engine.br3ak"
 SECTION="gnome"
 VERSION=4.10.0

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The LibTIFF package contains thebr3ak TIFF libraries and associated utilities. The libraries are used bybr3ak many programs for reading and writing TIFF files and the utilitiesbr3ak are used for general work with TIFF files.br3ak"
 SECTION="general"
 VERSION=4.0.6

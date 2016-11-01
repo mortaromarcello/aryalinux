@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Wayland is a project to define abr3ak protocol for a compositor to talk to its clients as well as abr3ak library implementation of the protocol.br3ak"
 SECTION="general"
 VERSION=1.12.0

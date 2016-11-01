@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The SQLite package is a softwarebr3ak library that implements a self-contained, serverless,br3ak zero-configuration, transactional SQL database engine.br3ak"
 SECTION="server"
 VERSION=3150000

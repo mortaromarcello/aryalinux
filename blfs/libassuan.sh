@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libassuan package contains anbr3ak inter process communication library used by some of the otherbr3ak GnuPG related packages.br3ak libassuan's primary use is tobr3ak allow a client to interact with a non-persistent server.br3ak libassuan is not, however, limitedbr3ak to use with GnuPG servers andbr3ak clients. It was designed to be flexible enough to meet the demandsbr3ak of many transaction based environments with non-persistent servers.br3ak"
 SECTION="general"
 VERSION=2.4.3

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The FriBidi package is anbr3ak implementation of the <a class=\"ulink\" href=\"http://www.unicode.org/reports/tr9/\">Unicode Bidirectionalbr3ak Algorithm (BIDI)</a>. This is useful for supporting Arabic andbr3ak Hebrew alphabets in other packages.br3ak"
 SECTION="general"
 VERSION=0.19.7

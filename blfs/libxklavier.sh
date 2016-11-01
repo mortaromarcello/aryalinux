@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libxklavier package contains abr3ak utility library for X keyboard.br3ak"
 SECTION="x"
 VERSION=5.4

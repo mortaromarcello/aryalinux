@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libcroco package contains abr3ak standalone CSS2 parsing and manipulation library.br3ak"
 SECTION="general"
 VERSION=0.6.11

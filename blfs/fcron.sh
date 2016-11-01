@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Fcron package contains abr3ak periodical command scheduler which aims at replacing Vixie Cron.br3ak"
 SECTION="general"
 VERSION=3.2.0

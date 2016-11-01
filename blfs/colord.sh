@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Colord is a system activatedbr3ak daemon that maps devices to color profiles. It is used bybr3ak GNOME Color Manager for systembr3ak integration and use when there are no users logged in.br3ak"
 SECTION="general"
 VERSION=1.2.12

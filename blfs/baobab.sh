@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Baobab package contains abr3ak graphical directory tree analyzer.br3ak"
 SECTION="gnome"
 VERSION=3.22.0

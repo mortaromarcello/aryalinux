@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libgweather package is abr3ak library used to access weather information from online services forbr3ak numerous locations.br3ak"
 SECTION="gnome"
 VERSION=3.20.3

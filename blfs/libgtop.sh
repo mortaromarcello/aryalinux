@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libgtop package contains thebr3ak GNOME top libraries.br3ak"
 SECTION="gnome"
 VERSION=2.34.1

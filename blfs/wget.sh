@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Wget package contains abr3ak utility useful for non-interactive downloading of files from thebr3ak Web.br3ak"
 SECTION="basicnet"
 VERSION=1.18

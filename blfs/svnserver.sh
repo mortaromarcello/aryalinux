@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak This section will describe how to set up, administer and secure abr3ak Subversion server.br3ak"
 SECTION="general"
 NAME="svnserver"

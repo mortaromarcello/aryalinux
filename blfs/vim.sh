@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Vim package, which is anbr3ak abbreviation for VI IMproved, contains a <span class=\"command\"><strong>vi</strong> clone with extra features asbr3ak compared to the original <span class=\"command\"><strong>vi</strong>.br3ak"
 SECTION="postlfs"
 VERSION=8.0

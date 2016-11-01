@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The lximage-qt package contains abr3ak lightweight image viewer and screenshot program.br3ak"
 SECTION="lxqt"
 VERSION=0.5.0

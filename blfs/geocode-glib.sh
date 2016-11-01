@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Geocode GLib is a conveniencebr3ak library for the Yahoo! Place Finder APIs. The Place Finder webbr3ak service allows to do geocoding (finding longitude and latitude frombr3ak an address), and reverse geocoding (finding an address frombr3ak coordinates).br3ak"
 SECTION="gnome"
 VERSION=3.20.1

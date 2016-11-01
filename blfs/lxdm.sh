@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The LXDM is a lightweight Displaybr3ak Manager for the LXDE desktop. Itbr3ak can also be used as an alternative to other Display Managers suchbr3ak as GNOME's GDM or LightDM.br3ak"
 SECTION="x"
 VERSION=0.5.3

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Shared Mime Info packagebr3ak contains a MIME database. This allows central updates of MIMEbr3ak information for all supporting applications.br3ak"
 SECTION="general"
 VERSION=1.7

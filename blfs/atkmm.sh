@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Atkmm is the official C++br3ak interface for the ATK accessibility toolkit library.br3ak"
 SECTION="x"
 VERSION=2.24.2

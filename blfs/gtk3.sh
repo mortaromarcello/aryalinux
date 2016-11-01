@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The GTK+ 3 package containsbr3ak libraries used for creating graphical user interfaces forbr3ak applications.br3ak"
 SECTION="x"
 VERSION=3.22.1

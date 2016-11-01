@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The LVM2 package is a set of toolsbr3ak that manage logical partitions. It allows spanning of file systemsbr3ak across multiple physical disks and disk partitions and provides forbr3ak dynamic growing or shrinking of logical partitions, mirroring andbr3ak low storage footprint snapshots.br3ak"
 SECTION="postlfs"
 VERSION=2.2.02.164

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The VTE package contains a termcapbr3ak file implementation for terminal emulators.br3ak"
 SECTION="gnome"
 VERSION=0.46.0

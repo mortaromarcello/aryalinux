@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Thunderbird is a stand-alonebr3ak mail/news client based on the Mozilla codebase. It uses the Gecko renderingbr3ak engine to enable it to display and compose HTML emails.br3ak"
 SECTION="xsoft"
 VERSION=45.4.0

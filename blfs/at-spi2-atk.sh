@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The At-Spi2 Atk package contains abr3ak library that bridges ATK tobr3ak At-Spi2 D-Bus service.br3ak"
 SECTION="x"
 VERSION=2.22.0

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Opal package contains a C++br3ak class library for normalising the numerous telephony protocols intobr3ak a single integrated call model.br3ak"
 SECTION="multimedia"
 VERSION=3.10.10

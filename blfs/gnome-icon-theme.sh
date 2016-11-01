@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The GNOME Icon Theme packagebr3ak contains an assortment of non-scalable icons of different sizes andbr3ak themes.br3ak"
 SECTION="x"
 VERSION=3.12.0

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The cups-pk-helper packagebr3ak contains a PolicyKit helper usedbr3ak to configure Cups withbr3ak fine-grained privileges.br3ak"
 SECTION="general"
 VERSION=0.2.6

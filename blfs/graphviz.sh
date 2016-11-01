@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Graphviz package containsbr3ak graph visualization software. Graph visualization is a way ofbr3ak representing structural information as diagrams of abstract graphsbr3ak and networks. Graphviz has severalbr3ak main graph layout programs. It also has web and interactivebr3ak graphical interfaces, auxiliary tools, libraries, and languagebr3ak bindings.br3ak"
 SECTION="general"
 VERSION=2.38.0

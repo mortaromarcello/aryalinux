@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak This library provides a Qtbr3ak implementation of the DBusMenu specification that exposes menus viabr3ak DBus.br3ak"
 SECTION="kde"
 VERSION=0.9.3+16.04.20160218

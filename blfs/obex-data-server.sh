@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak OBEX Data Server package containsbr3ak D-Bus service providing high-level OBEX client and server sidebr3ak functionality.br3ak"
 SECTION="general"
 VERSION=0.4.6

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Little Color Management System is a small-footprint colorbr3ak management engine, with special focus on accuracy and performance.br3ak It uses the International Color Consortium standard (ICC), which isbr3ak the modern standard for color management.br3ak"
 SECTION="general"
 VERSION=2.8

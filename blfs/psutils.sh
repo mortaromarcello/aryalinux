@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak PSUtils is a set of utilities tobr3ak manipulate PostScript files.br3ak"
 SECTION="pst"
 VERSION=17

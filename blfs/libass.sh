@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak libass is a portable subtitlebr3ak renderer for the ASS/SSA (Advanced Substation Alpha/Substationbr3ak Alpha) subtitle format that allows for more advanced subtitles thanbr3ak the conventional SRT and similar formats.br3ak"
 SECTION="multimedia"
 VERSION=0.13.4

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Biber is a BibTeX replacement for users of biblatex, written inbr3ak Perl, with full Unicode support.br3ak"
 SECTION="pst"
 VERSION=3.5

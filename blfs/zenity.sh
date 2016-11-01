@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Zenity is a rewrite ofbr3ak gdialog, the GNOME port of dialog which allows you to displaybr3ak GTK+ dialog boxes from the commandbr3ak line and shell scripts.br3ak"
 SECTION="gnome"
 VERSION=3.22.0

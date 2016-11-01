@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The AccountsService packagebr3ak provides a set of D-Bus interfacesbr3ak for querying and manipulating user account information and anbr3ak implementation of those interfaces based on the usermod(8),br3ak useradd(8) and userdel(8) commands.br3ak"
 SECTION="gnome"
 VERSION=0.6.43

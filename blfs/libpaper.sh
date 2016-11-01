@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak This package is intended to provide a simple way for applicationsbr3ak to take actions based on a system or user-specified paper size.br3ak"
 SECTION="general"
 VERSION=4

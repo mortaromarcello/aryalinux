@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libnotify library is used tobr3ak send desktop notifications to a notification daemon, as defined inbr3ak the Desktop Notifications spec. These notifications can be used tobr3ak inform the user about an event or display some form of informationbr3ak without getting in the user's way.br3ak"
 SECTION="x"
 VERSION=0.7.7

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The keybinder2 package contains abr3ak utility library registering global X keyboard shortcuts.br3ak"
 SECTION="x"
 VERSION=0.3.0

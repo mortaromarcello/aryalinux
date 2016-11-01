@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The GnuPG package is GNU's toolbr3ak for secure communication and data storage. It can be used tobr3ak encrypt data and to create digital signatures. It includes anbr3ak advanced key management facility and is compliant with the proposedbr3ak OpenPGP Internet standard as described in RFC2440 and the S/MIMEbr3ak standard as described by several RFCs. GnuPG 2 is the stablebr3ak version of GnuPG integrating support for OpenPGP and S/MIME.br3ak"
 SECTION="postlfs"
 VERSION=2.1.15

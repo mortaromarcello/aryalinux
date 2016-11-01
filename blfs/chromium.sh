@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Chromium is an open-source browserbr3ak project that aims to build a safer, faster, and more stable way forbr3ak all users to experience the web.br3ak"
 SECTION="xsoft"
 VERSION=3

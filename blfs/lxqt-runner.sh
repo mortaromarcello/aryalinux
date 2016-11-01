@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The lxqt-runner package provides abr3ak tool used to launch programs quickly by typing their names.br3ak"
 SECTION="lxqt"
 VERSION=0.11.0

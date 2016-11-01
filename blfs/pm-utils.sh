@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Power Management Utilities isbr3ak a small collection of scripts to suspend and hibernate computerbr3ak that can be used to run user supplied scripts on suspend andbr3ak resume.br3ak"
 SECTION="general"
 VERSION=1.4.1

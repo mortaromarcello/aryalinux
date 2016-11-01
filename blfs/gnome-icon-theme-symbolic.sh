@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The GNOME Icon Theme Symbolicbr3ak package contains symbolic icons for the default GNOME icon theme.br3ak"
 SECTION="x"
 VERSION=3.12.0

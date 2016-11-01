@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak IceWM is a window manager with thebr3ak goals of speed, simplicity, and not getting in the user's way.br3ak"
 SECTION="x"
 VERSION=1.3.12

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The lxqt-common package providesbr3ak common files for various LXQtbr3ak components.br3ak"
 SECTION="lxqt"
 VERSION=0.11.0

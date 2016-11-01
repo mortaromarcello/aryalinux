@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The xinit package contains abr3ak usable script to start the xserver.br3ak"
 SECTION="x"
 VERSION=1.3.4

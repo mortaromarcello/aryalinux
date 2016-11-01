@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Tumbler package contains abr3ak D-Bus thumbnailing service basedbr3ak on the thumbnail management D-Busbr3ak specification. This is useful for generating thumbnail images ofbr3ak files.br3ak"
 SECTION="xfce"
 VERSION=0.1.31

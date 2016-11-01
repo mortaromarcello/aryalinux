@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak WPA Supplicant is a Wi-Fibr3ak Protected Access (WPA) client and IEEE 802.1X supplicant. Itbr3ak implements WPA key negotiation with a WPA Authenticator andbr3ak Extensible Authentication Protocol (EAP) authentication with anbr3ak Authentication Server. In addition, it controls the roaming andbr3ak IEEE 802.11 authentication/association of the wireless LAN driver.br3ak This is useful for connecting to a password protected wirelessbr3ak access point.br3ak"
 SECTION="basicnet"
 VERSION=2.6

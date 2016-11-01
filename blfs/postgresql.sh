@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak PostgreSQL is an advancedbr3ak object-relational database management system (ORDBMS), derived frombr3ak the Berkeley Postgres database management system.br3ak"
 SECTION="server"
 VERSION=9.6.0

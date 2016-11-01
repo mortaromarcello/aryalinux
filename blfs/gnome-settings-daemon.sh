@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The GNOME Settings Daemon isbr3ak responsible for setting various parameters of a GNOME Session and the applications that runbr3ak under it.br3ak"
 SECTION="gnome"
 VERSION=3.22.0

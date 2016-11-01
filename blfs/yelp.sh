@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Yelp package contains a helpbr3ak browser used for viewing help files.br3ak"
 SECTION="gnome"
 VERSION=3.22.0

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Xine Libraries packagebr3ak contains xine libraries. These are useful for interfacing withbr3ak external plug-ins that allow the flow of information from thebr3ak source to the audio and video hardware.br3ak"
 SECTION="multimedia"
 VERSION=1.2.6

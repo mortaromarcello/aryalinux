@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Imlib2 is a graphics library forbr3ak fast file loading, saving, rendering and manipulation.br3ak"
 SECTION="x"
 VERSION=1.4.9

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak FFmpeg is a solution to record,br3ak convert and stream audio and video. It is a very fast video andbr3ak audio converter and it can also acquire from a live audio/videobr3ak source. Designed to be intuitive, the command-line interfacebr3ak (<span class=\"command\"><strong>ffmpeg</strong>) tries tobr3ak figure out all the parameters, when possible. FFmpeg can also convert from any sample ratebr3ak to any other, and resize video on the fly with a high qualitybr3ak polyphase filter. FFmpeg can use abr3ak Video4Linux compatible video source and any Open Sound System audiobr3ak source.br3ak"
 SECTION="multimedia"
 VERSION=3.1.4

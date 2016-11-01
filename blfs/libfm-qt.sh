@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak libfm-qt is the Qt port of libfm,br3ak a library providing components to build desktop file managers.br3ak"
 SECTION="lxqt"
 VERSION=0.11.1

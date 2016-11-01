@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Vala is a new programming languagebr3ak that aims to bring modern programming language features tobr3ak GNOME developers without imposingbr3ak any additional runtime requirements and without using a differentbr3ak ABI compared to applications and libraries written in C.br3ak"
 SECTION="general"
 VERSION=0.34.1

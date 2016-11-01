@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The USB Utils package containsbr3ak utilities used to display information about USB buses in the systembr3ak and the devices connected to them.br3ak"
 SECTION="general"
 VERSION=008

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The bridge-utils package containsbr3ak a utility needed to create and manage bridge devices. This isbr3ak useful in setting up networks for a hosted virtual machine (VM).br3ak"
 SECTION="basicnet"
 VERSION=1.5

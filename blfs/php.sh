@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak PHP is the PHP Hypertextbr3ak Preprocessor. Primarily used in dynamic web sites, it allows forbr3ak programming code to be directly embedded into the HTML markup. Itbr3ak is also useful as a general purpose scripting language.br3ak"
 SECTION="general"
 VERSION=7.0.12

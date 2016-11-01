@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Clutter package contains anbr3ak open source software library used for creating fast, visually richbr3ak and animated graphical user interfaces.br3ak"
 SECTION="x"
 VERSION=1.26.0

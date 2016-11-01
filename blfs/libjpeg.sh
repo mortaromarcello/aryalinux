@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak libjpeg-turbo is a fork of thebr3ak original IJG libjpeg which usesbr3ak SIMD to accelerate baseline JPEG compression and decompression.br3ak libjpeg is a library thatbr3ak implements JPEG image encoding, decoding and transcoding.br3ak"
 SECTION="general"
 VERSION=1.5.1

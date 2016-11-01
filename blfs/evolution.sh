@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Evolution package contains anbr3ak integrated mail, calendar and address book suite designed for thebr3ak GNOME environment.br3ak"
 SECTION="gnome"
 VERSION=3.22.0

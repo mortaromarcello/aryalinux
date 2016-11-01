@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libsoup is a HTTPbr3ak client/server library for GNOME.br3ak It uses GObject and the GLib main loop to integrate withbr3ak GNOME applications and it also hasbr3ak an asynchronous API for use in threaded applications.br3ak"
 SECTION="basicnet"
 VERSION=2.56.0

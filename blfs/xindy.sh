@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Xindy is an index processor thatbr3ak can be used to generate book-like indexes for arbitrarybr3ak document-preparation systems. This includes systems such as TeX andbr3ak LaTeX, the roff-family, SGML/XML-based systems (e.g., HTML) thatbr3ak process some kind of text and generate indexing information.br3ak"
 SECTION="pst"
 VERSION=2.5.1

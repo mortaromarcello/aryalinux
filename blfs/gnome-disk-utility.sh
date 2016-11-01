@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The GNOME Disk Utility packagebr3ak provides applications used for dealing with storage devices.br3ak"
 SECTION="gnome"
 VERSION=3.22.0

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The lxqt-admin package providesbr3ak two GUI tools to adjust setiings of the operating systembr3ak LXQt is running on.br3ak"
 SECTION="lxqt"
 VERSION=0.11.0

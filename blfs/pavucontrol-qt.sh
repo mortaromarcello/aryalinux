@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak pavucontrol-qt is the Qt port ofbr3ak volume control pavucontrol of sound server PulseAudio. Its use isbr3ak not limited to LXQt.br3ak"
 SECTION="lxqt"
 VERSION=0.1.0

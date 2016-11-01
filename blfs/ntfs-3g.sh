@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Ntfs-3g package contains abr3ak stable, read-write open source driver for NTFS partitions. NTFSbr3ak partitions are used by most Microsoft operating systems. Ntfs-3gbr3ak allows you to mount NTFS partitions in read-write mode from yourbr3ak Linux system. It uses the FUSE kernel module to be able tobr3ak implement NTFS support in user space.br3ak"
 SECTION="postlfs"
 VERSION=2016.2.22

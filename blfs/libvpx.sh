@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak This package, from the WebM project, provides the referencebr3ak implementations of the VP8 Codec, used in most current html5 video,br3ak and of the next-generation VP9 Codec.br3ak"
 SECTION="multimedia"
 VERSION=1.6.0

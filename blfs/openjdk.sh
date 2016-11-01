@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak OpenJDK is an open-sourcebr3ak implementation of Oracle's Java Standard Edition platform.br3ak OpenJDK is useful for developingbr3ak Java programs, and provides abr3ak complete runtime environment to run Java programs.br3ak"
 SECTION="general"
 VERSION=675

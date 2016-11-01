@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Netscape Portable Runtime (NSPR)br3ak provides a platform-neutral API for system level and libc likebr3ak functions.br3ak"
 SECTION="general"
 VERSION=4.13.1

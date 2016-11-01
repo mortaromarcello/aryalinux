@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Ninja is a small build system withbr3ak a focus on speed.br3ak"
 SECTION="general"
 VERSION=1.7.1

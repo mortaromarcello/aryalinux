@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The xcb-util-wm package containsbr3ak libraries which provide client and window-manager helpers for EWMHbr3ak and ICCCM.br3ak"
 SECTION="x"
 VERSION=0.4.1

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak If your system has a standard (US) keyboard, you probably do notbr3ak need to install this plugin.br3ak"
 SECTION="xfce"
 VERSION=0.7.1

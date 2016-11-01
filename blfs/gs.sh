@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Ghostscript is a versatilebr3ak processor for PostScript data with the ability to render PostScriptbr3ak to different targets. It used to be part of the cups printingbr3ak stack, but is no longer used for that.br3ak"
 SECTION="pst"
 VERSION=6.0

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The acpid (Advanced Configurationbr3ak and Power Interface event daemon) is a completely flexible, totallybr3ak extensible daemon for delivering ACPI events. It listens on netlinkbr3ak interface and when an event occurs, executes programs to handle thebr3ak event. The programs it executes are configured through a set ofbr3ak configuration files, which can be dropped into place by packages orbr3ak by the user.br3ak"
 SECTION="general"
 VERSION=2.0.28

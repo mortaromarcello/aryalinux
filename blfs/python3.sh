@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Python 3 package contains thebr3ak Python development environment.br3ak This is useful for object-oriented programming, writing scripts,br3ak prototyping large programs or developing entire applications.br3ak"
 SECTION="general"
 VERSION=3.5.2

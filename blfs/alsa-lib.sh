@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The ALSA Library package containsbr3ak the ALSA library used by programs (including ALSA Utilities) requiring access to the ALSAbr3ak sound interface.br3ak"
 SECTION="multimedia"
 VERSION=1.1.2

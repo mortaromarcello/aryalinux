@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The FreeTTS package contains abr3ak speech synthesis system written entirely in the Java programming language. It is based uponbr3ak <a class=\"ulink\" href=\"http://www.cmuflite.org/\">Flite</a>: a smallbr3ak run-time speech synthesis engine developed at Carnegie Mellonbr3ak University. Flite is derived frombr3ak the <a class=\"ulink\" href=\"http://www.cstr.ed.ac.uk/projects/festival/\">Festival</a> Speechbr3ak Synthesis System from the University of Edinburgh and the <a class=\"ulink\" href=\"http://festvox.org/\">FestVox</a> project frombr3ak Carnegie Mellon University. The FreeTTS package is used to convert text tobr3ak audible speech through the system audio hardware.br3ak"
 SECTION="multimedia"
 VERSION=1.2.2

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Pixman package contains abr3ak library that provides low-level pixel manipulation features such asbr3ak image compositing and trapezoid rasterization.br3ak"
 SECTION="general"
 VERSION=0.34.0

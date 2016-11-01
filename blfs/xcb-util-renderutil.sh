@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The xcb-util-renderutil packagebr3ak provides additional extensions to the XCB library.br3ak"
 SECTION="x"
 VERSION=0.3.9

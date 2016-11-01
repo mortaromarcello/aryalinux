@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak libdrm provides a user spacebr3ak library for accessing the DRM, direct rendering manager, onbr3ak operating systems that support the ioctl interface. libdrm is abr3ak low-level library, typically used by graphics drivers such as thebr3ak Mesa DRI drivers, the X drivers, libva and similar projects.br3ak"
 SECTION="x"
 VERSION=2.4.71

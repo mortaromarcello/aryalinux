@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The PIN-Entry package contains abr3ak collection of simple PIN or pass-phrase entry dialogs which utilizebr3ak the Assuan protocol as described by the <a class=\"ulink\" href=\"http://www.gnupg.org/aegypten/\">�gypten project</a>. PIN-Entry programs are usually invoked by thebr3ak <span class=\"command\"><strong>gpg-agent</strong> daemon, butbr3ak can be run from the command line as well. There are programs forbr3ak various text-based and GUI environments, including interfacesbr3ak designed for Ncurses (text-based),br3ak and for the common GTK andbr3ak Qt toolkits.br3ak"
 SECTION="general"
 VERSION=0.9.7

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The lxqt-qtplugin package providesbr3ak an LXQt Qt platform integration plugin.br3ak"
 SECTION="lxqt"
 VERSION=0.11.0

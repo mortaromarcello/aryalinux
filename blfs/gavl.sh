@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Gavl is short for Gmerlin Audiobr3ak Video Library. It is a low level library that handles the detailsbr3ak of audio and video formats like colorspaces, samplerates,br3ak multichannel configurations etc. It provides standardizedbr3ak definitions for those formats as well as container structures forbr3ak carrying audio samples or video images inside an application.br3ak"
 SECTION="multimedia"
 VERSION=1.4.0

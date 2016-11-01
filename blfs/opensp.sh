@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The OpenSP package contains abr3ak C++ library for using SGML/XMLbr3ak files. This is useful for validating, parsing and manipulating SGMLbr3ak and XML documents.br3ak"
 SECTION="pst"
 VERSION=1.5.2

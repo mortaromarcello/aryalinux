@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Git is a free and open source,br3ak distributed version control system designed to handle everythingbr3ak from small to very large projects with speed and efficiency. Everybr3ak Git clone is a full-fledgedbr3ak repository with complete history and full revision trackingbr3ak capabilities, not dependent on network access or a central server.br3ak Branching and merging are fast and easy to do. Git is used for version control of files, muchbr3ak like tools such as <a class=\"xref\" href=\"mercurial.html\" title=\"Mercurial-3.9.2\">Mercurial-3.9.2</a>, Bazaar, <a class=\"xref\" href=\"subversion.html\" br3ak title=\"Subversion-1.9.4\">Subversion-1.9.4</a>, <a class=\"ulink\" br3ak href=\"http://www.nongnu.org/cvs/\">CVS</a>, Perforce, and Teambr3ak Foundation Server.br3ak"
 SECTION="general"
 VERSION=2.10.1

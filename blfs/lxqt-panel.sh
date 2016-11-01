@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The lxqt-panel package contains abr3ak lightweight X11 desktop panel.br3ak"
 SECTION="lxqt"
 VERSION=0.11.0

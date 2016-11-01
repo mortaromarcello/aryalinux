@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Guile package contains the GNUbr3ak Project's extension language library. Guile also contains a stand alone Scheme interpreter.br3ak"
 SECTION="general"
 VERSION=2.0.13

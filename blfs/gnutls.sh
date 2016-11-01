@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The GnuTLS package containsbr3ak libraries and userspace tools which provide a secure layer over abr3ak reliable transport layer. Currently the GnuTLS library implements the proposedbr3ak standards by the IETF's TLS working group. Quoting from the TLSbr3ak protocol specification:br3ak"
 SECTION="postlfs"
 VERSION=3.5.5

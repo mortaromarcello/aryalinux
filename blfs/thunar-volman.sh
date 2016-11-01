@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Thunar Volume Manager is anbr3ak extension for the Thunar filebr3ak manager, which enables automatic management of removable drives andbr3ak media.br3ak"
 SECTION="xfce"
 VERSION=0.8.1

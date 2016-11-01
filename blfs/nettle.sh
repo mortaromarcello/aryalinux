@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Nettle package contains thebr3ak low-level cryptographic library that is designed to fit easily inbr3ak many contexts.br3ak"
 SECTION="postlfs"
 VERSION=3.3

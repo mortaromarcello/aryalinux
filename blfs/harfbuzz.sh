@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The HarfBuzz package contains anbr3ak OpenType text shaping engine.br3ak"
 SECTION="general"
 VERSION=1.3.2

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Aspell package contains anbr3ak interactive spell checking program and the Aspell libraries. Aspell can either be used as a library or asbr3ak an independent spell checker.br3ak"
 SECTION="general"
 VERSION=0.60.6.1

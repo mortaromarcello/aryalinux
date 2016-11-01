@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Tidy HTML5 package contains abr3ak command line tool and libraries used to read HTML, XHTML and XMLbr3ak files and write cleaned up markup. It detects and corrects manybr3ak common coding errors and strives to produce visually equivalentbr3ak markup that is both W3C compliant and compatible with mostbr3ak browsers.br3ak"
 SECTION="general"
 VERSION=5.2.0

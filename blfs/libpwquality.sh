@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libpwquality package providesbr3ak common functions for password quality checking and also scoringbr3ak them based on their apparent randomness. The library also providesbr3ak a function for generating random passwords with goodbr3ak pronounceability.br3ak"
 SECTION="postlfs"
 VERSION=1.3.0

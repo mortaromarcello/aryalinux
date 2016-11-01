@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Freeglut is intended to be a 100%br3ak compatible, completely opensourced clone of the GLUT library. GLUTbr3ak is a window system independent toolkit for writing OpenGL programs,br3ak implementing a simple windowing API, which makes learning about andbr3ak exploring OpenGL programming very easy.br3ak"
 SECTION="x"
 VERSION=3.0.0

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The LXAppearance package containsbr3ak a desktop-independent theme switcher for GTK+.br3ak"
 SECTION="lxde"
 VERSION=0.6.2

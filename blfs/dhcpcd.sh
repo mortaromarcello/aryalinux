@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak dhcpcd is an implementation of thebr3ak DHCP client specified in RFC2131. A DHCP client is useful forbr3ak connecting your computer to a network which uses DHCP to assignbr3ak network addresses. dhcpcd strives to be a fully featured, yet verybr3ak lightweight DHCP client.br3ak"
 SECTION="basicnet"
 VERSION=6.11.5

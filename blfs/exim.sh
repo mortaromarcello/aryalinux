@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Exim package contains a Mailbr3ak Transport Agent written by the University of Cambridge, releasedbr3ak under the GNU Public License.br3ak"
 SECTION="server"
 VERSION=4.87

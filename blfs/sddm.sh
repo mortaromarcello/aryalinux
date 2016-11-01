@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The SDDM package contains abr3ak lightweight display manager based upon Qt and QML.br3ak"
 SECTION="x"
 VERSION=0.14.0

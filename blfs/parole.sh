@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Parole is a DVD/CD/music playerbr3ak for Xfce that uses GStreamer.br3ak"
 SECTION="xfce"
 VERSION=0.8.1

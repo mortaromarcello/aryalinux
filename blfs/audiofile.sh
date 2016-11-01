@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The AudioFile package contains thebr3ak audio file libraries and two sound file support programs useful tobr3ak support basic sound file formats.br3ak"
 SECTION="multimedia"
 VERSION=0.3.6

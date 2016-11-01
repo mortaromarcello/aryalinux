@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Phonon is the multimedia API forbr3ak KDE. It replaces the old aRtsbr3ak package. Phonon needs either the GStreamer or VLC backend.br3ak"
 SECTION="kde"
 VERSION=4.9.0

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The rpcbind program is abr3ak replacement for portmap. It isbr3ak required for import or export of Network File System (NFS) sharedbr3ak directories.br3ak"
 SECTION="basicnet"
 VERSION=0.2.3

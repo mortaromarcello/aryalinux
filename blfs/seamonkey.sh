@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak SeaMonkey is a browser suite, thebr3ak Open Source sibling of Netscape.br3ak It includes the browser, composer, mail and news clients, and anbr3ak IRC client. It is the follow-on to the Mozilla browser suite.br3ak"
 SECTION="xsoft"
 VERSION=2.40

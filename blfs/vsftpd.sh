@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The vsftpd package contains a verybr3ak secure and very small FTP daemon. This is useful for serving filesbr3ak over a network.br3ak"
 SECTION="server"
 VERSION=3.0.3

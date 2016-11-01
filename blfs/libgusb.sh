@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libgusb package contains thebr3ak GObject wrappers for libusb-1.0br3ak that makes it easy to do asynchronous control, bulk and interruptbr3ak transfers with proper cancellation and integration into a mainloop.br3ak"
 SECTION="general"
 VERSION=0.2.9

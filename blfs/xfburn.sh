@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Xfburn is a GTK+ 2 GUI frontend for Libisoburn. This is useful for creating CDsbr3ak and DVDs from files on your computer or ISO images downloaded frombr3ak elsewhere.br3ak"
 SECTION="xfce"
 VERSION=0.5.4

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak GNOME Weather is a smallbr3ak application that allows you to monitor the current weatherbr3ak conditions for your city, or anywhere in the world, and to accessbr3ak updated forecasts provided by various internet services.br3ak"
 SECTION="gnome"
 VERSION=3.20.2

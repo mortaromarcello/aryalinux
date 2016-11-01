@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak ImageMagick is a collection ofbr3ak tools and libraries to read, write, and manipulate an image inbr3ak various image formats. Image processing operations are availablebr3ak from the command line. Bindings for Perl and C++ are alsobr3ak available.br3ak"
 SECTION="general"
 VERSION=3.51

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Lua is a powerful light-weightbr3ak programming language designed for extending applications. It isbr3ak also frequently used as a general-purpose, stand-alone language.br3ak Lua is implemented as a smallbr3ak library of C functions, written in ANSI C, and compiles unmodifiedbr3ak in all known platforms. The implementation goals are simplicity,br3ak efficiency, portability, and low embedding cost. The result is abr3ak fast language engine with small footprint, making it ideal inbr3ak embedded systems too.br3ak"
 SECTION="general"
 VERSION=5.3.3

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Kdenlive package is a KF5br3ak based video editor.br3ak"
 SECTION="kde"
 VERSION=16.08.0

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Gnumeric package contains abr3ak spreadsheet program which is useful for mathematical analysis.br3ak"
 SECTION="xsoft"
 VERSION=1.12.32

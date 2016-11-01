@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Qpdf package containsbr3ak command-line programs and library that do structural,br3ak content-preserving transformations on PDF files.br3ak"
 SECTION="general"
 VERSION=6.0.0

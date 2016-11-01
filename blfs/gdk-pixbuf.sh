@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Gdk Pixbuf is a toolkit forbr3ak image loading and pixel buffer manipulation. It is used bybr3ak GTK+ 2 and GTK+ 3 to load and manipulate images. In thebr3ak past it was distributed as part of GTK+br3ak 2 but it was split off into a separate package inbr3ak preparation for the change to GTK+br3ak 3.br3ak"
 SECTION="x"
 VERSION=2.36.0

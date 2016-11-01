@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The rsync package contains thebr3ak <span class=\"command\"><strong>rsync</strong> utility. Thisbr3ak is useful for synchronizing large file archives over a network.br3ak"
 SECTION="basicnet"
 VERSION=3.1.2

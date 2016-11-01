@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak libunistring is a library that provides functions for manipulatingbr3ak Unicode strings and for manipulating C strings according to thebr3ak Unicode standard.br3ak"
 SECTION="general"
 VERSION=0.9.6

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The GNOME Desktop package containsbr3ak a library that provides an API shared by several applications onbr3ak the GNOME Desktop.br3ak"
 SECTION="gnome"
 VERSION=3.22.0

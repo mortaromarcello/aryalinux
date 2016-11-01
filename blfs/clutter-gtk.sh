@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Clutter Gtk package is abr3ak library providing facilities to integrate Clutter into GTK+ applications.br3ak"
 SECTION="x"
 VERSION=1.8.2

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The CUPS Filters package containsbr3ak backends, filters and other software that was once part of the corebr3ak CUPS distribution but is no longerbr3ak maintained by Apple Inc.br3ak"
 SECTION="pst"
 VERSION=1.11.3

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Telepathy Mission Control is anbr3ak account manager and channel dispatcher for the Telepathy framework, allowing user interfacesbr3ak and other clients to share connections to real-time communicationbr3ak services without conflicting.br3ak"
 SECTION="gnome"
 VERSION=5.16.4

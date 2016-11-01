@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak libisoburn is a frontend forbr3ak libraries libburn and libisofs which enables creation and expansionbr3ak of ISO-9660 filesystems on all CD/DVD/BD media supported bybr3ak libburn. This includes media likebr3ak DVD+RW, which do not support multi-session management on mediabr3ak level and even plain disk files or block devices.br3ak"
 SECTION="multimedia"
 VERSION=1.4.6

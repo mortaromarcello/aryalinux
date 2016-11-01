@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The LXTerminal package contains abr3ak VTE-based terminal emulator for LXDE with support for multiple tabs.br3ak"
 SECTION="lxde"
 VERSION=0.2.0

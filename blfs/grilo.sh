@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Grilo is a framework focused onbr3ak making media discovery and browsing easy for applications andbr3ak application developers.br3ak"
 SECTION="gnome"
 VERSION=0.3.2

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The GCC package contains the GNUbr3ak Compiler Collection. This page describes the installation ofbr3ak compilers for the following languages: C, C++, Fortran, Objectivebr3ak C, Objective C++, and Go. Two additional languages , Ada and Javabr3ak are available in the collection. They have specific requirements,br3ak so they are described in separate pages (<a class=\"xref\" href=\"gcc-ada.html\" title=\"GCC-Ada-6.2.0\">GCC-Ada-6.2.0</a> andbr3ak <a class=\"xref\" href=\"gcc-java.html\" title=\"GCC-Java-6.2.0\">GCC-Java-6.2.0</a>). Since C and C++ are installedbr3ak in LFS, this page is either for upgrading C and C++, or forbr3ak installing additional compilers.br3ak"
 SECTION="general"
 VERSION=6.2.0

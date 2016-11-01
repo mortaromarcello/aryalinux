@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak File Roller is an archive managerbr3ak for GNOME with support for tar,br3ak bzip2, gzip, zip, jar, compress, lzop and many other archivebr3ak formats.br3ak"
 SECTION="gnome"
 VERSION=3.22.0

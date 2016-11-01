@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Gimp package contains the GNUbr3ak Image Manipulation Program which is useful for photo retouching,br3ak image composition and image authoring.br3ak"
 SECTION="xsoft"
 VERSION=2.8.2

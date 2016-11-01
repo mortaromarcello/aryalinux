@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Breeze Icons package containsbr3ak the default icons for KDE Plasma 5br3ak applications, but it can be used for other window environments.br3ak"
 SECTION="x"
 VERSION=5.25.0

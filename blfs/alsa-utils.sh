@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The ALSA Utilities packagebr3ak contains various utilities which are useful for controlling yourbr3ak sound card.br3ak"
 SECTION="multimedia"
 VERSION=1.1.2

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The ALSA Plugins package containsbr3ak plugins for various audio libraries and sound servers.br3ak"
 SECTION="multimedia"
 VERSION=1.1.1

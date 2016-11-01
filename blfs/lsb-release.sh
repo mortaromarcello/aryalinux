@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The lsb_release script givesbr3ak information about the Linux Standards Base (LSB) status of thebr3ak distribution.br3ak"
 SECTION="postlfs"
 VERSION=1.4

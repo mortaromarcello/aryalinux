@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak This package provides the Mesa OpenGL Utility library.br3ak"
 SECTION="x"
 VERSION=9.0.0

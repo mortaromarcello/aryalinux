@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The WebKitGTK+ is the port of thebr3ak portable web rendering engine WebKit to the GTK+br3ak 3 and GTK+ 2 platforms.br3ak"
 SECTION="x"
 VERSION=2.4.11

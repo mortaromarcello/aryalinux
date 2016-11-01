@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The xmlto is a front-end to an XSLbr3ak toolchain. It chooses an appropriate stylesheet for the conversionbr3ak you want and applies it using an external XSL-T processor. It alsobr3ak performs any necessary post-processing.br3ak"
 SECTION="pst"
 VERSION=0.0.28

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Even though D-Bus was built inbr3ak LFS, there are some features provided by the package that otherbr3ak BLFS packages need, but their dependencies didn't fit into LFS.br3ak"
 SECTION="general"
 VERSION=1.10.10

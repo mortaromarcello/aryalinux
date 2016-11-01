@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The ssh-askpass is a genericbr3ak executable name for many packages, with similar names, that providebr3ak a interactive X service to grab password for packages requiringbr3ak administrative privileges to be run. It prompts the user with abr3ak window box where the necessary password can be inserted. Here, webr3ak choose Damien Miller's package distributed in the OpenSSH tarball.br3ak"
 SECTION="postlfs"
 VERSION=7.3p1

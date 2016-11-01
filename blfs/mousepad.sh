@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Mousepad is a simple GTK+ 2 text editor for the Xfce desktop environment.br3ak"
 SECTION="xfce"
 VERSION=0.4.0

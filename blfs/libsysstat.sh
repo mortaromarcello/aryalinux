@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libsysstat package contains abr3ak library used to query system info and statistics.br3ak"
 SECTION="lxqt"
 VERSION=0.3.2

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Xorg protocol headers providebr3ak the header files required to build the system, and to allow otherbr3ak applications to build against the installed X Window system.br3ak"
 SECTION="x"
 NAME="x7proto"

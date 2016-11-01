@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak PulseAudio is a sound system forbr3ak POSIX OSes, meaning that it is a proxy for sound applications. Itbr3ak allows you to do advanced operations on your sound data as itbr3ak passes between your application and your hardware. Things likebr3ak transferring the audio to a different machine, changing the samplebr3ak format or channel count and mixing several sounds into one arebr3ak easily achieved using a sound server.br3ak"
 SECTION="multimedia"
 VERSION=9.0

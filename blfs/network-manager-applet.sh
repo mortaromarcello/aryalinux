@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The NetworkManager Applet providesbr3ak a tool and a panel applet used to configure wired and wirelessbr3ak network connections through GUI. It's designed for use with anybr3ak desktop environment that uses GTK+br3ak like Xfce and LXDE.br3ak"
 SECTION="gnome"
 VERSION=1.4.2

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The JSON GLib package is a librarybr3ak providing serialization and deserialization support for thebr3ak JavaScript Object Notation (JSON) format described by RFC 4627.br3ak"
 SECTION="general"
 VERSION=1.2.2

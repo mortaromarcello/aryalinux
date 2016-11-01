@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Colord is a system service thatbr3ak makes it easy to manage, install, and generate color profiles. Itbr3ak is used mainly by GNOME Colorbr3ak Manager for system integration and use when no users arebr3ak logged in.br3ak"
 SECTION="general"
 VERSION=1.3.3

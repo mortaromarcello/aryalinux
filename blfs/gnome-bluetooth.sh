@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The GNOME Bluetooth packagebr3ak contains tools for managing and manipulating Bluetooth devicesbr3ak using the GNOME Desktop.br3ak"
 SECTION="gnome"
 VERSION=3.20.0

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak This package contains tools for reading information from an MS Wordbr3ak document.br3ak"
 SECTION="general"
 VERSION=1.2.9

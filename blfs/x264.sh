@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak x264 package provides a librarybr3ak for encoding video streams into the H.264/MPEG-4 AVC format.br3ak"
 SECTION="multimedia"
 VERSION=2245

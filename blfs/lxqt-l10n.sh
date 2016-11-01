@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The lxqt-l10n package providesbr3ak translations for all components of the LXQt desktop.br3ak"
 SECTION="lxqt"
 VERSION=0.11.0

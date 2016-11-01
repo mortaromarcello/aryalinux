@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Boost provides a set of freebr3ak peer-reviewed portable C++ source libraries. It includes librariesbr3ak for linear algebra, pseudorandom number generation, multithreading,br3ak image processing, regular expressions and unit testing.br3ak"
 SECTION="general"
 VERSION=1_62_0

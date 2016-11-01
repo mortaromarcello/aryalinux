@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak w3m is primarily a pager but itbr3ak can also be used as a text-mode WWW browser.br3ak"
 SECTION="basicnet"
 VERSION=0.5.3

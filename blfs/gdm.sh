@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak GDM is a system service that isbr3ak responsible for providing graphical logins and managing local andbr3ak remote displays.br3ak"
 SECTION="gnome"
 VERSION=3.22.0

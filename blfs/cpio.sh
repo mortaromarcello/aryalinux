@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The cpio package contains toolsbr3ak for archiving.br3ak"
 SECTION="general"
 VERSION=2.12

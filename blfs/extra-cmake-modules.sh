@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Extra Cmake Modules packagebr3ak contains extra CMake modules usedbr3ak by KDE Frameworks 5 and otherbr3ak packages.br3ak"
 SECTION="kde"
 VERSION=5.25.0

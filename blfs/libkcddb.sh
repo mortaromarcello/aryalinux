@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libkcddb package contains abr3ak library used to retrieve audio CD meta data from the internet.br3ak"
 SECTION="kde"
 VERSION=11

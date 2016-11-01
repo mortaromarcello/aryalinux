@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The PCManFM package contains anbr3ak extremely fast, lightweight, yet feature-rich file manager withbr3ak tabbed browsing.br3ak"
 SECTION="lxde"
 VERSION=1.2.4

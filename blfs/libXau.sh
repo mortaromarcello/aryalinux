@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libXau package contains abr3ak library implementing the X11 Authorization Protocol. This is usefulbr3ak for restricting client access to the display.br3ak"
 SECTION="x"
 VERSION=1.0.8

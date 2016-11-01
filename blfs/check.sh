@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Check is a unit testing frameworkbr3ak for C. It was installed by LFS in the temporary /tools directory.br3ak These instructions install it permanently.br3ak"
 SECTION="general"
 VERSION=0.10.0

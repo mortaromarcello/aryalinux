@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libao package contains abr3ak cross-platform audio library. This is useful to output audio on abr3ak wide variety of platforms. It currently supports WAV files, OSSbr3ak (Open Sound System), ESD (Enlighten Sound Daemon), ALSA (Advancedbr3ak Linux Sound Architecture), NAS (Network Audio system), aRTS (analogbr3ak Real-Time Synthesizer and PulseAudio (next generation GNOME sound architecture).br3ak"
 SECTION="multimedia"
 VERSION=1.2.0

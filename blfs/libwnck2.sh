@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libwnck package contains abr3ak Window Navigator Construction Kit.br3ak"
 SECTION="xfce"
 VERSION=2.30.7

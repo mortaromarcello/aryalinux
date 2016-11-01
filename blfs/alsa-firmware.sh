@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The ALSA Firmware package containsbr3ak firmware for certain sound cards.br3ak"
 SECTION="multimedia"
 VERSION=1.0.29

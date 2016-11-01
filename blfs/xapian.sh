@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Xapian is an open source search engine library.br3ak"
 SECTION="general"
 VERSION=1.4.0

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libESMTP package contains thebr3ak libESMTP libraries which are usedbr3ak by some programs to manage email submission to a mail transportbr3ak layer.br3ak"
 SECTION="general"
 VERSION=1.0.6

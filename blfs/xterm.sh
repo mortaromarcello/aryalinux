@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak xterm is a terminal emulator forbr3ak the X Window System.br3ak"
 SECTION="x"
 VERSION=327

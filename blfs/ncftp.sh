@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The NcFTP package contains abr3ak powerful and flexible interface to the Internet standard Filebr3ak Transfer Protocol. It is intended to replace or supplement thebr3ak stock <span class=\"command\"><strong>ftp</strong> program.br3ak"
 SECTION="basicnet"
 VERSION=3.2.5

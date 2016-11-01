@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Rasqal is a C library that handlesbr3ak Resource Description Framework (RDF) query language syntaxes, querybr3ak construction and execution of queries returning results asbr3ak bindings, boolean, RDF graphs/triples or syntaxes. It is requiredbr3ak by Soprano to build Nepomuk.br3ak"
 SECTION="general"
 VERSION=0.9.33

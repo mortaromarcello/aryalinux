@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak libcanberra is an implementationbr3ak of the XDG Sound Theme and Name Specifications, for generatingbr3ak event sounds on free desktops, such as GNOME.br3ak"
 SECTION="multimedia"
 VERSION=0.30

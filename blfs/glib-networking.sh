@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The GLib Networking packagebr3ak contains Network related gio modules for GLib.br3ak"
 SECTION="basicnet"
 VERSION=2.50.0

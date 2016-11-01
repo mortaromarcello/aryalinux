@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak XSane is another front end forbr3ak <a class=\"xref\" href=\"sane.html\" title=\"SANE-1.0.25\">SANE-1.0.25</a>. It has additional features tobr3ak improve the image quality and ease of use compared to <span class=\"command\"><strong>xscanimage</strong>.br3ak"
 SECTION="pst"
 VERSION=0.999

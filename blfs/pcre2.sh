@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The PCRE2 package contains a newbr3ak generation of the Perl Compatible Regularbr3ak Expression libraries. These are useful for implementingbr3ak regular expression pattern matching using the same syntax andbr3ak semantics as Perl.br3ak"
 SECTION="general"
 VERSION=10.22

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Libkscreen package containsbr3ak the KDE Screen Management library.br3ak"
 SECTION="lxqt"
 VERSION=5.7.3

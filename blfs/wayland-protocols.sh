@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Wayland-Protocols packagebr3ak contains additional Wayland protocols that add functionalitybr3ak outside of protocols already in the Wayland core.br3ak"
 SECTION="general"
 VERSION=1.7

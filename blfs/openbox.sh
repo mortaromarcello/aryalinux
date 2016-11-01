@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Openbox is a highly configurablebr3ak desktop window manager with extensive standards support. It allowsbr3ak you to control almost every aspect of how you interact with yourbr3ak desktop.br3ak"
 SECTION="x"
 VERSION=1.2

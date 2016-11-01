@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The sendmail package contains abr3ak Mail Transport Agent (MTA).br3ak"
 SECTION="server"
 VERSION=8.15.2

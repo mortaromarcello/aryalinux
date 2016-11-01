@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The CrackLib package contains abr3ak library used to enforce strong passwords by comparing user selectedbr3ak passwords to words in chosen word lists.br3ak"
 SECTION="postlfs"
 VERSION=2.9.6

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Shadow was indeed installed in LFSbr3ak and there is no reason to reinstall it unless you installedbr3ak CrackLib or Linux-PAM after your LFS system was completed.br3ak If you have installed CrackLibbr3ak after LFS, then reinstalling Shadow will enable strong password support. Ifbr3ak you have installed Linux-PAM,br3ak reinstalling Shadow will allowbr3ak programs such as <span class=\"command\"><strong>login</strong> and <span class=\"command\"><strong>su</strong> to utilize PAM.br3ak"
 SECTION="postlfs"
 VERSION=4.2.1

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The XKeyboardConfig packagebr3ak contains the keyboard configuration database for the X Windowbr3ak System.br3ak"
 SECTION="x"
 VERSION=2.19

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The SoundTouch package contains anbr3ak open-source audio processing library that allows changing the soundbr3ak tempo, pitch and playback rate parameters independently from eachbr3ak other.br3ak"
 SECTION="multimedia"
 VERSION=1.9.2

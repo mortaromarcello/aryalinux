@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The UnRar package contains abr3ak <code class=\"filename\">RAR extraction utility used forbr3ak extracting files from <code class=\"filename\">RAR archives.br3ak <code class=\"filename\">RAR archives are usually created withbr3ak WinRAR, primarily in a Windowsbr3ak environment.br3ak"
 SECTION="general"
 VERSION=5.4.5

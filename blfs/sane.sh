@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak SANE is short for Scanner Accessbr3ak Now Easy. Scanner access; however, is far from easy, since everybr3ak vendor has their own protocols. The only known protocol that shouldbr3ak bring some unity into this chaos is the TWAIN interface, but thisbr3ak is too imprecise to allow a stable scanning framework. Therefore,br3ak SANE comes with its own protocol,br3ak and the vendor drivers can't be used.br3ak"
 SECTION="pst"
 VERSION=1.0.25

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The sawfish package contains abr3ak window manager. This is useful for organizing and displayingbr3ak windows where all window decorations are configurable and allbr3ak user-interface policy is controlled through the extension language.br3ak"
 SECTION="x"
 VERSION=1.12.0

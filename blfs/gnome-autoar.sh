@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The gnome-autoar package providesbr3ak a framework for automatic archive extraction, compression, andbr3ak management.br3ak"
 SECTION="gnome"
 VERSION=0.1.1

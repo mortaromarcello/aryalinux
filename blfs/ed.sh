@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Ed is a line-oriented text editor.br3ak It is used to create, display, modify and otherwise manipulate textbr3ak files, both interactively and via shell scripts. Ed isn't somethingbr3ak which many people use. It's described here because it can be usedbr3ak by the patch program if you encounter an ed-based patch file. Thisbr3ak happens rarely because diff-based patches are preferred these days.br3ak"
 SECTION="postlfs"
 NAME="ed"

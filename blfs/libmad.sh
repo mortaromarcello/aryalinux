@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak libmad is a high-quality MPEGbr3ak audio decoder capable of 24-bit output.br3ak"
 SECTION="multimedia"
 VERSION=0.15.1

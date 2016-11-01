@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Ruby package contains thebr3ak Ruby development environment. Thisbr3ak is useful for object-oriented scripting.br3ak"
 SECTION="general"
 VERSION=2.3.1

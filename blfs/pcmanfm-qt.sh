@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The pcmanfm-qt is a file managerbr3ak and desktop icon manager (Qt portbr3ak of pcmanfm and libfm).br3ak"
 SECTION="lxqt"
 VERSION=0.11.1

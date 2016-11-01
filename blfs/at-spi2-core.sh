@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The At-Spi2 Core package is a partbr3ak of the GNOME Accessibility Project. It provides a Service Providerbr3ak Interface for the Assistive Technologies available on thebr3ak GNOME platform and a librarybr3ak against which applications can be linked.br3ak"
 SECTION="x"
 VERSION=2.22.0

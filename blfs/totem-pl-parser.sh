@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Totem PL Parser packagebr3ak contains a simple GObject-based library used to parse a host ofbr3ak playlist formats, as well as save those.br3ak"
 SECTION="gnome"
 VERSION=3.10.7

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak All software has bugs. Sometimes, a bug can be exploited, forbr3ak example to allow users to gain enhanced privileges (perhaps gainingbr3ak a root shell, or simply accessing or deleting other user's files),br3ak or to allow a remote site to crash an application (denial ofbr3ak service), or for theft of data. These bugs are labelled asbr3ak vulnerabilities.br3ak"
 SECTION="postlfs"
 NAME="vulnerabilities"

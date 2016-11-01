@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Xorg Server is the core of thebr3ak X Window system.br3ak"
 SECTION="x"
 VERSION=1.18.4

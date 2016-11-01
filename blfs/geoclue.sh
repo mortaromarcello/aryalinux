@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak GeoClue is a modularbr3ak geoinformation service built on top of the D-Bus messaging system. The goal of thebr3ak GeoClue project is to makebr3ak creating location-aware applications as simple as possible.br3ak"
 SECTION="basicnet"
 VERSION=0.12.0

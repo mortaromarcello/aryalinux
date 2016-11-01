@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The mdadm package containsbr3ak administration tools for software RAID.br3ak"
 SECTION="postlfs"
 VERSION=3.4

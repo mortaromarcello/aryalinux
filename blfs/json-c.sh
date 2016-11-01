@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The JSON-C implements a referencebr3ak counting object model that allows you to easily construct JSONbr3ak objects in C, output them as JSON formatted strings and parse JSONbr3ak formatted strings back into the C representation of JSON objects.br3ak"
 SECTION="general"
 VERSION=0.12.1

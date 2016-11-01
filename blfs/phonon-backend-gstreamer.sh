@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak This package provides a Phononbr3ak backend which utilizes the GStreamer media framework.br3ak"
 SECTION="kde"
 VERSION=4.9.0

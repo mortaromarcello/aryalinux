@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Gtkmm package provides a C++br3ak interface to GTK+ 2. It can bebr3ak installed alongside <a class=\"xref\" href=\"gtkmm3.html\" title=\"Gtkmm-3.22.0\">Gtkmm-3.22.0</a> (the GTK+br3ak 3 version) with no namespace conflicts.br3ak"
 SECTION="x"
 VERSION=2.24.5

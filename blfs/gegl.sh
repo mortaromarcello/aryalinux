@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak This package provides the GEneric Graphics Library, which is abr3ak graph based image processing format.br3ak"
 SECTION="general"
 VERSION=0.3.8

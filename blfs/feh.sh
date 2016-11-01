@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak feh is a fast, lightweight imagebr3ak viewer which uses Imlib2. It is commandline-driven and supportsbr3ak multiple images through slideshows, thumbnail browsing or multiplebr3ak windows, and montages or index prints (using TrueType fonts tobr3ak display file info). Advanced features include fast dynamic zooming,br3ak progressive loading, loading via HTTP (with reload support forbr3ak watching webcams), recursive file opening (slideshow of a directorybr3ak hierarchy), and mouse wheel/keyboard control.br3ak"
 SECTION="xsoft"
 VERSION=2.17.1

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Ark package is a KF5 archivebr3ak tool. It is a graphical front end to tar and similar tools.br3ak"
 SECTION="kde"
 VERSION=16.08.0

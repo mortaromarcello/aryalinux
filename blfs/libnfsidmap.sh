@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libnfsidmap package contains abr3ak library to help mapping id's, mainly for NFSv4.br3ak"
 SECTION="general"
 VERSION=0.26

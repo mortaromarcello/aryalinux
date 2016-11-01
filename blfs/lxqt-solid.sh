@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Solid is a device integrationbr3ak framework. It provides a way of querying and interacting withbr3ak hardware independently of the underlying operating system.br3ak"
 SECTION="lxqt"
 VERSION=5.25.0

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The LXDE Common package provides abr3ak set of default configuration for LXDE.br3ak"
 SECTION="lxde"
 VERSION=0.99.1

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Inkscape is a what you see is whatbr3ak you get Scalable Vector Graphics editor. It is useful for creating,br3ak viewing and changing SVG images.br3ak"
 SECTION="xsoft"
 VERSION=0.91

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Adwaita Icon Theme packagebr3ak contains an icon theme for Gtk+ 3br3ak applications.br3ak"
 SECTION="x"
 VERSION=3.22.0

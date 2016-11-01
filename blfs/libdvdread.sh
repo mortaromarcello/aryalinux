@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak libdvdread is a library whichbr3ak provides a simple foundation for reading DVDs.br3ak"
 SECTION="multimedia"
 VERSION=5.0.3

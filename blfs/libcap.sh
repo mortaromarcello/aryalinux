@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libcap package was installedbr3ak in LFS, but if Linux-PAM supportbr3ak is desired, the PAM module must be built (after installation ofbr3ak Linux-PAM).br3ak"
 SECTION="postlfs"
 VERSION=2.25

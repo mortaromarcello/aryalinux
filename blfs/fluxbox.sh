@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Fluxbox package contains abr3ak window manager.br3ak"
 SECTION="x"
 VERSION=1.3.7

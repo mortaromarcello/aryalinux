@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Most of TeX Live can be built from source without a pre-existingbr3ak installation, but xindy (forbr3ak indexing) needs working versions of <span class=\"command\"><strong>latex</strong> and <span class=\"command\"><strong>pdflatex</strong> when configure is run,br3ak and the testsuite and install for <span class=\"command\"><strong>asy</strong> (for vector graphics) willbr3ak fail if TeX has not already been installed. Additionally,br3ak biber is not provided within thebr3ak texlive source.br3ak"
 SECTION="pst"
 VERSION=20160523

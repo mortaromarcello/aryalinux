@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The mod_dnssd package is anbr3ak Apache HTTPD module which addsbr3ak Zeroconf support via DNS-SD using Avahi. This allows Apache to advertise itself and the websitesbr3ak available to clients compatible with the protocol.br3ak"
 SECTION="basicnet"
 VERSION=0.6

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The International Components forbr3ak Unicode (ICU) package is a mature, widely used set of C/C++br3ak libraries providing Unicode and Globalization support for softwarebr3ak applications. ICU is widelybr3ak portable and gives applications the same results on all platforms.br3ak"
 SECTION="general"
 VERSION=58_1

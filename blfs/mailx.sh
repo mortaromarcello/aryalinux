@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Heirloom mailx packagebr3ak (formerly known as the Nailbr3ak package) contains <span class=\"command\"><strong>mailx</strong>, a command-line Mail Userbr3ak Agent derived from Berkeley Mail. It is intended to provide thebr3ak functionality of the POSIX <span class=\"command\"><strong>mailx</strong> command with additionalbr3ak support for MIME messages, IMAP (including caching), POP3, SMTP,br3ak S/MIME, message threading/sorting, scoring, and filtering.br3ak Heirloom mailx is especiallybr3ak useful for writing scripts and batch processing.br3ak"
 SECTION="basicnet"
 VERSION=12.5

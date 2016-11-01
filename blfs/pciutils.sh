@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The PCI Utils package contains abr3ak set of programs for listing PCI devices, inspecting their statusbr3ak and setting their configuration registers.br3ak"
 SECTION="general"
 VERSION=3.5.2

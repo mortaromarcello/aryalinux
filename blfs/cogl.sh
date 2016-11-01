@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Cogl is a modern 3D graphics APIbr3ak with associated utility APIs designed to expose the features of 3Dbr3ak graphics hardware using a direct state access API design, asbr3ak opposed to the state-machine style of OpenGL.br3ak"
 SECTION="x"
 VERSION=1.22.2

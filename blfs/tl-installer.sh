@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The TeX Live package is abr3ak comprehensive TeX document production system. It includes TeX,br3ak LaTeX2e, ConTeXt, Metafont, MetaPost, BibTeX and many otherbr3ak programs; an extensive collection of macros, fonts andbr3ak documentation; and support for typesetting in many differentbr3ak scripts from around the world.br3ak"
 SECTION="pst"
 VERSION=null

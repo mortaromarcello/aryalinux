@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The oxygen icons 5 theme is a photo-realistic icon style, with abr3ak high standard of graphics quality.br3ak"
 SECTION="x"
 VERSION=5.25.0

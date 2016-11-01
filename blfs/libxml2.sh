@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libxml2 package containsbr3ak libraries and utilities used for parsing XML files.br3ak"
 SECTION="general"
 VERSION=20130923

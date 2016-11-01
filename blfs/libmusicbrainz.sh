@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libmusicbrainz packagebr3ak contains a library which allows you to access the data held on thebr3ak MusicBrainz server. This is useful for adding MusicBrainz lookupbr3ak capabilities to other applications.br3ak"
 SECTION="multimedia"
 VERSION=2.1.5

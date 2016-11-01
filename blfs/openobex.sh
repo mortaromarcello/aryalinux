@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The OpenOBEX package contains abr3ak library that implements Object Exchange Protocol used for binarybr3ak file transfers between devices.br3ak"
 SECTION="general"
 VERSION=1.7.2

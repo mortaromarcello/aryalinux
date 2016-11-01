@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak AbiWord is a word processor whichbr3ak is useful for writing reports, letters and other formattedbr3ak documents.br3ak"
 SECTION="xsoft"
 VERSION=3.0.1

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak KIdleTime is used to report idle time of user and system. It isbr3ak useful not only for finding out about the current idle time of thebr3ak PC, but also for getting notified upon idle time events, such asbr3ak custom timeouts, or user activity.br3ak"
 SECTION="lxqt"
 VERSION=5.25.0

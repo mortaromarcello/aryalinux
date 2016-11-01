@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Vorbis Tools package containsbr3ak command-line tools useful for encoding, playing or editing filesbr3ak using the Ogg CODEC.br3ak"
 SECTION="multimedia"
 VERSION=1.4.0

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="%DESCRIPTION%"
 SECTION="x"
 VERSION=1.3.0

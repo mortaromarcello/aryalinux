@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The twm package contains a verybr3ak minimal window manager.br3ak"
 SECTION="x"
 VERSION=1.0.9

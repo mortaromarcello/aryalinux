@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Qtwebkit is a Qt based web browserbr3ak engine.br3ak"
 SECTION="x"
 VERSION=5.7.0

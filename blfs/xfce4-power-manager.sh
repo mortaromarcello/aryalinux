@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Xfce4 Power Manager is a powerbr3ak manager for the Xfce desktop,br3ak Xfce power manager manages thebr3ak power sources on the computer and the devices that can bebr3ak controlled to reduce their power consumption (such as LCDbr3ak brightness level, monitor sleep, CPU frequency scaling). Inbr3ak addition, Xfce4 Power Managerbr3ak provides a set of freedesktop-compliant DBus interfaces to inform other applicationsbr3ak about current power level so that they can adjust their powerbr3ak consumption.br3ak"
 SECTION="xfce"
 VERSION=1.6.0

@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak XArchiver is a GTK+ archive manager with support for tar, xz,br3ak bzip2, gzip, zip, 7z, rar, lzo and many other archive formats.br3ak"
 SECTION="xsoft"
 VERSION=0.5.4

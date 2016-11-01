@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak Libraw is a library for readingbr3ak RAW files obtained from digital photo cameras (CRW/CR2, NEF, RAF,br3ak DNG, and others).br3ak"
 SECTION="general"
 VERSION=0.17.2

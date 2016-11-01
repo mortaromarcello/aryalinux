@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Xfce4 Panel package containsbr3ak the Xfce4 Panel.br3ak"
 SECTION="xfce"
 VERSION=4.12.0

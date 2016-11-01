@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The LXAppearance OBconf packagebr3ak contains a plugin for LXAppearancebr3ak to configure OpenBox.br3ak"
 SECTION="lxde"
 VERSION=0.2.3

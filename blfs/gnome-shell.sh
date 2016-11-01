@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The GNOME Shell is the core userbr3ak interface of the GNOME Desktopbr3ak environment.br3ak"
 SECTION="gnome"
 VERSION=3.22.0

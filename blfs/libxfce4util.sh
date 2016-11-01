@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libxfce4util package is abr3ak basic utility library for the Xfcebr3ak desktop environment.br3ak"
 SECTION="xfce"
 VERSION=4.12.1

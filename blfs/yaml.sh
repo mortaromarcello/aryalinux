@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The YAML package contains a Cbr3ak library for parsing and emitting YAML (YAML Ain't Markup Language).br3ak"
 SECTION="general"
 VERSION=0.1.6

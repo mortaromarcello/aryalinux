@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The Common Unix Printing System (CUPS) is a print spooler andbr3ak associated utilities. It is based on the \"Internet Printingbr3ak Protocol\" and provides printing services to most PostScript andbr3ak raster printers.br3ak"
 SECTION="pst"
 VERSION=2.2.1

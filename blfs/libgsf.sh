@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libgsf package contains abr3ak library used for providing an extensible input/output abstractionbr3ak layer for structured file formats.br3ak"
 SECTION="general"
 VERSION=1.14.40

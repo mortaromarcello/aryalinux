@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The libxfce4ui package containsbr3ak GTK+ 2 widgets that are used bybr3ak other Xfce applications.br3ak"
 SECTION="xfce"
 VERSION=4.12.1

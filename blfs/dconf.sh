@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The DConf package contains abr3ak low-level configuration system. Its main purpose is to provide abr3ak backend to GSettings on platforms that don't already havebr3ak configuration storage systems.br3ak"
 SECTION="gnome"
 VERSION=3.22.0

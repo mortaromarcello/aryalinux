@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRIPTION="br3ak The GObject Introspection is usedbr3ak to describe the program APIs and collect them in a uniform, machinebr3ak readable format.br3ak"
 SECTION="general"
 VERSION=1.50.0
