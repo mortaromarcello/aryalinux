@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 #REQ:perl-modules#text-diff(forthetestsuite)
-#REQ:perl-modules#perl-capture-tiny
+#REQ:perl-modules#capture-tiny(forthetestsuite)
 
 SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/D/DC/DCANTRELL/Test-Differences-0.64.tar.gz"

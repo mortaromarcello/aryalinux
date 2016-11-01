@@ -4,6 +4,7 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 
 SOURCE_ONLY=y
@@ -34,7 +35,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#xml-namespacesupport=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

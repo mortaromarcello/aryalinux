@@ -6,11 +6,10 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#REQ:perl-modules#perl-capture-tiny
 
 SOURCE_ONLY=y
-URL="http://www.cpan.org/authors/id/A/AM/AMBS/Text-BibTeX-0.77.tar.gz"
-VERSION=0.77
+URL="http://www.cpan.org/authors/id/A/AM/AMBS/Text-BibTeX-0.76.tar.gz"
+VERSION=0.76
 NAME="perl-modules#text-bibtex"
 
 cd $SOURCE_DIR

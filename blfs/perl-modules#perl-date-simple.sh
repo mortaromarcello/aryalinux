@@ -4,12 +4,13 @@ set -e
 set +h
 
 . /etc/alps/alps.conf
+. /var/lib/alps/functions
 
 
 SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/I/IZ/IZUT/Date-Simple-3.03.tar.gz"
-NAME="perl-modules#perl-date-simple"
 VERSION=3.03
+NAME="perl-modules#date-simple"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -34,7 +35,7 @@ sudo make install
 fi
 cd $SOURCE_DIR
 
-sudo rm -rf $DIRECTORY
+cleanup "$NAME" "$DIRECTORY"
 
-echo "perl-modules#perl-date-simple=>`date`" | sudo tee -a $INSTALLED_LIST
+register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
 

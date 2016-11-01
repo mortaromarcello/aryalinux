@@ -6,9 +6,9 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#REQ:perl-modules#perl-xml-sax
+#REQ:perl-modules#xml-sax
 #REQ:perl-modules#xml-sax-expat
-#REQ:perl-modules#perl-xml-libxml
+#REQ:perl-modules#xml-libxml
 #REQ:perl-modules#tie-ixhash
 
 SOURCE_ONLY=y

@@ -6,16 +6,16 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#REQ:perl-modules#perl-module-implementation
+#REQ:perl-modules#perl-module-build
 #REQ:perl-modules#list-utilsby
 #REQ:perl-modules#number-compare
 #REQ:perl-modules#scalar-list-utils
-#REQ:perl-modules#perl-test-warnings
+#REQ:perl-modules#test-warnings
 #REQ:perl-modules#text-glob
 
 SOURCE_ONLY=y
-URL="http://www.cpan.org/authors/id/D/DR/DROLSKY/List-AllUtils-0.12.tar.gz"
-VERSION=0.12
+URL="http://www.cpan.org/authors/id/D/DR/DROLSKY/List-AllUtils-0.11.tar.gz"
+VERSION=0.11
 NAME="perl-modules#list-allutils"
 
 cd $SOURCE_DIR
