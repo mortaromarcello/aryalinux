@@ -24,8 +24,14 @@ wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/dhcp-4.3.5-client_scri
 wget -nc http://www.linuxfromscratch.org/patches/downloads/dhcp/dhcp-4.3.5-missing_ipv6-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/dhcp-4.3.5-missing_ipv6-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-tar --no-overwrite-dir -xf $TARBALL
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=''
+	unzip_dirname $TARBALL DIRECTORY
+	unzip_file $TARBALL
+fi
 cd $DIRECTORY
 fi
 

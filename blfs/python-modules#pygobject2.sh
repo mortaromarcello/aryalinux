@@ -27,8 +27,14 @@ wget -nc http://ftp.gnome.org/pub/gnome/sources/pygobject/2.28/pygobject-2.28.6.
 wget -nc http://www.linuxfromscratch.org/patches/downloads/pygobject/pygobject-2.28.6-fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/pygobject-2.28.6-fixes-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-tar --no-overwrite-dir -xf $TARBALL
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=''
+	unzip_dirname $TARBALL DIRECTORY
+	unzip_file $TARBALL
+fi
 cd $DIRECTORY
 fi
 

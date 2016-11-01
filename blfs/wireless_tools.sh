@@ -23,8 +23,14 @@ wget -nc http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/wireless_tools.29.
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/wireless_tools-29-fix_iwlist_scanning-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/wireless_tools/wireless_tools-29-fix_iwlist_scanning-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-tar --no-overwrite-dir -xf $TARBALL
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=''
+	unzip_dirname $TARBALL DIRECTORY
+	unzip_file $TARBALL
+fi
 cd $DIRECTORY
 fi
 

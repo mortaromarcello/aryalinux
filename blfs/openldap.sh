@@ -31,8 +31,14 @@ wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/openldap/openldap-2.4
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/openldap-2.4.44-consolidated-2.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/openldap/openldap-2.4.44-consolidated-2.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-tar --no-overwrite-dir -xf $TARBALL
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=''
+	unzip_dirname $TARBALL DIRECTORY
+	unzip_file $TARBALL
+fi
 cd $DIRECTORY
 fi
 

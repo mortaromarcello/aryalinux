@@ -32,8 +32,14 @@ wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/cyrus-sasl/cyrus-sasl
 wget -nc http://www.linuxfromscratch.org/patches/downloads/cyrus-sasl/cyrus-sasl-2.1.26-fixes-3.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/cyrus-sasl-2.1.26-fixes-3.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-tar --no-overwrite-dir -xf $TARBALL
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=''
+	unzip_dirname $TARBALL DIRECTORY
+	unzip_file $TARBALL
+fi
 cd $DIRECTORY
 fi
 

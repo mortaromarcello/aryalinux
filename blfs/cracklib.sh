@@ -24,8 +24,14 @@ wget -nc https://github.com/cracklib/cracklib/releases/download/cracklib-2.9.6/c
 wget -nc https://github.com/cracklib/cracklib/releases/download/cracklib-2.9.6/cracklib-words-2.9.6.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/cracklib-words/cracklib-words-2.9.6.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/cracklib-words/cracklib-words-2.9.6.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/cracklib-words/cracklib-words-2.9.6.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/cracklib-words/cracklib-words-2.9.6.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/cracklib-words/cracklib-words-2.9.6.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-tar --no-overwrite-dir -xf $TARBALL
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=''
+	unzip_dirname $TARBALL DIRECTORY
+	unzip_file $TARBALL
+fi
 cd $DIRECTORY
 fi
 

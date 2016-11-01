@@ -29,8 +29,14 @@ wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/obex-data-server/obex-data
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/obex-data-server-0.4.6-build-fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/obex-data-server/obex-data-server-0.4.6-build-fixes-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-tar --no-overwrite-dir -xf $TARBALL
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=''
+	unzip_dirname $TARBALL DIRECTORY
+	unzip_file $TARBALL
+fi
 cd $DIRECTORY
 fi
 

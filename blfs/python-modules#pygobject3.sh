@@ -25,8 +25,14 @@ then
 wget -nc http://ftp.gnome.org/pub/gnome/sources/pygobject/3.22/pygobject-3.22.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/pygobject/3.22/pygobject-3.22.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-tar --no-overwrite-dir -xf $TARBALL
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=''
+	unzip_dirname $TARBALL DIRECTORY
+	unzip_file $TARBALL
+fi
 cd $DIRECTORY
 fi
 

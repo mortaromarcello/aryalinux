@@ -35,8 +35,14 @@ wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/wireshark/wireshark
 wget -nc http://www.linuxfromscratch.org/patches/downloads/wireshark/wireshark-2.2.1-lua_5_3_1-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/wireshark-2.2.1-lua_5_3_1-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-tar --no-overwrite-dir -xf $TARBALL
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=''
+	unzip_dirname $TARBALL DIRECTORY
+	unzip_file $TARBALL
+fi
 cd $DIRECTORY
 fi
 

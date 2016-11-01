@@ -27,8 +27,14 @@ wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/parted/parted-3.2.t
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/parted-3.2-devmapper-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/parted/parted-3.2-devmapper-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-tar --no-overwrite-dir -xf $TARBALL
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=''
+	unzip_dirname $TARBALL DIRECTORY
+	unzip_file $TARBALL
+fi
 cd $DIRECTORY
 fi
 

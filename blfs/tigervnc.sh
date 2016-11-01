@@ -33,8 +33,14 @@ wget -nc http://ftp.x.org/pub/individual/xserver/xorg-server-1.18.4.tar.bz2 || w
 wget -nc http://www.linuxfromscratch.org/patches/downloads/tigervnc/tigervnc-1.7.0-gethomedir-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/tigervnc-1.7.0-gethomedir-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-tar --no-overwrite-dir -xf $TARBALL
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=''
+	unzip_dirname $TARBALL DIRECTORY
+	unzip_file $TARBALL
+fi
 cd $DIRECTORY
 fi
 

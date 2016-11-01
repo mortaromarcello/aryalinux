@@ -28,8 +28,14 @@ wget -nc http://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-l
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/fop-2.1-listNPE-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/fop/fop-2.1-listNPE-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-tar --no-overwrite-dir -xf $TARBALL
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=''
+	unzip_dirname $TARBALL DIRECTORY
+	unzip_file $TARBALL
+fi
 cd $DIRECTORY
 fi
 
