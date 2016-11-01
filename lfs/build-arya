@@ -99,14 +99,11 @@ def inputBuildProperties():
 	readInput('Enter full name: ', 'FULLNAME', propsFile, 'AryaLinux Dhruv')
 	readInput('Username: ', 'USERNAME', propsFile, 'aryalinux')
 	readInput('Computer Name: ', 'HOST_NAME', propsFile, 'aryalinux-dhruv')
-	readInput('Backup after base system? (y/n)', 'BACKUP1', propsFile, 'y')
 	readInput("Install X Server? (y/N) ", 'INSTALL_XSERVER', propsFile, 'n')
 	if getParamValue('INSTALL_XSERVER') == 'y' or getParamValue('INSTALL_XSERVER') == 'Y':
-		readInput('Backup after x-server? (y/n)', 'BACKUP2', propsFile, 'y')
 		readInput("Install Desktop Environment? (y/N) ", 'INSTALL_DESKTOP_ENVIRONMENT', propsFile, 'n')
 		if getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'y' or getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'Y':
 			readInput("Choose the Desktop Environment you want to install:\n1) XFCE\n2) Mate\n3) KDE\n4) Gnome\n5) LXDE\n\nEnter your choice (1-5): ", 'DESKTOP_ENVIRONMENT', propsFile, '2')
-			readInput('Backup after desktop-environment? (y/n)', 'BACKUP3', propsFile, 'y')
 
 def freshBuild(startFrom):
 	startFrom = int(startFrom)
@@ -168,10 +165,6 @@ def freshBuild(startFrom):
 			print ex
 			exit()
 
-	if getParamValue('BACKUP1') == 'y':
-	        print 'Backing up...'
-        	check_output('/root/scripts/backup.sh base-system', shell=True)
-
 	if startFrom == 6:
 		print '"' + getParamValue('INSTALL_XSERVER') + '"'
 		print getParamValue('INSTALL_XSERVER') == 'y' or getParamValue('INSTALL_XSERVER') == 'Y'
@@ -186,11 +179,6 @@ def freshBuild(startFrom):
 				print ex
 				exit()
 
-        if getParamValue('BACKUP2') == 'y':
-                print 'Backing up...'
-                check_output('/root/scripts/backup.sh x-server', shell=True)
-
-
 	if startFrom == 7:
 		if getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'y' or getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'Y':
 			try:
@@ -204,10 +192,6 @@ def freshBuild(startFrom):
 				print 'Error occured in the installation of desktop environment :'
 				print ex
 				exit()
-
-        if getParamValue('BACKUP3') == 'y':
-                print 'Backing up...'
-                check_output('/root/scripts/backup.sh desktop-environment', shell=True)
 
 	runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/final-stage.sh'])
 
