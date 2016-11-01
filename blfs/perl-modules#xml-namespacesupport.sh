@@ -6,9 +6,10 @@ set +h
 . /etc/alps/alps.conf
 
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/P/PE/PERIGRIN/XML-NamespaceSupport-1.11.tar.gz"
-
-#VER:XML-NamespaceSupport:1.11
+VERSION=1.11
+NAME="perl-modules#xml-namespacesupport"
 
 cd $SOURCE_DIR
 wget -nc $URL

@@ -6,9 +6,10 @@ set +h
 . /etc/alps/alps.conf
 
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/S/SH/SHLOMIF/XML-LibXML-2.0128.tar.gz"
-
-#VER:XML-LibXML:2.0128
+NAME="perl-modules#xml-libxml"
+VERSION=2.0128
 
 cd $SOURCE_DIR
 wget -nc $URL

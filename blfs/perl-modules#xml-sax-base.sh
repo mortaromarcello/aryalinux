@@ -6,9 +6,10 @@ set +h
 . /etc/alps/alps.conf
 
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/G/GR/GRANTM/XML-SAX-Base-1.08.tar.gz"
-
-#VER:XML-SAX-Base:1.08
+NAME="perl-modules#xml-sax-base"
+VERSION=1.08
 
 cd $SOURCE_DIR
 wget -nc $URL

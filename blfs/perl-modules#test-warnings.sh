@@ -7,9 +7,10 @@ set +h
 
 #REQ:perl-modules#cpan-meta-check
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/E/ET/ETHER/Test-Warnings-0.026.tar.gz"
-
-#VER:Test-Warnings:0.026
+NAME="perl-modules#test-warnings"
+VERSION=0.026
 
 cd $SOURCE_DIR
 wget -nc $URL

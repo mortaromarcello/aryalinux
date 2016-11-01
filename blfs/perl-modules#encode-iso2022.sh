@@ -6,9 +6,10 @@ set +h
 . /etc/alps/alps.conf
 
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/N/NE/NEZUMI/Encode-ISO2022-0.04.tar.gz"
-
-#VER:Encode-ISO2022:0.04
+NAME="perl-modules#encode-iso2022"
+VERSION=0.04
 
 cd $SOURCE_DIR
 wget -nc $URL

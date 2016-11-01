@@ -5,9 +5,10 @@ set +h
 
 . /etc/alps/alps.conf
 
-#VER:IO-String:1.08
-
+SOURCE_ONLY=y
 URL=http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/IO-String-1.08.tar.gz
+NAME="perl-modules#io-string"
+VERSION=1.08
 
 cd $SOURCE_DIR
 

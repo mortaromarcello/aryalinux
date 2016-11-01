@@ -6,9 +6,10 @@ set +h
 . /etc/alps/alps.conf
 
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/I/IZ/IZUT/Date-Simple-3.03.tar.gz"
-
-#VER:Date-Simple:3.03
+NAME="perl-modules#perl-date-simple"
+VERSION=3.03
 
 cd $SOURCE_DIR
 wget -nc $URL

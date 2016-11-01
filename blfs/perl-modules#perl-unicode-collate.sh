@@ -6,9 +6,10 @@ set +h
 . /etc/alps/alps.conf
 
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/S/SA/SADAHIRO/Unicode-Collate-1.14.tar.gz"
-
-#VER:Unicode-Collate:1.14
+NAME="perl-modules#perl-unicode-collate"
+VERSION=1.14
 
 cd $SOURCE_DIR
 wget -nc $URL

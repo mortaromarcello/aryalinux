@@ -7,9 +7,10 @@ set +h
 
 #REQ:perl-modules#encode-iso2022
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/N/NE/NEZUMI/Encode-JISX0213-0.04.tar.gz"
-
-#VER:Encode-JISX0213:0.04
+NAME="perl-modules#encode-jisx0213"
+VERSION=0.04
 
 cd $SOURCE_DIR
 wget -nc $URL

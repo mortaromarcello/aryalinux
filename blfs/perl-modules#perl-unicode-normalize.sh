@@ -6,9 +6,10 @@ set +h
 . /etc/alps/alps.conf
 
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/K/KH/KHW/Unicode-Normalize-1.25.tar.gz"
-
-#VER:Unicode-Normalize:1.25
+NAME="perl-modules#perl-unicode-normalize"
+VERSION=1.25
 
 cd $SOURCE_DIR
 wget -nc $URL
