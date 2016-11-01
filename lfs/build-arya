@@ -167,7 +167,7 @@ def freshBuild(startFrom):
 			exit()
 
         print 'Backing up...'
-        p = subprocess.Popen(['/root/scripts/backup.sh'], shell=True)
+        p = subprocess.Popen(['/root/scripts/backup.sh', 'base-system'], shell=True)
 	p.wait()
 
 	if startFrom == 6:
@@ -183,6 +183,9 @@ def freshBuild(startFrom):
 				print 'Error occured in the installation of x-server'
 				print ex
 				exit()
+        print 'Backing up...'
+        p = subprocess.Popen(['/root/scripts/backup.sh', 'x-server'], shell=True)
+        p.wait()
 
 	if startFrom == 7:
 		if getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'y' or getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'Y':
@@ -197,6 +200,10 @@ def freshBuild(startFrom):
 				print 'Error occured in the installation of desktop environment :'
 				print ex
 				exit()
+
+        print 'Backing up...'
+        p = subprocess.Popen(['/root/scripts/backup.sh', 'with-de'], shell=True)
+        p.wait()
 
 	runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/final-stage.sh'])
 
