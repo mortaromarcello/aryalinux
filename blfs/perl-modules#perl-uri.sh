@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/E/ET/ETHER/URI-1.71.tar.gz"
-
 VERSION=1.71
 NAME="perl-modules#uri"
 

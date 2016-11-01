@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/A/AB/ABH/Mozilla-CA-20160104.tar.gz"
-
 VERSION=20160104
 NAME="perl-modules#mozilla-ca"
 

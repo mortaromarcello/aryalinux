@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/U/UR/URI/File-Slurp-9999.19.tar.gz"
-
 VERSION=9999.19
 NAME="perl-modules#file-slurp"
 

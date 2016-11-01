@@ -9,8 +9,8 @@ set +h
 #REQ:.._postlfs_openssl#REQ:perl-modules#perl-lwp
 #REQ:perl-modules#io-socket-ssl
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/M/MS/MSCHILLI/LWP-Protocol-https-6.06.tar.gz"
-
 VERSION=6.06
 NAME="perl-modules#lwp-protocol-https"
 

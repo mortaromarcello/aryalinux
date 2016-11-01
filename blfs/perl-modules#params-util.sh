@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/A/AD/ADAMK/Params-Util-1.07.tar.gz"
-
 VERSION=1.07
 NAME="perl-modules#params-util"
 

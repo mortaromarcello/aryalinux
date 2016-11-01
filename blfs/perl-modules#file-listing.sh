@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/File-Listing-6.04.tar.gz"
-
 VERSION=6.04
 NAME="perl-modules#file-listing"
 

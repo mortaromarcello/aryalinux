@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/E/ET/ETHER/Net-HTTP-6.09.tar.gz"
-
 VERSION=6.09
 NAME="perl-modules#net-http"
 

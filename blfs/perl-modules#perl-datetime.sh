@@ -10,8 +10,8 @@ set +h
 #REQ:perl-modules#perl-sub-identify
 #REQ:perl-modules#cpan-meta-check
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org//CPAN/authors/id/D/DR/DROLSKY/DateTime-1.39.tar.gz"
-
 VERSION=1.39
 NAME="perl-modules#datetime"
 

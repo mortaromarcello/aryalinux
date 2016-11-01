@@ -11,8 +11,8 @@ set +h
 #REQ:perl-modules#perl-xml-libxml
 #REQ:perl-modules#tie-ixhash
 
+SOURCE_ONLY=y
 URL="http://cpan.org/authors/id/G/GR/GRANTM/XML-Simple-2.22.tar.gz"
-
 VERSION=2.22
 NAME="perl-modules#xml-simple"
 

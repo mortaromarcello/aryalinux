@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/P/PE/PEVANS/Scalar-List-Utils-1.46.tar.gz"
-
 VERSION=1.46
 NAME="perl-modules#scalar-list-utils"
 

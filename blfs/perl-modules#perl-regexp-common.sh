@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/A/AB/ABIGAIL/Regexp-Common-2016060801.tar.gz"
-
 VERSION=2016060801
 NAME="perl-modules#regexp-common"
 

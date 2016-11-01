@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/F/FD/FDESAR/Parse-Yapp-1.05.tar.gz"
-
 VERSION=1.05
 NAME="perl-modules#parse-yapp"
 

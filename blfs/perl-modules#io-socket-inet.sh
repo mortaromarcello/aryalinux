@@ -8,8 +8,8 @@ set +h
 
 #REQ:perl-modules#socket6
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/G/GB/GBARR/IO-1.25.tar.gz"
-
 VERSION=1.25
 NAME="perl-modules#io"
 

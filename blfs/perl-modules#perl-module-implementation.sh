@@ -11,8 +11,8 @@ set +h
 #REQ:perl-modules#perl-test-fatal
 #REQ:perl-modules#perl-test-requires
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org//CPAN/authors/id/D/DR/DROLSKY/Module-Implementation-0.09.tar.gz"
-
 VERSION=0.09
 NAME="perl-modules#module-implementation"
 

@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/S/SA/SALVA/Sort-Key-1.33.tar.gz"
-
 VERSION=1.33
 NAME="perl-modules#sort-key"
 

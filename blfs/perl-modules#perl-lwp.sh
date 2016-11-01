@@ -15,8 +15,8 @@ set +h
 #REQ:perl-modules#http-daemon
 #REQ:perl-modules#file-listing
 
+SOURCE_ONLY=y
 URL="https://cpan.metacpan.org/authors/id/E/ET/ETHER/libwww-perl-6.15.tar.gz"
-
 VERSION=6.15
 NAME="perl-modules#libwww-perl"
 

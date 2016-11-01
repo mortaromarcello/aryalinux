@@ -10,8 +10,8 @@ set +h
 #REQ:perl-modules#perl-file-which
 #REQ:perl-modules#ipc-system-simple
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/K/KI/KIMRYAN/File-BaseDir-0.07.tar.gz"
-
 VERSION=0.07
 NAME="perl-modules#file-basedir"
 

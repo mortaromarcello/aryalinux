@@ -8,8 +8,8 @@ set +h
 
 #REQ:perl-modules#package-deprecationmanager
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/D/DR/DROLSKY/DateTime-Format-Strptime-1.68.tar.gz"
-
 VERSION=1.68
 NAME="perl-modules#datetime-format-strptime"
 

@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/R/RC/RCLAMP/Text-Glob-0.10.tar.gz"
-
 VERSION=0.10
 NAME="perl-modules#text-glob"
 

@@ -8,8 +8,8 @@ set +h
 
 #REQ:perl-modules#perl-try-tiny
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org//CPAN/authors/id/R/RJ/RJBS/Test-Fatal-0.014.tar.gz"
-
 VERSION=0.014
 NAME="perl-modules#test-fatal"
 

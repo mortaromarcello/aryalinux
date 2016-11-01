@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/B/BD/BDFOY/Business-ISSN-1.001.tar.gz"
-
 VERSION=1.001
 NAME="perl-modules#business-issn"
 

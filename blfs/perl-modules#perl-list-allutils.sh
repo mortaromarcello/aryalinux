@@ -13,8 +13,8 @@ set +h
 #REQ:perl-modules#perl-test-warnings
 #REQ:perl-modules#text-glob
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/D/DR/DROLSKY/List-AllUtils-0.12.tar.gz"
-
 VERSION=0.12
 NAME="perl-modules#list-allutils"
 

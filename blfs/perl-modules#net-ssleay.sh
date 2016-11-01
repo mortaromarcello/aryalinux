@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/M/MI/MIKEM/Net-SSLeay-1.78.tar.gz"
-
 VERSION=1.78
 NAME="perl-modules#net-ssleay"
 

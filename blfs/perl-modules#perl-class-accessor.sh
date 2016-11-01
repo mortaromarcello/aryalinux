@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/K/KA/KASEI/Class-Accessor-0.34.tar.gz"
-
 VERSION=0.34
 NAME="perl-modules#class-accessor"
 

@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/M/MS/MSCHILLI/Log-Log4perl-1.47.tar.gz"
-
 VERSION=1.47
 NAME="perl-modules#log-log4perl"
 

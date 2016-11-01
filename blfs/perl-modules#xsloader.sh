@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/S/SA/SAPER/XSLoader-0.24.tar.gz"
-
 VERSION=0.24
 NAME="perl-modules#xsloader"
 

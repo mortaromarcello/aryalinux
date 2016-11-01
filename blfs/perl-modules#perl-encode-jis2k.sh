@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/D/DA/DANKOGAI/Encode-JIS2K-0.03.tar.gz"
-
 VERSION=0.03
 NAME="perl-modules#encode-jis2k"
 

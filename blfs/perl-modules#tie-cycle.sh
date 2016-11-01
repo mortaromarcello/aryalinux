@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/B/BD/BDFOY/Tie-Cycle-1.221.tar.gz"
-
 VERSION=1.221
 NAME="perl-modules#tie-cycle"
 

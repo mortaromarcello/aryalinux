@@ -9,8 +9,8 @@ set +h
 #REQ:perl-modules#html-tagset
 #REQ:perl-modules#perl-lwp
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/G/GA/GAAS/HTML-Parser-3.72.tar.gz"
-
 VERSION=3.72
 NAME="perl-modules#html-parser"
 

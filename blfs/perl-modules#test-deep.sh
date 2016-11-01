@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/R/RJ/RJBS/Test-Deep-1.123.tar.gz"
-
 VERSION=1.123
 NAME="perl-modules#test-deep"
 

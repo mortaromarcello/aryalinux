@@ -10,8 +10,8 @@ set +h
 #REQ:perl-modules#perl-datetime
 #REQ:perl-modules#datetime-format-strptime
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/D/DR/DROLSKY/DateTime-Format-Builder-0.81.tar.gz"
-
 VERSION=0.81
 NAME="perl-modules#datetime-format-builder"
 

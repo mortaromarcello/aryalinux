@@ -10,8 +10,8 @@ set +h
 #REQ:perl-modules#perl-xml-libxml
 #REQ:perl-modules#file-slurp-tiny
 
+SOURCE_ONLY=y
 URL="http://cpan.org/authors/id/M/MA/MARKOV/XML-LibXML-Simple-0.97.tar.gz"
-
 VERSION=0.97
 NAME="perl-modules#xml-libxml-simple"
 

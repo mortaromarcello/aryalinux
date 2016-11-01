@@ -8,8 +8,8 @@ set +h
 
 #REQ:perl-modules#file-find-rule
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/D/DC/DCANTRELL/Data-Compare-1.25.tar.gz"
-
 VERSION=1.25
 NAME="perl-modules#data-compare"
 

@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org//CPAN/authors/id/R/RG/RGARCIA/Sub-Identify-0.12.tar.gz"
-
 VERSION=0.12
 NAME="perl-modules#sub-identify"
 

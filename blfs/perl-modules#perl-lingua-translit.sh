@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/A/AL/ALINKE/Lingua-Translit-0.26.tar.gz"
-
 VERSION=0.26
 NAME="perl-modules#lingua-translit"
 

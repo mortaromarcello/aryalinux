@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/V/VP/VPIT/autovivification-0.16.tar.gz"
-
 VERSION=0.16
 NAME="perl-modules#autovivification"
 

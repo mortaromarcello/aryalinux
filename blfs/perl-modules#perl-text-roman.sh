@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/S/SY/SYP/Text-Roman-3.5.tar.gz"
-
 VERSION=3.5
 NAME="perl-modules#text-roman"
 

@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/R/RJ/RJBS/IPC-Run3-0.048.tar.gz"
-
 VERSION=0.048
 NAME="perl-modules#ipc-run3"
 

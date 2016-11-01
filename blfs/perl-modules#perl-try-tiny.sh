@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org//CPAN/authors/id/E/ET/ETHER/Try-Tiny-0.27.tar.gz"
-
 VERSION=0.27
 NAME="perl-modules#try-tiny"
 

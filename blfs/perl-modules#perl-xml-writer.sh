@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/J/JO/JOSEPHW/XML-Writer-0.625.tar.gz"
-
 VERSION=0.625
 NAME="perl-modules#xml-writer"
 

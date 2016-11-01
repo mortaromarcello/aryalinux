@@ -10,8 +10,8 @@ set +h
 #REQ:perl-modules#io-socket-inet6
 #REQ:perl-modules#io-socket-inet
 
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/N/NL/NLNETLABS/Net-DNS-1.06.tar.gz"
-
 VERSION=1.06
 NAME="perl-modules#net-dns"
 

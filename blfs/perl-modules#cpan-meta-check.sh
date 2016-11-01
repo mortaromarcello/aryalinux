@@ -8,8 +8,8 @@ set +h
 
 #REQ:perl-modules#test-deep
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/CPAN-Meta-Check-0.013.tar.gz"
-
 VERSION=0.013
 NAME="perl-modules#cpan-meta-check"
 

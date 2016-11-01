@@ -9,8 +9,8 @@ set +h
 #REQ:perl-modules#number-compare
 #REQ:perl-modules#text-glob
 
+SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/R/RC/RCLAMP/File-Find-Rule-0.34.tar.gz"
-
 VERSION=0.34
 NAME="perl-modules#file-find-rule"
 

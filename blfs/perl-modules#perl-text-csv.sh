@@ -7,8 +7,8 @@ set +h
 . /var/lib/alps/functions
 
 #REQ:.._pst_biber
+SOURCE_ONLY=y
 URL="http://www.cpan.org/authors/id/M/MA/MAKAMAKA/Text-CSV-1.33.tar.gz"
-
 VERSION=1.33
 NAME="perl-modules#text-csv"
 
