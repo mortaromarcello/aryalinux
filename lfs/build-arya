@@ -170,8 +170,7 @@ def freshBuild(startFrom):
 
 	if getParamValue('BACKUP1') == 'y':
 	        print 'Backing up...'
-        	p = subprocess.Popen(['/root/scripts/backup.sh', 'base-system'], shell=True)
-		p.wait()
+        	check_output('/root/scripts/backup.sh base-system', shell=True)
 
 	if startFrom == 6:
 		print '"' + getParamValue('INSTALL_XSERVER') + '"'
@@ -189,8 +188,7 @@ def freshBuild(startFrom):
 
         if getParamValue('BACKUP2') == 'y':
                 print 'Backing up...'
-                p = subprocess.Popen(['/root/scripts/backup.sh', 'x-server'], shell=True)
-                p.wait()
+                check_output('/root/scripts/backup.sh x-server', shell=True)
 
 
 	if startFrom == 7:
@@ -209,9 +207,7 @@ def freshBuild(startFrom):
 
         if getParamValue('BACKUP3') == 'y':
                 print 'Backing up...'
-                p = subprocess.Popen(['/root/scripts/backup.sh', 'desktop-environment'], shell=True)
-                p.wait()
-
+                check_output('/root/scripts/backup.sh desktop-environment', shell=True)
 
 	runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/final-stage.sh'])
 
