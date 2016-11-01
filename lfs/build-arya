@@ -99,7 +99,6 @@ def inputBuildProperties():
 	readInput('Enter full name: ', 'FULLNAME', propsFile, 'AryaLinux Dhruv')
 	readInput('Username: ', 'USERNAME', propsFile, 'aryalinux')
 	readInput('Computer Name: ', 'HOST_NAME', propsFile, 'aryalinux-dhruv')
-
 	readInput("Install X Server? (y/N) ", 'INSTALL_XSERVER', propsFile, 'n')
 	if getParamValue('INSTALL_XSERVER') == 'y' or getParamValue('INSTALL_XSERVER') == 'Y':
 		readInput("Install Desktop Environment? (y/N) ", 'INSTALL_DESKTOP_ENVIRONMENT', propsFile, 'n')
@@ -165,9 +164,6 @@ def freshBuild(startFrom):
 			print 'Error occured while running stage 4 :'
 			print ex
 			exit()
-
-        print 'Backing up...'
-        p = subprocess.Popen(['/sources/backup.sh'], shell=True)
 
 	if startFrom == 6:
 		print '"' + getParamValue('INSTALL_XSERVER') + '"'
