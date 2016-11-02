@@ -28,6 +28,7 @@ cd $DIRECTORY
 whoami > /tmp/currentuser
 
 patch -Np1 -i ../net-tools-CVS_20101030-remove_dups-1.patch &&
+patch -Np1 -i ../net-tools-1.60-kernel_headers-3.patch &&
 yes "" | make config &&
 make "-j`nproc`" || make
 
