@@ -13,6 +13,7 @@ VERSION=2.6.4
 
 #REQ:gtk2
 #REQ:gtk3
+#REQ:sass
 
 cd $SOURCE_DIR
 
@@ -25,8 +26,6 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
 tar xf $TARBALL
 
 cd $DIRECTORY
-./autogen.sh --prefix=/usr
-make -j4
 sudo make install
 
 cd $SOURCE_DIR
