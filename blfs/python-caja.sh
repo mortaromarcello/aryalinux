@@ -6,14 +6,16 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 NAME="python-caja"
-VERSION="1.15.0"
+DESCRIPTION="Python binding for Caja components"
+VERSION="1.16.0"
 
 #REQ:python-modules#pygobject2
 
 cd $SOURCE_DIR
 
-URL="http://pub.mate-desktop.org/releases/1.15/python-caja-1.15.0.tar.xz"
+URL="http://pub.mate-desktop.org/releases/1.16/python-caja-1.16.0.tar.xz"
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`

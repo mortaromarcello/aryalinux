@@ -6,15 +6,17 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 NAME="mate-system-monitor"
-VERSION="1.15.0"
+DESCRIPTION="Process viewer and system resource monitor for MATE"
+VERSION="1.17.0"
 
 #REQ:gtkmm3
 #REQ:glibmm
 
 cd $SOURCE_DIR
 
-URL="http://pub.mate-desktop.org/releases/1.15/mate-system-monitor-1.15.0.tar.xz"
+URL="http://pub.mate-desktop.org/releases/1.17/mate-system-monitor-1.17.0.tar.xz"
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`

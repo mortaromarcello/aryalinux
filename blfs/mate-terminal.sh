@@ -6,15 +6,17 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 NAME="mate-terminal"
-VERSION="1.15.0"
+DESCRIPTION="MATE terminal emulator application"
+VERSION="1.16.1"
 
 #REQ:vte2
 #REQ:vte
 
 cd $SOURCE_DIR
 
-URL="http://pub.mate-desktop.org/releases/1.15/mate-terminal-1.15.0.tar.xz"
+URL="http://pub.mate-desktop.org/releases/1.16/mate-terminal-1.16.1.tar.xz"
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`

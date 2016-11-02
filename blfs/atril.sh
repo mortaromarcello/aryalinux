@@ -6,15 +6,17 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 NAME="atril"
-VERSION="1.15.0"
+DESCRIPTION="PDF file reader for the mate desktop environment"
+VERSION="1.16.1"
 
 #REQ:poppler
 #REQ:qpdf
 
 cd $SOURCE_DIR
 
-URL="http://pub.mate-desktop.org/releases/1.15/atril-1.15.0.tar.xz"
+URL="http://pub.mate-desktop.org/releases/1.16/atril-1.16.1.tar.xz"
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`

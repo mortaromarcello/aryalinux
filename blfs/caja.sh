@@ -6,14 +6,16 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 NAME="caja"
-VERSION="1.15.0"
+DESCRIPTION="File Manager for the Mate desktop environment"
+VERSION="1.17.0"
 
 #REQ:mate-polkit
 
 cd $SOURCE_DIR
 
-URL="http://pub.mate-desktop.org/releases/1.15/caja-1.15.0.tar.xz"
+URL="http://pub.mate-desktop.org/releases/1.17/caja-1.17.0.tar.xz"
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`

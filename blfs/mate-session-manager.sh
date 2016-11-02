@@ -6,12 +6,14 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 NAME="mate-session-manager"
-VERSION="1.15.0"
+DESCRIPTION="Session manager of the MATE desktop environment"
+VERSION="1.16.0"
 
 cd $SOURCE_DIR
 
-URL="http://pub.mate-desktop.org/releases/1.15/mate-session-manager-1.15.0.tar.xz"
+URL="http://pub.mate-desktop.org/releases/1.16/mate-session-manager-1.16.0.tar.xz"
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`

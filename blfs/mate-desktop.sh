@@ -6,12 +6,14 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 NAME="mate-desktop"
-VERSION="1.15.0"
+DESCRIPTION="Library with common API for various MATE modules"
+VERSION="1.16.1"
 
 cd $SOURCE_DIR
 
-URL="http://pub.mate-desktop.org/releases/1.15/mate-desktop-1.15.0.tar.xz"
+URL="http://pub.mate-desktop.org/releases/1.16/mate-desktop-1.16.1.tar.xz"
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`

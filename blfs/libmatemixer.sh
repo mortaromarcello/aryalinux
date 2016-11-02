@@ -6,12 +6,14 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 NAME="libmatemixer"
-VERSION="1.15.0"
+DESCRIPTION="Mixer library for MATE Desktop. It provides an abstract API allowing access to mixer functionality available in the PulseAudio, ALSA and OSS sound systems."
+VERSION="1.16.0"
 
 cd $SOURCE_DIR
 
-URL="http://pub.mate-desktop.org/releases/1.15/libmatemixer-1.15.0.tar.xz"
+URL="http://pub.mate-desktop.org/releases/1.16/libmatemixer-1.16.0.tar.xz"
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
