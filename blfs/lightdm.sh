@@ -15,7 +15,7 @@ NAME="lightdm"
 DESCRIPTION="A light-weight desktop manager with greeters available in GTK/QT."
 VERSION=1.10.5
 
-#REQ:server-meta
+#REQ:xserver-meta
 #REQ:itstool
 #REQ:libgcrypt
 #REQ:libxklavier
