@@ -8,6 +8,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
+NAME="numix-icons-circle"
+DESCRIPTION="A beautiful flat icon theme with circular artifacts."
+VERSION="SVN-`date -I`"
+
 cd $SOURCE_DIR
 
 git clone https://github.com/numixproject/numix-icon-theme-circle.git

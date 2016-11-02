@@ -10,9 +10,17 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
+NAME="lightdm"
+DESCRIPTION="A light-weight desktop manager with greeters available in GTK/QT."
+VERSION=1.10.5
+
+#REQ:server-meta
 #REQ:itstool
 #REQ:libgcrypt
 #REQ:libxklavier
+#REQ:systemd
+#REQ:polkit
 
 
 cd $SOURCE_DIR

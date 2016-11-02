@@ -6,13 +6,14 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+#REQ:git
 #REQ:gtk2
 #REQ:gtk3
 #REQ:ruby
+#REQ:sass
 
 cd $SOURCE_DIR
 
-sudo gem install sass
 git clone https://github.com/shimmerproject/Greybird.git
 cd Greybird
 ./autogen.sh --prefix=/usr

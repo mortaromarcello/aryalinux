@@ -7,6 +7,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
+NAME="numix-icon-theme"
+DESCRIPTION="A beautiful flat icon theme"
+VERSION="SVN-`date -I`"
+
 cd $SOURCE_DIR
 
 git clone https://github.com/numixproject/numix-icon-theme.git

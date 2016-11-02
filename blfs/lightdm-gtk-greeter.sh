@@ -10,10 +10,16 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
+NAME="lightdm-gtk-greeter"
+DESCRIPTION="A GTK+ based greeter for lightdm"
+VERSION=2.0.1
+
 #REQ:lightdm
-#REQ:greybird-gtk-theme
-#REQ:aryalinux-wallpapers
+#REC:aryalinux-wallpapers
 #REC:aryalinux-fonts
+#REC:aryalinux-themes
+#REC:aryalinux-icons
 
 cd $SOURCE_DIR
 

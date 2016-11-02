@@ -6,11 +6,14 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=y
+NAME="sass"
+VERSION=
+DESCRIPTION=
+
 #REQ:ruby
 
 cd $SOURCE_DIR
-
-NAME="sass"
 
 sudo gem install sass
 

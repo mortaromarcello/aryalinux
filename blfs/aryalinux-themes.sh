@@ -5,20 +5,14 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-cd $SOURCE_DIR
+SOURCE_ONLY=n
+NAME="aryalinux-themes"
+DESCRIPTION="GTK+ themes for AryaLinux XFCE and Mate Desktop Environments"
+VERSION="2016.11"
 
-URL=http://aryalinux.org/packages/2015/aryalinux-theme.tar.xz
-wget -nc $URL
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar -tf $TARBALL | sed -e 's@/.*@@' | uniq `
-
-tar -xf $TARBALL
-
-cd $DIRECTORY
-
-sudo tar -xf themes.tar.gz -C /
-
-cd $SOURCE_DIR
-cleanup "$NAME" "$DIRECTORY"
+#REQ:numix-gtk-theme
+#REQ:greybird-gtk-theme
+#REQ:breeze-gtk-theme
+#REQ:arc-gtk-theme
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

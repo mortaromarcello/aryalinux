@@ -6,12 +6,16 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
+NAME="numix-gtk-theme"
+DESCRIPTION="The Numix GTK Theme"
+VERSION=2.6.4
+
 #REQ:gtk2
 #REQ:gtk3
 
 cd $SOURCE_DIR
 
-NAME="numix-gtk-theme"
 URL="https://github.com/numixproject/numix-gtk-theme/archive/2.6.4.tar.gz"
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 
