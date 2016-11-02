@@ -33,7 +33,9 @@ then
 fi
 
 mkdir ~/packages
-cp -v var/cache/alps/binaries/* ~/packages
+if [ -d /mnt/lfs/var/cache/alps/binaries/ ] && [ $(ls -A /mnt/lfs/var/cache/alps/binaries/) ] ; then
+	cp -v /mnt/lfs/var/cache/alps/binaries/* ~/packages
+fi
 
 popd
 

@@ -169,7 +169,7 @@ def freshBuild(startFrom):
 	if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
 		try:
 			p = subprocess.Popen(['/root/scripts/backup.sh', 'base-system', 'y'])
-			p.waitFor()
+			p.wait()
 		except:
 			print 'Error occured while backing up base-system. Aborting.'
 			exit()
@@ -191,7 +191,7 @@ def freshBuild(startFrom):
         if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
                 try:
                         p = subprocess.Popen(['/root/scripts/backup.sh', 'base-system-with-xserver', 'n'])
-                        p.waitFor()
+                        p.wait()
                 except:
                         print 'Error occured while backing up base-system-with-xserver. Aborting.'
                         exit()
@@ -213,7 +213,7 @@ def freshBuild(startFrom):
         if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
                 try:
                         p = subprocess.Popen(['/root/scripts/backup.sh', 'base-system-with-desktop-env', 'n'])
-                        p.waitFor()
+                        p.wait()
                 except:
                         print 'Error occured while backing up base-system-with-desktop-env. Aborting.'
                         exit()
