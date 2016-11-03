@@ -168,7 +168,7 @@ def freshBuild(startFrom):
 
 	if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
 		try:
-			backupFile = check_output("ls /root/aryalinux-*base-system*.tar.xz")
+			backupFile = check_output(['ls', '/root/aryalinux-*base-system*.tar.xz']).strip()
 			if backupFile == '':
 				p = subprocess.Popen(['/root/scripts/backup.sh', 'base-system', 'y'])
 				p.wait()
@@ -194,7 +194,7 @@ def freshBuild(startFrom):
 
         if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
                 try:
-			backupFile = check_output("ls /root/aryalinux-*base-system-with-xserver*.tar.xz")
+			backupFile = check_output(['ls', '/root/aryalinux-*base-system-with-xserver*.tar.xz']).strip()
                         if backupFile == '':
                                 p = subprocess.Popen(['/root/scripts/backup.sh', 'base-system-with-xserver', 'n'])
 	                        p.wait()
@@ -220,7 +220,7 @@ def freshBuild(startFrom):
 
         if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
                 try:
-                        backupFile = check_output("ls /root/aryalinux-*desktop-env*.tar.xz")
+                        backupFile = check_output(['ls', '/root/aryalinux-*desktop-env*.tar.xz']).strip()
                         if backupFile == '':
                                 p = subprocess.Popen(['/root/scripts/backup.sh', 'base-system-with-desktop-env', 'n'])
                                 p.wait()
