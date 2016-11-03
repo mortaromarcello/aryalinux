@@ -7,10 +7,10 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Download (HTTP): <a class=\"ulink\" href=\"http://ftp.gnu.org/gnu/which/which-2.21.tar.gz\">http://ftp.gnu.org/gnu/which/which-2.21.tar.gz</a>br3ak"
+DESCRIPTION="The which utility displays the full path for executables that are present in the PATH"
 SECTION="general"
 VERSION=2.21
-NAME="which"
+NAME="general_which"
 
 
 
@@ -48,23 +48,6 @@ ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
 sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-cat > /usr/bin/which << "EOF"
-#!/bin/bash
-type -pa "$@" | head -n 1 ; exit ${PIPESTATUS[0]}
-EOF
-chmod -v 755 /usr/bin/which
-chown -v root:root /usr/bin/which
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
