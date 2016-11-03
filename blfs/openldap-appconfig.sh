@@ -1,9 +1,0 @@
-#!/bin/bash
-set -e
-set +h
-
-groupadd -g 83 ldap &&
-useradd  -c "OpenLDAP Daemon Owner" \
-         -d /var/lib/openldap -u 83 \
-         -g ldap -s /bin/false ldap
-
