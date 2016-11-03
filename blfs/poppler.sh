@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Poppler package contains a PDFbr3ak rendering library and command line tools used to manipulate PDFbr3ak files. This is useful for providing PDF rendering functionality asbr3ak a shared library.br3ak"
 SECTION="general"
-VERSION=0.4.7
+VERSION=0.48.0
 NAME="poppler"
 
 #REQ:fontconfig
@@ -35,8 +35,8 @@ URL=http://poppler.freedesktop.org/poppler-0.48.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/poppler/poppler-0.48.0.tar.xz || wget -nc http://poppler.freedesktop.org/poppler-0.48.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/poppler/poppler-0.48.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/poppler/poppler-0.48.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/poppler/poppler-0.48.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/poppler/poppler-0.48.0.tar.xz
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/poppler/poppler-data-0.4.7.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/poppler/poppler-data-0.4.7.tar.gz || wget -nc http://poppler.freedesktop.org/poppler-data-0.4.7.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/poppler/poppler-data-0.4.7.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/poppler/poppler-data-0.4.7.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/poppler/poppler-data-0.4.7.tar.gz
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/poppler/poppler-0.48.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/poppler/poppler-0.48.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/poppler/poppler-0.48.0.tar.xz || wget -nc http://poppler.freedesktop.org/poppler-0.48.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/poppler/poppler-0.48.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/poppler/poppler-0.48.0.tar.xz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/poppler-data/poppler-data-0.4.7.tar.gz || wget -nc http://poppler.freedesktop.org/poppler-data-0.4.7.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/poppler-data/poppler-data-0.4.7.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/poppler-data/poppler-data-0.4.7.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/poppler-data/poppler-data-0.4.7.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/poppler-data/poppler-data-0.4.7.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

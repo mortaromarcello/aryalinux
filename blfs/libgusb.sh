@@ -25,7 +25,7 @@ URL=http://people.freedesktop.org/~hughsient/releases/libgusb-0.2.9.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libgusb/libgusb-0.2.9.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libgusb/libgusb-0.2.9.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libgusb/libgusb-0.2.9.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libgusb/libgusb-0.2.9.tar.xz || wget -nc http://people.freedesktop.org/~hughsient/releases/libgusb-0.2.9.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libgusb/libgusb-0.2.9.tar.xz
+wget -nc http://people.freedesktop.org/~hughsient/releases/libgusb-0.2.9.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libgusb/libgusb-0.2.9.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libgusb/libgusb-0.2.9.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libgusb/libgusb-0.2.9.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libgusb/libgusb-0.2.9.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libgusb/libgusb-0.2.9.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

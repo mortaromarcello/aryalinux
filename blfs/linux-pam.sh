@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Linux PAM package containsbr3ak Pluggable Authentication Modules used to enable the local systembr3ak administrator to choose how applications authenticate users.br3ak"
 SECTION="postlfs"
-VERSION=1.3.0
+VERSION=1.2.0
 NAME="linux-pam"
 
 #OPT:db
@@ -28,8 +28,8 @@ URL=http://linux-pam.org/library/Linux-PAM-1.3.0.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc http://linux-pam.org/library/Linux-PAM-1.3.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc http://linux-pam.org/documentation/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2
+wget -nc http://linux-pam.org/library/Linux-PAM-1.3.0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2
+wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc http://linux-pam.org/documentation/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

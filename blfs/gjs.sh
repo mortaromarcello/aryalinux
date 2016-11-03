@@ -24,7 +24,7 @@ URL=http://ftp.gnome.org/pub/gnome/sources/gjs/1.46/gjs-1.46.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gjs/gjs-1.46.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gjs/gjs-1.46.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gjs/gjs-1.46.0.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/gjs/1.46/gjs-1.46.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gjs/gjs-1.46.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gjs/gjs-1.46.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gjs/1.46/gjs-1.46.0.tar.xz
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gjs/gjs-1.46.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gjs/1.46/gjs-1.46.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gjs/gjs-1.46.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gjs/gjs-1.46.0.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/gjs/1.46/gjs-1.46.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gjs/gjs-1.46.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gjs/gjs-1.46.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

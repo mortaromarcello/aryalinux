@@ -26,7 +26,7 @@ URL=http://web.mit.edu/kerberos/dist/krb5/1.14/krb5-1.14.4.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/krb5/krb5-1.14.4.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/krb5/krb5-1.14.4.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/krb5/krb5-1.14.4.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/krb5/krb5-1.14.4.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/krb5/krb5-1.14.4.tar.gz || wget -nc http://web.mit.edu/kerberos/dist/krb5/1.14/krb5-1.14.4.tar.gz
+wget -nc http://web.mit.edu/kerberos/dist/krb5/1.14/krb5-1.14.4.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/krb5/krb5-1.14.4.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/krb5/krb5-1.14.4.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/krb5/krb5-1.14.4.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/krb5/krb5-1.14.4.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/krb5/krb5-1.14.4.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

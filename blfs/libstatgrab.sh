@@ -20,7 +20,7 @@ URL=http://www.mirrorservice.org/sites/ftp.i-scream.org/pub/i-scream/libstatgrab
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libstatgrab/libstatgrab-0.91.tar.gz || wget -nc http://www.mirrorservice.org/sites/ftp.i-scream.org/pub/i-scream/libstatgrab/libstatgrab-0.91.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libstatgrab/libstatgrab-0.91.tar.gz || wget -nc ftp://www.mirrorservice.org/sites/ftp.i-scream.org/pub/i-scream/libstatgrab/libstatgrab-0.91.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libstatgrab/libstatgrab-0.91.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libstatgrab/libstatgrab-0.91.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libstatgrab/libstatgrab-0.91.tar.gz
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libstatgrab/libstatgrab-0.91.tar.gz || wget -nc ftp://www.mirrorservice.org/sites/ftp.i-scream.org/pub/i-scream/libstatgrab/libstatgrab-0.91.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libstatgrab/libstatgrab-0.91.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libstatgrab/libstatgrab-0.91.tar.gz || wget -nc http://www.mirrorservice.org/sites/ftp.i-scream.org/pub/i-scream/libstatgrab/libstatgrab-0.91.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libstatgrab/libstatgrab-0.91.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libstatgrab/libstatgrab-0.91.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

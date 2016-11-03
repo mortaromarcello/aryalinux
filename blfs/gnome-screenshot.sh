@@ -22,7 +22,7 @@ URL=http://ftp.gnome.org/pub/gnome/sources/gnome-screenshot/3.22/gnome-screensho
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-screenshot/3.22/gnome-screenshot-3.22.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.22.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.22.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-screenshot/3.22/gnome-screenshot-3.22.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.22.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.22.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.22.0.tar.xz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.22.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.22.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.22.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.22.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.22.0.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-screenshot/3.22/gnome-screenshot-3.22.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-screenshot/3.22/gnome-screenshot-3.22.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

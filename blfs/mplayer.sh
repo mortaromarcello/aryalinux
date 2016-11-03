@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak MPlayer is a powerful audio/videobr3ak player controlled via the command line or a graphical interfacebr3ak that is able to play almost every popular audio and video filebr3ak format. With supported video hardware and additional drivers,br3ak MPlayer can play video filesbr3ak without an X Window Systembr3ak installed.br3ak"
 SECTION="multimedia"
-VERSION=1.7
+VERSION=1.3.0
 NAME="mplayer"
 
 #REQ:yasm
@@ -61,8 +61,8 @@ URL=http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.3.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz || wget -nc ftp://ftp.mplayerhq.hu/MPlayer/releases/MPlayer-1.3.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz || wget -nc http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.3.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc ftp://ftp.mplayerhq.hu/MPlayer/skins/Clearlooks-1.7.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc https://www.mplayerhq.hu/MPlayer/skins/Clearlooks-1.7.tar.bz2
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz || wget -nc ftp://ftp.mplayerhq.hu/MPlayer/releases/MPlayer-1.3.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz || wget -nc http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.3.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/MPlayer/MPlayer-1.3.0.tar.xz
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc https://www.mplayerhq.hu/MPlayer/skins/Clearlooks-1.7.tar.bz2 || wget -nc ftp://ftp.mplayerhq.hu/MPlayer/skins/Clearlooks-1.7.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/clearlooks/Clearlooks-1.7.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

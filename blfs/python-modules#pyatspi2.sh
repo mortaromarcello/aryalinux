@@ -22,7 +22,7 @@ URL=http://ftp.gnome.org/pub/gnome/sources/pyatspi/2.20/pyatspi-2.20.2.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.gnome.org/pub/gnome/sources/pyatspi/2.20/pyatspi-2.20.2.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/pyatspi/2.20/pyatspi-2.20.2.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/pyatspi/2.20/pyatspi-2.20.2.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/pyatspi/2.20/pyatspi-2.20.2.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

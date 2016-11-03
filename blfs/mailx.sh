@@ -23,8 +23,8 @@ URL=http://ftp.debian.org/debian/pool/main/h/heirloom-mailx/heirloom-mailx_12.5.
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/heirloom/heirloom-mailx_12.5.orig.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/heirloom/heirloom-mailx_12.5.orig.tar.gz || wget -nc ftp://ftp.debian.org/debian/pool/main/h/heirloom-mailx/heirloom-mailx_12.5.orig.tar.gz || wget -nc http://ftp.debian.org/debian/pool/main/h/heirloom-mailx/heirloom-mailx_12.5.orig.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/heirloom/heirloom-mailx_12.5.orig.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/heirloom/heirloom-mailx_12.5.orig.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/heirloom/heirloom-mailx_12.5.orig.tar.gz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/heirloom-mailx-12.5-fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/heirloom-mailx/heirloom-mailx-12.5-fixes-1.patch
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/heirloom/heirloom-mailx_12.5.orig.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/heirloom/heirloom-mailx_12.5.orig.tar.gz || wget -nc http://ftp.debian.org/debian/pool/main/h/heirloom-mailx/heirloom-mailx_12.5.orig.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/heirloom/heirloom-mailx_12.5.orig.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/heirloom/heirloom-mailx_12.5.orig.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/heirloom/heirloom-mailx_12.5.orig.tar.gz || wget -nc ftp://ftp.debian.org/debian/pool/main/h/heirloom-mailx/heirloom-mailx_12.5.orig.tar.gz
+wget -nc http://www.linuxfromscratch.org/patches/downloads/heirloom-mailx/heirloom-mailx-12.5-fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/heirloom-mailx-12.5-fixes-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

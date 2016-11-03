@@ -24,7 +24,7 @@ URL=https://github.com/nghttp2/nghttp2/releases/download/v1.15.0/nghttp2-1.15.0.
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/nghttp2/nghttp2/releases/download/v1.15.0/nghttp2-1.15.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/nghttp2/nghttp2-1.15.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/nghttp2/nghttp2-1.15.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/nghttp2/nghttp2-1.15.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/nghttp2/nghttp2-1.15.0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/nghttp2/nghttp2-1.15.0.tar.bz2
+wget -nc https://github.com/nghttp2/nghttp2/releases/download/v1.15.0/nghttp2-1.15.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/nghttp2/nghttp2-1.15.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/nghttp2/nghttp2-1.15.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/nghttp2/nghttp2-1.15.0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/nghttp2/nghttp2-1.15.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/nghttp2/nghttp2-1.15.0.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

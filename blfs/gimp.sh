@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Gimp package contains the GNUbr3ak Image Manipulation Program which is useful for photo retouching,br3ak image composition and image authoring.br3ak"
 SECTION="xsoft"
-VERSION=2.8.2
+VERSION=2.8.18
 NAME="gimp"
 
 #REQ:gegl
@@ -40,8 +40,8 @@ URL=http://download.gimp.org/pub/gimp/v2.8/gimp-2.8.18.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc http://download.gimp.org/pub/gimp/v2.8/gimp-2.8.18.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gimp/gimp-2.8.18.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gimp/gimp-2.8.18.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gimp/gimp-2.8.18.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gimp/gimp-2.8.18.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gimp/gimp-2.8.18.tar.bz2
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gimp/gimp-help-2.8.2.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gimp/gimp-help-2.8.2.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gimp/gimp-help-2.8.2.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gimp/gimp-help-2.8.2.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gimp/gimp-help-2.8.2.tar.bz2 || wget -nc http://download.gimp.org/pub/gimp/help/gimp-help-2.8.2.tar.bz2
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gimp/gimp-2.8.18.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gimp/gimp-2.8.18.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gimp/gimp-2.8.18.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gimp/gimp-2.8.18.tar.bz2 || wget -nc http://download.gimp.org/pub/gimp/v2.8/gimp-2.8.18.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gimp/gimp-2.8.18.tar.bz2
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gimp/gimp-help-2.8.2.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gimp/gimp-help-2.8.2.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gimp/gimp-help-2.8.2.tar.bz2 || wget -nc http://download.gimp.org/pub/gimp/help/gimp-help-2.8.2.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gimp/gimp-help-2.8.2.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gimp/gimp-help-2.8.2.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=y
+NAME="xserver-meta"
+DESCRIPTION="meta-package to install xserver components"
+VERSION=
+
 whoami > /tmp/currentuser
 sudo usermod -a -G video `cat /tmp/currentuser`
 

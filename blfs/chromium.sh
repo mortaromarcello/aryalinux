@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Chromium is an open-source browserbr3ak project that aims to build a safer, faster, and more stable way forbr3ak all users to experience the web.br3ak"
 SECTION="xsoft"
-VERSION=3
+VERSION=53.0.2785.143
 NAME="chromium"
 
 #REQ:alsa-lib
@@ -52,7 +52,7 @@ URL=https://commondatastorage.googleapis.com/chromium-browser-official/chromium-
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/chromium/chromium-53.0.2785.143.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/chromium/chromium-53.0.2785.143.tar.xz || wget -nc https://commondatastorage.googleapis.com/chromium-browser-official/chromium-53.0.2785.143.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/chromium/chromium-53.0.2785.143.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/chromium/chromium-53.0.2785.143.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/chromium/chromium-53.0.2785.143.tar.xz
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/chromium/chromium-53.0.2785.143.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/chromium/chromium-53.0.2785.143.tar.xz || wget -nc https://commondatastorage.googleapis.com/chromium-browser-official/chromium-53.0.2785.143.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/chromium/chromium-53.0.2785.143.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/chromium/chromium-53.0.2785.143.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/chromium/chromium-53.0.2785.143.tar.xz
 wget -nc https://github.com/foutrelis/chromium-launcher/archive/v3.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`

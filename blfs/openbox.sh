@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Openbox is a highly configurablebr3ak desktop window manager with extensive standards support. It allowsbr3ak you to control almost every aspect of how you interact with yourbr3ak desktop.br3ak"
 SECTION="x"
-VERSION=1.2
+VERSION=3.6.1
 NAME="openbox"
 
 #REQ:pango
@@ -27,7 +27,7 @@ URL=http://openbox.org/dist/openbox/openbox-3.6.1.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/openbox/openbox-3.6.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/openbox/openbox-3.6.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/openbox/openbox-3.6.1.tar.gz || wget -nc http://openbox.org/dist/openbox/openbox-3.6.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/openbox/openbox-3.6.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/openbox/openbox-3.6.1.tar.gz
+wget -nc http://openbox.org/dist/openbox/openbox-3.6.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/openbox/openbox-3.6.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/openbox/openbox-3.6.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/openbox/openbox-3.6.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/openbox/openbox-3.6.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/openbox/openbox-3.6.1.tar.gz
 wget -nc http://ftp.de.debian.org/debian/pool/main/n/numlockx/numlockx_1.2.orig.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`

@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak a2ps is a filter utilized mainlybr3ak in the background and primarily by printing scripts to convertbr3ak almost every input format into PostScript output. The application'sbr3ak name expands appropriately to “<span class=\"quote\">all tobr3ak PostScript”.br3ak"
 SECTION="pst"
-VERSION=0.1
+VERSION=4.14
 NAME="a2ps"
 
 #REC:psutils
@@ -27,8 +27,8 @@ URL=http://ftp.gnu.org/gnu/a2ps/a2ps-4.14.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.gnu.org/gnu/a2ps/a2ps-4.14.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/a2ps/a2ps-4.14.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/a2ps/a2ps-4.14.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/a2ps/a2ps-4.14.tar.gz || wget -nc http://ftp.gnu.org/gnu/a2ps/a2ps-4.14.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/a2ps/a2ps-4.14.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/a2ps/a2ps-4.14.tar.gz
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/i18n-fonts/i18n-fonts-0.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/i18n-fonts/i18n-fonts-0.1.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/i18n-fonts/i18n-fonts-0.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/i18n-fonts/i18n-fonts-0.1.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/i18n-fonts/i18n-fonts-0.1.tar.bz2 || wget -nc http://anduin.linuxfromscratch.org/BLFS/i18n-fonts/i18n-fonts-0.1.tar.bz2
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/a2ps/a2ps-4.14.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/a2ps/a2ps-4.14.tar.gz || wget -nc ftp://ftp.gnu.org/gnu/a2ps/a2ps-4.14.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/a2ps/a2ps-4.14.tar.gz || wget -nc http://ftp.gnu.org/gnu/a2ps/a2ps-4.14.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/a2ps/a2ps-4.14.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/a2ps/a2ps-4.14.tar.gz
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/i18n-fonts/i18n-fonts-0.1.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/i18n-fonts/i18n-fonts-0.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/i18n-fonts/i18n-fonts-0.1.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/i18n-fonts/i18n-fonts-0.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/i18n-fonts/i18n-fonts-0.1.tar.bz2 || wget -nc http://anduin.linuxfromscratch.org/BLFS/i18n-fonts/i18n-fonts-0.1.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
