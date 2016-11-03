@@ -6,8 +6,10 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-NAME="v"
-VERSION="0.4.0"
+SOURCE_ONLY=n
+NAME="libvdpau-va-gl"
+DESCRIPTION=
+VERSION=0.4.0
 
 #REQ:cmake
 #REQ:ffmpeg
