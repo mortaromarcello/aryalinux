@@ -6,7 +6,9 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-NAME="libIDL"
+SOURCE_ONLY=n
+NAME="libidl"
+DESCRIPTION=
 VERSION="0.8.14"
 
 cd $SOURCE_DIR
