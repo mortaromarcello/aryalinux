@@ -54,10 +54,6 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
-pgrep -l notification-da &&
-notify-send -i info Information "Hi ${USER}, This is a Test"
-
-
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
