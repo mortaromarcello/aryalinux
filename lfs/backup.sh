@@ -38,5 +38,3 @@ if [ -d /mnt/lfs/var/cache/alps/binaries/ ] && [ $(ls -A /mnt/lfs/var/cache/alps
 fi
 
 popd
-
-./umountal.sh
