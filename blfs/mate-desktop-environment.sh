@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=y
+NAME=mate-desktop-environment
+DESCRIPTION="The classic linux desktop environment forked from the gnome 2 desktop environment."
+VERSION=1.16
+
 #REQ:gobject-introspection
 #REQ:desktop-file-utils
 #REQ:shared-mime-info
@@ -43,7 +48,7 @@ set +h
 #REQ:libnotify
 #REQ:libwnck2
 #REQ:zenity
-#REQ:yelp
+#OPT:yelp
 #REQ:xdg-utils
 #REQ:xdg-user-dirs
 
