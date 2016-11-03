@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Biber is a BibTeX replacement for users of biblatex, written inbr3ak Perl, with full Unicode support.br3ak"
 SECTION="pst"
-VERSION=3.5
+VERSION=null
 NAME="biber"
 
 #REQ:perl-modules#perl-autovivification
@@ -54,8 +54,8 @@ URL=http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/current/
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex/biblatex-biber.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/biblatex/biblatex-biber.tar.gz || wget -nc http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/current/biblatex-biber.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex/biblatex-biber.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/biblatex/biblatex-biber.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/biblatex/biblatex-biber.tar.gz
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc http://sourceforge.net/projects/biblatex/files/biblatex-3.5/biblatex-3.5.tds.tgz
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex-biber/biblatex-biber.tar.gz || wget -nc http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/current/biblatex-biber.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/biblatex-biber/biblatex-biber.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex-biber/biblatex-biber.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/biblatex-biber/biblatex-biber.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/biblatex-biber/biblatex-biber.tar.gz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/biblatex/biblatex-3.5.tds.tgz || wget -nc http://sourceforge.net/projects/biblatex/files/biblatex-3.5/biblatex-3.5.tds.tgz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

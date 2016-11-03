@@ -20,7 +20,7 @@ URL=http://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.15.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.15.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.15.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.15.tar.gz || wget -nc http://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.15.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.15.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.15.tar.gz
+wget -nc http://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.15.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.15.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.15.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.15.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.15.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.15.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

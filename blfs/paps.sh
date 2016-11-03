@@ -22,7 +22,7 @@ URL=http://downloads.sourceforge.net/paps/paps-0.6.8.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/paps/paps-0.6.8.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/paps/paps-0.6.8.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/paps/paps-0.6.8.tar.gz || wget -nc http://downloads.sourceforge.net/paps/paps-0.6.8.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/paps/paps-0.6.8.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/paps/paps-0.6.8.tar.gz
+wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/paps/paps-0.6.8.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/paps/paps-0.6.8.tar.gz || wget -nc http://downloads.sourceforge.net/paps/paps-0.6.8.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/paps/paps-0.6.8.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/paps/paps-0.6.8.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/paps/paps-0.6.8.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

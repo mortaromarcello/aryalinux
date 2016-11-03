@@ -25,7 +25,7 @@ URL=http://ftp.gnu.org/pub/gnu/guile/guile-2.0.13.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.gnu.org/pub/gnu/guile/guile-2.0.13.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/guile/guile-2.0.13.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/guile/guile-2.0.13.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/guile/guile-2.0.13.tar.xz || wget -nc http://ftp.gnu.org/pub/gnu/guile/guile-2.0.13.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/guile/guile-2.0.13.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/guile/guile-2.0.13.tar.xz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/guile/guile-2.0.13.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/guile/guile-2.0.13.tar.xz || wget -nc http://ftp.gnu.org/pub/gnu/guile/guile-2.0.13.tar.xz || wget -nc ftp://ftp.gnu.org/pub/gnu/guile/guile-2.0.13.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/guile/guile-2.0.13.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/guile/guile-2.0.13.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/guile/guile-2.0.13.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

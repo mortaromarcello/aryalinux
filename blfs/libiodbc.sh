@@ -21,7 +21,7 @@ URL=http://downloads.sourceforge.net/project/iodbc/iodbc/3.52.12/libiodbc-3.52.1
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libiodbc/libiodbc-3.52.12.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libiodbc/libiodbc-3.52.12.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libiodbc/libiodbc-3.52.12.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libiodbc/libiodbc-3.52.12.tar.gz || wget -nc http://downloads.sourceforge.net/project/iodbc/iodbc/3.52.12/libiodbc-3.52.12.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libiodbc/libiodbc-3.52.12.tar.gz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libiodbc/libiodbc-3.52.12.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libiodbc/libiodbc-3.52.12.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libiodbc/libiodbc-3.52.12.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libiodbc/libiodbc-3.52.12.tar.gz || wget -nc http://downloads.sourceforge.net/project/iodbc/iodbc/3.52.12/libiodbc-3.52.12.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libiodbc/libiodbc-3.52.12.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

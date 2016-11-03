@@ -20,7 +20,7 @@ URL=http://ftp.x.org/pub/individual/util/util-macros-1.19.0.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.x.org/pub/individual/util/util-macros-1.19.0.tar.bz2 || wget -nc ftp://ftp.x.org/pub/individual/util/util-macros-1.19.0.tar.bz2
+wget -nc ftp://ftp.x.org/pub/individual/util/util-macros-1.19.0.tar.bz2 || wget -nc http://ftp.x.org/pub/individual/util/util-macros-1.19.0.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

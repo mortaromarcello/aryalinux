@@ -20,7 +20,7 @@ URL=http://downloads.sourceforge.net/joe-editor/joe-4.3.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/joe/joe-4.3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/joe/joe-4.3.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/joe/joe-4.3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/joe/joe-4.3.tar.gz || wget -nc http://downloads.sourceforge.net/joe-editor/joe-4.3.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/joe/joe-4.3.tar.gz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/joe/joe-4.3.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/joe/joe-4.3.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/joe/joe-4.3.tar.gz || wget -nc http://downloads.sourceforge.net/joe-editor/joe-4.3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/joe/joe-4.3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/joe/joe-4.3.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

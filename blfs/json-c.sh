@@ -20,7 +20,7 @@ URL=https://s3.amazonaws.com/json-c_releases/releases/json-c-0.12.1.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/jsonc/json-c-0.12.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/jsonc/json-c-0.12.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/jsonc/json-c-0.12.1.tar.gz || wget -nc https://s3.amazonaws.com/json-c_releases/releases/json-c-0.12.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/jsonc/json-c-0.12.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/jsonc/json-c-0.12.1.tar.gz
+wget -nc https://s3.amazonaws.com/json-c_releases/releases/json-c-0.12.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/jsonc/json-c-0.12.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/jsonc/json-c-0.12.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/jsonc/json-c-0.12.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/jsonc/json-c-0.12.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/jsonc/json-c-0.12.1.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

@@ -21,7 +21,7 @@ URL=http://ftp.de.debian.org/debian/pool/main/a/at/at_3.1.20.orig.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/at/at_3.1.20.orig.tar.gz || wget -nc ftp://ftp.de.debian.org/debian/pool/main/a/at/at_3.1.20.orig.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/at/at_3.1.20.orig.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/at/at_3.1.20.orig.tar.gz || wget -nc http://ftp.de.debian.org/debian/pool/main/a/at/at_3.1.20.orig.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/at/at_3.1.20.orig.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/at/at_3.1.20.orig.tar.gz
+wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/at/at_3.1.20.orig.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/at/at_3.1.20.orig.tar.gz || wget -nc ftp://ftp.de.debian.org/debian/pool/main/a/at/at_3.1.20.orig.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/at/at_3.1.20.orig.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/at/at_3.1.20.orig.tar.gz || wget -nc http://ftp.de.debian.org/debian/pool/main/a/at/at_3.1.20.orig.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/at/at_3.1.20.orig.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

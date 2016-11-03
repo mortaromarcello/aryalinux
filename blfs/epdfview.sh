@@ -25,8 +25,8 @@ URL=http://anduin.linuxfromscratch.org/BLFS/epdfview/epdfview-0.1.8.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/epdfview/epdfview-0.1.8.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/epdfview/epdfview-0.1.8.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/epdfview/epdfview-0.1.8.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/epdfview/epdfview-0.1.8.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/epdfview/epdfview-0.1.8.tar.bz2 || wget -nc http://anduin.linuxfromscratch.org/BLFS/epdfview/epdfview-0.1.8.tar.bz2
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/epdfview-0.1.8-fixes-2.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/epdfview/epdfview-0.1.8-fixes-2.patch
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/epdfview/epdfview-0.1.8.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/epdfview/epdfview-0.1.8.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/epdfview/epdfview-0.1.8.tar.bz2 || wget -nc http://anduin.linuxfromscratch.org/BLFS/epdfview/epdfview-0.1.8.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/epdfview/epdfview-0.1.8.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/epdfview/epdfview-0.1.8.tar.bz2
+wget -nc http://www.linuxfromscratch.org/patches/downloads/epdfview/epdfview-0.1.8-fixes-2.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/epdfview-0.1.8-fixes-2.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

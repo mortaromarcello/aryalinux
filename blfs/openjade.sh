@@ -21,7 +21,7 @@ URL=http://downloads.sourceforge.net/openjade/openjade-1.3.2.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/openjade/openjade-1.3.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/openjade/openjade-1.3.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/openjade/openjade-1.3.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/openjade/openjade-1.3.2.tar.gz || wget -nc http://downloads.sourceforge.net/openjade/openjade-1.3.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/openjade/openjade-1.3.2.tar.gz
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/openjade/openjade-1.3.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/openjade/openjade-1.3.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/openjade/openjade-1.3.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/openjade/openjade-1.3.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/openjade/openjade-1.3.2.tar.gz || wget -nc http://downloads.sourceforge.net/openjade/openjade-1.3.2.tar.gz
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/openjade-1.3.2-gcc_4.6-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/openjade/openjade-1.3.2-gcc_4.6-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`

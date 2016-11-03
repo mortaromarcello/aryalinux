@@ -25,7 +25,7 @@ URL=http://downloads.xiph.org/releases/vorbis/vorbis-tools-1.4.0.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/vorbis-tools/vorbis-tools-1.4.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/vorbis-tools/vorbis-tools-1.4.0.tar.gz || wget -nc http://downloads.xiph.org/releases/vorbis/vorbis-tools-1.4.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/vorbis-tools/vorbis-tools-1.4.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/vorbis-tools/vorbis-tools-1.4.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/vorbis-tools/vorbis-tools-1.4.0.tar.gz
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/vorbis-tools/vorbis-tools-1.4.0.tar.gz || wget -nc http://downloads.xiph.org/releases/vorbis/vorbis-tools-1.4.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/vorbis-tools/vorbis-tools-1.4.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/vorbis-tools/vorbis-tools-1.4.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/vorbis-tools/vorbis-tools-1.4.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/vorbis-tools/vorbis-tools-1.4.0.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

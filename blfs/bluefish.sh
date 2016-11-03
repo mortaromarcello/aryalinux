@@ -25,7 +25,7 @@ URL=http://www.bennewitz.com/bluefish/stable/source/bluefish-2.2.9.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/bluefish/bluefish-2.2.9.tar.bz2 || wget -nc http://www.bennewitz.com/bluefish/stable/source/bluefish-2.2.9.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/bluefish/bluefish-2.2.9.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/bluefish/bluefish-2.2.9.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/bluefish/bluefish-2.2.9.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/bluefish/bluefish-2.2.9.tar.bz2
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/bluefish/bluefish-2.2.9.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/bluefish/bluefish-2.2.9.tar.bz2 || wget -nc http://www.bennewitz.com/bluefish/stable/source/bluefish-2.2.9.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/bluefish/bluefish-2.2.9.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/bluefish/bluefish-2.2.9.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/bluefish/bluefish-2.2.9.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

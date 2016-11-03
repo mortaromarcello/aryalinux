@@ -25,7 +25,7 @@ URL=http://downloads.xiph.org/releases/flac/flac-1.3.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://downloads.xiph.org/pub/xiph/releases/flac/flac-1.3.1.tar.xz || wget -nc http://downloads.xiph.org/releases/flac/flac-1.3.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/flac/flac-1.3.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/flac/flac-1.3.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/flac/flac-1.3.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/flac/flac-1.3.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/flac/flac-1.3.1.tar.xz
+wget -nc ftp://downloads.xiph.org/pub/xiph/releases/flac/flac-1.3.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/flac/flac-1.3.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/flac/flac-1.3.1.tar.xz || wget -nc http://downloads.xiph.org/releases/flac/flac-1.3.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/flac/flac-1.3.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/flac/flac-1.3.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/flac/flac-1.3.1.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
