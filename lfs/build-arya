@@ -168,8 +168,13 @@ def freshBuild(startFrom):
 
 	if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
 		try:
-			backupFile = check_output(['ls', '/root/aryalinux-*base-system*.tar.xz']).strip()
-			if backupFile == '':
+			files = os.listdir('/root')
+			found = False
+			for file in files:
+				if file.startswith('aryalinux') and 'base-system' in file and file.endswith('.tar.xz'):
+					found = True
+					break
+			if not found:
 				p = subprocess.Popen(['/root/scripts/backup.sh', 'base-system', 'y'])
 				p.wait()
 			else:
@@ -194,8 +199,14 @@ def freshBuild(startFrom):
 
         if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
                 try:
-			backupFile = check_output(['ls', '/root/aryalinux-*base-system-with-xserver*.tar.xz']).strip()
-                        if backupFile == '':
+                        files = os.listdir('/root')
+                        found = False
+                        for file in files:
+                                if file.startswith('aryalinux') and 'base-system-with-xserver' in file and file.endswith('.tar.xz'):
+                                        found = True
+                                        break
+                        if not found:
+
                                 p = subprocess.Popen(['/root/scripts/backup.sh', 'base-system-with-xserver', 'n'])
 	                        p.wait()
 			else:
@@ -220,8 +231,13 @@ def freshBuild(startFrom):
 
         if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
                 try:
-                        backupFile = check_output(['ls', '/root/aryalinux-*desktop-env*.tar.xz']).strip()
-                        if backupFile == '':
+                        files = os.listdir('/root')
+                        found = False
+                        for file in files:
+                                if file.startswith('aryalinux') and 'base-system-with-desktop-env' in file and file.endswith('.tar.xz'):
+                                        found = True
+                                        break
+                        if not found:
                                 p = subprocess.Popen(['/root/scripts/backup.sh', 'base-system-with-desktop-env', 'n'])
                                 p.wait()
                         else:
