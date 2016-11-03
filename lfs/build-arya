@@ -168,8 +168,12 @@ def freshBuild(startFrom):
 
 	if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
 		try:
-			p = subprocess.Popen(['/root/scripts/backup.sh', 'base-system', 'y'])
-			p.wait()
+			backupFile = check_output("ls /root/aryalinux-*base-system*.tar.xz")
+			if backupFile == '':
+				p = subprocess.Popen(['/root/scripts/backup.sh', 'base-system', 'y'])
+				p.wait()
+			else:
+				print 'Base system backup already present. Not creating again'
 		except:
 			print 'Error occured while backing up base-system. Aborting.'
 			exit()
@@ -190,8 +194,12 @@ def freshBuild(startFrom):
 
         if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
                 try:
-                        p = subprocess.Popen(['/root/scripts/backup.sh', 'base-system-with-xserver', 'n'])
-                        p.wait()
+			backupFile = check_output("ls /root/aryalinux-*base-system-with-xserver*.tar.xz")
+                        if backupFile == '':
+                                p = subprocess.Popen(['/root/scripts/backup.sh', 'base-system-with-xserver', 'n'])
+	                        p.wait()
+			else:
+                                print 'X-Server backup already present. Not backing up again.'
                 except:
                         print 'Error occured while backing up base-system-with-xserver. Aborting.'
                         exit()
@@ -212,8 +220,12 @@ def freshBuild(startFrom):
 
         if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
                 try:
-                        p = subprocess.Popen(['/root/scripts/backup.sh', 'base-system-with-desktop-env', 'n'])
-                        p.wait()
+                        backupFile = check_output("ls /root/aryalinux-*desktop-env*.tar.xz")
+                        if backupFile == '':
+                                p = subprocess.Popen(['/root/scripts/backup.sh', 'base-system-with-desktop-env', 'n'])
+                                p.wait()
+                        else:
+                                print 'Desktop environment backup already present. Not backing up again.'
                 except:
                         print 'Error occured while backing up base-system-with-desktop-env. Aborting.'
                         exit()
