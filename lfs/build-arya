@@ -206,7 +206,6 @@ def freshBuild(startFrom):
                                         found = True
                                         break
                         if not found:
-
                                 p = subprocess.Popen(['/root/scripts/backup.sh', 'base-system-with-xserver', 'n'])
 	                        p.wait()
 			else:
