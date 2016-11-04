@@ -245,10 +245,11 @@ def freshBuild(startFrom):
 print 'Do you want to start a new build or resume a build that was previously started ?'
 print '1. Strart a fresh build'
 print '2. Resume the last build'
+print '3. Start a stage from scratch'
 response = raw_input('Enter your choice (1 ... 2): ')
 if response == '1':
 	freshBuild(1)
-else:
+elif response == '2':
 	rootPartition = raw_input('Enter the root partition where the build was in progress. Enter to exit: ')
 	if rootPartition != '':
 		if os.path.exists('/mnt/lfs/tmp/mountpoint'):
@@ -277,3 +278,6 @@ else:
 			check_output('./umountal.sh', shell=True)
 			print 'This is not the partition where build was in progress. Cannot continue. Exiting.'
 			print 'Please re-run this script with right inputs.'
+elif response == '3':
+	print 'This function has not been implemented.'
+	pass
