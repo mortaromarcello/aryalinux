@@ -7,7 +7,8 @@ USERNAME="$1"
 
 alps selfupdate
 alps updatescripts
-su - $USERNAME -c "PKG_BUILDER='ARYALINUX' alps install-no-prompt profile nano openssl general_which wget cacerts python2 python3 ntfs-3g fuse lvm2 parted gptfdisk shadow"
+su - $USERNAME -c "PKG_BUILDER=$3 alps install-no-prompt profile nano openssl general_which wget cacerts python2 python3 ntfs-3g fuse lvm2 parted gptfdisk 
+shadow"
 if ! grep "shadow=" /etc/alps/installed-list &> /dev/null
 then
 	echo "Essentials incomplete (shadow). Aborting..."
@@ -19,7 +20,7 @@ then
         echo "Essentials incomplete (sudo). Aborting..."
         exit 1
 fi
-su - $USERNAME -c "PKG_BUILDER='ARYALINUX' alps install-no-prompt usbutils pciutils openssh gobject-introspection libxml2 desktop-file-utils shared-mime-info ccache"
+su - $USERNAME -c "PKG_BUILDER=$3 alps install-no-prompt usbutils pciutils openssh gobject-introspection libxml2 desktop-file-utils shared-mime-info ccache"
 if ! grep "ccache=" /etc/alps/installed-list &> /dev/null
 then
         echo "Essentials incomplete (ccache). Aborting..."
