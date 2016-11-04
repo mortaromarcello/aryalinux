@@ -2,6 +2,9 @@
 set -e
 set +h
 
+function postinstall()
+{
+
 cat >> /etc/profile.d/extrapaths.sh << EOF
 
 # Begin Apache-ant addition
@@ -11,3 +14,13 @@ export ANT_HOME=/opt/ant
 
 EOF
 
+}
+
+
+preinstall()
+{
+echo "#"
+}
+
+
+$1
