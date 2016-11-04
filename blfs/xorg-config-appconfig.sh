@@ -2,5 +2,18 @@
 set -e
 set +h
 
-usermod -a -G video <em class="replaceable"><code><username></em>
+function postinstall()
+{
 
+usermod -a -G video $(cat /tmp/currentuser)
+
+}
+
+
+preinstall()
+{
+echo "#"
+}
+
+
+$1

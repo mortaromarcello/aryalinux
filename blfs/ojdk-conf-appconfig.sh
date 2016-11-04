@@ -2,6 +2,9 @@
 set -e
 set +h
 
+function postinstall()
+{
+
 cat >> /etc/man_db.conf << "EOF" &&
 # Begin Java addition
 MANDATORY_MANPATH /opt/jdk/man
@@ -12,3 +15,13 @@ EOF
 mkdir -p /var/cache/man
 mandb -c /opt/jdk/man
 
+}
+
+
+preinstall()
+{
+echo "#"
+}
+
+
+$1

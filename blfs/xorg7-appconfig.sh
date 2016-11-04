@@ -2,6 +2,11 @@
 set -e
 set +h
 
+function postinstall()
+{
+
+export XORG_PREFIX=/usr
+
 cat >> /etc/profile.d/xorg.sh << "EOF"
 pathappend $XORG_PREFIX/bin             PATH
 pathappend $XORG_PREFIX/lib/pkgconfig   PKG_CONFIG_PATH
@@ -15,3 +20,13 @@ EOF
 
 echo "$XORG_PREFIX/lib" >> /etc/ld.so.conf
 
+}
+
+
+preinstall()
+{
+echo "#"
+}
+
+
+$1
