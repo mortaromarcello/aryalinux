@@ -14,7 +14,7 @@ then
 	echo "Essentials incomplete (shadow). Aborting..."
 	exit 1
 fi
-PKG_BUILDER='ARYALINUX' alps install-no-prompt sudo
+PKG_BUILDER=$1 alps install-no-prompt sudo
 if ! grep "sudo=" /etc/alps/installed-list &> /dev/null
 then
         echo "Essentials incomplete (sudo). Aborting..."
