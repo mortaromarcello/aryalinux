@@ -119,9 +119,8 @@ def freshBuild(startFrom):
 			logCurrentStage('2')
 			runScript('stage1.sh', None)
 			startFrom = startFrom + 1
-		except Exception as ex:
-			print 'Error occured while executing stage 1 : '
-			print ex
+		except:
+			print 'Error occured while executing stage 1'
 			exit()
 
 	if startFrom == 3:
@@ -140,9 +139,8 @@ def freshBuild(startFrom):
 		try:
 			runScriptWithEnvAs('lfs', 'stage2.sh', env, '/home/lfs')
 			startFrom = startFrom + 1
-		except Exception as ex:
-			print 'Error occured while executing stage 2 :'
-			print ex
+		except:
+			print 'Error occured while executing stage 2'
 			exit()
 
 	if startFrom == 4:
@@ -150,9 +148,8 @@ def freshBuild(startFrom):
 		try:
 			runScript('/sources/stage3.sh', '/sources')
 			startFrom = startFrom + 1
-		except Exception as ex:
-			print 'Error occured while running stage 3 :'
-			print ex
+		except:
+			print 'Error occured while running stage 3'
 			exit()
 
 	if startFrom == 5:
@@ -162,8 +159,7 @@ def freshBuild(startFrom):
 			runScript('/sources/stage6.sh', '/sources')
 			startFrom = startFrom + 1
 		except:
-			print 'Error occured while running stage 4 :'
-			print ex
+			print 'Error occured while running stage 4'
 			exit()
 
 	if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
@@ -192,9 +188,8 @@ def freshBuild(startFrom):
 				runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/essentials.sh', getParamValue('USERNAME')])
 				runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'xserver-meta'])
 				startFrom = startFrom + 1
-			except Exception as ex:
+			except:
 				print 'Error occured in the installation of x-server'
-				print ex
 				exit()
 
         if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
@@ -224,9 +219,8 @@ def freshBuild(startFrom):
 				elif getParamValue('DESKTOP_ENVIRONMENT') == '1':
 					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'xfce-desktop-environment'])
 				startFrom = startFrom + 1
-			except Exception as ex:
-				print 'Error occured in the installation of desktop environment :'
-				print ex
+			except:
+				print 'Error occured in the installation of desktop environment'
 				exit()
 
         if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
