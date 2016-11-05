@@ -2,15 +2,17 @@
 set -e
 set +h
 
-function postinstall()
+function preinstall()
 {
 
+if ! grep video /etc/group &> /dev/null; then
 usermod -a -G video $(cat /tmp/currentuser)
+fi
 
 }
 
 
-preinstall()
+postinstall()
 {
 echo "#"
 }

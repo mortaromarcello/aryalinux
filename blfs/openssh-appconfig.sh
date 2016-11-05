@@ -5,8 +5,6 @@ set +h
 function postinstall()
 {
 
-if ! grep sshd /etc/group &> /dev/null; then
-
 install  -v -m700 -d /var/lib/sshd &&
 chown    -v root:sys /var/lib/sshd &&
 groupadd -g 50 sshd        &&
@@ -16,7 +14,6 @@ useradd  -c 'sshd PrivSep' \
          -s /bin/false     \
          -u 50 sshd
 
-fi
 }
 
 

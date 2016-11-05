@@ -2,8 +2,10 @@
 set -e
 set +h
 
-function preinstall()
+function postinstall()
 {
+
+if ! grep dovecot /etc/group &> /dev/null; then
 
 groupadd -g 42 dovecot &&
 useradd -c "Dovecot unprivileged user" -d /dev/null -u 42 \
@@ -12,10 +14,12 @@ groupadd -g 43 dovenull &&
 useradd -c "Dovecot login user" -d /dev/null -u 43 \
         -g dovenull -s /bin/false dovenull
 
+fi
+
 }
 
 
-postinstall()
+preinstall()
 {
 echo "#"
 }

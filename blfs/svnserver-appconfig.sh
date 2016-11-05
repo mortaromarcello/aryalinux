@@ -2,19 +2,15 @@
 set -e
 set +h
 
-function preinstall()
+function postinstall()
 {
 
+if ! grep svn /etc/group &> /dev/null; then
 groupadd -g 56 svn &&
 useradd -c "SVN Owner" -d /home/svn -m -g svn -s /bin/false -u 56 svn
 
 groupadd -g 57 svntest &&
 usermod -G svntest -a svn
-
-}
-
-function postinstall()
-{
 
 mv /usr/bin/svn /usr/bin/svn.orig &&
 mv /usr/bin/svnserve /usr/bin/svnserve.orig &&
@@ -38,8 +34,9 @@ usermod -G svn,svntest -a cat `/tmp/currentuser`
 }
 
 
-
-
-
+function preinstall()
+{
+echo "#"
+}
 
 $1

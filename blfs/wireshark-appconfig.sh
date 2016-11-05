@@ -2,15 +2,16 @@
 set -e
 set +h
 
-function preinstall()
+function postinstall()
 {
 
+if ! grep wireshark /etc/group &> /dev/null; then
 groupadd -g 62 wireshark
-
+fi
 }
 
 
-postinstall()
+function preinstall()
 {
 echo "#"
 }

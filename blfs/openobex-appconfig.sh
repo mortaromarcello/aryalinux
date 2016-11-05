@@ -2,16 +2,17 @@
 set -e
 set +h
 
-function preinstall()
+function postinstall()
 {
 
+if ! grep plugdev /etc/group &> /dev/null; then
 groupadd -g 90 plugdev
-
+fi
 }
 
 
 
-postinstall()
+preinstall()
 {
 echo "#"
 }

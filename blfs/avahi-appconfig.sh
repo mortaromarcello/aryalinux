@@ -2,8 +2,10 @@
 set -e
 set +h
 
-function preinstall()
+function postinstall()
 {
+
+if ! grep avahi /etc/group &> /dev/null; then
 
 groupadd -fg 84 avahi &&
 useradd -c "Avahi Daemon Owner" -d /var/run/avahi-daemon -u 84 \
@@ -11,10 +13,12 @@ useradd -c "Avahi Daemon Owner" -d /var/run/avahi-daemon -u 84 \
 
 groupadd -fg 86 netdev
 
+fi
+
 }
 
 
-postinstall()
+preinstall()
 {
 echo "#"
 }

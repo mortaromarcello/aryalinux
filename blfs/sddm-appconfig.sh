@@ -2,19 +2,17 @@
 set -e
 set +h
 
-function preinstall()
+function postinstall()
 {
+
+if ! grep sddm /etc/group &> /dev/null; then
 
 groupadd -g 64 sddm &&
 useradd  -c "SDDM Daemon" \
          -d /var/lib/sddm \
          -u 64 -g sddm    \
          -s /bin/false sddm
-
-}
-
-function postinstall()
-{
+fi
 
 . /sources/build-properties
 echo "setxkbmap $KEYBOARD" >> /usr/share/sddm/scripts/Xsetup
@@ -23,6 +21,9 @@ echo "source /etc/profile.d/dircolors.sh" >> /etc/bashrc
 }
 
 
-
+function preinstall()
+{
+echo "#"
+}
 
 $1

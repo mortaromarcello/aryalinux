@@ -2,16 +2,14 @@
 set -e
 set +h
 
-function preinstall()
+function postinstall()
 {
+
+if ! grep exim /etc/group &> /dev/null; then
 
 groupadd -g 31 exim &&
 useradd -d /dev/null -c "Exim Daemon" -g exim -s /bin/false -u 31 exim
-
-}
-
-funcrtion postinstall()
-{
+fi
 
 if ! grep -E "^postmaster:root" /etc/aliases &>/dev/null; then
 
@@ -27,7 +25,10 @@ exim -v -bi &&
 
 }
 
-
+function preinstall()
+{
+echo "#"
+}
 
 
 $1

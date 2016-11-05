@@ -2,15 +2,19 @@
 set -e
 set +h
 
-function preinstall()
+function postinstall()
 {
 
+if ! grep mail /etc/group &> /dev/null; then
+
 groupadd -g 34 mail
+
+fi
 
 }
 
 
-postinstall()
+preinstall()
 {
 echo "#"
 }

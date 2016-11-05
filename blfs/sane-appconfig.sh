@@ -2,7 +2,7 @@
 set -e
 set +h
 
-function preinstall()
+function postinstall()
 {
 
 if ! grep scanner /etc/group; then groupadd -g 70 scanner; fi
@@ -10,7 +10,7 @@ if ! grep scanner /etc/group; then groupadd -g 70 scanner; fi
 }
 
 
-postinstall()
+preinstall()
 {
 echo "#"
 }
