@@ -60,9 +60,9 @@ set +h
 #REQ:wireless_tools
 #REQ:wpa_supplicant
 #REQ:networkmanager
+#REQ:ModemManager
 #REQ:network-manager-applet
 #REQ:net-tools
-#REQ:ModemManager
 #REQ:usb_modeswitch
 #REQ:compton
 

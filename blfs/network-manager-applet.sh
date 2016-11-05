@@ -18,9 +18,9 @@ NAME="network-manager-applet"
 #REQ:libnotify
 #REQ:networkmanager
 #REQ:polkit-gnome
+#REQ:ModemManager
 #REC:gobject-introspection
 #OPT:gnome-bluetooth
-#OPT:ModemManager
 
 
 cd $SOURCE_DIR
