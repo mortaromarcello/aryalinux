@@ -55,6 +55,6 @@ sudo usermod -a -G video `cat /tmp/currentuser`
 #REQ:xinit
 #REQ:wayland-protocols
 
-rm -f /etc/X11/xorg.conf.d/*
+sudo rm -f /etc/X11/xorg.conf.d/*
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
