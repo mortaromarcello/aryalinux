@@ -48,7 +48,7 @@ VERSION=1.16
 #REQ:libnotify
 #REQ:libwnck2
 #REQ:zenity
-#OPT:yelp
+#REC:yelp
 #REQ:xdg-utils
 #REQ:xdg-user-dirs
 
