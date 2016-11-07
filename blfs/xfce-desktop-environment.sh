@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
+NAME="xfce-desktop-environment"
+DESCRIPTION="A popular lightweight gtk based desktop environment"
+VERSION=4.12
+
 #REQ:gobject-introspection
 #REQ:desktop-file-utils
 #REQ:shared-mime-info

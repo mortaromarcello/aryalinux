@@ -5,8 +5,10 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-NAME="p7zip_src_all"
-VERSION="_9.38.1"
+SOURCE_ONLY=n
+NAME="p7zip-full"
+VERSION=9.38.1
+DESCRIPTION="A high compression capable file archiving utility"
 
 cd $SOURCE_DIR
 
