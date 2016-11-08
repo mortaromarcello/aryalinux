@@ -110,6 +110,18 @@ cat > /etc/shells << "EOF"
 # End /etc/shells
 EOF
 
+if [ "x$ROOT_PART" != "x" ]; then
+ROOT_PART_BY_UUID=$(blkid $ROOT_PART | cut -d\" -f2)
+fi
+
+if [ "x$SWAP_PART" != "x" ]; then
+SWAP_PART_BY_UUID=$(blkid $SWAP_PART | cut -d\" -f2)
+fi
+
+if [ "x$HOME_PART" != "x" ]; then
+HOME_PART_BY_UUID=$(blkid $HOME_PART | cut -d\" -f2)
+fi
+
 cat > /etc/fstab << EOF
 # Begin /etc/fstab
 
