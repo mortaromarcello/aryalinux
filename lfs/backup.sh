@@ -32,7 +32,7 @@ then
 	fi
 fi
 
-mkdir ~/packages
+mkdir -pv ~/packages
 if [ -d /mnt/lfs/var/cache/alps/binaries/ ] && [ $(ls -A /mnt/lfs/var/cache/alps/binaries/) ] ; then
 	cp -v /mnt/lfs/var/cache/alps/binaries/* ~/packages
 fi

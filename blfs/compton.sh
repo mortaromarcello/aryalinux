@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=y
+NAME="compton"
+DESCRIPTION="A very lightweight desktop enviornment independent compositing manager"
+VERSION="SVN-`date -I`"
+
 #REQ:gtk2
 #REQ:gtk3
 #REQ:libconfig

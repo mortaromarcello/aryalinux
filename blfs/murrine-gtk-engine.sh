@@ -6,7 +6,9 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-NAME="murrine"
+SOURCE_ONLY=n
+NAME="murrine-gtk-engine"
+DESCRIPTION="A GTK theme engine"
 VERSION="0.98.2"
 
 cd $SOURCE_DIR
