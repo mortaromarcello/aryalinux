@@ -150,7 +150,7 @@ then
 	/sources/extras/014-openssl.sh | tee /sources/logs/initramfs.log
 fi
 
-/sources/lvm2.sh
+/sources/lvm2.sh | tee /sources/logs/lvm2.log
 
 if ! grep kernel /sources/build-log &> /dev/null
 then
