@@ -75,7 +75,10 @@ fi
 # End checking if home is a valid block device
 
 mkdir -v $LFS/sources
+mkdir -v $LFS/sources/logs
 chmod -v a+wt $LFS/sources
+chmod -v a+rw $LFS/sources/logs
+
 ln -svf $LFS/sources /sources
 
 cp -r ../sources/* $LFS/sources

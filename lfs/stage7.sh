@@ -142,24 +142,24 @@ fi
 
 if ! grep initramfs /sources/build-log &> /dev/null
 then
-	/sources/initramfs.sh
+	/sources/initramfs.sh | tee /sources/logs/initramfs.log
 fi
 
 if ! grep "014-openssl.sh" /sources/build-log &> /dev/null
 then
-	/sources/extras/014-openssl.sh
+	/sources/extras/014-openssl.sh | tee /sources/logs/initramfs.log
 fi
 
 /sources/lvm2.sh
 
 if ! grep kernel /sources/build-log &> /dev/null
 then
-	/sources/kernel.sh
+	/sources/kernel.sh | tee /sources/logs/kernel.log
 fi
 
 for script in /sources/extras/*.sh
 do
-	$script
+	$script | tee /sources/logs/$script.log
 done
 
 if ! grep syslinux /sources/build-log &> /dev/null
@@ -169,7 +169,7 @@ cd $SOURCE_DIR
 tar xf syslinux-4.06.tar.xz
 cd syslinux-4.06
 cd utils
-make
+make | tee /sources/logs/syslinux.log
 cp isohybrid /usr/bin/
 cd $SOURCE_DIR
 rm -r syslinux-4.06

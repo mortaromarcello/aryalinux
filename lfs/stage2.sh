@@ -7,7 +7,7 @@ set -e
 for script in /sources/toolchain/*.sh
 do
 
-bash $script
+bash $script | tee /sources/logs/$script.log
 
 done
 

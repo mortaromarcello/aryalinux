@@ -6,5 +6,5 @@ set -e
 
 for script in /sources/final-system/*
 do
-	bash $script
+	bash $script | tee /sources/logs/$script.log
 done
