@@ -214,8 +214,10 @@ def freshBuild(startFrom):
 			try:
 				logCurrentStage('7')
 				if getParamValue('DESKTOP_ENVIRONMENT') == '2':
+					desktopEnv = 'mate'
 					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'mate-desktop-environment'])
 				elif getParamValue('DESKTOP_ENVIRONMENT') == '1':
+					desktopEnv = 'xfce'
 					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'xfce-desktop-environment'])
 				startFrom = startFrom + 1
 			except:
@@ -227,16 +229,16 @@ def freshBuild(startFrom):
                         files = os.listdir('/root')
                         found = False
                         for file in files:
-                                if file.startswith('aryalinux') and 'base-system-with-desktop-env' in file and file.endswith('.tar.xz'):
+                                if file.startswith('aryalinux') and 'base-system-with-' + desktopEnv in file and file.endswith('.tar.xz'):
                                         found = True
                                         break
                         if not found:
-                                p = subprocess.Popen(['/root/scripts/backup.sh', 'base-system-with-desktop-env', 'n'])
+                                p = subprocess.Popen(['/root/scripts/backup.sh', 'base-system-with-' + desktopEnv, 'n'])
                                 p.wait()
                         else:
                                 print 'Desktop environment backup already present. Not backing up again.'
                 except:
-                        print 'Error occured while backing up base-system-with-desktop-env. Aborting.'
+                        print 'Error occured while backing up base-system-with-' + desktopEnv + '. Aborting.'
                         exit()
 
 
