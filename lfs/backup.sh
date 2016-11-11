@@ -22,13 +22,13 @@ mount $HOME_PART $LFS/home
 
 fi
 
-pushd $LFS
+pushd /
 
-if [ -z "`ls | grep -E 'aryalinux-$OS_VERSION-$LABEL'`" ]
+if [ -z "`ls ~ | grep -E 'aryalinux-$OS_VERSION-$LABEL'`" ]
 then
-	XZ_OPT=-9 tar --exclude=sources* --exclude=tools* --exclude=root/.ccache* --exclude=home/aryalinux/.ccache* --exclude=var/cache/alps/binaries --exclude=var/cache/alps/sources/* -cJvf ~/aryalinux-$OS_VERSION-$LABEL-`uname -m`-`date -I`.tar.xz *
-	if [ "$TOOLCHAIN_BACKUP" == "y" ] || [ "$TOOLCHAIN_BACKUP" == "Y" ]; then
-		XZ_OPT=-9 tar -cJvf ~/toolchain-$OS_VERSION-`uname -m`-`date -I`.tar.xz tools
+	XZ_OPT=-9 tar --exclude="/mnt/lfs/sources" --exclude="/mnt/lfs/tools" --exclude="/mnt/lfs/root/.ccache" --exclude="/mnt/lfs/home/aryalinux/.ccache" --exclude="/mnt/lfs/var/cache/alps/binaries" --exclude="/mnt/lfs/var/cache/alps/sources" -czvf ~/aryalinux-$OS_VERSION-$LABEL-`uname -m`-`date -I`.tar.xz $LFS
+	if [ "$TOOLCHAIN_BACKUP" == "y" ] || [ "$TOOLCHAIN_BACKUP" == "Y" ] && [ -z $(ls ~/toolchain*.tar.xz) ] ; then
+		XZ_OPT=-9 tar -cJvf ~/toolchain-$OS_VERSION-`uname -m`-`date -I`.tar.xz $LFS/tools
 	fi
 fi
 
