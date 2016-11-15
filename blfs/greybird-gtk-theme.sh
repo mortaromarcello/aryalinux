@@ -8,6 +8,7 @@ set +h
 #REQ:gtk2
 #REQ:gtk3
 #REQ:ruby
+#REQ:git
 
 cd $SOURCE_DIR
 
