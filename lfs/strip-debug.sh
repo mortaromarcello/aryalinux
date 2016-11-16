@@ -11,11 +11,11 @@ export LFS=/mnt/lfs
 mkdir -pv $LFS
 mount $ROOT_PART $LFS
 
-echo "Would be chrooting now. At the prompt please run:"
-echo ""
-echo "/tools/bin/stripdebug"
-echo ""
-echo "and hit enter. You might see a lot of messages scroll by. That's normal."
+#echo "Would be chrooting now. At the prompt please run:"
+#echo ""
+#echo "/tools/bin/stripdebug"
+#echo ""
+#echo "and hit enter. You might see a lot of messages scroll by. That's normal."
 
 cat > $LFS/tools/bin/stripdebug <<EOF
 /tools/bin/find /usr/lib -type f -name \*.a \
@@ -27,7 +27,7 @@ cat > $LFS/tools/bin/stripdebug <<EOF
 /tools/bin/find /{bin,sbin} /usr/{bin,sbin,libexec} -type f \
     -exec /tools/bin/strip --strip-all {} ';'
 
-echo "Stripping done. Please enter exit to continue..."
+# echo "Stripping done. Please enter exit to continue..."
 
 EOF
 chmod a+x $LFS/tools/bin/stripdebug
@@ -35,7 +35,7 @@ chmod a+x $LFS/tools/bin/stripdebug
 chroot $LFS /tools/bin/env -i            \
     HOME=/root TERM=$TERM PS1='\u:\w\$ ' \
     PATH=/bin:/usr/bin:/sbin:/usr/sbin   \
-    /tools/bin/bash --login
+    /tools/bin/bash --login /tools/bin/stripdebug
 
 rm $LFS/tools/bin/stripdebug
 umount $LFS
