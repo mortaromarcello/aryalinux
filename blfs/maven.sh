@@ -5,12 +5,14 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-NAME="apache-maven--bin"
+SOURCE_ONLY=y
+NAME="maven"
+DESCRIPTION="Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project's build, reporting and documentation from a central piece of information."
 VERSION="3.3.9"
 
 cd $SOURCE_DIR
 
-URL=http://mirror.fibergrid.in/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+URL=http://www-us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | sed -e 's@/.*@@' | uniq `

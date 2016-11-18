@@ -21,7 +21,7 @@ URL=https://tuxera.com/opensource/ntfs-3g_ntfsprogs-2016.2.22.tgz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ntfs-3g/ntfs-3g_ntfsprogs-2016.2.22.tgz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ntfs-3g/ntfs-3g_ntfsprogs-2016.2.22.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ntfs-3g/ntfs-3g_ntfsprogs-2016.2.22.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ntfs-3g/ntfs-3g_ntfsprogs-2016.2.22.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ntfs-3g/ntfs-3g_ntfsprogs-2016.2.22.tgz || wget -nc https://tuxera.com/opensource/ntfs-3g_ntfsprogs-2016.2.22.tgz
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ntfs-3g/ntfs-3g_ntfsprogs-2016.2.22.tgz || wget -nc https://tuxera.com/opensource/ntfs-3g_ntfsprogs-2016.2.22.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ntfs-3g/ntfs-3g_ntfsprogs-2016.2.22.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ntfs-3g/ntfs-3g_ntfsprogs-2016.2.22.tgz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ntfs-3g/ntfs-3g_ntfsprogs-2016.2.22.tgz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ntfs-3g/ntfs-3g_ntfsprogs-2016.2.22.tgz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

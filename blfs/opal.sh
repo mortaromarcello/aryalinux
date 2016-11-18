@@ -27,8 +27,8 @@ URL=http://ftp.gnome.org/pub/gnome/sources/opal/3.10/opal-3.10.10.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/opal/opal-3.10.10.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/opal/opal-3.10.10.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/opal/opal-3.10.10.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/opal/3.10/opal-3.10.10.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/opal/opal-3.10.10.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/opal/3.10/opal-3.10.10.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/opal/opal-3.10.10.tar.xz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/opal-3.10.10-ffmpeg2-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/opal/opal-3.10.10-ffmpeg2-1.patch
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/opal/opal-3.10.10.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/opal/3.10/opal-3.10.10.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/opal/opal-3.10.10.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/opal/opal-3.10.10.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/opal/3.10/opal-3.10.10.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/opal/opal-3.10.10.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/opal/opal-3.10.10.tar.xz
+wget -nc http://www.linuxfromscratch.org/patches/downloads/opal/opal-3.10.10-ffmpeg2-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/opal-3.10.10-ffmpeg2-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

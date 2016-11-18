@@ -28,7 +28,7 @@ URL=http://downloads.sourceforge.net/project/xarchiver/xarchiver-0.5.4.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xarchiver/xarchiver-0.5.4.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xarchiver/xarchiver-0.5.4.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xarchiver/xarchiver-0.5.4.tar.bz2 || wget -nc http://downloads.sourceforge.net/project/xarchiver/xarchiver-0.5.4.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xarchiver/xarchiver-0.5.4.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xarchiver/xarchiver-0.5.4.tar.bz2
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xarchiver/xarchiver-0.5.4.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xarchiver/xarchiver-0.5.4.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xarchiver/xarchiver-0.5.4.tar.bz2 || wget -nc http://downloads.sourceforge.net/project/xarchiver/xarchiver-0.5.4.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xarchiver/xarchiver-0.5.4.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xarchiver/xarchiver-0.5.4.tar.bz2
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/xarchiver-0.5.4-fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/xarchiver/xarchiver-0.5.4-fixes-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`

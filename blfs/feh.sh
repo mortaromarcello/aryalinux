@@ -28,7 +28,7 @@ URL=http://feh.finalrewind.org/feh-2.17.1.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/feh/feh-2.17.1.tar.bz2 || wget -nc http://feh.finalrewind.org/feh-2.17.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/feh/feh-2.17.1.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/feh/feh-2.17.1.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/feh/feh-2.17.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/feh/feh-2.17.1.tar.bz2
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/feh/feh-2.17.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/feh/feh-2.17.1.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/feh/feh-2.17.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/feh/feh-2.17.1.tar.bz2 || wget -nc http://feh.finalrewind.org/feh-2.17.1.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/feh/feh-2.17.1.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

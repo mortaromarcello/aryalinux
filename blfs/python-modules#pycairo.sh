@@ -23,8 +23,8 @@ URL=http://cairographics.org/releases/pycairo-1.10.0.tar.bz2
 if [ ! -z $URL ]
 then
 wget -nc http://cairographics.org/releases/pycairo-1.10.0.tar.bz2
-wget -nc http://www.linuxfromscratch.org/patches/downloads/pycairo/pycairo-1.10.0-waf_unpack-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/pycairo-1.10.0-waf_unpack-1.patch
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/pycairo-1.10.0-waf_python_3_4-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/pycairo/pycairo-1.10.0-waf_python_3_4-1.patch
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/pycairo-1.10.0-waf_unpack-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/pycairo/pycairo-1.10.0-waf_unpack-1.patch
+wget -nc http://www.linuxfromscratch.org/patches/downloads/pycairo/pycairo-1.10.0-waf_python_3_4-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/pycairo-1.10.0-waf_python_3_4-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

@@ -20,7 +20,7 @@ URL=http://ftp.gnu.org/gnu/libsigsegv/libsigsegv-2.10.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libsigsegv/libsigsegv-2.10.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libsigsegv/libsigsegv-2.10.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libsigsegv/libsigsegv-2.10.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libsigsegv/libsigsegv-2.10.tar.gz || wget -nc http://ftp.gnu.org/gnu/libsigsegv/libsigsegv-2.10.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libsigsegv/libsigsegv-2.10.tar.gz || wget -nc ftp://ftp.gnu.org/gnu/libsigsegv/libsigsegv-2.10.tar.gz
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libsigsegv/libsigsegv-2.10.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libsigsegv/libsigsegv-2.10.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libsigsegv/libsigsegv-2.10.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libsigsegv/libsigsegv-2.10.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libsigsegv/libsigsegv-2.10.tar.gz || wget -nc http://ftp.gnu.org/gnu/libsigsegv/libsigsegv-2.10.tar.gz || wget -nc ftp://ftp.gnu.org/gnu/libsigsegv/libsigsegv-2.10.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

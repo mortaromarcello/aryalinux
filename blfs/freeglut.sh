@@ -23,7 +23,7 @@ URL=http://downloads.sourceforge.net/freeglut/freeglut-3.0.0.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/freeglut/freeglut-3.0.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/freeglut/freeglut-3.0.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/freeglut/freeglut-3.0.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/freeglut/freeglut-3.0.0.tar.gz || wget -nc http://downloads.sourceforge.net/freeglut/freeglut-3.0.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/freeglut/freeglut-3.0.0.tar.gz
+wget -nc http://downloads.sourceforge.net/freeglut/freeglut-3.0.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/freeglut/freeglut-3.0.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/freeglut/freeglut-3.0.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/freeglut/freeglut-3.0.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/freeglut/freeglut-3.0.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/freeglut/freeglut-3.0.0.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

@@ -36,7 +36,7 @@ URL=https://github.com/fontforge/fontforge/releases/download/20161005/fontforge-
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/fontforge/fontforge-dist-20161004.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/fontforge/fontforge-dist-20161004.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/fontforge/fontforge-dist-20161004.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/fontforge/fontforge-dist-20161004.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/fontforge/fontforge-dist-20161004.tar.gz || wget -nc https://github.com/fontforge/fontforge/releases/download/20161005/fontforge-dist-20161004.tar.gz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/fontforge/fontforge-dist-20161004.tar.gz || wget -nc https://github.com/fontforge/fontforge/releases/download/20161005/fontforge-dist-20161004.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/fontforge/fontforge-dist-20161004.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/fontforge/fontforge-dist-20161004.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/fontforge/fontforge-dist-20161004.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/fontforge/fontforge-dist-20161004.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

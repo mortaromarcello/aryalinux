@@ -22,7 +22,7 @@ URL=http://ftp.gnome.org/pub/gnome/sources/polkit-gnome/0.105/polkit-gnome-0.105
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/polkit-gnome/polkit-gnome-0.105.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/polkit-gnome/0.105/polkit-gnome-0.105.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/polkit-gnome/0.105/polkit-gnome-0.105.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/polkit-gnome/polkit-gnome-0.105.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/polkit-gnome/polkit-gnome-0.105.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/polkit-gnome/polkit-gnome-0.105.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/polkit-gnome/polkit-gnome-0.105.tar.xz
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/polkit/polkit-gnome-0.105.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/polkit/polkit-gnome-0.105.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/polkit-gnome/0.105/polkit-gnome-0.105.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/polkit/polkit-gnome-0.105.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/polkit-gnome/0.105/polkit-gnome-0.105.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/polkit/polkit-gnome-0.105.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/polkit/polkit-gnome-0.105.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

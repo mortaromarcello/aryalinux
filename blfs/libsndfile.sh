@@ -25,7 +25,7 @@ URL=http://www.mega-nerd.com/libsndfile/files/libsndfile-1.0.27.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libsndfile/libsndfile-1.0.27.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libsndfile/libsndfile-1.0.27.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libsndfile/libsndfile-1.0.27.tar.gz || wget -nc http://www.mega-nerd.com/libsndfile/files/libsndfile-1.0.27.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libsndfile/libsndfile-1.0.27.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libsndfile/libsndfile-1.0.27.tar.gz
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libsndfile/libsndfile-1.0.27.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libsndfile/libsndfile-1.0.27.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libsndfile/libsndfile-1.0.27.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libsndfile/libsndfile-1.0.27.tar.gz || wget -nc http://www.mega-nerd.com/libsndfile/files/libsndfile-1.0.27.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libsndfile/libsndfile-1.0.27.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

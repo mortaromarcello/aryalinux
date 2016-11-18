@@ -20,8 +20,8 @@ URL=http://downloads.xiph.org/releases/cdparanoia/cdparanoia-III-10.2.src.tgz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/cdparanoia/cdparanoia-III-10.2.src.tgz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/cdparanoia/cdparanoia-III-10.2.src.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/cdparanoia/cdparanoia-III-10.2.src.tgz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/cdparanoia/cdparanoia-III-10.2.src.tgz || wget -nc http://downloads.xiph.org/releases/cdparanoia/cdparanoia-III-10.2.src.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/cdparanoia/cdparanoia-III-10.2.src.tgz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/cdparanoia-III-10.2-gcc_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/cdparanoia/cdparanoia-III-10.2-gcc_fixes-1.patch
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/cdparanoia/cdparanoia-III-10.2.src.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/cdparanoia/cdparanoia-III-10.2.src.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/cdparanoia/cdparanoia-III-10.2.src.tgz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/cdparanoia/cdparanoia-III-10.2.src.tgz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/cdparanoia/cdparanoia-III-10.2.src.tgz || wget -nc http://downloads.xiph.org/releases/cdparanoia/cdparanoia-III-10.2.src.tgz
+wget -nc http://www.linuxfromscratch.org/patches/downloads/cdparanoia/cdparanoia-III-10.2-gcc_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/cdparanoia-III-10.2-gcc_fixes-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

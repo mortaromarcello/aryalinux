@@ -20,7 +20,7 @@ URL=http://downloads.sourceforge.net/mad/libmad-0.15.1b.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libmad/libmad-0.15.1b.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libmad/libmad-0.15.1b.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libmad/libmad-0.15.1b.tar.gz || wget -nc http://downloads.sourceforge.net/mad/libmad-0.15.1b.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libmad/libmad-0.15.1b.tar.gz || wget -nc ftp://ftp.mars.org/pub/mpeg/libmad-0.15.1b.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libmad/libmad-0.15.1b.tar.gz
+wget -nc ftp://ftp.mars.org/pub/mpeg/libmad-0.15.1b.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libmad/libmad-0.15.1b.tar.gz || wget -nc http://downloads.sourceforge.net/mad/libmad-0.15.1b.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libmad/libmad-0.15.1b.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libmad/libmad-0.15.1b.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libmad/libmad-0.15.1b.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libmad/libmad-0.15.1b.tar.gz
 wget -nc http://www.linuxfromscratch.org/patches/downloads/libmad/libmad-0.15.1b-fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/libmad-0.15.1b-fixes-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`

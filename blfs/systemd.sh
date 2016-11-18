@@ -38,7 +38,7 @@ URL=http://anduin.linuxfromscratch.org/sources/other/systemd/systemd-231.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/systemd/systemd-231.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/systemd/systemd-231.tar.xz || wget -nc http://anduin.linuxfromscratch.org/sources/other/systemd/systemd-231.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/systemd/systemd-231.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/systemd/systemd-231.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/systemd/systemd-231.tar.xz
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/systemd/systemd-231.tar.xz || wget -nc http://anduin.linuxfromscratch.org/sources/other/systemd/systemd-231.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/systemd/systemd-231.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/systemd/systemd-231.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/systemd/systemd-231.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/systemd/systemd-231.tar.xz
 wget -nc http://www.linuxfromscratch.org/patches/downloads/systemd/systemd-231-security_fix-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/systemd-231-security_fix-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`

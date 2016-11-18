@@ -28,7 +28,7 @@ URL=http://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libtheora/libtheora-1.1.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libtheora/libtheora-1.1.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libtheora/libtheora-1.1.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libtheora/libtheora-1.1.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libtheora/libtheora-1.1.1.tar.xz || wget -nc http://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.xz
+wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libtheora/libtheora-1.1.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libtheora/libtheora-1.1.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libtheora/libtheora-1.1.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libtheora/libtheora-1.1.1.tar.xz || wget -nc http://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libtheora/libtheora-1.1.1.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

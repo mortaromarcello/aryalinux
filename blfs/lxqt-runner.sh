@@ -24,8 +24,8 @@ URL=http://downloads.lxqt.org/lxqt/0.11.0/lxqt-runner-0.11.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lxqt-runner/lxqt-runner-0.11.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-runner/lxqt-runner-0.11.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-runner/lxqt-runner-0.11.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-runner/lxqt-runner-0.11.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-runner/lxqt-runner-0.11.0.tar.xz || wget -nc http://downloads.lxqt.org/lxqt/0.11.0/lxqt-runner-0.11.0.tar.xz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/lxqt-runner-0.11.0-fix_endif-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/lxqt-runner/lxqt-runner-0.11.0-fix_endif-1.patch
+wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-runner/lxqt-runner-0.11.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-runner/lxqt-runner-0.11.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lxqt-runner/lxqt-runner-0.11.0.tar.xz || wget -nc http://downloads.lxqt.org/lxqt/0.11.0/lxqt-runner-0.11.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-runner/lxqt-runner-0.11.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-runner/lxqt-runner-0.11.0.tar.xz
+wget -nc http://www.linuxfromscratch.org/patches/downloads/lxqt-runner/lxqt-runner-0.11.0-fix_endif-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/lxqt-runner-0.11.0-fix_endif-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
