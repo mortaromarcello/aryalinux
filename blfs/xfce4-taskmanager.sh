@@ -29,5 +29,3 @@ cd $SOURCE_DIR
 
 rm -r $DIRECTORY
 echo "${NAME}=>`date`" | sudo tee -a $INSTALLED_LIST
-
-`
