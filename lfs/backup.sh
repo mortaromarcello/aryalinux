@@ -24,10 +24,10 @@ fi
 
 pushd /
 
-if [ -z "`ls ~ | grep -E 'aryalinux-$OS_VERSION-$LABEL'`" ]
+if [ -z "`ls $LFS/sources/ | grep -E 'aryalinux-$OS_VERSION-$LABEL'`" ]
 then
 	GZIP=-9 tar --exclude="/mnt/lfs/sources" --exclude="/mnt/lfs/tools" --exclude="/mnt/lfs/root/.ccache" --exclude="/mnt/lfs/home/aryalinux/.ccache" --exclude="/mnt/lfs/var/cache/alps/binaries" --exclude="/mnt/lfs/var/cache/alps/sources" -czvf $LFS/sources/aryalinux-$OS_VERSION-$LABEL-`uname -m`-`date -I`.tar.gz $LFS
-	if [ "$TOOLCHAIN_BACKUP" == "y" ] || [ "$TOOLCHAIN_BACKUP" == "Y" ] && [ -z $(ls ~/toolchain*.tar.xz) ] ; then
+	if [ "$TOOLCHAIN_BACKUP" == "y" ] || [ "$TOOLCHAIN_BACKUP" == "Y" ] && [ -z $(ls $LFS/sources/toolchain*.tar.xz) ] ; then
 		XZ_OPT=-9 tar -cJvf $LFS/sources/toolchain-$OS_VERSION-`uname -m`-`date -I`.tar.xz $LFS/tools
 	fi
 fi
