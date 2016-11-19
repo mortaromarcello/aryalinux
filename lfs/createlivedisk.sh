@@ -7,6 +7,8 @@ mkdir -pv $LFS
 
 ./umountal.sh
 
+. ./build-properties
+
 set -e
 
 if [ $# -ne 0 ]
@@ -51,11 +53,19 @@ done
 
 else
 
-read -p "Enter the root partition name E.g. /dev/sda7 : " ROOT_PART
-read -p "Enter the home partition name E.g. /dev/sda3 : " HOME_PART
-read -p "Enter the username that would be logged into live system by default : " USERNAME
-read -p "Enter the default label for the boot entry in the Live System : " LABEL
-read -p "Enter the name of the ISO file to be generated : " OUTFILE
+# read -p "Enter the root partition name E.g. /dev/sda7 : " ROOT_PART
+# read -p "Enter the home partition name E.g. /dev/sda3 : " HOME_PART
+# read -p "Enter the username that would be logged into live system by default : " USERNAME
+# read -p "Enter the default label for the boot entry in the Live System : " LABEL
+# read -p "Enter the name of the ISO file to be generated : " OUTFILE
+if [ "$DESKTOP_ENVIRONMENT" == "1" ]; then DE="XFCE"; elif [ "$DESKTOP_ENVIRONMENT" == "2" ] DE="Mate"; else DE=""; fi
+LABEL="$OS_NAME $DE $OS_VERSION"
+if [ "x$DE" != "x" ]
+then
+	OUTFILE="$(echo $OS_NAME | tr '[:upper:]' [:lower:])-$(echo $DE | tr '[:upper:]' '[:lower:]')-$OS_VERSION-$(uname -m).iso"
+else
+	OUTFILE="$(echo $OS_NAME | tr '[:upper:]' [:lower:])-$OS_VERSION-$(uname -m).iso"
+fi
 CREATE_ROOTSFS="y"
 
 fi

@@ -5,7 +5,7 @@ set +h
 
 ( ./umountal.sh && echo "Unmounted partition before performing actions..." ) || ( echo "Nothing mounted. Continuing..." )
 
-read -p "Enter the root partition name for AryaLinux : " ROOT_PART
+. ./build-properties
 
 export LFS=/mnt/lfs
 mkdir -pv $LFS
@@ -64,7 +64,7 @@ chroot "$LFS" /usr/bin/env -i              \
 clear
 ./umountal.sh
 
-echo "Done stripping debug symbols and rebuilding grub. In order to build an ISO from the system we just built, run the following command:"
-echo ""
-echo "./createlivedisk.sh"
-echo ""
+# echo "Done stripping debug symbols and rebuilding grub. In order to build an ISO from the system we just built, run the following command:"
+# echo ""
+# echo "./createlivedisk.sh"
+# echo ""
