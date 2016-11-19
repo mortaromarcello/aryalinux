@@ -27,5 +27,5 @@ sudo make install
 
 cd $SOURCE_DIR
 
-rm -r $DIRECTORY
+sudo rm -rf $DIRECTORY
 echo "${NAME}=>`date`" | sudo tee -a $INSTALLED_LIST
