@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
+NAME="adapta-gtk-theme"
+DESCRIPTION="Adapta GTK theme"
+VERSION="SVN-`date -I`"
+
 #REQ:gtk2
 #REQ:gtk3
 

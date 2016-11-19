@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
+NAME="flat-plat-gtk-theme"
+DESCRIPTION="Flat Plat GTK theme"
+VERSION="SVN-`date -I`"
+
 #REQ:gtk2
 #REQ:gtk3
 

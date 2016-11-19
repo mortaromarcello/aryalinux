@@ -6,6 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
+NAME="greybird-gtk-theme"
+DESCRIPTION="Greybird GTK Theme"
+VERSION="SVN-`date -I`"
+
 #REQ:git
 #REQ:gtk2
 #REQ:gtk3

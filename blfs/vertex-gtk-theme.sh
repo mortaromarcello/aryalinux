@@ -6,6 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 DESCRPTION="Vertex theme for GTK"
 NAME="vertex-gtk-theme"
 VERSION="SVN"
