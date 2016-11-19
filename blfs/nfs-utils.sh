@@ -51,18 +51,6 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-groupadd -g 99 nogroup &&
-useradd -c "Unprivileged Nobody" -d /dev/null -g nogroup \
-    -s /bin/false -u 99 nobody
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
 ./configure --prefix=/usr          \
             --sysconfdir=/etc      \
             --without-tcp-wrappers \
@@ -75,59 +63,6 @@ make "-j`nproc`" || make
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install &&
 chmod u+w,go+r /sbin/mount.nfs
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-/home <em class="replaceable"><code>192.168.0.0/24</em>(rw,subtree_check,anonuid=99,anongid=99)
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-. /etc/alps/alps.conf
-wget -nc http://aryalinux.org/releases/2016.11/blfs-systemd-units-20160602.tar.bz2 -O $SOURCE_DIR/blfs-systemd-units-20160602.tar.bz2
-tar xf $SOURCE_DIR/blfs-systemd-units-20160602.tar.bz2 -C $SOURCE_DIR
-cd $SOURCE_DIR/blfs-systemd-units-20160602
-make install-nfsv4-server
-
-cd $SOURCE_DIR
-rm -rf blfs-systemd-units-20160602
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-. /etc/alps/alps.conf
-wget -nc http://aryalinux.org/releases/2016.11/blfs-systemd-units-20160602.tar.bz2 -O $SOURCE_DIR/blfs-systemd-units-20160602.tar.bz2
-tar xf $SOURCE_DIR/blfs-systemd-units-20160602.tar.bz2 -C $SOURCE_DIR
-cd $SOURCE_DIR/blfs-systemd-units-20160602
-make install-nfs-server
-
-cd $SOURCE_DIR
-rm -rf blfs-systemd-units-20160602
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-<em class="replaceable"><code><server-name></em>:/home  /home nfs   rw,_netdev 0 0
-<em class="replaceable"><code><server-name></em>:/usr   /usr  nfs   ro,_netdev 0 0
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
