@@ -21,7 +21,7 @@ URL=https://wayland.freedesktop.org/releases/wayland-protocols-1.7.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/wayland/wayland-protocols-1.7.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/wayland/wayland-protocols-1.7.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/wayland/wayland-protocols-1.7.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/wayland/wayland-protocols-1.7.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/wayland/wayland-protocols-1.7.tar.xz || wget -nc https://wayland.freedesktop.org/releases/wayland-protocols-1.7.tar.xz
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/wayland/wayland-protocols-1.7.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/wayland/wayland-protocols-1.7.tar.xz || wget -nc https://wayland.freedesktop.org/releases/wayland-protocols-1.7.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/wayland/wayland-protocols-1.7.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/wayland/wayland-protocols-1.7.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/wayland/wayland-protocols-1.7.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

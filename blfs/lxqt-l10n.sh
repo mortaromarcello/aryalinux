@@ -21,7 +21,7 @@ URL=http://downloads.lxqt.org/lxqt/0.11.0/lxqt-l10n-0.11.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-l10n/lxqt-l10n-0.11.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lxqt-l10n/lxqt-l10n-0.11.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-l10n/lxqt-l10n-0.11.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-l10n/lxqt-l10n-0.11.0.tar.xz || wget -nc http://downloads.lxqt.org/lxqt/0.11.0/lxqt-l10n-0.11.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-l10n/lxqt-l10n-0.11.0.tar.xz
+wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-l10n/lxqt-l10n-0.11.0.tar.xz || wget -nc http://downloads.lxqt.org/lxqt/0.11.0/lxqt-l10n-0.11.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lxqt-l10n/lxqt-l10n-0.11.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-l10n/lxqt-l10n-0.11.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-l10n/lxqt-l10n-0.11.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-l10n/lxqt-l10n-0.11.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

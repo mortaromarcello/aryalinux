@@ -24,7 +24,7 @@ URL=https://www.mercurial-scm.org/release/mercurial-3.9.2.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://www.mercurial-scm.org/release/mercurial-3.9.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mercurial/mercurial-3.9.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mercurial/mercurial-3.9.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mercurial/mercurial-3.9.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mercurial/mercurial-3.9.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mercurial/mercurial-3.9.2.tar.gz
+wget -nc https://www.mercurial-scm.org/release/mercurial-3.9.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mercurial/mercurial-3.9.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mercurial/mercurial-3.9.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mercurial/mercurial-3.9.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mercurial/mercurial-3.9.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mercurial/mercurial-3.9.2.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

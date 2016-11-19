@@ -24,7 +24,7 @@ URL=http://ftp.gnome.org/pub/gnome/sources/rest/0.8/rest-0.8.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.gnome.org/pub/gnome/sources/rest/0.8/rest-0.8.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/rest/rest-0.8.0.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/rest/0.8/rest-0.8.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/rest/rest-0.8.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/rest/rest-0.8.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/rest/rest-0.8.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/rest/rest-0.8.0.tar.xz
+wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/rest/rest-0.8.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/rest/rest-0.8.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/rest/rest-0.8.0.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/rest/0.8/rest-0.8.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/rest/rest-0.8.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/rest/0.8/rest-0.8.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/rest/rest-0.8.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

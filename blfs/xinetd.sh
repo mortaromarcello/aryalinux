@@ -20,7 +20,7 @@ URL=ftp://anduin.linuxfromscratch.org/BLFS/xinetd/xinetd-2.3.15.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xinetd/xinetd-2.3.15.tar.gz || wget -nc ftp://anduin.linuxfromscratch.org/BLFS/xinetd/xinetd-2.3.15.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xinetd/xinetd-2.3.15.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xinetd/xinetd-2.3.15.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xinetd/xinetd-2.3.15.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xinetd/xinetd-2.3.15.tar.gz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xinetd/xinetd-2.3.15.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xinetd/xinetd-2.3.15.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xinetd/xinetd-2.3.15.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xinetd/xinetd-2.3.15.tar.gz || wget -nc ftp://anduin.linuxfromscratch.org/BLFS/xinetd/xinetd-2.3.15.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xinetd/xinetd-2.3.15.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

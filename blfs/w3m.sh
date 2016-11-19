@@ -27,8 +27,8 @@ URL=http://downloads.sourceforge.net/w3m/w3m-0.5.3.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz || wget -nc http://downloads.sourceforge.net/w3m/w3m-0.5.3.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/w3m-0.5.3-bdwgc72-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/w3m/w3m-0.5.3-bdwgc72-1.patch
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz || wget -nc http://downloads.sourceforge.net/w3m/w3m-0.5.3.tar.gz
+wget -nc http://www.linuxfromscratch.org/patches/downloads/w3m/w3m-0.5.3-bdwgc72-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/w3m-0.5.3-bdwgc72-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

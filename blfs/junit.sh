@@ -22,7 +22,7 @@ URL=https://launchpad.net/debian/+archive/primary/+files/junit4_4.11.orig.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/junit/junit4_4.11.orig.tar.gz || wget -nc https://launchpad.net/debian/+archive/primary/+files/junit4_4.11.orig.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/junit/junit4_4.11.orig.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/junit/junit4_4.11.orig.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/junit/junit4_4.11.orig.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/junit/junit4_4.11.orig.tar.gz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/junit/junit4_4.11.orig.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/junit/junit4_4.11.orig.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/junit/junit4_4.11.orig.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/junit/junit4_4.11.orig.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/junit/junit4_4.11.orig.tar.gz || wget -nc https://launchpad.net/debian/+archive/primary/+files/junit4_4.11.orig.tar.gz
 wget -nc http://hamcrest.googlecode.com/files/hamcrest-1.3.tgz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`

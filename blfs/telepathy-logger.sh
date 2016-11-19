@@ -24,7 +24,7 @@ URL=http://telepathy.freedesktop.org/releases/telepathy-logger/telepathy-logger-
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/telepathy-logger/telepathy-logger-0.8.2.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/telepathy-logger/telepathy-logger-0.8.2.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/telepathy-logger/telepathy-logger-0.8.2.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/telepathy-logger/telepathy-logger-0.8.2.tar.bz2 || wget -nc http://telepathy.freedesktop.org/releases/telepathy-logger/telepathy-logger-0.8.2.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/telepathy-logger/telepathy-logger-0.8.2.tar.bz2
+wget -nc http://telepathy.freedesktop.org/releases/telepathy-logger/telepathy-logger-0.8.2.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/telepathy-logger/telepathy-logger-0.8.2.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/telepathy-logger/telepathy-logger-0.8.2.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/telepathy-logger/telepathy-logger-0.8.2.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/telepathy-logger/telepathy-logger-0.8.2.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/telepathy-logger/telepathy-logger-0.8.2.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

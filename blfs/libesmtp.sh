@@ -21,7 +21,7 @@ URL=http://www.stafford.uklinux.net/libesmtp/libesmtp-1.0.6.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libesmtp/libesmtp-1.0.6.tar.bz2 || wget -nc http://www.stafford.uklinux.net/libesmtp/libesmtp-1.0.6.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libesmtp/libesmtp-1.0.6.tar.bz2 || wget -nc http://pkgs.fedoraproject.org/repo/pkgs/libesmtp/libesmtp-1.0.6.tar.bz2/bf3915e627fd8f35524a8fdfeed979c8/libesmtp-1.0.6.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libesmtp/libesmtp-1.0.6.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libesmtp/libesmtp-1.0.6.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libesmtp/libesmtp-1.0.6.tar.bz2
+wget -nc http://pkgs.fedoraproject.org/repo/pkgs/libesmtp/libesmtp-1.0.6.tar.bz2/bf3915e627fd8f35524a8fdfeed979c8/libesmtp-1.0.6.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libesmtp/libesmtp-1.0.6.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libesmtp/libesmtp-1.0.6.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libesmtp/libesmtp-1.0.6.tar.bz2 || wget -nc http://www.stafford.uklinux.net/libesmtp/libesmtp-1.0.6.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libesmtp/libesmtp-1.0.6.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libesmtp/libesmtp-1.0.6.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

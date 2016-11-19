@@ -24,7 +24,7 @@ URL=https://github.com/libass/libass/releases/download/0.13.4/libass-0.13.4.tar.
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libass/libass-0.13.4.tar.xz || wget -nc https://github.com/libass/libass/releases/download/0.13.4/libass-0.13.4.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libass/libass-0.13.4.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libass/libass-0.13.4.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libass/libass-0.13.4.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libass/libass-0.13.4.tar.xz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libass/libass-0.13.4.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libass/libass-0.13.4.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libass/libass-0.13.4.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libass/libass-0.13.4.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libass/libass-0.13.4.tar.xz || wget -nc https://github.com/libass/libass/releases/download/0.13.4/libass-0.13.4.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

@@ -24,7 +24,7 @@ URL=http://sourceforge.net/projects/liboauth/files/liboauth-1.0.3.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz || wget -nc http://sourceforge.net/projects/liboauth/files/liboauth-1.0.3.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz
+wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz || wget -nc http://sourceforge.net/projects/liboauth/files/liboauth-1.0.3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

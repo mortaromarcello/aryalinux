@@ -30,7 +30,7 @@ URL=http://ftp.gnome.org/pub/gnome/sources/cogl/1.22/cogl-1.22.2.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/cogl/cogl-1.22.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/cogl/cogl-1.22.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/cogl/cogl-1.22.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/cogl/cogl-1.22.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/cogl/cogl-1.22.2.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/cogl/1.22/cogl-1.22.2.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/cogl/1.22/cogl-1.22.2.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/cogl/1.22/cogl-1.22.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/cogl/cogl-1.22.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/cogl/cogl-1.22.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/cogl/cogl-1.22.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/cogl/cogl-1.22.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/cogl/cogl-1.22.2.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/cogl/1.22/cogl-1.22.2.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

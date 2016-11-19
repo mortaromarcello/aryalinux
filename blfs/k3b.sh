@@ -33,7 +33,7 @@ URL=http://anduin.linuxfromscratch.org/BLFS/k3b/k3b-2016-09-11.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/k3b/k3b-2016-09-11.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/k3b/k3b-2016-09-11.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/k3b/k3b-2016-09-11.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/k3b/k3b-2016-09-11.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/k3b/k3b-2016-09-11.tar.xz || wget -nc http://anduin.linuxfromscratch.org/BLFS/k3b/k3b-2016-09-11.tar.xz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/k3b/k3b-2016-09-11.tar.xz || wget -nc http://anduin.linuxfromscratch.org/BLFS/k3b/k3b-2016-09-11.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/k3b/k3b-2016-09-11.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/k3b/k3b-2016-09-11.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/k3b/k3b-2016-09-11.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/k3b/k3b-2016-09-11.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

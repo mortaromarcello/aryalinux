@@ -22,7 +22,7 @@ URL=ftp://invisible-island.net/xterm/xterm-327.tgz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://invisible-island.net/xterm/xterm-327.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xterm/xterm-327.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xterm/xterm-327.tgz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xterm/xterm-327.tgz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xterm/xterm-327.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xterm/xterm-327.tgz
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xterm/xterm-327.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xterm/xterm-327.tgz || wget -nc ftp://invisible-island.net/xterm/xterm-327.tgz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xterm/xterm-327.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xterm/xterm-327.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xterm/xterm-327.tgz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

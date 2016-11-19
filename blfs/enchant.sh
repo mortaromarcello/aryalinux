@@ -23,7 +23,7 @@ URL=http://www.abisource.com/downloads/enchant/1.6.0/enchant-1.6.0.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/enchant/enchant-1.6.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/enchant/enchant-1.6.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/enchant/enchant-1.6.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/enchant/enchant-1.6.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/enchant/enchant-1.6.0.tar.gz || wget -nc ftp://ftp.netbsd.org/pub/pkgsrc/distfiles/enchant-1.6.0.tar.gz || wget -nc http://www.abisource.com/downloads/enchant/1.6.0/enchant-1.6.0.tar.gz
+wget -nc http://www.abisource.com/downloads/enchant/1.6.0/enchant-1.6.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/enchant/enchant-1.6.0.tar.gz || wget -nc ftp://ftp.netbsd.org/pub/pkgsrc/distfiles/enchant-1.6.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/enchant/enchant-1.6.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/enchant/enchant-1.6.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/enchant/enchant-1.6.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/enchant/enchant-1.6.0.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

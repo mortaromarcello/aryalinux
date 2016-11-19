@@ -63,7 +63,7 @@ URL=http://get.videolan.org/vlc/2.2.4/vlc-2.2.4.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/vlc/vlc-2.2.4.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/vlc/vlc-2.2.4.tar.xz || wget -nc http://get.videolan.org/vlc/2.2.4/vlc-2.2.4.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/vlc/vlc-2.2.4.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/vlc/vlc-2.2.4.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/vlc/vlc-2.2.4.tar.xz
+wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/vlc/vlc-2.2.4.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/vlc/vlc-2.2.4.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/vlc/vlc-2.2.4.tar.xz || wget -nc http://get.videolan.org/vlc/2.2.4/vlc-2.2.4.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/vlc/vlc-2.2.4.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/vlc/vlc-2.2.4.tar.xz
 wget -nc http://www.linuxfromscratch.org/patches/downloads/vlc/vlc-2.2.4-ffmpeg3-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/vlc-2.2.4-ffmpeg3-1.patch
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/vlc-2.2.4-gcc6_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/vlc/vlc-2.2.4-gcc6_fixes-1.patch
 
