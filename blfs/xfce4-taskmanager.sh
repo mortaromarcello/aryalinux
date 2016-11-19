@@ -27,5 +27,5 @@ sudo make install
 
 cd $SOURCE_DIR
 
-rm -r $DIRECTORY
+sudo rm -rf $DIRECTORY
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
