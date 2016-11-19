@@ -5,6 +5,7 @@ import pwd
 import subprocess
 import sys
 from subprocess import check_output
+from getpass import getpass
 
 propsFile = 'build-properties'
 
@@ -105,8 +106,8 @@ def inputBuildProperties():
 		readInput("Install Desktop Environment? (y/N) ", 'INSTALL_DESKTOP_ENVIRONMENT', propsFile, 'n')
 		if getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'y' or getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'Y':
 			readInput("Choose the Desktop Environment you want to install:\n1) XFCE\n2) Mate\n3) KDE\n4) Gnome\n5) LXDE\n\nEnter your choice (1-5): ", 'DESKTOP_ENVIRONMENT', propsFile, '2')
-	rootpassword = raw_input('Enter the root password : ')
-	userpassword = raw_input('Enter the user password : ')
+	rootpassword = getpass('Enter the root password : ')
+	userpassword = getpass('Enter the user password : ')
 
 def freshBuild(startFrom):
 	startFrom = int(startFrom)
@@ -116,8 +117,8 @@ def freshBuild(startFrom):
 		inputBuildProperties()
 		startFrom = startFrom + 1
 	else:
-		rootpassword = raw_input('Enter the root password : ')
-	        userpassword = raw_input('Enter the user password : ')
+		rootpassword = getpass('Enter the root password : ')
+	        userpassword = getpass('Enter the user password : ')
 
 	if startFrom == 2:
 		try:
