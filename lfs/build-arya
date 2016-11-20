@@ -18,6 +18,7 @@ def getpassword(prompt, promptagain):
 	if password1 == password2:
 		return password1
 	else:
+		print 'Passwords do not match. Retrying...'
 		return getpassword(prompt, promptagain)
 
 def runWithEnvAs(user, commands, env, cwd):
