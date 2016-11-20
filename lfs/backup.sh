@@ -9,7 +9,6 @@ set +h
 
 LABEL=$1
 TOOLCHAIN_BACKUP=$2
-echo "Backing up for $LABEL."
 sleep 5
 
 LFS=/mnt/lfs
