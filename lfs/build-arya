@@ -9,6 +9,9 @@ import getpass
 
 propsFile = 'build-properties'
 
+rootpassword = ''
+userpassword = ''
+
 def getpassword(prompt, promptagain):
 	password1 = getpass.getpass(prompt)
 	password2 = getpass.getpass(promptagain)
