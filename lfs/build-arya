@@ -5,13 +5,13 @@ import pwd
 import subprocess
 import sys
 from subprocess import check_output
-from getpass import getpass
+import getpass
 
 propsFile = 'build-properties'
 
 def getpassword(prompt, promptagain):
-	pass = getpass(prompt)
-	pass1 = getpass(promptagain)
+	pass = getpass.getpass(prompt)
+	pass1 = getpass.getpass(promptagain)
 	if pass == pass1:
 		return pass
 	else:
