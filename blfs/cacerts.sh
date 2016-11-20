@@ -237,8 +237,7 @@ sudo rm rootscript.sh
 
 
 URL=http://anduin.linuxfromscratch.org/BLFS/other/certdata.txt &&
-rm -f certdata.txt &&
-wget $URL          &&
+wget -nc $URL          &&
 make-ca.sh         &&
 unset URL
 
