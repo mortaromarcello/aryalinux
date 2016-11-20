@@ -5,6 +5,9 @@ set +h
 
 cd /sources/
 
+echo $1
+echo $2
+
 if ! grep "root-and-admin-passwords" /sources/build-log &> /dev/null
 then
 
