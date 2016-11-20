@@ -211,7 +211,7 @@ def freshBuild(startFrom):
 				startFrom = startFrom + 1
 				if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
 					try:
-					        files = os.listdir('/root')
+					        files = os.listdir('/mnt/lfs/sources/')
 					        found = False
 					        for file in files:
 					                if file.startswith('aryalinux') and 'base-system-with-xserver' in file and file.endswith('.tar.xz'):
@@ -220,7 +220,7 @@ def freshBuild(startFrom):
 					        if not found:
 					                p = subprocess.Popen(['./strip-debug.sh'], shell=True)
 					                p.wait()
-				        	        p = subprocess.Popen(['./backup.sh', 'base-system-with-xserver', 'n'], shell=True)
+				        	        p = subprocess.Popen(['./backup.sh base-system-with-xserver n'], shell=True)
 					        	p.wait()
 						else:
 					                print 'X-Server backup already present. Not backing up again.'
@@ -245,16 +245,16 @@ def freshBuild(startFrom):
 				startFrom = startFrom + 1
 				if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
 					try:
-				        	files = os.listdir('/root')
+				        	files = os.listdir('/mnt/lfs/sources/')
 					        found = False
 					        for file in files:
-					                if file.startswith('aryalinux') and 'base-system-with-' + desktopEnv in file and file.endswith('.tar.xz'):
+					                if file.startswith('aryalinux') and 'base-system-with-' + desktopEnv in file and file.endswith('.tar.gz'):
 				        	                found = True
 				                	        break
 					        if not found:
 					                p = subprocess.Popen(['./strip-debug.sh'], shell=True)
 					                p.wait()
-				        	        p = subprocess.Popen(['./backup.sh', 'base-system-with-' + desktopEnv, 'n'], shell=True)
+				        	        p = subprocess.Popen(['./backup.sh base-system-with-' + desktopEnv + ' n'], shell=True)
 				                	p.wait()
 					        else:
 					                print 'Desktop environment backup already present. Not backing up again.'
