@@ -79,7 +79,7 @@ chmod -v a+wt $LFS/sources
 
 ln -svf $LFS/sources /sources
 
-cp -r ../sources/* $LFS/sources
+cp -r ~/sources/* $LFS/sources
 touch $LFS/sources/currentstage
 
 mkdir -v $LFS/tools
@@ -87,9 +87,9 @@ ln -sv $LFS/tools /
 
 mkdir -pv $LFS/var/cache/alps/sources
 
-if [ -d ../sources-apps ]
+if [ -d ~/sources-apps ]
 then
-	cp -r ../sources-apps/* $LFS/var/cache/alps/sources/
+	cp -r ~/sources-apps/* $LFS/var/cache/alps/sources/
 	chmod -R a+rw $LFS/var/cache/alps/sources
 fi
 
