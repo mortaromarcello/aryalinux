@@ -193,7 +193,7 @@ def freshBuild(startFrom):
 			if not found:
 				p = subprocess.Popen(['./strip-debug.sh'], shell=True)
 				p.wait()
-				p = subprocess.Popen(['./backup.sh', 'base-system', 'y'], shell=True)
+				p = subprocess.Popen(['./backup.sh base-system y'], shell=True)
 				p.wait()
 			else:
 				print 'Base system backup already present. Not creating again'
