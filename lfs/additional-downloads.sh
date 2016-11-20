@@ -5,7 +5,7 @@ set +h
 
 VERSION=2016.11
 
-pushd ../sources
+pushd ~/sources
 
 wget -nc http://pkgs.fedoraproject.org/lookaside/pkgs/dosfstools/dosfstools-3.0.26.tar.xz/45012f5f56f2aae3afcd62120b9e5a08/dosfstools-3.0.26.tar.xz
 wget -nc http://ftp.gnu.org/gnu/which/which-2.21.tar.gz
