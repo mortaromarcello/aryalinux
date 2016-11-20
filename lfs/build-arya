@@ -203,8 +203,6 @@ def freshBuild(startFrom):
 			exit()
 
 	if startFrom == 6:
-		print '"' + getParamValue('INSTALL_XSERVER') + '"'
-		print getParamValue('INSTALL_XSERVER') == 'y' or getParamValue('INSTALL_XSERVER') == 'Y'
 		if getParamValue('INSTALL_XSERVER') == 'y' or getParamValue('INSTALL_XSERVER') == 'Y':
 			try:
 				logCurrentStage('6')

@@ -58,14 +58,20 @@ else
 # read -p "Enter the username that would be logged into live system by default : " USERNAME
 # read -p "Enter the default label for the boot entry in the Live System : " LABEL
 # read -p "Enter the name of the ISO file to be generated : " OUTFILE
-if [ "$DESKTOP_ENVIRONMENT" == "1" ]; then DE="XFCE"; elif [ "$DESKTOP_ENVIRONMENT" == "2" ] DE="Mate"; else DE=""; fi
-LABEL="$OS_NAME $DE $OS_VERSION"
+if [ "x$INSTALL_DESKTOP_ENVIRONMENT" == "xy" ]; then
+	if [ "x$DESKTOP_ENVIRONMENT" == "x1" ]; then DE="XFCE"; elif [ "x$DESKTOP_ENVIRONMENT" == "x2" ]; then DE="Mate"; else DE=""; fi
+	LABEL="$OS_NAME $DE $OS_VERSION"
+else
+	LABEL="OS_NAME $OS_VERSION"
+fi
+
 if [ "x$DE" != "x" ]
 then
 	OUTFILE="$(echo $OS_NAME | tr '[:upper:]' [:lower:])-$(echo $DE | tr '[:upper:]' '[:lower:]')-$OS_VERSION-$(uname -m).iso"
 else
 	OUTFILE="$(echo $OS_NAME | tr '[:upper:]' [:lower:])-$OS_VERSION-$(uname -m).iso"
 fi
+
 CREATE_ROOTSFS="y"
 
 fi
