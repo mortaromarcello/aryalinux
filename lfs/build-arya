@@ -268,9 +268,9 @@ def freshBuild(startFrom):
 	pr.wait()
 
 print 'Do you want to start a new build or resume a build that was previously started ?'
-print '1. Strart a fresh build'
+print '1. Start a fresh build'
 print '2. Resume the last build'
-print '3. Start a stage from scratch'
+print '3. Resume from a certain stage'
 response = raw_input('Enter your choice (1 ... 2): ')
 if response == '1':
 	freshBuild(1)
