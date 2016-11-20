@@ -179,7 +179,7 @@ def freshBuild(startFrom):
 			print 'Error occured while running stage 4'
 			exit()
 
-        pr = subprocess.Popen(['./enteral.sh /sources/final-stage.sh ' + rootpassword + ' ' + userpassword], shell=True)
+        pr = subprocess.Popen(['./enteral.sh /sources/final-stage.sh "' + rootpassword + '" "' + userpassword + '"'], shell=True)
         pr.wait()
 
 	if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
