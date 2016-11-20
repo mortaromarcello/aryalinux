@@ -23,7 +23,7 @@ mkdosfs -F 12 efiboot.img
 MOUNTPOINT=$(mktemp -d)
 mount -o loop efiboot.img $MOUNTPOINT
 mkdir -p $MOUNTPOINT/EFI/BOOT
-cp -a bootx64.efi $MOUNTPOINT/EFI/BOOT
+cp -v bootx64.efi $MOUNTPOINT/EFI/BOOT
 cat > $MOUNTPOINT/EFI/BOOT/grub.cfg << EOF
 set default="0"
 set timeout="30"
