@@ -10,10 +10,10 @@ import getpass
 propsFile = 'build-properties'
 
 def getpassword(prompt, promptagain):
-	pass = getpass.getpass(prompt)
-	pass1 = getpass.getpass(promptagain)
-	if pass == pass1:
-		return pass
+	password1 = getpass.getpass(prompt)
+	password2 = getpass.getpass(promptagain)
+	if password1 == password2:
+		return password1
 	else:
 		return getpassword(prompt, promptagain)
 
