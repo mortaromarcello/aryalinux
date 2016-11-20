@@ -12,15 +12,11 @@ then
 elif [ -f ./build-properties ]
 then
 	. ./build-properties
+	mount -v -t ext4 $ROOT_PART $LFS
 fi
 
 export LFS=/mnt/lfs
 mkdir -pv $LFS
-
-if [ "$COMMAND" == "chroot" ]
-then
-	mount -v -t ext4 $ROOT_PART $LFS
-fi
 
 if [ "$HOME_PART" != "" ]
 then
