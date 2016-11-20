@@ -71,4 +71,9 @@ VERSION=4.12
 #REQ:usb_modeswitch
 #REQ:compton
 
+cd $SOURCE_DIR
+wget -nc aryalinux-xfce-config.tar.gz
+tar xf aryalinux-xfce-config.tar.gz -C ~
+sudo tar xf aryalinux-xfce-config.tar.gz -C /etc/skel/
+
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
