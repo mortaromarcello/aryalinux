@@ -9,6 +9,14 @@ from getpass import getpass
 
 propsFile = 'build-properties'
 
+def getpassword(prompt, promptagain):
+	pass = getpass(prompt)
+	pass1 = getpass(promptagain)
+	if pass == pass1:
+		return pass
+	else:
+		return getpassword(prompt, promptagain)
+
 def runWithEnvAs(user, commands, env, cwd):
 	userRecord = pwd.getpwnam(user)
 	userUid = userRecord.pw_uid
@@ -106,8 +114,8 @@ def inputBuildProperties():
 		readInput("Install Desktop Environment? (y/N) ", 'INSTALL_DESKTOP_ENVIRONMENT', propsFile, 'n')
 		if getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'y' or getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'Y':
 			readInput("Choose the Desktop Environment you want to install:\n1) XFCE\n2) Mate\n3) KDE\n4) Gnome\n5) LXDE\n\nEnter your choice (1-5): ", 'DESKTOP_ENVIRONMENT', propsFile, '2')
-	rootpassword = getpass('Enter the root password : ')
-	userpassword = getpass('Enter the user password : ')
+	rootpassword = getpassword('Enter the root password : ', 'Re-enter the root password : ')
+	userpassword = getpassword('Enter the user password : ', 'Re-enter the user password : ')
 
 def freshBuild(startFrom):
 	startFrom = int(startFrom)
@@ -117,8 +125,8 @@ def freshBuild(startFrom):
 		inputBuildProperties()
 		startFrom = startFrom + 1
 	else:
-		rootpassword = getpass('Enter the root password : ')
-	        userpassword = getpass('Enter the user password : ')
+		rootpassword = getpassword('Enter the root password : ', 'Re-enter the root password : ')
+	        userpassword = getpassword('Enter the user password : ', 'Re-enter the user password : ')
 
 	if startFrom == 2:
 		try:
@@ -168,9 +176,12 @@ def freshBuild(startFrom):
 			print 'Error occured while running stage 4'
 			exit()
 
+        pr = subprocess.Popen(['./enteral.sh', './final-stage.sh', rootpassword, userpassword], shell=True)
+        pr.wait()
+
 	if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
 		try:
-			files = os.listdir('/root')
+			files = os.listdir('/mnt/lfs/sources')
 			found = False
 			for file in files:
 				if file.startswith('aryalinux') and 'base-system' in file and file.endswith('.tar.xz'):
@@ -253,7 +264,6 @@ def freshBuild(startFrom):
                         print 'Error occured while backing up base-system-with-' + desktopEnv + '. Aborting.'
                         exit()
 
-	runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/final-stage.sh', rootpassword, userpassword])
 	pr = subprocess.Popen(['./createlivedisk.sh'], shell=True)
 	pr.wait()
 
