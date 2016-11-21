@@ -179,6 +179,11 @@ def freshBuild(startFrom):
 			print 'Error occured while running stage 4'
 			exit()
 
+	print '*** passwords ***'
+	print passwords['root']
+	print passwords['user']
+	print '***'
+
         pr = subprocess.Popen(['./enteral.sh /sources/final-stage.sh "' + passwords['root'] + '" "' + passwords['user'] + '"'], shell=True)
         pr.wait()
 
