@@ -9,8 +9,7 @@ import getpass
 
 propsFile = 'build-properties'
 
-rootpassword = ''
-userpassword = ''
+passwords = {}
 
 def getpassword(prompt, promptagain):
 	password1 = getpass.getpass(prompt)
@@ -118,8 +117,8 @@ def inputBuildProperties():
 		readInput("Install Desktop Environment? (y/N) ", 'INSTALL_DESKTOP_ENVIRONMENT', propsFile, 'n')
 		if getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'y' or getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'Y':
 			readInput("Choose the Desktop Environment you want to install:\n1) XFCE\n2) Mate\n3) KDE\n4) Gnome\n5) LXDE\n\nEnter your choice (1-5): ", 'DESKTOP_ENVIRONMENT', propsFile, '2')
-	rootpassword = getpassword('Enter the root password : ', 'Re-enter the root password : ')
-	userpassword = getpassword('Enter the user password : ', 'Re-enter the user password : ')
+	passwords['root'] = getpassword('Enter the root password : ', 'Re-enter the root password : ')
+	passwords['user'] = getpassword('Enter the user password : ', 'Re-enter the user password : ')
 
 def freshBuild(startFrom):
 	startFrom = int(startFrom)
@@ -129,8 +128,8 @@ def freshBuild(startFrom):
 		inputBuildProperties()
 		startFrom = startFrom + 1
 	else:
-		rootpassword = getpassword('Enter the root password : ', 'Re-enter the root password : ')
-	        userpassword = getpassword('Enter the user password : ', 'Re-enter the user password : ')
+		passwords['root'] = getpassword('Enter the root password : ', 'Re-enter the root password : ')
+	        passwords['user'] = getpassword('Enter the user password : ', 'Re-enter the user password : ')
 
 	if startFrom == 2:
 		try:
@@ -180,7 +179,7 @@ def freshBuild(startFrom):
 			print 'Error occured while running stage 4'
 			exit()
 
-        pr = subprocess.Popen(['./enteral.sh /sources/final-stage.sh "' + rootpassword + '" "' + userpassword + '"'], shell=True)
+        pr = subprocess.Popen(['./enteral.sh /sources/final-stage.sh "' + passwords['root'] + '" "' + passwords['user'] + '"'], shell=True)
         pr.wait()
 
 	if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
