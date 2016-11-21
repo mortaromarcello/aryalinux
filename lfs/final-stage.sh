@@ -8,7 +8,9 @@ cd /sources/
 if ! grep "root-and-admin-passwords" /sources/build-log &> /dev/null
 then
 
-clear
+echo "Root password : $1"
+echo "User password : $2"
+
 echo "Setting the password for root :"
 yes "$1" | passwd root
 
