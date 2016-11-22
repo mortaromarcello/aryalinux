@@ -30,7 +30,7 @@ DIRECTORY=$(unzip -l $TARBALL | grep "/" | rev | tr -s " " | cut -d " " -f1 | re
 unzip -o $TARBALL
 cd $DIRECTORY
 
-find Breeze* -type f -exec install -Dm644 '{}' "$pkgdir/usr/share/themes/{}" ;
+sudo cp -r Breeze* /usr/share/themes/
 
 cd $SOURCE_DIR
 rm -rf $DIRECTORY
