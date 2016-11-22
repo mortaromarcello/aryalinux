@@ -76,4 +76,70 @@ wget -nc aryalinux.org/releases/latest/aryalinux-xfce-config.tar.gz
 tar xf aryalinux-xfce-config.tar.gz -C ~
 sudo tar xf aryalinux-xfce-config.tar.gz -C /etc/skel/
 
+sudo tee /etc/gtk-2.0/gtkrc <<"EOF"
+include "/usr/share/themes/Clearlooks/gtk-2.0/gtkrc"
+gtk-icon-theme-name = "elementary"
+EOF
+
+sudo mkdir -pv /etc/polkit-1/localauthority/50-local.d/
+sudo mkdir -pv /etc/polkit-1/rules.d/
+
+sudo tee /etc/polkit-1/rules.d/50-org.freedesktop.NetworkManagerAndUdisks2.rules <<"EOF"
+polkit.addRule(function(action, subject) {
+  if (action.id.indexOf("org.freedesktop.NetworkManager.") == 0 || action.id.indexOf("org.freedesktop.udisks2.filesystem-mount") == 0) {
+    return polkit.Result.YES;
+  }
+});
+EOF
+
+sudo mkdir -pv /usr/share/icons/default/
+sudo tee /usr/share/icons/default/index.theme <<"EOF"
+[Icon Theme]
+Inherits=Adwaita
+EOF
+
+ccache -C
+sudo ccache -C
+ccache -c
+sudo ccache -c
+
+rm -rf ~/.ccache
+sudo rm -rf ~/.ccache
+xdg-user-dirs-update
+sudo xdg-user-dirs-update
+
+sudo tee /etc/profile.d/xdg.sh << EOF
+cd ~
+xdg-user-dirs-update
+EOF
+
+sudo rm -rf /etc/X11/xorg.conf.d/*
+
+sudo tee /etc/X11/xorg.conf.d/99-synaptics-overrides.conf <<"EOF"
+Section  "InputClass"
+    Identifier  "touchpad overrides"
+    # This makes this snippet apply to any device with the "synaptics" driver
+    # assigned
+    MatchDriver  "synaptics"
+
+    ####################################
+    ## The lines that you need to add ##
+    # Enable left mouse button by tapping
+    Option  "TapButton1"  "1"
+    # Enable vertical scrolling
+    Option  "VertEdgeScroll"  "1"
+    # Enable right mouse button by tapping lower right corner
+    Option "RBCornerButton" "3"
+    ####################################
+
+EndSection
+EOF
+
+if [ ! -f /usr/share/pixmaps/aryalinux.org ]
+then
+pushd /usr/share/pixmaps/
+sudo wget aryalinux.org/releases/2016.04/aryalinux.png
+popd
+fi
+
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
