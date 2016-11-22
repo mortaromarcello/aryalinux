@@ -28,7 +28,7 @@ else
 	wget -nc $URL
 	TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 fi
-DIRECTORY=$(unzip -l $TARBALL | grep "/" | cut -d/ -f1 | uniq)
+DIRECTORY=$(unzip -l $TARBALL | grep "/" | rev | tr -s " " | cut -d " " -f1 | rev | cut -d/ -f1 | uniq)
 unzip -o $TARBALL
 cd $DIRECTORY
 
