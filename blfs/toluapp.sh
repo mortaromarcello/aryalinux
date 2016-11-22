@@ -6,17 +6,29 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+SOURCE_ONLY=n
 NAME="toluapp"
-VERSION="svn"
+VERSION=SVN
+DESCRIPTION="tolua++ is an extension of toLua, a tool to integrate C/C++ code with Lua"
 
 #REQ:lua
 #REQ:cmake
-#REQ:git
 
 cd $SOURCE_DIR
-
-git clone https://github.com/LuaDist/toluapp.git
-cd toluapp
+URL="https://github.com/LuaDist/toluapp/archive/master.zip"
+if [ ! -z $(echo $URL | grep "/master.zip$") ] && [ ! -f $NAME-master.zip ]; then
+	wget -nc $URL -O $NAME-master.zip
+	TARBALL=$NAME-master.zip
+elif [ ! -z $(echo $URL | grep "/master.zip$") ] && [ -f $NAME-master.zip ]; then
+	echo "Tarball already downloaded. Skipping."
+	TARBALL=$NAME-master.zip
+else
+	wget -nc $URL
+	TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+fi
+DIRECTORY=$(unzip -l $TARBALL | grep "/" | rev | tr -s ' ' | cut -d ' ' -f1 | rev | cut -d/ -f1 | uniq)
+unzip -o $TARBALL
+cd $DIRECTORY
 
 cat > config_linux.py <<"EOF"
 ## This is the linux configuration file
@@ -57,6 +69,6 @@ make
 sudo make install
 
 cd $SOURCE_DIR
-rm -rf toluapp
+rm -rf $DIRECTORY
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
