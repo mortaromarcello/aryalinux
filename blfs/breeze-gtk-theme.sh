@@ -8,20 +8,31 @@ set +h
 
 SOURCE_ONLY=n
 NAME="breeze-gtk-theme"
-DESCRIPTION="A gtk+ theme similar to the breeze KDE theme"
-VERSION="SVN-`date -I`"
+VERSION=SVN
+DESCRIPTION="A GTK Theme Built to Match KDE's Breeze"
 
-#REQ:git
 #REQ:gtk2
 #REQ:gtk3
 
 cd $SOURCE_DIR
+URL="https://github.com/dirruk1/gnome-breeze/archive/master.zip"
+if [ ! -z $(echo $URL | grep "/master.zip$") ] && [ ! -f $NAME-master.zip ]; then
+	wget -nc $URL -O $NAME-master.zip
+	TARBALL=$NAME-master.zip
+elif [ ! -z $(echo $URL | grep "/master.zip$") ] && [ -f $NAME-master.zip ]; then
+	echo "Tarball already downloaded. Skipping."
+	TARBALL=$NAME-master.zip
+else
+	wget -nc $URL
+	TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+fi
+DIRECTORY=$(unzip -l $TARBALL | grep "/" | cut -d/ -f1 | uniq)
+unzip -o $TARBALL
+cd $DIRECTORY
 
-git clone https://github.com/dirruk1/gnome-breeze.git
-cd gnome-breeze
-find Breeze* -type f -exec sudo install -Dm644 '{}' "/usr/share/themes/{}" \;
+find Breeze* -type f -exec install -Dm644 '{}' "$pkgdir/usr/share/themes/{}" ;
 
 cd $SOURCE_DIR
-rm -rf gnome-breeze
+rm -rf $DIRECTORY
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
