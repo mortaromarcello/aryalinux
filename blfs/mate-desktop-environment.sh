@@ -188,7 +188,7 @@ sudo sed -i "0,/<default>true<\/default>/{s/<default>true<\/default>/<default>fa
 
 cd /usr/share/glib-2.0/schemas/
 
-cat > org.mate.peripherals-touchpad.gschema.xml <<"EOF"
+sudo tee org.mate.peripherals-touchpad.gschema.xml <<"EOF"
 <schemalist gettext-domain="mate-screensaver">
   <enum id="org.mate.screensaver.Mode">
     <value nick="blank-only" value="0"/>
@@ -334,7 +334,7 @@ cat > org.mate.peripherals-touchpad.gschema.xml <<"EOF"
 </schemalist>
 EOF
 
-cat > org.mate.screensaver.gschema.xml <<"EOF"
+sudo tee org.mate.screensaver.gschema.xml <<"EOF"
 <schemalist gettext-domain="mate-screensaver">
   <enum id="org.mate.screensaver.Mode">
     <value nick="blank-only" value="0"/>
@@ -421,6 +421,6 @@ cat > org.mate.screensaver.gschema.xml <<"EOF"
 </schemalist>
 EOF
 
-glib-compile-schemas .
+sudo glib-compile-schemas .
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
