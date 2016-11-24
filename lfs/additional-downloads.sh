@@ -4,6 +4,7 @@ set -e
 set +h
 
 VERSION=2016.11
+GIT_DIR=$(pwd)/..
 
 pushd ~/sources
 
@@ -46,13 +47,13 @@ wget -nc http://aryalinux.org/releases/2016.08/0.21-nvme_ioctl.h.patch
 
 # wget -nc http://aryalinux.org/releases/$VERSION/alps-scripts-2016.11.tar.gz
 
-pushd ~/aryalinux/blfs
+pushd $GIT_DIR/blfs
 git checkout $VERSION
 git pull
 tar -czf alps-scripts-$VERSION.tar.gz *.sh
 popd
 
-mv -f ~/aryalinux/blfs/alps-scripts-$VERSION.tar.gz .
+mv -f $GIT_DIR/blfs/alps-scripts-$VERSION.tar.gz .
 
 wget -nc https://sourceforge.net/projects/cdrtools/files/cdrtools-3.01.tar.bz2
 wget -nc https://launchpad.net/ubuntu/+archive/primary/+files/cdrkit_1.1.11.orig.tar.gz
@@ -63,10 +64,14 @@ wget -nc http://downloads.sourceforge.net/infozip/unzip60.tar.gz
 
 set +e
 
-wget https://raw.githubusercontent.com/FluidIdeas/alps/master/var/lib/alps/functions -O functions
-wget https://raw.githubusercontent.com/FluidIdeas/alps/master/usr/bin/alps -O alps
-wget https://raw.githubusercontent.com/FluidIdeas/alps/master/etc/alps/alps.conf -O alps.conf
-wget https://raw.githubusercontent.com/FluidIdeas/package-builder/master/makepkg.sh -O makepkg.sh
+mv -vf $GIT_DIR/functions ./
+mv -vf $GIT_DIR/alps ./
+mv -vf $GIT_DIR/alps.conf ./
+mv -vf $GIT_DIR/makepkg.sh ./
+#wget https://raw.githubusercontent.com/FluidIdeas/alps/master/var/lib/alps/functions -O functions
+#wget https://raw.githubusercontent.com/FluidIdeas/alps/master/usr/bin/alps -O alps
+#wget https://raw.githubusercontent.com/FluidIdeas/alps/master/etc/alps/alps.conf -O alps.conf
+#wget https://raw.githubusercontent.com/FluidIdeas/package-builder/master/makepkg.sh -O makepkg.sh
 
 set -e
 
