@@ -21,10 +21,12 @@ then
 cd $SOURCE_DIR
 
 if [ "$TARBALL" != "" ]
+then
 	DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
 	tar xf $TARBALL
 	cd $DIRECTORY
 fi
+
 sed -i '/Error loading kernel symbols/{n;n;d}' ksym_mod.c
 sed -i 's/union wait/int/' syslogd.c
 

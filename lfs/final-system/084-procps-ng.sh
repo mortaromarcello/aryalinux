@@ -34,8 +34,7 @@ fi
             --libdir=/usr/lib                        \
             --docdir=/usr/share/doc/procps-ng-3.3.12 \
             --disable-static                         \
-            --disable-kill                           \
-            --with-systemd
+            --disable-kill
 make
 make install
 mv -v /usr/lib/libprocps.so.* /lib

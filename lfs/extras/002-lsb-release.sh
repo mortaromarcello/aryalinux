@@ -36,7 +36,7 @@ ID="$OS_CODENAME"
 PRETTY_NAME="$OS_NAME $OS_VERSION ($OS_CODENAME)"
 EOF
 
-echo 7.9-systemd-rc2 > /etc/lfs-release
+echo 7.10 > /etc/lfs-release
 
 cat > /etc/lsb-release <<EOF
 DISTRIB_ID="$OS_NAME"

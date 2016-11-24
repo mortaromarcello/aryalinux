@@ -8,8 +8,12 @@ LFS=/mnt/lfs
 chown -R root:root $LFS/tools
 
 mkdir -pv $LFS/{dev,proc,sys,run}
-mknod -m 600 $LFS/dev/console c 5 1
-mknod -m 666 $LFS/dev/null c 1 3
+if [ ! -e $LFS/dev/console ]; then
+	mknod -m 600 $LFS/dev/console c 5 1
+fi
+if [ ! -e $LFS/dev/null ]; then
+	mknod -m 666 $LFS/dev/null c 1 3
+fi
 mount -v --bind /dev $LFS/dev
 
 mount -vt devpts devpts $LFS/dev/pts -o gid=5,mode=620

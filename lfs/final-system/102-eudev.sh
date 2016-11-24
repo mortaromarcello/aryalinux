@@ -21,6 +21,7 @@ then
 cd $SOURCE_DIR
 
 if [ "$TARBALL" != "" ]
+then
 	DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
 	tar xf $TARBALL
 	cd $DIRECTORY
