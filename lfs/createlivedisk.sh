@@ -133,16 +133,6 @@ then
 	sed -i "s@#autologin-user=@autologin-user=$USERNAME@g" $LFS/etc/lightdm/lightdm.conf
 	sed -i "s@#autologin-user-timeout=0@autologin-user-timeout=0@g" $LFS/etc/lightdm/lightdm.conf
 	sed -i "s@#pam-service=lightdm-autologin@pam-service=lightdm-autologin@g" $LFS/etc/lightdm/lightdm.conf
-else
-	mkdir -pv $LFS/etc/systemd/system/getty@tty1.service.d/
-	pushd $LFS/etc/systemd/system/getty@tty1.service.d/
-cat >override.conf<<EOF
-[Service]
-Type=simple
-ExecStart=
-ExecStart=-/sbin/agetty --autologin $USERNAME --noclear %I 38400 linux
-EOF
-	popd
 fi
 
 rm -f $LFS/sources/root.sfs
@@ -153,8 +143,6 @@ then
 	sed -i "s@autologin-user=$USERNAME@#autologin-user=@g" $LFS/etc/lightdm/lightdm.conf
 	sed -i "s@autologin-user-timeout=0@#autologin-user-timeout=0@g" $LFS/etc/lightdm/lightdm.conf
         sed -i "s@pam-service=lightdm-autologin@#pam-service=lightdm-autologin@g" $LFS/etc/lightdm/lightdm.conf
-else
-	rm -fv /etc/systemd/system/getty@tty1.service.d/override.conf
 fi
 
 fi
