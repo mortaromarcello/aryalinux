@@ -64,10 +64,10 @@ wget -nc http://downloads.sourceforge.net/infozip/unzip60.tar.gz
 
 set +e
 
-mv -vf $GIT_DIR/functions ./
-mv -vf $GIT_DIR/alps ./
-mv -vf $GIT_DIR/alps.conf ./
-mv -vf $GIT_DIR/makepkg.sh ./
+cp -v $GIT_DIR/lfs/functions ./
+cp -v $GIT_DIR/lfs/alps ./
+cp -v $GIT_DIR/lfs/alps.conf ./
+cp -v $GIT_DIR/lfs/makepkg.sh ./
 #wget https://raw.githubusercontent.com/FluidIdeas/alps/master/var/lib/alps/functions -O functions
 #wget https://raw.githubusercontent.com/FluidIdeas/alps/master/usr/bin/alps -O alps
 #wget https://raw.githubusercontent.com/FluidIdeas/alps/master/etc/alps/alps.conf -O alps.conf
