@@ -6,16 +6,22 @@ import subprocess
 import sys
 from subprocess import check_output
 import getpass
+from Crypto.Cipher import AES
+import base64
 
 propsFile = 'build-properties'
 
 passwords = {}
+encoded_passwords = {}
+
+secret_key = '13fFgYjK7iOyG564'
+cipher = AES.new(secret_key,AES.MODE_ECB)
 
 def getpassword(prompt, promptagain):
 	password1 = getpass.getpass(prompt)
 	password2 = getpass.getpass(promptagain)
 	if password1 == password2:
-		return password1
+		return password1.rjust(32)
 	else:
 		print 'Passwords do not match. Retrying...'
 		return getpassword(prompt, promptagain)
@@ -32,10 +38,10 @@ def runWithEnvAs(user, commands, env, cwd):
 		exit()
 
 def demote(user_uid, user_gid):
-    def result():
-        os.setgid(user_gid)
-        os.setuid(user_uid)
-    return result
+	def result():
+		os.setgid(user_gid)
+		os.setuid(user_uid)
+	return result
 
 def runScriptWithEnvAs(user, script, env, cwd):
 	runWithEnvAs(user, ['/bin/bash', script], env, cwd)
@@ -54,25 +60,31 @@ def runScriptWithArgs(script, cwd, args):
 	if result != 0:
 		exit()
 
-def readInput(message, varName, fileName, defaultValue, append=True):
+def readInput(message, varName, fileName, defaultValue, append=True, interactive=True):
 	if append:
 		with open(fileName, 'a') as f:
-			response = raw_input(message)
-			if response == '':
+			if interactive:
+				response = raw_input(message)
+				if response == '':
+					response = defaultValue
+			else:
 				response = defaultValue
 			f.write(varName + '="' + response + '"\n')
 	else:
-                with open(fileName, 'w') as f:
-                        response = raw_input(message)
-			if response == '':
+		with open(fileName, 'w') as f:
+			if interactive:
+				response = raw_input(message)
+				if response == '':
+					response = defaultValue
+			else:
 				response = defaultValue
-                        f.write(varName + '="' + response + '"\n')
+			f.write(varName + '="' + response + '"\n')
 
 def getParamValue(paramName):
 	with open(propsFile) as f:
 		for line in f:
 			if line.startswith(paramName):
-				return line.replace(paramName, '').replace('"', '').replace('=', '').strip()
+				return line.replace(paramName, '').replace('"', '').replace('=', '', 1).strip()
 	return None
 
 def makeLogEntry(message, logFile):
@@ -118,7 +130,11 @@ def inputBuildProperties():
 		if getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'y' or getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'Y':
 			readInput("Choose the Desktop Environment you want to install:\n1) XFCE\n2) Mate\n3) KDE\n4) Gnome\n5) LXDE\n\nEnter your choice (1-5): ", 'DESKTOP_ENVIRONMENT', propsFile, '2')
 	passwords['root'] = getpassword('Enter the root password : ', 'Re-enter the root password : ')
+	encoded_passwords['root'] = base64.b64encode(cipher.encrypt(passwords['root']))
 	passwords['user'] = getpassword('Enter the user password : ', 'Re-enter the user password : ')
+	encoded_passwords['user'] = base64.b64encode(cipher.encrypt(passwords['user']))
+	readInput('', 'ROOT_PASSWORD', propsFile, encoded_passwords['root'], True, False)
+	readInput('', 'USER_PASSWORD', propsFile, encoded_passwords['user'], True, False)
 
 def freshBuild(startFrom):
 	startFrom = int(startFrom)
@@ -128,8 +144,10 @@ def freshBuild(startFrom):
 		inputBuildProperties()
 		startFrom = startFrom + 1
 	else:
-		passwords['root'] = getpassword('Enter the root password : ', 'Re-enter the root password : ')
-	        passwords['user'] = getpassword('Enter the user password : ', 'Re-enter the user password : ')
+		passwords['root'] = cipher.decrypt(base64.b64decode(getParamValue('ROOT_PASSWORD')))
+		passwords['user'] = cipher.decrypt(base64.b64decode(getParamValue('USER_PASSWORD')))
+		#passwords['root'] = getpassword('Enter the root password : ', 'Re-enter the root password : ')
+		#passwords['user'] = getpassword('Enter the user password : ', 'Re-enter the user password : ')
 
 	if startFrom == 2:
 		try:
@@ -179,8 +197,8 @@ def freshBuild(startFrom):
 			print 'Error occured while running stage 4'
 			exit()
 	try:
-	        pr = subprocess.Popen(['./enteral.sh /sources/final-stage.sh "' + passwords['root'] + '" "' + passwords['user'] + '"'], shell=True)
-        	pr.wait()
+			pr = subprocess.Popen(['./enteral.sh /sources/final-stage.sh "' + passwords['root'] + '" "' + passwords['user'] + '"'], shell=True)
+			pr.wait()
 	except Exception as ex:
 		print ex
 
@@ -212,22 +230,22 @@ def freshBuild(startFrom):
 				startFrom = startFrom + 1
 				if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
 					try:
-					        files = os.listdir('/mnt/lfs/sources/')
-					        found = False
-					        for file in files:
-					                if file.startswith('aryalinux') and 'base-system-with-xserver' in file and file.endswith('.tar.xz'):
-				        	                found = True
-				                	        break
-					        if not found:
-					                p = subprocess.Popen(['./strip-debug.sh'], shell=True)
-					                p.wait()
-				        	        p = subprocess.Popen(['./backup.sh base-system-with-xserver n'], shell=True)
-					        	p.wait()
-						else:
-					                print 'X-Server backup already present. Not backing up again.'
+						files = os.listdir('/mnt/lfs/sources/')
+						found = False
+						for file in files:
+							if file.startswith('aryalinux') and 'base-system-with-xserver' in file and file.endswith('.tar.xz'):
+								found = True
+								break
+							if not found:
+								p = subprocess.Popen(['./strip-debug.sh'], shell=True)
+								p.wait()
+								p = subprocess.Popen(['./backup.sh base-system-with-xserver n'], shell=True)
+								p.wait()
+							else:
+								print 'X-Server backup already present. Not backing up again.'
 					except:
-					        print 'Error occured while backing up base-system-with-xserver. Aborting.'
-					        exit()
+						print 'Error occured while backing up base-system-with-xserver. Aborting.'
+						exit()
 			except:
 				print 'Error occured in the installation of x-server'
 				exit()
@@ -246,22 +264,22 @@ def freshBuild(startFrom):
 				startFrom = startFrom + 1
 				if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
 					try:
-				        	files = os.listdir('/mnt/lfs/sources/')
-					        found = False
-					        for file in files:
-					                if file.startswith('aryalinux') and 'base-system-with-' + desktopEnv in file and file.endswith('.tar.gz'):
-				        	                found = True
-				                	        break
-					        if not found:
-					                p = subprocess.Popen(['./strip-debug.sh'], shell=True)
-					                p.wait()
-				        	        p = subprocess.Popen(['./backup.sh base-system-with-' + desktopEnv + ' n'], shell=True)
-				                	p.wait()
-					        else:
-					                print 'Desktop environment backup already present. Not backing up again.'
+							files = os.listdir('/mnt/lfs/sources/')
+							found = False
+							for file in files:
+									if file.startswith('aryalinux') and 'base-system-with-' + desktopEnv in file and file.endswith('.tar.gz'):
+											found = True
+											break
+							if not found:
+									p = subprocess.Popen(['./strip-debug.sh'], shell=True)
+									p.wait()
+									p = subprocess.Popen(['./backup.sh base-system-with-' + desktopEnv + ' n'], shell=True)
+									p.wait()
+							else:
+									print 'Desktop environment backup already present. Not backing up again.'
 					except:
-					        print 'Error occured while backing up base-system-with-' + desktopEnv + '. Aborting.'
-					        exit()
+							print 'Error occured while backing up base-system-with-' + desktopEnv + '. Aborting.'
+							exit()
 			except:
 				print 'Error occured in the installation of desktop environment'
 				exit()
@@ -280,15 +298,15 @@ elif response == '2':
 	rootPartition = raw_input('Enter the root partition where the build was in progress. Enter to exit: ')
 	if rootPartition != '':
 		if os.path.exists('/mnt/lfs/dev'):
-                        try:
-                                check_output('umount -v /mnt/lfs/dev/pts', shell=True)
-                                check_output('umount -v /mnt/lfs/dev', shell=True)
-                                check_output('umount -v /mnt/lfs/sys', shell=True)
-                                check_output('umount -v /mnt/lfs/proc', shell=True)
-                                check_output('umount -v /mnt/lfs/run', shell=True)
-                                print 'Package builder directories unmounted successfully'
-                        except:
-                                print 'Un-mounting wasnt successful. Continuing without it...'
+						try:
+								check_output('umount -v /mnt/lfs/dev/pts', shell=True)
+								check_output('umount -v /mnt/lfs/dev', shell=True)
+								check_output('umount -v /mnt/lfs/sys', shell=True)
+								check_output('umount -v /mnt/lfs/proc', shell=True)
+								check_output('umount -v /mnt/lfs/run', shell=True)
+								print 'Package builder directories unmounted successfully'
+						except:
+								print 'Un-mounting wasnt successful. Continuing without it...'
 
 		if not os.path.exists('/mnt/lfs/sources/build-properties'):
 			runScript('./umountal.sh', None)

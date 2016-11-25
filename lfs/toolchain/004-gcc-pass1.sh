@@ -25,15 +25,19 @@ cd $SOURCE_DIR
 if [ "$TARBALL" != "" ]
 then
 	DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
-	tar xf $TARBALL
+	if [ -d $DIRECTORY ]
+	then
+		rm -rvf $DIRECTORY 
+	fi
+	tar xvf $TARBALL
 	cd $DIRECTORY
 fi
 
-tar -xf ../mpfr-3.1.5.tar.xz
+tar -xvf ../mpfr-3.1.5.tar.xz
 mv -v mpfr-3.1.5 mpfr
-tar -xf ../gmp-6.1.1.tar.xz
+tar -xvf ../gmp-6.1.1.tar.xz
 mv -v gmp-6.1.1 gmp
-tar -xf ../mpc-1.0.3.tar.gz
+tar -xvf ../mpc-1.0.3.tar.gz
 mv -v mpc-1.0.3 mpc
 for file in \
  $(find gcc/config -name linux64.h -o -name linux.h -o -name sysv4.h)

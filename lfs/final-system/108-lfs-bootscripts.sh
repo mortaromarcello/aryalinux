@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="108-lfs-bootscripts.sh"
-TARBALL="lfs-bootscripts-20150222"
+TARBALL="lfs-bootscripts-20150222.tar.bz2"
 
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then

@@ -18,24 +18,28 @@ TARBALL=""
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 
-cd $SOURCE_DIR
+	cd $SOURCE_DIR
 
-if [ "$TARBALL" != "" ]
-then
-	DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
-	tar xf $TARBALL
-	cd $DIRECTORY
-fi
+	if [ "$TARBALL" != "" ]
+	then
+		DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
+		if [ -d $DIRECTORY ]
+		then
+			rm -rvf $DIRECTORY 
+		fi
+		tar xvf $TARBALL
+		cd $DIRECTORY
+	fi
 
+#-----------------------------------------------------------------------
 
+#-----------------------------------------------------------------------
 
-cd $SOURCE_DIR
-if [ "$TARBALL" != "" ]
-then
-	rm -rf $DIRECTORY
-	rm -rf {gcc,glibc,binutils}-build
-fi
-
-echo "$STEPNAME" | tee -a $LOGFILE
-
+	cd $SOURCE_DIR
+	if [ "$TARBALL" != "" ]
+	then
+		rm -rvf $DIRECTORY
+		rm -rvf {gcc,glibc,binutils}-build
+	fi
+	echo "$STEPNAME" | tee -a $LOGFILE
 fi
