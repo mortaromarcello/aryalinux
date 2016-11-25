@@ -29,7 +29,7 @@ then
 	cd $DIRECTORY
 fi
 
-mkdir -v build
+mkdir -pv build
 cd       build
 ../libstdc++-v3/configure           \
     --host=$LFS_TGT                 \

@@ -30,7 +30,7 @@ then
 fi
 
 patch -Np1 -i ../glibc-2.24-fhs-1.patch
-mkdir -v build
+mkdir -pv build
 cd       build
 ../configure --prefix=/usr          \
              --enable-kernel=2.6.32 \

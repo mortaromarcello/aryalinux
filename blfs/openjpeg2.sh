@@ -44,7 +44,7 @@ wget -c https://github.com/uclouvain/openjpeg/archive/v2.1.2.tar.gz \
      -O openjpeg-2.1.2.tar.gz
 
 
-mkdir -v build &&
+mkdir -pv build &&
 cd       build &&
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr .. &&
 make "-j`nproc`" || make

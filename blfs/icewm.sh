@@ -60,7 +60,7 @@ sudo rm rootscript.sh
 echo icewm-session > ~/.xinitrc
 
 
-mkdir -v ~/.icewm                                       &&
+mkdir -pv ~/.icewm                                       &&
 cp -v /usr/share/icewm/keys ~/.icewm/keys               &&
 cp -v /usr/share/icewm/menu ~/.icewm/menu               &&
 cp -v /usr/share/icewm/preferences ~/.icewm/preferences &&

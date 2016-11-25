@@ -29,7 +29,7 @@ then
 	cd $DIRECTORY
 fi
 
-mkdir -v build
+mkdir -pv build
 cd       build
 CC=$LFS_TGT-gcc                \
 AR=$LFS_TGT-ar                 \

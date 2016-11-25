@@ -51,7 +51,7 @@ fi
 
 whoami > /tmp/currentuser
 
-mkdir -v build &&
+mkdir -pv build &&
 cd       build &&
 cmake -DCMAKE_INSTALL_PREFIX=$LXQT_PREFIX \
       -DCMAKE_BUILD_TYPE=Release          \

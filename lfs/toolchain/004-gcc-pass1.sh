@@ -48,7 +48,7 @@ do
 #define STANDARD_STARTFILE_PREFIX_2 ""' >> $file
   touch $file.orig
 done
-mkdir -v build
+mkdir -pv build
 cd       build
 ../configure                                       \
     --target=$LFS_TGT                              \

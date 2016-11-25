@@ -30,7 +30,7 @@ then
 fi
 
 expect -c "spawn ls"
-mkdir -v build
+mkdir -pv build
 cd       build
 ../configure --prefix=/usr   \
              --enable-shared \

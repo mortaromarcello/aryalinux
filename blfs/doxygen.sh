@@ -46,7 +46,7 @@ fi
 
 whoami > /tmp/currentuser
 
-mkdir -v build &&
+mkdir -pv build &&
 cd       build &&
 cmake -G "Unix Makefiles"         \
       -DCMAKE_BUILD_TYPE=Release  \

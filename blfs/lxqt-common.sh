@@ -40,7 +40,7 @@ whoami > /tmp/currentuser
 
 sed -e '/TryExec/s@=@='$LXQT_PREFIX'/bin/@' \
     -i xsession/lxqt.desktop.in &&
-mkdir -v build &&
+mkdir -pv build &&
 cd       build &&
 cmake -DCMAKE_BUILD_TYPE=Release          \
       -DCMAKE_INSTALL_PREFIX=$LXQT_PREFIX \

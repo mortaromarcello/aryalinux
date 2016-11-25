@@ -50,7 +50,7 @@ tar -xf ../gmp-6.1.1.tar.xz
 mv -v gmp-6.1.1 gmp
 tar -xf ../mpc-1.0.3.tar.gz
 mv -v mpc-1.0.3 mpc
-mkdir -v build
+mkdir -pv build
 cd       build
 CC=$LFS_TGT-gcc                                    \
 CXX=$LFS_TGT-g++                                   \

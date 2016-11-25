@@ -29,7 +29,7 @@ then
 	cd $DIRECTORY
 fi
 
-mkdir -v build
+mkdir -pv build
 cd       build
 ../configure --prefix=/tools            \
              --with-sysroot=$LFS        \
@@ -39,7 +39,7 @@ cd       build
              --disable-werror
 make
 case $(uname -m) in
-  x86_64) mkdir -v /tools/lib && ln -sv lib /tools/lib64 ;;
+  x86_64) mkdir -pv /tools/lib && ln -sv lib /tools/lib64 ;;
 esac
 make install
 

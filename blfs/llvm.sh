@@ -53,7 +53,7 @@ mv tools/cfe-3.9.0.src tools/clang &&
 mv projects/compiler-rt-3.9.0.src projects/compiler-rt
 
 
-mkdir -v build &&
+mkdir -pv build &&
 cd       build &&
 CC=gcc CXX=g++                              \
 cmake -DCMAKE_INSTALL_PREFIX=/usr           \

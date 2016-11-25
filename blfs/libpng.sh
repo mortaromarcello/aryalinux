@@ -46,7 +46,7 @@ make "-j`nproc`" || make
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install &&
-mkdir -v /usr/share/doc/libpng-1.6.26 &&
+mkdir -pv /usr/share/doc/libpng-1.6.26 &&
 cp -v README libpng-manual.txt /usr/share/doc/libpng-1.6.26
 
 ENDOFROOTSCRIPT

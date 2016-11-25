@@ -74,7 +74,7 @@ else
 fi
 # End checking if home is a valid block device
 
-mkdir -v $LFS/sources
+mkdir -pv $LFS/sources
 chmod -v a+wt $LFS/sources
 
 ln -svf $LFS/sources /sources
@@ -82,7 +82,7 @@ ln -svf $LFS/sources /sources
 cp -r ~/sources/* $LFS/sources
 touch $LFS/sources/currentstage
 
-mkdir -v $LFS/tools
+mkdir -pv $LFS/tools
 ln -sv $LFS/tools /
 
 mkdir -pv $LFS/var/cache/alps/sources

@@ -49,7 +49,7 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install &&
 find doc -name "Makefile*" -delete            &&
 rm -rf -v doc/{gdoc,idn.1,stamp-vti,man,texi} &&
-mkdir -v       /usr/share/doc/libidn-1.33     &&
+mkdir -pv       /usr/share/doc/libidn-1.33     &&
 cp -r -v doc/* /usr/share/doc/libidn-1.33
 
 ENDOFROOTSCRIPT

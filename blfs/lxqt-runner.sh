@@ -41,7 +41,7 @@ fi
 whoami > /tmp/currentuser
 
 patch -p1 -i ../lxqt-runner-0.11.0-fix_endif-1.patch &&
-mkdir -v build &&
+mkdir -pv build &&
 cd       build &&
 cmake -DCMAKE_BUILD_TYPE=Release          \
       -DRUNNER_MATH=OFF                   \

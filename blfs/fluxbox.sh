@@ -66,7 +66,7 @@ Type=Application
 EOF
 
 
-mkdir -v ~/.fluxbox &&
+mkdir -pv ~/.fluxbox &&
 cp -v /usr/share/fluxbox/init ~/.fluxbox/init &&
 cp -v /usr/share/fluxbox/keys ~/.fluxbox/keys
 

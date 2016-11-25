@@ -29,7 +29,7 @@ then
 	cd $DIRECTORY
 fi
 
-mkdir -v build
+mkdir -pv build
 cd build
 LIBS=-L/tools/lib                    \
 CFLAGS=-I/tools/include              \
