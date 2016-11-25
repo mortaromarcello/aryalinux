@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="042-linux-headers.sh"
-TARBALL="linux-4.8.1.tar.xz"
+TARBALL="linux-4.8.9.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -25,7 +25,11 @@ cd $SOURCE_DIR
 if [ "$TARBALL" != "" ]
 then
 	DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
-	tar xf $TARBALL
+	if [ -d $DIRECTORY ]
+	then
+		rm -rvf $DIRECTORY 
+	fi
+	tar xvf $TARBALL
 	cd $DIRECTORY
 fi
 
