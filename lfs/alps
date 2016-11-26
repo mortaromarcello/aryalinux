@@ -215,8 +215,8 @@ def updateAction():
 					pass
 				try:
 					print 'Downloading scripts from github...'
-					response = urllib2.urlopen("https://github.com/FluidIdeas/aryalinux/archive/" + version + ".zip")
-					urllib.urlretrieve ("https://github.com/FluidIdeas/aryalinux/archive/" + version + ".zip", "/tmp/" + version + ".zip")
+					response = urllib2.urlopen("https://github.com/mortaromarcello/aryalinux/archive/" + version + ".zip")
+					urllib.urlretrieve ("https://github.com/mortaromarcello/aryalinux/archive/" + version + ".zip", "/tmp/" + version + ".zip")
 					runCommand(["unzip", "-qq", "-o", "/tmp/" + version+ ".zip", "aryalinux-" + version + "/blfs/*", "-d", "/tmp"], "Extraction of scripts tarball")
 					files = glob.glob("/tmp/aryalinux-" + version + "/blfs/*.sh")
 					for f in files:

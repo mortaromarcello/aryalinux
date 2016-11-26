@@ -133,8 +133,8 @@ def inputBuildProperties():
 	encoded_passwords['root'] = base64.b64encode(cipher.encrypt(passwords['root']))
 	passwords['user'] = getpassword('Enter the user password : ', 'Re-enter the user password : ')
 	encoded_passwords['user'] = base64.b64encode(cipher.encrypt(passwords['user']))
-	readInput('', 'ROOT_PASSWORD', propsFile, encoded_passwords['root'], True, False)
-	readInput('', 'USER_PASSWORD', propsFile, encoded_passwords['user'], True, False)
+	readInput('', 'ROOT_ENCPASSWORD', propsFile, encoded_passwords['root'], True, False)
+	readInput('', 'USER_ENCPASSWORD', propsFile, encoded_passwords['user'], True, False)
 
 def freshBuild(startFrom):
 	startFrom = int(startFrom)
@@ -144,10 +144,8 @@ def freshBuild(startFrom):
 		inputBuildProperties()
 		startFrom = startFrom + 1
 	else:
-		passwords['root'] = cipher.decrypt(base64.b64decode(getParamValue('ROOT_PASSWORD')))
-		passwords['user'] = cipher.decrypt(base64.b64decode(getParamValue('USER_PASSWORD')))
-		#passwords['root'] = getpassword('Enter the root password : ', 'Re-enter the root password : ')
-		#passwords['user'] = getpassword('Enter the user password : ', 'Re-enter the user password : ')
+		passwords['root'] = cipher.decrypt(base64.b64decode(getParamValue('ROOT_ENCPASSWORD')))
+		passwords['user'] = cipher.decrypt(base64.b64decode(getParamValue('USER_ENCPASSWORD')))
 
 	if startFrom == 2:
 		try:
@@ -210,13 +208,13 @@ def freshBuild(startFrom):
 				if file.startswith('aryalinux') and 'base-system' in file and file.endswith('.tar.xz'):
 					found = True
 					break
-			if not found:
-				p = subprocess.Popen(['./strip-debug.sh'], shell=True)
-				p.wait()
-				p = subprocess.Popen(['./backup.sh base-system y'], shell=True)
-				p.wait()
-			else:
-				print 'Base system backup already present. Not creating again'
+				if not found:
+					p = subprocess.Popen(['./strip-debug.sh'], shell=True)
+					p.wait()
+					p = subprocess.Popen(['./backup.sh base-system y'], shell=True)
+					p.wait()
+				else:
+					print 'Base system backup already present. Not creating again'
 		except:
 			print 'Error occured while backing up base-system. Aborting.'
 			exit()
