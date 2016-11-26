@@ -68,7 +68,7 @@ CXXFLAGS="-O2 -fPIC"                                        \
             --with-nmtui                                    \
             --disable-ppp                                   \
             --with-session-tracking=systemd                 \
-            --with-systemdsystemunitdir=/lib/systemd/system \
+            --with-systemdsystemunitdir=no                  \
             --docdir=/usr/share/doc/network-manager-1.4.2 &&
 make "-j`nproc`" || make
 
