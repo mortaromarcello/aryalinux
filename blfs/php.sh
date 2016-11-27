@@ -133,7 +133,6 @@ sed -i 's/buffio.h/tidy&/' ext/tidy/tidy.c
             --enable-fpm                     \
             --with-fpm-user=apache           \
             --with-fpm-group=apache          \
-            --with-fpm-systemd               \
             --with-iconv                     &&
 make
 
@@ -205,13 +204,13 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
-wget -nc http://aryalinux.org/releases/2016.11/blfs-systemd-units-20160602.tar.bz2 -O $SOURCE_DIR/blfs-systemd-units-20160602.tar.bz2
-tar xf $SOURCE_DIR/blfs-systemd-units-20160602.tar.bz2 -C $SOURCE_DIR
-cd $SOURCE_DIR/blfs-systemd-units-20160602
-make install-php-fpm
+wget -nc http://anduin.linuxfromscratch.org/BLFS/blfs-bootscripts/blfs-bootscripts-20160902.tar.xz -O $SOURCE_DIR/blfs-bootscripts-20160902.tar.xz
+tar xf $SOURCE_DIR/blfs-bootscripts-20160902.tar.xz -C $SOURCE_DIR
+cd $SOURCE_DIR/blfs-bootscripts-20160902
+make install-php
 
 cd $SOURCE_DIR
-rm -rf blfs-systemd-units-20160602
+rm -rf blfs-bootscripts-20160902
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh

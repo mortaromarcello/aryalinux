@@ -49,8 +49,6 @@ fi
 
 whoami > /tmp/currentuser
 
-sed -i "s:cups.service:org.cups.cupsd.service:g" utils/cups-browsed.service
-
 
 ./configure                             \
         --prefix=/usr                   \
@@ -74,25 +72,6 @@ sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
 sudo rm rootscript.sh
 
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-install -v -m644 utils/cups-browsed.service /lib/systemd/system/cups-browsed.service
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-systemctl enable cups-browsed
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
 
 
 

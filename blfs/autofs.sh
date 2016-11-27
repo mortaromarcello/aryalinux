@@ -42,7 +42,6 @@ fi
 whoami > /tmp/currentuser
 
 ./configure --prefix=/         \
-            --with-systemd     \            
             --without-openldap \
             --mandir=/usr/share/man &&
 make "-j`nproc`" || make
@@ -76,8 +75,14 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-systemctl enable autofs
+. /etc/alps/alps.conf
+wget -nc http://anduin.linuxfromscratch.org/BLFS/blfs-bootscripts/blfs-bootscripts-20160902.tar.xz -O $SOURCE_DIR/blfs-bootscripts-20160902.tar.xz
+tar xf $SOURCE_DIR/blfs-bootscripts-20160902.tar.xz -C $SOURCE_DIR
+cd $SOURCE_DIR/blfs-bootscripts-20160902
+make install-autofs
 
+cd $SOURCE_DIR
+rm -rf blfs-bootscripts-20160902
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh

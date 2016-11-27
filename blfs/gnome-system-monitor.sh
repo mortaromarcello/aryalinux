@@ -13,13 +13,13 @@ VERSION=3.22.0
 NAME="gnome-system-monitor"
 
 #REQ:adwaita-icon-theme
-#REQ:appstream-glib
 #REQ:gtkmm3
 #REQ:itstool
 #REQ:libgtop
 #REQ:librsvg
 #REC:libwnck
 #OPT:desktop-file-utils
+#OPT:appstream-glib
 
 
 cd $SOURCE_DIR
@@ -44,8 +44,7 @@ fi
 whoami > /tmp/currentuser
 
 ./configure --prefix=/usr    \
-            --enable-wnck    \
-            --enable-systemd &&
+            --enable-wnck    &&
 make "-j`nproc`" || make
 
 
