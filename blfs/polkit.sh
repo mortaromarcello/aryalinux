@@ -14,8 +14,6 @@ NAME="polkit"
 
 #REQ:glib2
 #REQ:js
-#REQ:systemd
-#REC:linux-pam
 #OPT:gobject-introspection
 #OPT:docbook
 #OPT:docbook-xsl
@@ -56,14 +54,14 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
-sed -i "s:/sys/fs/cgroup/systemd/:/sys:g" configure
-
 
 sed -i "/seems to be moved/s/^/#/" ltmain.sh &&
 ./configure --prefix=/usr                    \
             --sysconfdir=/etc                \
             --localstatedir=/var             \
-            --disable-static                 &&
+            --disable-static                 \
+            --enable-libsystemd-login=no     \
+            --with-authfw=shadow             &&
 make "-j`nproc`" || make
 
 

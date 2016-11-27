@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The UDisks package provides abr3ak daemon, tools and libraries to access and manipulate disks andbr3ak storage devices.br3ak"
+DESCRIPTION="br3ak  The UDisks package provides a daemon,br3ak tools and libraries to access and manipulate disks and storage devices.br3ak"
 SECTION="general"
 VERSION=2.1.7
 NAME="udisks2"
@@ -16,12 +16,13 @@ NAME="udisks2"
 #REQ:libgudev
 #REQ:libxslt
 #REQ:polkit
-#REC:systemd
+#REQ:sg3_utils
 #OPT:gobject-introspection
 #OPT:gptfdisk
 #OPT:gtk-doc
 #OPT:ntfs-3g
 #OPT:parted
+#OPT:dosfstools
 
 
 cd $SOURCE_DIR
@@ -30,7 +31,7 @@ URL=http://udisks.freedesktop.org/releases/udisks-2.1.7.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/udisks/udisks-2.1.7.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/udisks/udisks-2.1.7.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/udisks/udisks-2.1.7.tar.bz2 || wget -nc http://udisks.freedesktop.org/releases/udisks-2.1.7.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/udisks/udisks-2.1.7.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/udisks/udisks-2.1.7.tar.bz2
+wget -nc http://udisks.freedesktop.org/releases/udisks-2.1.7.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/udisks/udisks-2.1.7.tar.bz2 || wget -nc http://hal.freedesktop.org/releases/udisks-2.1.7.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/udisks/udisks-2.1.7.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/udisks/udisks-2.1.7.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/udisks/udisks-2.1.7.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -48,7 +49,7 @@ whoami > /tmp/currentuser
 ./configure --prefix=/usr        \
             --sysconfdir=/etc    \
             --localstatedir=/var \
-            --disable-static &&
+            --disable-static     &&
 make "-j`nproc`" || make
 
 

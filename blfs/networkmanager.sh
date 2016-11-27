@@ -17,13 +17,13 @@ NAME="networkmanager"
 #REQ:libndp
 #REQ:libnl
 #REQ:nss
+#REC:ConsoleKit
 #REC:dhcpcd
 #REC:gobject-introspection
 #REC:iptables
 #REC:libsoup
 #REC:newt
 #REC:polkit
-#REC:systemd
 #REC:upower
 #REC:vala
 #REC:wpa_supplicant
@@ -31,8 +31,11 @@ NAME="networkmanager"
 #OPT:gtk-doc
 #OPT:qt5
 #OPT:ModemManager
-#OPT:python-modules#pygobject3
 #OPT:valgrind
+#OPT:dnsmasq
+#OPT:libteam
+#OPT:ppp
+#OPT:rp-pppoe
 
 
 cd $SOURCE_DIR
@@ -67,7 +70,6 @@ CXXFLAGS="-O2 -fPIC"                                        \
             --localstatedir=/var                            \
             --with-nmtui                                    \
             --disable-ppp                                   \
-            --with-session-tracking=systemd                 \
             --with-systemdsystemunitdir=no                  \
             --docdir=/usr/share/doc/network-manager-1.4.2 &&
 make "-j`nproc`" || make
@@ -98,7 +100,13 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-systemctl enable NetworkManager
+cat > /usr/share/polkit-1/rules.d/org.freedesktop.NetworkManager.rules << "EOF"
+polkit.addRule(function(action, subject) {
+    if (action.id.indexOf("org.freedesktop.NetworkManager.") == 0 && subject.isInGroup("netdev")) {
+        return polkit.Result.YES;
+    }
+});
+EOF
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
@@ -106,9 +114,15 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
-
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-systemctl enable NetworkManager-wait-online
+. /etc/alps/alps.conf
+wget -nc http://anduin.linuxfromscratch.org/BLFS/blfs-bootscripts/blfs-bootscripts-20160902.tar.xz -O $SOURCE_DIR/blfs-bootscripts-20160902.tar.xz
+tar xf $SOURCE_DIR/blfs-bootscripts-20160902.tar.xz -C $SOURCE_DIR
+cd $SOURCE_DIR/blfs-bootscripts-20160902
+make install-networkmanager
+
+cd $SOURCE_DIR
+rm -rf blfs-bootscripts-20160902
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

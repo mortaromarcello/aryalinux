@@ -100,18 +100,12 @@ make "-j`nproc`" || make
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-. /etc/alps/alps.conf
-wget -nc http://aryalinux.org/releases/2016.11/blfs-systemd-units-20160602.tar.bz2 -O $SOURCE_DIR/blfs-systemd-units-20160602.tar.bz2
-tar xf $SOURCE_DIR/blfs-systemd-units-20160602.tar.bz2 -C $SOURCE_DIR
-cd $SOURCE_DIR/blfs-systemd-units-20160602
 make install-strip &&
 make texlinks &&
 ldconfig &&
 mkdir -pv /opt/texlive/2016/tlpkg/TeXLive/ &&
 install -v -m644 ../texk/tests/TeXLive/* /opt/texlive/2016/tlpkg/TeXLive/
 
-cd $SOURCE_DIR
-rm -rf blfs-systemd-units-20160602
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh

@@ -46,7 +46,6 @@ whoami > /tmp/currentuser
             --sysconfdir=/etc             \
             --localstatedir=/var          \
             --enable-more-warnings=no     \
-            --with-suspend-resume=systemd \
             --disable-static &&
 make "-j`nproc`" || make
 
@@ -54,16 +53,6 @@ make "-j`nproc`" || make
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-systemctl enable ModemManager
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

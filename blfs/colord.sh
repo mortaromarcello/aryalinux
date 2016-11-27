@@ -21,7 +21,6 @@ NAME="colord"
 #REC:libgudev
 #REC:libgusb
 #REC:polkit
-#REC:systemd
 #REC:vala
 #OPT:docbook-utils
 #OPT:gnome-desktop
@@ -70,9 +69,11 @@ sed -i "/seems to be moved/s/^/#/" ltmain.sh &&
             --localstatedir=/var         \
             --with-daemon-user=colord    \
             --enable-vala                \
+            --enable-systemd-login=no    \
             --disable-argyllcms-sensor   \
             --disable-bash-completion    \
-            --disable-static &&
+            --disable-static             \
+            --with-systemdsystemunitdir=no &&
 make "-j`nproc`" || make
 
 

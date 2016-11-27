@@ -18,7 +18,6 @@ NAME="gvfs"
 #REC:libgudev
 #REC:libsecret
 #REC:libsoup
-#REC:systemd
 #REC:udisks2
 #OPT:apache
 #OPT:avahi
@@ -35,7 +34,10 @@ NAME="gvfs"
 #OPT:libxslt
 #OPT:openssh
 #OPT:samba
-#OPT:obex-data-server
+#OPT:libbluray
+#OPT:libgphoto2
+#OPT:libmobiledevice
+#OPT:libmtp
 
 
 cd $SOURCE_DIR

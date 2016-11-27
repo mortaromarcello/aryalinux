@@ -45,7 +45,7 @@ sed -i -e "/case V4L2_CID_HCENTER/d" -e "/case V4L2_CID_VCENTER/d" sys/v4l2/v4l2
             --sysconfdir=/etc \
             --with-gtk=3.0 \
             --with-package-name="GStreamer Good Plugins 0.10.31 BLFS" \
-            --with-package-origin="http://www.linuxfromscratch.org/blfs/view/systemd/" &&
+            --with-package-origin="http://www.linuxfromscratch.org/blfs/view/svn/" &&
 make "-j`nproc`"
 
 
