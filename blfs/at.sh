@@ -56,8 +56,7 @@ autoreconf
 
 ./configure --with-daemon_username=atd        \
             --with-daemon_groupname=atd       \
-            SENDMAIL=/usr/sbin/sendmail       \
-            --with-systemdsystemunitdir=/lib/systemd/system &&
+            SENDMAIL=/usr/sbin/sendmail       &&
 make -j1
 
 
@@ -75,8 +74,14 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-systemctl enable atd
+. /etc/alps/alps.conf
+wget -nc http://anduin.linuxfromscratch.org/BLFS/blfs-bootscripts/blfs-bootscripts-20160902.tar.xz -O $SOURCE_DIR/blfs-bootscripts-20160902.tar.xz
+tar xf $SOURCE_DIR/blfs-bootscripts-20160902.tar.xz -C $SOURCE_DIR
+cd $SOURCE_DIR/blfs-bootscripts-20160902
+make install-atd
 
+cd $SOURCE_DIR
+rm -rf blfs-bootscripts-20160902
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh

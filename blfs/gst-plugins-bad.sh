@@ -45,11 +45,9 @@ sed -e '/Some compatibility/ s:*/::' \
 
 
 ./configure --prefix=/usr      \
-            --with-gtk=3.0     \
-            --disable-examples \
-            --disable-static   \
+            --disable-wayland  \
             --with-package-name="GStreamer Bad Plugins 0.10.23 BLFS" \
-            --with-package-origin="http://www.linuxfromscratch.org/blfs/view/systemd/" &&
+            --with-package-origin="http://www.linuxfromscratch.org/blfs/view/svn/" &&
 make "-j`nproc`"
 
 

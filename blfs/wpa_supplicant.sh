@@ -14,8 +14,9 @@ NAME="wpa_supplicant"
 
 #REC:libnl
 #REC:openssl
-#OPT:dbus
-#OPT:libxml2
+#REC:desktop-file-utils
+#REC:dbus
+#REC:libxml2
 #OPT:qt5
 
 
@@ -93,14 +94,6 @@ sudo rm rootscript.sh
 
 
 
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-install -v -m644 systemd/*.service /lib/systemd/system/
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
@@ -114,15 +107,6 @@ sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
 sudo rm rootscript.sh
 
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-systemctl enable wpa_supplicant
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
 
 
 

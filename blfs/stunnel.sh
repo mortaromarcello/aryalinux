@@ -13,6 +13,8 @@ VERSION=5.36
 NAME="stunnel"
 
 #REQ:openssl
+#OPT:tcpwrappers
+#OPT:TOR
 
 
 cd $SOURCE_DIR
@@ -53,7 +55,8 @@ sed -i '/LDFLAGS.*static_flag/ s/^/#/' configure
 
 ./configure --prefix=/usr        \
             --sysconfdir=/etc    \
-            --localstatedir=/var &&
+            --localstatedir=/var \
+            --disable-systemd    &&
 make "-j`nproc`" || make
 
 
@@ -66,15 +69,6 @@ sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
 sudo rm rootscript.sh
 
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-install -v -m644 tools/stunnel.service /lib/systemd/system
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
 
 
 
@@ -128,7 +122,14 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-systemctl enable stunnel
+. /etc/alps/alps.conf
+wget -nc http://anduin.linuxfromscratch.org/BLFS/blfs-bootscripts/blfs-bootscripts-20160902.tar.xz -O $SOURCE_DIR/blfs-bootscripts-20160902.tar.xz
+tar xf $SOURCE_DIR/blfs-bootscripts-20160902.tar.xz -C $SOURCE_DIR
+cd $SOURCE_DIR/blfs-bootscripts-20160902
+make install-stunnel
+
+cd $SOURCE_DIR
+rm -rf blfs-bootscripts-20160902
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

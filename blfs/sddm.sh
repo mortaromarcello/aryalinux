@@ -15,6 +15,7 @@ NAME="sddm"
 #REQ:cmake
 #REQ:extra-cmake-modules
 #REQ:qt5
+#REQ:ConsoleKit
 #REC:linux-pam
 #REC:upower
 
@@ -54,10 +55,17 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+sed -e '/UPOWER_SERVICE)/ s:^://:' \
+    -i src/daemon/PowerManager.cpp &&
+sed -e '/\$@$/s/exec/& ck-launch-session/' \
+    -i data/scripts/Xsession
+
 mkdir build &&
 cd    build &&
 cmake -DCMAKE_INSTALL_PREFIX=/usr \
       -DCMAKE_BUILD_TYPE=Release  \
+      -DENABLE_JOURNALD=OFF       \
+      -DDBUS_CONFIG_FILENAME=sddm_org.freedesktop.DisplayManager.conf \
       -Wno-dev .. &&
 make "-j`nproc`" || make
 
@@ -121,7 +129,14 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-systemctl enable sddm
+. /etc/alps/alps.conf
+wget -nc http://anduin.linuxfromscratch.org/BLFS/blfs-bootscripts/blfs-bootscripts-20160902.tar.xz -O $SOURCE_DIR/blfs-bootscripts-20160902.tar.xz
+tar xf $SOURCE_DIR/blfs-bootscripts-20160902.tar.xz -C $SOURCE_DIR
+cd $SOURCE_DIR/blfs-bootscripts-20160902
+make install-sddm
+
+cd $SOURCE_DIR
+rm -rf blfs-bootscripts-20160902
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
@@ -170,6 +185,22 @@ ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
 sudo rm rootscript.sh
+
+
+
+
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+cp -v /etc/inittab{,-orig} &&
+sed -i '/initdefault/ s/3/5/' /etc/inittab
+
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo ./rootscript.sh
+sudo rm rootscript.sh
+
+
 
 
 sddm-greeter --test-mode --theme <em class="replaceable"><code><theme path></em>
