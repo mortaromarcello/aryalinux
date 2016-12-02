@@ -58,7 +58,6 @@ cd $DIRECTORY
 fi
 
 whoami > /tmp/currentuser
-/usr/sbin/usermod -a -G netdev `cat /tmp/currentuser`
 
 sed -e '/Qt[CDN]/s/Qt/Qt5/g'       \
     -e 's/moc_location/host_bins/' \
