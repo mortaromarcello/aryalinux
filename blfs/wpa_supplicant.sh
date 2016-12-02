@@ -98,7 +98,7 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 install -v -m644 dbus/fi.{epitest.hostap.WPASupplicant,w1.wpa_supplicant1}.service \
-                 /usr/share/dbus-1/system-services/ &&
+                 /usr/share/dbus-1/system-services/
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
