@@ -40,7 +40,13 @@ fi
 cd $DIRECTORY
 fi
 
+
 whoami > /tmp/currentuser
+
+groupadd -g 18 messagebus &&
+useradd -c "D-Bus Message Daemon User" -d /var/run/dbus \
+        -u 18 -g messagebus -s /bin/false messagebus
+
 
 ./configure --prefix=/usr                  \
             --sysconfdir=/etc              \
@@ -48,6 +54,8 @@ whoami > /tmp/currentuser
             --disable-doxygen-docs         \
             --disable-xml-docs             \
             --disable-static               \
+            --disable-systemd              \
+            --without-systemdsystemunitdir \
             --with-console-auth-dir=/run/console/ \
             --docdir=/usr/share/doc/dbus-1.10.10   &&
 make "-j`nproc`" || make
@@ -64,15 +72,6 @@ sudo rm rootscript.sh
 
 
 
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-mv -v /usr/lib/libdbus-1.so.* /lib
-ln -sfv ../../lib/$(readlink /usr/lib/libdbus-1.so) /usr/lib/libdbus-1.so
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
-
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
@@ -87,15 +86,7 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-cat > /etc/dbus-1/session-local.conf << "EOF"
-<!DOCTYPE busconfig PUBLIC
- "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
- "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
-<busconfig>
- <!-- Search for .service files in /usr/local -->
- <servicedir>/usr/local/share/dbus-1/services</servicedir>
-</busconfig>
-EOF
+dbus-uuidgen --ensure
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
