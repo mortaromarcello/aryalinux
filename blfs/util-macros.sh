@@ -12,6 +12,8 @@ SECTION="x"
 VERSION=1.19.0
 NAME="util-macros"
 
+#REC:xorg7
+
 
 
 cd $SOURCE_DIR
