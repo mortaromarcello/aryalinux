@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The CUPS Filters package containsbr3ak backends, filters and other software that was once part of the corebr3ak CUPS distribution but is no longerbr3ak maintained by Apple Inc.br3ak"
 SECTION="pst"
-VERSION=1.11.3
+VERSION=1.11.1
 NAME="cups-filters"
 
 #REQ:cups
@@ -30,11 +30,11 @@ NAME="cups-filters"
 
 cd $SOURCE_DIR
 
-URL=https://www.openprinting.org/download/cups-filters/cups-filters-1.11.3.tar.xz
+URL=https://www.openprinting.org/download/cups-filters/cups-filters-1.11.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/cups/cups-filters-1.11.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/cups/cups-filters-1.11.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/cups/cups-filters-1.11.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/cups/cups-filters-1.11.3.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/cups/cups-filters-1.11.3.tar.xz || wget -nc https://www.openprinting.org/download/cups-filters/cups-filters-1.11.3.tar.xz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/cups/cups-filters-1.11.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/cups/cups-filters-1.11.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/cups/cups-filters-1.11.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/cups/cups-filters-1.11.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/cups/cups-filters-1.11.1.tar.xz || wget -nc https://www.openprinting.org/download/cups-filters/cups-filters-1.11.1.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -59,7 +59,7 @@ whoami > /tmp/currentuser
         --disable-avahi                 \
         --with-gs-path=/usr/bin/gs      \
         --with-pdftops-path=/usr/bin/gs \
-        --docdir=/usr/share/doc/cups-filters-1.11.3 &&
+        --docdir=/usr/share/doc/cups-filters-1.11.1 &&
 make "-j`nproc`" || make
 
 
