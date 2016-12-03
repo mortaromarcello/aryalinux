@@ -53,6 +53,18 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+. /etc/alps/alps.conf
+wget -nc http://anduin.linuxfromscratch.org/BLFS/blfs-bootscripts/blfs-bootscripts-20160902.tar.xz -O $SOURCE_DIR/blfs-bootscripts-20160902.tar.xz
+tar xf $SOURCE_DIR/blfs-bootscripts-20160902.tar.xz -C $SOURCE_DIR
+cd $SOURCE_DIR/blfs-bootscripts-20160902
+make install-service-bridge
+
+cd $SOURCE_DIR
+rm -rf blfs-bootscripts-20160902
+
+ENDOFROOTSCRIPT
+
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
