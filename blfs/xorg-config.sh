@@ -16,11 +16,11 @@ NAME="xorg-config"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.osuosl.org/pub/blfs/conglomeration/Xorg//fireflysung-1.3.0.tar.gz
+URL=http://ftp.osuosl.org/pub/blfs/conglomeration/Xorg/fireflysung-1.3.0.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/Xorg//fireflysung-1.3.0.tar.gz
+wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/Xorg/fireflysung-1.3.0.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
