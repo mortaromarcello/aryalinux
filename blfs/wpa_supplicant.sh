@@ -17,6 +17,7 @@ NAME="wpa_supplicant"
 #REC:desktop-file-utils
 #REC:dbus
 #REC:libxml2
+#REC:dhcp
 #OPT:qt5
 
 
@@ -132,6 +133,31 @@ ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
 sudo rm rootscript.sh
+
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+cat > /etc/sysconfig/ifconfig.wifi0 << "EOF"
+ONBOOT="yes"
+IFACE="wlan0"
+SERVICE="wpa"
+# Additional arguments to wpa_supplicant
+WPA_ARGS="-c/etc/sysconfig/wpa_supplicant-wifi0.conf"
+WPA_SERVICE="dhclient"
+DHCP_START=""
+DHCP_STOP=""
+# Set PRINTIP="yes" to have the script print
+# the DHCP assigned IP address
+PRINTIP="no"
+# Set PRINTALL="yes" to print the DHCP assigned values for
+# IP, SM, DG, and 1st NS. This requires PRINTIP="yes".
+PRINTALL="no"
+EOF
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo ./rootscript.sh
+sudo rm rootscript.sh
+
 
 
 
