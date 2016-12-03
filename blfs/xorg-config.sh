@@ -16,7 +16,7 @@ NAME="xorg-config"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.osuosl.org/pub/blfs/conglomeration/Xorg/fireflysung-1.3.0.tar.gz
+URL=
 
 if [ ! -z $URL ]
 then
@@ -37,7 +37,7 @@ whoami > /tmp/currentuser
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-usermod -a -G video <em class="replaceable"><code><username></em>
+usermod -a -G video `cat /tmp/currentuser`
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
