@@ -66,7 +66,7 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-systemctl restart org.cups.cupsd
+/etc/rc.d/init.d/cups restart
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
