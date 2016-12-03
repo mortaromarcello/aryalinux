@@ -49,26 +49,27 @@ fi
 whoami > /tmp/currentuser
 
 
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+#sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 useradd -c "Print Service User" -d /var/spool/cups -g lp -s /bin/false -u 9 lp
 
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
+#ENDOFROOTSCRIPT
+#sudo chmod 755 rootscript.sh
+#sudo ./rootscript.sh
+#sudo rm rootscript.sh
 
 
 
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+#sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 groupadd -g 19 lpadmin
 
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
+#ENDOFROOTSCRIPT
+#sudo chmod 755 rootscript.sh
+#sudo ./rootscript.sh
+#sudo rm rootscript.sh
 
 
 whoami > /tmp/currentuser
+
 sudo usermod -a -G lpadmin `cat /tmp/currentuser`
 
 
