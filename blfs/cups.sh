@@ -9,11 +9,10 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Common Unix Printing System (CUPS) is a print spooler andbr3ak associated utilities. It is based on the \"Internet Printingbr3ak Protocol\" and provides printing services to most PostScript andbr3ak raster printers.br3ak"
 SECTION="pst"
-VERSION=2.2.1
+VERSION=2.1.4
 NAME="cups"
 
 #REQ:gnutls
-#REQ:cups-filters
 #REC:colord
 #REC:dbus
 #REC:libusb
@@ -30,11 +29,11 @@ NAME="cups"
 
 cd $SOURCE_DIR
 
-URL=https://github.com/apple/cups/releases/download/v2.2.1/cups-2.2.1-source.tar.gz
+URL=https://github.com/apple/cups/releases/download/v2.1.4/cups-2.1.4-source.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/cups/cups-2.2.1-source.tar.gz || wget -nc https://github.com/apple/cups/releases/download/v2.2.1/cups-2.2.1-source.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/cups/cups-2.2.1-source.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/cups/cups-2.2.1-source.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/cups/cups-2.2.1-source.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/cups/cups-2.2.1-source.tar.gz
+wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/cups/cups-2.1.4-source.tar.gz || wget -nc https://github.com/apple/cups/releases/download/v2.1.4/cups-2.1.4-source.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/cups/cups-2.1.4-source.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/cups/cups-2.1.4-source.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/cups/cups-2.1.4-source.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/cups/cups-2.1.4-source.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -77,19 +76,17 @@ sudo usermod -a -G lpadmin `cat /tmp/currentuser`
 sed -i 's#@CUPS_HTMLVIEW@#firefox#' desktop/cups.desktop.in
 
 
-sed -i 's:555:755:g;s:444:644:g' Makedefs.in
-&&
-sed -i '/MAN.EXT/s:.gz::g' configure config-scripts/cups-manpages.m4
-&&
-sed -i '/LIBGCRYPTCONFIG/d' config-scripts/cups-ssl.m4
-&&
-aclocal  -I config-scripts &&
-autoconf -I config-scripts &&
+sed -i 's:555:755:g;s:444:644:g' Makedefs.in                          &&
+sed -i '/MAN.EXT/s:.gz::g' configure config-scripts/cups-manpages.m4  &&
+sed -i '/LIBGCRYPTCONFIG/d' config-scripts/cups-ssl.m4                &&
+aclocal  -I config-scripts                                            &&
+autoconf -I config-scripts                                            &&
 CC=gcc \
 ./configure --libdir=/usr/lib            \
+            --disable-systemd            \
             --with-rcdir=/tmp/cupsinit   \
             --with-system-groups=lpadmin \
-            --with-docdir=/usr/share/cups/doc-2.2.1 &&
+            --with-docdir=/usr/share/cups/doc-2.1.4 &&
 make "-j`nproc`" || make
 
 
@@ -97,7 +94,7 @@ make "-j`nproc`" || make
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install &&
 rm -rf /tmp/cupsinit &&
-ln -svnf ../cups/doc-2.2.1 /usr/share/doc/cups-2.2.1
+ln -svnf ../cups/doc-2.1.4 /usr/share/doc/cups-2.1.4
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
