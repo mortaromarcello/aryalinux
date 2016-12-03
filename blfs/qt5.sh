@@ -32,8 +32,6 @@ NAME="qt5"
 #REC:nss
 #REC:openssl
 #REC:pcre
-#REC:sqlite
-#REC:wayland
 #REC:xcb-util-image
 #REC:xcb-util-keysyms
 #REC:xcb-util-renderutil
@@ -75,23 +73,13 @@ export QT5PREFIX=/opt/qt5
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-mkdir /opt/qt-5.7.0
+mkdir -vp /opt/qt-5.7.0
 ln -sfnv qt-5.7.0 /opt/qt5
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
 sudo rm rootscript.sh
-
-
--bindir         /usr/bin/qt5                \
--plugindir      /usr/lib/qt5/plugins        \
--importdir      /usr/lib/qt5/imports        \
--headerdir      /usr/include/qt5            \
--datadir        /usr/share/qt5              \
--docdir         /usr/share/doc/qt5          \
--translationdir /usr/share/qt5/translations \
--examplesdir    /usr/share/doc/qt5/examples \
 
 
 patch -Np1 -i ../qt-5.7.0-qtwebengine_glibc224-1.patch
