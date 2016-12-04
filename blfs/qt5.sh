@@ -19,7 +19,6 @@ NAME="qt5"
 #REC:cups
 #REC:glib2
 #REC:gst10-plugins-base
-#REC:harfbuzz
 #REC:icu
 #REC:jasper
 #REC:libjpeg
@@ -32,13 +31,14 @@ NAME="qt5"
 #REC:nss
 #REC:openssl
 #REC:pcre
+#REC:sqlite
 #REC:xcb-util-image
 #REC:xcb-util-keysyms
 #REC:xcb-util-renderutil
 #REC:xcb-util-wm
 #OPT:bluez
-#OPT:ibus
-#OPT:x7driver
+#OPT:harfbuzz
+#OPT:libinput
 #OPT:mariadb
 #OPT:pciutils
 #OPT:postgresql
@@ -82,7 +82,7 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 
-patch -Np1 -i ../qt-5.7.0-qtwebengine_glibc224-1.patch
+#patch -Np1 -i ../qt-5.7.0-qtwebengine_glibc224-1.patch
 
 
 export CXXFLAGS=-fno-delete-null-pointer-checks &&
@@ -203,6 +203,7 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+QT5BINDIR=$QT5PREFIX/bin
 for file in moc uic rcc qmake lconvert lrelease lupdate; do
   ln -sfrvn $QT5BINDIR/$file /usr/bin/$file-qt5
 done
@@ -212,21 +213,6 @@ sudo chmod 755 rootscript.sh
 sudo ./rootscript.sh
 sudo rm rootscript.sh
 
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-cat > /etc/profile.d/qt5.sh << EOF
-# Begin /etc/profile.d/qt5.sh
-QT5DIR=/usr
-export QT5DIR
-pathappend $QT5DIR/bin/qt5
-# End /etc/profile.d/qt5.sh
-EOF
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
-sudo rm rootscript.sh
 
 
 
