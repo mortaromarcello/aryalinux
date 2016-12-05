@@ -332,7 +332,7 @@ elif response == '3':
 class BuildLfs:
     def __init__(self):
         self.currentStageFile   = '/sources/currentstage'   # path file che memorizza lo stage
-        self.propsFile          = 'build-properties'        #nome del file che memorizza le proprietà
+        self.propsFile          = 'build-properties'        #nome del file che memorizza le proprieta'
         self.stage              = ''                        #stage corrente
         self.passwords          = {}                        #passwords root e utente
         self.encoded_passwords  = {}                        #passwords criptate
