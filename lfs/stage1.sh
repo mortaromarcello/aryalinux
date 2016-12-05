@@ -5,11 +5,11 @@ set +h
 
 clear
 
-TIMEZONE=`tzselect`
+TIMEZONE=$(tzselect)
 
-rm -rf /tools
-rm -rf /sources
-rm -rf /mnt/lfs
+rm -rvf /tools
+rm -rvf /sources
+rm -rvf /mnt/lfs
 
 cat >> build-properties << EOF
 TIMEZONE=$TIMEZONE
