@@ -598,7 +598,7 @@ class BuildLfs:
         self.passwords['user'] = cipher.decrypt(base64.b64decode(getParamValue('USER_ENCPASSWORD')))
         
     #--------------readInput
-    def readInput(self, message, varName defaultValue, append=True, interactive=True):
+    def readInput(self, message, varName, defaultValue, append=True, interactive=True):
         if append:
             with open(self.propsFile, 'a') as f:
                 if interactive:
