@@ -96,7 +96,7 @@ def logCurrentStage(stageName):
     if os.path.exists('/sources/currentstage'):
         with open('/sources/currentstage', 'w') as f:
             f.write(stageName)
-"""
+
 def getCurrentStage():
     try:
         with open('/sources/currentstage', 'r') as f:
@@ -105,7 +105,7 @@ def getCurrentStage():
     except:
         return 0
 
-"""
+
 def inputBuildProperties():
     readInput("Bootloader Device: ", 'DEV_NAME', propsFile, '', False)
     readInput("Root Partition: ", 'ROOT_PART', propsFile, '')
