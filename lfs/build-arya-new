@@ -336,7 +336,7 @@ class BuildLfs:
         self.passwords          = {}                        #passwords root e utente
         self.encoded_passwords  = {}                        #passwords criptate
         self.secret_key         = '13fFgYjK7iOyG564'        #chiave di cifratura
-        self.cipher             = AES.new(secret_key, AES.MODE_ECB) #
+        self.cipher             = AES.new(self.secret_key, AES.MODE_ECB) #
         self.DEV_NAME           = ''
         self._ROOT_PART         = ''
         self.HOME_PART          = ''
