@@ -352,8 +352,8 @@ class BuildLfs:
         self.KEYBOARD           = 'it'
         self.PAPER_SIZE         = 'A4'
         self.FULLNAME           = self.OS_NAME + ' ' + self.OS_CODENAME
-        self.USERNAME           = lower(self.OS_NAME)
-        self.HOST_NAME          = lower(self.OS_NAME + '-' + self.OS_CODENAME)
+        self.USERNAME           = string.lower(self.OS_NAME)
+        self.HOST_NAME          = string.lower(self.OS_NAME + '-' + self.OS_CODENAME)
         self.CREATE_BACKUPS     = 'n'
         self.INSTALL_XSERVER    = 'n'
         self.INSTALL_DESKTOP_ENVIRONMENT    = 'n'
