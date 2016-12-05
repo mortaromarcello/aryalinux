@@ -368,7 +368,7 @@ class BuildLfs:
         print '3. Resume from a certain stage'
         response = raw_input('Enter your choice (1 ... 2): ')
         if response == '1':
-            freshBuild(1)
+            self.freshBuild(1)
         elif response == '2':
             rootPartition = raw_input('Enter the root partition where the build was in progress. Enter to exit: ')
             if rootPartition != '':
@@ -394,7 +394,7 @@ class BuildLfs:
                 #se esiste carica lo stage memorizzato
                 if os.path.exists('/sources/build-properties'):
                     self.stage = getCurrentStage()
-                    freshBuild(self.stage)
+                    self.freshBuild(self.stage)
                 else:
                     check_output('./umountal.sh', shell=True)
                     print 'This is not the partition where build was in progress. Cannot continue. Exiting.'
@@ -419,17 +419,17 @@ class BuildLfs:
     def freshBuild(self, startFrom):
         startFrom = int(startFrom)
         if startFrom == 1:
-            logCurrentStage('1')
-            inputBuildProperties()
+            self.logCurrentStage('1')
+            self.inputBuildProperties()
             startFrom = startFrom + 1
         else:
-            getBuildProperties()
+            self.getBuildProperties()
             #passwords['root'] = cipher.decrypt(base64.b64decode(getParamValue('ROOT_ENCPASSWORD')))
             #passwords['user'] = cipher.decrypt(base64.b64decode(getParamValue('USER_ENCPASSWORD')))
 
         if startFrom == 2:
             try:
-                logCurrentStage('2')
+                self.logCurrentStage('2')
                 runScript('stage1.sh', None)
                 startFrom = startFrom + 1
             except:
@@ -437,7 +437,7 @@ class BuildLfs:
                 exit()
 
         if startFrom == 3:
-            logCurrentStage('3')
+            self.logCurrentStage('3')
             env={}
             LFS='/mnt/lfs'
             LC_ALL='POSIX'
@@ -454,7 +454,7 @@ class BuildLfs:
                 print 'Error occured while executing stage 2'
                 exit()
         if startFrom == 4:
-            logCurrentStage('4')
+            self.logCurrentStage('4')
             try:
                 runScript('/sources/stage3.sh', '/sources')
                 startFrom = startFrom + 1
@@ -463,7 +463,7 @@ class BuildLfs:
                 exit()
         if startFrom == 5:
             print 'Starting stage 5'
-            logCurrentStage('5')
+            self.logCurrentStage('5')
             try:
                 runScript('/sources/stage6.sh', '/sources')
                 startFrom = startFrom + 1
@@ -475,7 +475,8 @@ class BuildLfs:
                 pr.wait()
             except Exception as ex:
                 print ex
-            if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
+            #if self.getParamValue('CREATE_BACKUPS') == 'y' or self.getParamValue('CREATE_BACKUPS') == 'Y':
+            if string.lower(self.getParamValue('CREATE_BACKUPS')) == 'y':
                 try:
                     files = os.listdir('/mnt/lfs/sources')
                     found = False
@@ -495,13 +496,15 @@ class BuildLfs:
                     exit()
 
         if startFrom == 6:
-            if getParamValue('INSTALL_XSERVER') == 'y' or getParamValue('INSTALL_XSERVER') == 'Y':
+            #if getParamValue('INSTALL_XSERVER') == 'y' or getParamValue('INSTALL_XSERVER') == 'Y':
+            if string.lower(self.getParamValue('INSTALL_XSERVER')) == 'y':
                 try:
-                    logCurrentStage('6')
+                    self.logCurrentStage('6')
                     runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/essentials.sh', getParamValue('USERNAME')])
-                    runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'xserver-meta'])
+                    runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', self.getParamValue('USERNAME'), 'xserver-meta'])
                     startFrom = startFrom + 1
-                    if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
+                    #if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
+                    if string.lower(self.getParamValue('CREATE_BACKUPS')) == 'y':
                         try:
                             files = os.listdir('/mnt/lfs/sources/')
                             found = False
@@ -524,17 +527,19 @@ class BuildLfs:
                     exit()
 
         if startFrom == 7:
-            if getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'y' or getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'Y':
+            #if getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'y' or getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'Y':
+            if string.lower(self.getParamValue('INSTALL_DESKTOP_ENVIRONMENT')) == 'y':
                 try:
-                    logCurrentStage('7')
-                    if getParamValue('DESKTOP_ENVIRONMENT') == '2':
+                    self.logCurrentStage('7')
+                    if self.getParamValue('DESKTOP_ENVIRONMENT') == 'mate':
                         desktopEnv = 'mate'
-                        runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'mate-desktop-environment'])
-                    elif getParamValue('DESKTOP_ENVIRONMENT') == '1':
+                        runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', self.getParamValue('USERNAME'), 'mate-desktop-environment'])
+                    elif self.getParamValue('DESKTOP_ENVIRONMENT') == 'xfce':
                         desktopEnv = 'xfce'
-                        runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'xfce-desktop-environment'])
+                        runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', self.getParamValue('USERNAME'), 'xfce-desktop-environment'])
                     startFrom = startFrom + 1
-                    if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
+                    #if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
+                    if string.lower(self.getParamValue('CREATE_BACKUPS')) == 'y':
                         try:
                             files = os.listdir('/mnt/lfs/sources/')
                             found = False
@@ -565,7 +570,7 @@ class BuildLfs:
             return password1.rjust(32)
         else:
             print 'Passwords do not match. Retrying...'
-            return getpassword(prompt, promptagain)
+            return self.getPassword(prompt, promptagain)
     #--------------getParamValue
     def getParamValue(self, paramName):
         with open(self.propsFile) as f:
@@ -575,35 +580,35 @@ class BuildLfs:
         return None
     #--------------
     def getBuildProperties(self):
-        self.DEV_NAME           = getParamValue('DEV_NAME')
-        self._ROOT_PART         = getParamValue('ROOT_PART')
-        self.HOME_PART          = getParamValue('HOME_PART')
-        self.FORMAT_HOME        = getParamValue('FORMAT_HOME')
-        self.SWAP_PART          = getParamValue('SWAP_PART')
-        self.FORMAT_SWAP        = getParamValue('FORMAT_SWAP')
-        self.LOCALE             = getParamValue('LOCALE')
-        self.OS_NAME            = getParamValue('OS_NAME')
-        self.OS_VERSION         = getParamValue('OS_VERSION')
-        self.OS_CODENAME        = getParamValue('OS_CODENAME')
-        self.DOMAIN_NAME        = getParamValue('DOMAIN_NAME')
-        self.KEYBOARD           = getParamValue('KEYBOARD')
-        self.PAPER_SIZE         = getParamValue('PAPER_SIZE')
-        self.FULLNAME           = getParamValue('FULLNAME')
-        self.USERNAME           = getParamValue('USERNAME')
-        self.HOST_NAME          = getParamValue('HOST_NAME')
-        self.CREATE_BACKUPS     = getParamValue('CREATE_BACKUPS')
-        self.INSTALL_XSERVER    = getParamValue('INSTALL_XSERVER')
-        self.INSTALL_DESKTOP_ENVIRONMENT    = getParamValue('INSTALL_DESKTOP_ENVIRONMENT')
-        self.DESKTOP_ENVIRONMENT            = getParamValue('DESKTOP_ENVIRONMENT')
-        self.passwords['root'] = cipher.decrypt(base64.b64decode(getParamValue('ROOT_ENCPASSWORD')))
-        self.passwords['user'] = cipher.decrypt(base64.b64decode(getParamValue('USER_ENCPASSWORD')))
+        self.DEV_NAME           = self.getParamValue('DEV_NAME')
+        self._ROOT_PART         = self.getParamValue('ROOT_PART')
+        self.HOME_PART          = self.getParamValue('HOME_PART')
+        self.FORMAT_HOME        = self.getParamValue('FORMAT_HOME')
+        self.SWAP_PART          = self.getParamValue('SWAP_PART')
+        self.FORMAT_SWAP        = self.getParamValue('FORMAT_SWAP')
+        self.LOCALE             = self.getParamValue('LOCALE')
+        self.OS_NAME            = self.getParamValue('OS_NAME')
+        self.OS_VERSION         = self.getParamValue('OS_VERSION')
+        self.OS_CODENAME        = self.getParamValue('OS_CODENAME')
+        self.DOMAIN_NAME        = self.getParamValue('DOMAIN_NAME')
+        self.KEYBOARD           = self.getParamValue('KEYBOARD')
+        self.PAPER_SIZE         = self.getParamValue('PAPER_SIZE')
+        self.FULLNAME           = self.getParamValue('FULLNAME')
+        self.USERNAME           = self.getParamValue('USERNAME')
+        self.HOST_NAME          = self.getParamValue('HOST_NAME')
+        self.CREATE_BACKUPS     = self.getParamValue('CREATE_BACKUPS')
+        self.INSTALL_XSERVER    = self.getParamValue('INSTALL_XSERVER')
+        self.INSTALL_DESKTOP_ENVIRONMENT    = self.getParamValue('INSTALL_DESKTOP_ENVIRONMENT')
+        self.DESKTOP_ENVIRONMENT            = self.getParamValue('DESKTOP_ENVIRONMENT')
+        self.passwords['root'] = self.cipher.decrypt(base64.b64decode(getParamValue('ROOT_ENCPASSWORD')))
+        self.passwords['user'] = self.cipher.decrypt(base64.b64decode(getParamValue('USER_ENCPASSWORD')))
         
     #--------------readInput
     def readInput(self, message, varName, defaultValue, append=True, interactive=True):
         if append:
             with open(self.propsFile, 'a') as f:
                 if interactive:
-                    response = lower(raw_input(message))
+                    response = string.lower(raw_input(message))
                     if response == '':
                         response = defaultValue
                 else:
@@ -612,7 +617,7 @@ class BuildLfs:
         else:
             with open(self.propsFile, 'w') as f:
                 if interactive:
-                    response = lower(raw_input(message))
+                    response = string.lower(raw_input(message))
                     if response == '':
                         response = defaultValue
                 else:
@@ -621,40 +626,42 @@ class BuildLfs:
         defaultValue = response
     #--------------inputBuildProperties
     def inputBuildProperties(self):
-        readInput("Bootloader Device: ", 'DEV_NAME', self.DEV_NAME, False)
-        readInput("Root Partition: ", 'ROOT_PART', self.ROOT_PART)
-        readInput("Home Partition: ", 'HOME_PART', self.HOME_PART)
-        #if getParamValue('HOME_PART') != '':
-        if self.HOME_PART != '':
-            readInput('Format Home Partition? (y/N): ', 'FORMAT_HOME', self.FORMAT_HOME)
-        readInput("Swap Partition: ", 'SWAP_PART', self.SWAP_PART)
-        #if getParamValue('SWAP_PART') != '':
-        if self.SWAP_PART != '':
-            readInput('Format swap partition? (y/N): ', 'FORMAT_SWAP', self.FORMAT_SWAP)
-        readInput("Locale: (e.g. it_IT.utf8) ", 'LOCALE', self.LOCALE)
-        readInput("OS Name: ", 'OS_NAME', self.OS_NAME)
-        readInput("OS Version: ", 'OS_VERSION', self.OS_VERSION)
-        readInput("OS Codename: ", 'OS_CODENAME', self.OS_CODENAME)
-        readInput("Domain Name: ", 'DOMAIN_NAME', self.DOMAIN_NAME)
-        readInput("Keyboard Layout: (e.g. us, fr) ", 'KEYBOARD', self.KEYBOARD)
-        readInput("Printer Paper Size: (A4/letter) ", 'PAPER_SIZE', self.PAPER_SIZE)
-        readInput('Enter full name: ', 'FULLNAME', self.FULLNAME)
-        readInput('Username: ', 'USERNAME', self.USERNAME)
-        readInput('Computer Name: ', 'HOST_NAME', self.HOST_NAME)
-        readInput('Create backups? (y/N) ', 'CREATE_BACKUPS', self.CREATE_BACKUPS)
-        readInput("Install X Server? (y/N) ", 'INSTALL_XSERVER', self.INSTALL_XSERVER)
+        self.readInput("Bootloader Device: ", 'DEV_NAME', self.DEV_NAME, False)
+        self.readInput("Root Partition: ", 'ROOT_PART', self.ROOT_PART)
+        self.readInput("Home Partition: ", 'HOME_PART', self.HOME_PART)
+        if self.getParamValue('HOME_PART') != '':
+        #if self.HOME_PART != '':
+            self.readInput('Format Home Partition? (y/N): ', 'FORMAT_HOME', self.FORMAT_HOME)
+        self.readInput("Swap Partition: ", 'SWAP_PART', self.SWAP_PART)
+        if self.getParamValue('SWAP_PART') != '':
+        #if self.SWAP_PART != '':
+            self.readInput('Format swap partition? (y/N): ', 'FORMAT_SWAP', self.FORMAT_SWAP)
+        self.readInput("Locale: (e.g. it_IT.utf8) ", 'LOCALE', self.LOCALE)
+        self.readInput("OS Name: ", 'OS_NAME', self.OS_NAME)
+        self.readInput("OS Version: ", 'OS_VERSION', self.OS_VERSION)
+        self.readInput("OS Codename: ", 'OS_CODENAME', self.OS_CODENAME)
+        self.readInput("Domain Name: ", 'DOMAIN_NAME', self.DOMAIN_NAME)
+        self.readInput("Keyboard Layout: (e.g. us, fr) ", 'KEYBOARD', self.KEYBOARD)
+        self.readInput("Printer Paper Size: (A4/letter) ", 'PAPER_SIZE', self.PAPER_SIZE)
+        self.readInput('Enter full name: ', 'FULLNAME', self.FULLNAME)
+        self.readInput('Username: ', 'USERNAME', self.USERNAME)
+        self.readInput('Computer Name: ', 'HOST_NAME', self.HOST_NAME)
+        self.readInput('Create backups? (y/N) ', 'CREATE_BACKUPS', self.CREATE_BACKUPS)
+        self.readInput("Install X Server? (y/N) ", 'INSTALL_XSERVER', self.INSTALL_XSERVER)
         #if getParamValue('INSTALL_XSERVER') == 'y' or getParamValue('INSTALL_XSERVER') == 'Y':
-        if lower(self.INSTALL_XSERVER) == 'y':
-            readInput("Install Desktop Environment? (y/N) ", 'INSTALL_DESKTOP_ENVIRONMENT', self.INSTALL_DESKTOP_ENVIRONMENT)
+        if string.lower(self.getParamValue('INSTALL_XSERVER')) == 'y':
+        #if string.lower(self.INSTALL_XSERVER) == 'y':
+            self.readInput("Install Desktop Environment? (y/N) ", 'INSTALL_DESKTOP_ENVIRONMENT', self.INSTALL_DESKTOP_ENVIRONMENT)
             #if getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'y' or getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'Y':
-            if lower(self.INSTALL_DESKTOP_ENVIRONMENT) == 'y':
-                readInput("Choose the Desktop Environment you want to install:\n xfce\n mate\n kde\n gnome\n lxde\n\nEnter your choice (xfce): ", 'DESKTOP_ENVIRONMENT', self.DESKTOP_ENVIRONMENT)
-        passwords['root'] = getpassword('Enter the root password : ', 'Re-enter the root password : ')
-        encoded_passwords['root'] = base64.b64encode(cipher.encrypt(passwords['root']))
-        passwords['user'] = getpassword('Enter the user password : ', 'Re-enter the user password : ')
-        encoded_passwords['user'] = base64.b64encode(cipher.encrypt(passwords['user']))
-        readInput('', 'ROOT_ENCPASSWORD', encoded_passwords['root'], True, False)
-        readInput('', 'USER_ENCPASSWORD', encoded_passwords['user'], True, False)
+            if string.lower(self.getParamValue('INSTALL_DESKTOP_ENVIROMENT')) == 'y':
+            #if lower(self.INSTALL_DESKTOP_ENVIRONMENT) == 'y':
+                self.readInput("Choose the Desktop Environment you want to install:\n xfce\n mate\n kde\n gnome\n lxde\n\nEnter your choice (xfce): ", 'DESKTOP_ENVIRONMENT', self.DESKTOP_ENVIRONMENT)
+        self.passwords['root'] = self.getPassword('Enter the root password : ', 'Re-enter the root password : ')
+        self.encoded_passwords['root'] = base64.b64encode(self.cipher.encrypt(self.passwords['root']))
+        self.passwords['user'] = self.getPassword('Enter the user password : ', 'Re-enter the user password : ')
+        self.encoded_passwords['user'] = base64.b64encode(self.cipher.encrypt(self.passwords['user']))
+        self.readInput('', 'ROOT_ENCPASSWORD', self.encoded_passwords['root'], True, False)
+        self.readInput('', 'USER_ENCPASSWORD', self.encoded_passwords['user'], True, False)
 
 
 if __name__ == '__main__':
