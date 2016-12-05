@@ -339,7 +339,7 @@ class BuildLfs:
         self.secret_key         = '13fFgYjK7iOyG564'        #chiave di cifratura
         self.cipher             = AES.new(self.secret_key, AES.MODE_ECB) #
         self.DEV_NAME           = ''
-        self._ROOT_PART         = ''
+        self.ROOT_PART          = ''
         self.HOME_PART          = ''
         self.FORMAT_HOME        = 'n'
         self.SWAP_PART          = ''
