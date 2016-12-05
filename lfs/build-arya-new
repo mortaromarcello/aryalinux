@@ -368,7 +368,7 @@ class BuildLfs:
         print '3. Resume from a certain stage'
         response = raw_input('Enter your choice (1 ... 2): ')
         if response == '1':
-            self.freshBuild(1)
+            freshBuild(1)
         elif response == '2':
             rootPartition = raw_input('Enter the root partition where the build was in progress. Enter to exit: ')
             if rootPartition != '':
