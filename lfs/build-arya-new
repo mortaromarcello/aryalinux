@@ -51,13 +51,7 @@ def makeLogEntry(message, logFile):
 class BuildLfs:
     #------------------__init__-----------------------------------------
     def __init__(self):
-        self.logger = logging.getLogger(__name__)
-        self.logger.setLevel(logging.INFO)
-        self.handler = logging.FileHandler('/sources/' + __name__ + '.log')
-        self.formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        self.handler.setFormatter(self.formatter)
-        self.logger.addHandler(self.handler)
-        self.logger.info('Set log system')
+        self.fileLog            = '/sources/' + __name__ + '.log'
         self.currentStageFile   = '/sources/currentstage'   # path file che memorizza lo stage
         self.propsFile          = 'build-properties'        #nome del file che memorizza le proprieta'
         self.stage              = ''                        #stage corrente
@@ -127,6 +121,18 @@ class BuildLfs:
         elif response == '3':
             print 'This function has not been implemented.'
             pass
+    #------------------setFileLog---------------------------------------
+    def setFileLog(self):
+        if not os.path.exists(self.fileLog):
+            with open(self.fileLog, 'w') as f:
+                f.write('Initializing file log\n')
+        self.logger = logging.getLogger(__name__)
+        self.logger.setLevel(logging.INFO)
+        self.handler = logging.FileHandler(self.fileLog)
+        self.formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        self.handler.setFormatter(self.formatter)
+        self.logger.addHandler(self.handler)
+        self.logger.info('Set log system')
     #------------------logCurrentStage----------------------------------
     def logCurrentStage(self, stageName):
         if os.path.exists(self.currentStageFile):
@@ -156,6 +162,7 @@ class BuildLfs:
             try:
                 self.logCurrentStage('2')
                 runScript('stage1.sh', None)
+                self.setFileLog()
                 startFrom = startFrom + 1
             except:
                 #print 'Error occured while executing stage 1'
