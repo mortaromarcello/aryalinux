@@ -51,7 +51,7 @@ def makeLogEntry(message, logFile):
 class BuildLfs:
     #------------------__init__-----------------------------------------
     def __init__(self):
-        self.fileLog            = '/sources/' + __name__ + '.log'
+        self.fileLog            = '/sources/' + os.path.basename(__file__) + '.log'
         self.currentStageFile   = '/sources/currentstage'   # path file che memorizza lo stage
         self.propsFile          = 'build-properties'        #nome del file che memorizza le proprieta'
         self.stage              = ''                        #stage corrente
@@ -126,7 +126,7 @@ class BuildLfs:
         if not os.path.exists(self.fileLog):
             with open(self.fileLog, 'w') as f:
                 f.write('Initializing file log\n')
-        self.logger = logging.getLogger(__name__)
+        self.logger = logging.getLogger(os.path.basename(__file__))
         self.logger.setLevel(logging.INFO)
         self.handler = logging.FileHandler(self.fileLog)
         self.formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
