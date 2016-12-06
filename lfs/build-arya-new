@@ -4,7 +4,6 @@ import os
 import string
 import pwd
 import subprocess
-import sys
 from subprocess import check_output
 import getpass
 from Crypto.Cipher import AES
@@ -119,7 +118,7 @@ class BuildLfs:
                     check_output('ln -svf /mnt/lfs/sources /', shell=True)
                 #se esiste carica lo stage memorizzato
                 if os.path.exists('/sources/build-properties'):
-                    self.stage = getCurrentStage()
+                    self.stage = self.getCurrentStage()
                     self.freshBuild(self.stage)
                 else:
                     check_output('./umountal.sh', shell=True)
@@ -131,7 +130,7 @@ class BuildLfs:
     #------------------logCurrentStage----------------------------------
     def logCurrentStage(self, stageName):
         if os.path.exists(self.currentStageFile):
-            with opens(self.currentStageFile, 'w') as f:
+            with open(self.currentStageFile, 'w') as f:
                 f.write(stageName)
     #------------------getCurrentStage----------------------------------
     def getCurrentStage(self):
@@ -201,7 +200,7 @@ class BuildLfs:
                 self.logger.error('Error occured while executing stage 4', exc_info=True)
                 exit()
             try:
-                pr = subprocess.Popen(['./enteral.sh /sources/final-stage.sh "' + passwords['root'] + '" "' + passwords['user'] + '"'], shell=True)
+                pr = subprocess.Popen(['./enteral.sh /sources/final-stage.sh "' + self.passwords['root'] + '" "' + self.passwords['user'] + '"'], shell=True)
                 pr.wait()
             except Exception as ex:
                 print ex
@@ -231,7 +230,7 @@ class BuildLfs:
             if string.lower(self.getParamValue('INSTALL_XSERVER')) == 'y':
                 try:
                     self.logCurrentStage('6')
-                    runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/essentials.sh', getParamValue('USERNAME')])
+                    runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/essentials.sh', self.getParamValue('USERNAME')])
                     runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', self.getParamValue('USERNAME'), 'xserver-meta'])
                     startFrom = startFrom + 1
                     #if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
@@ -335,8 +334,8 @@ class BuildLfs:
         self.INSTALL_XSERVER    = self.getParamValue('INSTALL_XSERVER')
         self.INSTALL_DESKTOP_ENVIRONMENT    = self.getParamValue('INSTALL_DESKTOP_ENVIRONMENT')
         self.DESKTOP_ENVIRONMENT            = self.getParamValue('DESKTOP_ENVIRONMENT')
-        self.passwords['root'] = self.cipher.decrypt(base64.b64decode(getParamValue('ROOT_ENCPASSWORD')))
-        self.passwords['user'] = self.cipher.decrypt(base64.b64decode(getParamValue('USER_ENCPASSWORD')))
+        self.passwords['root'] = self.cipher.decrypt(base64.b64decode(self.getParamValue('ROOT_ENCPASSWORD')))
+        self.passwords['user'] = self.cipher.decrypt(base64.b64decode(self.getParamValue('USER_ENCPASSWORD')))
     #------------------readInput----------------------------------------
     def readInput(self, message, varName, defaultValue, append=True, interactive=True):
         if append:
