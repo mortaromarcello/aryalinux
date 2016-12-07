@@ -10,6 +10,7 @@ SOURCE_DIR="/sources"
 if ! grep "config-files" /sources/build-log &> /dev/null
 then
 
+bash /lib/udev/init-net-rules.sh
 
 cat > /etc/sysconfig/ifconfig.eth0 << "EOF"
 ONBOOT=yes
@@ -90,6 +91,12 @@ UTC=1
 # such as machine hardware clock type for Alphas.
 CLOCKPARAMS=
 # End /etc/sysconfig/clock
+EOF
+
+cat > /etc/sysconfig/console << "EOF"
+# Begin /etc/sysconfig/console
+KEYMAP="$KEYBOARD"
+# End /etc/sysconfig/console
 EOF
 
 cat > /etc/adjtime << "EOF"
