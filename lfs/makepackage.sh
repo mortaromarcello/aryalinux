@@ -72,6 +72,7 @@ strip -s $DIR_BUILD/usr/lib/* $DIR_BUILD/usr/bin/*
 gzip -9 $DIR_BUILD/usr/man/man?/*.?
 cd $DIR_BUILD
 find . -type f -name "*"|sed 's/^.//' > ../../$PACKAGE.files
+find . -type d -name "*"|sed 's/^.//' >> ../../$PACKAGE.files
 fmakepkg ../../$PACKAGE.tgz
 cd $PWD
 rm -rvf $DIR_BUILD
