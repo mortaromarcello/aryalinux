@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import sys
-import time
+#import time
 import subprocess
 import urllib
 import urllib2
@@ -104,12 +104,12 @@ def getAllDependencies(packages):
     return allDependencies
 
 def getConfirmation(packages, action, prompt=True):
-        if action == 'install':
-            print 'The following packages would be installed:\n'
-        else if action == 'remove':
-            print 'The following packages would be removed:\n'
-        for package in packages:
-                print package,
+    if action == 'install':
+        print 'The following packages would be installed:\n'
+    elif action == 'remove':
+        print 'The following packages would be removed:\n'
+    for package in packages:
+        print package,
         print ''
         print ''
     if prompt:
@@ -120,7 +120,7 @@ def getConfirmation(packages, action, prompt=True):
         for package in packages:
             if action == 'install':
                 runPackageInstall(package)
-            else if action == 'remove':
+            elif action == 'remove':
                 runPackageRemove(package)
 
 def isSourceOnly(packageName):
@@ -146,11 +146,11 @@ def runPackageRemove(packageName):
     print "runPackageRemove"
     removed_files = []
     try:
-        file = open(configuration['INSTALLED_FILES_DIR'] + '/' + packageName + '.files', 'r')
+        f = open(configuration['INSTALLED_FILES_DIR'] + '/' + packageName + '.files', 'r')
     except:
         print 'Error opening' + packageName + '.files.\nNot removing.'
         return
-    data = file.read()
+    data = f.read()
     lines = data.split('\n')
     for line in lines:
         if os.path.isfile(line):
@@ -159,14 +159,13 @@ def runPackageRemove(packageName):
                 removed_files.append(line)
             except:
                 print ''
-            else if os.path.isdir(line):
-                try:
-                    is.rmdir(line)
-                    removed_files.append(line)
-                except:
-                    print 'Not remove ' + line + 'directory.'
-        except:
-            return
+        elif os.path.isdir(line):
+            try:
+                os.rmdir(line)
+                removed_files.append(line)
+            except:
+                print 'Not remove ' + line + 'directory.'
+    f.close()
     if removed_files:
         f = open(configuration['REMOVED_FILES_DIR'] + '/' + packageName + '.removed', 'w')
         for name in removed_files:
@@ -364,6 +363,9 @@ if sys.argv[1] == 'install':
     loadInstalled()
     installAction()
     exit()
+if sys.argv[1] == 'remove':
+    loadInstalled()
+    removeAction()
 if sys.argv[1] == 'install-no-prompt':
         loadInstalled()
         installAction(False)
