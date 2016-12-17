@@ -9,8 +9,8 @@
 set -e
 set +h
 
-. /etc/alps/alps.conf
-. /var/lib/alps/functions
+#. /etc/alps/alps.conf
+#. /var/lib/alps/functions
 
 SOURCE_ONLY=n
 DESCRIPTION="\n The Wireless Extension (WE) is a generic API in the Linux kernel\n allowing a driver to expose configuration and statistics specific\n to common Wireless LANs to user space. A single set of tools can\n support all the variations of Wireless LANs, regardless of their\n type as long as the driver supports Wireless Extensions. WE\n parameters may also be changed on the fly without restarting the\n driver (or Linux).\n"
@@ -26,7 +26,7 @@ PKGNAME=$NAME
 #LOC=""
 ARCH=`uname -m`
 
-START=$SOURCE_DIR
+START=`pwd`
 PKG=$START/pkg
 SRC=$START/work
 function build() {
@@ -50,7 +50,7 @@ function build() {
     fi
     #whoami > /tmp/currentuser
     patch -Np1 -i ../wireless_tools-29-fix_iwlist_scanning-1.patch
-
+    make PREFIX=$PKG/usr INSTALL_MAN=$PKG/usr/share/man install
     # compiling package , preinstall and postinstall
     #./configure --prefix=/usr
     #make
@@ -59,9 +59,9 @@ function build() {
 }
 
 function package() {
-    strip -s $PKG/usr/bin/*
+    strip -s $PKG/usr/sbin/*
     #chown -R root:root usr/bin
-    #gzip -9 $PKG/usr/man/man?/*.?
+    gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-1.files
     find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-1.files

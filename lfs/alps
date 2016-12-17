@@ -353,6 +353,11 @@ def showInstalledAction():
         print allinstalled
         pass
 
+#
+def installPkg(packageName):
+    runCommand('tar -xzlUpvf ' + packageName, 'install package')
+#
+
 configuration = loadConfig(None)
 distConfig = loadConfig('/etc/lsb-release')
 

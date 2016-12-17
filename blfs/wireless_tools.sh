@@ -39,8 +39,6 @@ whoami > /tmp/currentuser
 patch -Np1 -i ../wireless_tools-29-fix_iwlist_scanning-1.patch
 
 
-make
-
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
