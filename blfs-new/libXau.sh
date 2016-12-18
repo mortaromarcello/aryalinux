@@ -48,9 +48,9 @@ function unzip_file()
 function build() {
     mkdir -vp $PKG $SRC
     cd $SRC
-    URL=
+    URL=http://ftp.x.org/pub/individual/lib/libXau-1.0.8.tar.bz2
     if [ ! -z $URL ]; then
-        wget 
+        wget -nc http://ftp.x.org/pub/individual/lib/libXau-1.0.8.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libXau/libXau-1.0.8.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libXau/libXau-1.0.8.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libXau/libXau-1.0.8.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libXau/libXau-1.0.8.tar.bz2 || wget -nc ftp://ftp.x.org/pub/individual/lib/libXau-1.0.8.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libXau/libXau-1.0.8.tar.bz2
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -61,18 +61,17 @@ function build() {
         fi
         cd $DIRECTORY
     fi
-    #whoami > /tmp/currentuser
-    # compiling package , preinstall and postinstall
-    #./configure --prefix=/usr
-    #make
-    #make DESTDIR=$PKG install
-    #
+    export XORG_PREFIX=/usr
+    export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
+    ./configure $XORG_CONFIG &&
+    make "-j`nproc`" || make
+    make DESTDIR=$PKG install
 }
 
 function package() {
-    strip -s $PKG/usr/bin/*
+    #strip -s $PKG/usr/bin/*
     #chown -R root:root usr/bin
-    #gzip -9 $PKG/usr/share/man/man?/*.?
+    gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-1.files
     find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-1.files
@@ -80,6 +79,7 @@ function package() {
     cp -v $START/$PKGNAME-$VERSION-$ARCH-1.files $PKG/install/
     echo -e $DESCRIPTION > $PKG/install/blfs-desc
     cat > $PKG/install/doinst.sh << "EOF"
+#!/bin/sh
 echo -e "Non ho niente da fare!"
 EOF
     tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-1.tgz

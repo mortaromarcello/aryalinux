@@ -20,7 +20,6 @@ NAME="x7proto"
 PKGNAME=$NAME
 
 #REQ:util-macros
-#REC:sudo
 #REC:wget
 #OPT:fop
 #OPT:libxslt
@@ -116,16 +115,12 @@ EOF
         ./configure $XORG_CONFIG
         make DESTDIR=$PKG install
         cd $SRC/proto
-        rm -rf $packagedir
-done
-    #./configure --prefix=/usr
-    #make
-    #make DESTDIR=$PKG install
-    #
+        #rm -rvf $packagedir
+    done
 }
 
 function package() {
-    strip -s $PKG/usr/bin/*
+    #strip -s $PKG/usr/bin/*
     #chown -R root:root usr/bin
     #gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG

@@ -13,15 +13,18 @@ set +h
 #. /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=""
-SECTION=""
-VERSION=
-NAME=""
+DESCRIPTION="\n The libxcb package provides an\n interface to the X Window System protocol, which replaces the\n current Xlib interface. Xlib can also use XCB as a transport layer,\n allowing software to make requests and receive responses with both.\n"
+SECTION="x"
+VERSION=1.12
+NAME="libxcb"
 PKGNAME=$NAME
 
-#REQ:
-#REC:
-#OPT:
+#REQ:libXau
+#REQ:xcb-proto
+#REC:libXdmcp
+#OPT:doxygen
+#OPT:check
+#OPT:libxslt
 
 #LOC=""
 ARCH=`uname -m`
@@ -50,9 +53,10 @@ function unzip_file()
 function build() {
     mkdir -vp $PKG $SRC
     cd $SRC
-    URL=
+    URL=http://xcb.freedesktop.org/dist/libxcb-1.12.tar.bz2
     if [ ! -z $URL ]; then
-        wget 
+        wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libxcb/libxcb-1.12.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libxcb/libxcb-1.12.tar.bz2 || wget -nc http://xcb.freedesktop.org/dist/libxcb-1.12.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libxcb/libxcb-1.12.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libxcb/libxcb-1.12.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libxcb/libxcb-1.12.tar.bz2
+        wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/libxcb-1.12-python3-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/libxcb/libxcb-1.12-python3-1.patch
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -64,17 +68,22 @@ function build() {
         cd $DIRECTORY
     fi
     #whoami > /tmp/currentuser
-    # compiling package , preinstall and postinstall
-    #./configure --prefix=/usr
-    #make
-    #make DESTDIR=$PKG install
-    #
+    export XORG_PREFIX=/usr
+    export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
+    patch -Np1 -i ../libxcb-1.12-python3-1.patch
+    sed -i "s/pthread-stubs//" configure &&
+    ./configure $XORG_CONFIG      \
+                --enable-xinput   \
+                --without-doxygen \
+                --docdir='${datadir}'/doc/libxcb-1.12 &&
+    make "-j`nproc`" || make
+    make DESTDIR=$PKG install
 }
 
 function package() {
-    strip -s $PKG/usr/bin/*
+    #strip -s $PKG/usr/bin/*
     #chown -R root:root usr/bin
-    #gzip -9 $PKG/usr/share/man/man?/*.?
+    gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-1.files
     find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-1.files
@@ -82,6 +91,7 @@ function package() {
     cp -v $START/$PKGNAME-$VERSION-$ARCH-1.files $PKG/install/
     echo -e $DESCRIPTION > $PKG/install/blfs-desc
     cat > $PKG/install/doinst.sh << "EOF"
+#!/bin/sh
 echo -e "Non ho niente da fare!"
 EOF
     tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-1.tgz
