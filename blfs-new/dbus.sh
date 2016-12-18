@@ -13,15 +13,19 @@ set +h
 #. /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=""
-SECTION=""
-VERSION=
-NAME=""
+DESCRIPTION="\n Even though D-Bus was built in\n LFS, there are some features provided by the package that other\n BLFS packages need, but their dependencies didn't fit into LFS.\n"
+SECTION="general"
+VERSION=1.10.10
+NAME="dbus"
 PKGNAME=$NAME
 
-#REQ:
-#REC:
-#OPT:
+#REC:x7lib
+#OPT:dbus-glib
+#OPT:python-modules#dbus-python
+#OPT:python-modules#pygobject2
+#OPT:valgrind
+#OPT:doxygen
+#OPT:xmlto
 
 #LOC=""
 ARCH=`uname -m`
@@ -50,9 +54,9 @@ function unzip_file()
 function build() {
     mkdir -vp $PKG $SRC
     cd $SRC
-    URL=
+    URL=http://dbus.freedesktop.org/releases/dbus/dbus-1.10.10.tar.gz
     if [ ! -z $URL ]; then
-        wget 
+        wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/db/dbus-1.10.10.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/db/dbus-1.10.10.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/db/dbus-1.10.10.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/db/dbus-1.10.10.tar.gz || wget -nc http://dbus.freedesktop.org/releases/dbus/dbus-1.10.10.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/db/dbus-1.10.10.tar.gz
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -64,11 +68,18 @@ function build() {
         cd $DIRECTORY
     fi
     #whoami > /tmp/currentuser
-    # compiling package , preinstall and postinstall
-    #./configure --prefix=/usr
-    #make
-    #make DESTDIR=$PKG install
-    #
+    ./configure --prefix=/usr                  \
+                --sysconfdir=/etc              \
+                --localstatedir=/var           \
+                --disable-doxygen-docs         \
+                --disable-xml-docs             \
+                --disable-static               \
+                --disable-systemd              \
+                --without-systemdsystemunitdir \
+                --with-console-auth-dir=/run/console/ \
+                --docdir=/usr/share/doc/dbus-1.10.10   &&
+    make "-j`nproc`" || make
+    make DESTDIR=$PKG install
 }
 
 function package() {
@@ -82,7 +93,10 @@ function package() {
     cp -v $START/$PKGNAME-$VERSION-$ARCH-1.files $PKG/install/
     echo -e $DESCRIPTION > $PKG/install/blfs-desc
     cat > $PKG/install/doinst.sh << "EOF"
-echo -e "Non ho niente da fare!"
+#!/bin/sh
+groupadd -g 18 messagebus &&
+useradd -c "D-Bus Message Daemon User" -d /var/run/dbus \
+        -u 18 -g messagebus -s /bin/false messagebus
 EOF
     tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-1.tgz
     echo "blfs package \"$1\" created."
