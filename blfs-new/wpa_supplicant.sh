@@ -101,15 +101,131 @@ CONFIG_CTRL_IFACE_DBUS_INTRO=y
 EOF
     # compiling package , preinstall and postinstall
     cd wpa_supplicant && make BINDIR=/sbin LIBDIR=/lib
+    mkdir -vp $PKG/sbin
     install -v -m755 wpa_{cli,passphrase,supplicant} $PKG/sbin/ &&
+    mkdir -vp $PKG/usr/share/man/man{5,8}
     install -v -m644 doc/docbook/wpa_supplicant.conf.5 $PKG/usr/share/man/man5/ &&
     install -v -m644 doc/docbook/wpa_{cli,passphrase,supplicant}.8 $PKG/usr/share/man/man8/
+    mkdir -vp $PKG/usr/share/dbus-1/system-services
     install -v -m644 dbus/fi.{epitest.hostap.WPASupplicant,w1.wpa_supplicant1}.service $PKG/usr/share/dbus-1/system-services/
+    mkdir -vp $PKG/lib/services
+    cat > $PKG/lib/services/wpa << "EOF"
+#!/bin/bash
+# Begin services/wpa
 
-    #./configure --prefix=/usr
-    #make
-    #make DESTDIR=$PKG install
-    #
+# Origianlly based upon lfs-bootscripts-1.12 $NETWORK_DEVICES/if{down,up}
+# Written by Armin K. <krejzi at email dot com>
+
+# Call with: IFCONFIG=<filename> /lib/services/wpa <IFACE> <up | down>
+
+#$LastChangedBy: bdubbs $
+#$Date: 2015-03-04 16:39:39 -0600 (Wed, 04 Mar 2015) $
+
+. /lib/lsb/init-functions
+. $IFCONFIG
+
+CFGFILE=/etc/sysconfig/wpa_supplicant-${IFCONFIG##*.}.conf
+PIDFILE=/run/wpa_supplicant/$1.pid
+CONTROL_IFACE=/run/wpa_supplicant/$1
+
+case "$2" in
+   up)
+
+      if [ -e ${PIDFILE} ]; then
+         ps $(cat ${PIDFILE}) | grep wpa_supplicant >/dev/null
+         if [ "$?" = "0" ]; then
+            log_warning_msg "\n wpa_supplicant already running on $1."
+            exit 0
+         else
+            rm ${PIDFILE}
+         fi
+      fi
+
+      if [ ! -e ${CFGFILE} ]; then
+        log_info_msg "\n wpa_supplicant configuration file ${CFGFILE} not present"
+        log_failure_msg2
+        exit 1
+      fi
+
+      # Only specify -C on command line if it is not in CFGFILE
+      if ! grep -q ctrl_interface ${CFGFILE}; then 
+         WPA_ARGS="-C/run/wpa_supplicant ${WPA_ARGS}"
+      fi
+
+      log_info_msg "\n Starting wpa_supplicant on the $1 interface..."
+
+      mkdir -p /run/wpa_supplicant
+
+      /sbin/wpa_supplicant -q -B -Dnl80211,wext -P${PIDFILE} \
+          -c${CFGFILE} -i$1 ${WPA_ARGS}
+
+      if [ "$?" != "0" ]; then
+        log_failure_msg2
+        exit 1
+      fi
+
+      log_success_msg2
+
+      if [ -n "${WPA_SERVICE}" ]; then
+         if [ ! -e /lib/services/${WPA_SERVICE} -a \
+              ! -x /lib/services/${WPA_SERVICE} ]; then
+            log_info_msg "\n Cannot start ${WPA_SERVICE} on $1"
+            log_failure_msg2
+            exit 1
+         fi
+
+         IFCONFIG=${IFCONFIG} /lib/services/${WPA_SERVICE} $1 up
+      fi
+   ;;
+
+   down)
+      if [ -n "${WPA_SERVICE}" ]; then
+         if [ ! -e /lib/services/${WPA_SERVICE} -a ! -x /lib/services/${WPA_SERVICE} ]; then
+            log_warning_msg "\n Cannot stop ${WPA_SERVICE} on $1"
+         else
+            IFCONFIG=${IFCONFIG} /lib/services/${WPA_SERVICE} $1 down
+         fi
+      fi
+
+      log_info_msg "\n Stopping wpa_supplicant on the $1 interface..."
+
+      if [ -e ${PIDFILE} ]; then
+         kill -9 $(cat ${PIDFILE})
+         rm -f ${PIDFILE} ${CONTROL_IFACE}
+         evaluate_retval
+      else
+         log_warning_msg "\n wpa_supplicant already stopped on $1"
+         exit 0
+      fi
+   ;;
+
+   *)
+      echo "Usage: $0 [interface] {up|down}"
+      exit 1
+   ;;
+esac
+
+# End services/wpa
+
+EOF
+    chmod 754 $PKG/lib/services/wpa
+    mkdir -vp $PKG/etc/sysconfig
+    cat > $PKG/etc/sysconfig/ifconfig.wifi0 << "EOF"
+ONBOOT="yes"
+IFACE="wlan0"
+SERVICE="wpa"
+# Additional arguments to wpa_supplicant
+WPA_ARGS="-c/etc/sysconfig/wpa_supplicant-wifi0.conf"
+WPA_SERVICE="dhclient"
+DHCP_START=""
+DHCP_STOP=""
+# Set PRINTIP="yes" to have the script print
+# the DHCP assigned IP address
+PRINTIP="no"
+# Set PRINTALL="yes" to print the DHCP assigned values for
+# IP, SM, DG, and 1st NS. This requires PRINTIP="yes".
+PRINTALL="no"
+EOF
 }
 
 function package() {
@@ -121,6 +237,10 @@ function package() {
     find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-1.files
     mkdir $PKG/install
     echo -e $DESCRIPTION > $PKG/install/blfs-desc
+    cat > $PKG/install/doinst.sh << "EOF"
+#!/bin/sh
+update-desktop-database
+EOF
     tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-1.tgz
     echo "blfs package \"$1\" created."
 }

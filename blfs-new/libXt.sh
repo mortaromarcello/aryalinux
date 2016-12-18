@@ -13,14 +13,15 @@ set +h
 #. /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The xcb-proto package provides the\n XML-XCB protocol descriptions that libxcb uses to generate the majority of its\n code and API.\n"
+DESCRIPTION="\n The Xorg libXt library provide library\n routines that are used within all X Window applications.\n"
 SECTION="x"
-VERSION=1.12
-NAME="xcb-proto"
+VERSION=1.5.5
+NAME="libXt"
 PKGNAME=$NAME
 
-#REQ:python2
-#OPT:libxml2
+#REQ:
+#REC:
+#OPT:
 
 #LOC=""
 ARCH=`uname -m`
@@ -49,11 +50,9 @@ function unzip_file()
 function build() {
     mkdir -vp $PKG $SRC
     cd $SRC
-    URL=http://xcb.freedesktop.org/dist/xcb-proto-1.12.tar.bz2
+    URL=http://ftp.x.org/pub/individual/lib/libXt-1.1.5.tar.bz2
     if [ ! -z $URL ]; then
-        wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xcb-proto/xcb-proto-1.12.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xcb-proto/xcb-proto-1.12.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xcb-proto/xcb-proto-1.12.tar.bz2 || wget -nc http://xcb.freedesktop.org/dist/xcb-proto-1.12.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xcb-proto/xcb-proto-1.12.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xcb-proto/xcb-proto-1.12.tar.bz2
-        wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/xcb-proto-1.12-python3-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/xcb-proto/xcb-proto-1.12-python3-1.patch
-        wget -nc http://www.linuxfromscratch.org/patches/downloads/xcb-proto/xcb-proto-1.12-schema-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/xcb-proto-1.12-schema-1.patch
+        wget -nc http://ftp.x.org/pub/individual/lib/libXt-1.1.5.tar.bz2
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -67,16 +66,15 @@ function build() {
     #whoami > /tmp/currentuser
     export XORG_PREFIX=/usr
     export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
-    patch -Np1 -i ../xcb-proto-1.12-schema-1.patch
-    patch -Np1 -i ../xcb-proto-1.12-python3-1.patch
-    ./configure $XORG_CONFIG
+    ./configure $XORG_CONFIG \
+        --with-appdefaultdir=/etc/X11/app-defaults
     make DESTDIR=$PKG install
 }
 
 function package() {
     #strip -s $PKG/usr/bin/*
     #chown -R root:root usr/bin
-    #gzip -9 $PKG/usr/share/man/man?/*.?
+    gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-1.files
     find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-1.files
