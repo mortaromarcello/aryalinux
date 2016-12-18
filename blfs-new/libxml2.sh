@@ -13,15 +13,14 @@ set +h
 #. /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION=""
-SECTION=""
-VERSION=
-NAME=""
+DESCRIPTION="\n The libxml2 package contains\n libraries and utilities used for parsing XML files.\n"
+SECTION="general"
+VERSION=2.9.4
+NAME="libxml2"
 PKGNAME=$NAME
 
-#REQ:
-#REC:
-#OPT:
+#REC:python2
+#OPT:valgrind
 
 #LOC=""
 ARCH=`uname -m`
@@ -32,27 +31,28 @@ SRC=$START/work
 
 function unzip_file()
 {
-	dir_name=$(unzip_dirname $1 $2)
-	echo $dir_name
-	if [ `echo $dir_name | grep "extracted$"` ]
-	then
-		echo "Create and extract..."
-		mkdir $dir_name
-		cp $1 $dir_name
-		cd $dir_name
-		unzip $1
-		cd ..
-	else
-		echo "Just Extract..."
-		unzip $1
-	fi
+    dir_name=$(unzip_dirname $1 $2)
+    echo $dir_name
+    if [ `echo $dir_name | grep "extracted$"` ]
+    then
+        echo "Create and extract..."
+        mkdir $dir_name
+        cp $1 $dir_name
+        cd $dir_name
+        unzip $1
+        cd ..
+    else
+        echo "Just Extract..."
+        unzip $1
+    fi
 }
 function build() {
     mkdir -vp $PKG $SRC
     cd $SRC
-    URL=
+    URL=http://xmlsoft.org/sources/libxml2-2.9.4.tar.gz
     if [ ! -z $URL ]; then
-        wget 
+        wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libxml/libxml2-2.9.4.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libxml/libxml2-2.9.4.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libxml/libxml2-2.9.4.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libxml/libxml2-2.9.4.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libxml/libxml2-2.9.4.tar.gz || wget -nc http://xmlsoft.org/sources/libxml2-2.9.4.tar.gz || wget -nc ftp://xmlsoft.org/libxml2/libxml2-2.9.4.tar.gz
+        wget -nc http://www.w3.org/XML/Test/xmlts20130923.tar.gz
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -64,17 +64,17 @@ function build() {
         cd $DIRECTORY
     fi
     #whoami > /tmp/currentuser
-    # compiling package , preinstall and postinstall
-    #./configure --prefix=/usr
-    #make
-    #make DESTDIR=$PKG install
-    #
+    sed -i "/seems to be moved/s/^/#/" ltmain.sh &&
+    ./configure --prefix=/usr --disable-static --with-history &&
+    make "-j`nproc`" || make
+    tar xf ../xmlts20130923.tar.gz
+    make DESTDIR=$PKG install
 }
 
 function package() {
-    strip -s $PKG/usr/bin/*
+    strip -s $PKG/usr/bin/xml{catalog,lint}
     #chown -R root:root usr/bin
-    #gzip -9 $PKG/usr/share/man/man?/*.?
+    gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-1.files
     find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-1.files

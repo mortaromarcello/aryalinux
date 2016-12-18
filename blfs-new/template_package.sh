@@ -74,7 +74,7 @@ function build() {
 function package() {
     strip -s $PKG/usr/bin/*
     #chown -R root:root usr/bin
-    #gzip -9 $PKG/usr/share/man/man?/*.?
+    gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-1.files
     find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-1.files
