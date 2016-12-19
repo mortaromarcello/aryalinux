@@ -10,7 +10,9 @@ SOURCE_DIR="/sources"
 if ! grep "config-files" /sources/build-log &> /dev/null
 then
 
-bash /lib/udev/init-net-rules.sh
+if [ ! -e /etc/udev/rules.d/70-persistent-net.rules ]; then
+    bash /lib/udev/init-net-rules.sh
+fi
 
 cat > /etc/sysconfig/ifconfig.eth0 << "EOF"
 ONBOOT=yes
