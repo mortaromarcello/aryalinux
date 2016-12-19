@@ -171,6 +171,7 @@ class BuildLfs:
 
         if startFrom == 3:
             self.logCurrentStage('3')
+            self.setFileLog()
             env={}
             LFS='/mnt/lfs'
             LC_ALL='POSIX'
@@ -189,6 +190,7 @@ class BuildLfs:
                 exit()
         if startFrom == 4:
             self.logCurrentStage('4')
+            self.setFileLog()
             try:
                 runScript('/sources/stage3.sh', '/sources')
                 startFrom = startFrom + 1
@@ -199,6 +201,7 @@ class BuildLfs:
         if startFrom == 5:
             print 'Starting stage 5'
             self.logCurrentStage('5')
+            self.setFileLog()
             try:
                 runScript('/sources/stage6.sh', '/sources')
                 startFrom = startFrom + 1
@@ -233,10 +236,12 @@ class BuildLfs:
                     exit()
 
         if startFrom == 6:
+            
             #if getParamValue('INSTALL_XSERVER') == 'y' or getParamValue('INSTALL_XSERVER') == 'Y':
             if string.lower(self.getParamValue('INSTALL_XSERVER')) == 'y':
                 try:
                     self.logCurrentStage('6')
+                    self.setFileLog()
                     runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/essentials.sh', self.getParamValue('USERNAME')])
                     runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', self.getParamValue('USERNAME'), 'xserver-meta'])
                     startFrom = startFrom + 1
@@ -270,6 +275,7 @@ class BuildLfs:
             if string.lower(self.getParamValue('INSTALL_DESKTOP_ENVIRONMENT')) == 'y':
                 try:
                     self.logCurrentStage('7')
+                    self.setFileLog()
                     if self.getParamValue('DESKTOP_ENVIRONMENT') == 'mate':
                         desktopEnv = 'mate'
                         runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', self.getParamValue('USERNAME'), 'mate-desktop-environment'])
