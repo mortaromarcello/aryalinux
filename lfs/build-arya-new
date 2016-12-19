@@ -203,6 +203,7 @@ class BuildLfs:
             self.logCurrentStage('5')
             self.setFileLog()
             try:
+                runScript('/sources/mountal.sh', '/sources')
                 runScript('/sources/stage6.sh', '/sources')
                 startFrom = startFrom + 1
             except:
