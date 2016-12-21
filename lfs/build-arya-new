@@ -193,7 +193,7 @@ class BuildLfs:
             self.setFileLog()
             try:
                 runScript('/sources/stage3.sh', '/sources')
-                startFrom = startFrom + 1
+                #startFrom = startFrom + 1
             except:
                 #print 'Error occured while running stage 3'
                 self.logger.error('Error occured while executing stage 3', exc_info=True)
