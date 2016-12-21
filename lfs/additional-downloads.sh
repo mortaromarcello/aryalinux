@@ -32,7 +32,7 @@ wget -nc ftp://sourceware.org/pub/libffi/libffi-3.2.1.tar.gz
 wget -nc https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tar.xz
 wget -nc https://ftp.dlitz.net/pub/dlitz/crypto/pycrypto/pycrypto-2.6.1.tar.gz
 wget -nc http://anduin.linuxfromscratch.org/sources/other/certdata.txt
-wget -nc http://www.openssl.org/source/openssl-1.0.1i.tar.gz
+wget -nc http://www.openssl.org/source/openssl-1.0.2j.tar.gz
 wget -nc http://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-4.06.tar.xz
 wget -nc http://gondor.apana.org.au/~herbert/dash/files/dash-0.5.8.tar.gz
 wget -nc https://www.kernel.org/pub/linux/utils/boot/dracut/dracut-044.tar.xz
