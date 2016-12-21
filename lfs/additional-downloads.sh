@@ -24,7 +24,7 @@ wget -nc https://busybox.net/downloads/fixes-1.20.2/busybox-1.20.2-sys-resource.
 wget -nc https://busybox.net/downloads/busybox-1.20.2.tar.bz2
 wget -nc https://ftp.gnu.org/gnu/nettle/nettle-3.1.1.tar.gz
 wget -nc http://ftp.gnu.org/gnu/libtasn1/libtasn1-4.5.tar.gz
-wget -nc http://p11-glue.freedesktop.org/releases/p11-kit-0.23.1.tar.gz
+wget -nc http://p11-glue.freedesktop.org/releases/p11-kit-0.23.2.tar.gz
 wget -nc ftp://ftp.gnutls.org/gcrypt/gnutls/v3.4/gnutls-3.4.3.tar.xz
 wget -nc http://ftp.gnu.org/gnu/wget/wget-1.16.3.tar.xz
 wget -nc http://www.sudo.ws/dist/sudo-1.8.16.tar.gz

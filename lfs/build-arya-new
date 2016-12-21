@@ -308,8 +308,8 @@ class BuildLfs:
                     #print 'Error occured in the installation of desktop environment'
                     self.logger.error('Error occured in the installation of desktop environment', exc_info=True)
                     exit()
-        #pr = subprocess.Popen(['./createlivedisk.sh'], shell=True)
-        #pr.wait()
+        pr = subprocess.Popen(['./createlivedisk.sh'], shell=True)
+        pr.wait()
     #------------------getPassword--------------------------------------
     def getPassword(self, prompt, promptagain):
         password1 = getpass.getpass(prompt)

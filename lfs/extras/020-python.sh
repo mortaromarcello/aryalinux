@@ -4,7 +4,7 @@ set -e
 set +h
 
 . /sources/build-properties
-
+echo -e "building $0"
 export MAKEFLAGS="-j `nproc`"
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"

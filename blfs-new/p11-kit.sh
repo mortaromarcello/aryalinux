@@ -68,7 +68,7 @@ function build() {
     fi
     #whoami > /tmp/currentuser
     # compiling package , preinstall and postinstall
-    ./configure --prefix=/usr --sysconfdir=/etc &&
+    ./configure --prefix=/usr --sysconfdir=/etc --with-trust-paths=/etc/pki/anchors &&
     make "-j`nproc`" || make
     make DESTDIR=$PKG install
 }

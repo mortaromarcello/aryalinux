@@ -4,12 +4,12 @@ set -e
 set +h
 
 . /sources/build-properties
-
+echo -e "building $0"
 export MAKEFLAGS="-j `nproc`"
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="016-p11kit.sh"
-TARBALL="p11-kit-0.23.1.tar.gz"
+TARBALL="p11-kit-0.23.2.tar.gz"
 
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
@@ -23,7 +23,7 @@ then
 	cd $DIRECTORY
 fi
 
-./configure --prefix=/usr --sysconfdir=/etc &&
+./configure --prefix=/usr --sysconfdir=/etc --with-trust-paths=/etc/pki/anchors &&
 make
 make install
 
