@@ -155,9 +155,6 @@ class BuildLfs:
             startFrom = startFrom + 1
         else:
             self.getBuildProperties()
-            #passwords['root'] = cipher.decrypt(base64.b64decode(getParamValue('ROOT_ENCPASSWORD')))
-            #passwords['user'] = cipher.decrypt(base64.b64decode(getParamValue('USER_ENCPASSWORD')))
-
         if startFrom == 2:
             try:
                 self.logCurrentStage('2')
@@ -370,6 +367,7 @@ class BuildLfs:
                 else:
                     response = defaultValue
                 f.write(varName + '="' + response + '"\n')
+        print response
         defaultValue = response
     #------------------inputBuildProperties-----------------------------
     def inputBuildProperties(self):
@@ -383,13 +381,13 @@ class BuildLfs:
         if self.getParamValue('SWAP_PART') != '':
         #if self.SWAP_PART != '':
             self.readInput('Format swap partition? (y/N): ', 'FORMAT_SWAP', self.FORMAT_SWAP)
-        self.readInput("Locale: (e.g. it_IT.utf8) ", 'LOCALE', self.LOCALE)
+        self.readInput("Locale: (default:" + self.LOCALE + ") ", 'LOCALE', self.LOCALE)
         self.readInput("OS Name: ", 'OS_NAME', self.OS_NAME)
         self.readInput("OS Version: ", 'OS_VERSION', self.OS_VERSION)
         self.readInput("OS Codename: ", 'OS_CODENAME', self.OS_CODENAME)
         self.readInput("Domain Name: ", 'DOMAIN_NAME', self.DOMAIN_NAME)
-        self.readInput("Keyboard Layout: (e.g. us, fr) ", 'KEYBOARD', self.KEYBOARD)
-        self.readInput("Printer Paper Size: (A4/letter) ", 'PAPER_SIZE', self.PAPER_SIZE)
+        self.readInput("Keyboard Layout: (default:" + self.KEYBOARD + ") ", 'KEYBOARD', self.KEYBOARD)
+        self.readInput("Printer Paper Size: (default:" + self.PAPER_SIZE + ") ", 'PAPER_SIZE', self.PAPER_SIZE)
         self.readInput('Enter full name: ', 'FULLNAME', self.FULLNAME)
         self.readInput('Username: ', 'USERNAME', self.USERNAME)
         self.readInput('Computer Name: ', 'HOST_NAME', self.HOST_NAME)
@@ -402,7 +400,7 @@ class BuildLfs:
             #if getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'y' or getParamValue('INSTALL_DESKTOP_ENVIRONMENT') == 'Y':
             if string.lower(self.getParamValue('INSTALL_DESKTOP_ENVIROMENT')) == 'y':
             #if lower(self.INSTALL_DESKTOP_ENVIRONMENT) == 'y':
-                self.readInput("Choose the Desktop Environment you want to install:\n xfce\n mate\n kde\n gnome\n lxde\n\nEnter your choice (xfce): ", 'DESKTOP_ENVIRONMENT', self.DESKTOP_ENVIRONMENT)
+                self.readInput("Choose the Desktop Environment you want to install:\n xfce\n mate\n kde\n gnome\n lxde\n\nEnter your choice (default:" + self.DESKTOP_ENVIRONMENT + "): ", 'DESKTOP_ENVIRONMENT', self.DESKTOP_ENVIRONMENT)
         self.passwords['root'] = self.getPassword('Enter the root password : ', 'Re-enter the root password : ')
         self.encoded_passwords['root'] = base64.b64encode(self.cipher.encrypt(self.passwords['root']))
         self.passwords['user'] = self.getPassword('Enter the user password : ', 'Re-enter the user password : ')
