@@ -211,17 +211,17 @@ EOF
 
 fi
 
-if ! grep initramfs /sources/build-log &> /dev/null
-then
-	/sources/initramfs.sh
-fi
+#if ! grep initramfs /sources/build-log &> /dev/null
+#then
+#	/sources/initramfs.sh
+#fi
 
 #if ! grep "014-openssl.sh" /sources/build-log &> /dev/null
 #then
 #	/sources/extras/014-openssl.sh
 #fi
 
-/sources/lvm2.sh
+#/sources/lvm2.sh
 
 if ! grep kernel /sources/build-log &> /dev/null
 then
