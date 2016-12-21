@@ -4,7 +4,7 @@ set -e
 set +h
 
 . /sources/build-properties
-
+echo -e "building $0"
 if [ "x$MULTICORE" == "xy" ] || [ "x$MULTICORE" == "xY" ]
 then
 	export MAKEFLAGS="-j `nproc`"
