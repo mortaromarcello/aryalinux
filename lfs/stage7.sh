@@ -228,10 +228,10 @@ then
 	/sources/kernel.sh
 fi
 
-for script in /sources/extras/*.sh
-do
-	$script
-done
+#for script in /sources/extras/*.sh
+#do
+#	$script
+#done
 
 if ! grep syslinux /sources/build-log &> /dev/null
 then
