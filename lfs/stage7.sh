@@ -216,10 +216,10 @@ then
 	/sources/initramfs.sh
 fi
 
-if ! grep "014-openssl.sh" /sources/build-log &> /dev/null
-then
-	/sources/extras/014-openssl.sh
-fi
+#if ! grep "014-openssl.sh" /sources/build-log &> /dev/null
+#then
+#	/sources/extras/014-openssl.sh
+#fi
 
 /sources/lvm2.sh
 
