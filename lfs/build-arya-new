@@ -193,7 +193,7 @@ class BuildLfs:
             self.setFileLog()
             try:
                 runScript('/sources/stage3.sh', '/sources')
-                #startFrom = startFrom + 1
+                startFrom = startFrom + 1
             except:
                 #print 'Error occured while running stage 3'
                 self.logger.error('Error occured while executing stage 3', exc_info=True)
@@ -308,8 +308,8 @@ class BuildLfs:
                     #print 'Error occured in the installation of desktop environment'
                     self.logger.error('Error occured in the installation of desktop environment', exc_info=True)
                     exit()
-        pr = subprocess.Popen(['./createlivedisk.sh'], shell=True)
-        pr.wait()
+        #pr = subprocess.Popen(['./createlivedisk.sh'], shell=True)
+        #pr.wait()
     #------------------getPassword--------------------------------------
     def getPassword(self, prompt, promptagain):
         password1 = getpass.getpass(prompt)
