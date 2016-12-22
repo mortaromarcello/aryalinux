@@ -20,9 +20,9 @@ NAME="python2"
 PKGNAME=$NAME
 
 #REC:libffi
+#REC:openssl
 #OPT:bluez
 #OPT:valgrind
-#OPT:openssl
 #OPT:sqlite
 #OPT:tk
 

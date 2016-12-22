@@ -18,11 +18,8 @@ SECTION="general"
 VERSION=2.0.28
 NAME="acpid"
 PKGNAME=$NAME
+REVISION=1
 ARCH=`uname -m`
-
-#REQ:
-#REC:
-#OPT:
 
 
 START=`pwd`
@@ -127,6 +124,7 @@ esac
 # End acpid
 
 EOF
+    chmod 754 $PKG/etc/rc.d/init.d/acpid
     ln -svf  ../init.d/acpid $PKG/etc/rc.d/rc0.d/K32acpid
     ln -svf  ../init.d/acpid $PKG/etc/rc.d/rc1.d/K32acpid
     ln -svf  ../init.d/acpid $PKG/etc/rc.d/rc2.d/S18acpid
@@ -141,12 +139,12 @@ function package() {
     #chown -R root:root usr/bin
     gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
-    find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-1.files
-    find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-1.files
+    find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
+    find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
     mkdir -vp $PKG/install
     echo -e $DESCRIPTION > $PKG/install/blfs-desc
-    tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-1.tgz
-    echo "blfs package \"$PKGNAME-$VERSION-$ARCH-1.tgz\" created."
+    tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.tgz
+    echo "blfs package \"$PKGNAME-$VERSION-$ARCH-$REVISION.tgz\" created."
 }
 build
 package

@@ -282,7 +282,7 @@ def updateAction():
                 try:
                     print 'Downloading scripts from github...'
                     response = urllib2.urlopen("https://github.com/mortaromarcello/aryalinux/archive/" + version + ".zip")
-                    urllib.urlretrieve (response, "/tmp/" + version + ".zip")
+                    urllib.urlretrieve ('https://github.com/mortaromarcello/aryalinux/archive/' + version + '.zip', '/tmp/' + version + '.zip')
                     runCommand(["unzip", "-qq", "-o", "/tmp/" + version+ ".zip", "aryalinux-" + version + "/blfs-new/*", "-d", "/tmp"], "Extraction of scripts tarball")
                     files = glob.glob("/tmp/aryalinux-" + version + "/blfs-new/*.sh")
                     for f in files:
@@ -304,8 +304,8 @@ def selfUpdateAction():
         pass
     try:
         print 'Fetching the latest version of alps...'
-        response = urllib2.urlopen('https://github.com/mortaromarcello/aryalinux/raw/2016.11/lfs/alps')
-        urllib.urlretrieve(response, '/tmp/alps')
+        response = urllib2.urlopen('http://github.com/mortaromarcello/aryalinux/raw/2016.11/lfs/alps')
+        urllib.urlretrieve('http://github.com/mortaromarcello/aryalinux/raw/2016.11/lfs/alps', '/tmp/alps')
         os.chmod('/tmp/alps', 0755)
         runCommand(['sudo', 'mv', '-f', '/tmp/alps', alpsExecutable], 'Moving alps from temp location to /usr/bin');
         print 'alps updated successfully'

@@ -15,7 +15,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="\n CA Certificate Download: <a class=\"ulink\" href=\"http://anduin.linuxfromscratch.org/BLFS/other/certdata.txt\">http://anduin.linuxfromscratch.org/BLFS/other/certdata.txt</a>\n"
 SECTION="postlfs"
-VERSION=
+VERSION=0.1
 NAME="cacerts"
 PKGNAME=$NAME
 
@@ -63,6 +63,7 @@ function build() {
         cd $DIRECTORY
     fi
     #whoami > /tmp/currentuser
+    mkdir -vp $PKG/usr/bin
     cat > $PKG/usr/bin/make-cert.pl << "EOF"
 #!/usr/bin/perl -w
 # Used to generate PEM encoded files from Mozilla certdata.txt.
@@ -189,6 +190,7 @@ cat certs/*.pem > ${BUNDLE}
 rm -r "${TEMPDIR}"
 EOF
     chmod +x $PKG/usr/bin/make-ca.sh
+    mkdir -vp $PKG/usr/sbin
     cat > $PKG/usr/sbin/remove-expired-certs.sh << "EOF"
 #!/bin/sh
 # Begin /usr/sbin/remove-expired-certs.sh
@@ -244,9 +246,9 @@ EOF
 }
 
 function package() {
-    strip -s $PKG/usr/bin/*
+    #strip -s $PKG/usr/bin/*
     #chown -R root:root usr/bin
-    gzip -9 $PKG/usr/share/man/man?/*.?
+    #gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-1.files
     find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-1.files
