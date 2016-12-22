@@ -304,8 +304,8 @@ def selfUpdateAction():
         pass
     try:
         print 'Fetching the latest version of alps...'
-        response = urllib2.urlopen('https://github.com/mortaromarcello/aryalinux/raw/2016.11/lfs/alps')
-        urllib.urlretrieve('https://github.com/mortaromarcello/aryalinux/raw/2016.11/lfs/alps', '/tmp/alps')
+        response = urllib2.urlopen('http://github.com/mortaromarcello/aryalinux/raw/2016.11/lfs/alps')
+        urllib.urlretrieve('http://github.com/mortaromarcello/aryalinux/raw/2016.11/lfs/alps', '/tmp/alps')
         os.chmod('/tmp/alps', 0755)
         runCommand(['sudo', 'mv', '-f', '/tmp/alps', alpsExecutable], 'Moving alps from temp location to /usr/bin');
         print 'alps updated successfully'
