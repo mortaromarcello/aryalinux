@@ -23,9 +23,13 @@ mkdir -pv /var/cache/alps/scripts
 mkdir -pv /var/cache/alps/sources
 mkdir -pv /var/cache/alps/logs
 mkdir -pv /var/cache/alps/binaries
+mkdir -pv /var/cache/alps/tgz
+mkdir -pv /var/cache/alps/installed_files
 chmod -R a+rw /var/cache/alps/binaries
 chmod -R a+rw /var/cache/alps/sources
 chmod -R a+rw /var/cache/alps/logs
+chmod -R a+rw /var/cache/alps/tgz
+chmod -R a+rw /var/cache/alps/installed_files
 mkdir -pv /var/lib/alps
 cp -v functions /var/lib/alps
 tar xf alps-scripts*.tar.gz -C /var/cache/alps/scripts/
