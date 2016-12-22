@@ -149,7 +149,7 @@ def runPackageBuildTgz(packageName):
         print 'Error occured while building/installing ' + packageName + '. Aborting.'
         exit(1)
     else:
-        name = glob.glob(/tmp/packageName'+'-*.tgz')
+        name = glob.glob('/tmp/' + 'packageName' + '*.tgz')
         os.rename(name[0], configuration['TGZ_DIR'] + '/' + os.path.basename(name[0]))
 
 def runPackageInstall(packageName):
