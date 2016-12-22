@@ -99,7 +99,7 @@ useradd -c "D-Bus Message Daemon User" -d /var/run/dbus \
         -u 18 -g messagebus -s /bin/false messagebus
 EOF
     tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-1.tgz
-    echo "blfs package \"$1\" created."
+    echo "blfs package \"$PKGNAME-$VERSION-$ARCH-1.tgz\" created."
 }
 build
 package

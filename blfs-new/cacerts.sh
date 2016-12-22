@@ -270,7 +270,7 @@ unset SSLDIR
 rm -r certs BLFS-ca-bundle*
 EOF
     tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-1.tgz
-    echo "blfs package \"$1\" created."
+    echo "blfs package \"$PKGNAME-$VERSION-$ARCH-1.tgz\" created."
 }
 build
 package

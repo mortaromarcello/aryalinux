@@ -92,7 +92,7 @@ def getDependencies(packageName):
 def mergeArrays(array1, array2):
     for item in array2:
         if item not in array1:
-            index = array1.append(item)
+            array1.append(item)
 
 def getAllDependencies(packages):
     allDependencies = []
@@ -281,7 +281,7 @@ def updateAction():
                     pass
                 try:
                     print 'Downloading scripts from github...'
-                    response = urllib2.urlopen("http://github.com/mortaromarcello/aryalinux/archive/" + version + ".zip")
+                    response = urllib2.urlopen("https://github.com/mortaromarcello/aryalinux/archive/" + version + ".zip")
                     urllib.urlretrieve (response, "/tmp/" + version + ".zip")
                     runCommand(["unzip", "-qq", "-o", "/tmp/" + version+ ".zip", "aryalinux-" + version + "/blfs-new/*", "-d", "/tmp"], "Extraction of scripts tarball")
                     files = glob.glob("/tmp/aryalinux-" + version + "/blfs-new/*.sh")
@@ -304,7 +304,7 @@ def selfUpdateAction():
         pass
     try:
         print 'Fetching the latest version of alps...'
-        response = urllib2.urlopen('http://github.com/mortaromarcello/aryalinux/raw/2016.11/lfs/alps')
+        response = urllib2.urlopen('https://github.com/mortaromarcello/aryalinux/raw/2016.11/lfs/alps')
         urllib.urlretrieve(response, '/tmp/alps')
         os.chmod('/tmp/alps', 0755)
         runCommand(['sudo', 'mv', '-f', '/tmp/alps', alpsExecutable], 'Moving alps from temp location to /usr/bin');
