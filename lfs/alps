@@ -148,6 +148,9 @@ def runPackageBuildTgz(packageName):
     if returncode != 0:
         print 'Error occured while building/installing ' + packageName + '. Aborting.'
         exit(1)
+    else:
+        name = glob.glob(/tmp/packageName'+'-*.tgz')
+        os.rename(name[0], configuration['TGZ_DIR'] + '/' + os.path.basename(name[0]))
 
 def runPackageInstall(packageName):
     print 'runPackageInstall'
