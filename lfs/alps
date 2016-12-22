@@ -119,7 +119,11 @@ def getConfirmation(packages, action, prompt=True):
     if resp == 'Y' or resp == 'y':
         for package in packages:
             if action == 'install':
-                runPackageInstall(package)
+                if os.path.exists(configuration['TGZ_DIR']+'/'+package+'.tgz'):
+                    runPackageInstall(package)
+                else:
+                    runPackageBuildTgz(package)
+                    runPackageInstall(package)
             elif action == 'remove':
                 runPackageRemove(package)
 
@@ -133,14 +137,19 @@ def isSourceOnly(packageName):
                                 break
         return sourceOnly
 
+def runPackageBuildTgz(packageName):
+    print 'runPackageBuildTgz'
+
 def runPackageInstall(packageName):
+    print 'runPackageInstall'
+    
     # print 'SOURCE_ONLY :: Building/Installing ' + packageName + '.sh'
-    process = subprocess.Popen(['/var/cache/alps/scripts/' + packageName + '.sh | tee -a /var/cache/alps/logs/' + packageName + '.log'], shell=True)
-    returncode = process.wait()
+    #process = subprocess.Popen(['/var/cache/alps/scripts/' + packageName + '.sh | tee -a /var/cache/alps/logs/' + packageName + '.log'], shell=True)
+    #returncode = process.wait()
     # returncode = subprocess.call('/var/cache/alps/scripts/' + packageName + '.sh | tee -a /var/cache/alps/logs/' + packageName + '.log', shell=True)
-    if returncode != 0:
-        print 'Error occured while building/installing ' + packageName + '. Aborting.'
-        exit(1)
+    #if returncode != 0:
+    #    print 'Error occured while building/installing ' + packageName + '. Aborting.'
+    #    exit(1)
 
 def runPackageRemove(packageName):
     print "runPackageRemove"

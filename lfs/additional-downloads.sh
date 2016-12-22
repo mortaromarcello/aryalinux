@@ -4,9 +4,10 @@ set -e
 set +h
 
 VERSION=2016.11
-GIT_DIR=$(pwd)/..
-
-pushd ~/sources
+PWD=$(pwd)
+GIT_DIR=$PWD/..
+mkdir -vp ~/sources
+cd ~/sources
 
 wget -nc http://pkgs.fedoraproject.org/lookaside/pkgs/dosfstools/dosfstools-3.0.26.tar.xz/45012f5f56f2aae3afcd62120b9e5a08/dosfstools-3.0.26.tar.xz
 wget -nc http://ftp.gnu.org/gnu/which/which-2.21.tar.gz
@@ -47,13 +48,13 @@ wget -nc http://aryalinux.org/releases/2016.08/0.21-nvme_ioctl.h.patch
 
 # wget -nc http://aryalinux.org/releases/$VERSION/alps-scripts-2016.11.tar.gz
 
-pushd $GIT_DIR/blfs
+cd $GIT_DIR/blfs-new
 git checkout $VERSION
 git pull
 tar -czf alps-scripts-$VERSION.tar.gz *.sh
-popd
+cd ~/sources
 
-mv -f $GIT_DIR/blfs/alps-scripts-$VERSION.tar.gz .
+mv -f $GIT_DIR/blfs-new/alps-scripts-$VERSION.tar.gz .
 
 wget -nc https://sourceforge.net/projects/cdrtools/files/cdrtools-3.01.tar.bz2
 wget -nc https://launchpad.net/ubuntu/+archive/primary/+files/cdrkit_1.1.11.orig.tar.gz
@@ -76,4 +77,4 @@ cp -v $GIT_DIR/lfs/makepackage.sh ./
 
 set -e
 
-popd
+cd $PWD
