@@ -227,7 +227,12 @@ EOF
 
 chmod u+x /usr/sbin/remove-expired-certs.sh
 
-make-ca.sh                                                   &&
+URL=http://anduin.linuxfromscratch.org/BLFS/other/certdata.txt &&
+rm -f certdata.txt &&
+wget $URL          &&
+make-ca.sh         &&
+unset URL
+
 SSLDIR=/etc/ssl                                              &&
 remove-expired-certs.sh certs                                &&
 install -d ${SSLDIR}/certs                                   &&
