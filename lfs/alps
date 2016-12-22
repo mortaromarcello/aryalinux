@@ -140,6 +140,9 @@ def isSourceOnly(packageName):
 def runPackageBuildTgz(packageName):
     print 'runPackageBuildTgz'
     os.chdir('/tmp')
+    if glob.glob(configuration['TGZ_DIR']+'/'+packageName+'*.tgz'):
+        print packageName + ' already build'
+        return
     process = subprocess.Popen(['/var/cache/alps/scripts/' + packageName + '.sh | tee -a /var/cache/alps/logs/' + packageName + '.log'], shell=True)
     returncode = process.wait()
     if returncode != 0:
@@ -148,7 +151,9 @@ def runPackageBuildTgz(packageName):
 
 def runPackageInstall(packageName):
     print 'runPackageInstall'
-    
+    if glob.glob(configuration['INSTALLED_FILES_DIR']+'/'+packageName+'*.files*'):
+        print packageName + ' already installed'
+        return
     # print 'SOURCE_ONLY :: Building/Installing ' + packageName + '.sh'
     #process = subprocess.Popen(['/var/cache/alps/scripts/' + packageName + '.sh | tee -a /var/cache/alps/logs/' + packageName + '.log'], shell=True)
     #returncode = process.wait()
