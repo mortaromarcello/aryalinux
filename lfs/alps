@@ -283,8 +283,8 @@ def updateAction():
                     print 'Downloading scripts from github...'
                     response = urllib2.urlopen("https://github.com/mortaromarcello/aryalinux/archive/" + version + ".zip")
                     urllib.urlretrieve ("https://github.com/mortaromarcello/aryalinux/archive/" + version + ".zip", "/tmp/" + version + ".zip")
-                    runCommand(["unzip", "-qq", "-o", "/tmp/" + version+ ".zip", "aryalinux-" + version + "/blfs/*", "-d", "/tmp"], "Extraction of scripts tarball")
-                    files = glob.glob("/tmp/aryalinux-" + version + "/blfs/*.sh")
+                    runCommand(["unzip", "-qq", "-o", "/tmp/" + version+ ".zip", "aryalinux-" + version + "/blfs-new/*", "-d", "/tmp"], "Extraction of scripts tarball")
+                    files = glob.glob("/tmp/aryalinux-" + version + "/blfs-new/*.sh")
                     for f in files:
                         os.chmod(f, 0755)
                         copy2(f, '/var/cache/alps/scripts')
