@@ -68,8 +68,8 @@ set +e
 cp -v $GIT_DIR/lfs/functions ./
 cp -v $GIT_DIR/lfs/alps ./
 cp -v $GIT_DIR/lfs/alps.conf ./
-cp -v $GIT_DIR/lfs/makepkg.sh ./
-cp -v $GIT_DIR/lfs/makepackage.sh ./
+#cp -v $GIT_DIR/lfs/makepkg.sh ./
+#cp -v $GIT_DIR/lfs/makepackage.sh ./
 #wget https://raw.githubusercontent.com/FluidIdeas/alps/master/var/lib/alps/functions -O functions
 #wget https://raw.githubusercontent.com/FluidIdeas/alps/master/usr/bin/alps -O alps
 #wget https://raw.githubusercontent.com/FluidIdeas/alps/master/etc/alps/alps.conf -O alps.conf
