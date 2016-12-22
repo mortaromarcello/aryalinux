@@ -9,15 +9,13 @@
 set -e
 set +h
 
-#. /etc/alps/alps.conf
-#. /var/lib/alps/functions
-
 SOURCE_ONLY=n
 DESCRIPTION="\n Even though D-Bus was built in\n LFS, there are some features provided by the package that other\n BLFS packages need, but their dependencies didn't fit into LFS.\n"
 SECTION="general"
 VERSION=1.10.10
 NAME="dbus"
 PKGNAME=$NAME
+REVISION=1
 
 #REC:x7lib
 #OPT:dbus-glib
@@ -27,7 +25,6 @@ PKGNAME=$NAME
 #OPT:doxygen
 #OPT:xmlto
 
-#LOC=""
 ARCH=`uname -m`
 
 START=`pwd`
@@ -51,6 +48,7 @@ function unzip_file()
 		unzip $1
 	fi
 }
+
 function build() {
     mkdir -vp $PKG $SRC
     cd $SRC
@@ -67,7 +65,6 @@ function build() {
         fi
         cd $DIRECTORY
     fi
-    #whoami > /tmp/currentuser
     ./configure --prefix=/usr                  \
                 --sysconfdir=/etc              \
                 --localstatedir=/var           \
@@ -84,13 +81,12 @@ function build() {
 
 function package() {
     strip -s $PKG/usr/bin/*
-    #chown -R root:root usr/bin
-    #gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
-    find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-1.files
-    find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-1.files
+    find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
+    find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
+    gzip -f $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files.gz
     mkdir -vp $PKG/install
-    cp -v $START/$PKGNAME-$VERSION-$ARCH-1.files $PKG/install/
+    mv -v $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files.gz $PKG/install/
     echo -e $DESCRIPTION > $PKG/install/blfs-desc
     cat > $PKG/install/doinst.sh << "EOF"
 #!/bin/sh
@@ -98,8 +94,8 @@ groupadd -g 18 messagebus &&
 useradd -c "D-Bus Message Daemon User" -d /var/run/dbus \
         -u 18 -g messagebus -s /bin/false messagebus
 EOF
-    tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-1.tgz
-    echo "blfs package \"$PKGNAME-$VERSION-$ARCH-1.tgz\" created."
+    tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.tgz
+    echo "blfs package \"$PKGNAME-$VERSION-$ARCH-$REVISION.tgz\" created."
 }
 build
 package

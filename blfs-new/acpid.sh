@@ -9,9 +9,6 @@
 set -e
 set +h
 
-#. /etc/alps/alps.conf
-#. /var/lib/alps/functions
-
 SOURCE_ONLY=n
 DESCRIPTION="\nThe acpid (Advanced Configuration and Power Interface\n event daemon) is a completely flexible, totally\n extensible daemon for delivering ACPI events. It listens on netlin\n interface and when an event occurs, executes programs to handle the\n event. The programs it executes are configured through a set of\n configuration files, which can be dropped into place by packages or\n by the user.\n"
 SECTION="general"
@@ -21,10 +18,27 @@ PKGNAME=$NAME
 REVISION=1
 ARCH=`uname -m`
 
-
 START=`pwd`
 PKG=$START/pkg
 SRC=$START/work
+function unzip_file()
+{
+    dir_name=$(unzip_dirname $1 $2)
+    echo $dir_name
+    if [ `echo $dir_name | grep "extracted$"` ]
+    then
+        echo "Create and extract..."
+        mkdir $dir_name
+        cp $1 $dir_name
+        cd $dir_name
+        unzip $1
+        cd ..
+    else
+        echo "Just Extract..."
+        unzip $1
+    fi
+}
+
 function build() {
     mkdir -vp $PKG $SRC
     cd $SRC
@@ -41,8 +55,6 @@ function build() {
         fi
         cd $DIRECTORY
     fi
-    #whoami > /tmp/currentuser
-    # compiling package , preinstall and postinstall
     ./configure --prefix=/usr \
         --docdir=/usr/share/doc/acpid-2.0.28 &&
     make "-j`nproc`" || make
@@ -136,7 +148,6 @@ EOF
 
 function package() {
     strip -s $PKG/usr/bin/*
-    #chown -R root:root usr/bin
     gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
@@ -148,6 +159,7 @@ function package() {
     tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.tgz
     echo "blfs package \"$PKGNAME-$VERSION-$ARCH-$REVISION.tgz\" created."
 }
+
 build
 package
 

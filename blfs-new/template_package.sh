@@ -9,9 +9,6 @@
 set -e
 set +h
 
-#. /etc/alps/alps.conf
-#. /var/lib/alps/functions
-
 SOURCE_ONLY=n
 DESCRIPTION=""
 SECTION=""
@@ -24,7 +21,6 @@ REVISION=1
 #REC:
 #OPT:
 
-#LOC=""
 ARCH=`uname -m`
 
 START=`pwd`
@@ -48,6 +44,7 @@ function unzip_file()
 		unzip $1
 	fi
 }
+
 function build() {
     mkdir -vp $PKG $SRC
     cd $SRC
@@ -90,6 +87,7 @@ EOF
     tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.tgz
     echo "blfs package \"$PKGNAME-$VERSION-$ARCH-$REVISION.tgz\" created."
 }
+
 build
 package
 
