@@ -123,11 +123,11 @@ def getConfirmation(packages, action, prompt=True):
             if action == 'install':
                 if os.path.exists(configuration['TGZ_DIR']+'/'+package+'.tgz'):
                     print 'runPackageInstall(' + package + ')'
-                    #runPackageInstall(package)
+                    runPackageInstall(package)
                 else:
                     runPackageBuildTgz(package)
                     print 'runPackageInstall(' + package + ')'
-                    #runPackageInstall(package)
+                    runPackageInstall(package)
             elif action == 'remove':
                 runPackageRemove(package)
 
