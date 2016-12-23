@@ -125,7 +125,7 @@ def getConfirmation(packages, action, prompt=True):
                     #runPackageInstall(package)
                 else:
                     runPackageBuildTgz(package)
-                    print 'runPackageInstall('+package')'
+                    print 'runPackageInstall(' + package + ')'
                     #runPackageInstall(package)
             elif action == 'remove':
                 runPackageRemove(package)
