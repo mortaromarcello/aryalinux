@@ -63,6 +63,7 @@ function build() {
         -xvf ../python-2.7.12-docs-html.tar.bz2 &&
     find $PKG/usr/share/doc/python-2.7.12 -type d -exec chmod 0755 {} \; &&
     find $PKG/usr/share/doc/python-2.7.12 -type f -exec chmod 0644 {} \;
+    mkdir -vp $PKG/etc
     cat > $PKG/etc/pythonrc.py << "EOF"
 # Add auto-completion and a stored history file of commands to your Python
 # interactive interpreter. Requires Python 2.0+, readline. Autocomplete is

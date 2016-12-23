@@ -71,11 +71,11 @@ function build() {
                 --with-cli-lease-file=/var/lib/dhclient/dhclient.leases \
                 --with-cli6-lease-file=/var/lib/dhclient/dhclient6.leases &&
     make -j1
-    make DESTDIR=$PKG -C client install
-    mkdir -vp $PKG/sbin
-    mv -v $PKG/usr/sbin/dhclient $PKG/sbin && install -v -m755 client/scripts/linux $PKG/sbin/dhclient-script
-    make DESTDIR=$PKG -C server install
-    make DESTDIR=$PKG install && mv -v $PKG/usr/sbin/dhclient $PKG/sbin && install -v -m755 client/scripts/linux $PKG/sbin/dhclient-script
+    make DESTDIR=$PKG install &&
+    mkdir -vp $PKG/sbin &&
+    mv -v $PKG/usr/sbin/dhclient $PKG/sbin &&
+    install -v -m755 client/scripts/linux $PKG/sbin/dhclient-script
+    
     cat > $PKG/etc/dhcp/dhclient.conf << "EOF"
 # Begin /etc/dhcp/dhclient.conf
 #
@@ -345,7 +345,7 @@ EOF
 EOF
     chmod 754 $PKG/etc/rc.d/init.d/dhcpd
     chmod 644 $PKG/etc/sysconfig/dhcpd
-    mkdir $PKG/etc/rc.d/rc{0,1,2,3,4,5,6}.d
+    mkdir -vp $PKG/etc/rc.d/rc{0,1,2,3,4,5,6}.d
     ln -sf  ../init.d/dhcpd $PKG/etc/rc.d/rc0.d/K30dhcpd
     ln -sf  ../init.d/dhcpd $PKG/etc/rc.d/rc1.d/K30dhcpd
     ln -sf  ../init.d/dhcpd $PKG/etc/rc.d/rc2.d/K30dhcpd
@@ -357,7 +357,6 @@ EOF
 }
 
 function package() {
-    strip -s $PKG/usr/{,s}bin/*
     strip -s $PKG/sbin/dhclient
     gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
