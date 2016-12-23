@@ -455,6 +455,7 @@ if sys.argv[1] == 'reinstall':
     exit()
 if sys.argv[1] == 'build':
     buildAction()
+    exit()
 if sys.argv[1] == '--help' or sys.argv[1] == 'help':
     help()
     exit()
