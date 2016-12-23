@@ -9,9 +9,6 @@
 set -e
 set +h
 
-#. /etc/alps/alps.conf
-#. /var/lib/alps/functions
-
 SOURCE_ONLY=n
 DESCRIPTION="\n The Python 2 package contains the\n Python development environment. It\n is useful for object-oriented programming, writing scripts,\n prototyping large programs or developing entire applications. This\n version is for backward compatibility with other dependent\n packages.\n"
 SECTION="general"

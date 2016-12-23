@@ -9,15 +9,13 @@
 set -e
 set +h
 
-#. /etc/alps/alps.conf
-#. /var/lib/alps/functions
-
 SOURCE_ONLY=n
 DESCRIPTION="\n The Xorg protocol headers provide\n the header files required to build the system, and to allow other\n applications to build against the installed X Window system.\n"
 SECTION="x"
 VERSION=
 NAME="x7proto"
 PKGNAME=$NAME
+REVISION=1
 
 #REQ:util-macros
 #REC:wget
@@ -26,7 +24,6 @@ PKGNAME=$NAME
 #OPT:xmlto
 #OPT:asciidoc
 
-#LOC=""
 ARCH=`uname -m`
 
 START=`pwd`
@@ -66,7 +63,6 @@ function build() {
         fi
         cd $DIRECTORY
     fi
-    #whoami > /tmp/currentuser
     export XORG_PREFIX=/usr
     export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
 
@@ -98,15 +94,11 @@ e793ecefeaecfeabd1aed6a01095174e xf86vidmodeproto-2.3.1.tar.bz2
 9959fe0bfb22a0e7260433b8d199590a xineramaproto-1.2.1.tar.bz2
 16791f7ca8c51a20608af11702e51083 xproto-7.0.31.tar.bz2
 EOF
-
-
     mkdir -pv proto &&
     cd proto &&
     grep -v '^#' ../proto-7.7.md5 | awk '{print $2}' | wget -i- -c \
         -B http://ftp.x.org/pub/individual/proto/ &&
     md5sum -c ../proto-7.7.md5
-
-    # compiling package , preinstall and postinstall
     for package in $(grep -v '^#' ../proto-7.7.md5 | awk '{print $2}')
     do
         packagedir=${package%.tar.bz2}
@@ -115,25 +107,23 @@ EOF
         ./configure $XORG_CONFIG
         make DESTDIR=$PKG install
         cd $SRC/proto
-        #rm -rvf $packagedir
+        rm -rvf $packagedir
     done
 }
 
 function package() {
-    #strip -s $PKG/usr/bin/*
-    #chown -R root:root usr/bin
-    #gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
-    find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-1.files
-    find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-1.files
+    find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
+    find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
+    gzip -f $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files.gz
     mkdir -vp $PKG/install
-    cp -v $START/$PKGNAME-$VERSION-$ARCH-1.files $PKG/install/
+    mv -v $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files.gz $PKG/install/
     echo -e $DESCRIPTION > $PKG/install/blfs-desc
     cat > $PKG/install/doinst.sh << "EOF"
 echo -e "Non ho niente da fare!"
 EOF
-    tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-1.tgz
-    echo "blfs package \"$PKGNAME-$VERSION-$ARCH-1.tgz\" created."
+    tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.tgz
+    echo "blfs package \"$PKGNAME-$VERSION-$ARCH-$REVISION.tgz\" created."
 }
 build
 package

@@ -9,19 +9,16 @@
 set -e
 set +h
 
-#. /etc/alps/alps.conf
-#. /var/lib/alps/functions
-
 SOURCE_ONLY=n
 DESCRIPTION="\n The PCRE package contains\n Perl Compatible Regular Expression\n libraries. These are useful for implementing regular expression\n pattern matching using the same syntax and semantics as\n Perl 5.\n"
 SECTION="general"
 VERSION=8.39
 NAME="pcre"
 PKGNAME=$NAME
+REVISION=1
 
 #OPT:valgrind
 
-#LOC=""
 ARCH=`uname -m`
 
 START=`pwd`
@@ -43,7 +40,6 @@ function build() {
         fi
         cd $DIRECTORY
     fi
-    #whoami > /tmp/currentuser
     ./configure --prefix=/usr                     \
                 --docdir=/usr/share/doc/pcre-8.39 \
                 --enable-unicode-properties       \
@@ -58,29 +54,22 @@ function build() {
     mkdir -vp $PKG/lib
     mv -v $PKG/usr/lib/libpcre.so.* $PKG/lib &&
     ln -sfv ../../lib/$(readlink $PKG/usr/lib/libpcre.so) $PKG/usr/lib/libpcre.so
-
-    # compiling package , preinstall and postinstall
-    #./configure --prefix=/usr
-    #make
-    #make DESTDIR=$PKG install
-    #
 }
 
 function package() {
     strip -s $PKG/usr/bin/pcre{grep,test}
-    #chown -R root:root usr/bin
-    #gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
-    find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-1.files
-    find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-1.files
+    find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
+    find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
+    gzip -f $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files.gz
     mkdir -vp $PKG/install
-    cp -v $START/$PKGNAME-$VERSION-$ARCH-1.files $PKG/install/
+    mv -v $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files.gz $PKG/install/
     echo -e $DESCRIPTION > $PKG/install/blfs-desc
     cat > $PKG/install/doinst.sh << "EOF"
 echo -e "Non ho niente da fare!"
 EOF
-    tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-1.tgz
-    echo "blfs package \"$PKGNAME-$VERSION-$ARCH-1.tgz\" created."
+    tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.tgz
+    echo "blfs package \"$PKGNAME-$VERSION-$ARCH-$REVISION.tgz\" created."
 }
 build
 package
