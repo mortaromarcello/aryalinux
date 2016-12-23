@@ -18,14 +18,6 @@ PKGNAME=$NAME
 REVISION=1
 
 #REQ:libX11
-#REQ:xtrans
-#REQ:fontconfig
-#REQ:libxcb
-#OPT:xmlto
-#OPT:fop
-#OPT:links
-#OPT:lynx
-#OPT:w3m
 
 ARCH=`uname -m`
 
@@ -52,6 +44,16 @@ function unzip_file()
 }
 function build() {
     mkdir -vp $PKG $SRC
+    cd $PKG
+    case $(uname -m) in
+        x86_64)
+            mkdir -vp lib
+            ln -sv lib lib64
+            mkdir -vp usr/lib
+            ln -sv lib usr/lib64
+            mkdir -vp usr/local/lib
+            ln -sv lib usr/local/lib64 ;;
+    esac
     cd $SRC
     URL=http://ftp.x.org/pub/individual/lib/libXext-1.3.3.tar.bz2
     if [ ! -z $URL ]; then

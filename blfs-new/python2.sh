@@ -31,6 +31,16 @@ PKG=$START/pkg
 SRC=$START/work
 function build() {
     mkdir -vp $PKG $SRC
+    cd $PKG
+    case $(uname -m) in
+        x86_64)
+            mkdir -vp lib
+            ln -sv lib lib64
+            mkdir -vp usr/lib
+            ln -sv lib usr/lib64
+            mkdir -vp usr/local/lib
+            ln -sv lib usr/local/lib64 ;;
+    esac
     cd $SRC
     URL=https://www.python.org/ftp/python/2.7.12/Python-2.7.12.tar.xz
     if [ ! -z $URL ]; then

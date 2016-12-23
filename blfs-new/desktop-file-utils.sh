@@ -27,6 +27,16 @@ PKG=$START/pkg
 SRC=$START/work
 function build() {
     mkdir -vp $PKG $SRC
+    cd $PKG
+    case $(uname -m) in
+        x86_64)
+            mkdir -vp lib
+            ln -sv lib lib64
+            mkdir -vp usr/lib
+            ln -sv lib usr/lib64
+            mkdir -vp usr/local/lib
+            ln -sv lib usr/local/lib64 ;;
+    esac
     cd $SRC
     URL=http://freedesktop.org/software/desktop-file-utils/releases/desktop-file-utils-0.23.tar.xz
     if [ ! -z $URL ]; then

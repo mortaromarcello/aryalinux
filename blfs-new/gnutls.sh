@@ -56,6 +56,16 @@ function unzip_file()
 }
 function build() {
     mkdir -vp $PKG $SRC
+    cd $PKG
+    case $(uname -m) in
+        x86_64)
+            mkdir -vp lib
+            ln -sv lib lib64
+            mkdir -vp usr/lib
+            ln -sv lib usr/lib64
+            mkdir -vp usr/local/lib
+            ln -sv lib usr/local/lib64 ;;
+    esac
     cd $SRC
     URL=ftp://ftp.gnutls.org/gcrypt/gnutls/v3.5/gnutls-3.5.5.tar.xz
     if [ ! -z $URL ]; then

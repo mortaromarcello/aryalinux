@@ -27,6 +27,16 @@ PKG=$START/pkg
 SRC=$START/work
 function build() {
     mkdir -vp $PKG $SRC
+    cd $PKG
+    case $(uname -m) in
+        x86_64)
+            mkdir -vp lib
+            ln -sv lib lib64
+            mkdir -vp usr/lib
+            ln -sv lib usr/lib64
+            mkdir -vp usr/local/lib
+            ln -sv lib usr/local/lib64 ;;
+    esac
     cd $SRC
     URL=http://download.icu-project.org/files/icu4c/58.1/icu4c-58_1-src.tgz
     if [ ! -z $URL ]; then
