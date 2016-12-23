@@ -382,12 +382,10 @@ def showInstalledAction():
 #
 def installPkg(packageName):
     os.chdir('/')
-    name = os.path.splitext(os.path.basename(packageName))
-    print name[0]
-    print ['cp', '-vf', '/install/*.files.gz', configuration['INSTALLED_FILES_DIR']]
     runCommand(['tar', '-xzlpvf', packageName], 'install package')
     runCommand(['sh', '/install/doinst.sh'], 'post install')
-    runCommand(['cp', '-vf', '/install/' + name[0] + '.files.gz', configuration['INSTALLED_FILES_DIR']], 'copy installed files')
+    name = glob.glob('/install/*.files.gz')
+    runCommand(['cp', '-vf', name[0], configuration['INSTALLED_FILES_DIR']], 'copy installed files')
     runCommand(['rm', '-rvf', '/install'], 'remove install')
 #
 
