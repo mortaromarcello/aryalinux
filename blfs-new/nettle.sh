@@ -22,7 +22,6 @@ REVISION=1
 
 #OPT:openssl
 
-#LOC=""
 ARCH=`uname -m`
 
 START=`pwd`
@@ -62,26 +61,21 @@ function build() {
         fi
         cd $DIRECTORY
     fi
-    #whoami > /tmp/currentuser
     ./configure --prefix=/usr --disable-static &&
     make "-j`nproc`" || make
     make DESTDIR=$PKG install &&
-    #chmod   -v   755 $PKG/usr/lib/lib{hogweed,nettle}.so &&
     install -v -m755 -d $PKG/usr/share/doc/nettle-3.3 &&
     install -v -m644 nettle.html $PKG/usr/share/doc/nettle-3.3
 }
 
 function package() {
-    strip -s $PKG/usr/bin/*
-    #chown -R root:root usr/bin
-    #gzip -9 $PKG/usr/share/man/man?/*.?
+    strip -s $PKG/usr/bin/asn1{Coding,Decoding,Parser}
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
     find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
     gzip -f $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files.gz
     mkdir -vp $PKG/install
     mv -v $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files.gz $PKG/install/
-    cp -v $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files $PKG/install/
     echo -e $DESCRIPTION > $PKG/install/blfs-desc
     cat > $PKG/install/doinst.sh << "EOF"
 echo -e "Non ho niente da fare!"

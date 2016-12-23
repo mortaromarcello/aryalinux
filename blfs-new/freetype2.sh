@@ -86,7 +86,6 @@ function package() {
     gzip -f $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files.gz
     mkdir -vp $PKG/install
     mv -v $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files.gz $PKG/install/
-    cp -v $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files $PKG/install/
     echo -e $DESCRIPTION > $PKG/install/blfs-desc
     cat > $PKG/install/doinst.sh << "EOF"
 echo -e "Non ho niente da fare!"
