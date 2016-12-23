@@ -385,7 +385,7 @@ def installPkg(packageName):
     print ['tar','-xzlpvf ', packageName]
     runCommand(['tar', '-xzlpvf', packageName], 'install package')
     runCommand(['sh', '/install/doinst.sh'], 'post install')
-    copy2('install/*.files.gz', configuration['INSTALLED_FILES_DIR'])
+    copy2('/install/*.files.gz', configuration['INSTALLED_FILES_DIR'])
     runCommand(['rm', '-rvf', '/install'], 'remove install')
 #
 
