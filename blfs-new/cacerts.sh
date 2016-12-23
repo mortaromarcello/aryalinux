@@ -18,7 +18,6 @@ PKGNAME=$NAME
 REVISION=1
 
 #REQ:openssl
-#REC:wget
 
 ARCH=`uname -m`
 

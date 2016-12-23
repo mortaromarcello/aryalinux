@@ -23,6 +23,7 @@ def help():
         print 'install                  Install packages if not installed'
         print 'remove                   Remove installed packages'
         print 'reinstall                Force installation of an already installed package'
+        print 'build                    Build package tgz'
         print 'updatescripts            Update the package build scripts'
         print 'selfupdate               Update alps to latest version online'
         print 'clean                    Clean up the working directory'
@@ -109,6 +110,8 @@ def getConfirmation(packages, action, prompt=True):
         print 'The following packages would be installed:\n'
     elif action == 'remove':
         print 'The following packages would be removed:\n'
+    elif action == 'build':
+        print 'The following packages would be builded:\n'
     for package in packages:
         print package,
         print ''
@@ -122,13 +125,15 @@ def getConfirmation(packages, action, prompt=True):
             if action == 'install':
                 if os.path.exists(configuration['TGZ_DIR']+'/'+package+'.tgz'):
                     print 'runPackageInstall(' + package + ')'
-                    #runPackageInstall(package)
+                    runPackageInstall(package)
                 else:
                     runPackageBuildTgz(package)
                     print 'runPackageInstall(' + package + ')'
-                    #runPackageInstall(package)
+                    runPackageInstall(package)
             elif action == 'remove':
                 runPackageRemove(package)
+            elif action == 'build':
+                runPackageBuildTgz(package)
 
 def isSourceOnly(packageName):
         with open('/var/cache/alps/scripts/' + packageName + '.sh') as f:
@@ -276,8 +281,19 @@ def removeAction(prompt=True):
     if len(allDependencies) > 0:
         getConfirmation(allDependencies, 'remove', prompt)
     else:
-        print 'All packages have been installed.'
-        print 'If you want to still enforce installation use the following: \n\nalps forceinstall packagenames\n\nBye!'
+        print 'All packages have been removed.'
+        #print 'If you want to still enforce installation use the following: \n\nalps forceinstall packagenames\n\nBye!'
+
+def buildAction(prompt=True):
+    packages = []
+    for i in range(2, len(sys.argv)):
+        packages.append(sys.argv[i])
+    allDependencies = getAllDependencies(packages)
+    if len(allDependencies) > 0:
+        getConfirmation(allDependencies, 'build', prompt)
+    else:
+        print 'All packages have been build.'
+        #print 'If you want to still enforce installation use the following: \n\nalps forceinstall packagenames\n\nBye!'
 
 def forceInstallAction():
     installAction() 
@@ -437,6 +453,8 @@ if sys.argv[1] == 'src':
 if sys.argv[1] == 'reinstall':
     reinstall()
     exit()
+if sys.argv[1] == 'build':
+    buildAction()
 if sys.argv[1] == '--help' or sys.argv[1] == 'help':
     help()
     exit()
