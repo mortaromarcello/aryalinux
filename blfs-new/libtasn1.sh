@@ -9,9 +9,6 @@
 set -e
 set +h
 
-#. /etc/alps/alps.conf
-#. /var/lib/alps/functions
-
 SOURCE_ONLY=n
 DESCRIPTION="br3ak libtasn1 is a highly portable C\n library that encodes and decodes DER/BER data following an ASN.1\n schema.\n"
 SECTION="general"
@@ -62,8 +59,6 @@ function build() {
         fi
         cd $DIRECTORY
     fi
-    #whoami > /tmp/currentuser
-    # compiling package , preinstall and postinstall
     ./configure --prefix=/usr --disable-static &&
     make "-j`nproc`" || make
     make DESTDIR=$PKG install
@@ -72,7 +67,6 @@ function build() {
 
 function package() {
     strip -s $PKG/usr/bin/*
-    #chown -R root:root usr/bin
     gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files

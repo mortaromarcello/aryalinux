@@ -61,17 +61,10 @@ function build() {
         fi
         cd $DIRECTORY
     fi
-    #whoami > /tmp/currentuser
-    # compiling package , preinstall and postinstall
-    #./configure --prefix=/usr
-    #make
-    #make DESTDIR=$PKG install
-    #
 }
 
 function package() {
     strip -s $PKG/usr/bin/*
-    #chown -R root:root usr/bin
     gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
