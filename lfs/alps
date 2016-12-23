@@ -8,6 +8,7 @@ import urllib2
 import os
 import glob
 from shutil import copy2
+from shutil import move
 
 global configuration
 global traversed
@@ -150,7 +151,8 @@ def runPackageBuildTgz(packageName):
         exit(1)
     else:
         name = glob.glob('/tmp/' + packageName + '*.tgz')
-        os.rename(name[0], configuration['TGZ_DIR'] + '/' + os.path.basename(name[0]))
+        print name
+        move(name[0], configuration['TGZ_DIR'] + '/')
 
 def runPackageInstall(packageName):
     print 'runPackageInstall'

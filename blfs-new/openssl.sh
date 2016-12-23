@@ -41,8 +41,6 @@ function build() {
         fi
         cd $DIRECTORY
     fi
-    #whoami > /tmp/currentuser
-    # compiling package , preinstall and postinstall
     ./config --prefix=$PKG/usr         \
          --openssldir=$PKG/etc/ssl \
          --libdir=lib          \
@@ -57,8 +55,6 @@ function build() {
 
 function package() {
     strip -s $PKG/usr/bin/openssl
-    #chown -R root:root usr/bin
-    #gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
     find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
