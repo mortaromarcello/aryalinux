@@ -154,9 +154,12 @@ def runPackageBuildTgz(packageName):
 
 def runPackageInstall(packageName):
     print 'runPackageInstall'
-    if glob.glob(configuration['INSTALLED_FILES_DIR']+'/'+packageName+'*.files*'):
+    if glob.glob(configuration['INSTALLED_FILES_DIR'] + '/' + packageName + '*.files*'):
         print packageName + ' already installed'
         return
+    name = glob.glob(configuration['TGZ_DIR'] + '/' + packageName + '*.tgz')
+    if name:
+        installPkg(name[0])
     # print 'SOURCE_ONLY :: Building/Installing ' + packageName + '.sh'
     #process = subprocess.Popen(['/var/cache/alps/scripts/' + packageName + '.sh | tee -a /var/cache/alps/logs/' + packageName + '.log'], shell=True)
     #returncode = process.wait()
@@ -378,7 +381,12 @@ def showInstalledAction():
 
 #
 def installPkg(packageName):
-    runCommand('tar -xzlUpvf ' + packageName, 'install package')
+    os.chdir('/')
+    print ['tar','-xzlpvf ', packageName]
+    runCommand(['tar', '-xzlpvf', packageName], 'install package')
+    runCommand(['sh', '/install/doinst.sh'], 'post install')
+    copy2('install/*.files.gz', configuration['INSTALLED_FILES_DIR'])
+    runCommand(['rm', '-rvf', '/install'], 'remove install')
 #
 
 configuration = loadConfig(None)

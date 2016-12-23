@@ -54,6 +54,9 @@ function package() {
     mkdir $PKG/install
     mv -v $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files.gz $PKG/install/
     echo -e $DESCRIPTION > $PKG/install/blfs-desc
+    cat > $PKG/install/doinst.sh << "EOF"
+echo -e "Non ho niente da fare!"
+EOF
     tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.tgz
     echo "blfs package \"$PKGNAME-$VERSION-$ARCH-$REVISION.tgz\" created."
 }
