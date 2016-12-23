@@ -76,7 +76,7 @@ function build() {
 }
 
 function package() {
-    strip -s $PKG/usr/bin/asn1{Coding,Decoding,Parser}
+    strip -s $PKG/usr/bin/*
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
     find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
