@@ -27,7 +27,6 @@ REVISION=1
 #OPT:sqlite
 #OPT:tk
 
-#LOC=""
 ARCH=`uname -m`
 
 START=`pwd`

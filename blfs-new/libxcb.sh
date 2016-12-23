@@ -9,15 +9,13 @@
 set -e
 set +h
 
-#. /etc/alps/alps.conf
-#. /var/lib/alps/functions
-
 SOURCE_ONLY=n
 DESCRIPTION="\n The libxcb package provides an\n interface to the X Window System protocol, which replaces the\n current Xlib interface. Xlib can also use XCB as a transport layer,\n allowing software to make requests and receive responses with both.\n"
 SECTION="x"
 VERSION=1.12
 NAME="libxcb"
 PKGNAME=$NAME
+REVISION=1
 
 #REQ:libXau
 #REQ:xcb-proto
@@ -26,7 +24,6 @@ PKGNAME=$NAME
 #OPT:check
 #OPT:libxslt
 
-#LOC=""
 ARCH=`uname -m`
 
 START=`pwd`
@@ -67,7 +64,6 @@ function build() {
         fi
         cd $DIRECTORY
     fi
-    #whoami > /tmp/currentuser
     export XORG_PREFIX=/usr
     export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
     patch -Np1 -i ../libxcb-1.12-python3-1.patch
@@ -81,21 +77,20 @@ function build() {
 }
 
 function package() {
-    #strip -s $PKG/usr/bin/*
-    #chown -R root:root usr/bin
     gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
-    find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-1.files
-    find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-1.files
+    find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
+    find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
+    gzip -f $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files.gz
     mkdir -vp $PKG/install
-    cp -v $START/$PKGNAME-$VERSION-$ARCH-1.files $PKG/install/
+    mv -v $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files.gz $PKG/install/
     echo -e $DESCRIPTION > $PKG/install/blfs-desc
     cat > $PKG/install/doinst.sh << "EOF"
 #!/bin/sh
 echo -e "Non ho niente da fare!"
 EOF
-    tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-1.tgz
-    echo "blfs package \"$PKGNAME-$VERSION-$ARCH-1.tgz\" created."
+    tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.tgz
+    echo "blfs package \"$PKGNAME-$VERSION-$ARCH-$REVISION.tgz\" created."
 }
 build
 package

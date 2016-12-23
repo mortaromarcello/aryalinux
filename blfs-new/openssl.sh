@@ -19,7 +19,6 @@ REVISION=1
 
 #OPT:mitkrb
 
-#LOC=""
 ARCH=`uname -m`
 
 START=`pwd`

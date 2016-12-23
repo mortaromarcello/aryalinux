@@ -9,15 +9,13 @@
 set -e
 set +h
 
-#. /etc/alps/alps.conf
-#. /var/lib/alps/functions
-
 SOURCE_ONLY=n
 DESCRIPTION="\n The HarfBuzz package contains an\n OpenType text shaping engine.\n"
 SECTION="general"
 VERSION=1.3.2
 NAME="harfbuzz"
 PKGNAME=$NAME
+REVISION=1
 
 #REC:glib2
 #REC:icu
@@ -27,7 +25,6 @@ PKGNAME=$NAME
 #OPT:gtk-doc
 #OPT:graphite2
 
-#LOC=""
 ARCH=`uname -m`
 
 START=`pwd`
@@ -49,8 +46,6 @@ function build() {
         fi
         cd $DIRECTORY
     fi
-    #whoami > /tmp/currentuser
-    # compiling package , preinstall and postinstall
     ./configure --prefix=/usr --with-gobject &&
     make "-j`nproc`" || make
     make DESTDIR=$PKG install
@@ -58,19 +53,18 @@ function build() {
 
 function package() {
     strip -s $PKG/usr/bin/*
-    #chown -R root:root usr/bin
-    #gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
-    find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-1.files
-    find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-1.files
+    find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
+    find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
+    gzip -f $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files.gz
     mkdir -vp $PKG/install
-    cp -v $START/$PKGNAME-$VERSION-$ARCH-1.files $PKG/install/
+    mv -v $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files.gz $PKG/install/
     echo -e $DESCRIPTION > $PKG/install/blfs-desc
     cat > $PKG/install/doinst.sh << "EOF"
 echo -e "Non ho niente da fare!"
 EOF
-    tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-1.tgz
-    echo "blfs package \"$PKGNAME-$VERSION-$ARCH-1.tgz\" created."
+    tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.tgz
+    echo "blfs package \"$PKGNAME-$VERSION-$ARCH-$REVISION.tgz\" created."
 }
 build
 package

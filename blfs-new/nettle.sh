@@ -9,9 +9,6 @@
 set -e
 set +h
 
-#. /etc/alps/alps.conf
-#. /var/lib/alps/functions
-
 SOURCE_ONLY=n
 DESCRIPTION="\n The Nettle package contains the\n low-level cryptographic library that is designed to fit easily in\n many contexts.\n"
 SECTION="postlfs"

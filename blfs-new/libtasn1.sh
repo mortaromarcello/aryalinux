@@ -23,7 +23,6 @@ REVISION=1
 #OPT:gtk-doc
 #OPT:valgrind
 
-#LOC=""
 ARCH=`uname -m`
 
 START=`pwd`
