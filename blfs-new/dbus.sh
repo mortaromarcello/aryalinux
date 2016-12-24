@@ -106,9 +106,19 @@ function package() {
     echo -e $DESCRIPTION > $PKG/install/blfs-desc
     cat > $PKG/install/doinst.sh << "EOF"
 #!/bin/sh
-groupadd -g 18 messagebus &&
-useradd -c "D-Bus Message Daemon User" -d /var/run/dbus \
+if getent group messagebus
+then
+    echo "group messagebus exist"
+else
+    groupadd -g 18 messagebus
+fi
+if getent passwd messagebus
+then
+    echo "user messagebus exist"
+else
+    useradd -c "D-Bus Message Daemon User" -d /var/run/dbus \
         -u 18 -g messagebus -s /bin/false messagebus
+fi
 EOF
     tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.tgz
     echo "blfs package \"$PKGNAME-$VERSION-$ARCH-$REVISION.tgz\" created."
