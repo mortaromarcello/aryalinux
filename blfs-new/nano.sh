@@ -93,6 +93,7 @@ function build() {
                 --docdir=/usr/share/doc/nano-2.6.3 &&
     make "-j`nproc`" || make
     make DESTDIR=$PKG install &&
+    mkdir -vp $PKG/etc &&
     install -v -m644 doc/nanorc.sample $PKG/etc &&
     install -v -m644 doc/texinfo/nano.html $PKG/usr/share/doc/nano-2.6.3
 }
