@@ -89,7 +89,6 @@ function build() {
         fi
         cd $DIRECTORY
     fi
-    #whoami > /tmp/currentuser
     sed -i "/seems to be moved/s/^/#/" ltmain.sh &&
     ./configure --prefix=/usr --disable-static --with-history &&
     make "-j`nproc`" || make
@@ -103,8 +102,9 @@ function package() {
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
     find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
+    gzip -f $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files.gz
     mkdir -vp $PKG/install
-    cp -v $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files $PKG/install/
+    mv -v $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files.gz $PKG/install/
     echo -e $DESCRIPTION > $PKG/install/blfs-desc
     cat > $PKG/install/doinst.sh << "EOF"
 echo -e "Non ho niente da fare!"

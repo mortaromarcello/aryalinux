@@ -91,7 +91,8 @@ function build() {
     mkdir -vp $PKG/sbin &&
     mv -v $PKG/usr/sbin/dhclient $PKG/sbin &&
     install -v -m755 client/scripts/linux $PKG/sbin/dhclient-script
-    
+
+    mkdir $PKG/etc/dhcp
     cat > $PKG/etc/dhcp/dhclient.conf << "EOF"
 # Begin /etc/dhcp/dhclient.conf
 #
