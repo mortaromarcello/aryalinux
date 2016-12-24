@@ -26,6 +26,18 @@ START=`pwd`
 PKG=$START/pkg
 SRC=$START/work
 
+function unzip_dirname()
+{
+    dirname="$2-extracted"
+    unzip -o -q $1 -d $dirname
+    if [ "$(ls $dirname | wc -w)" == "1" ]; then
+        echo "$(ls $dirname)"
+    else
+        echo "$dirname"
+    fi
+    rm -rf $dirname
+}
+
 function unzip_file()
 {
     dir_name=$(unzip_dirname $1 $2)
@@ -43,7 +55,14 @@ function unzip_file()
         unzip $1
     fi
 }
+
 function build() {
+    if [ -d $PKG ]; then
+        rm -rvf $PKG
+    fi
+    if [ -d $SRC ]; then
+        rm -rvf $SRC
+    fi
     mkdir -vp $PKG $SRC
     cd $PKG
     case $(uname -m) in

@@ -111,9 +111,7 @@ def getConfirmation(packages, action, prompt=True):
     elif action == 'remove':
         print 'The following packages would be removed:\n'
     for package in packages:
-        print package,
-        print ''
-        print ''
+        print package
     if prompt:
         resp = raw_input('Are you sure? (y/N) ')
     else:

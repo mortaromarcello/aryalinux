@@ -40,6 +40,12 @@ function unzip_file()
 }
 
 function build() {
+    if [ -d $PKG ]; then
+        rm -rvf $PKG
+    fi
+    if [ -d $SRC ]; then
+        rm -rvf $SRC
+    fi
     mkdir -vp $PKG $SRC
     cd $PKG
     case $(uname -m) in

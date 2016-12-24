@@ -9,9 +9,6 @@
 set -e
 set +h
 
-#. /etc/alps/alps.conf
-#. /var/lib/alps/functions
-
 SOURCE_ONLY=n
 DESCRIPTION="\n The FreeType2 package contains a\n library which allows applications to properly render TrueType fonts.\n"
 SECTION="general"
@@ -22,8 +19,6 @@ REVISION=1
 
 #REC:libpng
 #REC:general_which
-
-#LOC=""
 ARCH=`uname -m`
 
 START=`pwd`
@@ -47,6 +42,12 @@ function unzip_file()
 	fi
 }
 function build() {
+    if [ -d $PKG ]; then
+        rm -rvf $PKG
+    fi
+    if [ -d $SRC ]; then
+        rm -rvf $SRC
+    fi
     mkdir -vp $PKG $SRC
     cd $PKG
     case $(uname -m) in

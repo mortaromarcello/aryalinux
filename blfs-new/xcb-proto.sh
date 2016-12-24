@@ -26,24 +26,43 @@ START=`pwd`
 PKG=$START/pkg
 SRC=$START/work
 
+function unzip_dirname()
+{
+    dirname="$2-extracted"
+    unzip -o -q $1 -d $dirname
+    if [ "$(ls $dirname | wc -w)" == "1" ]; then
+        echo "$(ls $dirname)"
+    else
+        echo "$dirname"
+    fi
+    rm -rf $dirname
+}
+
 function unzip_file()
 {
-	dir_name=$(unzip_dirname $1 $2)
-	echo $dir_name
-	if [ `echo $dir_name | grep "extracted$"` ]
-	then
-		echo "Create and extract..."
-		mkdir $dir_name
-		cp $1 $dir_name
-		cd $dir_name
-		unzip $1
-		cd ..
-	else
-		echo "Just Extract..."
-		unzip $1
-	fi
+    dir_name=$(unzip_dirname $1 $2)
+    echo $dir_name
+    if [ `echo $dir_name | grep "extracted$"` ]
+    then
+        echo "Create and extract..."
+        mkdir $dir_name
+        cp $1 $dir_name
+        cd $dir_name
+        unzip $1
+        cd ..
+    else
+        echo "Just Extract..."
+        unzip $1
+    fi
 }
+
 function build() {
+    if [ -d $PKG ]; then
+        rm -rvf $PKG
+    fi
+    if [ -d $SRC ]; then
+        rm -rvf $SRC
+    fi
     mkdir -vp $PKG $SRC
     cd $PKG
     case $(uname -m) in
