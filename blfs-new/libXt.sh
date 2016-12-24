@@ -17,10 +17,6 @@ NAME="libXt"
 PKGNAME=$NAME
 REVISION=1
 
-#REQ:
-#REC:
-#OPT:
-
 ARCH=`uname -m`
 
 START=`pwd`

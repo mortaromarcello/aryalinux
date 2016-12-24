@@ -17,8 +17,6 @@ NAME="libX11"
 PKGNAME=$NAME
 REVISION=1
 
-#REQ:xtrans
-
 ARCH=`uname -m`
 
 START=`pwd`

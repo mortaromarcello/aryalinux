@@ -17,8 +17,6 @@ NAME="libXext"
 PKGNAME=$NAME
 REVISION=1
 
-#REQ:libX11
-
 ARCH=`uname -m`
 
 START=`pwd`
