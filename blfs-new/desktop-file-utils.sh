@@ -77,6 +77,7 @@ function build() {
     fi
     ./configure --prefix=/usr && make "-j`nproc`" || make
     make DESTDIR=$PKG install
+    mkdir -vp $PKG/usr/share/applications
 }
 
 function package() {

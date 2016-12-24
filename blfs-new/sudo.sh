@@ -99,6 +99,7 @@ function build() {
     make "-j`nproc`" || make
     make DESTDIR=$PKG install &&
     ln -sfv libsudo_util.so.0.0.0 $PKG/usr/lib/sudo/libsudo_util.so.0
+    mkdir -vp $PKG/etc/pam.d
     cat > $PKG/etc/pam.d/sudo << "EOF"
 # Begin /etc/pam.d/sudo
 # include the default auth settings
