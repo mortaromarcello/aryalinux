@@ -53,9 +53,9 @@ function build() {
             ln -sv lib usr/local/lib64 ;;
     esac
     cd $SRC
-    URL=http://ftp.x.org/pub/individual/lib/libXext-1.3.3.tar.bz2
+    URL=http://ftp.x.org/pub/individual/lib/$NAME-$VERSION.tar.bz2
     if [ ! -z $URL ]; then
-        wget -nc http://ftp.x.org/pub/individual/lib/libXext-1.3.3.tar.bz2
+        wget -nc http://ftp.x.org/pub/individual/lib/$NAME-$VERSION.tar.bz2
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
