@@ -51,15 +51,16 @@ function build() {
         cd $DIRECTORY
     fi
     ./config --prefix=$PKG/usr         \
-         --openssldir=$PKG/etc/ssl \
+         --openssldir=/etc/ssl \
          --libdir=lib          \
          shared                \
          zlib-dynamic &&
-    make depend           &&
+    make depend       &&
     make "-j`nproc`" || make
     sed -i 's# libcrypto.a##;s# libssl.a##' Makefile
-    make MANDIR=$PKG/usr/share/man MANSUFFIX=ssl install && install -dv -m755 $PKG/usr/share/doc/openssl-1.0.2j && cp -vfr doc/* $PKG/usr/share/doc/openssl-1.0.2j
-    make install
+    make  MANDIR=$PKG/usr/share/man MANSUFFIX=ssl install &&
+    install -dv -m755 $PKG/usr/share/doc/openssl-1.0.2j &&
+    cp -vfr doc/* $PKG/usr/share/doc/openssl-1.0.2j
 }
 
 function package() {
