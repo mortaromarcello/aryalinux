@@ -10,14 +10,15 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Nano package contains a small,\n simple text editor which aims to replace Pico, the default editor in the Pine package.\n"
-SECTION="postlfs"
-VERSION=2.6.3
-NAME="nano"
+DESCRIPTION="\n The xcb-util-wm package contains\n libraries which provide client and window-manager helpers for EWMH\n and ICCCM.\n"
+SECTION="x"
+VERSION=0.4.1
+NAME="xcb-util-wm"
 PKGNAME=$NAME
 REVISION=1
 
-#OPT:slang
+#REQ:libxcb
+#OPT:doxygen
 
 ARCH=`uname -m`
 
@@ -74,9 +75,9 @@ function build() {
             ln -sv lib usr/local/lib64 ;;
     esac
     cd $SRC
-    URL=https://www.nano-editor.org/dist/v2.6/nano-2.6.3.tar.xz
+    URL=http://xcb.freedesktop.org/dist/xcb-util-wm-0.4.1.tar.bz2
     if [ ! -z $URL ]; then
-        wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/nano/nano-2.6.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/nano/nano-2.6.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/nano/nano-2.6.3.tar.xz || wget -nc https://www.nano-editor.org/dist/v2.6/nano-2.6.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/nano/nano-2.6.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/nano/nano-2.6.3.tar.xz
+        wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xcb-util/xcb-util-wm-0.4.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xcb-util/xcb-util-wm-0.4.1.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xcb-util/xcb-util-wm-0.4.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xcb-util/xcb-util-wm-0.4.1.tar.bz2 || wget -nc http://xcb.freedesktop.org/dist/xcb-util-wm-0.4.1.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xcb-util/xcb-util-wm-0.4.1.tar.bz2
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -87,20 +88,14 @@ function build() {
         fi
         cd $DIRECTORY
     fi
-    ./configure --prefix=/usr     \
-                --sysconfdir=/etc \
-                --enable-utf8     \
-                --docdir=/usr/share/doc/nano-2.6.3 &&
+    export XORG_PREFIX=/usr
+    export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
+    ./configure $XORG_CONFIG &&
     make "-j`nproc`" || make
-    make DESTDIR=$PKG install &&
-    mkdir -vp $PKG/etc &&
-    install -v -m644 doc/nanorc.sample $PKG/etc &&
-    install -v -m644 doc/texinfo/nano.html $PKG/usr/share/doc/nano-2.6.3
+    make DESTDIR=$PKG install
 }
 
 function package() {
-    strip -s $PKG/usr/bin/*
-    gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
     find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files

@@ -10,14 +10,23 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Nano package contains a small,\n simple text editor which aims to replace Pico, the default editor in the Pine package.\n"
-SECTION="postlfs"
-VERSION=2.6.3
-NAME="nano"
+DESCRIPTION="\n Mesa is an OpenGL compatible 3D\n graphics library.\n"
+SECTION="x"
+VERSION=12.0.1
+NAME="mesa"
 PKGNAME=$NAME
 REVISION=1
 
-#OPT:slang
+#REQ:x7lib
+#REQ:libdrm
+#REQ:python2
+#REC:elfutils
+#REC:llvm
+#REC:libvdpau
+#OPT:libgcrypt
+#OPT:nettle
+#OPT:wayland
+#OPT:plasma-all
 
 ARCH=`uname -m`
 
@@ -74,9 +83,10 @@ function build() {
             ln -sv lib usr/local/lib64 ;;
     esac
     cd $SRC
-    URL=https://www.nano-editor.org/dist/v2.6/nano-2.6.3.tar.xz
+    URL=ftp://ftp.freedesktop.org/pub/mesa/12.0.1/mesa-12.0.1.tar.xz
     if [ ! -z $URL ]; then
-        wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/nano/nano-2.6.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/nano/nano-2.6.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/nano/nano-2.6.3.tar.xz || wget -nc https://www.nano-editor.org/dist/v2.6/nano-2.6.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/nano/nano-2.6.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/nano/nano-2.6.3.tar.xz
+        wget -nc ftp://ftp.freedesktop.org/pub/mesa/12.0.1/mesa-12.0.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mesa/mesa-12.0.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mesa/mesa-12.0.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mesa/mesa-12.0.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mesa/mesa-12.0.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mesa/mesa-12.0.1.tar.xz
+wget -nc http://www.linuxfromscratch.org/patches/downloads/mesa/mesa-12.0.1-add_xdemos-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/mesa-12.0.1-add_xdemos-1.patch
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -87,15 +97,28 @@ function build() {
         fi
         cd $DIRECTORY
     fi
-    ./configure --prefix=/usr     \
-                --sysconfdir=/etc \
-                --enable-utf8     \
-                --docdir=/usr/share/doc/nano-2.6.3 &&
+    export XORG_PREFIX=/usr
+    export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
+    patch -Np1 -i ../mesa-12.0.1-add_xdemos-1.patch
+    GLL_DRV="nouveau,r300,r600,radeonsi,svga,swrast,swr"
+    sed -i "/pthread-stubs/d" configure.ac      &&
+    sed -i "/seems to be moved/s/^/: #/" bin/ltmain.sh &&
+    ./autogen.sh CFLAGS='-O2' CXXFLAGS='-O2'    \
+            --prefix=$XORG_PREFIX           \
+            --sysconfdir=/etc               \
+            --enable-texture-float          \
+            --enable-gles1                  \
+            --enable-gles2                  \
+            --enable-osmesa                 \
+            --enable-xa                     \
+            --enable-gbm                    \
+            --enable-glx-tls                \
+            --with-egl-platforms="drm,x11"  \
+            --with-gallium-drivers=$GLL_DRV &&
+    unset GLL_DRV &&
     make "-j`nproc`" || make
-    make DESTDIR=$PKG install &&
-    mkdir -vp $PKG/etc &&
-    install -v -m644 doc/nanorc.sample $PKG/etc &&
-    install -v -m644 doc/texinfo/nano.html $PKG/usr/share/doc/nano-2.6.3
+    make -C xdemos DEMOS_PREFIX=$XORG_PREFIX
+    make DESTDIR=$PKG install
 }
 
 function package() {

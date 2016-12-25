@@ -10,14 +10,17 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Nano package contains a small,\n simple text editor which aims to replace Pico, the default editor in the Pine package.\n"
-SECTION="postlfs"
-VERSION=2.6.3
-NAME="nano"
+DESCRIPTION="\n The CMake package contains a\n modern toolset used for generating Makefiles. It is a successor of\n the auto-generated <span class=\"command\"><strong>configure</strong> script and aims to be\n platform- and compiler-independent. A significant user of\n CMake is KDE since version 4.\n"
+SECTION="general"
+VERSION=3.6.2
+NAME="cmake"
 PKGNAME=$NAME
 REVISION=1
 
-#OPT:slang
+#REC:curl
+#REC:libarchive
+#OPT:qt5
+#OPT:subversion
 
 ARCH=`uname -m`
 
@@ -74,9 +77,9 @@ function build() {
             ln -sv lib usr/local/lib64 ;;
     esac
     cd $SRC
-    URL=https://www.nano-editor.org/dist/v2.6/nano-2.6.3.tar.xz
+    URL=http://www.cmake.org/files/v3.6/cmake-3.6.2.tar.gz
     if [ ! -z $URL ]; then
-        wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/nano/nano-2.6.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/nano/nano-2.6.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/nano/nano-2.6.3.tar.xz || wget -nc https://www.nano-editor.org/dist/v2.6/nano-2.6.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/nano/nano-2.6.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/nano/nano-2.6.3.tar.xz
+        wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/cmake/cmake-3.6.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/cmake/cmake-3.6.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/cmake/cmake-3.6.2.tar.gz || wget -nc http://www.cmake.org/files/v3.6/cmake-3.6.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/cmake/cmake-3.6.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/cmake/cmake-3.6.2.tar.gz
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -87,20 +90,17 @@ function build() {
         fi
         cd $DIRECTORY
     fi
-    ./configure --prefix=/usr     \
-                --sysconfdir=/etc \
-                --enable-utf8     \
-                --docdir=/usr/share/doc/nano-2.6.3 &&
+    ./bootstrap --prefix=$PKG/usr       \
+            --system-libs       \
+            --mandir=/share/man \
+            --no-system-jsoncpp \
+            --docdir=/share/doc/cmake-3.6.2 &&
     make "-j`nproc`" || make
-    make DESTDIR=$PKG install &&
-    mkdir -vp $PKG/etc &&
-    install -v -m644 doc/nanorc.sample $PKG/etc &&
-    install -v -m644 doc/texinfo/nano.html $PKG/usr/share/doc/nano-2.6.3
+    make install
 }
 
 function package() {
     strip -s $PKG/usr/bin/*
-    gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
     find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files

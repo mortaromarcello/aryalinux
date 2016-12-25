@@ -10,14 +10,23 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Nano package contains a small,\n simple text editor which aims to replace Pico, the default editor in the Pine package.\n"
-SECTION="postlfs"
-VERSION=2.6.3
-NAME="nano"
+DESCRIPTION="\n The LLVM package contains a\n collection of modular and reusable compiler and toolchain\n technologies. The Low Level Virtual Machine (LLVM) Core libraries\n provide a modern source and target-independent optimizer, along\n with code generation support for many popular CPUs (as well as some\n less common ones!). These libraries are built around a well\n specified code representation known as the LLVM intermediate\n representation (\"LLVM IR\").\n"
+SECTION="general"
+VERSION=3.9.0
+NAME="llvm"
 PKGNAME=$NAME
 REVISION=1
 
-#OPT:slang
+#REC:cmake
+#REC:libffi
+#REC:python2
+#OPT:doxygen
+#OPT:graphviz
+#OPT:libxml2
+#OPT:texlive
+#OPT:tl-installer
+#OPT:valgrind
+#OPT:zip
 
 ARCH=`uname -m`
 
@@ -74,9 +83,11 @@ function build() {
             ln -sv lib usr/local/lib64 ;;
     esac
     cd $SRC
-    URL=https://www.nano-editor.org/dist/v2.6/nano-2.6.3.tar.xz
+    URL=http://llvm.org/releases/3.9.0/llvm-3.9.0.src.tar.xz
     if [ ! -z $URL ]; then
-        wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/nano/nano-2.6.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/nano/nano-2.6.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/nano/nano-2.6.3.tar.xz || wget -nc https://www.nano-editor.org/dist/v2.6/nano-2.6.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/nano/nano-2.6.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/nano/nano-2.6.3.tar.xz
+        wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/llvm/llvm-3.9.0.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/llvm/llvm-3.9.0.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/llvm-3.9.0.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/llvm/llvm-3.9.0.src.tar.xz || wget -nc http://llvm.org/releases/3.9.0/llvm-3.9.0.src.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/llvm-3.9.0.src.tar.xz
+        wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/cfe-3.9.0.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/llvm/cfe-3.9.0.src.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/llvm/cfe-3.9.0.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/llvm/cfe-3.9.0.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/cfe-3.9.0.src.tar.xz || wget -nc http://llvm.org/releases/3.9.0/cfe-3.9.0.src.tar.xz
+        wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/compiler-rt/compiler-rt-3.9.0.src.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/compiler-rt/compiler-rt-3.9.0.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/compiler-rt/compiler-rt-3.9.0.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/compiler-rt/compiler-rt-3.9.0.src.tar.xz || wget -nc http://llvm.org/releases/3.9.0/compiler-rt-3.9.0.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/compiler-rt/compiler-rt-3.9.0.src.tar.xz
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -87,15 +98,21 @@ function build() {
         fi
         cd $DIRECTORY
     fi
-    ./configure --prefix=/usr     \
-                --sysconfdir=/etc \
-                --enable-utf8     \
-                --docdir=/usr/share/doc/nano-2.6.3 &&
+    tar -xf ../cfe-3.9.0.src.tar.xz -C tools &&
+    tar -xf ../compiler-rt-3.9.0.src.tar.xz -C projects &&
+    mv tools/cfe-3.9.0.src tools/clang &&
+    mv projects/compiler-rt-3.9.0.src projects/compiler-rt
+    mkdir -pv build &&
+    cd build &&
+    CC=gcc CXX=g++                            \
+    cmake -DCMAKE_INSTALL_PREFIX=$PKG/usr     \
+        -DLLVM_ENABLE_FFI=ON                  \
+        -DCMAKE_BUILD_TYPE=Release            \
+        -DLLVM_BUILD_LLVM_DYLIB=ON            \
+        -DLLVM_TARGETS_TO_BUILD="host;AMDGPU" \
+        -Wno-dev ..                           &&
     make "-j`nproc`" || make
-    make DESTDIR=$PKG install &&
-    mkdir -vp $PKG/etc &&
-    install -v -m644 doc/nanorc.sample $PKG/etc &&
-    install -v -m644 doc/texinfo/nano.html $PKG/usr/share/doc/nano-2.6.3
+    make install
 }
 
 function package() {
