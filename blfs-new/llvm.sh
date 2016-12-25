@@ -116,7 +116,9 @@ function build() {
 }
 
 function package() {
-    strip -s $PKG/usr/bin/*
+    strip -s $PKG/usr/bin/{bugpoint,c-index-test}
+    strip -s $PKG/usr/bin/clang-{3.9,check,format}
+    strip -s $PKG/usr/bin/{llc,lli,llvm-*,obj2yaml,opt,sancov,sanstats,verify-uselistorder,yaml2obj}
     gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
