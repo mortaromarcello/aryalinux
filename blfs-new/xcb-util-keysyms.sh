@@ -10,12 +10,16 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The util-macros package contains\n the m4 macros used by all of the\n Xorg packages.\n"
+DESCRIPTION="\n The xcb-util-keysyms package\n contains a library for handling standard X key constants and\n conversion to/from keycodes.\n"
 SECTION="x"
-VERSION=1.19.0
-NAME="util-macros"
+VERSION=0.4.0
+NAME="xcb-util-keysyms"
 PKGNAME=$NAME
 REVISION=1
+
+#REQ:
+#REC:
+#OPT:
 
 ARCH=`uname -m`
 
@@ -72,9 +76,9 @@ function build() {
             ln -sv lib usr/local/lib64 ;;
     esac
     cd $SRC
-    URL=http://ftp.x.org/pub/individual/util/util-macros-1.19.0.tar.bz2
+    URL=URL=http://xcb.freedesktop.org/dist/xcb-util-keysyms-0.4.0.tar.bz2
     if [ ! -z $URL ]; then
-        wget -nc ftp://ftp.x.org/pub/individual/util/util-macros-1.19.0.tar.bz2 || wget -nc http://ftp.x.org/pub/individual/util/util-macros-1.19.0.tar.bz2
+        wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xcb-util/xcb-util-keysyms-0.4.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xcb-util/xcb-util-keysyms-0.4.0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xcb-util/xcb-util-keysyms-0.4.0.tar.bz2 || wget -nc http://xcb.freedesktop.org/dist/xcb-util-keysyms-0.4.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xcb-util/xcb-util-keysyms-0.4.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xcb-util/xcb-util-keysyms-0.4.0.tar.bz2
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -85,17 +89,10 @@ function build() {
         fi
         cd $DIRECTORY
     fi
-    #whoami > /tmp/currentuser
     export XORG_PREFIX=/usr
     export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
-    mkdir -vp $PKG/etc/profile.d
-    cat > $PKG/etc/profile.d/xorg.sh << EOF
-XORG_PREFIX="$XORG_PREFIX"
-XORG_CONFIG="--prefix=\$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
-export XORG_PREFIX XORG_CONFIG
-EOF
-    chmod 644 $PKG/etc/profile.d/xorg.sh
-    ./configure $XORG_CONFIG
+    ./configure $XORG_CONFIG &&
+    make "-j`nproc`" || make
     make DESTDIR=$PKG install
 }
 
@@ -108,11 +105,13 @@ function package() {
     mv -v $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files.gz $PKG/install/
     echo -e $DESCRIPTION > $PKG/install/blfs-desc
     cat > $PKG/install/doinst.sh << "EOF"
+#!/bin/sh
 echo -e "Non ho niente da fare!"
 EOF
     tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.tgz
     echo "blfs package \"$PKGNAME-$VERSION-$ARCH-$REVISION.tgz\" created."
 }
+
 build
 package
 
