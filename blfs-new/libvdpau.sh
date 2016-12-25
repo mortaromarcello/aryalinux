@@ -95,6 +95,7 @@ function build() {
     ./configure $XORG_CONFIG \
         --docdir=/usr/share/doc/libvdpau-1.1.1 &&
     make
+    mkdir -vp $PKG/usr/lib/pkgconfig
     cat > $PKG/usr/lib/pkgconfig/vdpau.pc <<"EOF"
 prefix=@prefix@
 exec_prefix=@exec_prefix@
@@ -113,8 +114,6 @@ EOF
 }
 
 function package() {
-    strip -s $PKG/usr/bin/*
-    gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
     find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
