@@ -75,7 +75,9 @@ function build() {
         --docdir=/usr/share/doc/acpid-2.0.28 &&
     make "-j`nproc`" || make
     make DESTDIR=$PKG install
-    mkdir -vp $PKG/etc/acpi/events
+    install -v -m755 -d $PKG/etc/acpi/events &&
+    cp -r samples $PKG/usr/share/doc/acpid-2.0.28
+    
     cat > $PKG/etc/acpi/events/lid << "EOF"
 event=button/lid
 action=/etc/acpi/lid.sh
@@ -89,7 +91,6 @@ EOF
     chmod +x $PKG/etc/acpi/lid.sh
     mkdir -vp -m 755 $PKG/etc/rc.d/rc{0,1,2,3,4,5,6,S}.d
     mkdir -vp -m 755 $PKG/etc/rc.d/init.d
-    mkdir -vp -m 755 $PKG/etc/sysconfig
     cat > $PKG/etc/rc.d/init.d/acpid << "EOF"
 #!/bin/sh
 ########################################################################

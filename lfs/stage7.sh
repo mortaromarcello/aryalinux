@@ -97,7 +97,13 @@ EOF
 
 cat > /etc/sysconfig/console << "EOF"
 # Begin /etc/sysconfig/console
-KEYMAP="$KEYBOARD"
+LOGLEVEL=1
+KEYMAP=$KEYBOARD
+KEYMAP_CORRECTIONS="euro2"
+LEGACY_CHARSET="iso-8859-15"
+FONT="lat1-16 -m 8859-15"
+UNICODE=1
+
 # End /etc/sysconfig/console
 EOF
 
