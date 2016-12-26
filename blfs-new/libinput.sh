@@ -13,7 +13,7 @@ SOURCE_ONLY=n
 DESCRIPTION=" libinput is a library that handles input devices for display servers and other applications that need to directly deal with input devices."
 SECTION="x"
 VERSION=1.1.1
-NAME="libevdev"
+NAME="libinput"
 PKGNAME=$NAME
 REVISION=1
 
