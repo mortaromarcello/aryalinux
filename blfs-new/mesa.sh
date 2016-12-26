@@ -12,7 +12,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="\n Mesa is an OpenGL compatible 3D\n graphics library.\n"
 SECTION="x"
-VERSION=12.0.1
+VERSION=12.0.3
 NAME="mesa"
 PKGNAME=$NAME
 REVISION=1
@@ -83,10 +83,10 @@ function build() {
             ln -sv lib usr/local/lib64 ;;
     esac
     cd $SRC
-    URL=ftp://ftp.freedesktop.org/pub/mesa/12.0.1/mesa-12.0.1.tar.xz
+    URL=ftp://ftp.freedesktop.org/pub/mesa/12.0.3/mesa-12.0.3.tar.xz
     if [ ! -z $URL ]; then
-        wget -nc ftp://ftp.freedesktop.org/pub/mesa/12.0.1/mesa-12.0.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mesa/mesa-12.0.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mesa/mesa-12.0.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mesa/mesa-12.0.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mesa/mesa-12.0.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mesa/mesa-12.0.1.tar.xz
-wget -nc http://www.linuxfromscratch.org/patches/downloads/mesa/mesa-12.0.1-add_xdemos-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/mesa-12.0.1-add_xdemos-1.patch
+        wget -nc ftp://ftp.freedesktop.org/pub/mesa/12.0.3/mesa-12.0.3.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mesa/mesa-12.0.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mesa/mesa-12.0.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mesa/mesa-12.0.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mesa/mesa-12.0.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mesa/mesa-12.0.3.tar.xz
+wget -nc http://www.linuxfromscratch.org/patches/downloads/mesa/mesa-12.0.3-add_xdemos-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/mesa-12.0.3-add_xdemos-1.patch
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -99,7 +99,7 @@ wget -nc http://www.linuxfromscratch.org/patches/downloads/mesa/mesa-12.0.1-add_
     fi
     export XORG_PREFIX=/usr
     export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
-    patch -Np1 -i ../mesa-12.0.1-add_xdemos-1.patch
+    patch -Np1 -i ../mesa-12.0.3-add_xdemos-1.patch
     GLL_DRV="nouveau,r300,r600,radeonsi,svga,swrast,swr"
     sed -i "/pthread-stubs/d" configure.ac      &&
     sed -i "/seems to be moved/s/^/: #/" bin/ltmain.sh &&
