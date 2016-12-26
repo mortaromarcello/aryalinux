@@ -12,7 +12,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="\n The LLVM package contains a\n collection of modular and reusable compiler and toolchain\n technologies. The Low Level Virtual Machine (LLVM) Core libraries\n provide a modern source and target-independent optimizer, along\n with code generation support for many popular CPUs (as well as some\n less common ones!). These libraries are built around a well\n specified code representation known as the LLVM intermediate\n representation (\"LLVM IR\").\n"
 SECTION="general"
-VERSION=3.9.0
+VERSION=3.8.1
 NAME="llvm"
 PKGNAME=$NAME
 REVISION=1
@@ -83,11 +83,11 @@ function build() {
             ln -sv lib usr/local/lib64 ;;
     esac
     cd $SRC
-    URL=http://llvm.org/releases/3.9.0/llvm-3.9.0.src.tar.xz
+    URL=http://llvm.org/releases/3.8.1/llvm-3.8.1.src.tar.xz
     if [ ! -z $URL ]; then
-        wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/llvm/llvm-3.9.0.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/llvm/llvm-3.9.0.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/llvm-3.9.0.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/llvm/llvm-3.9.0.src.tar.xz || wget -nc http://llvm.org/releases/3.9.0/llvm-3.9.0.src.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/llvm-3.9.0.src.tar.xz
-        wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/cfe-3.9.0.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/llvm/cfe-3.9.0.src.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/llvm/cfe-3.9.0.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/llvm/cfe-3.9.0.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/cfe-3.9.0.src.tar.xz || wget -nc http://llvm.org/releases/3.9.0/cfe-3.9.0.src.tar.xz
-        wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/compiler-rt/compiler-rt-3.9.0.src.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/compiler-rt/compiler-rt-3.9.0.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/compiler-rt/compiler-rt-3.9.0.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/compiler-rt/compiler-rt-3.9.0.src.tar.xz || wget -nc http://llvm.org/releases/3.9.0/compiler-rt-3.9.0.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/compiler-rt/compiler-rt-3.9.0.src.tar.xz
+        wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/llvm/llvm-3.8.1.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/llvm/llvm-3.8.1.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/llvm-3.8.1.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/llvm/llvm-3.8.1.src.tar.xz || wget -nc http://llvm.org/releases/3.8.1/llvm-3.8.1.src.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/llvm-3.8.1.src.tar.xz
+        wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/cfe-3.8.1.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/llvm/cfe-3.8.1.src.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/llvm/cfe-3.8.1.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/llvm/cfe-3.8.1.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/cfe-3.8.1.src.tar.xz || wget -nc http://llvm.org/releases/3.8.1/cfe-3.8.1.src.tar.xz
+        wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/compiler-rt/compiler-rt-3.8.1.src.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/compiler-rt/compiler-rt-3.8.1.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/compiler-rt/compiler-rt-3.8.1.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/compiler-rt/compiler-rt-3.8.1.src.tar.xz || wget -nc http://llvm.org/releases/3.8.1/compiler-rt-3.8.1.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/compiler-rt/compiler-rt-3.8.1.src.tar.xz
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -98,27 +98,27 @@ function build() {
         fi
         cd $DIRECTORY
     fi
-    tar -xf ../cfe-3.9.0.src.tar.xz -C tools &&
-    tar -xf ../compiler-rt-3.9.0.src.tar.xz -C projects &&
-    mv tools/cfe-3.9.0.src tools/clang &&
-    mv projects/compiler-rt-3.9.0.src projects/compiler-rt
+    tar -xf ../cfe-3.8.1.src.tar.xz -C tools &&
+    tar -xf ../compiler-rt-3.8.1.src.tar.xz -C projects &&
+    mv tools/cfe-3.8.1.src tools/clang &&
+    mv projects/compiler-rt-3.8.1.src projects/compiler-rt
     mkdir -pv build &&
     cd build &&
     CC=gcc CXX=g++                            \
-    cmake -DCMAKE_INSTALL_PREFIX=$PKG/usr     \
+    cmake -DCMAKE_INSTALL_PREFIX=/usr     \
         -DLLVM_ENABLE_FFI=ON                  \
         -DCMAKE_BUILD_TYPE=Release            \
         -DLLVM_BUILD_LLVM_DYLIB=ON            \
         -DLLVM_TARGETS_TO_BUILD="host;AMDGPU" \
         -Wno-dev ..                           &&
     make "-j`nproc`" || make
-    make install
+    make DESTDIR=$PKG install
 }
 
 function package() {
     strip -s $PKG/usr/bin/{bugpoint,c-index-test}
-    strip -s $PKG/usr/bin/clang-{3.9,check,format}
-    strip -s $PKG/usr/bin/{llc,lli,llvm-*,obj2yaml,opt,sancov,sanstats,verify-uselistorder,yaml2obj}
+    strip -s $PKG/usr/bin/clang-{3.8,check,format}
+    strip -s $PKG/usr/bin/{llc,lli,llvm-*,obj2yaml,opt,sancov,verify-uselistorder,yaml2obj}
     gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
