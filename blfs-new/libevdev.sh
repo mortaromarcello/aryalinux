@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="The libevdev package contains common functions for Xorg input drivers. "
+DESCRIPTION="The libevdev package contains common functions for Xorg input drivers."
 SECTION="x"
 VERSION=1.1.1
 NAME="libevdev"
@@ -94,7 +94,6 @@ function build() {
     export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
     ./configure $XORG_CONFIG &&
     make
-    mkdir -vp $PKG/usr/lib/pkgconfig
     make DESTDIR=$PKG install
 }
 

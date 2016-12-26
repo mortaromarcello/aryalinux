@@ -97,7 +97,6 @@ function build() {
     ./configure $XORG_CONFIG \
         --docdir=/usr/share/doc/libvdpau-1.1.1 &&
     make
-    mkdir -vp $PKG/usr/lib/pkgconfig
     make DESTDIR=$PKG install
 }
 
