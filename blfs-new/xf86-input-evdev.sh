@@ -19,7 +19,6 @@ REVISION=1
 
 #REQ:libevdev
 #REQ:mtdev
-#REQ:doxygen
 #REQ:xorg-server
 
 ARCH=`uname -m`
