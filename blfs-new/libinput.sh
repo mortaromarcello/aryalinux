@@ -18,7 +18,7 @@ PKGNAME=$NAME
 REVISION=1
 
 #REQ:libevdev
-#OPT:mtdev
+#REQ:mtdev
 #OPT:doxygen
 #OPT:valgrind
 #OPT:graphviz
