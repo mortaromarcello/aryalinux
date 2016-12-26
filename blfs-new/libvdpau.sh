@@ -92,24 +92,12 @@ function build() {
         fi
         cd $DIRECTORY
     fi
+    export XORG_PREFIX=/usr
+    export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
     ./configure $XORG_CONFIG \
         --docdir=/usr/share/doc/libvdpau-1.1.1 &&
     make
     mkdir -vp $PKG/usr/lib/pkgconfig
-    cat > $PKG/usr/lib/pkgconfig/vdpau.pc <<"EOF"
-prefix=@prefix@
-exec_prefix=@exec_prefix@
-libdir=@libdir@
-includedir=@includedir@
-moduledir=@moduledir@
-
-Name: VDPAU
-Description: The Video Decode and Presentation API for UNIX
-Version: @PACKAGE_VERSION@
-Requires.private: x11
-Cflags: -I${includedir}
-Libs: -L${libdir} -lvdpau
-EOF
     make DESTDIR=$PKG install
 }
 
