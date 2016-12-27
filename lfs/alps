@@ -198,7 +198,10 @@ def runPackageRemove(packageName):
         f.close()
         doRemoveName = glob.glob(configuration['INSTALLED_FILES_DIR'] + '/' + packageName + '*.postremove')
         if doRemoveName:
-            runCommand(['sh', doRemoveName[0]], 'post removed script')
+            runCommand(['sh', doRemoveName[0]], 'post remove script')
+        doRemoveName = glob.glob(configuration['INSTALLED_FILES_DIR'] + '/' + packageName + '*.preremove')
+        if doRemoveName:
+            runCommand(['sh', doRemoveName[0]], 'pre remove script')
         runCommand(['rm', '-vf', realName[0], realNameGz[0]], 'remove temp file')
         packageTgzName = glob.glob(configuration['TGZ_DIR'] + '/' + packageName + '*.tgz')
         if packageTgzName:
