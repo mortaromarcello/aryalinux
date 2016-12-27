@@ -379,6 +379,8 @@ def installPkg(packageName):
     runCommand(['sh', '/install/doinst.sh'], 'post install')
     name = glob.glob('/install/*.files.gz')
     runCommand(['cp', '-vf', name[0], configuration['INSTALLED_FILES_DIR']], 'copy installed files')
+    name = glob.glob('/install/*.postremove')
+    runCommand(['cp', '-vf', name[0], configuration['INSTALLED_FILES_DIR']], 'copy postremove files')
     runCommand(['rm', '-rvf', '/install'], 'remove install')
 #
 

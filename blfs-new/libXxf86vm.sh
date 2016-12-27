@@ -104,6 +104,14 @@ function package() {
 #!/bin/sh
 echo -e "Non ho niente da fare!"
 EOF
+    cat > $PKG/install/$PKGNAME-$VERSION-$ARCH-$REVISION.preremove << "EOF"
+#!/bin/sh
+echo -e "Non ho niente da fare!"
+EOF
+    cat > $PKG/install/$PKGNAME-$VERSION-$ARCH-$REVISION.postremove << "EOF"
+#!/bin/sh
+echo -e "Non ho niente da fare!"
+EOF
     tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.tgz
     echo "blfs package \"$PKGNAME-$VERSION-$ARCH-$REVISION.tgz\" created."
 }
