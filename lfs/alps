@@ -252,12 +252,14 @@ def addFileToRemoveToQueue(packageName, queue):
         lines = data.split('\n')
         for line in lines:
             if line.startswith('#REQ:'):
-                if line.replace('#REQ:', '') != '':
-                    if (packageName == line) and (packageName not in packages) and (packageName not in queue):
+                string = line.replace('#REQ:', '')
+                if string != '':
+                    if (packageName == string.strip()) and (packageName not in packages) and (packageName not in queue):
                         packages.append(os.path.splitext(os.path.basename(package))[0])
             if line.startswith('#REC:'):
-                if line.replace('#REC:', '') != '':
-                    if (packageName == line) and (packageName not in packages) and (packageName not in queue):
+                string = line.replace('#REC:', '')
+                if string != '':
+                    if (packageName == string.strip()) and (packageName not in packages) and (packageName not in queue):
                         packages.append(os.path.splitext(os.path.basename(package))[0])
     print packages
     queue.extend(packages)
