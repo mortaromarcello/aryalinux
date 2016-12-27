@@ -163,52 +163,40 @@ def runPackageInstall(packageName):
     name = glob.glob(configuration['TGZ_DIR'] + '/' + packageName + '*.tgz')
     if name:
         installPkg(name[0])
-    # print 'SOURCE_ONLY :: Building/Installing ' + packageName + '.sh'
-    #process = subprocess.Popen(['/var/cache/alps/scripts/' + packageName + '.sh | tee -a /var/cache/alps/logs/' + packageName + '.log'], shell=True)
-    #returncode = process.wait()
-    # returncode = subprocess.call('/var/cache/alps/scripts/' + packageName + '.sh | tee -a /var/cache/alps/logs/' + packageName + '.log', shell=True)
-    #if returncode != 0:
-    #    print 'Error occured while building/installing ' + packageName + '. Aborting.'
-    #    exit(1)
 
 def runPackageRemove(packageName):
-    print "runPackageRemove" + packageName
-    #removed_files = []
-    #try:
-    #    f = open(configuration['INSTALLED_FILES_DIR'] + '/' + packageName + '.files', 'r')
-    #except:
-    #    print 'Error opening' + packageName + '.files.\nNot removing.'
-    #    return
-    #data = f.read()
-    #lines = data.split('\n')
-    #for line in lines:
-    #    if os.path.isfile(line):
-    #        try:
-    #            os.remove(line)
-    #            removed_files.append(line)
-    #        except:
-    #            print ''
-    #    elif os.path.isdir(line):
-    #        try:
-    #            os.rmdir(line)
-    #            removed_files.append(line)
-    #        except:
-    #            print 'Not remove ' + line + 'directory.'
-    #f.close()
-    #if removed_files:
-    #    f = open(configuration['REMOVED_FILES_DIR'] + '/' + packageName + '.removed', 'w')
-    #    for name in removed_files:
-    #        f.write(name + '\n')
-    #    f.close
-    #    os.remove(configuration['INSTALLED_FILES_DIR'] + '/' + packageName + '.files')
-    #    f = open(configuration['INSTALLED_LIST'], 'r')
-    #    data = file.readlines()
-    #    f.close()
-    #    f = open(configuration['INSTALLED_LIST'], 'w')
-    #    for line in data:
-    #        if line != packageName + '\n':
-    #            f.write(line)
-    #    f.close()
+    print "runPackageRemove " + packageName
+    removed_files = []
+    realNameGz = glob.glob(configuration['INSTALLED_FILES_DIR'] + '/' + packageName + '*.files.gz')
+    print realNameGz
+    if realNameGz:
+        runCommand(['gunzip', '-vkf', realNameGz[0]], 'gunzip file')
+        realName = glob.glob(configuration['INSTALLED_FILES_DIR'] + '/' + packageName + '*.files')
+        try:
+            f = open(realName[0], 'r')
+        except:
+            print 'Error opening' + packageName + '.files.\nNot removing.'
+            return
+        data = f.read()
+        lines = data.split('\n')
+        for line in lines:
+            if os.path.isfile(line):
+                try:
+                    os.remove(line)
+                    print 'removed=>' + line
+                    removed_files.append(line)
+                except:
+                    print 'error occured removing file'
+            elif os.path.isdir(line):
+                try:
+                    os.rmdir(line)
+                    removed_files.append(line)
+                except:
+                    print 'Not remove ' + line + 'directory.'
+        f.close()
+        runCommand(['rm', '-vf', realName[0], realNameGz[0]], 'remove temp file')
+    else:
+        print packageName + ' is not installed.'
 
 #def runPackageInstall(packageName):
 #   if isSourceOnly(packageName) or ( 'PKG_BUILDER' in os.environ and os.environ['PKG_BUILDER'] != 'chandrakant'):
@@ -269,7 +257,6 @@ def installAction(prompt=True):
 
 def addFileToRemoveToQueue(packageName, queue):
     packages = []
-    listScripts = glob.glob(configuration['SCRIPTS_DIR'] + '/*')
     for package in listScripts:
         file = open(package)
         data = file.read()
@@ -277,20 +264,24 @@ def addFileToRemoveToQueue(packageName, queue):
         for line in lines:
             if line.startswith('#REQ:'):
                 if line.replace('#REQ:', '') != '':
-                    if line.find(line, packageName):
-                        packages.append(line.replace('#REQ:', ''))
+                    if (packageName in line) and (packageName not in packages) and (packageName not in queue):
+                        packages.append(os.path.splitext(os.path.basename(package))[0])
             if line.startswith('#REC:'):
                 if line.replace('#REC:', '') != '':
-                    if line.find(line, packageName):
-                        packages.append(line.replace('#REC:', ''))
+                    if (packageName in line) and (packageName not in packages) and (packageName not in queue):
+                        packages.append(os.path.splitext(os.path.basename(package))[0])
+    print packages
+    queue.extend(packages)
     for package in packages:
         addFileToRemoveToQueue(package, queue)
-    queue.extend(packages)
+    if packageName not in queue:
+        queue.append(packageName)
+    print queue
 
 def removeAction(prompt=True):
     for i in range(2, len(sys.argv)):
         packagesToRemove = []
-        addFileToRemoveToQueue(i, packagesToRemove)
+        addFileToRemoveToQueue(sys.argv[i], packagesToRemove)
     if len(packagesToRemove) > 0:
         getConfirmation(packagesToRemove, 'remove', prompt)
     else:
@@ -413,6 +404,7 @@ def installPkg(packageName):
 
 configuration = loadConfig(None)
 distConfig = loadConfig('/etc/lsb-release')
+listScripts = glob.glob(configuration['SCRIPTS_DIR'] + '/*')
 
 if len(sys.argv) < 2:
     help()
@@ -424,6 +416,7 @@ if sys.argv[1] == 'install':
 if sys.argv[1] == 'remove':
     loadInstalled()
     removeAction()
+    exit()
 if sys.argv[1] == 'install-no-prompt':
         loadInstalled()
         installAction(False)
