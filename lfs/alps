@@ -172,43 +172,43 @@ def runPackageInstall(packageName):
     #    exit(1)
 
 def runPackageRemove(packageName):
-    print "runPackageRemove"
-    removed_files = []
-    try:
-        f = open(configuration['INSTALLED_FILES_DIR'] + '/' + packageName + '.files', 'r')
-    except:
-        print 'Error opening' + packageName + '.files.\nNot removing.'
-        return
-    data = f.read()
-    lines = data.split('\n')
-    for line in lines:
-        if os.path.isfile(line):
-            try:
-                os.remove(line)
-                removed_files.append(line)
-            except:
-                print ''
-        elif os.path.isdir(line):
-            try:
-                os.rmdir(line)
-                removed_files.append(line)
-            except:
-                print 'Not remove ' + line + 'directory.'
-    f.close()
-    if removed_files:
-        f = open(configuration['REMOVED_FILES_DIR'] + '/' + packageName + '.removed', 'w')
-        for name in removed_files:
-            f.write(name + '\n')
-        f.close
-        os.remove(configuration['INSTALLED_FILES_DIR'] + '/' + packageName + '.files')
-        f = open(configuration['INSTALLED_LIST'], 'r')
-        data = file.readlines()
-        f.close()
-        f = open(configuration['INSTALLED_LIST'], 'w')
-        for line in data:
-            if line != packageName + '\n':
-                f.write(line)
-        f.close()
+    print "runPackageRemove" + packageName
+    #removed_files = []
+    #try:
+    #    f = open(configuration['INSTALLED_FILES_DIR'] + '/' + packageName + '.files', 'r')
+    #except:
+    #    print 'Error opening' + packageName + '.files.\nNot removing.'
+    #    return
+    #data = f.read()
+    #lines = data.split('\n')
+    #for line in lines:
+    #    if os.path.isfile(line):
+    #        try:
+    #            os.remove(line)
+    #            removed_files.append(line)
+    #        except:
+    #            print ''
+    #    elif os.path.isdir(line):
+    #        try:
+    #            os.rmdir(line)
+    #            removed_files.append(line)
+    #        except:
+    #            print 'Not remove ' + line + 'directory.'
+    #f.close()
+    #if removed_files:
+    #    f = open(configuration['REMOVED_FILES_DIR'] + '/' + packageName + '.removed', 'w')
+    #    for name in removed_files:
+    #        f.write(name + '\n')
+    #    f.close
+    #    os.remove(configuration['INSTALLED_FILES_DIR'] + '/' + packageName + '.files')
+    #    f = open(configuration['INSTALLED_LIST'], 'r')
+    #    data = file.readlines()
+    #    f.close()
+    #    f = open(configuration['INSTALLED_LIST'], 'w')
+    #    for line in data:
+    #        if line != packageName + '\n':
+    #            f.write(line)
+    #    f.close()
 
 #def runPackageInstall(packageName):
 #   if isSourceOnly(packageName) or ( 'PKG_BUILDER' in os.environ and os.environ['PKG_BUILDER'] != 'chandrakant'):
