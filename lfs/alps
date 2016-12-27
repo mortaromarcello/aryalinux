@@ -277,11 +277,11 @@ def addFileToRemoveToQueue(packageName, queue):
         for line in lines:
             if line.startswith('#REQ:'):
                 if line.replace('#REQ:', '') != '':
-                    if line.find(packageName):
+                    if line.find(line, packageName):
                         packages.append(line.replace('#REQ:', ''))
             if line.startswith('#REC:'):
                 if line.replace('#REC:', '') != '':
-                    if line.find(packageName):
+                    if line.find(line, packageName):
                         packages.append(line.replace('#REC:', ''))
     for package in packages:
         addFileToRemoveToQueue(package, queue)
