@@ -61,26 +61,28 @@ def loadConfig(configPath):
 
 def addToQueue(packageName, dependencyQueue):
     if packageName not in dependencyQueue:
-        file = open(configuration['SCRIPTS_DIR'] + '/' + packageName + '.sh')
-        data = file.read()
-        lines = data.split('\n')
-        dependencies = []
+        try:
+            file = open(configuration['SCRIPTS_DIR'] + '/' + packageName + '.sh')
+            data = file.read()
+            lines = data.split('\n')
+            dependencies = []
+            for line in lines:
+                if line.startswith('#REQ:'):
+                    if line.replace('#REQ:', '') != '':
+                        dependencies.append(line.replace('#REQ:', ''))
+                if line.startswith('#REC:'):
+                    if line.replace('#REC:', '') != '':
+                        dependencies.append(line.replace('#REC:', ''))
 
-        for line in lines:
-            if line.startswith('#REQ:'):
-                if line.replace('#REQ:', '') != '':
-                    dependencies.append(line.replace('#REQ:', ''))
-            if line.startswith('#REC:'):
-                if line.replace('#REC:', '') != '':
-                    dependencies.append(line.replace('#REC:', ''))
-
-        for dependency in dependencies:
-            if dependency not in traversed:
-                traversed.append(dependency)
-                addToQueue(dependency, dependencyQueue)
-
-        if packageName not in dependencyQueue:
-            dependencyQueue.append(packageName)
+            for dependency in dependencies:
+                if dependency not in traversed:
+                    traversed.append(dependency)
+                    addToQueue(dependency, dependencyQueue)
+            if packageName not in dependencyQueue:
+                dependencyQueue.append(packageName)
+        except:
+            print 'Error opening ' + packageName + '.sh' + '(script not exist?)'
+            exit(1)
 
 def getDependencies(packageName):
     if packageName != '':
@@ -194,6 +196,9 @@ def runPackageRemove(packageName):
                 except:
                     print 'Not remove ' + line + 'directory.'
         f.close()
+        doRemoveName = glob.glob(configuration['INSTALLED_FILES_DIR'] + '/' + packageName + '*.postremove')
+        if doRemoveName:
+            runCommand(['sh', doRemoveName[0]], 'post removed script')
         runCommand(['rm', '-vf', realName[0], realNameGz[0]], 'remove temp file')
     else:
         print packageName + ' is not installed.'
