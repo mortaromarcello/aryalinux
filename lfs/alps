@@ -194,7 +194,7 @@ def runPackageRemove(packageName):
                     os.rmdir(line)
                     removed_files.append(line)
                 except:
-                    print 'Not remove ' + line + 'directory.'
+                    print 'Not remove ' + line + ' directory.'
         f.close()
         doRemoveName = glob.glob(configuration['INSTALLED_FILES_DIR'] + '/' + packageName + '*.postremove')
         if doRemoveName:
