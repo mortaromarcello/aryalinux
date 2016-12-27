@@ -268,31 +268,32 @@ def installAction(prompt=True):
         print 'If you want to still enforce installation use the following: \n\nalps forceinstall packagenames\n\nBye!'
 
 def addFileToRemoveToQueue(packageName, queue):
+    packages = []
     listScripts = glob.glob(configuration['SCRIPTS_DIR'] + '/*')
     for package in listScripts:
-            file = open(package)
-            data = file.read()
-            lines = data.split('\n')
-            for line in lines:
-                if line.startswith('#REQ:'):
-                    if line.replace('#REQ:', '') != '':
-                        if line.find(packageName)
-                            queue.append(line.replace('#REQ:', ''))
-                if line.startswith('#REC:'):
-                    if line.replace('#REC:', '') != '':
-                        if line.find(packageName)
-                            queue.append(line.replace('#REC:', ''))
+        file = open(package)
+        data = file.read()
+        lines = data.split('\n')
+        for line in lines:
+            if line.startswith('#REQ:'):
+                if line.replace('#REQ:', '') != '':
+                    if line.find(packageName)
+                        packages.append(line.replace('#REQ:', ''))
+            if line.startswith('#REC:'):
+                if line.replace('#REC:', '') != '':
+                    if line.find(packageName)
+                        packages.append(line.replace('#REC:', ''))
+    for package in packages:
+        addFileToRemoveToQueue(package, queue)
+    queue.extend(packages)
 
 def removeAction(prompt=True):
     packages = []
     for i in range(2, len(sys.argv)):
         packagesToRemove = []
         addFileToRemoveToQueue(i, packagesToRemove)
-        for l in packagesToRemove:
-            if i not in packagesToRemove:
-                addFileToRemoveToQueue(l, packagesToRemove)
-    if len(allDependencies) > 0:
-        getConfirmation(allDependencies, 'remove', prompt)
+    if len(packagesToRemove) > 0:
+        getConfirmation(packagesToRemove, 'remove', prompt)
     else:
         print 'All packages have been removed.'
         #print 'If you want to still enforce installation use the following: \n\nalps forceinstall packagenames\n\nBye!'
