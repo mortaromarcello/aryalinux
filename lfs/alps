@@ -199,9 +199,11 @@ def runPackageRemove(packageName):
         doRemoveName = glob.glob(configuration['INSTALLED_FILES_DIR'] + '/' + packageName + '*.postremove')
         if doRemoveName:
             runCommand(['sh', doRemoveName[0]], 'post remove script')
+            runCommand(['rm' , '-vf', doRemoveName[0]], 'post remove script')
         doRemoveName = glob.glob(configuration['INSTALLED_FILES_DIR'] + '/' + packageName + '*.preremove')
         if doRemoveName:
             runCommand(['sh', doRemoveName[0]], 'pre remove script')
+            runCommand(['rm' , '-vf', doRemoveName[0]], 'post remove script')
         runCommand(['rm', '-vf', realName[0], realNameGz[0]], 'remove temp file')
         packageTgzName = glob.glob(configuration['TGZ_DIR'] + '/' + packageName + '*.tgz')
         if packageTgzName:
@@ -387,6 +389,8 @@ def installPkg(packageName):
     runCommand(['cp', '-vf', name[0], configuration['INSTALLED_FILES_DIR']], 'copy installed files')
     name = glob.glob('/install/*.postremove')
     runCommand(['cp', '-vf', name[0], configuration['INSTALLED_FILES_DIR']], 'copy postremove files')
+    name = glob.glob('/install/*.preremove')
+    runCommand(['cp', '-vf', name[0], configuration['INSTALLED_FILES_DIR']], 'copy preremove files')
     runCommand(['rm', '-rvf', '/install'], 'remove install')
 #
 
