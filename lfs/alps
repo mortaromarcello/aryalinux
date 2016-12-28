@@ -12,7 +12,7 @@ from shutil import move
 
 global configuration
 global traversed
-
+#global listScripts
 traversed = []
 
 alpsExecutable = '/usr/bin/alps'
@@ -244,6 +244,8 @@ def buildAction(prompt=True):
     else:
         print 'All packages have been builded.'
 
+global listPackagesToRemove
+listPackagesToRemove = []
 def addFileToRemoveToQueue(packageName):
     packages = []
     for package in listScripts:
@@ -254,28 +256,31 @@ def addFileToRemoveToQueue(packageName):
             if line.startswith('#REQ:'):
                 string = line.replace('#REQ:', '')
                 if string != '':
-                    if (packageName == string.strip()) and (packageName not in packages):
+                    if (packageName == string.strip()) and (packageName not in listPackagesToRemove) and (packageName not in packages):
                         print package
                         packages.append(os.path.splitext(os.path.basename(package))[0])
             if line.startswith('#REC:'):
                 string = line.replace('#REC:', '')
                 if string != '':
-                    if (packageName == string.strip()) and (packageName not in packages):
+                    if (packageName == string.strip()) and (packageName not in listPackagesToRemove) (packageName not in packages):
                         print package
                         packages.append(os.path.splitext(os.path.basename(package))[0])
     file.close()
     print 'packages='
     print packages
-    if packageName not in packages:
-        packages.append(packageName)
-    return packages
+    listPackagesToRemove.extend(packages)
+    for package in packages:
+        addFileToRemoveToQueue(package)
+    if packageName not in listPackagesToRemove:
+        listPackagesToRemove.append(packageName)
 
 def removeAction(prompt=True):
     for i in range(2, len(sys.argv)):
-        packagesToRemove = []
-        packagesToRemove = addFileToRemoveToQueue(sys.argv[i])
-    if len(packagesToRemove) > 0:
-        getConfirmation(packagesToRemove, 'remove', prompt)
+        #packagesToRemove = []
+        #packagesToRemove =
+        addFileToRemoveToQueue(sys.argv[i])
+    if len(listPackagesToRemove) > 0:
+        getConfirmation(listPackagesToRemove, 'remove', prompt)
     else:
         print 'All packages have been removed.'
 
