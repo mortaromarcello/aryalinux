@@ -159,7 +159,7 @@ def runPackageBuildTgz(packageName):
 
 def runPackageInstall(packageName):
     print 'runPackageInstall'
-    if glob.glob(configuration['INSTALLED_FILES_DIR'] + '/' + packageName + '*.files*'):
+    if glob.glob(configuration['INSTALLED_FILES_DIR'] + '/' + packageName + '*.files*') and configuration['FORCE_INSTALL'] == 'no':
         print packageName + ' already installed'
         return
     name = glob.glob(configuration['TGZ_DIR'] + '/' + packageName + '*.tgz')
@@ -244,7 +244,7 @@ def buildAction(prompt=True):
     else:
         print 'All packages have been builded.'
 
-def addFileToRemoveToQueue(packageName, queue):
+def addFileToRemoveToQueue(packageName):
     packages = []
     for package in listScripts:
         file = open(package)
@@ -254,25 +254,26 @@ def addFileToRemoveToQueue(packageName, queue):
             if line.startswith('#REQ:'):
                 string = line.replace('#REQ:', '')
                 if string != '':
-                    if (packageName == string.strip()) and (packageName not in packages) and (packageName not in queue):
+                    if (packageName == string.strip()) and (packageName not in packages):
+                        print package
                         packages.append(os.path.splitext(os.path.basename(package))[0])
             if line.startswith('#REC:'):
                 string = line.replace('#REC:', '')
                 if string != '':
-                    if (packageName == string.strip()) and (packageName not in packages) and (packageName not in queue):
+                    if (packageName == string.strip()) and (packageName not in packages):
+                        print package
                         packages.append(os.path.splitext(os.path.basename(package))[0])
+    file.close()
+    print 'packages='
     print packages
-    queue.extend(packages)
-    for package in packages:
-        addFileToRemoveToQueue(package, queue)
-    if packageName not in queue:
-        queue.append(packageName)
-    print queue
+    if packageName not in packages:
+        packages.append(packageName)
+    return packages
 
 def removeAction(prompt=True):
     for i in range(2, len(sys.argv)):
         packagesToRemove = []
-        addFileToRemoveToQueue(sys.argv[i], packagesToRemove)
+        packagesToRemove = addFileToRemoveToQueue(sys.argv[i])
     if len(packagesToRemove) > 0:
         getConfirmation(packagesToRemove, 'remove', prompt)
     else:
