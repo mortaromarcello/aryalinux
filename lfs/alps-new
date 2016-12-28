@@ -76,10 +76,27 @@ class Package:
                     string = line.replace('#REC:', '')
                     if string != '':
                         if (self.name == string.strip()) and (self.name not in packages):
-                            print package
                             packages.append(os.path.splitext(os.path.basename(package))[0])
             file.close()
         return packages
+    
+    def install(self):
+        if self.required:
+            for pkg in self.required:
+                p = Package(pkg)
+                p.install()
+        if self.recommended:
+            for pkg in self.recommended:
+                p = Package(pkg)
+                p.install()
+        print 'install=>' + self.name
+    
+    def remove(self):
+        if self.dependent:
+            for pkg in self.dependent:
+                p = Package(pkg)
+                p.remove()
+        print 'remove=>' + self.name
 
 def help():
         print 'Usage : alps <command> [packages...]'
@@ -465,20 +482,25 @@ configuration = loadConfig(None)
 distConfig = loadConfig('/etc/lsb-release')
 listScripts = glob.glob(configuration['SCRIPTS_DIR'] + '/*')
 ################################# TEST #################################
-p = Package('python2')
-print 'required=>'
-print p.required
-print 'recommended=>'
-print p.recommended
-print 'dependent=>'
-print p.dependent
-print 'optional=>'
-print p.optional
+#p = Package('dhcp')
+#print 'required=>'
+#print p.required
+#print 'recommended=>'
+#print p.recommended
+#print 'dependent=>'
+#print p.dependent
+#print 'optional=>'
+#print p.optional
+#p.install()
+#p.remove()
 ########################################################################
 
 if len(sys.argv) < 2:
-    #help()
+    help()
     exit()
+
+for i in 
+
 if sys.argv[1] == 'build':
     loadInstalled()
     buildAction()
