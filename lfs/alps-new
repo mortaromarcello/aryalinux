@@ -10,15 +10,8 @@ import glob
 from shutil import copy2
 from shutil import move
 
-#global configuration
-#global traversed
-
-#traversed = []
-
-#alpsExecutable = '/usr/bin/alps'
 alpExecutable = sys.argv[0]
 basenameAlpExecutable = os.path.basename(alpExecutable)
-print basenameAlpExecutable
 
 def runCommand(cmd, actionName):
     p = subprocess.Popen(cmd)
@@ -541,7 +534,7 @@ def cleanAction():
     print 'Cleaning up. This might take a while...'
     subprocess.call('sudo rm -rf ' + configuration['SOURCE_DIR'] + '/*', shell=True)
     print 'Done'
-
+'''
 def updateAction():
     file = open('/etc/lsb-release', 'r')
     data = file.read()
@@ -572,10 +565,10 @@ def updateAction():
                     runCommand(["rm", "-rf", "/tmp/aryalinux-" + version], "Cleaning up")
                 except Exception:
                     pass
-'''
+
 def selfUpdateAction():
     try:
-        os.remove('/tmp/'+basenameAlpExecutable)
+        os.remove('/tmp/' + basenameAlpExecutable)
     except Exception:
         pass
     try:
@@ -640,9 +633,6 @@ def showInstalledAction():
 
 '''
 
-#if len(sys.argv) < 2:
-#    help()
-#    exit()
 pkgs = []
 for i in range(2, len(sys.argv)):
     pkgs.append(Package(sys.argv[i]))
@@ -660,21 +650,27 @@ for i in pkgs:
     print i.namePostRemoveScript
     print i.namePreRemoveScript
 
-if len(sys.argv) > 1:
-    if sys.argv[1] == 'install':
-        for i in pkgs:
-            i.install()
-    if sys.argv[1] == 'build':
-        for i in pkgs:
-            i.build()
-    if sys.argv[1] == 'remove':
-        for i in pkgs:
-            i.remove()
-    if sys.argv[1] == 'show':
-        for i in pkgs:
-            i.show()
-    if sys.argv[1] == 'selfupdate':
-        selfUpdateAction()
+if len(sys.argv) < 2:
+    help()
+    exit()
+
+
+if sys.argv[1] == 'install':
+    for i in pkgs:
+        i.install()
+if sys.argv[1] == 'build':
+    for i in pkgs:
+        i.build()
+if sys.argv[1] == 'remove':
+    for i in pkgs:
+        i.remove()
+if sys.argv[1] == 'show':
+    for i in pkgs:
+        i.show()
+if sys.argv[1] == 'selfupdate':
+    selfUpdateAction()
+if sys.argv[1] == 'updatescripts':
+    updateAction()
 '''
 if sys.argv[1] == 'build':
     loadInstalled()
