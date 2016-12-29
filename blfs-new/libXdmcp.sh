@@ -105,7 +105,8 @@ function package() {
     cat > $PKG/install/doinst.sh << "EOF"
 #!/bin/sh
 echo -e "Non ho niente da fare!"
-EOF    cat > $PKG/install/$PKGNAME-$VERSION-$ARCH-$REVISION.preremove << "EOF"
+EOF
+    cat > $PKG/install/$PKGNAME-$VERSION-$ARCH-$REVISION.preremove << "EOF"
 #!/bin/sh
 echo -e "Non ho niente da fare!"
 EOF
