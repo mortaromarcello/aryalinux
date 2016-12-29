@@ -35,7 +35,7 @@ class Package:
     
     def loadConfig(self):
         conf = {}
-        file = open(configPath, 'r')
+        file = open(self.configPath, 'r')
         data = file.read()
         lines = data.split('\n')
         for line in lines:
@@ -558,13 +558,18 @@ distConfig = loadConfig('/etc/lsb-release')
 #p.remove()
 ########################################################################
 
-if len(sys.argv) < 2:
-    help()
-    exit()
+#if len(sys.argv) < 2:
+#    help()
+#    exit()
 pkgs = []
-for i in range(2, len(sys.argv):
+for i in range(2, len(sys.argv)):
     pkgs.append(Package(sys.argv[i]))
 
+for i in pkgs:
+    print i.name
+    print i.nameFile
+    print i.configuration
+'''
 if sys.argv[1] == 'build':
     loadInstalled()
     buildAction()
@@ -613,3 +618,4 @@ if sys.argv[1] == '--help' or sys.argv[1] == 'help':
     exit()
 print 'Invalid command ' + sys.argv[1] + '\n'
 help()
+'''
