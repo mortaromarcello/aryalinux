@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Xorg protocol headers provide\n the header files required to build the system, and to allow other\n applications to build against the installed X Window system.\n"
+DESCRIPTION=" The Xorg protocol headers provide the header files required to build the system, and to allow other applications to build against the installed X Window system."
 SECTION="x"
 VERSION=
 NAME="x7proto"

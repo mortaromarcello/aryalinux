@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The xcb-util-cursor package\n provides a module that implements the XCB cursor library. It is a\n the XCB replacement for\n libXcursor.\n"
+DESCRIPTION=" The xcb-util-cursor package provides a module that implements the XCB cursor library. It is a the XCB replacement for libXcursor."
 SECTION="x"
 VERSION=0.1.3
 NAME="xcb-util-cursor"

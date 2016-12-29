@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The libXdmcp package contains a\n library implementing the X Display Manager Control Protocol. This\n is useful for allowing clients to interact with the X Display\n Manager.\n"
+DESCRIPTION=" The libXdmcp package contains a library implementing the X Display Manager Control Protocol. This is useful for allowing clients to interact with the X Display Manager."
 SECTION="x"
 VERSION=1.1.2
 NAME="libXdmcp"

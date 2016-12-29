@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The GnuTLS package contains\n libraries and userspace tools which provide a secure layer over a\n reliable transport layer. Currently the GnuTLS library implements the proposed\n standards by the IETF's TLS working group. Quoting from the TLS\n protocol specification:\n"
+DESCRIPTION=" The GnuTLS package contains libraries and userspace tools which provide a secure layer over a reliable transport layer. Currently the GnuTLS library implements the proposed standards by the IETF's TLS working group. Quoting from the TLS protocol specification:"
 SECTION="postlfs"
 VERSION=3.5.5
 NAME="gnutls"

@@ -13,7 +13,7 @@ set +h
 #. /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The FreeType2 package contains a\n library which allows applications to properly render TrueType fonts.\n"
+DESCRIPTION=" The FreeType2 package contains a library which allows applications to properly render TrueType fonts."
 SECTION="general"
 VERSION=2.7
 NAME="freetype2"

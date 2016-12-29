@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The xcb-util-wm package contains\n libraries which provide client and window-manager helpers for EWMH\n and ICCCM.\n"
+DESCRIPTION=" The xcb-util-wm package contains libraries which provide client and window-manager helpers for EWMH and ICCCM."
 SECTION="x"
 VERSION=0.4.1
 NAME="xcb-util-wm"

@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The GLib package contains\n low-level libraries useful for providing data structure handling\n for C, portability wrappers and interfaces for such runtime\n functionality as an event loop, threads, dynamic loading and an\n object system.\n"
+DESCRIPTION=" The GLib package contains low-level libraries useful for providing data structure handling for C, portability wrappers and interfaces for such runtime functionality as an event loop, threads, dynamic loading and an object system."
 SECTION="general"
 VERSION=2.50.0
 NAME="glib2"

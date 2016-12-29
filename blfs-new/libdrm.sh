@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n libdrm provides a user space\n library for accessing the DRM, direct rendering manager, on\n operating systems that support the ioctl interface. libdrm is a\n low-level library, typically used by graphics drivers such as the\n Mesa DRI drivers, the X drivers, libva and similar projects.\n"
+DESCRIPTION=" libdrm provides a user space library for accessing the DRM, direct rendering manager, on operating systems that support the ioctl interface. libdrm is a low-level library, typically used by graphics drivers such as the Mesa DRI drivers, the X drivers, libva and similar projects."
 SECTION="x"
 VERSION=2.4.71
 NAME="libdrm"

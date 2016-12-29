@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The util-macros package contains\n the m4 macros used by all of the\n Xorg packages.\n"
+DESCRIPTION=" The util-macros package contains the m4 macros used by all of the Xorg packages."
 SECTION="x"
 VERSION=1.19.0
 NAME="util-macros"

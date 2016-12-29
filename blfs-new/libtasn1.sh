@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak libtasn1 is a highly portable C\n library that encodes and decodes DER/BER data following an ASN.1\n schema.\n"
+DESCRIPTION=" libtasn1 is a highly portable C library that encodes and decodes DER/BER data following an ASN.1 schema."
 SECTION="general"
 VERSION=4.9
 NAME="libtasn1"

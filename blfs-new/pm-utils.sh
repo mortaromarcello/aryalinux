@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Power Management Utilities is\n a small collection of scripts to suspend and hibernate computer\n that can be used to run user supplied scripts on suspend and\n resume.\n"
+DESCRIPTION=" The Power Management Utilities is a small collection of scripts to suspend and hibernate computer that can be used to run user supplied scripts on suspend and resume."
 SECTION="general"
 VERSION=1.4.1
 NAME="pm-utils"

@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The ISC DHCP package contains both\n the client and server programs for DHCP. <span class=\"command\"><strong>dhclient</strong> (the client) is used for\n connecting to a network which uses DHCP to assign network\n addresses. <span class=\"command\"><strong>dhcpd</strong> (the\n server) is used for assigning network addresses on private\n networks.\n"
+DESCRIPTION=" The ISC DHCP package contains both the client and server programs for DHCP. <span class=\"command\"><strong>dhclient</strong> (the client) is used for connecting to a network which uses DHCP to assign network addresses. <span class=\"command\"><strong>dhcpd</strong> (the server) is used for assigning network addresses on private networks."
 SECTION="basicnet"
 VERSION=4.3.5
 NAME="dhcp"

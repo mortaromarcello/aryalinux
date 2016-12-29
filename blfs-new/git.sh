@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n Git is a free and open source,\n distributed version control system designed to handle everything\n from small to very large projects with speed and efficiency. Every\n Git clone is a full-fledged\n repository with complete history and full revision tracking\n capabilities, not dependent on network access or a central server.\n Branching and merging are fast and easy to do. Git is used for version control of files, much\n like tools such as <a class=\"xref\" href=\"mercurial.html\" title=\"Mercurial-3.9.2\">Mercurial-3.9.2</a>, Bazaar, <a class=\"xref\" href=\"subversion.html\" \n title=\"Subversion-1.9.4\">Subversion-1.9.4</a>, <a class=\"ulink\" \n href=\"http://www.nongnu.org/cvs/\">CVS</a>, Perforce, and Team\n Foundation Server.\n"
+DESCRIPTION=" Git is a free and open source, distributed version control system designed to handle everything from small to very large projects with speed and efficiency. Every Git clone is a full-fledged repository with complete history and full revision tracking capabilities, not dependent on network access or a central server. Branching and merging are fast and easy to do. Git is used for version control of files, much like tools such as <a class=\"xref\" href=\"mercurial.html\" title=\"Mercurial-3.9.2\">Mercurial-3.9.2</a>, Bazaar, <a class=\"xref\" href=\"subversion.html\"  title=\"Subversion-1.9.4\">Subversion-1.9.4</a>, <a class=\"ulink\"  href=\"http://www.nongnu.org/cvs/\">CVS</a>, Perforce, and Team Foundation Server."
 SECTION="general"
 VERSION=2.10.1
 NAME="git"

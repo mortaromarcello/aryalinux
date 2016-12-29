@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The libnl suite is a collection of\n libraries providing APIs to netlink protocol based Linux kernel\n interfaces.\n"
+DESCRIPTION=" The libnl suite is a collection of libraries providing APIs to netlink protocol based Linux kernel interfaces."
 SECTION="basicnet"
 VERSION=3.2.28
 NAME="libnl"

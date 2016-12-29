@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Xorg libpciaccess library provide library\n routines that are used within all X Window applications.\n"
+DESCRIPTION=" The Xorg libpciaccess library provide library routines that are used within all X Window applications."
 SECTION="x"
 VERSION=0.13.4
 NAME="libpciaccess"

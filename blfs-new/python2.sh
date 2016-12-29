@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Python 2 package contains the\n Python development environment. It\n is useful for object-oriented programming, writing scripts,\n prototyping large programs or developing entire applications. This\n version is for backward compatibility with other dependent\n packages.\n"
+DESCRIPTION=" The Python 2 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs or developing entire applications. This version is for backward compatibility with other dependent packages."
 SECTION="general"
 VERSION=2.7.12
 NAME="python2"

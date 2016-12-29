@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\nThe acpid (Advanced Configuration and Power Interface\n event daemon) is a completely flexible, totally\n extensible daemon for delivering ACPI events. It listens on netlin\n interface and when an event occurs, executes programs to handle the\n event. The programs it executes are configured through a set of\n configuration files, which can be dropped into place by packages or\n by the user.\n"
+DESCRIPTION="The acpid (Advanced Configuration and Power Interface event daemon) is a completely flexible, totally extensible daemon for delivering ACPI events. It listens on netlin interface and when an event occurs, executes programs to handle the event. The programs it executes are configured through a set of configuration files, which can be dropped into place by packages or by the user."
 SECTION="general"
 VERSION=2.0.28
 NAME="acpid"

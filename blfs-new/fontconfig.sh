@@ -13,7 +13,7 @@ set +h
 #. /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Fontconfig package contains a\n library and support programs used for configuring and customizing\n font access.\n"
+DESCRIPTION=" The Fontconfig package contains a library and support programs used for configuring and customizing font access."
 SECTION="general"
 VERSION=2.12.1
 NAME="fontconfig"

@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The libarchive library provides a\n single interface for reading/writing various compression formats.\n"
+DESCRIPTION=" The libarchive library provides a single interface for reading/writing various compression formats."
 SECTION="general"
 VERSION=3.2.1
 NAME="libarchive"

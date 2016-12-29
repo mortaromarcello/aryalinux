@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The PCRE package contains\n Perl Compatible Regular Expression\n libraries. These are useful for implementing regular expression\n pattern matching using the same syntax and semantics as\n Perl 5.\n"
+DESCRIPTION=" The PCRE package contains Perl Compatible Regular Expression libraries. These are useful for implementing regular expression pattern matching using the same syntax and semantics as Perl 5."
 SECTION="general"
 VERSION=8.39
 NAME="pcre"

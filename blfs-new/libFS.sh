@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Xorg libFS library provide library\n routines that are used within all X Window applications.\n"
+DESCRIPTION=" The Xorg libFS library provide library routines that are used within all X Window applications."
 SECTION="x"
 VERSION=1.0.7
 NAME="libFS"

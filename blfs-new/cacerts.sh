@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n CA Certificate Download: <a class=\"ulink\" href=\"http://anduin.linuxfromscratch.org/BLFS/other/certdata.txt\">http://anduin.linuxfromscratch.org/BLFS/other/certdata.txt</a>\n"
+DESCRIPTION=" CA Certificate Download: <a class=\"ulink\" href=\"http://anduin.linuxfromscratch.org/BLFS/other/certdata.txt\">http://anduin.linuxfromscratch.org/BLFS/other/certdata.txt</a>"
 SECTION="postlfs"
 VERSION=0.1
 NAME="cacerts"

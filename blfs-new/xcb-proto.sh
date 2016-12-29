@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The xcb-proto package provides the\n XML-XCB protocol descriptions that libxcb uses to generate the majority of its\n code and API.\n"
+DESCRIPTION=" The xcb-proto package provides the XML-XCB protocol descriptions that libxcb uses to generate the majority of its code and API."
 SECTION="x"
 VERSION=1.12
 NAME="xcb-proto"

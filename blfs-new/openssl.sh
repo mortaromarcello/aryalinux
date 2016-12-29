@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The OpenSSL package contains\n management tools and libraries relating to cryptography. These are\n useful for providing cryptography functions to other packages, such\n as OpenSSH, email applications and\n web browsers (for accessing HTTPS sites).\n"
+DESCRIPTION=" The OpenSSL package contains management tools and libraries relating to cryptography. These are useful for providing cryptography functions to other packages, such as OpenSSH, email applications and web browsers (for accessing HTTPS sites)."
 SECTION="postlfs"
 VERSION=1.0.2j
 NAME="openssl"

@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Nano package contains a small,\n simple text editor which aims to replace Pico, the default editor in the Pine package.\n"
+DESCRIPTION=" The Nano package contains a small, simple text editor which aims to replace Pico, the default editor in the Pine package."
 SECTION="postlfs"
 VERSION=2.6.3
 NAME="nano"

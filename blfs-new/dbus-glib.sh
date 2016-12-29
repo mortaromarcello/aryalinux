@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The D-Bus GLib package contains\n GLib interfaces to the\n D-Bus API.\n"
+DESCRIPTION=" The D-Bus GLib package contains GLib interfaces to the D-Bus API."
 SECTION="general"
 VERSION=0.108
 NAME="dbus-glib"

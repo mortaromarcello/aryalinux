@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The libffi library provides a\n portable, high level programming interface to various calling\n conventions. This allows a programmer to call any function\n specified by a call interface description at run time.\n"
+DESCRIPTION=" The libffi library provides a portable, high level programming interface to various calling conventions. This allows a programmer to call any function specified by a call interface description at run time."
 SECTION="general"
 VERSION=3.2.1
 NAME="libffi"

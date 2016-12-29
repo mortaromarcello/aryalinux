@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n WPA Supplicant is a Wi-Fi\n Protected Access (WPA) client and IEEE 802.1X supplicant. It\n implements WPA key negotiation with a WPA Authenticator and\n Extensible Authentication Protocol (EAP) authentication with an\n Authentication Server. In addition, it controls the roaming and\n IEEE 802.11 authentication/association of the wireless LAN driver.\n This is useful for connecting to a password protected wireless\n access point.\n"
+DESCRIPTION=" WPA Supplicant is a Wi-Fi Protected Access (WPA) client and IEEE 802.1X supplicant. It implements WPA key negotiation with a WPA Authenticator and Extensible Authentication Protocol (EAP) authentication with an Authentication Server. In addition, it controls the roaming and IEEE 802.11 authentication/association of the wireless LAN driver. This is useful for connecting to a password protected wireless access point."
 SECTION="basicnet"
 VERSION=2.6
 NAME="wpa_supplicant"

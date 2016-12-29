@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Pixman package contains a\n library that provides low-level pixel manipulation features such as\n image compositing and trapezoid rasterization.\n"
+DESCRIPTION=" The Pixman package contains a library that provides low-level pixel manipulation features such as image compositing and trapezoid rasterization."
 SECTION="general"
 VERSION=0.34.0
 NAME="pixman"

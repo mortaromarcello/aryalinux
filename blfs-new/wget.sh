@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Wget package contains a\n utility useful for non-interactive downloading of files from the\n Web.\n"
+DESCRIPTION=" The Wget package contains a utility useful for non-interactive downloading of files from the Web."
 SECTION="basicnet"
 VERSION=1.18
 NAME="wget"

@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The xcb-util-renderutil package\n provides additional extensions to the XCB library.\n"
+DESCRIPTION=" The xcb-util-renderutil package provides additional extensions to the XCB library."
 SECTION="x"
 VERSION=0.3.9
 NAME="xcb-util-renderutil"

@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The xcb-util-keysyms package\n contains a library for handling standard X key constants and\n conversion to/from keycodes.\n"
+DESCRIPTION="\n The xcb-util-keysyms package contains a library for handling standard X key constants and conversion to/from keycodes."
 SECTION="x"
 VERSION=0.4.0
 NAME="xcb-util-keysyms"

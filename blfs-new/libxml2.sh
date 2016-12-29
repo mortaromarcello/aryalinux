@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The libxml2 package contains\n libraries and utilities used for parsing XML files.\n"
+DESCRIPTION=" The libxml2 package contains libraries and utilities used for parsing XML files."
 SECTION="general"
 VERSION=2.9.4
 NAME="libxml2"

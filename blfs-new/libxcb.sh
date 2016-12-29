@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The libxcb package provides an\n interface to the X Window System protocol, which replaces the\n current Xlib interface. Xlib can also use XCB as a transport layer,\n allowing software to make requests and receive responses with both.\n"
+DESCRIPTION=" The libxcb package provides an interface to the X Window System protocol, which replaces the current Xlib interface. Xlib can also use XCB as a transport layer, allowing software to make requests and receive responses with both."
 SECTION="x"
 VERSION=1.12
 NAME="libxcb"

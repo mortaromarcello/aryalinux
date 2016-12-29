@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n Mesa is an OpenGL compatible 3D\n graphics library.\n"
+DESCRIPTION=" Mesa is an OpenGL compatible 3D graphics library."
 SECTION="x"
 VERSION=12.0.3
 NAME="mesa"

@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Xorg font packages provide\n needed fonts to the Xorg\n applications.\n"
+DESCRIPTION=" The Xorg font packages provide needed fonts to the Xorg applications."
 SECTION="x"
 VERSION=0.0.1
 NAME="x7font"

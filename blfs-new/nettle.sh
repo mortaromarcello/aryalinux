@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Nettle package contains the\n low-level cryptographic library that is designed to fit easily in\n many contexts.\n"
+DESCRIPTION=" The Nettle package contains the low-level cryptographic library that is designed to fit easily in many contexts."
 SECTION="postlfs"
 VERSION=3.3
 NAME="nettle"

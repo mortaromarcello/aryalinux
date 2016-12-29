@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The LLVM package contains a\n collection of modular and reusable compiler and toolchain\n technologies. The Low Level Virtual Machine (LLVM) Core libraries\n provide a modern source and target-independent optimizer, along\n with code generation support for many popular CPUs (as well as some\n less common ones!). These libraries are built around a well\n specified code representation known as the LLVM intermediate\n representation (\"LLVM IR\").\n"
+DESCRIPTION=" The LLVM package contains a collection of modular and reusable compiler and toolchain technologies. The Low Level Virtual Machine (LLVM) Core libraries provide a modern source and target-independent optimizer, along with code generation support for many popular CPUs (as well as some less common ones!). These libraries are built around a well specified code representation known as the LLVM intermediate representation (\"LLVM IR\")."
 SECTION="general"
 VERSION=3.8.1
 NAME="llvm"

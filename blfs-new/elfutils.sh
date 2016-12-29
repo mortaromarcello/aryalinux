@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The elfutils package contains a\n set of utilities and libraries for handling ELF (Executable and\n Linkable Format) files.\n"
+DESCRIPTION=" The elfutils package contains a set of utilities and libraries for handling ELF (Executable and Linkable Format) files."
 SECTION="general"
 VERSION=0.167
 NAME="elfutils"

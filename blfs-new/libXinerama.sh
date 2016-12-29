@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Xorg libXinerama library provide library\n routines that are used within all X Window applications.\n"
+DESCRIPTION=" The Xorg libXinerama library provide library routines that are used within all X Window applications."
 SECTION="x"
 VERSION=1.1.3
 NAME="libXinerama"

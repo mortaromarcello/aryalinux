@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Xorg Server is the core of the\n X Window system.\n"
+DESCRIPTION=" The Xorg Server is the core of the X Window system."
 SECTION="x"
 VERSION=1.18.4
 NAME="xorg-server"

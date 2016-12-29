@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Desktop File Utils package\n contains command line utilities for working with <a class=\"ulink\" \n href=\"http://standards.freedesktop.org/desktop-entry-spec/latest/\">Desktop\n entries</a>. These utilities are used by Desktop Environments and\n other applications to manipulate the MIME-types application\n databases and help adhere to the Desktop Entry Specification.\n"
+DESCRIPTION=" The Desktop File Utils package contains command line utilities for working with <a class=\"ulink\"  href=\"http://standards.freedesktop.org/desktop-entry-spec/latest/\">Desktop entries</a>. These utilities are used by Desktop Environments and other applications to manipulate the MIME-types application databases and help adhere to the Desktop Entry Specification."
 SECTION="general"
 VERSION=0,23
 NAME="desktop-file-utils"

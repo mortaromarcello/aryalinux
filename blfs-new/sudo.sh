@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Sudo package allows a system\n administrator to give certain users (or groups of users) the\n ability to run some (or all) commands as <code class=\"systemitem\">root or another user while logging the commands\n and arguments.\n"
+DESCRIPTION=" The Sudo package allows a system administrator to give certain users (or groups of users) the ability to run some (or all) commands as <code class=\"systemitem\">root or another user while logging the commands and arguments."
 SECTION="postlfs"
 VERSION=1
 NAME="sudo"

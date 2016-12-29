@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Xorg libXxf86vm library provide library\n routines that are used within all X Window applications.\n"
+DESCRIPTION=" The Xorg libXxf86vm library provide library routines that are used within all X Window applications."
 SECTION="x"
 VERSION=1.1.4
 NAME="libXxf86vm"

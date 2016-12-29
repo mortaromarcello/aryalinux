@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The libpng package contains\n libraries used by other programs for reading and writing PNG files.\n The PNG format was designed as a replacement for GIF and, to a\n lesser extent, TIFF, with many improvements and extensions and lack\n of patent problems.\n"
+DESCRIPTION=" The libpng package contains libraries used by other programs for reading and writing PNG files. The PNG format was designed as a replacement for GIF and, to a lesser extent, TIFF, with many improvements and extensions and lack of patent problems."
 SECTION="general"
 VERSION=1.6.26
 NAME="libpng"

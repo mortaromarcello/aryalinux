@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n S-Lang is an interpreted language\n that may be embedded into an application to make the application\n extensible. It provides facilities required by interactive\n applications such as display/screen management, keyboard input and\n keymaps.\n"
+DESCRIPTION=" S-Lang is an interpreted language that may be embedded into an application to make the application extensible. It provides facilities required by interactive applications such as display/screen management, keyboard input and keymaps."
 SECTION="general"
 VERSION=2.2.4
 NAME="slang"

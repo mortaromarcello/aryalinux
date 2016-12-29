@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n Even though D-Bus was built in\n LFS, there are some features provided by the package that other\n BLFS packages need, but their dependencies didn't fit into LFS.\n"
+DESCRIPTION=" Even though D-Bus was built in LFS, there are some features provided by the package that other BLFS packages need, but their dependencies didn't fit into LFS."
 SECTION="general"
 VERSION=1.10.10
 NAME="dbus"

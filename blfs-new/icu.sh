@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The International Components for\n Unicode (ICU) package is a mature, widely used set of C/C++\n libraries providing Unicode and Globalization support for software\n applications. ICU is widely\n portable and gives applications the same results on all platforms.\n"
+DESCRIPTION=" The International Components for Unicode (ICU) package is a mature, widely used set of C/C++ libraries providing Unicode and Globalization support for software applications. ICU is widely portable and gives applications the same results on all platforms."
 SECTION="general"
 VERSION=58_1
 NAME="icu"

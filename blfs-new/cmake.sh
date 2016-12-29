@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The CMake package contains a\n modern toolset used for generating Makefiles. It is a successor of\n the auto-generated <span class=\"command\"><strong>configure</strong> script and aims to be\n platform- and compiler-independent. A significant user of\n CMake is KDE since version 4.\n"
+DESCRIPTION=" The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated <span class=\"command\"><strong>configure</strong> script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4."
 SECTION="general"
 VERSION=3.6.2
 NAME="cmake"

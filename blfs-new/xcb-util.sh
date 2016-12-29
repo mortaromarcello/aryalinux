@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The xcb-util package provides\n additional extensions to the XCB\n library, many that were previously found in Xlib, but are not part of core X protocol.\n"
+DESCRIPTION=" The xcb-util package provides additional extensions to the XCB library, many that were previously found in Xlib, but are not part of core X protocol."
 SECTION="x"
 VERSION=0.4.0
 NAME="xcb-util"

@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Xorg libXft library provide library\n routines that are used within all X Window applications.\n"
+DESCRIPTION=" The Xorg libXft library provide library routines that are used within all X Window applications."
 SECTION="x"
 VERSION=2.3.2
 NAME="libXft"

@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The libXau package contains a\n library implementing the X11 Authorization Protocol. This is useful\n for restricting client access to the display.\n"
+DESCRIPTION=" The libXau package contains a library implementing the X11 Authorization Protocol. This is useful for restricting client access to the display."
 SECTION="x"
 VERSION=1.0.8
 NAME="libXau"

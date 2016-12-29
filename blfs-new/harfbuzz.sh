@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The HarfBuzz package contains an\n OpenType text shaping engine.\n"
+DESCRIPTION=" The HarfBuzz package contains an OpenType text shaping engine."
 SECTION="general"
 VERSION=1.3.2
 NAME="harfbuzz"

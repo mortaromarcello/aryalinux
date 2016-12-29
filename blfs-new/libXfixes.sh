@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The Xorg libXfixes library provide library\n routines that are used within all X Window applications.\n"
+DESCRIPTION=" The Xorg libXfixes library provide library routines that are used within all X Window applications."
 SECTION="x"
 VERSION=5.0.3
 NAME="libXfixes"

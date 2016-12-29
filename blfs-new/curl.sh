@@ -10,7 +10,7 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION="\n The cURL package contains an\n utility and a library used for transferring files with URL syntax\n to any of the following protocols: FTP, FTPS, HTTP, HTTPS, SCP,\n SFTP, TFTP, TELNET, DICT, LDAP, LDAPS and FILE. Its ability to both\n download and upload files can be incorporated into other programs\n to support functions like streaming media.\n"
+DESCRIPTION=" The cURL package contains an utility and a library used for transferring files with URL syntax to any of the following protocols: FTP, FTPS, HTTP, HTTPS, SCP, SFTP, TFTP, TELNET, DICT, LDAP, LDAPS and FILE. Its ability to both download and upload files can be incorporated into other programs to support functions like streaming media."
 SECTION="basicnet"
 VERSION=7.50.3
 NAME="curl"
