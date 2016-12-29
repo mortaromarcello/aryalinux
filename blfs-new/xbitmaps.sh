@@ -89,9 +89,8 @@ function build() {
     fi
     export XORG_PREFIX=/usr
     export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
+    ./configure $XORG_CONFIG
     make DESTDIR=$PKG install
-
-./configure $XORG_CONFIG
 }
 
 function package() {
