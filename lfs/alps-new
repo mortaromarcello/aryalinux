@@ -183,6 +183,7 @@ class Package:
                     p = Package(pkg)
                     p.remove()
             print 'remove=>' + self.name
+            self.__removePkg()
         else:
             print 'Package ' + self.name + ' is not installed.'
     
