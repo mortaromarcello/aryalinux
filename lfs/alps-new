@@ -20,6 +20,14 @@ alpExecutable = sys.argv[0]
 basenameAlpExecutable = os.path.basename(alpExecutable)
 print basenameAlpExecutable
 
+def runCommand(cmd, actionName):
+    p = subprocess.Popen(cmd)
+    p.wait()
+    if p.returncode != 0:
+        print 'Error occured in performing operation: ' + actionName
+        print 'Aborting...'
+        exit()
+
 class Package:
     def __init__(self, name):
         self.name = name
@@ -175,7 +183,7 @@ class Package:
         print 'dependent=>'
         for i in self.dependent:
             print '\t' + i
-    
+    '''
     def runCommand(self, cmd, actionName):
         p = subprocess.Popen(cmd)
         p.wait()
@@ -183,25 +191,25 @@ class Package:
             print 'Error occured in performing operation: ' + actionName
             print 'Aborting...'
             exit()
-    
+    '''
     def __installPkg(self):
         print 'installPkg '  + self.name
         if not self.nameFileTgz:
             self.__buildPkg()
         if self.nameFileTgz:
             os.chdir('/')
-            self.runCommand(['tar', '-xzvf', self.nameFileTgz], 'install package')
-            self.runCommand(['sh', '/install/doinst.sh'], 'post install')
+            runCommand(['tar', '-xzvf', self.nameFileTgz], 'install package')
+            runCommand(['sh', '/install/doinst.sh'], 'post install')
             name = glob.glob('/install/*.files.gz')
-            self.runCommand(['cp', '-vf', name[0], self.configuration['INSTALLED_FILES_DIR']], 'copy installed files')
+            runCommand(['cp', '-vf', name[0], self.configuration['INSTALLED_FILES_DIR']], 'copy installed files')
             self.nameInstalledFilesGz = self.configuration['INSTALLED_FILES_DIR'] + '/' + name[0]
             name = glob.glob('/install/*.postremove')
-            self.runCommand(['cp', '-vf', name[0], self.configuration['INSTALLED_FILES_DIR']], 'copy postremove files')
+            runCommand(['cp', '-vf', name[0], self.configuration['INSTALLED_FILES_DIR']], 'copy postremove files')
             self.namePostRemoveScript = self.configuration['INSTALLED_FILES_DIR'] + '/' + name[0]
             name = glob.glob('/install/*.preremove')
-            self.runCommand(['cp', '-vf', name[0], self.configuration['INSTALLED_FILES_DIR']], 'copy preremove files')
+            runCommand(['cp', '-vf', name[0], self.configuration['INSTALLED_FILES_DIR']], 'copy preremove files')
             self.namePreRemoveScript = self.configuration['INSTALLED_FILES_DIR'] + '/' + name[0]
-            self.runCommand(['rm', '-rvf', '/install'], 'remove install')
+            runCommand(['rm', '-rvf', '/install'], 'remove install')
     
     def __buildPkg(self):
         print 'buildPkg ' + self.name
@@ -224,7 +232,7 @@ class Package:
         print 'removePkg ' + self.name
         removed_files = []
         if self.nameInstalledFilesGz:
-            self.runCommand(['gunzip', '-vkf', self.nameInstalledFilesGz], 'gunzip file')
+            runCommand(['gunzip', '-vkf', self.nameInstalledFilesGz], 'gunzip file')
             realName = glob.glob(self.configuration['INSTALLED_FILES_DIR'] + '/' + self.name + '*.files')
             try:
                 f = open(realName[0], 'r')
@@ -249,17 +257,17 @@ class Package:
                         print 'Not remove ' + line + ' directory.'
             f.close()
             if self.namePostRemoveScript:
-                self.runCommand(['sh', self.namePostRemoveScript], 'post remove script')
-                self.runCommand(['rm' , '-vf', self.namePostRemoveScript], 'post remove script')
+                runCommand(['sh', self.namePostRemoveScript], 'post remove script')
+                runCommand(['rm' , '-vf', self.namePostRemoveScript], 'post remove script')
                 self.namePostRemoveScript = ''
             if self.namePreRemoveScript:
-                self.runCommand(['sh', self.namePreRemoveScript], 'pre remove script')
-                self.runCommand(['rm' , '-vf', self.namePreRemoveScript], 'post remove script')
+                runCommand(['sh', self.namePreRemoveScript], 'pre remove script')
+                runCommand(['rm' , '-vf', self.namePreRemoveScript], 'post remove script')
                 self.namePreRemoveScript = ''
-                self.runCommand(['rm', '-vf', realName[0], self.nameInstalledFilesGz], 'remove temp file')
+                runCommand(['rm', '-vf', realName[0], self.nameInstalledFilesGz], 'remove temp file')
                 self.nameInstalledFilesGz = ''
             if self.nameFileTgz:
-                self.runCommand(['rm', '-vf', self.nameFileTgz], 'remove tgz file')
+                runCommand(['rm', '-vf', self.nameFileTgz], 'remove tgz file')
             else:
                 print self.name + ' is not installed.'
 
