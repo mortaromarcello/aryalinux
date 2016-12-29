@@ -583,7 +583,7 @@ def selfUpdateAction():
         response = urllib2.urlopen('http://github.com/mortaromarcello/aryalinux/raw/2016.11/lfs/' + basenameAlpExecutable)
         urllib.urlretrieve('http://github.com/mortaromarcello/aryalinux/raw/2016.11/lfs/' + basenameAlpExecutable, '/tmp/' + basenameAlpExecutable)
         os.chmod('/tmp/' + basenameAlpExecutable, 0755)
-        Package.runCommand(['sudo', 'mv', '-f', '/tmp/' + basenameAlpExecutable, alpExecutable], 'Moving ' + basenameAlpExecutable + ' from temp location to /usr/bin');
+        runCommand(['sudo', 'mv', '-f', '/tmp/' + basenameAlpExecutable, alpExecutable], 'Moving ' + basenameAlpExecutable + ' from temp location to /usr/bin');
         print basenameAlpExecutable + ' updated successfully'
     except Exception, e:
         print 'Error occured in updating ' + basenameAlpExecutable + '. ' + str(e)
