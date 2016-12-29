@@ -13,7 +13,7 @@ SOURCE_ONLY=n
 DESCRIPTION="The Xorg applications provide the expected applications available in previous X Window implementations."
 SECTION="x"
 VERSION=0.0.1
-NAME="x7app.sh"
+NAME="x7app"
 PKGNAME=$NAME
 REVISION=1
 
