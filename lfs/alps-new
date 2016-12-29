@@ -16,7 +16,9 @@ from shutil import move
 #traversed = []
 
 #alpsExecutable = '/usr/bin/alps'
-alpExecutable = '/usr/bin/' + sys.argv[0]
+alpExecutable = sys.argv[0]
+basenameAlpExecutable = os.path.basename(alpExecutable)
+print basenameAlpExecutable
 
 class Package:
     def __init__(self, name):
@@ -65,7 +67,11 @@ class Package:
         return conf
     
     def getRequired(self):
-        file = open(self.nameFile)
+        try:
+            file = open(self.nameFile)
+        except:
+            print 'Error occured opening ' + self.nameFile + '. Exit'
+            exit(1)
         data = file.read()
         lines = data.split('\n')
         dependencies = []
@@ -154,6 +160,21 @@ class Package:
             print 'remove=>' + self.name
         else:
             print 'Package ' + self.name + ' is not installed.'
+    
+    def show(self):
+        print 'name=>' + self.name
+        print 'nameFile =>' + self.nameFile
+        print 'nameFileTgz =>' + self.nameFileTgz
+        print 'nameInstalledFilesGz=>' + self.nameInstalledFilesGz
+        print 'required=>'
+        for i in self.required:
+            print '\t' + i
+        print 'recommended=>'
+        for i in self.recommended:
+            print '\t' + i
+        print 'dependent=>'
+        for i in self.dependent:
+            print '\t' + i
     
     def runCommand(self, cmd, actionName):
         p = subprocess.Popen(cmd)
@@ -543,23 +564,23 @@ def updateAction():
                     runCommand(["rm", "-rf", "/tmp/aryalinux-" + version], "Cleaning up")
                 except Exception:
                     pass
-
+'''
 def selfUpdateAction():
     try:
-        os.remove('/tmp/alps')
+        os.remove('/tmp/'+basenameAlpExecutable)
     except Exception:
         pass
     try:
         print 'Fetching the latest version of alps...'
-        response = urllib2.urlopen('http://github.com/mortaromarcello/aryalinux/raw/2016.11/lfs/alps')
-        urllib.urlretrieve('http://github.com/mortaromarcello/aryalinux/raw/2016.11/lfs/alps', '/tmp/alps')
-        os.chmod('/tmp/alps', 0755)
-        runCommand(['sudo', 'mv', '-f', '/tmp/alps', alpsExecutable], 'Moving alps from temp location to /usr/bin');
-        print 'alps updated successfully'
+        response = urllib2.urlopen('http://github.com/mortaromarcello/aryalinux/raw/2016.11/lfs/' + basenameAlpExecutable)
+        urllib.urlretrieve('http://github.com/mortaromarcello/aryalinux/raw/2016.11/lfs/' + basenameAlpExecutable, '/tmp/' + basenameAlpExecutable)
+        os.chmod('/tmp/' + basenameAlpExecutable, 0755)
+        Package.runCommand(['sudo', 'mv', '-f', '/tmp/' + basenameAlpExecutable, alpExecutable], 'Moving ' + basenameAlpExecutable + ' from temp location to /usr/bin');
+        print basenameAlpExecutable + ' updated successfully'
     except Exception, e:
-        print 'Error occured in updating alps. ' + str(e)
+        print 'Error occured in updating ' + basenameAlpExecutable + '. ' + str(e)
         print 'Aborting'
-
+'''
 def downloadSource():
     try:
         parts = sys.argv[2].split('/')
@@ -609,22 +630,6 @@ def showInstalledAction():
         print allinstalled
         pass
 
-#
-def installPkg(packageName):
-    os.chdir('/')
-    runCommand(['tar', '-xzvf', packageName], 'install package')
-    runCommand(['sh', '/install/doinst.sh'], 'post install')
-    name = glob.glob('/install/*.files.gz')
-    runCommand(['cp', '-vf', name[0], configuration['INSTALLED_FILES_DIR']], 'copy installed files')
-    name = glob.glob('/install/*.postremove')
-    runCommand(['cp', '-vf', name[0], configuration['INSTALLED_FILES_DIR']], 'copy postremove files')
-    name = glob.glob('/install/*.preremove')
-    runCommand(['cp', '-vf', name[0], configuration['INSTALLED_FILES_DIR']], 'copy preremove files')
-    runCommand(['rm', '-rvf', '/install'], 'remove install')
-#
-
-#configuration = loadConfig(None)
-#distConfig = loadConfig('/etc/lsb-release')
 '''
 
 #if len(sys.argv) < 2:
@@ -646,18 +651,22 @@ for i in pkgs:
     print i.nameInstalledFilesGz
     print i.namePostRemoveScript
     print i.namePreRemoveScript
-    
-if sys.argv[1] == 'install':
-    for i in pkgs:
-        i.install()
 
-if sys.argv[1] == 'build':
-    for i in pkgs:
-        i.build()
-
-if sys.argv[1] == 'remove':
-    for i in pkgs:
-        i.remove()
+if len(sys.argv) > 1:
+    if sys.argv[1] == 'install':
+        for i in pkgs:
+            i.install()
+    if sys.argv[1] == 'build':
+        for i in pkgs:
+            i.build()
+    if sys.argv[1] == 'remove':
+        for i in pkgs:
+            i.remove()
+    if sys.argv[1] == 'show':
+        for i in pkgs:
+            i.show()
+    if sys.argv[1] == 'selfupdate':
+        selfUpdateAction()
 '''
 if sys.argv[1] == 'build':
     loadInstalled()
