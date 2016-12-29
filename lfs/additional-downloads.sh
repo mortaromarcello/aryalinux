@@ -66,7 +66,7 @@ wget -nc http://downloads.sourceforge.net/infozip/unzip60.tar.gz
 set +e
 
 cp -v $GIT_DIR/lfs/functions ./
-cp -v $GIT_DIR/lfs/alps ./
+cp -v $GIT_DIR/lfs/alps-new ./
 cp -v $GIT_DIR/lfs/alps.conf ./
 #cp -v $GIT_DIR/lfs/makepkg.sh ./
 #cp -v $GIT_DIR/lfs/makepackage.sh ./
