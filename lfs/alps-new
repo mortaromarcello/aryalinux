@@ -417,40 +417,46 @@ def selfUpdateAction():
         print 'Error occured in updating ' + basenameAlpExecutable + '. ' + str(e)
         print 'Aborting'
 
-pkgs = []
-for i in range(2, len(sys.argv)):
-    pkgs.append(Package(sys.argv[i]))
+class Main:
+    def __init__(self, args):
+        self.args = sys.argv
+        self.pkgs = []
+    def parseargs(self):
+        for i in range(2, len(self.args)):
+            self.pkgs.append(Package(self.args[i]))
+        if len(self.args) < 2:
+            help()
+            exit()
+        if self.args[1] == 'install':
+            for i in self.pkgs:
+                i.install()
+                exit()
+        if self.args[1] == 'build':
+            for i in self.pkgs:
+                i.build()
+                exit()
+        if self.args[1] == 'remove':
+            for i in self.pkgs:
+                i.remove()
+                exit()
+        if self.args[1] == 'show':
+            for i in self.pkgs:
+                i.show()
+                exit()
+        if self.args[1] == 'selfupdate':
+            selfUpdateAction()
+            exit()
+        if self.args[1] == 'updatescripts':
+            updateAction()
+            exit()
+        if self.args[1] == '--help' or self.args[1] == 'help':
+            help()
+            exit()
+        print 'Invalid command ' + self.args[1] + '\n'
+        help()
+    
+    def main(self):
+        self.parseargs()
 
-if len(sys.argv) < 2:
-    help()
-    exit()
-
-
-if sys.argv[1] == 'install':
-    for i in pkgs:
-        i.install()
-        exit()
-if sys.argv[1] == 'build':
-    for i in pkgs:
-        i.build()
-        exit()
-if sys.argv[1] == 'remove':
-    for i in pkgs:
-        i.remove()
-        exit()
-if sys.argv[1] == 'show':
-    for i in pkgs:
-        i.show()
-        exit()
-if sys.argv[1] == 'selfupdate':
-    selfUpdateAction()
-    exit()
-if sys.argv[1] == 'updatescripts':
-    updateAction()
-    exit()
-if sys.argv[1] == '--help' or sys.argv[1] == 'help':
-    help()
-    exit()
-print 'Invalid command ' + sys.argv[1] + '\n'
-help()
-
+if __name__ == "__main__":
+    Main.main()
