@@ -26,11 +26,12 @@ class Package:
         self.configPath = '/etc/alps/alps.conf'
         self.configuration = self.loadConfig()
         self.nameFile = self.configuration['SCRIPTS_DIR'] + '/' + self.name + '.sh'
-        self.properties = {'DESCRIPTION':'','SECTION':'', 'VERSION':'', 'REVISION':''}
+        self.properties = {'DESCRIPTION':'','SECTION':'', 'VERSION':'', 'REVISION':'', 'URL':''}
         self.properties['DESCRIPTION'] = self.getDescription()
         self.properties['SECTION'] = self.getDescription()
         self.properties['VERSION'] = self.getDescription()
         self.properties['REVISION'] = self.getDescription()
+        self.properties['URL'] = self.getUrl()
         tmp = glob.glob(self.configuration['TGZ_DIR'] + '/' + self.name + '*.tgz')
         if tmp:
             self.nameFileTgz = tmp[0]
@@ -127,6 +128,21 @@ class Package:
         lines = data.split('\n')
         for line in lines:
             if line.startswith('REVISION'):
+                fields = line.split('=')
+                response = fields[1]
+        return response
+    
+    def getUrl(self):
+        try:
+            file = open(self.nameFile)
+        except:
+            print 'Error occured opening ' + self.nameFile + '. Exit'
+            exit(1)
+        response = ''
+        data = file.read()
+        lines = data.split('\n')
+        for line in lines:
+            if line.startswith('URL'):
                 fields = line.split('=')
                 response = fields[1]
         return response
@@ -253,6 +269,7 @@ class Package:
         print 'section=>' + self.properties['SECTION']
         print 'version=>' + self.properties['VERSION']
         print 'revision=>' + self.properties['REVISION']
+        print 'url=>' + self.properties['URL']
     
     def __installPkg(self):
         print 'installPkg '  + self.name
