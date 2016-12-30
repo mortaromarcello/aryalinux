@@ -8,6 +8,7 @@ import os
 import glob
 from shutil import copy2
 from shutil import move
+#import argparse
 
 alpExecutable = sys.argv[0]
 basenameAlpExecutable = os.path.basename(alpExecutable)
@@ -421,7 +422,20 @@ class Main:
     def __init__(self, args):
         self.args = sys.argv
         self.pkgs = []
+        #self.parser = argparse.ArgumentParser()
+        #self.subparsers = parser.add_subparsers()
+        #self.parser_install = subparsers.add_parser('install')
+        #self.parser_install.add_argument('args', nargs=argparse.REMAINDER)
+        #self.parser_install.add_argument('--verbose', action='store_true')
+        #self.parser_build = subparsers.add_parser('build')
+        #self.parser_build.add_argument('args', nargs=argparse.REMAINDER)
+        #self.parser_remove = subparsers.add_parser('remove')
+        #self.parser_remove.add_argument('args', nargs=argparse.REMAINDER)
+        #self.namespace = self.parser.parse_args()
     def parseargs(self):
+        '''
+        
+        '''
         for i in range(2, len(self.args)):
             self.pkgs.append(Package(self.args[i]))
         if len(self.args) < 2:
