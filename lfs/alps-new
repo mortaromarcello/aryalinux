@@ -28,6 +28,9 @@ class Package:
         self.nameFile = self.configuration['SCRIPTS_DIR'] + '/' + self.name + '.sh'
         self.properties = {'DESCRIPTION':'','SECTION':'', 'VERSION':'', 'REVISION':''}
         self.properties['DESCRIPTION'] = self.getDescription()
+        self.properties['SECTION'] = self.getDescription()
+        self.properties['VERSION'] = self.getDescription()
+        self.properties['REVISION'] = self.getDescription()
         tmp = glob.glob(self.configuration['TGZ_DIR'] + '/' + self.name + '*.tgz')
         if tmp:
             self.nameFileTgz = tmp[0]
@@ -79,6 +82,51 @@ class Package:
         lines = data.split('\n')
         for line in lines:
             if line.startswith('DESCRIPTION'):
+                fields = line.split('=')
+                response = fields[1]
+        return response
+    
+    def getSection(self):
+        try:
+            file = open(self.nameFile)
+        except:
+            print 'Error occured opening ' + self.nameFile + '. Exit'
+            exit(1)
+        response = ''
+        data = file.read()
+        lines = data.split('\n')
+        for line in lines:
+            if line.startswith('SECTION'):
+                fields = line.split('=')
+                response = fields[1]
+        return response
+    
+    def getVersion(self):
+        try:
+            file = open(self.nameFile)
+        except:
+            print 'Error occured opening ' + self.nameFile + '. Exit'
+            exit(1)
+        response = ''
+        data = file.read()
+        lines = data.split('\n')
+        for line in lines:
+            if line.startswith('VERSION'):
+                fields = line.split('=')
+                response = fields[1]
+        return response
+    
+    def getRevision(self):
+        try:
+            file = open(self.nameFile)
+        except:
+            print 'Error occured opening ' + self.nameFile + '. Exit'
+            exit(1)
+        response = ''
+        data = file.read()
+        lines = data.split('\n')
+        for line in lines:
+            if line.startswith('REVISION'):
                 fields = line.split('=')
                 response = fields[1]
         return response
@@ -202,6 +250,9 @@ class Package:
         for i in self.dependent:
             print '\t' + i
         print 'description=>' + self.properties['DESCRIPTION']
+        print 'section=>' + self.properties['SECTION']
+        print 'version=>' + self.properties['VERSION']
+        print 'revision=>' + self.properties['REVISION']
     
     def __installPkg(self):
         print 'installPkg '  + self.name
@@ -228,7 +279,7 @@ class Package:
         if glob.glob(self.configuration['TGZ_DIR'] + '/' + self.name + '*.tgz'):
             print self.name + ' already build'
             return
-        process = subprocess.Popen([self.configuration['SCRIPTS_DIR'] + '/' + self.name + '.sh | tee -a ' + self.configuration['LOGS_DIR'] + '/' + self.name + '.log'], shell=True)
+        process = subprocess.Popen([self.configuration['SCRIPTS_DIR'] + '/' + self.name + '.sh | tee -a |gzip > ' + self.configuration['LOGS_DIR'] + '/' + self.name + '.log.gz'], shell=True)
         returncode = process.wait()
         if returncode != 0:
             print 'Error occured while building/installing ' + self.name + '. Aborting.'
@@ -353,19 +404,6 @@ pkgs = []
 for i in range(2, len(sys.argv)):
     pkgs.append(Package(sys.argv[i]))
 
-for i in pkgs:
-    print i.name
-    print i.nameFile
-    print i.required
-    print i.recommended
-    print i.dependent
-    print i.optional
-    print i.installed
-    print i.nameFileTgz
-    print i.nameInstalledFilesGz
-    print i.namePostRemoveScript
-    print i.namePreRemoveScript
-
 if len(sys.argv) < 2:
     help()
     exit()
@@ -374,66 +412,28 @@ if len(sys.argv) < 2:
 if sys.argv[1] == 'install':
     for i in pkgs:
         i.install()
+        exit()
 if sys.argv[1] == 'build':
     for i in pkgs:
         i.build()
+        exit()
 if sys.argv[1] == 'remove':
     for i in pkgs:
         i.remove()
+        exit()
 if sys.argv[1] == 'show':
     for i in pkgs:
         i.show()
-if sys.argv[1] == 'selfupdate':
-    selfUpdateAction()
-if sys.argv[1] == 'updatescripts':
-    updateAction()
-'''
-if sys.argv[1] == 'build':
-    loadInstalled()
-    buildAction()
-    exit()
-if sys.argv[1] == 'install':
-    loadInstalled()
-    installAction()
-    exit()
-if sys.argv[1] == 'remove':
-    loadInstalled()
-    removeAction()
-    exit()
-if sys.argv[1] == 'install-no-prompt':
-        loadInstalled()
-        installAction(False)
         exit()
-if sys.argv[1] == 'forceinstall':
-    forceInstallAction()
-    exit()
-if sys.argv[1] == 'clean':
-    cleanAction()
-    exit()
-if sys.argv[1] == 'updatescripts':
-    updateAction()
-    exit()
 if sys.argv[1] == 'selfupdate':
     selfUpdateAction()
     exit()
-if sys.argv[1] == 'showall':
-        if len(sys.argv) == 2:
-                showAllAction()
-        else:
-                showMatchingAction()
-        exit()
-if sys.argv[1] == 'showinstalled':
-        showInstalledAction()
-        exit()
-if sys.argv[1] == 'src':
-    downloadSource()
-    exit()
-if sys.argv[1] == 'reinstall':
-    reinstall()
+if sys.argv[1] == 'updatescripts':
+    updateAction()
     exit()
 if sys.argv[1] == '--help' or sys.argv[1] == 'help':
     help()
     exit()
 print 'Invalid command ' + sys.argv[1] + '\n'
 help()
-'''
+
