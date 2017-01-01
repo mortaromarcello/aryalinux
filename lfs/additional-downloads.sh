@@ -32,6 +32,7 @@ wget -nc http://www.sudo.ws/dist/sudo-1.8.16.tar.gz
 wget -nc ftp://sourceware.org/pub/libffi/libffi-3.2.1.tar.gz
 wget -nc https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tar.xz
 wget -nc https://ftp.dlitz.net/pub/dlitz/crypto/pycrypto/pycrypto-2.6.1.tar.gz
+wget -nc https://pypi.python.org/packages/7a/00/c14926d8232b36b08218067bcd5853caefb4737cda3f0a47437151344792/click-6.6.tar.gz
 wget -nc http://anduin.linuxfromscratch.org/sources/other/certdata.txt
 wget -nc http://www.openssl.org/source/openssl-1.0.2j.tar.gz
 wget -nc http://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-4.06.tar.xz
