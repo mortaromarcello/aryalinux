@@ -60,7 +60,7 @@ class Package:
             self.installed = True
         else:
             self.installed = False
-    
+
     def loadConfig(self):
         conf = {}
         file = open(self.configPath, 'r')
@@ -71,7 +71,7 @@ class Package:
             if len(parts) == 2:
                 conf[parts[0]] = parts[1].replace('"', '');
         return conf
-    
+
     def getDescription(self):
         try:
             file = open(self.nameFile)
@@ -86,7 +86,7 @@ class Package:
                 fields = line.split('=')
                 response = fields[1]
         return response
-    
+
     def getSection(self):
         try:
             file = open(self.nameFile)
@@ -101,7 +101,7 @@ class Package:
                 fields = line.split('=')
                 response = fields[1]
         return response
-    
+
     def getVersion(self):
         try:
             file = open(self.nameFile)
@@ -116,7 +116,7 @@ class Package:
                 fields = line.split('=')
                 response = fields[1]
         return response
-    
+
     def getRevision(self):
         try:
             file = open(self.nameFile)
@@ -131,7 +131,7 @@ class Package:
                 fields = line.split('=')
                 response = fields[1]
         return response
-    
+
     def getUrl(self):
         try:
             file = open(self.nameFile)
@@ -146,7 +146,7 @@ class Package:
                 fields = line.split('=')
                 response = fields[1]
         return response
-    
+
     def getRequired(self):
         try:
             file = open(self.nameFile)
@@ -161,7 +161,7 @@ class Package:
                 if line.replace('#REQ:', '') != '':
                     dependencies.append(line.replace('#REQ:', ''))
         return dependencies
-    
+
     def getRecommended(self):
         try:
             file = open(self.nameFile)
@@ -176,7 +176,7 @@ class Package:
                 if line.replace('#REC:', '') != '':
                     dependencies.append(line.replace('#REC:', ''))
         return dependencies
-    
+
     def getOptional(self):
         try:
             file = open(self.nameFile)
@@ -191,7 +191,7 @@ class Package:
                 if line.replace('#OPT:', '') != '':
                     dependencies.append(line.replace('#OPT:', ''))
         return dependencies
-    
+
     def getDependent(self):
         listScripts = glob.glob(self.configuration['SCRIPTS_DIR'] + '/*')
         packages = []
@@ -212,7 +212,7 @@ class Package:
                             packages.append(os.path.splitext(os.path.basename(package))[0])
             file.close()
         return packages
-    
+
     def install(self):
         if not self.installed:
             if self.required:
@@ -227,7 +227,7 @@ class Package:
             self.__installPkg()
         else:
             print 'Package ' + self.name + ' is already installed.'
-    
+
     def build(self):
         if self.required:
             for pkg in self.required:
@@ -239,7 +239,7 @@ class Package:
                 p.install()
         print 'build=>' + self.name
         self.__buildPkg()
-    
+
     def remove(self):
         if self.installed:
             if self.dependent:
@@ -250,7 +250,7 @@ class Package:
             self.__removePkg()
         else:
             print 'Package ' + self.name + ' is not installed.'
-    
+
     def show(self):
         print 'name=>' + self.name
         print 'nameFile =>' + self.nameFile
@@ -270,7 +270,7 @@ class Package:
         print 'version=>' + self.properties['VERSION']
         print 'revision=>' + self.properties['REVISION']
         print 'url=>' + self.properties['URL']
-        
+
     def getNeededPackages(self):
         packages = []
         neededs = []
@@ -280,10 +280,10 @@ class Package:
             for i in neededs:
                 pack = Package(i)
                 if not pack.installed:
-                    packages.expand(pack.getNeededPackages()
-                    packages.append(i)
+                    packages.expand(pack.getNeededPackages())
+                packages.append(i)
         return packages
-    
+
     def __installPkg(self):
         print 'installPkg '  + self.name
         if not self.nameFileTgz:
@@ -302,7 +302,7 @@ class Package:
             runCommand(['cp', '-vf', name[0], self.configuration['INSTALLED_FILES_DIR']], 'copy preremove files')
             self.namePreRemoveScript = self.configuration['INSTALLED_FILES_DIR'] + '/' + name[0]
             runCommand(['rm', '-rvf', '/install'], 'remove install')
-    
+
     def __buildPkg(self):
         print 'buildPkg ' + self.name
         os.chdir('/tmp')
@@ -319,7 +319,7 @@ class Package:
             print name
             move(name[0], self.configuration['TGZ_DIR'] + '/')
             self.nameFileTgz = self.configuration['TGZ_DIR'] + '/' + os.path.basename(name[0])
-    
+
     def __removePkg(self):
         print 'removePkg ' + self.name
         removed_files = []
@@ -431,34 +431,42 @@ def selfUpdateAction():
         print 'Aborting'
 
 class Main:
-    def __init__(self, args):
+    def __init__(self):
         self.nameExecutable = os.path.basename(sys.argv[0])
         self.args = sys.argv
-        self.args.remove(self.nameExecutable)
-        self.command = getCommand()
-        self.options = getOptions()
-        self.params = getParams()
-        self.pkgs = setPkg()
-        
+        self.args.remove(sys.argv[0])
+        self.command = self.getCommand()
+        self.options = self.getOptions()
+        self.params = self.getParams()
+        self.pkgs = self.setPkg()
+
     def getCommand(self):
+        ret = ''
         for i in self.args:
-            if i == 'build' or i = 'install' or i == 'remove' or i == 'show' or i == 'selfupdate' or i == 'updatescripts':
-                self.command = i
-    
+            if i == 'build' or i == 'install' or i == 'remove' or i == 'show' or i == 'selfupdate' or i == 'updatescripts':
+                ret = i
+        return ret
+
     def getOptions(self):
-        for i in args:
+        ret = []
+        for i in self.args:
             if i.startswith("--") or i.startswith("-"):
-            options.append(i)
-    
+                ret.append(i)
+        return ret
+
     def getParams(self):
+        ret = []
         for i in self.args:
             if  i != 'install' and i != 'build' and i != 'remove' and i != 'show' and i != 'selfupdate' and i != 'updatescripts':
-                params.append(i)
-    
+                ret.append(i)
+        return ret
+
     def setPkg(self):
-        for i self.params:
-            self.pkgs.append(Package(i))
-    
+        ret = []
+        for i in self.params:
+            ret.append(Package(i))
+        return ret
+
     def parseargs(self):
         if not self.command:
             help()
@@ -490,9 +498,10 @@ class Main:
             exit()
         print 'Invalid command ' + self.args[1] + '\n'
         help()
-    
+
     def main(self):
         self.parseargs()
 
 if __name__ == "__main__":
-    Main.main()
+    main = Main()
+    main.main()
