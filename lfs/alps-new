@@ -8,7 +8,6 @@ import os
 import glob
 from shutil import copy2
 from shutil import move
-#import argparse
 
 alpExecutable = sys.argv[0]
 basenameAlpExecutable = os.path.basename(alpExecutable)
@@ -271,6 +270,19 @@ class Package:
         print 'version=>' + self.properties['VERSION']
         print 'revision=>' + self.properties['REVISION']
         print 'url=>' + self.properties['URL']
+        
+    def getNeededPackages(self):
+        packages = []
+        neededs = []
+        neededs.expand(self.required)
+        neededs.expand(self.recommended)
+        if not self.installed:
+            for i in neededs:
+                pack = Package(i)
+                if not pack.installed:
+                    packages.expand(pack.getNeededPackages()
+                    packages.append(i)
+        return packages
     
     def __installPkg(self):
         print 'installPkg '  + self.name
@@ -420,47 +432,57 @@ def selfUpdateAction():
 
 class Main:
     def __init__(self, args):
+        self.nameExecutable = os.path.basename(sys.argv[0])
         self.args = sys.argv
-        self.pkgs = []
-        #self.parser = argparse.ArgumentParser()
-        #self.subparsers = parser.add_subparsers()
-        #self.parser_install = subparsers.add_parser('install')
-        #self.parser_install.add_argument('args', nargs=argparse.REMAINDER)
-        #self.parser_install.add_argument('--verbose', action='store_true')
-        #self.parser_build = subparsers.add_parser('build')
-        #self.parser_build.add_argument('args', nargs=argparse.REMAINDER)
-        #self.parser_remove = subparsers.add_parser('remove')
-        #self.parser_remove.add_argument('args', nargs=argparse.REMAINDER)
-        #self.namespace = self.parser.parse_args()
-    def parseargs(self):
-        '''
+        self.args.remove(self.nameExecutable)
+        self.command = getCommand()
+        self.options = getOptions()
+        self.params = getParams()
+        self.pkgs = setPkg()
         
-        '''
-        for i in range(2, len(self.args)):
-            self.pkgs.append(Package(self.args[i]))
-        if len(self.args) < 2:
+    def getCommand(self):
+        for i in self.args:
+            if i == 'build' or i = 'install' or i == 'remove' or i == 'show' or i == 'selfupdate' or i == 'updatescripts':
+                self.command = i
+    
+    def getOptions(self):
+        for i in args:
+            if i.startswith("--") or i.startswith("-"):
+            options.append(i)
+    
+    def getParams(self):
+        for i in self.args:
+            if  i != 'install' and i != 'build' and i != 'remove' and i != 'show' and i != 'selfupdate' and i != 'updatescripts':
+                params.append(i)
+    
+    def setPkg(self):
+        for i self.params:
+            self.pkgs.append(Package(i))
+    
+    def parseargs(self):
+        if not self.command:
             help()
             exit()
-        if self.args[1] == 'install':
+        if self.command == 'install':
             for i in self.pkgs:
                 i.install()
                 exit()
-        if self.args[1] == 'build':
+        if self.command == 'build':
             for i in self.pkgs:
                 i.build()
                 exit()
-        if self.args[1] == 'remove':
+        if self.command == 'remove':
             for i in self.pkgs:
                 i.remove()
                 exit()
-        if self.args[1] == 'show':
+        if self.command == 'show':
             for i in self.pkgs:
                 i.show()
                 exit()
-        if self.args[1] == 'selfupdate':
+        if self.command == 'selfupdate':
             selfUpdateAction()
             exit()
-        if self.args[1] == 'updatescripts':
+        if self.command == 'updatescripts':
             updateAction()
             exit()
         if self.args[1] == '--help' or self.args[1] == 'help':
