@@ -28,9 +28,9 @@ class Package:
         self.nameFile = self.configuration['SCRIPTS_DIR'] + '/' + self.name + '.sh'
         self.properties = {'DESCRIPTION':'','SECTION':'', 'VERSION':'', 'REVISION':'', 'URL':''}
         self.properties['DESCRIPTION'] = self.getDescription()
-        self.properties['SECTION'] = self.getDescription()
-        self.properties['VERSION'] = self.getDescription()
-        self.properties['REVISION'] = self.getDescription()
+        self.properties['SECTION'] = self.getSection()
+        self.properties['VERSION'] = self.getVersion()
+        self.properties['REVISION'] = self.getRevision()
         self.properties['URL'] = self.getUrl()
         tmp = glob.glob(self.configuration['TGZ_DIR'] + '/' + self.name + '*.tgz')
         if tmp:
