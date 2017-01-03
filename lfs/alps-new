@@ -213,7 +213,7 @@ class Package:
             file.close()
         return packages
 
-    def install(self, prompt=True):
+    def install(self, prompt):
         neededPackages = self.getNeededPackages()
         if not self.installed:
             if prompt:
@@ -223,13 +223,13 @@ class Package:
                 if resp.lower() == 'y':
                     for pkg in neededPackages:
                         p = Package(pkg)
-                        p.install()
+                        p.install(prompt)
                 else:
                     exit()
             else:
                 for pkg in neededPackages:
                     p = Package(pkg)
-                    p.install()
+                    p.install(prompt)
             '''
             if self.required:
                 for pkg in self.required:
@@ -245,7 +245,7 @@ class Package:
         else:
             print 'Package ' + self.name + ' is already installed.'
 
-    def build(self, prompt=True):
+    def build(self, prompt):
         neededPackages = self.getNeededPackages()
         if neededPackages:
             if prompt:
@@ -255,13 +255,13 @@ class Package:
                 if resp.lower() == 'y':
                     for pkg in neededPackages:
                         p = Package(pkg)
-                        p.install()
+                        p.install(prompt)
                 else:
                     exit()
             else:
                 for pkg in neededPackages:
                     p = Package(pkg)
-                    p.install()
+                    p.install(prompt)
             '''
             for pkg in self.required:
                 p = Package(pkg)
@@ -274,7 +274,7 @@ class Package:
         print 'build=>' + self.name
         self.__buildPkg()
 
-    def remove(self,prompt=True):
+    def remove(self,prompt):
         if self.installed:
             neededPackages = self.getNeededPackages()
             if prompt:
@@ -503,14 +503,14 @@ class Main:
     def getOptions(self):
         ret = []
         for i in self.args:
-            if i.startswith("--") or i.startswith("-"):
+            if i.startswith("-"):
                 ret.append(i)
         return ret
 
     def getParams(self):
         ret = []
         for i in self.args:
-            if  i != 'install' and i != 'build' and i != 'remove' and i != 'show' and i != 'selfupdate' and i != 'updatescripts':
+            if  i != 'install' and i != 'build' and i != 'remove' and i != 'show' and i != 'selfupdate' and i != 'updatescripts' and not i.startswith("-"):
                 ret.append(i)
         return ret
 
@@ -524,9 +524,15 @@ class Main:
         if not self.command:
             help()
             exit()
+        print self.command
+        print self.options
+        print self.params
+        print self.prompt
         for opt in self.options:
+            print opt
             if opt == '-y' or opt == '--yes':
                 self.prompt = False
+            print self.prompt
         if self.command == 'install':
             for i in self.pkgs:
                 i.install(self.prompt)
