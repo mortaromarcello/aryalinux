@@ -97,7 +97,7 @@ function build() {
 }
 
 function package() {
-    strip -s $PKG/usr/bin/*
+    strip -s $PKG/usr/bin/g-ir-(compiler,generate,inspect)
     gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
