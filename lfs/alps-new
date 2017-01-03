@@ -219,13 +219,13 @@ class Package:
             if prompt:
                 if neededPackages:
                     print 'The following packages would be installed: ' + " ".join(neededPackages)
-                resp = raw_input('Are you sure? (y/N) ')
-                if resp.lower() == 'y':
-                    for pkg in neededPackages:
-                        p = Package(pkg)
-                        p.install(prompt)
-                else:
-                    exit()
+                    resp = raw_input('Are you sure? (y/N) ')
+                    if resp.lower() == 'y':
+                        for pkg in neededPackages:
+                            p = Package(pkg)
+                            p.install(False)
+                    else:
+                        exit()
             else:
                 for pkg in neededPackages:
                     p = Package(pkg)
@@ -241,13 +241,13 @@ class Package:
             if prompt:
                 if neededPackages:
                     print 'The following packages would be installed: ' + " ".join(neededPackages)
-                resp = raw_input('Are you sure? (y/N) ')
-                if resp.lower() == 'y':
-                    for pkg in neededPackages:
-                        p = Package(pkg)
-                        p.install(prompt)
-                else:
-                    exit()
+                    resp = raw_input('Are you sure? (y/N) ')
+                    if resp.lower() == 'y':
+                        for pkg in neededPackages:
+                            p = Package(pkg)
+                            p.install(prompt)
+                    else:
+                        exit()
             else:
                 for pkg in neededPackages:
                     p = Package(pkg)
@@ -261,19 +261,19 @@ class Package:
             if prompt:
                 if neededPackages:
                     print 'The following packages would be installed: ' + " ".join(neededPackages)
-                resp = raw_input('Are you sure? (y/N) ')
-                if resp.lower() == 'y':
-                    for pkg in neededPackages:
-                        p = Package(pkg)
-                        p.install()
-                else:
-                    exit()
+                    resp = raw_input('Are you sure? (y/N) ')
+                    if resp.lower() == 'y':
+                        for pkg in neededPackages:
+                            p = Package(pkg)
+                            p.install(False)
+                    else:
+                        exit()
             else:
                 for pkg in neededPackages:
                     p = Package(pkg)
-                    p.install()
+                    p.install(prompt)
             print 'remove=>' + self.name
-            self.__removePkg(prompt)
+            self.__removePkg()
         else:
             print 'Package ' + self.name + ' is not installed.'
 
