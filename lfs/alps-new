@@ -523,15 +523,15 @@ class Main:
             exit()
         if self.command == 'install':
             for i in self.pkgs:
-                i.install(prompt)
+                i.install(self.prompt)
                 exit()
         if self.command == 'build':
             for i in self.pkgs:
-                i.build(prompt)
+                i.build(self.prompt)
                 exit()
         if self.command == 'remove':
             for i in self.pkgs:
-                i.remove(prompt)
+                i.remove(self.prompt)
                 exit()
         if self.command == 'show':
             for i in self.pkgs:
