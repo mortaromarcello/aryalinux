@@ -17,9 +17,14 @@ NAME="gdk-pixbuf"
 PKGNAME=$NAME
 REVISION=1
 
-#REQ:
-#REC:
-#OPT:
+#REQ:glib2
+#REQ:libjpeg
+#REQ:libpng
+#REC:libtiff
+#REC:x7lib
+#OPT:gobject-introspection
+#OPT:jasper
+#OPT:gtk-doc
 
 ARCH=`uname -m`
 
