@@ -488,6 +488,7 @@ class Main:
         self.options = self.getOptions()
         self.params = self.getParams()
         self.pkgs = self.setPkg()
+        self.prompt = True
 
     def getCommand(self):
         ret = ''
@@ -522,15 +523,15 @@ class Main:
             exit()
         if self.command == 'install':
             for i in self.pkgs:
-                i.install()
+                i.install(prompt)
                 exit()
         if self.command == 'build':
             for i in self.pkgs:
-                i.build()
+                i.build(prompt)
                 exit()
         if self.command == 'remove':
             for i in self.pkgs:
-                i.remove()
+                i.remove(prompt)
                 exit()
         if self.command == 'show':
             for i in self.pkgs:
