@@ -270,19 +270,19 @@ class Package:
         print 'version=>' + self.properties['VERSION']
         print 'revision=>' + self.properties['REVISION']
         print 'url=>' + self.properties['URL']
-        print 'needed packages=>' + " ".join(getNeededPackages())
+        print 'needed packages=>' + " ".join(self.getNeededPackages())
 
     def getNeededPackages(self):
         packages = []
         neededs = []
-        neededs.expand(self.required)
-        neededs.expand(self.recommended)
+        neededs.extend(self.required)
+        neededs.extend(self.recommended)
         if not self.installed:
             for i in neededs:
                 pack = Package(i)
                 if not pack.installed:
-                    packages.expand(pack.getNeededPackages())
-                packages.append(i)
+                    packages.append(i)
+                    packages.extend(pack.getNeededPackages())
         return packages
 
     def __installPkg(self):
