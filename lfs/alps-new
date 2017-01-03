@@ -524,6 +524,9 @@ class Main:
         if not self.command:
             help()
             exit()
+        for opt in self.options:
+            if opt == '-y' or opt == '--yes':
+                self.prompt = False
         if self.command == 'install':
             for i in self.pkgs:
                 i.install(self.prompt)
