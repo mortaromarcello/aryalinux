@@ -230,16 +230,6 @@ class Package:
                 for pkg in neededPackages:
                     p = Package(pkg)
                     p.install(prompt)
-            '''
-            if self.required:
-                for pkg in self.required:
-                    p = Package(pkg)
-                    p.install()
-            if self.recommended:
-                for pkg in self.recommended:
-                    p = Package(pkg)
-                    p.install()
-            '''
             print 'install=>' + self.name
             self.__installPkg()
         else:
@@ -262,15 +252,6 @@ class Package:
                 for pkg in neededPackages:
                     p = Package(pkg)
                     p.install(prompt)
-            '''
-            for pkg in self.required:
-                p = Package(pkg)
-                p.install()
-        if self.recommended:
-            for pkg in self.recommended:
-                p = Package(pkg)
-                p.install()
-            '''
         print 'build=>' + self.name
         self.__buildPkg()
 
@@ -291,12 +272,6 @@ class Package:
                 for pkg in neededPackages:
                     p = Package(pkg)
                     p.install()
-            '''
-            if self.dependent:
-                for pkg in self.dependent:
-                    p = Package(pkg)
-                    p.remove()
-            '''
             print 'remove=>' + self.name
             self.__removePkg(prompt)
         else:
@@ -524,15 +499,9 @@ class Main:
         if not self.command:
             help()
             exit()
-        print self.command
-        print self.options
-        print self.params
-        print self.prompt
         for opt in self.options:
-            print opt
             if opt == '-y' or opt == '--yes':
                 self.prompt = False
-            print self.prompt
         if self.command == 'install':
             for i in self.pkgs:
                 i.install(self.prompt)
