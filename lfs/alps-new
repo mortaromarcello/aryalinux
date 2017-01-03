@@ -140,7 +140,7 @@ class Package:
             exit(1)
         response = ''
         data = file.read()
-        lines = data.split('\n')
+        lines = data.split()
         for line in lines:
             if line.startswith('URL'):
                 fields = line.split('=')
