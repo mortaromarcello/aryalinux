@@ -87,14 +87,15 @@ function build() {
         cd $DIRECTORY
     fi
     tar -xf ../nasm-2.12.02-xdoc.tar.xz --strip-components=1
-    ./configure --prefix=/usr &&
+    ./configure --prefix=$PKG/usr &&
     make "-j`nproc`" || make
-    make DESTDIR=$PKG install
+    make install
     install -m755 -d $PKG/usr/share/doc/nasm-2.12.02/html &&
     cp -v doc/html/*.html $PKG/usr/share/doc/nasm-2.12.02/html &&
     cp -v doc/*.{txt,ps,pdf} $PKG/usr/share/doc/nasm-2.12.02 &&
+    install -m755 -d $PKG/usr/share/info &&
     cp -v doc/info/* $PKG/usr/share/info &&
-    install-info /usr/share/info/nasm.info $PKG/usr/share/info/dir
+    install-info $PKG/usr/share/info/nasm.info $PKG/usr/share/info/dir
 }
 
 function package() {
