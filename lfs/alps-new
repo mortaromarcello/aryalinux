@@ -270,6 +270,7 @@ class Package:
         print 'version=>' + self.properties['VERSION']
         print 'revision=>' + self.properties['REVISION']
         print 'url=>' + self.properties['URL']
+        print 'needed packages=>' + " ".join(getNeededPackages())
 
     def getNeededPackages(self):
         packages = []
