@@ -221,13 +221,13 @@ class Package:
                 resp = raw_input('Are you sure? (y/N) ')
                 if resp.lower() == 'y':
                     for pkg in neededPackages:
-                        p = package(pkg)
+                        p = Package(pkg)
                         p.install()
-                else
+                else:
                     exit()
             else:
                 for pkg in neededPackages:
-                    p = package(pkg)
+                    p = Package(pkg)
                     p.install()
             '''
             if self.required:
@@ -252,13 +252,13 @@ class Package:
                 resp = raw_input('Are you sure? (y/N) ')
                 if resp.lower() == 'y':
                     for pkg in neededPackages:
-                        p = package(pkg)
+                        p = Package(pkg)
                         p.install()
-                else
+                else:
                     exit()
             else:
                 for pkg in neededPackages:
-                    p = package(pkg)
+                    p = Package(pkg)
                     p.install()
             '''
             for pkg in self.required:
@@ -280,13 +280,13 @@ class Package:
                 resp = raw_input('Are you sure? (y/N) ')
                 if resp.lower() == 'y':
                     for pkg in neededPackages:
-                        p = package(pkg)
+                        p = Package(pkg)
                         p.install()
-                else
+                else:
                     exit()
             else:
                 for pkg in neededPackages:
-                    p = package(pkg)
+                    p = Package(pkg)
                     p.install()
             '''
             if self.dependent:
