@@ -10,16 +10,15 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION=""
-SECTION=""
-VERSION=
-NAME=""
+DESCRIPTION=" x265 package provides a library for encoding video streams into the H.265/HEVC format."
+SECTION="multimedia"
+VERSION=265_2.1
+NAME="x265"
 PKGNAME=$NAME
 REVISION=1
 
-#REQ:
-#REC:
-#OPT:
+#REQ:cmake
+#REC:yasm
 
 ARCH=`uname -m`
 
@@ -76,9 +75,10 @@ function build() {
             ln -sv lib usr/local/lib64 ;;
     esac
     cd $SRC
-    URL=
+    URL=https://bitbucket.org/multicoreware/x265/downloads/x265_2.1.tar.gz
     if [ ! -z $URL ]; then
-        wget 
+        wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/x265/x265_2.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/x265/x265_2.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/x265/x265_2.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/x265/x265_2.1.tar.gz || wget -nc https://bitbucket.org/multicoreware/x265/downloads/x265_2.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/x265/x265_2.1.tar.gz
+        wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/x265_2.1-enable_static-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/x265/x265_2.1-enable_static-1.patch
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -89,6 +89,14 @@ function build() {
         fi
         cd $DIRECTORY
     fi
+    patch -Np1 -i ../x265_2.1-enable_static-1.patch &&
+    mkdir bld &&
+    cd    bld &&
+    cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_INSTALL_PREFIX=/usr \
+        -DENABLE_STATIC=OFF         \
+        ../source                   &&
+    make "-j`nproc`" || make
+    make DESTDIR=$PKG install
 }
 
 function package() {

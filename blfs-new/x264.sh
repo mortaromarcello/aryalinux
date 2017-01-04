@@ -10,16 +10,14 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION=""
-SECTION=""
-VERSION=
-NAME=""
+DESCRIPTION=" x264 package provides a library for encoding video streams into the H.264/MPEG-4 AVC format."
+SECTION="multimedia"
+VERSION=2245
+NAME="x264"
 PKGNAME=$NAME
 REVISION=1
 
-#REQ:
-#REC:
-#OPT:
+#REC:yasm
 
 ARCH=`uname -m`
 
@@ -76,9 +74,9 @@ function build() {
             ln -sv lib usr/local/lib64 ;;
     esac
     cd $SRC
-    URL=
+    URL=http://download.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-20160827-2245-stable.tar.bz2
     if [ ! -z $URL ]; then
-        wget 
+        wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/x264/x264-snapshot-20160827-2245-stable.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/x264/x264-snapshot-20160827-2245-stable.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/x264/x264-snapshot-20160827-2245-stable.tar.bz2 || wget -nc http://download.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-20160827-2245-stable.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/x264/x264-snapshot-20160827-2245-stable.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/x264/x264-snapshot-20160827-2245-stable.tar.bz2
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -89,6 +87,11 @@ function build() {
         fi
         cd $DIRECTORY
     fi
+    ./configure --prefix=/usr \
+                --enable-shared \
+                --disable-cli &&
+    make "-j`nproc`" || make
+    make DESTDIR=$PKG install
 }
 
 function package() {

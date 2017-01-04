@@ -10,16 +10,17 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION=""
-SECTION=""
-VERSION=
-NAME=""
+DESCRIPTION=" This package, from the WebM project, provides the reference implementations of the VP8 Codec, used in most current html5 video, and of the next-generation VP9 Codec."
+SECTION="multimedia"
+VERSION=1.6.0
+NAME="libvpx"
 PKGNAME=$NAME
 REVISION=1
 
-#REQ:
-#REC:
-#OPT:
+#REQ:yasm
+#REQ:general_which
+#OPT:doxygen
+#OPT:php
 
 ARCH=`uname -m`
 
@@ -76,9 +77,9 @@ function build() {
             ln -sv lib usr/local/lib64 ;;
     esac
     cd $SRC
-    URL=
+    URL=http://storage.googleapis.com/downloads.webmproject.org/releases/webm/libvpx-1.6.0.tar.bz2
     if [ ! -z $URL ]; then
-        wget 
+        wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libvpx/libvpx-1.6.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libvpx/libvpx-1.6.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libvpx/libvpx-1.6.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libvpx/libvpx-1.6.0.tar.bz2 || wget -nc http://storage.googleapis.com/downloads.webmproject.org/releases/webm/libvpx-1.6.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libvpx/libvpx-1.6.0.tar.bz2
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -89,6 +90,14 @@ function build() {
         fi
         cd $DIRECTORY
     fi
+    sed -i 's/cp -p/cp/' build/make/Makefile &&
+    mkdir libvpx-build            &&
+    cd    libvpx-build            &&
+    ../configure --prefix=/usr    \
+                --enable-shared  \
+                --disable-static &&
+    make "-j`nproc`" || make
+    make DISTDIR=$PKG install
 }
 
 function package() {

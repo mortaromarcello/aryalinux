@@ -10,16 +10,16 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION=""
-SECTION=""
-VERSION=
-NAME=""
+DESCRIPTION="Opus is a lossy audio compression format developed by the Internet Engineering Task Force (IETF) that is particularly suitable for interactive speech and audio transmission over the Internet. This package provides the Opus development library and headers."
+SECTION="multimedia"
+VERSION=1.1.3
+NAME="opus"
 PKGNAME=$NAME
 REVISION=1
 
-#REQ:
-#REC:
-#OPT:
+#OPT:doxygen
+#OPT:texlive
+#OPT:tl-installer
 
 ARCH=`uname -m`
 
@@ -76,9 +76,9 @@ function build() {
             ln -sv lib usr/local/lib64 ;;
     esac
     cd $SRC
-    URL=
+    URL=http://downloads.xiph.org/releases/opus/opus-1.1.3.tar.gz
     if [ ! -z $URL ]; then
-        wget 
+        wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/opus/opus-1.1.3.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/opus/opus-1.1.3.tar.gz || wget -nc http://downloads.xiph.org/releases/opus/opus-1.1.3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/opus/opus-1.1.3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/opus/opus-1.1.3.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/opus/opus-1.1.3.tar.gz
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -89,6 +89,10 @@ function build() {
         fi
         cd $DIRECTORY
     fi
+    ./configure --prefix=/usr    \
+                --disable-static \
+                --docdir=/usr/share/doc/opus-1.1.3 &&
+    make "-j`nproc`" || make
 }
 
 function package() {
