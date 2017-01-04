@@ -25,6 +25,12 @@ REVISION=1
 #REQ:xf86-input-wacom
 #REQ:xf86-video-ati
 #REQ:xf86-video-fbdev
+#REQ:xf86-video-intel
+#REQ:xf86-video-nouveau
+#REQ:libva
+#REQ:libva-intel-driver
+#REQ:libvdpau
+#REQ:libvdpau-va-gl
 
 ARCH=`uname -m`
 
