@@ -13,7 +13,7 @@ SOURCE_ONLY=n
 DESCRIPTION="The libevdev package contains common functions for Xorg input drivers."
 SECTION="x"
 VERSION=1.1.1
-NAME="libevdev"
+NAME="xf86-input-evdev"
 PKGNAME=$NAME
 REVISION=1
 
@@ -97,6 +97,7 @@ function build() {
 }
 
 function package() {
+    gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
     find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
