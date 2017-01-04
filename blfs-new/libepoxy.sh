@@ -11,16 +11,14 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION=""
-SECTION=""
-VERSION=
-NAME=""
+DESCRIPTION=" libepoxy is a library for handling OpenGL function pointer management."
+SECTION="x"
+VERSION=1.3.1
+NAME="libepoxy"
 PKGNAME=$NAME
 REVISION=1
 
-#REQ:
-#REC:
-#OPT:
+#REQ:mesa
 
 ARCH=`uname -m`
 
@@ -77,9 +75,9 @@ function build() {
             ln -sv lib usr/local/lib64 ;;
     esac
     cd $SRC
-    URL=
+    URL=https://github.com/anholt/libepoxy/releases/download/v1.3.1/libepoxy-1.3.1.tar.bz2
     if [ ! -z $URL ]; then
-        wget 
+        wget -nc https://github.com/anholt/libepoxy/releases/download/v1.3.1/libepoxy-1.3.1.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libepoxy/libepoxy-1.3.1.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libepoxy/libepoxy-1.3.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libepoxy/libepoxy-1.3.1.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libepoxy/libepoxy-1.3.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libepoxy/libepoxy-1.3.1.tar.bz2
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -90,6 +88,9 @@ function build() {
         fi
         cd $DIRECTORY
     fi
+    ./configure --prefix=/usr &&
+    make "-j`nproc`" || make
+    make DESTDIR=$PKG
 }
 
 function package() {

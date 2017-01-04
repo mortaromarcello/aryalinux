@@ -87,10 +87,22 @@ function build() {
         fi
         cd $DIRECTORY
     fi
+    export XORG_PREFIX=/usr
+    export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
+    ./configure $XORG_CONFIG &&
+    make
+    make DESTDIR=$PKG install
+    mkdir -vp $PKG/etc/X11/xorg.conf.d/
+    cat >> $PKG/etc/X11/xorg.conf.d/nvidia.conf << "EOF"
+Section "Device"
+        Identifier "nvidia"
+        Driver "nouveau"
+        Option "AccelMethod" "glamor"
+EndSection
+EOF
 }
 
 function package() {
-    strip -s $PKG/usr/bin/*
     gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files

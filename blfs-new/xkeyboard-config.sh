@@ -10,16 +10,14 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION=""
-SECTION=""
-VERSION=
-NAME=""
+DESCRIPTION=" The XKeyboardConfig package contains the keyboard configuration database for the X Window System."
+SECTION="x"
+VERSION=2.19
+NAME="xkeyboard-config"
 PKGNAME=$NAME
 REVISION=1
 
-#REQ:
-#REC:
-#OPT:
+#REQ:x7lib
 
 ARCH=`uname -m`
 
@@ -76,9 +74,9 @@ function build() {
             ln -sv lib usr/local/lib64 ;;
     esac
     cd $SRC
-    URL=
+    URL=http://xorg.freedesktop.org/archive/individual/data/xkeyboard-config/xkeyboard-config-2.19.tar.bz2
     if [ ! -z $URL ]; then
-        wget 
+        wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xkeyboard-config/xkeyboard-config-2.19.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xkeyboard-config/xkeyboard-config-2.19.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xkeyboard-config/xkeyboard-config-2.19.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xkeyboard-config/xkeyboard-config-2.19.tar.bz2 || wget -nc ftp://ftp.x.org/pub/individual/data/xkeyboard-config/xkeyboard-config-2.19.tar.bz2 || wget -nc http://xorg.freedesktop.org/archive/individual/data/xkeyboard-config/xkeyboard-config-2.19.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xkeyboard-config/xkeyboard-config-2.19.tar.bz2
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -89,10 +87,15 @@ function build() {
         fi
         cd $DIRECTORY
     fi
+    export XORG_PREFIX=/usr
+    export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
+
+    ./configure $XORG_CONFIG --with-xkb-rules-symlink=xorg &&
+    make "-j`nproc`" || make
+    make DESTDIR=$PKG install
 }
 
 function package() {
-    strip -s $PKG/usr/bin/*
     gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
