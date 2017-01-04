@@ -308,7 +308,8 @@ class Package:
             for i in neededs:
                 pack = Package(i)
                 if not pack.installed:
-                    packages.append(i)
+                    if i not in packages:
+                        packages.append(i)
                     packages.extend(pack.getNeededPackages())
         return packages
 
