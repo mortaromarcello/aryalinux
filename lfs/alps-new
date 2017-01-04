@@ -148,7 +148,7 @@ class Package:
         for line in lines:
             if line.startswith('URL'):
                 fields = line.split('=')
-                if fields:
+                if fields[1]:
                     response = fields[1]
         return response
 
