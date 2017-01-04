@@ -148,8 +148,10 @@ class Package:
         for line in lines:
             if line.startswith('URL'):
                 fields = line.split('=')
-                if fields[1]:
+                try:
                     response = fields[1]
+                except:
+                    pass
         return response
 
     def getRequired(self):
