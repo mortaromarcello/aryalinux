@@ -8,6 +8,7 @@ import os
 import glob
 from shutil import copy2
 from shutil import move
+from collections import OrderedDict
 
 alpExecutable = sys.argv[0]
 basenameAlpExecutable = os.path.basename(alpExecutable)
@@ -19,6 +20,9 @@ def runCommand(cmd, actionName):
         print 'Error occured in performing operation: ' + actionName
         print 'Aborting...'
         exit()
+
+def remove_duplicates(lst):
+    return list(OrderedDict.fromkeys(lst))
 
 class Package:
     def __init__(self, name):
@@ -308,10 +312,9 @@ class Package:
             for i in neededs:
                 pack = Package(i)
                 if not pack.installed:
-                    if i not in packages:
-                        packages.append(i)
+                    packages.append(i)
                     packages.extend(pack.getNeededPackages())
-        return packages
+        return remove_duplicates(packages)
 
     def __installPkg(self):
         print 'installPkg '  + self.name
