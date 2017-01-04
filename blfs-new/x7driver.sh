@@ -10,10 +10,10 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION=""
-SECTION=""
-VERSION=
-NAME=""
+DESCRIPTION="The Xorg drivers that are necessary in order for Xorg Server to take advantage of the hardware that it is running on. At least one input and one video driver are required for Xorg Server to start."
+SECTION="x"
+VERSION=0.0.1
+NAME="x7driver"
 PKGNAME=$NAME
 REVISION=1
 
