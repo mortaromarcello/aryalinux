@@ -105,8 +105,7 @@ function build() {
 }
 
 function package() {
-    strip -s $PKG/usr/bin/*
-    gzip -9 $PKG/usr/share/man/man?/*.?
+    strip -s $PKG/usr/bin/cairo-sphinx
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
     find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
