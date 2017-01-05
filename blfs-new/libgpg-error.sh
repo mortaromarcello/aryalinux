@@ -87,11 +87,11 @@ function build() {
     fi
     ./configure --prefix=/usr &&
     make "-j`nproc`" || make
-    make DESTDIR=$PKG
+    make DESTDIR=$PKG install
 }
 
 function package() {
-    strip -s $PKG/usr/bin/*
+    strip -s $PKG/usr/bin/gpg-error
     gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
