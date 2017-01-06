@@ -98,6 +98,7 @@ function build() {
     ./configure --prefix=/usr --disable-static &&
     make "-j`nproc`" || make
     make DESTDIR=$PKG install
+    mkdir -vp $PKG/usr/bin
     cd examples/.libs &&
     for E in *; do
         install -v -m755 $E $PKG/usr/bin/theora_${E}
