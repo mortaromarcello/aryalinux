@@ -91,7 +91,6 @@ function build() {
     export XORG_PREFIX=/usr
     export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
     cat > font-7.7.md5 << "EOF"
-23756dab809f9ec5011bb27fb2c3c7d6 font-util-1.3.1.tar.bz2
 0f2d6546d514c5cc4ecf78a60657a5c1 encodings-1.0.4.tar.bz2
 1347c3031b74c9e91dc4dfa53b12f143 font-adobe-100dpi-1.0.3.tar.bz2
 6c9f26c92393c0756f3e8d614713495b font-adobe-75dpi-1.0.3.tar.bz2
