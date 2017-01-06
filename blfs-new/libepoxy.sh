@@ -90,7 +90,7 @@ function build() {
     fi
     ./configure --prefix=/usr &&
     make "-j`nproc`" || make
-    make DESTDIR=$PKG
+    make DESTDIR=$PKG install
 }
 
 function package() {
