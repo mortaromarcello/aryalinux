@@ -105,7 +105,7 @@ EOF
 }
 
 function package() {
-    strip -s $PKG/usr/bin/{fbrun,fbsetbg,fbsetroot,fluxbox,fluxbox-generate_menu,fluxbox-remote,fluxbox-configs}
+    strip -s $PKG/usr/bin/{fbrun,fbsetbg,fbsetroot,fluxbox,fluxbox-remote,fluxbox-update_configs}
     gzip -9 $PKG/usr/share/man/man?/*.?
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
