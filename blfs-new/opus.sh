@@ -93,6 +93,7 @@ function build() {
                 --disable-static \
                 --docdir=/usr/share/doc/opus-1.1.3 &&
     make "-j`nproc`" || make
+    make DESTDIR=$PKG install
 }
 
 function package() {
