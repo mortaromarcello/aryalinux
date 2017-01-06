@@ -14,7 +14,7 @@ alpExecutable = sys.argv[0]
 basenameAlpExecutable = os.path.basename(alpExecutable)
 
 def runCommand(cmd, actionName):
-    p = subprocess.Popen(cmd, shell=True)
+    p = subprocess.Popen(cmd)
     p.wait()
     if p.returncode != 0:
         print 'Error occured in performing operation: ' + actionName
