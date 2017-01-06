@@ -141,7 +141,7 @@ EOF
         ./configure $XORG_CONFIG
         make "-j`nproc`" || make
         make DESTDIR=$PKG install
-        cd $SRC/fonts
+        cd $SRC/font
         rm -rf $packagedir
     done
 }
