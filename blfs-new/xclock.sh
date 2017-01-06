@@ -17,9 +17,7 @@ NAME="xclock"
 PKGNAME=$NAME
 REVISION=1
 
-#REQ:
-#REC:
-#OPT:
+#REQ:x7lib
 
 ARCH=`uname -m`
 
