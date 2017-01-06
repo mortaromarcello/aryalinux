@@ -18,6 +18,7 @@ PKGNAME=$NAME
 REVISION=1
 
 #REQ:xcursor-themes
+#REQ:font-util
 
 ARCH=`uname -m`
 
