@@ -10,29 +10,38 @@ set -e
 set +h
 
 SOURCE_ONLY=n
-DESCRIPTION=" The Xorg Server is the core of the X Window system."
-SECTION="x"
-VERSION=1.18.4
-NAME="xorg-server"
+DESCRIPTION="NetworkManager is a set of co-operative tools that make networking simple and straightforward. Whether WiFi, wired, 3G, or Bluetooth, NetworkManager allows you to quickly move from one network to another: Once a network has been configured and joined once, it can be detected and re-joined automatically the next time it's available."
+SECTION="basicnet"
+VERSION=1.4.0
+NAME="networkmanager"
 PKGNAME=$NAME
 REVISION=1
 
-#REQ:openssl
-#REQ:nettle
-#REQ:libgcrypt
-#REQ:pixman
-#REQ:x7font
-#REQ:xkeyboard-config
-#REC:libepoxy
-#OPT:acpid
-#OPT:doxygen
-#OPT:fop
-#OPT:gs
-#OPT:xcb-util-keysyms
-#OPT:xcb-util-image
-#OPT:xcb-util-renderutil
-#OPT:xcb-util-wm
-#OPT:xmlto
+#REQ:dbus-glib
+#REQ:libgudev
+#REQ:libndp
+#REQ:libnl
+#REQ:nss
+#REC:ConsoleKit
+#REC:dhcpc
+#REC:gobject-introspection
+#REC:iptables
+#REC:libsoup
+#REC:newt
+#REC:polkit
+#REC:upower
+#REC:vala
+#REC:wpa_supplicant
+#OPT:bluez
+#OPT:gtk-doc
+#OPT:qt5
+#OPT:ModemManager
+#OPT:valgrind
+#OPT:dnsmasq
+#OPT:libteam
+#OPT:ppp
+#OPT:rp-pppoe
+
 
 ARCH=`uname -m`
 
@@ -89,10 +98,9 @@ function build() {
             ln -sv lib usr/local/lib64 ;;
     esac
     cd $SRC
-    URL=http://ftp.x.org/pub/individual/xserver/xorg-server-1.18.4.tar.bz2
+    URL=
     if [ ! -z $URL ]; then
-        wget -nc http://ftp.x.org/pub/individual/xserver/xorg-server-1.18.4.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2 || wget -nc ftp://ftp.x.org/pub/individual/xserver/xorg-server-1.18.4.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/Xorg/xorg-server-1.18.4.tar.bz2
-        wget -nc http://www.linuxfromscratch.org/patches/downloads/xorg-server/xorg-server-1.18.4-add_prime_support-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/xorg-server-1.18.4-add_prime_support-1.patch
+        wget 
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -103,22 +111,6 @@ function build() {
         fi
         cd $DIRECTORY
     fi
-    export XORG_PREFIX=/usr
-    export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
-    patch -Np1 -i ../xorg-server-1.18.4-add_prime_support-1.patch
-    ./configure $XORG_CONFIG             \
-                --enable-glamor          \
-                --enable-install-setuid  \
-                --enable-suid-wrapper    \
-                --disable-systemd-logind \
-                --with-xkb-output=/var/lib/xkb &&
-    make "-j`nproc`" || make
-    make DESTDIR=$PKG install &&
-    mkdir -pv $PKG/etc/sysconfig
-    cat >> $PKG/etc/sysconfig/createfiles << "EOF"
-/tmp/.ICE-unix dir 1777 root root
-/tmp/.X11-unix dir 1777 root root
-EOF
 }
 
 function package() {
