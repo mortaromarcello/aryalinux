@@ -30,6 +30,7 @@ REVISION=1
 #REQ:libXmu
 #REQ:libXpm
 #REQ:libXau
+#REQ:libXaw
 #REQ:libXfixes
 #REQ:libXcomposite
 #REQ:libXrender
