@@ -203,7 +203,7 @@ class Package:
         ls = glob.glob(self.configuration['SCRIPTS_DIR'] + '/*')
         listScripts = []
         for i in ls:
-            listScripts.append(os.path.basename(os.path.splitext(i)[0]))
+            listScripts.append(os.path.splitext(os.path.basename(i))[0])
         packages = []
         for package in listScripts:
             p = Package(package)
