@@ -219,16 +219,7 @@ class Package:
                             packages.append(os.path.splitext(os.path.basename(package))[0])
             file.close()
         return packages
-
-    def getAllDependent(self):
-        packages = self.dependent
-        if self.dependent:
-            for pkg in self.dependent:
-                p = Package(pkg)
-                if p.dependent:
-                    packages.extend(p.dependent)
-        return remove_duplicates(packages)
-
+    
     def install(self, prompt):
         neededPackages = self.getNeededPackages()
         if not self.installed:
@@ -273,54 +264,50 @@ class Package:
 
     def remove(self,prompt):
         if self.installed:
+            packagesDependetInstalled = self.getDependentPackages()
             if prompt:
-                if self.dependent:
+                if packagesDependetInstalled:
                     print 'The following packages would be removed: ' + " ".join(self.dependent)
                     resp = raw_input('Are you sure? (y/N) ')
                     if resp.lower() == 'y':
-                        for pkg in self.dependent:
+                        for pkg in packagesDependetInstalled:
                             p = Package(pkg)
-                            p.remove(False)
+                            p.__removePkg()
                     else:
                         exit()
             else:
-                for pkg in self.dependent:
+                for pkg in packagesDependetInstalled:
                     p = Package(pkg)
-                    p.remove(prompt)
+                    p.__removePkg()
             print 'remove=>' + self.name
             self.__removePkg()
         else:
             print 'Package ' + self.name + ' is not installed.'
 
     def show(self):
-        print 'name=>' + self.name
-        print 'nameFile =>' + self.nameFile
-        print 'nameFileTgz =>' + self.nameFileTgz
-        print 'nameInstalledFilesGz=>' + self.nameInstalledFilesGz
-        print 'required=>'
-        for i in self.required:
-            print '\t' + i
-        print 'recommended=>'
-        for i in self.recommended:
-            print '\t' + i
-        print 'dependent=>'
-        for i in self.dependent:
-            print '\t' + i
-        print 'description=>' + self.properties['DESCRIPTION']
-        print 'section=>' + self.properties['SECTION']
-        print 'version=>' + self.properties['VERSION']
-        print 'revision=>' + self.properties['REVISION']
-        print 'url=>' + self.properties['URL']
-        print 'needed packages=>' + " ".join(self.getNeededPackages())
-        print 'dependent packages installed=>' + " ".join(self.getDependentPackages())
+        print 'name => ' + self.name
+        print 'nameFile => ' + self.nameFile
+        print 'nameFileTgz => ' + self.nameFileTgz
+        print 'nameInstalledFilesGz => ' + self.nameInstalledFilesGz
+        print 'required => ' + " ".join(self.required)
+        print 'recommended => ' + " ".join(self.recommended)
+        print 'dependent => ' + " "join(self.dependent)
+        print 'description => ' + self.properties['DESCRIPTION']
+        print 'section => ' + self.properties['SECTION']
+        print 'version => ' + self.properties['VERSION']
+        print 'revision => ' + self.properties['REVISION']
+        print 'url => ' + self.properties['URL']
+        print 'needed packages => ' + " ".join(self.getNeededPackages())
+        print 'dependent packages installed => ' + " ".join(self.getDependentPackages())
 
     def getDependentPackages(self):
         packages = []
-        for i in self.dependent:
-            pack = Package(i)
-            if pack.installed:
-                packages.append(i)
-                packages.extend(pack.getDependentPackages())
+        if self.installed:
+            for i in self.dependent:
+                pack = Package(i)
+                if pack.installed:
+                    packages.append(i)
+                    packages.extend(pack.getDependentPackages())
         return remove_duplicates(packages)
 
     def getNeededPackages(self):
