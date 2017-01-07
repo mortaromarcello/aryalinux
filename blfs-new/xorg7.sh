@@ -118,10 +118,12 @@ function build() {
     install -v -d -m755 $PKG/usr/share/fonts/dejavu &&
     cd $SRC
     wget -nc http://downloads.sourceforge.net/project/dejavu/dejavu/2.37/dejavu-fonts-ttf-2.37.tar.bz2
+    tar -xvf dejavu-fonts-ttf-2.37.tar.bz2
     cd dejavu-fonts-ttf-2.37
     install -v -m644 ttf/*.ttf $PKG/usr/share/fonts/dejavu
     cd $SRC
     wget -nc http://downloads.sourceforge.net/project/dejavu/dejavu/2.37/dejavu-lgc-fonts-ttf-2.37.tar.bz2
+    tar -xvf dejavu-lgc-fonts-ttf-2.37.tar.bz2
     cd dejavu-lgc-fonts-ttf-2.37
     install -v -m644 ttf/*.ttf $PKG/usr/share/fonts/dejavu
     cd $SRC
