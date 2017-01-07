@@ -17,7 +17,7 @@ NAME="xcb-util-cursor"
 PKGNAME=$NAME
 REVISION=1
 
-#REQ:xcb-util-renderutil
+#REQ:xcb-util
 
 ARCH=`uname -m`
 

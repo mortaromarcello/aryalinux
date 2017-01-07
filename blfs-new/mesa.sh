@@ -100,21 +100,21 @@ wget -nc http://www.linuxfromscratch.org/patches/downloads/mesa/mesa-12.0.3-add_
     export XORG_PREFIX=/usr
     export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
     patch -Np1 -i ../mesa-12.0.3-add_xdemos-1.patch
-    GLL_DRV="nouveau,r300,r600,radeonsi,svga,swrast,swr"
+    GLL_DRV="nouveau,r300,r600,radeonsi,svga,swrast,swr" &&
     sed -i "/pthread-stubs/d" configure.ac      &&
     sed -i "/seems to be moved/s/^/: #/" bin/ltmain.sh &&
     ./autogen.sh CFLAGS='-O2' CXXFLAGS='-O2'    \
-            --prefix=$XORG_PREFIX           \
-            --sysconfdir=/etc               \
-            --enable-texture-float          \
-            --enable-gles1                  \
-            --enable-gles2                  \
-            --enable-osmesa                 \
-            --enable-xa                     \
-            --enable-gbm                    \
-            --enable-glx-tls                \
-            --with-egl-platforms="drm,x11"  \
-            --with-gallium-drivers=$GLL_DRV &&
+                --prefix=$XORG_PREFIX           \
+                --sysconfdir=/etc               \
+                --enable-texture-float          \
+                --enable-gles1                  \
+                --enable-gles2                  \
+                --enable-osmesa                 \
+                --enable-xa                     \
+                --enable-gbm                    \
+                --enable-glx-tls                \
+                --with-egl-platforms="drm,x11"  \
+                --with-gallium-drivers=$GLL_DRV &&
     unset GLL_DRV &&
     make "-j`nproc`" || make
     make -C xdemos DEMOS_PREFIX=$XORG_PREFIX

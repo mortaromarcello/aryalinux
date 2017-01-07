@@ -17,9 +17,7 @@ NAME="xcb-util-keysyms"
 PKGNAME=$NAME
 REVISION=1
 
-#REQ:
-#REC:
-#OPT:
+#REQ:libxcb
 
 ARCH=`uname -m`
 

@@ -29,7 +29,6 @@ REVISION=1
 #REQ:libXt
 #REQ:libXmu
 #REQ:libXpm
-#REQ:libXau
 #REQ:libXaw
 #REQ:libXfixes
 #REQ:libXcomposite
