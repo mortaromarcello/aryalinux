@@ -203,6 +203,10 @@ class Package:
         listScripts = glob.glob(self.configuration['SCRIPTS_DIR'] + '/*')
         packages = []
         for package in listScripts:
+            p = Package(p)
+            packages.extend(p.dependent)
+            packages.extend(p.recommended)
+            '''
             file = open(package)
             data = file.read()
             lines = data.split('\n')
@@ -218,7 +222,8 @@ class Package:
                         if (self.name == string.strip()) and (self.name not in packages):
                             packages.append(os.path.splitext(os.path.basename(package))[0])
             file.close()
-        return packages
+            '''
+        return remove_duplicates(packages)
     
     def getAllDependent(self):
         packages = self.dependent
