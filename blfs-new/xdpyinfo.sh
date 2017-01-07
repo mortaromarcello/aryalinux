@@ -94,8 +94,8 @@ function build() {
     export XORG_PREFIX=/usr
     export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
     ./configure $XORG_CONFIG
-        make "-j`nproc`" || make
-        make DESTDIR=$PKG install
+    make "-j`nproc`" || make
+    make DESTDIR=$PKG install
 }
 
 function package() {

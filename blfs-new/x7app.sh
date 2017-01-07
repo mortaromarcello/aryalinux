@@ -31,6 +31,7 @@ REVISION=1
 #REQ:xcmsdb
 #REQ:xcursorgen
 #REQ:xdpyinfo
+#REQ:xdriinfo
 #REQ:xev
 #REQ:xgamma
 #REQ:xhost
