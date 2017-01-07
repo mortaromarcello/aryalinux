@@ -219,7 +219,7 @@ class Package:
                             packages.append(os.path.splitext(os.path.basename(package))[0])
             file.close()
         return packages
-    
+
     def getAllDependent(self):
         packages = self.dependent
         if self.dependent:
@@ -316,6 +316,16 @@ class Package:
         print 'revision=>' + self.properties['REVISION']
         print 'url=>' + self.properties['URL']
         print 'needed packages=>' + " ".join(self.getNeededPackages())
+        print 'dependent packages installed=>' + " ".join(self.getDependentPackages())
+
+    def getDependentPackages(self):
+        packages = []
+        for i in self.dependent:
+            pack = Package(i)
+            if pack.installed:
+                packages.append(i)
+                packages.extend(pack.getDependentPackages())
+        return remove_duplicates(packages)
 
     def getNeededPackages(self):
         packages = []
