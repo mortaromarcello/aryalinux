@@ -116,7 +116,23 @@ function build() {
     tar -xvf dejavu-fonts-2.37.tar.bz2
     cd dejavu-fonts-2.37
     install -v -d -m755 $PKG/usr/share/fonts/dejavu &&
-    install -v -m644 *.ttf $PKG/usr/share/fonts/dejavu
+    cd $SRC
+    wget -nc http://downloads.sourceforge.net/project/dejavu/dejavu/2.37/dejavu-fonts-ttf-2.37.tar.bz2
+    cd dejavu-fonts-ttf-2.37
+    install -v -m644 ttf/*.ttf $PKG/usr/share/fonts/dejavu
+    cd $SRC
+    wget -nc http://downloads.sourceforge.net/project/dejavu/dejavu/2.37/dejavu-lgc-fonts-ttf-2.37.tar.bz2
+    cd dejavu-lgc-fonts-ttf-2.37
+    install -v -m644 ttf/*.ttf $PKG/usr/share/fonts/dejavu
+    cd $SRC
+    mkdir -vp $PKG/etc/X11/xorg.conf.d
+    cat > $PKG/etc/X11/xorg.conf.d/xkb-defaults.conf << "EOF"
+Section "InputClass"
+    Identifier "XKB Defaults"
+    MatchIsKeyboard "yes"
+    Option "XkbOptions" "terminate:ctrl_alt_bksp"
+EndSection
+EOF
 }
 
 function package() {
