@@ -112,6 +112,11 @@ function build() {
         fi
         cd $DIRECTORY
     fi
+    wget -nc http://downloads.sourceforge.net/project/dejavu/dejavu/2.37/dejavu-fonts-2.37.tar.bz2
+    tar -xvf dejavu-fonts-2.37.tar.bz2
+    cd dejavu-fonts-2.37
+    install -v -d -m755 $PKG/usr/share/fonts/dejavu &&
+    install -v -m644 *.ttf $PKG/usr/share/fonts/dejavu
 }
 
 function package() {
@@ -124,7 +129,7 @@ function package() {
     echo -e $DESCRIPTION > $PKG/install/blfs-desc
     cat > $PKG/install/doinst.sh << "EOF"
 #!/bin/sh
-echo -e "Non ho niente da fare!"
+fc-cache -v /usr/share/fonts/dejavu
 EOF
     cat > $PKG/install/$PKGNAME-$VERSION-$ARCH-$REVISION.preremove << "EOF"
 #!/bin/sh
