@@ -219,6 +219,15 @@ class Package:
                             packages.append(os.path.splitext(os.path.basename(package))[0])
             file.close()
         return packages
+    
+    def getAllDependent(self):
+        packages = self.dependent
+        if self.dependent:
+            for pkg in self.dependent:
+                p = Package(pkg)
+                if p.dependent:
+                    packages.extend(p.getAllDependent())
+        return remove_duplicates(packages)
 
     def install(self, prompt):
         neededPackages = self.getNeededPackages()
@@ -264,21 +273,20 @@ class Package:
 
     def remove(self,prompt):
         if self.installed:
-            neededPackages = self.getNeededPackages()
             if prompt:
-                if neededPackages:
-                    print 'The following packages would be installed: ' + " ".join(neededPackages)
+                if self.dependent:
+                    print 'The following packages would be removed: ' + " ".join(self.dependent)
                     resp = raw_input('Are you sure? (y/N) ')
                     if resp.lower() == 'y':
-                        for pkg in neededPackages:
+                        for pkg in self.dependent:
                             p = Package(pkg)
-                            p.install(False)
+                            p.remove(False)
                     else:
                         exit()
             else:
-                for pkg in neededPackages:
+                for pkg in self.dependent:
                     p = Package(pkg)
-                    p.install(prompt)
+                    p.remove(prompt)
             print 'remove=>' + self.name
             self.__removePkg()
         else:
@@ -295,8 +303,8 @@ class Package:
         print 'recommended=>'
         for i in self.recommended:
             print '\t' + i
-        print 'dependent=>'
-        for i in self.dependent:
+        print 'all dependent=>'
+        for i in self.getAllDependent():
             print '\t' + i
         print 'description=>' + self.properties['DESCRIPTION']
         print 'section=>' + self.properties['SECTION']
