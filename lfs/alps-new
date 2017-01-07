@@ -200,10 +200,13 @@ class Package:
         return dependencies
 
     def getDependent(self):
-        listScripts = glob.glob(self.configuration['SCRIPTS_DIR'] + '/*')
+        ls = glob.glob(self.configuration['SCRIPTS_DIR'] + '/*')
+        listScripts = []
+        for i in ls:
+            listScripts.append(os.path.splitext(i)[0])
         packages = []
         for package in listScripts:
-            p = Package(p)
+            p = Package(package)
             packages.extend(p.dependent)
             packages.extend(p.recommended)
             '''
@@ -224,7 +227,7 @@ class Package:
             file.close()
             '''
         return remove_duplicates(packages)
-    
+
     def getAllDependent(self):
         packages = self.dependent
         if self.dependent:
