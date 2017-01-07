@@ -307,10 +307,6 @@ class Package:
         for i in self.dependent:
             print '\t' + i
         print 'description=>' + self.properties['DESCRIPTION']
-        print 'all dependent=>'
-        for i in self.getAllDependent():
-            print '\t' + i
-        print 'description=>' + self.properties['DESCRIPTION']
         print 'section=>' + self.properties['SECTION']
         print 'version=>' + self.properties['VERSION']
         print 'revision=>' + self.properties['REVISION']
