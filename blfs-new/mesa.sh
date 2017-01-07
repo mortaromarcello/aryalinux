@@ -119,6 +119,7 @@ wget -nc http://www.linuxfromscratch.org/patches/downloads/mesa/mesa-12.0.3-add_
     make "-j`nproc`" || make
     make -C xdemos DEMOS_PREFIX=$XORG_PREFIX
     make DESTDIR=$PKG install
+    make -C xdemos DESTDIR=$PKG DEMOS_PREFIX=$XORG_PREFIX install
 }
 
 function package() {
