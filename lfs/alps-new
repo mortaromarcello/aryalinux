@@ -200,16 +200,9 @@ class Package:
         return dependencies
 
     def getDependent(self):
-        ls = glob.glob(self.configuration['SCRIPTS_DIR'] + '/*')
-        listScripts = []
-        for i in ls:
-            listScripts.append(os.path.splitext(os.path.basename(i))[0])
+        listScripts = glob.glob(self.configuration['SCRIPTS_DIR'] + '/*')
         packages = []
         for package in listScripts:
-            p = Package(package)
-            packages.extend(p.dependent)
-            packages.extend(p.recommended)
-            '''
             file = open(package)
             data = file.read()
             lines = data.split('\n')
@@ -225,16 +218,15 @@ class Package:
                         if (self.name == string.strip()) and (self.name not in packages):
                             packages.append(os.path.splitext(os.path.basename(package))[0])
             file.close()
-            '''
-        return remove_duplicates(packages)
-
+        return packages
+    
     def getAllDependent(self):
         packages = self.dependent
         if self.dependent:
             for pkg in self.dependent:
                 p = Package(pkg)
                 if p.dependent:
-                    packages.extend(p.getAllDependent())
+                    packages.extend(p.dependent)
         return remove_duplicates(packages)
 
     def install(self, prompt):
@@ -313,6 +305,10 @@ class Package:
             print '\t' + i
         print 'dependent=>'
         for i in self.dependent:
+            print '\t' + i
+        print 'description=>' + self.properties['DESCRIPTION']
+        print 'all dependent=>'
+        for i in self.getAllDependent():
             print '\t' + i
         print 'description=>' + self.properties['DESCRIPTION']
         print 'section=>' + self.properties['SECTION']
