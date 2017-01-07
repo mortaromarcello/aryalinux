@@ -345,6 +345,8 @@ case "$1" in
 esac
 
 # End /etc/init.d/dhcpd
+EOF
+    cat > $PKG/etc/sysconfig/dhcpd << EOF
 # Begin /etc/sysconfig/dhcpd
 
 # On which interfaces should the DHCP Server (dhcpd) serve DHCP requests?
@@ -355,9 +357,6 @@ INTERFACES=""
 OPTIONS=""
 
 # End /etc/sysconfig/dhcpd
-EOF
-    cat > $PKG/etc/sysconfig/dhcpd << EOF
-
 EOF
     chmod 754 $PKG/etc/rc.d/init.d/dhcpd
     chmod 644 $PKG/etc/sysconfig/dhcpd
