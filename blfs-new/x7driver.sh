@@ -19,6 +19,7 @@ REVISION=1
 
 #REQ:libevdev
 #REQ:mtdev
+#REQ:libinput
 #REQ:xf86-input-evdev
 #REQ:xf86-input-synaptics
 #REQ:xf86-input-vmmouse
@@ -27,6 +28,15 @@ REVISION=1
 #REQ:xf86-video-fbdev
 #REQ:xf86-video-intel
 #REQ:xf86-video-nouveau
+#REQ:xf86-video-vmware
+#REQ:xf86-video-vesa
+#REQ:xf86-video-sis
+#REQ:xf86-video-mach64
+#REQ:xf86-video-openchrome
+#REQ:xf86-video-mga
+#REQ:xf86-video-r128
+#REQ:xf86-video-savage
+#REQ:xf86-video-tdfx
 #REQ:libva
 #REQ:libva-intel-driver
 #REQ:libvdpau
