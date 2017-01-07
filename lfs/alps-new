@@ -308,8 +308,8 @@ class Package:
         print 'recommended=>'
         for i in self.recommended:
             print '\t' + i
-        print 'all dependent=>'
-        for i in self.getAllDependent():
+        print 'dependent=>'
+        for i in self.dependent:
             print '\t' + i
         print 'description=>' + self.properties['DESCRIPTION']
         print 'section=>' + self.properties['SECTION']
