@@ -123,6 +123,7 @@ wget -nc http://www.linuxfromscratch.org/patches/downloads/mesa/mesa-12.0.3-add_
 }
 
 function package() {
+    strip -s $PKG/usr/bin/*
     cd $PKG
     find . -type f -name "*"|sed 's/^.//' > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
     find . -type d -name "*"|sed 's/^.//' >> $START/$PKGNAME-$VERSION-$ARCH-$REVISION.files
