@@ -219,7 +219,7 @@ class Package:
                             packages.append(os.path.splitext(os.path.basename(package))[0])
             file.close()
         return packages
-    
+
     def install(self, prompt):
         neededPackages = self.getNeededPackages()
         if not self.installed:
@@ -291,7 +291,7 @@ class Package:
         print 'nameInstalledFilesGz => ' + self.nameInstalledFilesGz
         print 'required => ' + " ".join(self.required)
         print 'recommended => ' + " ".join(self.recommended)
-        print 'dependent => ' + " "join(self.dependent)
+        print 'dependent => ' + " ".join(self.dependent)
         print 'description => ' + self.properties['DESCRIPTION']
         print 'section => ' + self.properties['SECTION']
         print 'version => ' + self.properties['VERSION']
