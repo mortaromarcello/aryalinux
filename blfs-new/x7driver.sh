@@ -18,7 +18,6 @@ PKGNAME=$NAME
 REVISION=1
 
 #REQ:libevdev
-#REQ:mtdev
 #REQ:libinput
 #REQ:xf86-input-evdev
 #REQ:xf86-input-synaptics

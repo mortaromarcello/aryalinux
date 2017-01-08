@@ -80,9 +80,9 @@ function build() {
             ln -sv lib usr/local/lib64 ;;
     esac
     cd $SRC
-    URL=https://github.com/i-rinat/libvdpau-va-gl/archive/v0.4.0.tar.gz
+    URL=https://github.com/i-rinat/libvdpau-va-gl/archive/libvdpau-va-gl-0.4.0.tar.gz
     if [ ! -z $URL ]; then
-        wget -nc https://github.com/i-rinat/libvdpau-va-gl/archive/v0.4.0.tar.gz
+        wget -nc https://github.com/i-rinat/libvdpau-va-gl/archive/v0.4.0.tar.gz -O libvdpau-va-gl-0.4.0.tar.gz
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -100,7 +100,6 @@ function build() {
     cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$XORG_PREFIX .. &&
     make
     make DESTDIR=$PKG install
-    mkdir -vp $PKG/etc/profile.d/
 }
 
 function package() {
