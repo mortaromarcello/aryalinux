@@ -80,9 +80,9 @@ function build() {
             ln -sv lib usr/local/lib64 ;;
     esac
     cd $SRC
-    URL=https://github.com/i-rinat/libvdpau-va-gl/archive/libvdpau-va-gl-0.4.0.tar.gz
+    URL=https://github.com/i-rinat/libvdpau-va-gl/archive/v0.4.0.tar.gz
     if [ ! -z $URL ]; then
-        wget -nc https://github.com/i-rinat/libvdpau-va-gl/archive/v0.4.0.tar.gz -O libvdpau-va-gl-0.4.0.tar.gz
+        wget -nc https://github.com/i-rinat/libvdpau-va-gl/archive/v0.4.0.tar.gz
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -120,7 +120,7 @@ echo -e "Non ho niente da fare!"
 EOF
     cat > $PKG/install/$PKGNAME-$VERSION-$ARCH-$REVISION.postremove << "EOF"
 #!/bin/sh
-echo -e "Non ho niente da fare!"
+sed -i.bak "/export VDPAU_DRIVER=va_gl/d" /etc/profile.d/xorg.sh
 EOF
     tar cvvf - . --format gnu --xform 'sx^\./\(.\)x\1x' --show-stored-names --group 0 --owner 0 | gzip > $START/$PKGNAME-$VERSION-$ARCH-$REVISION.tgz
     echo "blfs package \"$PKGNAME-$VERSION-$ARCH-$REVISION.tgz\" created."

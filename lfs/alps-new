@@ -363,6 +363,12 @@ class Package:
         print 'removePkg ' + self.name
         removed_files = []
         if self.nameInstalledFilesGz:
+            if self.namePreRemoveScript:
+                runCommand(['sh', self.namePreRemoveScript], 'pre remove script')
+                runCommand(['rm' , '-vf', self.namePreRemoveScript], 'post remove script')
+                self.namePreRemoveScript = ''
+                runCommand(['rm', '-vf', realName[0], self.nameInstalledFilesGz], 'remove temp file')
+                self.nameInstalledFilesGz = ''
             runCommand(['gunzip', '-vkf', self.nameInstalledFilesGz], 'gunzip file')
             realName = glob.glob(self.configuration['INSTALLED_FILES_DIR'] + '/' + self.name + '*.files')
             try:
@@ -391,12 +397,6 @@ class Package:
                 runCommand(['sh', self.namePostRemoveScript], 'post remove script')
                 runCommand(['rm' , '-vf', self.namePostRemoveScript], 'post remove script')
                 self.namePostRemoveScript = ''
-            if self.namePreRemoveScript:
-                runCommand(['sh', self.namePreRemoveScript], 'pre remove script')
-                runCommand(['rm' , '-vf', self.namePreRemoveScript], 'post remove script')
-                self.namePreRemoveScript = ''
-                runCommand(['rm', '-vf', realName[0], self.nameInstalledFilesGz], 'remove temp file')
-                self.nameInstalledFilesGz = ''
             if self.nameFileTgz:
                 runCommand(['rm', '-vf', self.nameFileTgz], 'remove tgz file')
             else:
