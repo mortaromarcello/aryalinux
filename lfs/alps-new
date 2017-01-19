@@ -9,9 +9,11 @@ import glob
 from shutil import copy2
 from shutil import move
 from collections import OrderedDict
+from pysqlite2 import dbapi2 as sqlite
 
 alpExecutable = sys.argv[0]
 basenameAlpExecutable = os.path.basename(alpExecutable)
+alpDataBase = "/var/lib/alps/packages.sqlite"
 
 def runCommand(cmd, actionName):
     p = subprocess.Popen(cmd)
@@ -24,11 +26,105 @@ def runCommand(cmd, actionName):
 def remove_duplicates(lst):
     return list(OrderedDict.fromkeys(lst))
 
+def initializeDB(pathScripts, DB):
+    listPathScripts = glob.glob(pathScripts + '/' + '*')
+    packages = []
+    for i in listPathScripts:
+        
+        description = ""
+        section = ""
+        version = ""
+        revision = ""
+        url = ""
+        required = []
+        recommended = []
+        optional = []
+        dependent = []
+        
+        file = open(i)
+        data = file.read()
+        lines = data.split('\n')
+        for line in lines:
+            line = line.strip()
+            if line.startswith('DESCRIPTION'):
+                fields = line.split('=')
+                try:
+                    description = fields[1]
+                except:
+                    description = ""
+            if line.startswith('SECTION'):
+                fields = line.split('=')
+                try:
+                    section = fields[1]
+                except:
+                    section = ""
+            if line.startswith('VERSION'):
+                fields = line.split('=')
+                try:
+                    version = fields[1]
+                except:
+                    version = ""
+            if line.startswith('REVISION'):
+                fields = line.split('=')
+                try:
+                    if fields[1].isdigit():
+                        revision = fields[1]
+                except:
+                    revision = ""
+            if line.startswith('URL'):
+                fields = line.split('=')
+                try:
+                    url = fields[1]
+                    break
+                except:
+                    url = ""
+        for line in lines:
+            if line.startswith('#REQ:'):
+                if line.replace('#REQ:', '') != '':
+                    required.append(line.replace('#REQ:', ''))
+        for line in lines:
+            if line.startswith('#REC:'):
+                if line.replace('#REC:', '') != '':
+                    recommended.append(line.replace('#REC:', ''))
+        for line in lines:
+            if line.startswith('#OPT:'):
+                if line.replace('#OPT:', '') != '':
+                    optional.append(line.replace('#OPT:', ''))
+        packages.append((os.path.splitext(os.path.basename(i))[0], i, description, section, version, revision, url, " ".join(required), " ".join(recommended), " ".join(optional), " ".join(dependent), False))
+    con = None
+    try:
+        conn = sqlite.connect(DB)
+        conn.text_factory = str
+        c = conn.cursor()
+        c.execute("DROP TABLE IF EXISTS Package")
+        c.execute("CREATE TABLE IF NOT EXISTS Package(Name TEXT, NameFile TEXT, Description TEXT, Section TEXT, Version INT, Revision TEXT, Url TEXT, Required TEXT, Recommended TEXT, Optional TEXT, Dependent TEXT, Installed INT)")
+        c.executemany("INSERT INTO Package VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", packages)
+        conn.commit()
+    except sqlite.Error, e:
+        print "Error %s:" % e.args[0]
+        sys.exit(1)
+    finally:
+        if con:
+            con.close()
+
+def loadConfig(configPath):
+    conf = {}
+    file = open(configPath, 'r')
+    data = file.read()
+    lines = data.split('\n')
+    for line in lines:
+        parts = line.split('=')
+        if len(parts) == 2:
+            conf[parts[0]] = parts[1].replace('"', '');
+    return conf
+
 class Package:
-    def __init__(self, name):
+    def __init__(self, name, conDB):
         self.name = name
+        self.DB = conDB
+        self.cur = self.DB.cursor()
         self.configPath = '/etc/alps/alps.conf'
-        self.configuration = self.loadConfig()
+        self.configuration = loadConfig(self.configPath)
         self.nameFile = self.configuration['SCRIPTS_DIR'] + '/' + self.name + '.sh'
         self.properties = {'DESCRIPTION':'','SECTION':'', 'VERSION':'', 'REVISION':'', 'URL':''}
         self.properties['DESCRIPTION'] = self.getDescription()
@@ -60,168 +156,66 @@ class Package:
         self.recommended = self.getRecommended()
         self.optional = self.getOptional()
         self.dependent = self.getDependent()
-        if glob.glob(self.configuration['INSTALLED_FILES_DIR'] + '/' + self.name + '*.files.gz'):
-            self.installed = True
-        else:
-            self.installed = False
-
-    def loadConfig(self):
-        conf = {}
-        file = open(self.configPath, 'r')
-        data = file.read()
-        lines = data.split('\n')
-        for line in lines:
-            parts = line.split('=')
-            if len(parts) == 2:
-                conf[parts[0]] = parts[1].replace('"', '');
-        return conf
-
+        self.installed = self.getInstalled()
+    
     def getDescription(self):
-        try:
-            file = open(self.nameFile)
-        except:
-            print 'Error occured opening ' + self.nameFile + '. Exit'
-            exit(1)
-        response = ''
-        data = file.read()
-        lines = data.split('\n')
-        for line in lines:
-            if line.startswith('DESCRIPTION'):
-                fields = line.split('=')
-                response = fields[1]
-        return response
-
+        self.cur.execute("SELECT Description FROM Package WHERE Name=?", (self.name,))
+        responce = self.cur.fetchall()
+        return responce[0][0]
+    
     def getSection(self):
-        try:
-            file = open(self.nameFile)
-        except:
-            print 'Error occured opening ' + self.nameFile + '. Exit'
-            exit(1)
-        response = ''
-        data = file.read()
-        lines = data.split('\n')
-        for line in lines:
-            if line.startswith('SECTION'):
-                fields = line.split('=')
-                response = fields[1]
-        return response
-
+        self.cur.execute("SELECT Section FROM Package WHERE Name=?", (self.name,))
+        responce = self.cur.fetchall()
+        return responce[0][0]
+    
     def getVersion(self):
-        try:
-            file = open(self.nameFile)
-        except:
-            print 'Error occured opening ' + self.nameFile + '. Exit'
-            exit(1)
-        response = ''
-        data = file.read()
-        lines = data.split('\n')
-        for line in lines:
-            if line.startswith('VERSION'):
-                fields = line.split('=')
-                response = fields[1]
-        return response
-
+        self.cur.execute("SELECT Version FROM Package WHERE Name=?", (self.name,))
+        responce = self.cur.fetchall()
+        return str(responce[0][0])
+    
     def getRevision(self):
-        try:
-            file = open(self.nameFile)
-        except:
-            print 'Error occured opening ' + self.nameFile + '. Exit'
-            exit(1)
-        response = ''
-        data = file.read()
-        lines = data.split('\n')
-        for line in lines:
-            if line.startswith('REVISION'):
-                fields = line.split('=')
-                response = fields[1]
-        return response
-
+        self.cur.execute("SELECT Revision FROM Package WHERE Name=?", (self.name,))
+        responce = self.cur.fetchall()
+        return responce[0][0]
+    
     def getUrl(self):
-        try:
-            file = open(self.nameFile)
-        except:
-            print 'Error occured opening ' + self.nameFile + '. Exit'
-            exit(1)
-        response = ''
-        data = file.read()
-        lines = data.split()
-        for line in lines:
-            if line.startswith('URL'):
-                fields = line.split('=')
-                try:
-                    response = fields[1]
-                except:
-                    pass
-        return response
-
+        self.cur.execute("SELECT Url FROM Package WHERE Name=?", (self.name,))
+        responce = self.cur.fetchall()
+        return responce[0][0]
+    
     def getRequired(self):
-        try:
-            file = open(self.nameFile)
-        except:
-            print 'Error occured opening ' + self.nameFile + '. Exit'
-            exit(1)
-        data = file.read()
-        lines = data.split('\n')
-        dependencies = []
-        for line in lines:
-            if line.startswith('#REQ:'):
-                if line.replace('#REQ:', '') != '':
-                    dependencies.append(line.replace('#REQ:', ''))
-        return dependencies
+        self.cur.execute("SELECT Required FROM Package WHERE Name=?", (self.name,))
+        responce = self.cur.fetchall()
+        return responce[0][0]
 
     def getRecommended(self):
-        try:
-            file = open(self.nameFile)
-        except:
-            print 'Error occured opening ' + self.nameFile + '. Exit'
-            exit(1)
-        data = file.read()
-        lines = data.split('\n')
-        dependencies = []
-        for line in lines:
-            if line.startswith('#REC:'):
-                if line.replace('#REC:', '') != '':
-                    dependencies.append(line.replace('#REC:', ''))
-        return dependencies
-
+        self.cur.execute("SELECT Recommended FROM Package WHERE Name=?", (self.name,))
+        responce = self.cur.fetchall()
+        return responce[0][0]
+    
     def getOptional(self):
-        try:
-            file = open(self.nameFile)
-        except:
-            print 'Error occured opening ' + self.nameFile + '. Exit'
-            exit(1)
-        data = file.read()
-        lines = data.split('\n')
-        dependencies = []
-        for line in lines:
-            if line.startswith('#OPT:'):
-                if line.replace('#OPT:', '') != '':
-                    dependencies.append(line.replace('#OPT:', ''))
-        return dependencies
+        self.cur.execute("SELECT Optional FROM Package WHERE Name=?", (self.name,))
+        responce = self.cur.fetchall()
+        return responce[0][0]
 
     def getDependent(self):
-        listScripts = glob.glob(self.configuration['SCRIPTS_DIR'] + '/*')
-        packages = []
-        for package in listScripts:
-            file = open(package)
-            data = file.read()
-            lines = data.split('\n')
-            for line in lines:
-                if line.startswith('#REQ:'):
-                    string = line.replace('#REQ:', '')
-                    if string != '':
-                        if (self.name == string.strip()) and (self.name not in packages):
-                            packages.append(os.path.splitext(os.path.basename(package))[0])
-                if line.startswith('#REC:'):
-                    string = line.replace('#REC:', '')
-                    if string != '':
-                        if (self.name == string.strip()) and (self.name not in packages):
-                            packages.append(os.path.splitext(os.path.basename(package))[0])
-            file.close()
-        return packages
-
+        dependents = []
+        self.cur.execute("SELECT Name FROM Package WHERE Required LIKE '%{name}%' UNION SELECT Name FROM Package WHERE Recommended LIKE '%{name}%'".format(name=self.name))
+        rows = self.cur.fetchall()
+        for i in rows:
+            dependents.append(i[0])
+        return remove_duplicates(dependents)
+    
+    def getInstalled(self):
+        self.cur.execute("SELECT Installed FROM Package WHERE Name=?", (self.name,))
+        responce = self.cur.fetchall()
+        return responce[0][0]
+    
+    def setInstalled(self, value):
+        self.cur.execute("UPDATE Package SET Installed=? WHERE Name=?", (value, self.name))
+    
     def install(self, prompt):
-        neededPackages = self.getNeededPackages()
+        neededPackages = self.getNeededPackages(self.name)
         if not self.installed:
             if prompt:
                 if neededPackages:
@@ -243,7 +237,7 @@ class Package:
             print 'Package ' + self.name + ' is already installed.'
 
     def build(self, prompt):
-        neededPackages = self.getNeededPackages()
+        neededPackages = self.getNeededPackages(self.name)
         if neededPackages:
             if prompt:
                 if neededPackages:
@@ -289,40 +283,42 @@ class Package:
         print 'nameFile => ' + self.nameFile
         print 'nameFileTgz => ' + self.nameFileTgz
         print 'nameInstalledFilesGz => ' + self.nameInstalledFilesGz
-        print 'required => ' + " ".join(self.required)
-        print 'recommended => ' + " ".join(self.recommended)
+        print 'required => ' + self.required
+        print 'recommended => ' + self.recommended
         print 'dependent => ' + " ".join(self.dependent)
         print 'description => ' + self.properties['DESCRIPTION']
         print 'section => ' + self.properties['SECTION']
         print 'version => ' + self.properties['VERSION']
         print 'revision => ' + self.properties['REVISION']
         print 'url => ' + self.properties['URL']
-        print 'needed packages => ' + " ".join(self.getNeededPackages())
-        print 'dependent packages installed => ' + " ".join(self.getDependentPackages())
+        print 'needed packages => ' + " ".join(self.getNeededPackages(self.name))
+        print 'dependent packages installed => ' + " ".join(self.getDependentPackages(self.name))
 
-    def getDependentPackages(self):
+    def getDependentPackages(self, name):
         packages = []
         if self.installed:
             for i in self.dependent:
-                pack = Package(i)
-                if pack.installed:
+                self.cur.execute("SELECT Installed FROM Package WHERE Name=?", (i,))
+                rows = self.cur.fetchall()
+                if rows[0][0]:
                     packages.append(i)
-                    packages.extend(pack.getDependentPackages())
+                    packages.extend(self.getDependentPackages(i))
         return remove_duplicates(packages)
-
-    def getNeededPackages(self):
-        packages = []
-        neededs = []
-        neededs.extend(self.required)
-        neededs.extend(self.recommended)
-        if not self.installed:
-            for i in neededs:
-                pack = Package(i)
-                if not pack.installed:
-                    packages.append(i)
-                    packages.extend(pack.getNeededPackages())
-        return remove_duplicates(packages)
-
+    
+    def getNeededPackages(self, nm):
+        dependents = []
+        self.cur.execute("SELECT Name,Installed FROM Package WHERE Required LIKE '%{name}%' UNION SELECT Name,Installed FROM Package WHERE Recommended LIKE '%{name}%'".format(name=nm))
+        rows = self.cur.fetchall()
+        for i in rows:
+            if not i[1]:
+                dependents.append(i[0])
+        try:
+            for i in dependents:
+                remove_duplicates(dependents.extend(self.getNeededPackages(i)))
+        except:
+            pass
+        return remove_duplicates(dependents)
+    
     def __installPkg(self):
         print 'installPkg '  + self.name
         if not self.nameFileTgz:
@@ -471,6 +467,12 @@ def selfUpdateAction():
 
 class Main:
     def __init__(self):
+        if not os.path.exists('/var/lib/alps/alps.sqlite'):
+            initializeDB('/var/cache/alps/scripts', '/var/lib/alps/alps.sqlite')
+            self.DB = sqlite.connect('/var/lib/alps/alps.sqlite')
+        else:
+            self.DB = sqlite.connect('/var/lib/alps/alps.sqlite')
+        self.DB.text_factory = str
         self.nameExecutable = os.path.basename(sys.argv[0])
         self.args = sys.argv
         self.args.remove(sys.argv[0])
@@ -504,7 +506,7 @@ class Main:
     def setPkg(self):
         ret = []
         for i in self.params:
-            ret.append(Package(i))
+            ret.append(Package(i, self.DB))
         return ret
 
     def parseargs(self):
