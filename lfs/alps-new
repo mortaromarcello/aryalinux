@@ -24,7 +24,10 @@ def runCommand(cmd, actionName):
         exit()
 
 def remove_duplicates(lst):
-    return list(OrderedDict.fromkeys(lst))
+    if lst:
+        return list(OrderedDict.fromkeys(lst))
+    else:
+        return []
 
 def initializeDB(pathScripts, DB):
     listPathScripts = glob.glob(pathScripts + '/' + '*')
@@ -215,21 +218,21 @@ class Package:
         self.cur.execute("UPDATE Package SET Installed=? WHERE Name=?", (value, self.name))
     
     def install(self, prompt):
-        neededPackages = self.getNeededPackages(self.name)
         if not self.installed:
+            neededPackages = self.getNeededPackages()
             if prompt:
                 if neededPackages:
                     print 'The following packages would be installed: ' + " ".join(neededPackages)
                     resp = raw_input('Are you sure? (y/N) ')
                     if resp.lower() == 'y':
                         for pkg in neededPackages:
-                            p = Package(pkg)
+                            p = Package(pkg, self.DB)
                             p.install(False)
                     else:
                         exit()
             else:
                 for pkg in neededPackages:
-                    p = Package(pkg)
+                    p = Package(pkg, self.DB)
                     p.install(prompt)
             print 'install=>' + self.name
             self.__installPkg()
@@ -237,7 +240,7 @@ class Package:
             print 'Package ' + self.name + ' is already installed.'
 
     def build(self, prompt):
-        neededPackages = self.getNeededPackages(self.name)
+        neededPackages = self.getNeededPackages()
         if neededPackages:
             if prompt:
                 if neededPackages:
@@ -291,33 +294,32 @@ class Package:
         print 'version => ' + self.properties['VERSION']
         print 'revision => ' + self.properties['REVISION']
         print 'url => ' + self.properties['URL']
-        print 'needed packages => ' + " ".join(self.getNeededPackages(self.name))
-        print 'dependent packages installed => ' + " ".join(self.getDependentPackages(self.name))
-
-    def getDependentPackages(self, name):
-        packages = []
-        if self.installed:
-            for i in self.dependent:
-                self.cur.execute("SELECT Installed FROM Package WHERE Name=?", (i,))
-                rows = self.cur.fetchall()
-                if rows[0][0]:
-                    packages.append(i)
-                    packages.extend(self.getDependentPackages(i))
-        return remove_duplicates(packages)
+        print 'needed packages => ' + " ".join(self.getNeededPackages())
+        pkgs = []
+        self.getDependentPackages(pkgs)
+        print 'dependent packages installed => ' + " ".join(pkgs)
     
-    def getNeededPackages(self, nm):
-        dependents = []
-        self.cur.execute("SELECT Name,Installed FROM Package WHERE Required LIKE '%{name}%' UNION SELECT Name,Installed FROM Package WHERE Recommended LIKE '%{name}%'".format(name=nm))
-        rows = self.cur.fetchall()
-        for i in rows:
-            if not i[1]:
-                dependents.append(i[0])
-        try:
-            for i in dependents:
-                remove_duplicates(dependents.extend(self.getNeededPackages(i)))
-        except:
-            pass
-        return remove_duplicates(dependents)
+    def getDependentPackages(self, pkgs):
+        if self.installed:
+            if self.dependent:
+                for i in self.dependent:
+                    if i not in pkgs:
+                        pkgs.append(i)
+                        p = Package(i, self.DB)
+                        if p.dependent:
+                            p.getDependentPackages(pkgs)
+        pkgs = remove_duplicates(pkgs)
+        #print self.name
+    
+    def getNeededPackages(self):
+        neededPackages = []
+        neededPackages.extend(self.required.split())
+        neededPackages.extend(self.recommended.split())
+        for i in neededPackages:
+            p = Package(i, self.DB)
+            if not p.installed:
+                neededPackages.extend(p.getNeededPackages())
+        return remove_duplicates(neededPackages)
     
     def __installPkg(self):
         print 'installPkg '  + self.name
