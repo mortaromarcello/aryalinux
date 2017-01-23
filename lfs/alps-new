@@ -11,9 +11,23 @@ from shutil import move
 from collections import OrderedDict
 from pysqlite2 import dbapi2 as sqlite
 
+def loadConfig(configPath):
+    conf = {}
+    file = open(configPath, 'r')
+    data = file.read()
+    lines = data.split('\n')
+    for line in lines:
+        parts = line.split('=')
+        if len(parts) == 2:
+            conf[parts[0]] = parts[1].replace('"', '');
+    return conf
+
+########################################################################
+pathConfig = '/etc/alps/alps.conf'
 alpExecutable = sys.argv[0]
 basenameAlpExecutable = os.path.basename(alpExecutable)
-alpDataBase = "/var/lib/alps/packages.sqlite"
+alpDataBase = loadConfig(pathConfig)['DB_FILE']
+#print alpDataBase + ' ' + basenameAlpExecutable + ' ' + alpExecutable
 
 def runCommand(cmd, actionName):
     p = subprocess.Popen(cmd)
@@ -189,23 +203,12 @@ def initializeDB(pathScripts, DB):
         if con:
             con.close()
 
-def loadConfig(configPath):
-    conf = {}
-    file = open(configPath, 'r')
-    data = file.read()
-    lines = data.split('\n')
-    for line in lines:
-        parts = line.split('=')
-        if len(parts) == 2:
-            conf[parts[0]] = parts[1].replace('"', '');
-    return conf
-
 class Package:
     def __init__(self, name, conDB):
         self.name = name
         self.DB = conDB
         self.cur = self.DB.cursor()
-        self.configPath = '/etc/alps/alps.conf'
+        self.configPath = pathConfig
         self.configuration = loadConfig(self.configPath)
         self.nameFile = self.configuration['SCRIPTS_DIR'] + '/' + self.name + '.sh'
         self.properties = {'DESCRIPTION':'','SECTION':'', 'VERSION':'', 'REVISION':'', 'URL':''}
@@ -559,11 +562,11 @@ def selfUpdateAction():
 
 class Main:
     def __init__(self):
-        if not os.path.exists('/var/lib/alps/alps.sqlite'):
-            initializeDB('/var/cache/alps/scripts', '/var/lib/alps/alps.sqlite')
-            self.DB = sqlite.connect('/var/lib/alps/alps.sqlite')
+        if not os.path.exists(alpDataBase):
+            initializeDB(loadConfig(pathConfig)['SCRIPTS_DIR'], alpDataBase)
+            self.DB = sqlite.connect(alpDataBase)
         else:
-            self.DB = sqlite.connect('/var/lib/alps/alps.sqlite')
+            self.DB = sqlite.connect(alpDataBase)
         self.DB.text_factory = str
         self.nameExecutable = os.path.basename(sys.argv[0])
         self.args = sys.argv
@@ -629,11 +632,14 @@ class Main:
             exit()
         if self.command == 'updatescripts':
             updateAction()
+            self.DB.close()
+            updateDB(loadConfig(pathConfig)['SCRIPTS_DIR'], alpDataBase)
+            self.DB = sqlite.connect(alpDataBase)
             exit()
         if self.command == 'updatedb':
             self.DB.close()
-            updateDB('/var/cache/alps/scripts', '/var/lib/alps/alps.sqlite')
-            self.DB = sqlite.connect('/var/lib/alps/alps.sqlite')
+            updateDB(loadConfig(pathConfig)['SCRIPTS_DIR'], alpDataBase)
+            self.DB = sqlite.connect(alpDataBase)
             exit()
         if self.args[1] == '--help' or self.args[1] == 'help':
             help()
