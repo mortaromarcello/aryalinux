@@ -300,7 +300,8 @@ class Package:
     
     def install(self, prompt):
         if not self.installed:
-            neededPackages = self.getNeededPackages()
+            neededPackages = []
+            self.getNeededPackages(neededPackages)
             if prompt:
                 if neededPackages:
                     print 'The following packages would be installed: ' + " ".join(neededPackages)
@@ -321,7 +322,8 @@ class Package:
             print 'Package ' + self.name + ' is already installed.'
 
     def build(self, prompt):
-        neededPackages = self.getNeededPackages()
+        neededPackages = []
+        self.getNeededPackages(neededPackages)
         if neededPackages:
             if prompt:
                 if neededPackages:

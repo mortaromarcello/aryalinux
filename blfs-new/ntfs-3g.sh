@@ -76,7 +76,7 @@ function build() {
     esac
     cd $SRC
     if [ ! -z $URL ]; then
-        wget 
+        wget -nc $URL
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
