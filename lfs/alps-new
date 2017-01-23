@@ -27,7 +27,6 @@ pathConfig = '/etc/alps/alps.conf'
 alpExecutable = sys.argv[0]
 basenameAlpExecutable = os.path.basename(alpExecutable)
 alpDataBase = loadConfig(pathConfig)['DB_FILE']
-#print alpDataBase + ' ' + basenameAlpExecutable + ' ' + alpExecutable
 
 def runCommand(cmd, actionName):
     p = subprocess.Popen(cmd)
