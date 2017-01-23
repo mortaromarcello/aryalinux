@@ -29,11 +29,90 @@ def remove_duplicates(lst):
     else:
         return []
 
+def updateDB(pathScripts, DB):
+    listPathScripts = glob.glob(pathScripts + '/' + '*')
+    packages = []
+    try:
+        con = sqlite.connect(DB)
+        con.text_factory = str
+        c = con.cursor()
+        c.execute("SELECT Name,NameFile FROM Package")
+        rows = c.fetchall()
+        for i in listPathScripts:
+            if i not in rows[1]:
+                description = ""
+                section = ""
+                version = ""
+                revision = ""
+                url = ""
+                required = []
+                recommended = []
+                optional = []
+                dependent = []
+                file = open(i)
+                data = file.read()
+                lines = data.split('\n')
+                for line in lines:
+                    line = line.strip()
+                    if line.startswith('DESCRIPTION'):
+                        fields = line.split('=')
+                        try:
+                            description = fields[1]
+                        except:
+                            description = ""
+                    if line.startswith('SECTION'):
+                        fields = line.split('=')
+                        try:
+                            section = fields[1]
+                        except:
+                            section = ""
+                    if line.startswith('VERSION'):
+                        fields = line.split('=')
+                        try:
+                            version = fields[1]
+                        except:
+                            version = ""
+                    if line.startswith('REVISION'):
+                        fields = line.split('=')
+                        try:
+                            if fields[1].isdigit():
+                                revision = fields[1]
+                        except:
+                            revision = ""
+                    if line.startswith('URL'):
+                        fields = line.split('=')
+                        try:
+                            url = fields[1]
+                            break
+                        except:
+                            url = ""
+                for line in lines:
+                    if line.startswith('#REQ:'):
+                        if line.replace('#REQ:', '') != '':
+                            required.append(line.replace('#REQ:', ''))
+                for line in lines:
+                    if line.startswith('#REC:'):
+                        if line.replace('#REC:', '') != '':
+                            recommended.append(line.replace('#REC:', ''))
+                for line in lines:
+                    if line.startswith('#OPT:'):
+                        if line.replace('#OPT:', '') != '':
+                            optional.append(line.replace('#OPT:', ''))
+                packages.append((os.path.splitext(os.path.basename(i))[0], i, description, section, version, revision, url, " ".join(required), " ".join(recommended), " ".join(optional), " ".join(dependent), False))
+        c.executemany("INSERT INTO Package VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", packages)
+        con.commit()
+                #############################
+    except sqlite.Error, e:
+        print "Error %s:" % e.args[0]
+        sys.exit(1)
+    finally:
+        if con:
+            con.close()
+
 def initializeDB(pathScripts, DB):
     listPathScripts = glob.glob(pathScripts + '/' + '*')
     packages = []
     for i in listPathScripts:
-        
         description = ""
         section = ""
         version = ""
@@ -96,13 +175,13 @@ def initializeDB(pathScripts, DB):
         packages.append((os.path.splitext(os.path.basename(i))[0], i, description, section, version, revision, url, " ".join(required), " ".join(recommended), " ".join(optional), " ".join(dependent), False))
     con = None
     try:
-        conn = sqlite.connect(DB)
-        conn.text_factory = str
-        c = conn.cursor()
+        con = sqlite.connect(DB)
+        con.text_factory = str
+        c = con.cursor()
         c.execute("DROP TABLE IF EXISTS Package")
         c.execute("CREATE TABLE IF NOT EXISTS Package(Name TEXT, NameFile TEXT, Description TEXT, Section TEXT, Version INT, Revision TEXT, Url TEXT, Required TEXT, Recommended TEXT, Optional TEXT, Dependent TEXT, Installed INT)")
         c.executemany("INSERT INTO Package VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", packages)
-        conn.commit()
+        con.commit()
     except sqlite.Error, e:
         print "Error %s:" % e.args[0]
         sys.exit(1)
@@ -498,7 +577,7 @@ class Main:
     def getCommand(self):
         ret = ''
         for i in self.args:
-            if i == 'build' or i == 'install' or i == 'remove' or i == 'show' or i == 'selfupdate' or i == 'updatescripts':
+            if i == 'build' or i == 'install' or i == 'remove' or i == 'show' or i == 'selfupdate' or i == 'updatescripts' or i == 'updatedb':
                 ret = i
         return ret
 
@@ -512,7 +591,7 @@ class Main:
     def getParams(self):
         ret = []
         for i in self.args:
-            if  i != 'install' and i != 'build' and i != 'remove' and i != 'show' and i != 'selfupdate' and i != 'updatescripts' and not i.startswith("-"):
+            if  i != 'install' and i != 'build' and i != 'remove' and i != 'show' and i != 'selfupdate' and i != 'updatescripts' and i != "updatedb" and not i.startswith("-"):
                 ret.append(i)
         return ret
 
@@ -550,6 +629,11 @@ class Main:
             exit()
         if self.command == 'updatescripts':
             updateAction()
+            exit()
+        if self.command == 'updatedb':
+            self.DB.close()
+            updateDB('/var/cache/alps/scripts', '/var/lib/alps/alps.sqlite')
+            self.DB = sqlite.connect('/var/lib/alps/alps.sqlite')
             exit()
         if self.args[1] == '--help' or self.args[1] == 'help':
             help()
