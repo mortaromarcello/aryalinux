@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="030-python-pysqlite.sh"
-TARBALL="pysqlite-1.1.zip"
+TARBALL="pysqlite-2.8.tar.gz"
 
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
@@ -22,7 +22,7 @@ then
 
 	if [ "$TARBALL" != "" ]
 	then
-		DIRECTORY="pysqlite-1.1"
+		DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 		if [ -d $DIRECTORY ]
 		then
 			rm -rvf $DIRECTORY 

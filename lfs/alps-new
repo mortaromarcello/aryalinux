@@ -203,7 +203,7 @@ def initializeDB(pathScripts, DB):
             con.close()
 
 class Package:
-    def __init__(self, name, conDB):
+    def __init__(self, name, conDB, options={'prompt':False, 'force':False}):
         self.name = name
         self.DB = conDB
         self.cur = self.DB.cursor()
@@ -241,6 +241,7 @@ class Package:
         self.optional = self.getOptional()
         self.dependent = self.getDependent()
         self.installed = self.getInstalled()
+        self.options = options
     
     def getDescription(self):
         self.cur.execute("SELECT Description FROM Package WHERE Name=?", (self.name,))
@@ -298,68 +299,71 @@ class Package:
     def setInstalled(self, value):
         self.cur.execute("UPDATE Package SET Installed=? WHERE Name=?", (value, self.name))
     
-    def install(self, prompt):
+    def install(self):
         if not self.installed:
             neededPackages = []
             self.getNeededPackages(neededPackages)
-            if prompt:
+            if self.options['prompt']:
                 if neededPackages:
                     print 'The following packages would be installed: ' + " ".join(neededPackages)
                     resp = raw_input('Are you sure? (y/N) ')
                     if resp.lower() == 'y':
                         for pkg in neededPackages:
-                            p = Package(pkg, self.DB)
-                            p.install(False)
+                            p = Package(pkg, self.DB, self.options)
+                            p.install()
                     else:
                         exit()
             else:
                 for pkg in neededPackages:
-                    p = Package(pkg, self.DB)
-                    p.install(prompt)
+                    p = Package(pkg, self.DB, self.options)
+                    p.install()
             print 'install=>' + self.name
             self.__installPkg()
         else:
-            print 'Package ' + self.name + ' is already installed.'
+            if self.options['force']:
+                self.__installPkg()
+            else:
+                print 'Package ' + self.name + ' is already installed.'
 
-    def build(self, prompt):
+    def build(self):
         neededPackages = []
         self.getNeededPackages(neededPackages)
         if neededPackages:
-            if prompt:
+            if self.options['prompt']:
                 if neededPackages:
                     print 'The following packages would be installed: ' + " ".join(neededPackages)
                     resp = raw_input('Are you sure? (y/N) ')
                     if resp.lower() == 'y':
                         for pkg in neededPackages:
-                            p = Package(pkg)
-                            p.install(prompt)
+                            p = Package(pkg, self.DB, self.options)
+                            p.install()
                     else:
                         exit()
             else:
                 for pkg in neededPackages:
-                    p = Package(pkg)
-                    p.install(prompt)
+                    p = Package(pkg, self.DB, self.options)
+                    p.install()
         print 'build=>' + self.name
         self.__buildPkg()
 
-    def remove(self,prompt):
+    def remove(self):
         if self.installed:
             packagesDependetInstalled = []
             self.getDependentPackages(packagesDependetInstalled)
-            if prompt:
+            if self.options['prompt']:
                 if packagesDependetInstalled:
                     print 'The following packages would be removed: ' + " ".join(self.dependent)
                     resp = raw_input('Are you sure? (y/N) ')
                     if resp.lower() == 'y':
                         for pkg in packagesDependetInstalled:
-                            p = Package(pkg, self.DB)
-                            p.remove(prompt)
+                            p = Package(pkg, self.DB, self.options)
+                            p.remove()
                     else:
                         exit()
             else:
                 for pkg in packagesDependetInstalled:
-                    p = Package(pkg, self.DB)
-                    p.remove(prompt)
+                    p = Package(pkg, self.DB, self.options)
+                    p.remove()
             print 'remove=>' + self.name
             self.__removePkg()
         else:
@@ -586,10 +590,13 @@ class Main:
         return ret
 
     def getOptions(self):
-        ret = []
+        ret = {'prompt':False, 'force':False}
         for i in self.args:
             if i.startswith("-"):
-                ret.append(i)
+                if i == '-y' or i == '--yes':
+                    ret['prompt'] = True
+                if i == '-f' or i == '--force':
+                    ret['force'] = True
         return ret
 
     def getParams(self):
@@ -602,27 +609,27 @@ class Main:
     def setPkg(self):
         ret = []
         for i in self.params:
-            ret.append(Package(i, self.DB))
+            ret.append(Package(i, self.DB, self.options))
         return ret
 
     def parseargs(self):
         if not self.command:
             help()
             exit()
-        for opt in self.options:
-            if opt == '-y' or opt == '--yes':
-                self.prompt = False
+        #for opt in self.options:
+        #    if opt == '-y' or opt == '--yes':
+        #        self.prompt = False
         if self.command == 'install':
             for i in self.pkgs:
-                i.install(self.prompt)
+                i.install()
                 exit()
         if self.command == 'build':
             for i in self.pkgs:
-                i.build(self.prompt)
+                i.build()
                 exit()
         if self.command == 'remove':
             for i in self.pkgs:
-                i.remove(self.prompt)
+                i.remove()
                 exit()
         if self.command == 'show':
             for i in self.pkgs:
