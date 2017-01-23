@@ -261,21 +261,22 @@ class Package:
 
     def remove(self,prompt):
         if self.installed:
-            packagesDependetInstalled = self.getDependentPackages()
+            packagesDependetInstalled = []
+            self.getDependentPackages(packagesDependetInstalled)
             if prompt:
                 if packagesDependetInstalled:
                     print 'The following packages would be removed: ' + " ".join(self.dependent)
                     resp = raw_input('Are you sure? (y/N) ')
                     if resp.lower() == 'y':
                         for pkg in packagesDependetInstalled:
-                            p = Package(pkg)
-                            p.__removePkg()
+                            p = Package(pkg, self.DB)
+                            p.remove(prompt)
                     else:
                         exit()
             else:
                 for pkg in packagesDependetInstalled:
-                    p = Package(pkg)
-                    p.__removePkg()
+                    p = Package(pkg, self.DB)
+                    p.remove(prompt)
             print 'remove=>' + self.name
             self.__removePkg()
         else:
@@ -286,6 +287,7 @@ class Package:
         print 'nameFile => ' + self.nameFile
         print 'nameFileTgz => ' + self.nameFileTgz
         print 'nameInstalledFilesGz => ' + self.nameInstalledFilesGz
+        print 'installed=> ' + str(bool(self.installed))
         print 'required => ' + self.required
         print 'recommended => ' + self.recommended
         print 'dependent => ' + " ".join(self.dependent)
@@ -294,7 +296,9 @@ class Package:
         print 'version => ' + self.properties['VERSION']
         print 'revision => ' + self.properties['REVISION']
         print 'url => ' + self.properties['URL']
-        print 'needed packages => ' + " ".join(self.getNeededPackages())
+        pkgs = []
+        self.getNeededPackages(pkgs)
+        print 'needed packages => ' + " ".join(pkgs)
         pkgs = []
         self.getDependentPackages(pkgs)
         print 'dependent packages installed => ' + " ".join(pkgs)
@@ -304,22 +308,25 @@ class Package:
             if self.dependent:
                 for i in self.dependent:
                     if i not in pkgs:
-                        pkgs.append(i)
                         p = Package(i, self.DB)
-                        if p.dependent:
-                            p.getDependentPackages(pkgs)
+                        if p.installed:
+                            pkgs.append(i)
+                            if p.dependent:
+                                p.getDependentPackages(pkgs)
         pkgs = remove_duplicates(pkgs)
-        #print self.name
     
-    def getNeededPackages(self):
-        neededPackages = []
-        neededPackages.extend(self.required.split())
-        neededPackages.extend(self.recommended.split())
-        for i in neededPackages:
-            p = Package(i, self.DB)
-            if not p.installed:
-                neededPackages.extend(p.getNeededPackages())
-        return remove_duplicates(neededPackages)
+    def getNeededPackages(self, pkgs):
+        packages = []
+        packages.extend(self.required.split())
+        packages.extend(self.recommended.split())
+        for i in packages:
+            if i not in pkgs:
+                p = Package(i, self.DB)
+                if not p.installed:
+                    pkgs.append(i)
+                    if p.required or p.recommended:
+                        p.getNeededPackages(pkgs)
+        pkgs = remove_duplicates(pkgs)
     
     def __installPkg(self):
         print 'installPkg '  + self.name
@@ -339,6 +346,8 @@ class Package:
             runCommand(['cp', '-vf', name[0], self.configuration['INSTALLED_FILES_DIR']], 'copy preremove files')
             self.namePreRemoveScript = self.configuration['INSTALLED_FILES_DIR'] + '/' + name[0]
             runCommand(['rm', '-rvf', '/install'], 'remove install')
+            self.cur.execute("UPDATE Package SET Installed=? WHERE Name=?", (1, self.name))
+            self.DB.commit()
 
     def __buildPkg(self):
         print 'buildPkg ' + self.name
@@ -365,8 +374,6 @@ class Package:
                 runCommand(['sh', self.namePreRemoveScript], 'pre remove script')
                 runCommand(['rm' , '-vf', self.namePreRemoveScript], 'post remove script')
                 self.namePreRemoveScript = ''
-                runCommand(['rm', '-vf', realName[0], self.nameInstalledFilesGz], 'remove temp file')
-                self.nameInstalledFilesGz = ''
             runCommand(['gunzip', '-vkf', self.nameInstalledFilesGz], 'gunzip file')
             realName = glob.glob(self.configuration['INSTALLED_FILES_DIR'] + '/' + self.name + '*.files')
             try:
@@ -391,14 +398,18 @@ class Package:
                     except:
                         print 'Not remove ' + line + ' directory.'
             f.close()
+            runCommand(['rm', '-vf', realName[0], self.nameInstalledFilesGz], 'remove temp file')
+            self.nameInstalledFilesGz = ''
             if self.namePostRemoveScript:
                 runCommand(['sh', self.namePostRemoveScript], 'post remove script')
                 runCommand(['rm' , '-vf', self.namePostRemoveScript], 'post remove script')
                 self.namePostRemoveScript = ''
             if self.nameFileTgz:
                 runCommand(['rm', '-vf', self.nameFileTgz], 'remove tgz file')
-            else:
-                print self.name + ' is not installed.'
+            self.cur.execute("UPDATE Package SET Installed=? WHERE Name=?", (0, self.name))
+            self.DB.commit()
+        else:
+            print self.name + ' is not installed.'
 
 def help():
         print 'Usage : alps <command> [packages...]'

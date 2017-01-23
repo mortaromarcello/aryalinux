@@ -16,6 +16,7 @@ VERSION=
 NAME=""
 PKGNAME=$NAME
 REVISION=1
+URL=
 
 #REQ:
 #REC:
@@ -76,7 +77,6 @@ function build() {
             ln -sv lib usr/local/lib64 ;;
     esac
     cd $SRC
-    URL=
     if [ ! -z $URL ]; then
         wget 
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
