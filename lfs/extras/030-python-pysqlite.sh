@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="030-python-pysqlite.sh"
-TARBALL="pysqlite-2.8.tar.gz"
+TARBALL="pysqlite-2.8.3.tar.gz"
 
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
@@ -27,7 +27,7 @@ then
 		then
 			rm -rvf $DIRECTORY 
 		fi
-		unzip $TARBALL
+		tar -xf $TARBALL
 		cd $DIRECTORY
 	fi
 
