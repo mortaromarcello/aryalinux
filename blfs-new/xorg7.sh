@@ -112,6 +112,7 @@ function build() {
         fi
         cd $DIRECTORY
     fi
+    export XORG_PREFIX=/usr
     wget -nc http://downloads.sourceforge.net/project/dejavu/dejavu/2.37/dejavu-fonts-2.37.tar.bz2
     tar -xvf dejavu-fonts-2.37.tar.bz2
     cd dejavu-fonts-2.37
@@ -135,6 +136,17 @@ Section "InputClass"
     Option "XkbOptions" "terminate:ctrl_alt_bksp"
 EndSection
 EOF
+cat >> $PKG/etc/profile.d/xorg.sh << "EOF"
+pathappend $XORG_PREFIX/bin             PATH
+pathappend $XORG_PREFIX/lib/pkgconfig   PKG_CONFIG_PATH
+pathappend $XORG_PREFIX/share/pkgconfig PKG_CONFIG_PATH
+pathappend $XORG_PREFIX/lib             LIBRARY_PATH
+pathappend $XORG_PREFIX/include         C_INCLUDE_PATH
+pathappend $XORG_PREFIX/include         CPLUS_INCLUDE_PATH
+ACLOCAL='aclocal -I $XORG_PREFIX/share/aclocal'
+export PATH PKG_CONFIG_PATH ACLOCAL LIBRARY_PATH C_INCLUDE_PATH CPLUS_INCLUDE_PATH
+EOF
+echo "$XORG_PREFIX/lib" >> $PKG/etc/ld.so.conf
 }
 
 function package() {
