@@ -16,7 +16,7 @@ VERSION=0.0.1
 NAME="xorg7"
 PKGNAME=$NAME
 REVISION=1
-URL=ftp://ftp.tw.freebsd.org/pub/branches/-current/ports/distfiles/fireflysung-1.3.0.tar.gz
+URL=http://ftp.tw.freebsd.org/pub/branches/-current/ports/distfiles/fireflysung-1.3.0.tar.gz
 
 #REQ:wget
 #REQ:util-macros
