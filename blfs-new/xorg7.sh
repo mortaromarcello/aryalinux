@@ -16,6 +16,7 @@ VERSION=0.0.1
 NAME="xorg7"
 PKGNAME=$NAME
 REVISION=1
+URL=http://ftp.osuosl.org/pub/blfs/conglomeration/Xorg/fireflysung-1.3.0.tar.gz
 
 #REQ:wget
 #REQ:util-macros
@@ -99,9 +100,8 @@ function build() {
             ln -sv lib usr/local/lib64 ;;
     esac
     cd $SRC
-    URL=
     if [ ! -z $URL ]; then
-        wget 
+        wget -nc $URL
         TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
         if [ -z $(echo $TARBALL | grep ".zip$") ]; then
             DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
@@ -113,21 +113,10 @@ function build() {
         cd $DIRECTORY
     fi
     export XORG_PREFIX=/usr
-    wget -nc http://downloads.sourceforge.net/project/dejavu/dejavu/2.37/dejavu-fonts-2.37.tar.bz2
-    tar -xvf dejavu-fonts-2.37.tar.bz2
-    cd dejavu-fonts-2.37
+    DRI_PRIME=1 glxinfo | egrep "(OpenGL vendor|OpenGL renderer|OpenGL version)"
     install -v -d -m755 $PKG/usr/share/fonts/dejavu &&
-    cd $SRC
-    wget -nc http://downloads.sourceforge.net/project/dejavu/dejavu/2.37/dejavu-fonts-ttf-2.37.tar.bz2
-    tar -xvf dejavu-fonts-ttf-2.37.tar.bz2
-    cd dejavu-fonts-ttf-2.37
-    install -v -m644 ttf/*.ttf $PKG/usr/share/fonts/dejavu
-    cd $SRC
-    wget -nc http://downloads.sourceforge.net/project/dejavu/dejavu/2.37/dejavu-lgc-fonts-ttf-2.37.tar.bz2
-    tar -xvf dejavu-lgc-fonts-ttf-2.37.tar.bz2
-    cd dejavu-lgc-fonts-ttf-2.37
-    install -v -m644 ttf/*.ttf $PKG/usr/share/fonts/dejavu
-    cd $SRC
+    install -v -m644 ttf/*.ttf $PKG/usr/share/fonts/dejavu &&
+    
     mkdir -vp $PKG/etc/X11/xorg.conf.d
     cat > $PKG/etc/X11/xorg.conf.d/xkb-defaults.conf << "EOF"
 Section "InputClass"
@@ -136,8 +125,26 @@ Section "InputClass"
     Option "XkbOptions" "terminate:ctrl_alt_bksp"
 EndSection
 EOF
-mkdir -vp $PKG/etc/profile.d
-cat >> $PKG/etc/profile.d/xorg.sh << "EOF"
+    cat > $PKG/etc/X11/xorg.conf.d/videocard-0.conf << "EOF"
+Section "Device"
+    Identifier  "Videocard0"
+    Driver      "radeon"
+    VendorName  "Videocard vendor"
+    BoardName   "ATI Radeon 7500"
+    Option      "NoAccel" "true"
+EndSection
+EOF
+
+    cat > $PKG/etc/X11/xorg.conf.d/server-layout.conf << "EOF"
+Section "ServerLayout"
+    Identifier     "DefaultLayout"
+    Screen      0  "Screen0" 0 0
+    Screen      1  "Screen1" LeftOf "Screen0"
+    Option         "Xinerama"
+EndSection
+EOF
+    mkdir -vp $PKG/etc/profile.d
+    cat >> $PKG/etc/profile.d/xorg.sh << "EOF"
 pathappend $XORG_PREFIX/bin             PATH
 pathappend $XORG_PREFIX/lib/pkgconfig   PKG_CONFIG_PATH
 pathappend $XORG_PREFIX/share/pkgconfig PKG_CONFIG_PATH
@@ -147,7 +154,6 @@ pathappend $XORG_PREFIX/include         CPLUS_INCLUDE_PATH
 ACLOCAL='aclocal -I $XORG_PREFIX/share/aclocal'
 export PATH PKG_CONFIG_PATH ACLOCAL LIBRARY_PATH C_INCLUDE_PATH CPLUS_INCLUDE_PATH
 EOF
-echo "$XORG_PREFIX/lib" >> $PKG/etc/ld.so.conf
 }
 
 function package() {
@@ -161,6 +167,7 @@ function package() {
     cat > $PKG/install/doinst.sh << "EOF"
 #!/bin/sh
 fc-cache -v /usr/share/fonts/dejavu
+echo "$XORG_PREFIX/lib" >> /etc/ld.so.conf
 EOF
     cat > $PKG/install/$PKGNAME-$VERSION-$ARCH-$REVISION.preremove << "EOF"
 #!/bin/sh
