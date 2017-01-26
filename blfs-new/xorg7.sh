@@ -136,6 +136,7 @@ Section "InputClass"
     Option "XkbOptions" "terminate:ctrl_alt_bksp"
 EndSection
 EOF
+mkdir -vp $PKG/etc/profile.d
 cat >> $PKG/etc/profile.d/xorg.sh << "EOF"
 pathappend $XORG_PREFIX/bin             PATH
 pathappend $XORG_PREFIX/lib/pkgconfig   PKG_CONFIG_PATH
