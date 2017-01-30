@@ -16,9 +16,9 @@ VERSION=0.0.1
 NAME="xorg7"
 PKGNAME=$NAME
 REVISION=1
-URL=ftp://ftp.tw.freebsd.org/pub/branches/-current/ports/distfiles/fireflysung-1.3.0.tar.gz
+URL=ftp://ftp.fr.freshrpms.net/pub/linux/gentoo/distfiles/fireflysung-1.3.0.tar.gz
 
-#REQ:wget
+#REQ:libxml2
 #REQ:util-macros
 #REQ:x7proto
 #REQ:libXau
@@ -115,7 +115,7 @@ function build() {
     export XORG_PREFIX=/usr
     DRI_PRIME=1 glxinfo | egrep "(OpenGL vendor|OpenGL renderer|OpenGL version)"
     install -v -d -m755 $PKG/usr/share/fonts/dejavu &&
-    install -v -m644 ttf/*.ttf $PKG/usr/share/fonts/dejavu &&
+    install -v -m644 *.ttf $PKG/usr/share/fonts/dejavu &&
     
     mkdir -vp $PKG/etc/X11/xorg.conf.d
     cat > $PKG/etc/X11/xorg.conf.d/xkb-defaults.conf << "EOF"
