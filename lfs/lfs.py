@@ -1,10 +1,16 @@
 #!/usr/bin/env python
-import os
+import os, time, parted
 try:
     import wget
 except ImportError:
     print "not import wget. Exit"
     exit
+try:
+    import pytz
+except ImportError:
+    print "not import pytz. Exit"
+    exit
+
 #-----------------------data--------------------------------------------
 WGET_LIST=["http://download.savannah.gnu.org/releases/acl/acl-2.2.52.src.tar.gz",
 "http://download.savannah.gnu.org/releases/attr/attr-2.4.47.src.tar.gz",
@@ -101,7 +107,41 @@ def getfile(url):
     filename = wget.download(url)
     return filename
 
+def getlist(outdir, listfiles):
+    pushdir(outdir)
+    for i in listfiles:
+        print "Download " + i + " file"
+        getfile(i)
+    popdir()
+
+def get_timezone():
+    count = 0
+    result = 0
+    number = ""
+    while number == "":
+        for tz in pytz.common_timezones:
+            count += 1
+            print str (count) + ")" + " " + tz
+            if count % 23 == 0:
+                number = raw_input("Insert the number or return for others country: ")
+                if number != "":
+                    try:
+                        result = int(number)
+                    except:
+                        result = ""
+                        continue
+                    break
+        count = 0
+    return pytz.timezone(pytz.common_timezones[result - 1])
+
 #---------------------------main---------------------------------------#
+
+if __name__ == "__main__":
+    pass
+#---------------------------tests--------------------------------------#
 for i in WGET_LIST:
     print i
-filename = getfile(WGET_LIST[0])
+print "Download " + WGET_LIST[0] + " file"
+#filename = getfile(WGET_LIST[0])
+
+print get_timezone()
