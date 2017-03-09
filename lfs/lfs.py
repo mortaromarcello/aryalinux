@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import os, time, parted
+import os, time, parted, libmount
 try:
     import wget
 except ImportError:
@@ -93,6 +93,7 @@ WGET_LIST=["http://download.savannah.gnu.org/releases/acl/acl-2.2.52.src.tar.gz"
 "http://www.linuxfromscratch.org/patches/lfs/7.10/sysvinit-2.88dsf-consolidated-1.patch"
 ]
 pushstack = list()
+LFS = "/mnt/lfs"
 #---------------------------functions----------------------------------#
 def pushdir(dirname):
     global pushstack
@@ -127,8 +128,11 @@ def get_timezone():
                 if number != "":
                     try:
                         result = int(number)
+                        if result > len(pytz.common_timezones):
+                            result = 0
+                            continue
                     except:
-                        result = ""
+                        result = 0
                         continue
                     break
         count = 0
