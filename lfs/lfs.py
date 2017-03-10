@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import os, time, parted, pylibmount
+import os, time, parted, libmount
 try:
     import wget
 except ImportError:
@@ -170,5 +170,7 @@ if __name__ == "__main__":
 #    print (i)
 #print ("Download " + WGET_LIST[0] + " file")
 #filename = getfile(WGET_LIST[0])
-
-print (get_timezone())
+#print (get_timezone())
+#mount("/dev/sdb5", "/mnt")
+#raw_input("...")
+#umount("/mnt")
