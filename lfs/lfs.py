@@ -1,14 +1,14 @@
 #!/usr/bin/env python
-import os, time, parted, libmount
+import os, time, parted, pylibmount
 try:
     import wget
 except ImportError:
-    print "not import wget. Exit"
+    print ("not import wget. Exit")
     exit
 try:
     import pytz
 except ImportError:
-    print "not import pytz. Exit"
+    print ("not import pytz. Exit")
     exit
 
 #-----------------------data--------------------------------------------
@@ -111,7 +111,7 @@ def getfile(url):
 def getlist(outdir, listfiles):
     pushdir(outdir)
     for i in listfiles:
-        print "Download " + i + " file"
+        print ("Download " + i + " file")
         getfile(i)
     popdir()
 
@@ -122,7 +122,7 @@ def get_timezone():
     while number == "":
         for tz in pytz.common_timezones:
             count += 1
-            print str (count) + ")" + " " + tz
+            print (str (count) + ")" + " " + tz)
             if count % 23 == 0:
                 number = raw_input("Insert the number or return for others country: ")
                 if number != "":
@@ -138,14 +138,37 @@ def get_timezone():
         count = 0
     return pytz.timezone(pytz.common_timezones[result - 1])
 
+def mount(source, target):
+    cxt = libmount.Context()
+    cxt.source = source
+    cxt.target = target
+    try:
+        cxt.mount()
+    except Exception:
+        print("failed to mount " + source + " in " + target)
+        return -1
+    print("successfully mounted")
+    return 0
+
+def umount(target):
+    cxt = libmount.Context()
+    cxt.target = target
+    try:
+        cxt.umount()
+    except Exception:
+        print("failed to umount " + target)
+        return -1
+    print("successfully umounted")
+    return 0
+
 #---------------------------main---------------------------------------#
 
 if __name__ == "__main__":
     pass
 #---------------------------tests--------------------------------------#
-for i in WGET_LIST:
-    print i
-print "Download " + WGET_LIST[0] + " file"
+#for i in WGET_LIST:
+#    print (i)
+#print ("Download " + WGET_LIST[0] + " file")
 #filename = getfile(WGET_LIST[0])
 
-print get_timezone()
+print (get_timezone())
