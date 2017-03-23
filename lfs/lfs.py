@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-import os, time, parted, libmount
+import sys, os, time, parted, libmount, shutil, stat
+import subprocess as sproc
 try:
     import wget
 except ImportError:
@@ -94,6 +95,12 @@ WGET_LIST=["http://download.savannah.gnu.org/releases/acl/acl-2.2.52.src.tar.gz"
 ]
 pushstack = list()
 LFS = "/mnt/lfs"
+TIMEZONE = "Europe/Rome"
+FS = "ext4"
+ROOT_PART = "" #"/dev/sdc5"
+SWAP_PART = "" #"/dev/sdxx"
+HOME_PART = "" #
+
 #---------------------------functions----------------------------------#
 def pushdir(dirname):
     global pushstack
@@ -161,6 +168,85 @@ def umount(target):
     print("successfully umounted")
     return 0
 
+def mkfs(fs,dev):
+    if fs=="" or dev == "":
+        return -1
+    cmd = []
+    cmd.append("mkfs")
+    cmd.append("-t")
+    cmd.append(fs)
+    cmd.append(dev)
+    p = sproc.Popen(cmd, stdin=sproc.PIPE, stdout=sproc.PIPE, stderr=sproc.STDOUT, shell=False)
+    p.stdin.write("y\n")
+    line = p.stdout.readline()
+    while line != "":
+        sys.stdout.write(line)
+        sys.stdout.flush()
+        line = p.stdout.readline()
+    return p.wait()
+
+def mkswap(dev):
+    if dev == "":
+        return -1
+    cmd = []
+    cmd.append("mkswap")
+    cmd.append(dev)
+    p = sproc.Popen(cmd, stdin=sproc.PIPE, stdout=sproc.PIPE, stderr=sproc.STDOUT, shell=False)
+    p.stdin.write("y\n")
+    line = p.stdout.readline()
+    while line != "":
+        sys.stdout.write(line)
+        sys.stdout.flush()
+        line = p.stdout.readline()
+    return p.wait()
+
+def deltree(path):
+    if path == "":
+        exit -1
+    cmd = []
+    cmd.append("rm")
+    cmd.append("-rvf")
+    cmd.append(path)
+    p = sproc.Popen(cmd, stdin=sproc.PIPE, stdout=sproc.PIPE, stderr=sproc.STDOUT, shell=False)
+    line = p.stdout.readline()
+    while line != "":
+        sys.stdout.write(line)
+        sys.stdout.flush()
+        line = p.stdout.readline()
+    return p.wait()
+
+def isblkdev(dev):
+    mode = os.stat(dev).st_mode
+    if stat.S_ISBLK(mode):
+        return True
+    else:
+        return False
+
+#---------------------------stages-------------------------------------#
+def stage1():
+    TIMEZONE = get_timezone()
+    deltree("/tools")
+    deltree("/sources")
+    deltree(LFS)
+    f = open("build-properties", "a")
+    f.write("LFS=%s" % LFS)
+    if os.path.isfile(ROOT_PART) and isblkdev(ROOT_PART):
+        ret = mkfs(FS, ROOT_PART)
+        if ret != 0:
+            print "Error!"
+            exit(1)
+    else:
+        print "%s is not a valid block device. Aborting..." % ROOT_PART
+        exit(1)
+    os.makedirs(LFS)
+    mount(ROOT_PART, LFS)
+    if os.path.isfile(SWAP_PART) and isblkdev(SWAP_PART):
+        ret = mkswap(SWAP_PART)
+        if ret != 0:
+            print "Swap partition exists and is active. Not formatting"
+    else:
+        print "No valid swap partition specified. Continuing without swap partition..."
+    
 #---------------------------main---------------------------------------#
 
 if __name__ == "__main__":
@@ -170,7 +256,16 @@ if __name__ == "__main__":
 #    print (i)
 #print ("Download " + WGET_LIST[0] + " file")
 #filename = getfile(WGET_LIST[0])
-#print (get_timezone())
+#TIMEZONE = get_timezone()
+#print (TIMEZONE)
 #mount("/dev/sdb5", "/mnt")
 #raw_input("...")
 #umount("/mnt")
+#sdc = parted.getDevice("/dev/sdc")
+#print(sdc.model)
+#ret = mkfs("ext4", "/dev/sdc1")
+#print (ret)
+#ret = deltree("/home/marcellomortaro/symb")
+#print(ret)
+print isblkdev("/dev/sda1")
+print isblkdev("/home/marcellomortaro/src/git/aryalinux/lfs/lfs.py")
