@@ -1,13 +1,19 @@
 #!/usr/bin/env python
 import sys, os, parted, shutil, libmount, stat, glob, pwd
 import subprocess as sproc
-from pychroot import Chroot
+
+try:
+	from pychroot import Chroot
+except ImportError:
+    print ("not import pychroot. Exit")
+    exit(-1)
 
 try:
     import wget
 except ImportError:
     print ("not import wget. Exit")
     exit(-1)
+
 try:
     import pytz
 except ImportError:
@@ -136,6 +142,17 @@ ROOT_PART = "" #"/dev/sdc5"
 SWAP_PART = "" #"/dev/sdxx"
 HOME_PART = "" #
 FORMAT_HOME = False
+env = {}
+
+#---------------------------build-packages-----------------------------#
+def build_binutils(step, srcdir, tarball):
+	os.chdir(srcdir)
+	if tarball:
+		directory = os.path.splitext(os.path.splitext(tarball)[0])[0]
+		if os.path.exists(direcotiry):
+			shutil.deltree(directory)
+			
+	
 
 #---------------------------functions----------------------------------#
 def demote(user_uid, user_gid):
@@ -265,7 +282,7 @@ def run_with_env_as(user, cmds, env, cwd):
     userUid = userRecord.pw_uid
     userGid = userRecord.pw_gid
     p = sproc.Popen(
-        cmds, stdin=sproc.PIPE, stdout=sproc.PIPE, stderr=sproc.STDOUT, preexec_fn=demote(userUid, userGid), cwd=cwd, env=env, shell=False)
+        cmds.split(), stdin=sproc.PIPE, stdout=sproc.PIPE, stderr=sproc.STDOUT, preexec_fn=demote(userUid, userGid), cwd=cwd, env=env, shell=False)
     line = p.stdout.readline()
     while line != "":
         sys.stdout.write(line)
@@ -274,7 +291,7 @@ def run_with_env_as(user, cmds, env, cwd):
     return p.wait()
 
 def run_cmd(cmd):
-    p = sproc.Popen(cmd, stdin=sproc.PIPE, stdout=sproc.PIPE, stderr=sproc.STDOUT, shell=False)
+    p = sproc.Popen(cmd.split(), stdin=sproc.PIPE, stdout=sproc.PIPE, stderr=sproc.STDOUT, shell=False)
     line = p.stdout.readline()
     while line != "":
         sys.stdout.write(line)
@@ -347,12 +364,12 @@ def stage1():
                 st = os.stat(name)
                 os.chmod(name, st.st_mode | stat.S_IWUSR | stat.S_IRUSR | stat.S_IWGRP | stat.S_IRGRP | stat.S_IWOTH | stat.S_IROTH)
     if 'lfs' in open('/etc/passwd').read():
-        run_cmd(['userdel', '-r', 'lfs'])
-    run_cmd(['groupadd', 'lfs'])
-    run_cmd(['useradd', '-s', '/bin/bash', '-g', 'lfs', '-m', '-k', '/dev/null', 'lfs'])
-    run_cmd(['chown', '-R', 'lfs:lfs', '/home/lfs/*'])
-    run_cmd(['chown', '-R', 'lfs:lfs', '/sources/*'])
-    run_cmd(['chown', '-R', 'lfs:lfs', '/home/lfs'])
+        run_cmd("userdel -r lfs")
+    run_cmd("groupadd lfs")
+    run_cmd("useradd -s /bin/bash -g lfs -m -k /dev/null lfs")
+    run_cmd("chown -R lfs:lfs /home/lfs/*")
+    run_cmd("chown -R lfs:lfs /sources/*")
+    run_cmd("chown -R lfs:lfs /home/lfs")
 
 def stage2():
     env = {}
@@ -365,25 +382,25 @@ def stage2():
         run_with_env_as('lfs', name, env, '/home/lfs')
 
 def stage3():
-    run_cmd(['chown', '-R', 'root:root', '%s/tools' % LFS])
+    run_cmd("chown -R root:root %s/tools" % LFS)
     for name in ['dev', 'proc', 'sys', 'run']:
         os.makedirs("%s/%s" % (LFS, name), True)
     if not os.path.exists("%s/dev/console" % LFS):
-        run_cmd(['mknod', '-m', '600', '%s/dev/console' % LFS, 'c', '5', '1'])
+        run_cmd("mknod -m 600 %s/dev/console c 5 1" % LFS)
     if not os.path.exists("%s/dev/null" % LFS):
-        run_cmd(['mknod', '-m', '600', '%s/dev/null' % LFS, 'c', '1', '3'])
-    run_cmd(['mount', '-v', '--bind', '/dev', '%s/dev' % LFS])
-    run_cmd(['mount', '-vt', 'devpts', 'devpts', '%s/dev/pts' % LFS, '-o', 'gid=5', 'mode=620'])
-    run_cmd(['mount', '-vt', 'proc', 'proc', '%s/proc' % LFS])
-    run_cmd(['mount', '-vt', 'sysfs', 'sysfs', '%s/sys' % LFS])
-    run_cmd(['mount', '-vt', 'tmpfs', 'tmpfs', '%s/run' % LFS])
+        run_cmd("mknod -m 600 %s/dev/null c 1 3" % LFS)
+    run_cmd("mount -v --bind /dev %s/dev" % LFS)
+    run_cmd("mount -vt devpts devpts %s/dev/pts -o gid=5 mode=620" % LFS)
+    run_cmd("mount -vt proc proc %s/proc" % LFS)
+    run_cmd("mount -vt sysfs sysfs %s/sys" % LFS)
+    run_cmd("mount -vt tmpfs tmpfs %s/run" % LFS)
     if os.path.exists("%s/dev/shm" % LFS):
         os.makedirs("%s/%s" % (LFS, os.readlink("%s/dev/shm" % LFS)))
 
 def stage4():
     with Chroot(LFS):
-        run_cmd(['mkdir', '-pv', '/{bin,boot,etc/{opt,sysconfig},home,lib/firmware,mnt,opt}'])
-        run_cmd(['mkdir', '-pv', '/{media/{floppy,cdrom},sbin,srv,var}'])
+        run_cmd("mkdir -pv /{bin,boot,etc/{opt,sysconfig},home,lib/firmware,mnt,opt}")
+        run_cmd("mkdir -pv /{media/{floppy,cdrom},sbin,srv,var}")
     
 
 #---------------------------main---------------------------------------#
