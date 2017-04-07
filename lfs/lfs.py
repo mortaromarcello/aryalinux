@@ -146,11 +146,25 @@ env = {}
 
 #---------------------------build-packages-----------------------------#
 def build_binutils(step, srcdir, tarball):
+	if step == 1:
+		prefix = "%s/tools" % LFS
+		
+	else if sep == 2:
+		prefix = LFS
+	
 	os.chdir(srcdir)
 	if tarball:
 		directory = os.path.splitext(os.path.splitext(tarball)[0])[0]
 		if os.path.exists(direcotiry):
 			shutil.deltree(directory)
+		run_cmd("tar xvf %s" % tarball)
+		os.chdir(directory)
+		run_cmd("mkdir -pv build")
+		os.chdir("build")
+		if step == 1:
+			run_cmd("../configure --prefix=%s --with-sysroot=%s --with-lib-path=%s/lib --target=%s --disable-nls --disable-werror" % (LFS, LFS, LFS, LFS_TGT))
+			run_cmd("make")
+
 			
 	
 
