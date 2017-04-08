@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 import sys, os, parted, shutil, libmount, stat, glob, pwd
 import subprocess as sproc
+from subprocess import check_output
 
 try:
-	from pychroot import Chroot
+    from pychroot import Chroot
 except ImportError:
     print ("not import pychroot. Exit")
     exit(-1)
@@ -133,7 +134,7 @@ WGET_LIST=["http://download.savannah.gnu.org/releases/acl/acl-2.2.52.src.tar.gz"
 "ftp://sources.redhat.com/pub/lvm2/releases/LVM2.2.02.155.tgz"
 ]
 pushstack = list()
-LFS = "/mnt/lfs"
+LFS = "%s/lfs" % os.environ["HOME"]
 LC_ALL='POSIX'
 LFS_TGT=sproc.check_output("echo $(uname -m)-lfs-linux-gnu", shell=True).strip('\n')
 TIMEZONE = "Europe/Rome"
@@ -143,31 +144,74 @@ SWAP_PART = "" #"/dev/sdxx"
 HOME_PART = "" #
 FORMAT_HOME = False
 env = {}
+PATH="%s/tools/bin:%s/bin:%s/usr/bin" % (LFS, LFS, LFS)
+env['LFS'] = LFS
+env['LC_ALL'] = LC_ALL
+env['PATH'] = PATH
+env['LFS_TGT']=LFS_TGT
 
 #---------------------------build-packages-----------------------------#
 def build_binutils(step, srcdir, tarball):
-	if step == 1:
-		prefix = "%s/tools" % LFS
-		
-	else if sep == 2:
-		prefix = LFS
-	
-	os.chdir(srcdir)
-	if tarball:
-		directory = os.path.splitext(os.path.splitext(tarball)[0])[0]
-		if os.path.exists(direcotiry):
-			shutil.deltree(directory)
-		run_cmd("tar xvf %s" % tarball)
-		os.chdir(directory)
-		run_cmd("mkdir -pv build")
-		os.chdir("build")
-		if step == 1:
-			run_cmd("../configure --prefix=%s --with-sysroot=%s --with-lib-path=%s/lib --target=%s --disable-nls --disable-werror" % (LFS, LFS, LFS, LFS_TGT))
-			run_cmd("make")
+    if step == 1:
+        prefix = "%s/tools" % LFS
+    elif step == 2:
+        prefix = LFS
+    os.chdir(srcdir)
+    if tarball:
+        directory = os.path.splitext(os.path.splitext(tarball)[0])[0]
+        if os.path.exists(directory):
+            deltree(directory)
+        run_cmd("tar xvf %s" % tarball)
+        os.chdir(directory)
+        run_cmd("mkdir -pv build")
+        os.chdir("build")
+        if step == 1:
+            run_cmd("../configure --prefix=%s --with-sysroot=%s --with-lib-path=%s/tools/lib --target=%s --disable-nls --disable-werror" % (prefix, LFS, LFS, LFS_TGT))
+        elif step == 2:
+            run_cmd("CC=$LFS_TGT-gcc AR=$LFS_TGT-ar RANLIB=$LFS_TGT-ranlib ./configure --prefix=%s --disable-nls -disable-werror --with-lib-path=%s/lib --with-sysroot" % (LFS, LFS), env)
+        run_cmd("make")
+        if os.uname()[4] == "x86_64":
+            run_cmd("mkdir -pv %s/tools/lib && ln -sv lib %s/tools/lib64 ;;" % (LFS, LFS))
+        run_cmd("make install")
 
-			
-	
-
+def build_gcc(step, srcdir, tarball):
+    if step == 1:
+        prefix = "%s/tools" % LFS
+    elif step == 2:
+        prefix = LFS
+    os.chdir(srcdir)
+    if tarball:
+        directory = os.path.splitext(os.path.splitext(tarball)[0])[0]
+        if os.path.exists(directory):
+            deltree(directory)
+        run_cmd("tar xvf %s" % tarball)
+        os.chdir(directory)
+        run_cmd("tar -xvf ../mpfr-3.1.5.tar.xz")
+        run_cmd("mv -v mpfr-3.1.5 mpfr")
+        run_cmd("tar -xvf ../gmp-6.1.1.tar.xz")
+        run_cmd("mv -v gmp-6.1.1 gmp")
+        run_cmd("tar -xvf ../mpc-1.0.3.tar.gz")
+        run_cmd("mv -v mpc-1.0.3 mpc")
+        for nfile in check_output("find gcc/config -name linux64.h -o -name linux.h -o -name sysv4.h".split()).split():
+            run_cmd("cp -uv %s{,.orig}" % nfile)
+            run_cmd("sed -e 's@/lib\(64\)\?\(32\)\?/ld@/tools&@g' -e 's@/usr@/tools@g' %s.orig > %s" % (nfile, nfile))
+            f = open(nfile, 'a')
+            f.write("#undef STANDARD_STARTFILE_PREFIX_1")
+            f.write("#undef STANDARD_STARTFILE_PREFIX_2")
+            f.write("#define STANDARD_STARTFILE_PREFIX_1 \"%s/lib/\"" % prefix)
+            f.write("#define STANDARD_STARTFILE_PREFIX_2 \"\"")
+            f.close()
+        run_cmd("mkdir -pv build")
+        os.chdir("build")
+        if step == 1:
+            run_cmd("../configure --prefix=%s --with-glibc-version=2.11 --with-sysroot=%s --with-newlib --without-headers --with-local-prefix=%s --with-native-system-header-dir=%s/include --disable-nls --disable-shared --disable-multilib --disable-decimal-float --disable-threads --disable-libatomic --disable-libgomp --disable-libmpx --disable-libquadmath --disable-libssp --disable-libvtv --disable-libstdcxx --enable-languages=c,c++ --target=%s" % (prefix, LFS, prefix, prefix, LFS_TGT))
+        elif step == 2:
+            pass
+        run_cmd("make")
+        if os.uname()[4] == "x86_64":
+            run_cmd("mkdir -pv %s/tools/lib && ln -sv lib %s/tools/lib64 ;;" % (LFS, LFS))
+        run_cmd("make install")
+    
 #---------------------------functions----------------------------------#
 def demote(user_uid, user_gid):
     def result():
@@ -279,24 +323,13 @@ def mkswap(dev):
 def deltree(path):
     if path == "":
         exit(-1)
-    cmd = []
-    cmd.append("rm")
-    cmd.append("-rvf")
-    cmd.append(path)
-    p = sproc.Popen(cmd, stdin=sproc.PIPE, stdout=sproc.PIPE, stderr=sproc.STDOUT, shell=False)
-    line = p.stdout.readline()
-    while line != "":
-        sys.stdout.write(line)
-        sys.stdout.flush()
-        line = p.stdout.readline()
-    return p.wait()
+    run_cmd("rm -rvf %s" % path)
 
 def run_with_env_as(user, cmds, env, cwd):
     userRecord = pwd.getpwnam(user)
     userUid = userRecord.pw_uid
     userGid = userRecord.pw_gid
-    p = sproc.Popen(
-        cmds.split(), stdin=sproc.PIPE, stdout=sproc.PIPE, stderr=sproc.STDOUT, preexec_fn=demote(userUid, userGid), cwd=cwd, env=env, shell=False)
+    p = sproc.Popen(cmds.split(), stdin=sproc.PIPE, stdout=sproc.PIPE, stderr=sproc.STDOUT, preexec_fn=demote(userUid, userGid), cwd=cwd, env=env, shell=False)
     line = p.stdout.readline()
     while line != "":
         sys.stdout.write(line)
@@ -304,8 +337,11 @@ def run_with_env_as(user, cmds, env, cwd):
         line = p.stdout.readline()
     return p.wait()
 
-def run_cmd(cmd):
-    p = sproc.Popen(cmd.split(), stdin=sproc.PIPE, stdout=sproc.PIPE, stderr=sproc.STDOUT, shell=False)
+def run_cmd(cmd, env=""):
+    if env:
+        p = sproc.Popen(cmd.split(), stdin=sproc.PIPE, stdout=sproc.PIPE, stderr=sproc.STDOUT, env=env, shell=False)
+    else:
+        p = sproc.Popen(cmd.split(), stdin=sproc.PIPE, stdout=sproc.PIPE, stderr=sproc.STDOUT, shell=False)
     line = p.stdout.readline()
     while line != "":
         sys.stdout.write(line)
@@ -386,12 +422,7 @@ def stage1():
     run_cmd("chown -R lfs:lfs /home/lfs")
 
 def stage2():
-    env = {}
-    PATH='/tools/bin:/bin:/usr/bin'
-    env['LFS'] = LFS
-    env['LC_ALL'] = LC_ALL
-    env['PATH'] = PATH
-    env['LFS_TGT']=LFS_TGT
+    global env
     for name in glob.glob('/sources/toolchain/*.sh'):
         run_with_env_as('lfs', name, env, '/home/lfs')
 
@@ -453,5 +484,8 @@ print isblkdev("/home/marcellomortaro/src/git/aryalinux/lfs/lfs.py")
 #os.chroot('/home/marcellomortaro/chroot')
 #run_cmd(['mkdir', '-pv', '/{bin,boot,etc/{opt,sysconfig},home,lib/firmware,mnt,opt}'])
 #print os.getcwd()
-download_sources()
+#download_sources()
+
+build_binutils(1, "%s/sources" % os.environ["HOME"], "binutils-2.27.tar.bz2")
+build_gcc(1, "%s/sources" % os.environ["HOME"], "gcc-6.2.0.tar.bz2")
 
