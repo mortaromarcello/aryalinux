@@ -151,7 +151,8 @@ env['PATH'] = PATH
 env['LFS_TGT']=LFS_TGT
 
 #---------------------------build-packages-----------------------------#
-def build_binutils(step, srcdir, tarball):
+def build_binutils(step, srcdir):
+    tarball = "binutils-2.27.tar.bz2"
     if step == 1:
         prefix = "%s/tools" % LFS
     elif step == 2:
@@ -168,13 +169,14 @@ def build_binutils(step, srcdir, tarball):
         if step == 1:
             run_cmd("../configure --prefix=%s --with-sysroot=%s --with-lib-path=%s/tools/lib --target=%s --disable-nls --disable-werror" % (prefix, LFS, LFS, LFS_TGT))
         elif step == 2:
-            run_cmd("CC=$LFS_TGT-gcc AR=$LFS_TGT-ar RANLIB=$LFS_TGT-ranlib ./configure --prefix=%s --disable-nls -disable-werror --with-lib-path=%s/lib --with-sysroot" % (LFS, LFS), env)
+            run_cmd("CC=%s-gcc AR=%s-ar RANLIB=%s-ranlib ./configure --prefix=%s --disable-nls -disable-werror --with-lib-path=%s/lib --with-sysroot" % (LFS_TGT, LFS_TGT, LFS_TGT, LFS, LFS), env)
         run_cmd("make")
         if os.uname()[4] == "x86_64":
             run_cmd("mkdir -pv %s/tools/lib && ln -sv lib %s/tools/lib64 ;;" % (LFS, LFS))
         run_cmd("make install")
 
-def build_gcc(step, srcdir, tarball):
+def build_gcc(step, srcdir):
+    tarball = "gcc-6.2.0.tar.bz2"
     if step == 1:
         prefix = "%s/tools" % LFS
     elif step == 2:
@@ -192,25 +194,40 @@ def build_gcc(step, srcdir, tarball):
         run_cmd("mv -v gmp-6.1.1 gmp")
         run_cmd("tar -xvf ../mpc-1.0.3.tar.gz")
         run_cmd("mv -v mpc-1.0.3 mpc")
+        if step == 2:
+            run_cmd("cat gcc/limitx.h gcc/glimits.h gcc/limity.h > `dirname $(%s-gcc -print-libgcc-file-name)`/include-fixed/limits.h" % LFS_TGT)
         for nfile in check_output("find gcc/config -name linux64.h -o -name linux.h -o -name sysv4.h".split()).split():
             run_cmd("cp -uv %s{,.orig}" % nfile)
             run_cmd("sed -e 's@/lib\(64\)\?\(32\)\?/ld@/tools&@g' -e 's@/usr@/tools@g' %s.orig > %s" % (nfile, nfile))
             f = open(nfile, 'a')
-            f.write("#undef STANDARD_STARTFILE_PREFIX_1")
-            f.write("#undef STANDARD_STARTFILE_PREFIX_2")
-            f.write("#define STANDARD_STARTFILE_PREFIX_1 \"%s/lib/\"" % prefix)
-            f.write("#define STANDARD_STARTFILE_PREFIX_2 \"\"")
+            f.write("\n")
+            f.write("#undef STANDARD_STARTFILE_PREFIX_1\n")
+            f.write("#undef STANDARD_STARTFILE_PREFIX_2\n")
+            f.write("#define STANDARD_STARTFILE_PREFIX_1 \"%s/lib/\"\n" % prefix)
+            f.write("#define STANDARD_STARTFILE_PREFIX_2 \"\"\n")
             f.close()
         run_cmd("mkdir -pv build")
         os.chdir("build")
         if step == 1:
             run_cmd("../configure --prefix=%s --with-glibc-version=2.11 --with-sysroot=%s --with-newlib --without-headers --with-local-prefix=%s --with-native-system-header-dir=%s/include --disable-nls --disable-shared --disable-multilib --disable-decimal-float --disable-threads --disable-libatomic --disable-libgomp --disable-libmpx --disable-libquadmath --disable-libssp --disable-libvtv --disable-libstdcxx --enable-languages=c,c++ --target=%s" % (prefix, LFS, prefix, prefix, LFS_TGT))
         elif step == 2:
-            pass
+            run_cmd("CC=%s-gcc CXX=%s-g++ AR=%s-ar RANLIB=%s-ranlib ../configure --prefix=%s     --with-local-prefix=%s --with-native-system-header-dir=%s/include --enable-languages=c,c++ --disable-libstdcxx-pch --disable-multilib --disable-bootstrap --disable-libgomp" % (LFS_TGT, LFS_TGT, LFS_TGT, LFS_TGT, prefix, prefix, prefix))
         run_cmd("make")
-        if os.uname()[4] == "x86_64":
-            run_cmd("mkdir -pv %s/tools/lib && ln -sv lib %s/tools/lib64 ;;" % (LFS, LFS))
         run_cmd("make install")
+
+def build_linux_headers(srcdir):
+    tarball = "linux-4.8.9.tar.xz"
+    prefix = "%s/tools" % LFS
+    os.chdir(srcdir)
+    if tarball:
+        directory = os.path.splitext(os.path.splitext(tarball)[0])[0]
+        if os.path.exists(directory):
+            deltree(directory)
+        run_cmd("tar xvf %s" % tarball)
+        os.chdir(directory)
+        run_cmd("make mrproper")
+        run_cmd("make INSTALL_HDR_PATH=dest headers_install")
+        run_cmd("cp -rv dest/include/* %s/include" % prefix)
     
 #---------------------------functions----------------------------------#
 def demote(user_uid, user_gid):
@@ -486,6 +503,10 @@ print isblkdev("/home/marcellomortaro/src/git/aryalinux/lfs/lfs.py")
 #print os.getcwd()
 #download_sources()
 
-build_binutils(1, "%s/sources" % os.environ["HOME"], "binutils-2.27.tar.bz2")
-build_gcc(1, "%s/sources" % os.environ["HOME"], "gcc-6.2.0.tar.bz2")
+#
+#build_binutils(1, "%s/sources" % os.environ["HOME"])
+#build_gcc(1, "%s/sources" % os.environ["HOME"])
+build_linux_headers("%s/sources" % os.environ["HOME"])
+#build_binutils(2, "%s/sources" % os.environ["HOME"], "binutils-2.27.tar.bz2")
+#build_gcc(2, "%s/sources" % os.environ["HOME"], "gcc-6.2.0.tar.bz2")
 
