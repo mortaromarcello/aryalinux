@@ -227,8 +227,8 @@ def build_linux_headers(srcdir):
         os.chdir(directory)
         run_cmd("make mrproper")
         run_cmd("make INSTALL_HDR_PATH=dest headers_install")
-        run_cmd("cp -rv dest/include/* %s/include" % prefix)
-    
+        run_cmd("cp -rv dest/include %s/" % (prefix))
+
 #---------------------------functions----------------------------------#
 def demote(user_uid, user_gid):
     def result():
