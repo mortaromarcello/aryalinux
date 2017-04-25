@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import sys, os, parted, shutil, libmount, stat, glob, pwd
+import sys, os, parted, shutil, libmount, stat, glob, pwd, string
 import subprocess as sproc
 from subprocess import check_output
 
@@ -230,6 +230,16 @@ def build_linux_headers(srcdir):
         run_cmd("cp -rv dest/include %s/" % (prefix))
 
 #---------------------------functions----------------------------------#
+def addstr(s, adds, subs=''):
+	tmp = []
+	if subs:
+		pos = string.find(s, sub)
+		if pos != -1:
+			tmp = (s[:pos], adds, s[pos:])
+	else:
+		tmp = (s, adds)
+	return ''.join(tmp)
+		
 def demote(user_uid, user_gid):
     def result():
         os.setgid(user_gid)
